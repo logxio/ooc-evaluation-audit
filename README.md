@@ -50,6 +50,30 @@ Against the F1 image baseline, F2 increases test balanced accuracy by 0.0490 and
 
 The F2 script also prints per-cell validation denominators, recalls, false-positive rates, and confusion matrices. A missing class makes that cell's balanced accuracy undefined. Neither the split nor the bootstrap proves independence across physical chips, because chip IDs are unavailable.
 
+## How the source split changes the score
+
+The source ZIP assigns images to train, validation, and test folders. The `source_split_audit.py` command reads that assignment from the ZIP64 central directory with byte-range requests, then checks every image ID and good/bad folder against the datasheet. It reads about 0.5 MB of ZIP metadata and does not download the 6.7 GB image archive. The source split has 2,130/286/656 images; all 57 date-like prefixes in its test set also appear in its training set. That is acquisition-context overlap, not proof that the same physical chip appears on both sides.
+
+F3 fits the same 300-tree random-forest specification on the source training images using the frozen 29 features. It selects a threshold from the source validation images with the exact F2 rule. The source validation set selects `0.4984234764442013`; the F2 prefix-split validation set selected `0.31713680975737424`.
+
+| Split and model | Good / bad test images | Test balanced accuracy | Good recall | Bad recall | Good false-positive rate | Test confusion matrix |
+| --- | ---: | ---: | ---: | ---: | ---: | --- |
+| Source ZIP folders, F3 RF | 365 / 291 | **0.7979** | 0.8329 | 0.7629 | 61/365 = 0.1671 | `[[304, 61], [69, 222]]` |
+| Date-like prefix groups, F2 RF | 376 / 360 | **0.6578** | 0.5239 | 0.7917 | 179/376 = 0.4761 | `[[197, 179], [75, 285]]` |
+
+F3 source validation balanced accuracy is 0.7850, with good/bad recall 0.8221/0.7480, good false-positive rate 29/163 = 0.1779, and confusion matrix `[[134, 29], [31, 92]]`. Source test balanced accuracy exceeds the prefix-split result by **0.1401**. A 2,000-draw bootstrap over the source test's 57 prefixes gives an approximate 95% balanced-accuracy interval of **0.744–0.847**; it does not remove train/test prefix overlap. The comparison passes our preregistered audit-direction screen: source test accuracy at least 0.75 and a gap of at least 0.10. A second dataset is needed before treating split sensitivity as a general finding.
+
+Only 151 images are in both test sets; 505 are unique to the source test and 585 to the prefix-group test. The score gap combines changes in training rows, validation rows and threshold, and test composition. It is a diagnostic comparison, not a same-image causal estimate of leakage. This experiment does not reproduce the published InceptionV3 study.
+
+| F3 source test cell type | Good / bad | Balanced accuracy | Good recall | Bad recall | Good false-positive rate |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| A549 | 112 / 52 | 0.7754 | 0.8393 | 0.7115 | 0.1607 |
+| CACO | 25 / 50 | 0.8000 | 0.8000 | 0.8000 | 0.2000 |
+| HPMEC | 163 / 138 | 0.8018 | 0.8282 | 0.7754 | 0.1718 |
+| HSAEC | 37 / 20 | 0.6595 | 0.9189 | 0.4000 | 0.0811 |
+| HUVEC | 4 / 21 | 0.9762 | 1.0000 | 0.9524 | 0.0000 |
+| NHBE | 24 / 10 | 0.8542 | 0.7083 | 1.0000 | 0.2917 |
+
 ## Reproduce
 
 Use Python 3.11 or later. [NumPy](https://numpy.org/doc/stable/license) is BSD-3-Clause licensed; [Pillow](https://pillow.readthedocs.io/en/stable/about.html#license) describes its license as MIT-CMU. [scikit-learn 1.9.1 on official PyPI](https://pypi.org/project/scikit-learn/1.9.1/) is BSD-3-Clause licensed. This code uses no paid API, proprietary model, or GPU.
@@ -81,6 +105,16 @@ python f2_rf.py evaluate --features .cache/image_features.jsonl > .cache/f2_rf_r
 ```
 
 The measured local F2 fit took 0.97 seconds; the full process took 2.22 seconds and reached 147 MB maximum resident memory on a Mac. The 64-row resource probe reached 135 MB. Feature cache SHA-256: `ba4406c3671d5d859b6ff58a66a7d05ff4bbd95ed4d58700de18533e362b5f57`. The cache and result JSON are ignored by git; they contain no redistributed source images.
+
+To reproduce F3 with the same feature cache, read the ZIP metadata and evaluate the frozen RF specification:
+
+```sh
+python source_split_audit.py probe
+python source_split_audit.py map
+python source_split_audit.py evaluate --features .cache/image_features.jsonl > .cache/f3_source_result.json
+```
+
+`map` saves `.cache/source_split.json` after verifying 3,072 unique IDs, source-folder labels, cell types, and split counts. Both mapping and result are ignored by git. The measured mapping process took 5.01 seconds and peaked at 61 MB; the F3 evaluation took 2.74 seconds and peaked at 149 MB. The central-directory SHA-256 is `82125825d36ecca86496fe7d64a2b6169f4ffa940ffa3d98b9fce91bb97f27b8`.
 
 To run the complete image calculation on a private Kaggle CPU notebook with internet enabled:
 
