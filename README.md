@@ -20,8 +20,9 @@ The metadata-only logistic baseline uses cell type, seeding density, time after 
 | --- | ---: | ---: | --- |
 | Always good | 0.5000 | 0.0000 | `[[376, 0], [360, 0]]` |
 | Metadata only | **0.5233** | **0.4722** | `[[216, 160], [190, 170]]` |
+| Image features only | **0.6088** | **0.8028** | `[[156, 220], [71, 289]]` |
 
-The image-feature result is pending a full source-image run. The metadata score alone is not evidence that the quality gate generalizes well.
+The image result comes from all 3,072 source PNGs. The downloaded ZIP matched Zenodo's MD5 `8f7e058996203d48eb03b2d86c0a2e4d`; all 3,072 extracted feature IDs matched the datasheet. The image model improves balanced accuracy by 0.0855 over metadata, but incorrectly flags 220 of 376 good test images (58.5%). A prefix-group bootstrap with 2,000 resamples gives a wide approximate 95% interval of 0.492–0.719 for image balanced accuracy; the prefixes are not confirmed chip IDs. The image score is below our predefined 0.65 continuation target. These results support a review queue for potentially bad images, not automatic rejection of a culture. A549 and HSAEC remain weak; HUVEC and NHBE have only bad examples in this test split, so per-cell balanced accuracy is undefined for them.
 
 ## Reproduce
 
@@ -44,7 +45,7 @@ python ooc_qc.py extract-images --count 64
 python ooc_qc.py image-evaluate
 ```
 
-`verify-images` checks the source ZIP against Zenodo's MD5. `extract-images` computes 29 low-cost grayscale features per image; it writes only local, ignored cache entries. The image model uses the same split, train-only scaling, training-only fitting, and validation-only threshold selection. The test set is read once for the reported score. The split is stricter than the source's original image-level split, but it cannot establish chip-level independence without chip identifiers.
+`verify-images` checks the source ZIP against Zenodo's MD5. `extract-images` computes 29 low-cost grayscale features per image; it writes only local, ignored cache entries. The image model uses the same split, train-only scaling, training-only fitting, and validation-only threshold selection. Test labels do not guide feature design, model fitting, or threshold selection. The split is stricter than the source's original image-level split, but it cannot establish chip-level independence without chip identifiers.
 
 To run the complete image calculation on a private Kaggle CPU notebook with internet enabled:
 

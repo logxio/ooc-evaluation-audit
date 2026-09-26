@@ -7,7 +7,7 @@ on demand and does not redistribute source data or trained weights.
 from __future__ import annotations
 
 import argparse
-from collections import Counter
+from collections import Counter, defaultdict
 import hashlib
 import json
 import math
@@ -211,6 +211,34 @@ def select_threshold(y: np.ndarray, probability: np.ndarray) -> tuple[float, dic
     return threshold, metrics(y, probability >= threshold)
 
 
+def prefix_bootstrap_interval(rows: list[dict], y: np.ndarray,
+                              prediction: np.ndarray, draws: int = 2000) -> dict:
+    """Resample date-like prefix groups, preserving all rows within each group."""
+    indices = defaultdict(list)
+    for index, row in enumerate(rows):
+        indices[row["id"][:6]].append(index)
+    groups = sorted(indices)
+    group_cm = []
+    for group in groups:
+        selected = np.asarray(indices[group])
+        cm = confusion(y[selected], prediction[selected])
+        group_cm.append([cm[key] for key in
+                         ("good_as_good", "good_as_bad", "bad_as_good", "bad_as_bad")])
+    group_cm = np.asarray(group_cm, dtype=np.int64)
+    rng = np.random.default_rng(26)
+    values = []
+    for _ in range(draws):
+        chosen = rng.integers(0, len(groups), size=len(groups))
+        gg, gb, bg, bb = group_cm[chosen].sum(axis=0)
+        if gg + gb and bg + bb:
+            values.append((gg / (gg + gb) + bb / (bg + bb)) / 2)
+    low, high = np.quantile(values, [0.025, 0.975])
+    return {"low": float(low), "high": float(high),
+            "valid_draws": len(values), "draws": draws,
+            "group_count": len(groups),
+            "note": "prefix-group bootstrap; prefixes are not confirmed chip IDs"}
+
+
 def evaluate_model(parts: dict[str, list[dict]], matrices: dict[str, np.ndarray], feature_names: list[str]) -> dict:
     y = {name: np.asarray([row["label"] == 2 for row in rows], dtype=np.float64)
          for name, rows in parts.items()}
@@ -229,6 +257,7 @@ def evaluate_model(parts: dict[str, list[dict]], matrices: dict[str, np.ndarray]
         "threshold": threshold,
         "validation": val_metric,
         "test": test_metric,
+        "test_ba_prefix_bootstrap_95pct": prefix_bootstrap_interval(parts["test"], y["test"], prediction),
         "test_by_cell": per_cell,
         "test_prefix_groups": len({row["id"][:6] for row in parts["test"]}),
     }
