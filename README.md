@@ -1,8 +1,8 @@
-# Organ-on-Chip Image Quality Gate
+# Organ-on-Chip Image Evaluation Audit
 
-A researcher can use this baseline to flag organ-on-chip brightfield images that may need review before a culture is used for downstream analysis. It predicts the source dataset's expert **good/bad image-quality** label. It does not measure drug toxicity, neural connectivity, or whether a chip will succeed clinically.
+A researcher can use this audit to see how an organ-on-chip image-quality score changes when images sharing an acquisition context are held out together. It compares two fixed evaluations of the source dataset's expert **good/bad image-quality** labels and shows which images change from correct to incorrect.
 
-The key question is whether image evidence still helps when images with the same date-like filename prefix are kept together during evaluation. The prefix is a proxy for acquisition context; the source does not provide independent chip IDs.
+The first evaluation follows the source ZIP's image-level train/validation/test folders. The second keeps images with the same date-like filename prefix together. That prefix is a proxy for acquisition context; the source does not provide independent chip IDs. The image-quality models are baselines for the audit, not measures of drug toxicity or neural connectivity.
 
 ## Data and license
 
@@ -74,6 +74,45 @@ Only 151 images are in both test sets; 505 are unique to the source test and 585
 | HUVEC | 4 / 21 | 0.9762 | 1.0000 | 0.9524 | 0.0000 |
 | NHBE | 24 / 10 | 0.8542 | 0.7083 | 1.0000 | 0.2917 |
 
+## F4: the same 151 test images
+
+The two original test sets share 151 images: 68 good, 83 bad, across 14 date-like prefixes. F4 refits each frozen 300-tree forest on its original training rows, chooses its threshold on its original validation rows, and scores both on those same 151 images. The 29 features, model parameters, and threshold rule are unchanged. F4 does not select or tune a model on the 151-image subset. Both models' full test summaries were already seen before F4, so this is a diagnostic comparison, not a fresh blind test.
+
+| Model on shared images | Balanced accuracy | Good recall | Bad recall | Good false-positive rate | Confusion matrix, true rows good/bad |
+| --- | ---: | ---: | ---: | ---: | --- |
+| Source ZIP split, F3 | **0.762491** | 0.838235 | 0.686747 | 11/68 = 0.161765 | `[[57, 11], [26, 57]]` |
+| Prefix-group split, F2 | **0.691708** | 0.588235 | 0.795181 | 28/68 = 0.411765 | `[[40, 28], [17, 66]]` |
+
+The paired balanced-accuracy difference is **+0.070783** for the source-split model. Its good-image recall is higher by 0.25, while its bad-image recall is lower by 0.108434. Resampling the same 14 prefixes for both models 2,000 times gives a paired percentile bootstrap 95% difference interval of **−0.031747 to +0.127527**. Our preregistered stronger-evidence screen required a difference of at least 0.08 and a bootstrap lower bound above zero. Neither condition passed. This is a split-sensitivity diagnostic on one dataset, with a second data source needed before a general platform claim.
+
+| True label | Both correct | Source only correct | Prefix only correct | Both wrong |
+| --- | ---: | ---: | ---: | ---: |
+| Good, 68 images | 40 | 17 | 0 | 11 |
+| Bad, 83 images | 54 | 3 | 12 | 14 |
+| All 151 images | **94** | **20** | **12** | **25** |
+
+Per-cell scores use the same shared images in both models. A cell with no good images has undefined balanced accuracy, good recall, and good false-positive rate.
+
+| Cell type, good/bad | Source BA | Good recall | Bad recall | Good FPR | Source confusion matrix |
+| --- | ---: | ---: | ---: | ---: | --- |
+| A549, 28/20 | 0.725000 | 0.750000 | 0.700000 | 0.250000 | `[[21,7],[6,14]]` |
+| CACO, 5/9 | 0.577778 | 0.600000 | 0.555556 | 0.400000 | `[[3,2],[4,5]]` |
+| HPMEC, 31/33 | 0.847507 | 0.967742 | 0.727273 | 0.032258 | `[[30,1],[9,24]]` |
+| HSAEC, 4/9 | 0.486111 | 0.750000 | 0.222222 | 0.250000 | `[[3,1],[7,2]]` |
+| HUVEC, 0/9 | undefined | undefined | 1.000000 | undefined | `[[0,0],[0,9]]` |
+| NHBE, 0/3 | undefined | undefined | 1.000000 | undefined | `[[0,0],[0,3]]` |
+
+| Cell type, good/bad | Prefix BA | Good recall | Bad recall | Good FPR | Prefix confusion matrix |
+| --- | ---: | ---: | ---: | ---: | --- |
+| A549, 28/20 | 0.592857 | 0.535714 | 0.650000 | 0.464286 | `[[15,13],[7,13]]` |
+| CACO, 5/9 | 0.688889 | 0.600000 | 0.777778 | 0.400000 | `[[3,2],[2,7]]` |
+| HPMEC, 31/33 | 0.747801 | 0.677419 | 0.818182 | 0.322581 | `[[21,10],[6,27]]` |
+| HSAEC, 4/9 | 0.513889 | 0.250000 | 0.777778 | 0.750000 | `[[1,3],[2,7]]` |
+| HUVEC, 0/9 | undefined | undefined | 1.000000 | undefined | `[[0,0],[0,9]]` |
+| NHBE, 0/3 | undefined | undefined | 1.000000 | undefined | `[[0,0],[0,3]]` |
+
+F4 reproduced every stored full-test metric field for F2 and F3, including each cell type and the full-test bootstrap interval; it also matched their split summaries, validation metrics, threshold choices, parameters, and feature names. Keeping test images fixed removes test-composition differences. The models still have different training rows and validation thresholds, so the paired difference cannot be attributed entirely to prefix overlap and does not prove that a physical chip leaked across splits.
+
 ## Reproduce
 
 Use Python 3.11 or later. [NumPy](https://numpy.org/doc/stable/license) is BSD-3-Clause licensed; [Pillow](https://pillow.readthedocs.io/en/stable/about.html#license) describes its license as MIT-CMU. [scikit-learn 1.9.1 on official PyPI](https://pypi.org/project/scikit-learn/1.9.1/) is BSD-3-Clause licensed. This code uses no paid API, proprietary model, or GPU.
@@ -115,6 +154,15 @@ python source_split_audit.py evaluate --features .cache/image_features.jsonl > .
 ```
 
 `map` saves `.cache/source_split.json` after verifying 3,072 unique IDs, source-folder labels, cell types, and split counts. Both mapping and result are ignored by git. The measured mapping process took 5.01 seconds and peaked at 61 MB; the F3 evaluation took 2.74 seconds and peaked at 149 MB. The central-directory SHA-256 is `82125825d36ecca86496fe7d64a2b6169f4ffa940ffa3d98b9fce91bb97f27b8`.
+
+After F2 and F3 have written their local result JSON files, reproduce the paired F4 audit without downloading images again:
+
+```sh
+python f4_paired.py probe --features .cache/image_features.jsonl
+python f4_paired.py evaluate --features .cache/image_features.jsonl > .cache/f4_paired_result.json
+```
+
+The script stops if any stored F2 or F3 deterministic field differs from its refit, then reports the shared-image matrices, per-cell scores, correctness transitions, and paired prefix-group interval. The 64-row-per-model resource probe prints no score. The local F4 evaluation took 2.91 seconds including process startup and peaked at 149 MB; its ignored JSON stores the unrounded values. The feature-cache SHA-256 was `ba4406c3671d5d859b6ff58a66a7d05ff4bbd95ed4d58700de18533e362b5f57`.
 
 To run the complete image calculation on a private Kaggle CPU notebook with internet enabled:
 
