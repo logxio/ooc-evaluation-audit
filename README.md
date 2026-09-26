@@ -1,8 +1,18 @@
 # Organ-on-Chip Image Evaluation Audit
 
-A researcher can use this audit to see how an organ-on-chip image-quality score changes when images sharing an acquisition context are held out together. It compares two fixed evaluations of the source dataset's expert **good/bad image-quality** labels and shows which images change from correct to incorrect.
+Give the audit per-image labels, acquisition groups, train/validation/test splits, and test predictions. It gives you an offline report showing group overlap, each test set's good/bad errors, and what changes when both evaluations score the same images.
 
-The first evaluation follows the source ZIP's image-level train/validation/test folders. The second keeps images with the same date-like filename prefix together. That prefix is a proxy for acquisition context; the source does not provide independent chip IDs. The image-quality models are baselines for the audit, not measures of drug toxicity or neural connectivity.
+With the prepared cache from the [source dataset](https://zenodo.org/records/10203721), run:
+
+```sh
+.venv/bin/python audit_report.py ooc --output .cache/audit_report
+```
+
+Open `.cache/audit_report/audit.html` in any browser. `.cache/audit_report/audit.json` contains the scored records and computed values. Both files stay local and the HTML needs no network connection. The source ZIP's folder split and a split that keeps date-like filename prefixes together are fitted with the frozen 29-feature model and checked against the earlier F2/F3/F4 results before export.
+
+For another image dataset, use `python audit_report.py records --source-records SOURCE.jsonl --grouped-records GROUPED.jsonl --output OUTPUT_DIR`. Each JSONL file needs one record per image with `id`, `group`, `label` (`0` good, `1` bad), `split` (`train`, `val`, or `test`), and `prediction` (`0` or `1` on test, `null` elsewhere). `subgroup` is optional. The two files must use the same labels and groups for shared IDs. A group should identify the acquisition unit you want to keep together; it is only a chip ID if your data actually supplies one.
+
+For this OoC dataset, the date-like prefix is an acquisition-context proxy. The source does not supply independent physical chip IDs. These image-quality scores do not measure toxicity or neural connectivity.
 
 ## Data and license
 
