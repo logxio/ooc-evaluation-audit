@@ -24,9 +24,35 @@ The metadata-only logistic baseline uses cell type, seeding density, time after 
 
 The image result comes from all 3,072 source PNGs. The downloaded ZIP matched Zenodo's MD5 `8f7e058996203d48eb03b2d86c0a2e4d`; all 3,072 extracted feature IDs matched the datasheet. The image model improves balanced accuracy by 0.0855 over metadata, but incorrectly flags 220 of 376 good test images (58.5%). A prefix-group bootstrap with 2,000 resamples gives a wide approximate 95% interval of 0.492–0.719 for image balanced accuracy; the prefixes are not confirmed chip IDs. The image score is below our predefined 0.65 continuation target. These results support a review queue for potentially bad images, not automatic rejection of a culture. A549 and HSAEC remain weak; HUVEC and NHBE have only bad examples in this test split, so per-cell balanced accuracy is undefined for them.
 
+## F2: one preregistered nonlinear comparison
+
+After seeing the F1 test score, we preregistered one F2 random forest using the **same 29 image features, labels, and prefix split**. It fits only on train: `RandomForestClassifier(n_estimators=300, min_samples_leaf=8, max_features='sqrt', class_weight='balanced_subsample', random_state=26)` with all other scikit-learn defaults. There is no additional feature engineering or test-set tuning. This is an **adaptive iteration after viewing F1 test**, so the reused 736-image test is not a fresh blind holdout.
+
+Threshold selection uses validation probabilities only. Candidates are each distinct probability, adjacent midpoints, and 0, 0.5, 1. Among candidates with bad recall at least 0.60 **and** good recall at least 0.55, maximize balanced accuracy. If none qualify, use those with bad recall at least 0.60; if none qualify, maximize balanced accuracy without a recall constraint. Ties go to the threshold closest to 0.5, then the higher threshold. The first tier contained 44 of 506 candidates, and selected `0.31713680975737424`.
+
+Before the fit, our target for continuing this direction was **all three** test conditions: balanced accuracy at least 0.65, bad recall at least 0.60, and good false-positive rate at most 0.45. Our expected ranges were test balanced accuracy 0.63–0.71 (center 0.67), bad recall 0.60–0.80, and good false-positive rate 0.35–0.50. The actual measurements are:
+
+| F2 split | Good / bad | Balanced accuracy | Good recall | Bad recall | Good false-positive rate | Confusion matrix, true rows good/bad |
+| --- | ---: | ---: | ---: | ---: | ---: | --- |
+| Validation | 179 / 73 | 0.6464 | 0.5531 | 0.7397 | 80/179 = 0.4469 | `[[99, 80], [19, 54]]` |
+| Test | 376 / 360 | **0.6578** | 0.5239 | **0.7917** | **179/376 = 0.4761** | `[[197, 179], [75, 285]]` |
+
+Against the F1 image baseline, F2 increases test balanced accuracy by 0.0490 and reduces good false positives from 220 to 179, while bad recall changes from 0.8028 to 0.7917. A 2,000-draw bootstrap resampling the 15 date-like test prefix groups gives an approximate 95% balanced-accuracy interval of 0.577–0.733. **F2 misses the preregistered joint continuation target** because 47.61% of good images are still falsely flagged, above the 45% ceiling. The next decision is to change the primary direction, not tune a third model on this test set. This result may help prioritize human review; it does not justify automatic culture rejection.
+
+| Test cell type | Good / bad | Balanced accuracy | Good recall | Bad recall | Good false-positive rate |
+| --- | ---: | ---: | ---: | ---: | ---: |
+| A549 | 151 / 81 | 0.5684 | 0.4702 | 0.6667 | 0.5298 |
+| CACO | 27 / 55 | 0.6774 | 0.5185 | 0.8364 | 0.4815 |
+| HPMEC | 187 / 152 | 0.6960 | 0.5829 | 0.8092 | 0.4171 |
+| HSAEC | 11 / 24 | 0.4280 | 0.2727 | 0.5833 | 0.7273 |
+| HUVEC | 0 / 39 | undefined | undefined | 1.0000 | undefined |
+| NHBE | 0 / 9 | undefined | undefined | 1.0000 | undefined |
+
+The F2 script also prints per-cell validation denominators, recalls, false-positive rates, and confusion matrices. A missing class makes that cell's balanced accuracy undefined. Neither the split nor the bootstrap proves independence across physical chips, because chip IDs are unavailable.
+
 ## Reproduce
 
-Use Python 3.10 or later. [NumPy](https://numpy.org/doc/stable/license) is BSD-3-Clause licensed; [Pillow](https://pillow.readthedocs.io/en/stable/about.html#license) describes its license as MIT-CMU. This code uses no paid API, proprietary model, or GPU.
+Use Python 3.11 or later. [NumPy](https://numpy.org/doc/stable/license) is BSD-3-Clause licensed; [Pillow](https://pillow.readthedocs.io/en/stable/about.html#license) describes its license as MIT-CMU. [scikit-learn 1.9.1 on official PyPI](https://pypi.org/project/scikit-learn/1.9.1/) is BSD-3-Clause licensed. This code uses no paid API, proprietary model, or GPU.
 
 ```sh
 python3 -m venv .venv
@@ -45,7 +71,16 @@ python ooc_qc.py extract-images --count 64
 python ooc_qc.py image-evaluate
 ```
 
-`verify-images` checks the source ZIP against Zenodo's MD5. `extract-images` computes 29 low-cost grayscale features per image; it writes only local, ignored cache entries. The image model uses the same split, train-only scaling, training-only fitting, and validation-only threshold selection. Test labels do not guide feature design, model fitting, or threshold selection. The split is stricter than the source's original image-level split, but it cannot establish chip-level independence without chip identifiers.
+`verify-images` checks the source ZIP against Zenodo's MD5. `extract-images` computes 29 low-cost grayscale features per image; it writes only local, ignored cache entries. The F1 image model uses the same split, train-only scaling, training-only fitting, and validation-only threshold selection. Its test labels did not guide F1 feature design, model fitting, or threshold selection. F2 was specified after the F1 test score was known. The split is stricter than the source's original image-level split, but it cannot establish chip-level independence without chip identifiers.
+
+With the **existing** `.cache/image_features.jsonl` from that F1 extraction, F2 needs no ZIP download. Supply another path with `--features` if the cache is elsewhere. `probe` fits 300 trees on only 64 training rows and reports time/memory, without reporting a score. `evaluate` runs the one full train fit and prints the complete validation/test result as JSON, including per-cell counts, confusion matrices, the prefix-group bootstrap, and F1-to-F2 changes.
+
+```sh
+python f2_rf.py probe --features .cache/image_features.jsonl
+python f2_rf.py evaluate --features .cache/image_features.jsonl > .cache/f2_rf_result.json
+```
+
+The measured local F2 fit took 0.97 seconds; the full process took 2.22 seconds and reached 147 MB maximum resident memory on a Mac. The 64-row resource probe reached 135 MB. Feature cache SHA-256: `ba4406c3671d5d859b6ff58a66a7d05ff4bbd95ed4d58700de18533e362b5f57`. The cache and result JSON are ignored by git; they contain no redistributed source images.
 
 To run the complete image calculation on a private Kaggle CPU notebook with internet enabled:
 
