@@ -4,13 +4,13 @@ Give the audit per-image labels, acquisition groups, train/validation/test split
 
 The [technical report](technical_report.pdf) gives the dataset provenance, frozen model protocol, exact denominators, and limits of this single-dataset result. Its [source](technical_report.md) is included for review.
 
-With the prepared cache from the [source dataset](https://zenodo.org/records/10203721), run:
+To reproduce the [Zenodo image-quality example](https://zenodo.org/records/10203721) from the original files, install `requirements.txt`, then run:
 
 ```sh
-.venv/bin/python audit_report.py ooc --output .cache/audit_report
+python run_full_audit.py
 ```
 
-Open `.cache/audit_report/audit.html` in any browser. `.cache/audit_report/audit.json` contains the scored records and computed values. Both files stay local and the HTML needs no network connection. The source ZIP's folder split and a split that keeps date-like filename prefixes together are fitted with the frozen 29-feature model and checked against the earlier F2/F3/F4 results before export.
+The first run downloads a **6,710,767,405-byte (6.71 GB) image ZIP** and a 119,712-byte datasheet from Zenodo. It verifies their published hashes, extracts 29 features from all 3,072 images, recomputes F1–F4, checks the earlier frozen results, and writes `.cache/audit_report/audit.html`, `audit.json`, and `run_evidence.json`. Open the HTML offline; the JSON includes scored records and input hashes. The default command stops after about four minutes on a local machine. Run the **same command again** to resume the ZIP download or feature extraction. On a remote CPU with a longer process allowance, use `python run_full_audit.py --time-budget 0` for one uninterrupted invocation. No source images or cached features are included in this repository.
 
 For another image dataset, use `python audit_report.py records --source-records SOURCE.jsonl --grouped-records GROUPED.jsonl --output OUTPUT_DIR`. Each JSONL file needs one record per image with `id`, `group`, `label` (`0` good, `1` bad), `split` (`train`, `val`, or `test`), and `prediction` (`0` or `1` on test, `null` elsewhere). `subgroup` is optional. The two files must use the same labels and groups for shared IDs. A group should identify the acquisition unit you want to keep together; it is only a chip ID if your data actually supplies one.
 
@@ -176,11 +176,11 @@ python f4_paired.py evaluate --features .cache/image_features.jsonl > .cache/f4_
 
 The script stops if any stored F2 or F3 deterministic field differs from its refit, then reports the shared-image matrices, per-cell scores, correctness transitions, and paired prefix-group interval. The 64-row-per-model resource probe prints no score. The local F4 evaluation took 2.91 seconds including process startup and peaked at 149 MB; its ignored JSON stores the unrounded values. The feature-cache SHA-256 was `ba4406c3671d5d859b6ff58a66a7d05ff4bbd95ed4d58700de18533e362b5f57`.
 
-To run the complete image calculation on a private Kaggle CPU notebook with internet enabled:
+To verify a clean run on a private Kaggle CPU notebook with internet enabled:
 
 ```sh
-python make_kaggle_job.py --owner YOUR_KAGGLE_USERNAME
-kaggle kernels push -p .cache/kaggle_f1
+python make_kaggle_audit_job.py --owner YOUR_KAGGLE_USERNAME
+kaggle kernels push -p .cache/kaggle_f9
 ```
 
-The generated job is private and downloads the ZIP directly from Zenodo. `f1_image_result.json` is its evaluation artifact. Do not treat it as a public submission or publish it without reviewing the source license and competition sharing rules.
+The generated job is private, downloads the ZIP directly from Zenodo into temporary storage, and exports only the HTML, JSON, and run evidence. This is a verification job, not a competition submission. Review the source license and competition sharing rules before publishing any notebook or adapted data.

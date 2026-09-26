@@ -16,6 +16,7 @@ import struct
 import sys
 import time
 import urllib.request
+import zipfile
 
 from ooc_qc import (CACHE, DATASET_URL, IMAGE_FEATURE_NAMES, IMAGE_MD5,
                     IMAGE_SIZE, IMAGE_URL, TABLE_SHA256, prefix_bootstrap_interval,
@@ -103,19 +104,40 @@ def image_mapping(directory: bytes, expected_entries: int) -> list[dict]:
         cursor = end
         if not name.lower().endswith(".png"):
             continue
-        path = PurePosixPath(name)
-        parts = path.parts
-        if (len(parts) != 6 or parts[0] != "OOC_image_dataset"
-                or parts[1] not in EXPECTED or parts[2] not in ("good", "bad")
-                or not parts[3].startswith("cell_type_")
-                or not re.fullmatch(r"\d{6}_.+\.png", parts[5])):
-            raise ValueError(f"unexpected source image path: {name}")
-        result.append({"id": path.stem, "split": parts[1],
-                       "quality": parts[2], "cell_type": parts[3][10:],
-                       "path": name})
+        result.append(image_entry(name))
     if cursor != len(directory):
         raise ValueError("central-directory byte count mismatch")
     return result
+
+
+def image_entry(name: str) -> dict:
+    path = PurePosixPath(name)
+    parts = path.parts
+    if (len(parts) != 6 or parts[0] != "OOC_image_dataset"
+            or parts[1] not in EXPECTED or parts[2] not in ("good", "bad")
+            or not parts[3].startswith("cell_type_")
+            or not re.fullmatch(r"\d{6}_.+\.png", parts[5])):
+        raise ValueError(f"unexpected source image path: {name}")
+    return {"id": path.stem, "split": parts[1],
+            "quality": parts[2], "cell_type": parts[3][10:], "path": name}
+
+
+def map_local_zip(zip_path: Path, table_path: Path, mapping_path: Path) -> dict:
+    """Use an MD5-verified local ZIP; no second network request is needed."""
+    with zipfile.ZipFile(zip_path) as archive:
+        entries = [image_entry(info.filename) for info in archive.infolist()
+                   if info.filename.lower().endswith(".png")]
+    rows = read_table(table_path)
+    parts, overlap = validate_mapping(entries, rows)
+    document = {"source": DATASET_URL, "image_url": IMAGE_URL,
+                "image_zip_size": IMAGE_SIZE, "image_zip_md5_expected": IMAGE_MD5,
+                "datasheet_sha256": TABLE_SHA256,
+                "mapping_method": "folder paths in MD5-verified local source ZIP",
+                "entries": sorted(entries, key=lambda entry: entry["id"])}
+    mapping_path.parent.mkdir(parents=True, exist_ok=True)
+    mapping_path.write_text(json.dumps(document, indent=2) + "\n")
+    return {"image_count": len(entries), "split": split_summary(parts),
+            "prefix_overlap_with_train": overlap, "mapping_file": str(mapping_path)}
 
 
 def validate_mapping(entries: list[dict], rows: list[dict]) -> tuple[dict, dict]:

@@ -33,9 +33,13 @@ CACHE = Path(__file__).resolve().parent / ".cache"
 def fetch_table(path: Path) -> None:
     if not path.exists():
         path.parent.mkdir(parents=True, exist_ok=True)
+        partial = path.with_suffix(path.suffix + ".part")
         req = urllib.request.Request(TABLE_URL, headers={"User-Agent": "OoC-QC-baseline/0.1"})
         with urllib.request.urlopen(req, timeout=30) as response:
-            path.write_bytes(response.read())
+            partial.write_bytes(response.read())
+        if hashlib.sha256(partial.read_bytes()).hexdigest() != TABLE_SHA256:
+            raise ValueError("downloaded datasheet SHA-256 mismatch; rerun to retry")
+        partial.replace(path)
     digest = hashlib.sha256(path.read_bytes()).hexdigest()
     if digest != TABLE_SHA256:
         raise ValueError(f"datasheet SHA-256 mismatch: {digest}")
