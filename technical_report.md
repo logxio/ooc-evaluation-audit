@@ -40,7 +40,7 @@ An image-quality model can score well on a held-out folder while failing to answ
 
 We demonstrate the tool on 3,072 real organ-on-chip brightfield images and expert good/bad labels from the public Zenodo dataset by Movčana and colleagues [1, 2]. The original ZIP's image-level test contains 57 date-like filename prefixes; all 57 also occur in its training set. A fixed 29-feature random forest scores 0.797882 balanced accuracy on that test, while the corresponding model evaluated on a prefix-group holdout scores 0.657801. These test sets share only 151 images, so the 0.140080 difference is descriptive. On the shared images, the source-split and grouped-split models score 0.762491 and 0.691708, a difference of 0.070783. A paired percentile bootstrap over 14 prefixes gives an approximate 95% interval from -0.031747 to 0.127527. The interval crosses zero, and the two models were trained and calibrated on different rows. These observations do not establish a general optimistic bias, a causal effect of overlap, or leakage between physical chips.
 
-The dataset does not provide independently verified physical chip IDs. Filename prefixes are therefore treated only as acquisition-context proxies. The contribution is an inspectable evaluation workflow, a fully worked real-data case, and explicit limits on what each comparison can establish. It requires no paid API, GPU, proprietary model, or redistribution of the source images.
+The dataset does not provide independently verified physical chip IDs. Filename prefixes are therefore treated only as acquisition-context proxies. A clean Linux CPU run reproduced the source and feature hash but selected slightly different forest thresholds and scores from the original macOS run; the prespecified decisions did not change. The tool records that mismatch. The contribution is an inspectable evaluation workflow, a fully worked real-data case, and explicit limits on what each comparison can establish. It requires no paid API, GPU, proprietary model, or redistribution of the source images.
 
 **Keywords:** organ-on-chip; brightfield imaging; evaluation audit; grouped holdout; reproducibility; image quality.
 
@@ -169,7 +169,7 @@ For this case study, the `ooc` command rebuilds test predictions from the previo
 
 A researcher with their own per-image predictions can bypass the example adapter. They supply source and grouped JSONL records, with group IDs that reflect their actual experimental provenance. The generic report then exposes group overlap and both test compositions. If the test sets have no shared IDs, it cannot compute a same-image contrast. If a test has only one class, balanced accuracy is undefined. These are intentional boundaries of the evidence.
 
-The currently verified one-command route begins with a **prepared local cache** of the publicly obtainable spreadsheet, image features, source split map, and F2-F4 result JSON. It is not yet a one-command fresh download from the public data record. The public README documents the staged, resumable source download and feature extraction; an independent clean-machine run remains part of release validation.
+The source-to-report route is `python run_full_audit.py`. It downloads and verifies both original Zenodo files, extracts the 3,072 image feature vectors, computes F1-F4, and writes the offline HTML, JSON, and `run_evidence.json`. On a local machine its default four-minute budget allows the same command to resume the ZIP download and feature extraction. A clean Kaggle Linux CPU run used `--time-budget 0` to complete the route in one invocation. It produced the report, but its forest results differed from the earlier macOS frozen numbers. The report labels this `frozen_mismatch` and the command exits with status 3; this is an observed reproducibility limit, not an exact reproduction of the macOS metrics.
 
 # Reliability, limitations, and application value
 
@@ -191,11 +191,26 @@ The audit can serve as an evaluation checklist with executable calculations. Whe
 
 ## Hardware and software
 
-The code runs on CPU with Python 3.11 or later. `requirements.txt` specifies NumPy 2.x, Pillow 11-12, and scikit-learn 1.9.1. It uses no paid service, proprietary model, non-public data, or GPU. Runtime measurements are from this Mac and are not performance guarantees on another system. The source ZIP is roughly 6.7 GB, so obtaining all images is the largest transfer; the Python downloader saves progress and bounds each local call to 200 seconds. The generated feature cache and results stay in ignored local files.
+The code runs on CPU with Python 3.12 or later. `requirements.txt` pins NumPy 2.5.3, Pillow 12.3.0, and scikit-learn 1.9.1. It uses no paid service, proprietary model, non-public data, or GPU. The source ZIP is roughly 6.7 GB, so obtaining all images is the largest transfer; the Python downloader saves progress and the main command defaults to a 240-second local budget. The generated feature cache and results stay in ignored local files. Runtime measurements are specific to their stated environments.
+
+## Cross-platform source-to-report check
+
+The clean Kaggle Linux x86-64 run started without a prepared cache. It verified the 6,710,767,405-byte ZIP against source MD5 `8f7e058996203d48eb03b2d86c0a2e4d`, verified the datasheet SHA-256, and extracted features for all 3,072 matching image IDs. The canonical 29-feature cache SHA-256 was `65bb227546f96b7f4643ccf5f98caf50ca38b90c23cce221367dae7d5c6e5902`, identical to the cache on which the macOS models were refitted. The run exported a 4,365-byte HTML report, a 1,059,809-byte JSON report, and `run_evidence.json`; the evidence records hashes of both reports, the source identities, metrics, platform, and resource use. It used four free CPU cores, took 2,703.35 seconds in the audit command, and peaked at 218.80 MiB resident memory.
+
+| Measure | Original macOS run | Clean Kaggle Linux run |
+| --- | ---: | ---: |
+| Grouped F2 test balanced accuracy | 0.657801 | 0.657920 |
+| Grouped F2 good images falsely flagged | 179/376 | 181/376 |
+| Source F3 test balanced accuracy | 0.797882 | 0.799925 |
+| Source F3 good images falsely flagged | 61/365 | 57/365 |
+| Same-151-image paired balanced-accuracy difference | +0.070783 | +0.066088 |
+| Paired 14-prefix bootstrap 95% interval | -0.031747 to +0.127527 | -0.042091 to +0.122483 |
+
+The grouped false-positive rate exceeds the prespecified 45% ceiling on both systems. The descriptive full-test gap exceeds the audit-direction screen of 0.10 on both systems. The paired difference is below the 0.08 stronger-evidence screen and its interval crosses zero on both systems. A separate macOS Python 3.12 environment with the same pinned library versions and feature hash reproduced the original macOS values, while a Linux ARM64 container reproduced the Kaggle Linux values. The evidence points to a platform-dependent model-training or threshold path; the exact underlying function has not been isolated. We do not overwrite the earlier measurements with the later ones or infer a general physical-chip leakage effect from either run. The HTML and JSON display the mismatch, and `run_evidence.json` records `status: frozen_mismatch`; exit status 3 makes it visible to automated callers.
 
 ## Reproduction sequence
 
-From the public repository root, create a virtual environment, install requirements, download and verify the source spreadsheet, then download and MD5-check the image ZIP. Extract the 29 image features in bounded batches. Run the F1 image and metadata baselines, the fixed F2 forest on the grouped split, the F3 forest on the source split, and the F4 paired comparison. Finally run `audit_report.py ooc --output .cache/audit_report`. The exact commands and expected files are in the repository README; no hidden model file or private database is needed.
+From the public repository root, create a virtual environment, install requirements, and run `python run_full_audit.py`. The default local time budget pauses with a resumable instruction; rerun the same command until it completes. On a remote CPU without a short process limit, use `python run_full_audit.py --time-budget 0`. The script performs the spreadsheet and ZIP checks, feature extraction, F1-F4 calculations, and report export. The staged commands remain in the repository README for inspecting or rerunning a single stage; no hidden model file or private database is needed. A frozen-reference mismatch produces the reports with a visible warning and exit status 3.
 
 The source split mapper reads ZIP64 metadata via HTTP range requests, checks the 3,072 IDs and source folder labels against the spreadsheet, and writes the mapping locally. F4 refits both models and compares deterministic fields in the frozen F2/F3 JSON, including split counts, validation/test summaries, thresholds, and per-cell results. F7 repeats those checks and validates F4's shared test. Input SHA-256 hashes are recorded in its JSON. These checks make an accidental change of source file, feature cache, split, or model output visible.
 

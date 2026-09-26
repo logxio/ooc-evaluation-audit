@@ -129,7 +129,7 @@ F4 reproduced every stored full-test metric field for F2 and F3, including each 
 
 ## Reproduce
 
-Use Python 3.11 or later. [NumPy](https://numpy.org/doc/stable/license) is BSD-3-Clause licensed; [Pillow](https://pillow.readthedocs.io/en/stable/about.html#license) describes its license as MIT-CMU. [scikit-learn 1.9.1 on official PyPI](https://pypi.org/project/scikit-learn/1.9.1/) is BSD-3-Clause licensed. This code uses no paid API, proprietary model, or GPU.
+Use Python 3.12 or later. [NumPy](https://numpy.org/doc/stable/license) is BSD-3-Clause licensed; [Pillow](https://pillow.readthedocs.io/en/stable/about.html#license) describes its license as MIT-CMU. [scikit-learn 1.9.1 on official PyPI](https://pypi.org/project/scikit-learn/1.9.1/) is BSD-3-Clause licensed. This code uses no paid API, proprietary model, or GPU.
 
 ```sh
 python3 -m venv .venv
@@ -157,7 +157,7 @@ python f2_rf.py probe --features .cache/image_features.jsonl
 python f2_rf.py evaluate --features .cache/image_features.jsonl > .cache/f2_rf_result.json
 ```
 
-The measured local F2 fit took 0.97 seconds; the full process took 2.22 seconds and reached 147 MB maximum resident memory on a Mac. The 64-row resource probe reached 135 MB. Feature cache SHA-256: `ba4406c3671d5d859b6ff58a66a7d05ff4bbd95ed4d58700de18533e362b5f57`. The cache and result JSON are ignored by git; they contain no redistributed source images.
+The measured local F2 fit took 0.97 seconds; the full process took 2.22 seconds and reached 147 MB maximum resident memory on a Mac. The 64-row resource probe reached 135 MB. The current 12-decimal feature cache SHA-256 is `65bb227546f96b7f4643ccf5f98caf50ca38b90c23cce221367dae7d5c6e5902`; the original pre-normalization cache had SHA-256 `ba4406c3671d5d859b6ff58a66a7d05ff4bbd95ed4d58700de18533e362b5f57`. Both gave the original macOS F2 result. The cache and result JSON are ignored by git; they contain no redistributed source images.
 
 To reproduce F3 with the same feature cache, read the ZIP metadata and evaluate the frozen RF specification:
 
@@ -176,7 +176,7 @@ python f4_paired.py probe --features .cache/image_features.jsonl
 python f4_paired.py evaluate --features .cache/image_features.jsonl > .cache/f4_paired_result.json
 ```
 
-The script stops if any stored F2 or F3 deterministic field differs from its refit, then reports the shared-image matrices, per-cell scores, correctness transitions, and paired prefix-group interval. The 64-row-per-model resource probe prints no score. The local F4 evaluation took 2.91 seconds including process startup and peaked at 149 MB; its ignored JSON stores the unrounded values. The feature-cache SHA-256 was `ba4406c3671d5d859b6ff58a66a7d05ff4bbd95ed4d58700de18533e362b5f57`.
+The script stops if any stored F2 or F3 deterministic field differs from its refit, then reports the shared-image matrices, per-cell scores, correctness transitions, and paired prefix-group interval. The 64-row-per-model resource probe prints no score. The original local F4 evaluation took 2.91 seconds including process startup and peaked at 149 MB; its ignored JSON stores the unrounded values. That run used the pre-normalization feature cache; the current 12-decimal cache has SHA-256 `65bb227546f96b7f4643ccf5f98caf50ca38b90c23cce221367dae7d5c6e5902` and reproduced the same macOS metrics in a fresh pinned environment.
 
 To verify a clean run on a private Kaggle CPU notebook with internet enabled:
 
