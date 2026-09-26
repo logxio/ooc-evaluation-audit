@@ -2,6 +2,8 @@
 
 Give the audit per-image labels, acquisition groups, train/validation/test splits, and test predictions. It gives you an offline report showing group overlap, each test set's good/bad errors, and what changes when both evaluations score the same images.
 
+The [technical report](technical_report.pdf) gives the dataset provenance, frozen model protocol, exact denominators, and limits of this single-dataset result. Its [source](technical_report.md) is included for review.
+
 With the prepared cache from the [source dataset](https://zenodo.org/records/10203721), run:
 
 ```sh
