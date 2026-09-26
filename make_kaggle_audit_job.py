@@ -32,6 +32,7 @@ from pathlib import Path
 import subprocess
 import sys
 from io import BytesIO
+import shutil
 import zipfile
 
 source = Path("/kaggle/temp/ooc_audit_source")
@@ -40,10 +41,19 @@ with zipfile.ZipFile(BytesIO(base64.b85decode({payload!r}))) as bundle:
     bundle.extractall(source)
 subprocess.run([sys.executable, "-m", "pip", "install", "-q", "-r",
                 str(source / "requirements.txt")], check=True)
-subprocess.run([sys.executable, str(source / "run_full_audit.py"),
-                "--cache", "/kaggle/temp/ooc_audit_cache",
-                "--output", "/kaggle/working/audit_report",
-                "--time-budget", "0"], check=True)
+cache = Path("/kaggle/temp/ooc_audit_cache")
+try:
+    subprocess.run([sys.executable, str(source / "run_full_audit.py"),
+                    "--cache", str(cache),
+                    "--output", "/kaggle/working/audit_report",
+                    "--time-budget", "0"], check=True)
+finally:
+    results = Path("/kaggle/working/model_results")
+    results.mkdir(exist_ok=True)
+    for name in ("f1_metadata_result.json", "f1_image_result.json",
+                 "f2_rf_result.json", "f3_source_result.json", "f4_paired_result.json"):
+        if (cache / name).exists():
+            shutil.copy2(cache / name, results / name)
 '''
     JOB.mkdir(parents=True, exist_ok=True)
     (JOB / "run_kaggle_audit.py").write_text(runner)

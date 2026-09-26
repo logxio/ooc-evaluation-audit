@@ -383,7 +383,9 @@ def image_features(image_file) -> list[float]:
     ]
     if len(values) != len(IMAGE_FEATURE_NAMES) or not all(math.isfinite(x) for x in values):
         raise ValueError("invalid image feature vector")
-    return values
+    # Canonicalize platform-scale reduction noise before serializing the cache.
+    # This does not change the 29 features or the frozen model/threshold rules.
+    return [round(value, 12) for value in values]
 
 
 def read_feature_cache(path: Path) -> dict[str, list[float]]:
