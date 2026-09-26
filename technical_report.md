@@ -38,9 +38,9 @@ header-includes:
 
 An image-quality model can score well on a held-out folder while failing to answer the question an organ-on-chip researcher actually asks: will it work on a new acquisition context? We built an offline audit that joins image identifiers, expert quality labels, acquisition groups, train/validation/test assignments, and test predictions. It reports group overlap, class denominators, confusion matrices, false alarms on good images, and a same-image comparison between two evaluations. The report is generated from records and includes the records and calculations in JSON.
 
-We demonstrate the tool on 3,072 real organ-on-chip brightfield images and expert good/bad labels from the public Zenodo dataset by Movčana and colleagues [1, 2]. The original ZIP's image-level test contains 57 date-like filename prefixes; all 57 also occur in its training set. A fixed 29-feature random forest scores 0.797882 balanced accuracy on that test, while the corresponding model evaluated on a prefix-group holdout scores 0.657801. These test sets share only 151 images, so the 0.140080 difference is descriptive. On the shared images, the source-split and grouped-split models score 0.762491 and 0.691708, a difference of 0.070783. A paired percentile bootstrap over 14 prefixes gives an approximate 95% interval from -0.031747 to 0.127527. The interval crosses zero, and the two models were trained and calibrated on different rows. These observations do not establish a general optimistic bias, a causal effect of overlap, or leakage between physical chips.
+We demonstrate the tool on 3,072 real organ-on-chip brightfield images and expert good/bad labels from the public Zenodo dataset by Movčana and colleagues [1, 2]. The original ZIP's image-level test contains 57 date-like filename prefixes; all 57 also occur in its training set. In the clean Linux CPU run, a fixed 29-feature random forest scores 0.799925 balanced accuracy on that test, while the corresponding model evaluated on a prefix-group holdout scores 0.657920. These test sets share only 151 images, so their 0.142005 difference is descriptive. On the shared images, the source-split and grouped-split models score 0.756467 and 0.690379, a difference of 0.066088. A paired percentile bootstrap over 14 prefixes gives an approximate 95% interval from -0.042091 to 0.122483. The interval crosses zero, and the two models were trained and calibrated on different rows. These observations do not establish a general optimistic bias, a causal effect of overlap, or leakage between physical chips.
 
-The dataset does not provide independently verified physical chip IDs. Filename prefixes are therefore treated only as acquisition-context proxies. A clean Linux CPU run reproduced the source and feature hash but selected slightly different forest thresholds and scores from the original macOS run; the prespecified decisions did not change. The tool records that mismatch. The contribution is an inspectable evaluation workflow, a fully worked real-data case, and explicit limits on what each comparison can establish. It requires no paid API, GPU, proprietary model, or redistribution of the source images.
+The dataset does not provide independently verified physical chip IDs. Filename prefixes are therefore treated only as acquisition-context proxies. The Linux CPU result is the frozen reference for the public command; the original macOS run is retained as a historical measurement. Both runs used a byte-identical feature file but built different forest trees, while the prespecified research decisions were unchanged. The tool checks Linux outputs against the Linux reference and marks a macOS difference. The contribution is an inspectable evaluation workflow, a fully worked real-data case, and explicit limits on what each comparison can establish. It requires no paid API, GPU, proprietary model, or redistribution of the source images.
 
 **Keywords:** organ-on-chip; brightfield imaging; evaluation audit; grouped holdout; reproducibility; image quality.
 
@@ -70,7 +70,7 @@ The spreadsheet is 119,712 bytes and is checked by SHA-256 before parsing. The i
 
 ## License boundary
 
-The Zenodo record metadata lists CC BY 4.0 for its files [1]. The associated descriptor refers to the dataset as CC-BY-SA without a version [2]. We report both statements. The downloadable images and their adapted forms are not included in our code repository, so the discrepancy is not resolved by silently republishing under either license. Users follow the source record and its attribution terms when obtaining the data. Our own code is MIT licensed. NumPy uses BSD-3-Clause; Pillow describes its license as MIT-CMU; scikit-learn uses BSD-3-Clause [4-6]. The source of each external component is listed in the references.
+The Zenodo record metadata lists CC BY 4.0 for its files [1]. The associated descriptor refers to the dataset as CC-BY-SA without a version [2]. We report both statements. The downloadable images and their adapted forms are not included in our code repository, so the discrepancy is not resolved by silently republishing under either license. Users follow the source record and its attribution terms when obtaining the data. Our own code is MIT licensed. NumPy uses BSD-3-Clause; Pillow describes its license as MIT-CMU; SciPy and scikit-learn use BSD-3-Clause [4-6, 8]. The source of each external component is listed in the references.
 
 ## Evaluation groups
 
@@ -108,13 +108,13 @@ F1 fits a deterministic L2-regularized logistic classifier on the grouped split.
 
 ## F2: one prespecified nonlinear comparison
 
-After F1, we registered one random-forest comparison using the same 29 features and grouped split: 300 trees, `min_samples_leaf=8`, `max_features=sqrt`, `class_weight=balanced_subsample`, seed 26, and the remaining scikit-learn defaults. No new features are added. The threshold is selected using validation probabilities only. Candidate thresholds include distinct probabilities, adjacent midpoints, and 0, 0.5, and 1. The first selection tier requires bad recall at least 0.60 and good recall at least 0.55; within an eligible tier, maximize balanced accuracy, break ties by distance to 0.5, then by higher threshold. The grouped validation set selected 0.31713680975737424.
+After F1, we registered one random-forest comparison using the same 29 features and grouped split: 300 trees, `min_samples_leaf=8`, `max_features=sqrt`, `class_weight=balanced_subsample`, seed 26, and the remaining scikit-learn defaults. No new features are added. The threshold is selected using validation probabilities only. Candidate thresholds include distinct probabilities, adjacent midpoints, and 0, 0.5, and 1. The first selection tier requires bad recall at least 0.60 and good recall at least 0.55; within an eligible tier, maximize balanced accuracy, break ties by distance to 0.5, then by higher threshold. The grouped validation set selected 0.314465497255814 in the Linux reference; the earlier macOS run selected 0.31713680975737424.
 
 The continuation gate, written before fitting F2, required test balanced accuracy at least 0.65, bad recall at least 0.60, **and** good-image false-positive rate at most 0.45. F2 passed the first two conditions and missed the third. We stopped optimizing automatic image rejection on this repeatedly viewed test.
 
 ## F3 and F4: split comparison without model search
 
-F3 uses the same feature vector, forest configuration, and threshold rule, now with the original ZIP's train/validation/test folders. Its validation threshold is 0.4984234764442013. F4 refits both frozen configurations and scores them on the intersection of their test image IDs. F4 changes no feature, model parameter, or threshold rule. The source and grouped full-test results were already seen when F4 was chosen; F4 is a diagnostic paired comparison, not a fresh blinded validation. A second dataset would be required to test transport beyond this source.
+F3 uses the same feature vector, forest configuration, and threshold rule, now with the original ZIP's train/validation/test folders. Its validation threshold is 0.503368900036556 in the Linux reference; the earlier macOS run selected 0.4984234764442013. F4 refits both frozen configurations and scores them on the intersection of their test image IDs. F4 changes no feature, model parameter, or threshold rule. The source and grouped full-test results were already seen when F4 was chosen; F4 is a diagnostic paired comparison, not a fresh blinded validation. A second dataset would be required to test transport beyond this source.
 
 # Measured results
 
@@ -125,22 +125,22 @@ F3 uses the same feature vector, forest configuration, and threshold rule, now w
 | Always good | 376/360 | 0.500000 | 0.000000 | 0/376 |
 | Metadata logistic | 376/360 | 0.523345 | 0.472222 | 160/376 |
 | F1 image logistic | 376/360 | 0.608836 | 0.802778 | 220/376 |
-| F2 image forest | 376/360 | 0.657801 | 0.791667 | 179/376 |
+| F2 image forest | 376/360 | 0.657920 | 0.797222 | 181/376 |
 
-Confusion matrices (true good/bad rows, predicted good/bad columns) are: always good `[[376,0],[360,0]]`; metadata `[[216,160],[190,170]]`; F1 image `[[156,220],[71,289]]`; and F2 forest `[[197,179],[75,285]]`.
+Confusion matrices (true good/bad rows, predicted good/bad columns) are: always good `[[376,0],[360,0]]`; metadata `[[216,160],[190,170]]`; F1 image `[[156,220],[71,289]]`; and Linux F2 forest `[[195,181],[73,287]]`. The F2 validation set has 179 good and 73 bad images, matrix `[[99,80],[19,54]]`, and balanced accuracy 0.646399.
 
-F1 improves balanced accuracy by 0.085491 over metadata, but falsely flags 58.51% of good test images. F2 lowers that count by 41 and improves balanced accuracy by 0.048966, while its good-image false-positive rate remains 179/376 = 0.476064. Because 0.476064 exceeds the prespecified 0.45 ceiling, the automatic quality-gate direction was stopped. It would be misleading to present F2's 0.657801 alone as evidence for automated culture rejection. A 2,000-resample bootstrap over its 15 test prefixes gives an approximate balanced-accuracy interval of 0.577-0.733; these prefixes are not verified chips.
+F1 improves balanced accuracy by 0.085491 over metadata, but falsely flags 58.51% of good test images. Linux F2 lowers that count to 181 and improves balanced accuracy by 0.049084, while its good-image false-positive rate remains 181/376 = 0.481383. This exceeds the prespecified 0.45 ceiling, so the automatic quality-gate direction was stopped. A 2,000-resample bootstrap over its 15 test prefixes gives an approximate balanced-accuracy interval of 0.575-0.730; these prefixes are not verified chips. F2 reused a test already viewed for F1 and cannot be called a fresh blind evaluation.
 
 ## Full tests under different splits
 
 | Evaluation | Test good/bad | Balanced accuracy | Good recall | Bad recall | Good-image false positives |
 |:--|--:|--:|--:|--:|--:|
-| F3, source folders | 365/291 | 0.797882 | 0.832877 | 0.762887 | 61/365 |
-| F2, prefix groups | 376/360 | 0.657801 | 0.523936 | 0.791667 | 179/376 |
+| F3, source folders | 365/291 | 0.799925 | 0.843836 | 0.756014 | 57/365 |
+| F2, prefix groups | 376/360 | 0.657920 | 0.518617 | 0.797222 | 181/376 |
 
-The source matrix is `[[304,61],[69,222]]`; the grouped matrix is `[[197,179],[75,285]]`.
+The Linux source matrix is `[[308,57],[71,220]]`; the grouped matrix is `[[195,181],[73,287]]`. Source validation has 163 good and 123 bad images, matrix `[[135,28],[32,91]]`, and balanced accuracy 0.784029. A 2,000-resample bootstrap over source test prefixes gives an approximate balanced-accuracy interval of 0.744-0.848.
 
-The source-folder test has 57/57 date-like prefixes also present in source training. The grouped test has 0/15 prefixes in grouped training. The numerical balanced-accuracy gap is 0.140080. However, the tests differ in composition: 505 source-test images are not in grouped test, and 585 grouped-test images are not in source test. The two training sets, validation sets, and selected thresholds also differ. The full-test gap is therefore an audit signal, not a causal estimate of the cost of overlap.
+The source-folder test has 57/57 date-like prefixes also present in source training. The grouped test has 0/15 prefixes in grouped training. The Linux full-test balanced-accuracy gap is 0.142005. However, the tests differ in composition: 505 source-test images are absent from grouped test, and 585 grouped-test images are absent from source test. The two training sets, validation sets, and selected thresholds also differ. The gap is an audit signal, not a causal estimate of the cost of overlap.
 
 ## Same 151 images under both models
 
@@ -148,28 +148,26 @@ The test intersection has 68 good and 83 bad images from 14 date-like prefixes. 
 
 | Model | Balanced accuracy | Good recall | Bad recall | Good-image false positives |
 |:--|--:|--:|--:|--:|
-| F3 source-split model | 0.762491 | 0.838235 | 0.686747 | 11/68 |
-| F2 grouped-split model | 0.691708 | 0.588235 | 0.795181 | 28/68 |
+| F3 source-split model | 0.756467 | 0.838235 | 0.674699 | 11/68 |
+| F2 grouped-split model | 0.690379 | 0.573529 | 0.807229 | 29/68 |
 
-The source model's shared-image matrix is `[[57,11],[26,57]]`; the grouped model's is `[[40,28],[17,66]]`.
-
-The paired balanced-accuracy difference is +0.070783. Both models are correct on 94 images; only the source model is correct on 20; only the grouped model is correct on 12; both are wrong on 25. A paired 14-prefix bootstrap gives an approximate 95% difference interval of -0.031747 to +0.127527 (2,000/2,000 valid draws). The prespecified strong-evidence gate required a difference of at least 0.08 and an interval lower bound above zero; neither condition passed. We therefore report split sensitivity in this source without asserting a general direction of evaluation bias.
+The source model's shared-image matrix is `[[57,11],[27,56]]`; the grouped model's is `[[39,29],[16,67]]`. The paired balanced-accuracy difference is +0.066088. Both models are correct on 92 images; only the source model is correct on 21; only the grouped model is correct on 14; both are wrong on 24. A paired 14-prefix bootstrap gives an approximate 95% difference interval of -0.042091 to +0.122483 (2,000/2,000 valid draws). The prespecified strong-evidence gate required a difference of at least 0.08 and an interval lower bound above zero; neither condition passed. The interval does not establish a general direction of evaluation bias.
 
 Holding test images fixed removes test-composition differences. It does not equalize the rows used to train the forests or the rows used to choose their thresholds. It also cannot turn a date-like prefix into a physical chip ID. The result is not evidence that the same chip was used for training and test.
 
 ## Cell-type boundaries
 
-The grouped F2 full test includes A549 (151 good/81 bad), CACO (27/55), HPMEC (187/152), HSAEC (11/24), HUVEC (0/39), and NHBE (0/9). With no good images in the last two cell types, their good recall and balanced accuracy are undefined. The report's main measures use the full test denominators; per-cell results in the code README retain denominators so a reader cannot mistake an undefined small subgroup for a reliable score. We do not promote any single cell-type result as a separate discovery.
+The grouped F2 full test includes A549 (151 good/81 bad), CACO (27/55), HPMEC (187/152), HSAEC (11/24), HUVEC (0/39), and NHBE (0/9). With no good images in the last two cell types, their good recall and balanced accuracy are undefined. The generated JSON retains each cell type's denominator and confusion matrix; no single cell-type result is promoted as a separate discovery.
 
 # Software artifact and real workflow
 
 The offline tool has a generic core and an adapter for this dataset. The generic command reads two JSONL record sets, validates them, and writes `audit.html` and `audit.json`. The HTML is a single local page that summarizes overlap, test denominators and errors, the shared-image comparison, and the interpretation limits. The JSON stores both input records, computed counts, metadata, and input file hashes. The artifact does not call a model API or upload images.
 
-For this case study, the `ooc` command rebuilds test predictions from the previously extracted local image features and fixed model specifications. Before export, it checks F2 and F3 results against their frozen JSON records and checks F4's shared-image counts, confusion matrices, transitions, paired difference, and interval. The independent rerun on the prepared real cache took 3.32 seconds and peaked at 156,188,672 bytes resident memory on a Mac. Its HTML was byte-identical to the first generated page; the JSON was identical apart from elapsed time and reported memory. This is an engineering reproducibility check, not a new external validation result.
+For this case study, the `ooc` command rebuilds test predictions from locally extracted image features and fixed model specifications. Before export, it checks fresh F2 and F3 results against the refitted models and checks F4's shared-image counts, confusion matrices, transitions, paired difference, and interval. On a prepared real feature cache, Linux ARM64 reproduced the independent Kaggle Linux x86-64 deterministic F2-F4 fields and exported the report with `status: verified`. This checks the reporting path; it is not a second biological dataset or a new external validation result.
 
 A researcher with their own per-image predictions can bypass the example adapter. They supply source and grouped JSONL records, with group IDs that reflect their actual experimental provenance. The generic report then exposes group overlap and both test compositions. If the test sets have no shared IDs, it cannot compute a same-image contrast. If a test has only one class, balanced accuracy is undefined. These are intentional boundaries of the evidence.
 
-The source-to-report route is `python run_full_audit.py`. It downloads and verifies both original Zenodo files, extracts the 3,072 image feature vectors, computes F1-F4, and writes the offline HTML, JSON, and `run_evidence.json`. On a local machine its default four-minute budget allows the same command to resume the ZIP download and feature extraction. A clean Kaggle Linux CPU run used `--time-budget 0` to complete the route in one invocation. It produced the report, but its forest results differed from the earlier macOS frozen numbers. The report labels this `frozen_mismatch` and the command exits with status 3; this is an observed reproducibility limit, not an exact reproduction of the macOS metrics.
+The source-to-report route is `python run_full_audit.py`. It downloads and verifies both original Zenodo files, extracts the 3,072 image feature vectors, computes F1-F4, and writes the offline HTML, JSON, and `run_evidence.json`. On a local machine its default four-minute budget allows the same command to resume the ZIP download and feature extraction. A clean Kaggle Linux CPU run used `--time-budget 0` to complete the route in one invocation, produced the report, matched the Linux reference, and exited 0. The corresponding macOS run uses the same feature SHA-256 but different forest trees; its report marks the platform difference and the command exits 3.
 
 # Reliability, limitations, and application value
 
@@ -191,28 +189,32 @@ The audit can serve as an evaluation checklist with executable calculations. Whe
 
 ## Hardware and software
 
-The code runs on CPU with Python 3.12 or later. `requirements.txt` pins NumPy 2.5.3, Pillow 12.3.0, and scikit-learn 1.9.1. It uses no paid service, proprietary model, non-public data, or GPU. The source ZIP is roughly 6.7 GB, so obtaining all images is the largest transfer; the Python downloader saves progress and the main command defaults to a 240-second local budget. The generated feature cache and results stay in ignored local files. Runtime measurements are specific to their stated environments.
+The code runs on CPU with Python 3.12. `requirements.txt` pins NumPy 2.5.3, Pillow 12.3.0, SciPy 1.18.1, and scikit-learn 1.9.1. It uses no paid service, proprietary model, non-public data, or GPU. The source ZIP is roughly 6.7 GB, so obtaining all images is the largest transfer; the Python downloader saves progress and the main command defaults to a 240-second local budget. The generated feature cache and results stay in ignored local files. Runtime measurements are specific to their stated environments.
 
-## Cross-platform source-to-report check
+## Linux reference and independent clean run
 
-The clean Kaggle Linux x86-64 run started without a prepared cache. It verified the 6,710,767,405-byte ZIP against source MD5 `8f7e058996203d48eb03b2d86c0a2e4d`, verified the datasheet SHA-256, and extracted features for all 3,072 matching image IDs. The canonical 29-feature cache SHA-256 was `65bb227546f96b7f4643ccf5f98caf50ca38b90c23cce221367dae7d5c6e5902`, identical to the cache on which the macOS models were refitted. The run exported a 4,365-byte HTML report, a 1,059,809-byte JSON report, and `run_evidence.json`; the evidence records hashes of both reports, the source identities, metrics, platform, and resource use. It used four free CPU cores, took 2,703.35 seconds in the audit command, and peaked at 218.80 MiB resident memory.
+An earlier clean Kaggle Linux x86-64 CPU run started without a prepared cache, verified the 6,710,767,405-byte ZIP against source MD5 `8f7e058996203d48eb03b2d86c0a2e4d`, verified the datasheet SHA-256, and extracted features for all 3,072 image IDs. Its feature-cache SHA-256 was `65bb227546f96b7f4643ccf5f98caf50ca38b90c23cce221367dae7d5c6e5902`. That run exited 3 because the reference still contained earlier macOS measurements. Its actual Linux F2-F4 output is now the frozen Linux reference; the macOS record remains separately identified in the same file.
 
-| Measure | Original macOS run | Clean Kaggle Linux run |
+A second Kaggle run used the public one-command code and a new, empty `/kaggle/temp/ooc_audit_cache`. It downloaded the original files again, verified the same source and feature hashes, recomputed F1-F4, and produced `audit.html`, `audit.json`, and `run_evidence.json` with `status: verified`. The private verification job completed with exit 0 on four free Linux x86-64 CPU cores, with GPU disabled and internet access for Zenodo. The audit command took 601.00 seconds and recorded 218.98 MiB peak resident memory. The two report SHA-256 digests are recorded in `run_evidence.json` and match the downloaded artifacts. Its source test had 57/57 date-like prefixes also in training, and the shared test had 151 images, 68 good and 83 bad, from 14 prefixes.
+
+| Measure | Clean Linux reference | Original macOS measurement |
 | --- | ---: | ---: |
-| Grouped F2 test balanced accuracy | 0.657801 | 0.657920 |
-| Grouped F2 good images falsely flagged | 179/376 | 181/376 |
-| Source F3 test balanced accuracy | 0.797882 | 0.799925 |
-| Source F3 good images falsely flagged | 61/365 | 57/365 |
-| Same-151-image paired balanced-accuracy difference | +0.070783 | +0.066088 |
-| Paired 14-prefix bootstrap 95% interval | -0.031747 to +0.127527 | -0.042091 to +0.122483 |
+| Grouped F2 test balanced accuracy | 0.657920 | 0.657801 |
+| Grouped F2 good images falsely flagged | 181/376 | 179/376 |
+| Source F3 test balanced accuracy | 0.799925 | 0.797882 |
+| Source F3 good images falsely flagged | 57/365 | 61/365 |
+| Same-151-image paired balanced-accuracy difference | +0.066088 | +0.070783 |
+| Paired 14-prefix bootstrap 95% interval | -0.042091 to +0.122483 | -0.031747 to +0.127527 |
 
-The grouped false-positive rate exceeds the prespecified 45% ceiling on both systems. The descriptive full-test gap exceeds the audit-direction screen of 0.10 on both systems. The paired difference is below the 0.08 stronger-evidence screen and its interval crosses zero on both systems. A separate macOS Python 3.12 environment with the same pinned library versions and feature hash reproduced the original macOS values, while a Linux ARM64 container reproduced the Kaggle Linux values. The evidence points to a platform-dependent model-training or threshold path; the exact underlying function has not been isolated. We do not overwrite the earlier measurements with the later ones or infer a general physical-chip leakage effect from either run. The HTML and JSON display the mismatch, and `run_evidence.json` records `status: frozen_mismatch`; exit status 3 makes it visible to automated callers.
+We located the first measured divergence before validation and threshold selection. On the same ordered feature and label arrays, with identical seeds and one fitting thread, the first forest tree is identical across macOS Python 3.12 and Linux x86-64/ARM64 Python 3.12. In a 300-tree grouped fit, tree 3 first differs at node index 96: macOS selects feature 7 at threshold 0.0150570632, while Linux selects feature 9 at 0.0283526825. A 64-row probe first differs in tree 16. Linux x86-64 and ARM64 agree on every probed tree, validation probability, and threshold. The precise lower-level cause of the tree split is not established; the identical source and feature hashes rule out a different image cache as its cause.
+
+The Linux ARM64 check reproduced 820 deterministic reference leaf fields, including 207 floating-point fields, with maximum observed difference zero. The frozen comparison allows only `1e-12` absolute numeric difference and requires exact counts, labels, split summaries, thresholds' nonnumeric selection fields, and confusion matrices. The feature SHA-256 must match exactly; source ZIP MD5 and datasheet SHA-256 are verified before evaluation. This tolerance is far below the measured cross-platform score and threshold differences. On macOS, the report explicitly marks matching features with platform-dependent forest scores and exits 3. A changed source or feature file likewise cannot receive `verified` status.
+
+The grouped false-positive rate exceeds the prespecified 45% ceiling on both systems. The descriptive full-test gap exceeds the audit-direction screen of 0.10 on both systems. The paired difference is below the 0.08 stronger-evidence screen and its interval crosses zero on both systems. We do not overwrite the earlier measurements or infer a general physical-chip leakage effect from either run.
 
 ## Reproduction sequence
 
-From the public repository root, create a virtual environment, install requirements, and run `python run_full_audit.py`. The default local time budget pauses with a resumable instruction; rerun the same command until it completes. On a remote CPU without a short process limit, use `python run_full_audit.py --time-budget 0`. The script performs the spreadsheet and ZIP checks, feature extraction, F1-F4 calculations, and report export. The staged commands remain in the repository README for inspecting or rerunning a single stage; no hidden model file or private database is needed. A frozen-reference mismatch produces the reports with a visible warning and exit status 3.
-
-The source split mapper reads ZIP64 metadata via HTTP range requests, checks the 3,072 IDs and source folder labels against the spreadsheet, and writes the mapping locally. F4 refits both models and compares deterministic fields in the frozen F2/F3 JSON, including split counts, validation/test summaries, thresholds, and per-cell results. F7 repeats those checks and validates F4's shared test. Input SHA-256 hashes are recorded in its JSON. These checks make an accidental change of source file, feature cache, split, or model output visible.
+From the public repository root, create a Python 3.12 virtual environment, install `requirements.txt`, and run `python run_full_audit.py`. The default local time budget pauses with a resumable instruction; repeat the same command until it completes. On a remote CPU without a short process limit, use `python run_full_audit.py --time-budget 0`. The script performs the spreadsheet and ZIP checks, feature extraction, F1-F4 calculations, Linux-reference comparison, and report export. The source mapper reads ZIP64 metadata, reconciles 3,072 IDs and source-folder labels to the spreadsheet, and writes the mapping locally. F4 refits both models and checks the stored F2/F3 results before the offline report is written. The JSON records input SHA-256 hashes and per-image predictions. No private database, model file, paid API, or GPU is needed.
 
 A separate generic route accepts two user-provided record files:
 
@@ -242,28 +244,29 @@ There is one individual entrant, Yan Su. Python, NumPy, Pillow, and scikit-learn
 5. [Pillow license](https://pillow.readthedocs.io/en/stable/about.html#license). Official Pillow documentation.
 6. [scikit-learn 1.9.1 release](https://pypi.org/project/scikit-learn/1.9.1/). Official PyPI distribution and license metadata.
 7. [CC BY 4.0 legal code](https://creativecommons.org/licenses/by/4.0/) and [CC BY-SA 4.0 legal code](https://creativecommons.org/licenses/by-sa/4.0/). Creative Commons.
+8. [SciPy license](https://projects.scipy.org/scipylib/license.html). Official SciPy project license.
 
 # Appendix A: denominators and decision gates
 
 | Version | Test unit / denominator | Primary observation | Decision |
 |:--|:--|:--|:--|
 | F1 | 15 held-out date-like prefixes, 736 images | Image BA 0.608836; 220/376 good images flagged bad | One prespecified nonlinear comparison allowed |
-| F2 | Same grouped test, 736 images | Forest BA 0.657801; 179/376 good images flagged bad | Automatic quality gate stopped because 47.61% > 45% |
-| F3 | Original folder test, 57 overlapping prefixes, 656 images | Forest BA 0.797882; nonpaired gap +0.140080 | Audit direction explored; paired check required |
-| F4 | Exact common test IDs, 151 images, 14 prefixes | Paired gap +0.070783; interval crosses zero | Strong-evidence gate failed; report as diagnostic |
-| F7 | Existing real cache, 3,072 indexed images | HTML and JSON independently regenerated in 3.32 s | Offline report entrance accepted; no new model effect |
+| F2 | Same grouped test, 736 images | Linux forest BA 0.657920; 181/376 good images flagged bad | Automatic quality gate stopped because 48.14% > 45% |
+| F3 | Original folder test, 57 overlapping prefixes, 656 images | Linux forest BA 0.799925; nonpaired gap +0.142005 | Audit direction explored; paired check required |
+| F4 | Exact common test IDs, 151 images, 14 prefixes | Linux paired gap +0.066088; interval crosses zero | Strong-evidence gate failed; report as diagnostic |
+| F7 | Real indexed images | Offline HTML and JSON with per-image records | One-command report entrance accepted |
 
-The F3 candidate screen required source-test balanced accuracy at least 0.75 and full-test gap at least 0.10, both of which were observed. That screen only justified the F4 diagnostic, not a leakage claim. The F4 strong-evidence screen required a paired gap at least 0.08 and an approximate interval lower bound above zero; neither was observed. These thresholds were used as research decisions, not post hoc significance tests.
+The F3 candidate screen required source-test balanced accuracy at least 0.75 and full-test gap at least 0.10, both of which were observed on macOS and Linux. That screen only justified the F4 diagnostic, not a leakage claim. The F4 strong-evidence screen required a paired gap at least 0.08 and an approximate interval lower bound above zero; neither was observed on either platform. These thresholds were used as research decisions, not post hoc significance tests.
 
 # Appendix B: numeric audit checks
 
-The following equalities are useful for a reviewer checking the published JSON and code:
+The following equalities can be checked against the generated Linux JSON and code:
 
-- F2 grouped full test: 197 + 179 = 376 expert-good images; 75 + 285 = 360 expert-bad images. Balanced accuracy is `(197/376 + 285/360)/2 = 0.6578014184`.
-- F3 source full test: 304 + 61 = 365 expert-good images; 69 + 222 = 291 expert-bad images. Balanced accuracy is `(304/365 + 222/291)/2 = 0.7978816551`.
-- Shared test: 68 expert-good plus 83 expert-bad images equals 151 IDs. The F3 matrix is `[[57,11],[26,57]]`; the F2 matrix is `[[40,28],[17,66]]`.
-- Shared-image F3 balanced accuracy is `(57/68 + 57/83)/2 = 0.7624911410`; F2 is `(40/68 + 66/83)/2 = 0.6917080085`; their difference is 0.0707831325.
-- Correctness transitions sum to the common denominator: 94 both correct + 20 source-only correct + 12 grouped-only correct + 25 both wrong = 151.
+- F2 grouped full test: 195 + 181 = 376 expert-good images; 73 + 287 = 360 expert-bad images. Balanced accuracy is `(195/376 + 287/360)/2 = 0.6579196217`.
+- F3 source full test: 308 + 57 = 365 expert-good images; 71 + 220 = 291 expert-bad images. Balanced accuracy is `(308/365 + 220/291)/2 = 0.7999246811`.
+- Shared test: 68 expert-good plus 83 expert-bad images equals 151 IDs. The F3 matrix is `[[57,11],[27,56]]`; the F2 matrix is `[[39,29],[16,67]]`.
+- Shared-image F3 balanced accuracy is `(57/68 + 56/83)/2 = 0.7564670446`; F2 is `(39/68 + 67/83)/2 = 0.6903791637`; their difference is 0.0660878809.
+- Correctness transitions sum to the common denominator: 92 both correct + 21 source-only correct + 14 grouped-only correct + 24 both wrong = 151.
 - Test-composition accounting: 656 source test - 151 common = 505 source-only; 736 grouped test - 151 common = 585 grouped-only.
 
-The audit program computes these numbers from records. The appendix shows how to check the reported values by hand; it is not a separate source of values. Full precision, source hashes, and per-image assignments are held in the generated local `audit.json`. The HTML rounds for reading, and the JSON preserves the computed values.
+The audit program computes these numbers from records. The appendix shows how to check them by hand; it is not a separate source of values. Full precision, source hashes, and per-image assignments are held in the generated local `audit.json`. The HTML rounds for reading, and the JSON preserves the computed values.

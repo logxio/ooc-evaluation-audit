@@ -23,7 +23,6 @@ from ooc_qc import (CACHE, DATASET_URL, IMAGE_FEATURE_NAMES, IMAGE_MD5,
                     read_feature_cache, read_table, split_summary)
 
 
-F2_GROUP_TEST_BA = 0.6578014184397163
 EXPECTED = {"train": (2130, 1199, 931), "val": (286, 163, 123),
             "test": (656, 365, 291)}
 TAIL_BYTES = 128 * 1024
@@ -220,6 +219,8 @@ def command_evaluate(args: argparse.Namespace) -> dict:
     import numpy as np
 
     started = time.perf_counter()
+    f2_result = json.loads(args.f2_result.read_text())
+    f2_test_ba = f2_result["test"]["overall"]["balanced_accuracy"]
     parts, overlap = load_mapping(args.mapping, args.table)
     cache = read_feature_cache(args.features)
     expected_ids = {row["id"] for rows in parts.values() for row in rows}
@@ -245,7 +246,7 @@ def command_evaluate(args: argparse.Namespace) -> dict:
     val = detailed_metrics(parts["val"], y["val"], prediction["val"])
     test = detailed_metrics(parts["test"], y["test"], prediction["test"])
     test_ba = test["overall"]["balanced_accuracy"]
-    delta = test_ba - F2_GROUP_TEST_BA
+    delta = test_ba - f2_test_ba
     return {"phase": "F3_source_image_split_vs_F2_prefix_split",
             "source": DATASET_URL, "mapping": str(args.mapping),
             "feature_count": len(IMAGE_FEATURE_NAMES),
@@ -259,7 +260,7 @@ def command_evaluate(args: argparse.Namespace) -> dict:
             "validation": val, "test": test,
             "test_ba_prefix_bootstrap_95pct": prefix_bootstrap_interval(
                 parts["test"], y["test"], prediction["test"]),
-            "f2_prefix_split_test_ba": F2_GROUP_TEST_BA,
+            "f2_prefix_split_test_ba": f2_test_ba,
             "source_minus_f2_test_ba": delta,
             "audit_direction_gate": {"source_test_ba_ge_0.75": test_ba >= 0.75,
                                      "delta_ge_0.10": delta >= 0.10,
@@ -276,6 +277,7 @@ def main() -> None:
     parser.add_argument("--table", type=Path, default=CACHE / "OOC_datasheet.xlsx")
     parser.add_argument("--mapping", type=Path, default=CACHE / "source_split.json")
     parser.add_argument("--features", type=Path, default=CACHE / "image_features.jsonl")
+    parser.add_argument("--f2-result", type=Path, default=CACHE / "f2_rf_result.json")
     args = parser.parse_args()
     if args.command == "probe":
         result = command_probe(args)

@@ -35,36 +35,44 @@ def emit(stage: str, **values) -> None:
     print(json.dumps({"stage": stage, **values}), flush=True)
 
 
-def equal_number(actual: float, expected: float, name: str) -> None:
-    if not math.isclose(actual, expected, rel_tol=0, abs_tol=1e-12):
-        raise ValueError(f"frozen reference mismatch: {name}: {actual} != {expected}")
+def compare_reference(actual: object, expected: object, name: str,
+                      tolerance: float) -> None:
+    if type(actual) is not type(expected):
+        raise ValueError(f"Linux reference mismatch: {name}: type differs")
+    if isinstance(expected, dict):
+        if set(actual) != set(expected):
+            raise ValueError(f"Linux reference mismatch: {name}: fields differ")
+        for key, value in expected.items():
+            compare_reference(actual[key], value, f"{name}.{key}", tolerance)
+    elif isinstance(expected, list):
+        if len(actual) != len(expected):
+            raise ValueError(f"Linux reference mismatch: {name}: length differs")
+        for index, value in enumerate(expected):
+            compare_reference(actual[index], value, f"{name}[{index}]", tolerance)
+    elif isinstance(expected, float):
+        if not math.isclose(actual, expected, rel_tol=0, abs_tol=tolerance):
+            raise ValueError(f"Linux reference mismatch: {name}: {actual} != {expected}")
+    elif actual != expected:
+        raise ValueError(f"Linux reference mismatch: {name}: {actual!r} != {expected!r}")
 
 
 def check_reference(cache: Path, reference_path: Path) -> dict:
     reference = json.loads(reference_path.read_text())
+    inputs = reference["inputs"]
+    if (inputs["image_zip_bytes"] != IMAGE_SIZE or
+            inputs["image_zip_md5"] != IMAGE_MD5 or
+            digest(cache / "OOC_datasheet.xlsx") != inputs["table_sha256"]):
+        raise ValueError("Linux reference mismatch: original source identity differs")
+    feature_hash = digest(cache / "image_features.jsonl")
+    if feature_hash != inputs["feature_cache_sha256"]:
+        raise ValueError("Linux reference mismatch: 3072-image feature hash differs")
     f2 = json.loads((cache / "f2_rf_result.json").read_text())
     f3 = json.loads((cache / "f3_source_result.json").read_text())
     f4 = json.loads((cache / "f4_paired_result.json").read_text())
-    for name, result in (("f2", f2), ("f3", f3)):
-        frozen = reference[name]
-        equal_number(result["test"]["overall"]["balanced_accuracy"], frozen["test_ba"],
-                     f"{name} test BA")
-        equal_number(result["threshold"], frozen["threshold"], f"{name} threshold")
-        if result["test"]["overall"]["confusion"] != frozen["test_confusion"]:
-            raise ValueError(f"frozen reference mismatch: {name} test confusion")
-    if f3["prefix_overlap_with_train"]["test"] != reference["f3"]["test_prefix_overlap"]:
-        raise ValueError("frozen reference mismatch: source test prefix overlap")
-    if f4["common_test"] != reference["f4"]["common_test"]:
-        raise ValueError("frozen reference mismatch: common test")
-    equal_number(f4["paired_common_test"]["source_minus_prefix_balanced_accuracy"],
-                 reference["f4"]["paired_ba_difference"], "paired difference")
-    interval = f4["paired_common_test"]["source_minus_prefix_ba_bootstrap_95pct"]
-    for key, expected in reference["f4"]["paired_interval"].items():
-        if key in ("low", "high"):
-            equal_number(interval[key], expected, f"paired interval {key}")
-        elif interval[key] != expected:
-            raise ValueError(f"frozen reference mismatch: paired interval {key}")
-    feature_hash = digest(cache / "image_features.jsonl")
+    for name, result in (("f2", f2), ("f3", f3), ("f4", f4)):
+        frozen = reference["canonical"][name]
+        observed = {key: result[key] for key in frozen}
+        compare_reference(observed, frozen, name, reference["numeric_abs_tolerance"])
     if not all(item["matches_reference"] for item in f4["full_test_reproduction"].values()):
         raise ValueError("F4 failed to reproduce fresh F2/F3 result fields")
     return {"f2_test_ba": f2["test"]["overall"]["balanced_accuracy"],
@@ -72,10 +80,9 @@ def check_reference(cache: Path, reference_path: Path) -> dict:
             "source_test_prefix_overlap": f3["prefix_overlap_with_train"]["test"],
             "common_test": f4["common_test"],
             "paired_ba_difference": f4["paired_common_test"]["source_minus_prefix_balanced_accuracy"],
-            "paired_interval_95pct": interval,
+            "paired_interval_95pct": f4["paired_common_test"]["source_minus_prefix_ba_bootstrap_95pct"],
             "feature_sha256": feature_hash,
-            "feature_sha256_matches_canonical_reference": (
-                feature_hash == reference["f4"]["feature_cache_sha256"]),
+            "feature_sha256_matches_canonical_reference": True,
             "independent_frozen_reference_sha256": digest(reference_path)}
 
 
@@ -106,19 +113,30 @@ def finish_report(cache: Path, output: Path, reference: Path, table: Path,
     f2 = json.loads((cache / "f2_rf_result.json").read_text())
     f3 = json.loads((cache / "f3_source_result.json").read_text())
     f4 = json.loads((cache / "f4_paired_result.json").read_text())
+    frozen = json.loads(reference.read_text())
     if report["audit"]["common_test"]["n"] != f4["common_test"]["n"]:
         raise ValueError("report shared-test count differs from F4")
+    feature_hash = digest(features)
+    platform_difference = (reference_error is not None and platform.system() == "Darwin" and
+                           feature_hash == frozen["inputs"]["feature_cache_sha256"])
+    report["reference_check"] = {
+        "status": "mismatch" if reference_error else "verified",
+        "canonical_platform": frozen["provenance"]["canonical_platform"],
+        "reference_sha256": digest(reference),
+        "reason": reference_error,
+        "platform_difference": platform_difference,
+    }
+    (output / "audit.json").write_text(json.dumps(report, indent=2) + "\n")
     if reference_error:
-        report["reference_check"] = {"status": "mismatch", "reason": reference_error,
-                                     "reference_sha256": digest(reference)}
-        (output / "audit.json").write_text(json.dumps(report, indent=2) + "\n")
         html_path = output / "audit.html"
-        banner = ("<p class='note'><strong>Frozen reference mismatch.</strong> "
-                  "These scores were recomputed here but differ from the earlier result. "
-                  "Review run_evidence.json before citing them. "
+        context = ("Matching image features led to different random-forest trees on macOS. "
+                   "The frozen scores come from a clean Linux CPU run. "
+                   if platform_difference else
+                   "This run differs from the verified Linux inputs or scores. ")
+        banner = ("<p class='note'><strong>Linux reference mismatch.</strong> "
+                  + context + "Review run_evidence.json before citing these scores. "
                   f"{escape(reference_error)}</p>")
         html_path.write_text(html_path.read_text().replace("<main>", "<main>" + banner, 1))
-    feature_hash = digest(features)
     evidence = {"status": "frozen_mismatch" if reference_error else "verified",
                 "source": "https://zenodo.org/records/10203721",
                 "image_zip_bytes": IMAGE_SIZE, "image_zip_md5": IMAGE_MD5,
@@ -126,7 +144,9 @@ def finish_report(cache: Path, output: Path, reference: Path, table: Path,
                 "image_feature_ids": image_ids,
                 "feature_sha256": feature_hash,
                 "feature_sha256_matches_canonical_reference": (
-                    feature_hash == json.loads(reference.read_text())["f4"]["feature_cache_sha256"]),
+                    feature_hash == frozen["inputs"]["feature_cache_sha256"]),
+                "canonical_platform": frozen["provenance"]["canonical_platform"],
+                "platform_difference": platform_difference,
                 "independent_frozen_reference_sha256": digest(reference),
                 "f2_test_ba": f2["test"]["overall"]["balanced_accuracy"],
                 "f3_test_ba": f3["test"]["overall"]["balanced_accuracy"],
@@ -213,7 +233,8 @@ def main() -> None:
                    "--table", table, "--features", features)
     require_budget()
     result_command(cache / "f3_source_result.json", "source_split_audit.py", "evaluate",
-                   "--table", table, "--features", features, "--mapping", mapping)
+                   "--table", table, "--features", features, "--mapping", mapping,
+                   "--f2-result", cache / "f2_rf_result.json")
     require_budget()
     result_command(cache / "f4_paired_result.json", "f4_paired.py", "evaluate",
                    "--table", table, "--features", features, "--mapping", mapping,
