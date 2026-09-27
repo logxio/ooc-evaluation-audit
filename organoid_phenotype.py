@@ -14,6 +14,7 @@ import hashlib
 from html import escape
 import json
 import os
+import random
 import resource
 import sys
 import tempfile
@@ -226,6 +227,96 @@ def bootstrap(y, pmain, pmajor, pcentroid, groups):
             "paired_difference_ci95": np.quantile(diffs, [.025, .975]).tolist() if valid else None}
 
 
+def score_only_review(scores, group_codes, group_names):
+    """Rank keys by scores within the atlas-label-selected three-class cohort."""
+    groups = {}
+    for values, code in zip(scores, group_codes):
+        ordered = sorted(float(value) for value in values)
+        margin = ordered[2] - ordered[1]
+        if margin < 0:
+            raise RuntimeError("negative decision-score margin")
+        key = group_names[int(code)]
+        group = groups.setdefault(key, [0, 0.0])
+        group[0] += 1
+        group[1] += 1 / (1 + margin)
+    records = [{"group": key, "n": count, "uncertainty": total / count}
+               for key, (count, total) in groups.items()]
+    ranked = sorted(records, key=lambda row: (-row["uncertainty"], row["group"]))
+    queue = [{"rank": rank, **row} for rank, row in enumerate(ranked, 1)]
+    return records, {"cells": int(len(scores)), "groups": len(records),
+                     "uncertainty": "mean(1/(1+top1_minus_top2_decision_score))",
+                     "ranking": queue}
+
+
+def ranks(values):
+    order = sorted(range(len(values)), key=lambda i: values[i])
+    out = [0.0] * len(values)
+    i = 0
+    while i < len(order):
+        j = i + 1
+        while j < len(order) and values[order[j]] == values[order[i]]:
+            j += 1
+        rank = (i + j - 1) / 2 + 1
+        for k in range(i, j):
+            out[order[k]] = rank
+        i = j
+    return out
+
+
+def spearman(a, b):
+    ra, rb = ranks(a), ranks(b)
+    ma, mb = sum(ra) / len(ra), sum(rb) / len(rb)
+    da = sum((x - ma) ** 2 for x in ra)
+    db = sum((x - mb) ** 2 for x in rb)
+    return sum((x - ma) * (y - mb) for x, y in zip(ra, rb)) / (da * db) ** .5 if da and db else None
+
+
+def percentile(values, p):
+    x = sorted(values)
+    z = (len(x) - 1) * p
+    i = int(z)
+    return x[i] + (x[min(i + 1, len(x) - 1)] - x[i]) * (z - i)
+
+
+def review_validation(score_records, ranked, y_true, y_pred, group_codes, group_names):
+    """Use atlas labels only after the score-only order has been frozen."""
+    errors = {row["group"]: 0 for row in score_records}
+    for truth, prediction, code in zip(y_true, y_pred, group_codes):
+        errors[group_names[int(code)]] += int(truth != prediction)
+    records = [{**row, "errors": errors[row["group"]],
+                "error_rate": errors[row["group"]] / row["n"]} for row in score_records]
+    by_key = {row["group"]: row for row in records}
+    uncertainty = [row["uncertainty"] for row in records]
+    error = [row["error_rate"] for row in records]
+    rho = spearman(uncertainty, error)
+    rng = random.Random(SEED)
+    draws = []
+    for _ in range(2000):
+        sampled = [records[rng.randrange(len(records))] for _ in records]
+        value = spearman([row["uncertainty"] for row in sampled],
+                         [row["error_rate"] for row in sampled])
+        if value is not None:
+            draws.append(value)
+    top = [by_key[row["group"]] for row in ranked[:8]]
+    ratio = (sum(row["error_rate"] for row in top) / 8) / (sum(error) / len(error))
+    low, high = percentile(draws, .025), percentile(draws, .975)
+    return {"label_source": "HNOCA shared-atlas annot_level_1",
+            "rho": rho, "rho_ci95": [low, high], "draws": 2000,
+            "valid_draws": len(draws), "top8_error_rate_ratio_to_all_groups": ratio,
+            "top8": top, "group_errors": {row["group"]: {"n": row["n"],
+                             "errors": row["errors"], "error_rate": row["error_rate"]} for row in records},
+            "gate": bool(rho >= .35 and low > 0 and ratio >= 1.3)}
+
+
+def write_review_csv(path, ranking):
+    with path.open("w", encoding="utf-8", newline="") as stream:
+        writer = csv.DictWriter(stream, fieldnames=("rank", "bio_sample", "cells", "mean_score_uncertainty"))
+        writer.writeheader()
+        for row in ranking:
+            writer.writerow({"rank": row["rank"], "bio_sample": row["group"],
+                             "cells": row["n"], "mean_score_uncertainty": row["uncertainty"]})
+
+
 def group_diagnostics(per_group):
     records = []
     for key, group in per_group.items():
@@ -266,11 +357,18 @@ def html_report(result):
     main = external["main"]
     boot = external["bootstrap"]
     groups = external["group_diagnostics"]
+    review = external["score_only_review"]
+    review_check = external["review_validation"]
     cm = main["confusion"]
     fp = cm[0][2] + cm[1][2]
     glioblast = main["per_class"]["Glioblast"]
     glioblast_large_groups = sum(group["true"][2] >= 100 for group in groups)
-    top = groups[:5]
+    top = groups[:8]
+    review_rows = "".join(
+        f"<tr><td>{row['rank']}</td><th scope='row'><details>"
+        f"<summary>{escape(row['group'].rsplit(')_', 1)[-1].lstrip('; '))}</summary>"
+        f"<code>{escape(row['group'])}</code></details></th><td>{row['n']:,}</td>"
+        f"<td>{row['uncertainty']:.6f}</td></tr>" for row in review["ranking"][:8])
     group_rows = "".join(
         f"<tr><th scope='row'><details><summary>{escape(g['bio_sample'].rsplit(')_', 1)[-1].lstrip('; '))}</summary>"
         f"<code>{escape(g['bio_sample'])}</code></details></th><td>{g['cells']:,}</td>"
@@ -314,16 +412,23 @@ th,td{{padding:10px;border-bottom:1px solid #d7dfd8;text-align:left;vertical-ali
 code{{overflow-wrap:anywhere}}summary{{cursor:pointer;color:#24563b}}
 a{{color:#24563b}}footer{{margin-top:48px;color:#42574b;font-size:.9rem}}
 </style></head><body><main>
-<h1>Find organoid samples to review.</h1>
-<p class="lede">Compare predicted NPC, Neuron, and Glioblast composition with atlas labels by biological sample key. Start with samples that have the most Glioblast false positives; check marker genes and original annotations before using their composition estimates.</p>
+<h1>Review keys in the atlas-selected three-class cohort.</h1>
+<p class="lede">Start with the groups whose selected cells have the smallest gaps between their top two model decision scores. Check marker genes and original annotations there first.</p>
+<p class="note">HNOCA labels selected NPC, Neuron, and Glioblast cells before this calculation. Within that selected cohort, group order uses model scores and <code>bio_sample</code> keys only. This is not an end-to-end test on wholly unannotated input. HNOCA's shared 3,000-gene panel includes the external study. The score is unitless and uncalibrated, not an error probability. The keys identify biological samples, not verified physical organoids.</p>
+<h2>Score-only group order within the selected cohort</h2>
+<div class="scroll"><table><thead><tr><th>Rank</th><th>Sample key</th><th>Cells</th><th>Mean score uncertainty</th></tr></thead><tbody>{review_rows}</tbody></table></div>
+<p>Open a sample name for its exact key. <a href="review_queue.csv">All {review['groups']} score-only ranks</a> omit labels and errors; the upstream three-class cell selection used HNOCA labels.</p>
+<h2>How this order associated with atlas errors</h2>
+<p>On these {review['groups']} Bhaduri sample keys, the score-only order and HNOCA consensus-label error rates had Spearman rho {review_check['rho']:.3f}; the 2,000-draw group bootstrap 95% interval was {review_check['rho_ci95'][0]:.3f}–{review_check['rho_ci95'][1]:.3f}. The top eight ranked groups had {review_check['top8_error_rate_ratio_to_all_groups']:.3f} times the equal-weight mean error rate across all groups. Labels selected the three-class cells and measured errors afterward, while the ordering formula used scores alone. This is an exploratory check on shared-atlas labels, not independent blind validation.</p>
+<h2>Known-label evaluation</h2>
 <div class="cards"><div class="card"><strong>{main['macro_f1']:.4f}</strong><span>Bhaduri macro-F1, {main['n']:,} cells across {boot['groups']} sample keys</span></div>
 <div class="card"><strong>{glioblast['precision']:.3f}</strong><span>Glioblast precision; {fp:,} false positives</span></div>
 <div class="card"><strong>+{boot['paired_difference']:.4f}</strong><span>macro-F1 above the Velasco nearest-centroid baseline on the same cells</span></div>
 <div class="card"><strong>{glioblast_large_groups}/{boot['groups']}</strong><span>sample keys with at least 100 atlas-labeled Glioblast cells</span></div></div>
 <p class="note">This is a Velasco-to-Bhaduri collection-source test under HNOCA's shared 3,000-gene panel and atlas labels. Bhaduri contributed to that panel and common annotation. Biological sample keys are not verified physical organoid IDs.</p>
-<h2>Samples with the most Glioblast false positives</h2>
+<h2>Known-label audit: Glioblast false positives</h2>
 <div class="scroll"><table><thead><tr><th>Sample key</th><th>Three-class cells</th><th>True / predicted Glioblast</th><th>False positives</th><th>Prediction minus atlas, points</th></tr></thead><tbody>{group_rows}</tbody></table></div>
-<p>Open a sample name for its exact <code>bio_sample</code> key. <a href="groups.csv">All 34 sample rows</a> include each group's 3×3 confusion matrix; <a href="audit.json">JSON</a> has the same counts and full evaluation details.</p>
+<p>This second list uses known HNOCA labels and belongs to retrospective error audit. Open a sample name for its exact <code>bio_sample</code> key. <a href="groups.csv">All 34 labeled audit rows</a> include each group's 3×3 confusion matrix; <a href="audit.json">JSON</a> has both complete lists and evaluation details.</p>
 <h2>External study and uncertainty</h2>
 <p>Macro-F1 {main['macro_f1']:.6f}; 95% biological-sample bootstrap interval {boot['macro_f1_ci95'][0]:.6f}–{boot['macro_f1_ci95'][1]:.6f} ({boot['effective_draws']:,}/{boot['draws']:,} valid draws). The paired advantage over {escape(boot['best_baseline'].replace('_',' '))} is {boot['paired_difference']:+.6f}, interval {boot['paired_difference_ci95'][0]:+.6f} to {boot['paired_difference_ci95'][1]:+.6f}. The majority and nearest-centroid baselines score {external['majority']['macro_f1']:.6f} and {external['nearest_centroid']['macro_f1']:.6f} on these same cells. The better baseline was selected using the Bhaduri labels, so its paired interval is conditional on that choice.</p>
 <div class="scroll"><table><thead><tr><th>Class</th><th>True cells</th><th>Precision</th><th>Recall</th><th>F1</th></tr></thead><tbody>{class_rows}</tbody></table></div>
@@ -331,7 +436,7 @@ a{{color:#24563b}}footer{{margin-top:48px;color:#42574b;font-size:.9rem}}
 <div class="scroll"><table><thead><tr><th>True / predicted</th><th>NPC</th><th>Neuron</th><th>Glioblast</th></tr></thead><tbody>{matrix_rows}</tbody></table></div>
 <h2>What each test measured</h2>
 <div class="scroll"><table><thead><tr><th>Evaluation</th><th>Train cells / keys</th><th>Test cells / keys</th><th>Macro-F1</th></tr></thead><tbody>{split_rows}</tbody></table></div>
-<p>The two Velasco validation fits and the full-source external fit use the same fixed model specification. Their test rows differ, so their score gaps describe different evaluation protocols and do not isolate a cause. Bhaduri labels were used to score the external test and compare the two prespecified baselines; they were not used to fit the classifier, choose genes, or tune its settings.</p>
+<p>The two Velasco validation fits and the full-source external fit use the same fixed model specification. Their test rows differ, so their score gaps describe different evaluation protocols and do not isolate a cause. The three-class endpoint was chosen after inspecting Bhaduri class counts. Bhaduri labels also scored the external test and compared the two prespecified baselines; they did not fit the classifier or tune its settings. The shared atlas selected the gene panel across studies.</p>
 <p>The atlas panel and labels are shared across studies. Predictions are a review queue, not independent composition truth, a clinical diagnosis, or a drug-toxicity readout. Astrocyte is outside this three-class score; its sample denominators are in the JSON.</p>
 <footer>HNOCA v1 source: <a href="https://zenodo.org/records/15004818">Zenodo record 15004818</a>, CC BY 4.0. Original size {result['data']['bytes']:,} bytes; MD5 {result['data']['md5']}. Code: MIT. Python dependencies: NumPy, SciPy, scikit-learn, h5py (BSD-3-Clause), Requests (Apache-2.0). All figures on this page come from this run's <a href="audit.json">audit.json</a>.</footer>
 </main></body></html>"""
@@ -340,7 +445,7 @@ a{{color:#24563b}}footer{{margin-top:48px;color:#42574b;font-size:.9rem}}
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--output-dir", type=Path, default=Path("organoid_audit"),
-                        help="Visible HTML, JSON, and group CSV output (default: ./organoid_audit)")
+                        help="Visible HTML, JSON, labeled group CSV, and score-only queue CSV (default: ./organoid_audit)")
     parser.add_argument("--input", type=Path, help="Previously downloaded HNOCA v1 H5AD; verified before use")
     args = parser.parse_args()
     args.output_dir.mkdir(parents=True, exist_ok=True)
@@ -385,6 +490,9 @@ def main():
     stage("group_validation_complete", macro_f1=group_val["metrics"]["macro_f1"])
     clf = model().fit(xd, yd)
     pred = clf.predict(xt)
+    scores = clf.decision_function(xt)
+    score_records, review_queue = score_only_review(scores, gt, gc)
+    stage("score_only_review_complete", groups=review_queue["groups"])
     majority_class = int(np.bincount(yd, minlength=3).argmax())
     pmajor = np.full(len(yt), majority_class, dtype=np.int8)
     pcentroid = nearest_centroid(xd, yd, xt)
@@ -409,6 +517,9 @@ def main():
                            "nearest_centroid": metrics(yt, pcentroid), "majority_class": LABELS[majority_class]}}
     result["external"]["group_diagnostics"] = group_diagnostics(per_group)
     result["external"]["bootstrap"] = bootstrap(yt, pred, pmajor, pcentroid, gt)
+    result["external"]["score_only_review"] = review_queue
+    result["external"]["review_validation"] = review_validation(
+        score_records, review_queue["ranking"], yt, pred, gt, gc)
     stage("bootstrap_complete", **{k: result["external"]["bootstrap"][k] for k in ("effective_draws", "macro_f1_ci95", "paired_difference_ci95")})
     result["runtime"] = {"seconds": round(time.monotonic() - START, 3), "maxrss_bytes": rss(),
                          "exit_code": 0, "cpu_count": os.cpu_count(),
@@ -419,10 +530,13 @@ def main():
     loaded = json.loads(output_path.read_text(encoding="utf-8"))
     html_path = args.output_dir / "audit.html"
     csv_path = args.output_dir / "groups.csv"
+    review_path = args.output_dir / "review_queue.csv"
     html_path.write_text(html_report(loaded), encoding="utf-8")
     write_group_csv(csv_path, loaded["external"]["group_diagnostics"])
+    write_review_csv(review_path, loaded["external"]["score_only_review"]["ranking"])
     stage("done", result_sha256=sha256(output_path), html_sha256=sha256(html_path),
-          groups_sha256=sha256(csv_path), output_dir=str(args.output_dir))
+          groups_sha256=sha256(csv_path), review_sha256=sha256(review_path),
+          output_dir=str(args.output_dir))
 
 
 if __name__ == "__main__":
