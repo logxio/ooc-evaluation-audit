@@ -54,7 +54,7 @@ The same evaluation discipline is illustrated on 3,072 expert-labeled organ-on-c
 
 ## Two decisions at the bench
 
-A neural-organoid team may want to estimate NPC, Neuron, and Glioblast cell-type composition in a new sequencing batch. A model trained on another study can rank samples for annotation review, but a high aggregate score can conceal rare-class false positives or a few dominant samples. The evaluation must therefore show each class's errors, the full source split, and uncertainty over sample keys. We do not use model output to replace marker-gene review or the study's original annotation process.
+A neural-organoid team may want to check NPC, Neuron, and Glioblast cell-type calls across studies. Within an atlas-selected cohort, a model trained on another study can rank sample keys for annotation review, but a high aggregate score can conceal rare-class false positives or a few dominant samples. The evaluation must therefore show each class's errors, the full source split, and uncertainty over sample keys. We do not use model output to replace marker-gene review or the study's original annotation process; a wholly unannotated batch needs a separate end-to-end test.
 
 An organ-on-chip imaging team may train a classifier to send low-quality brightfield images for manual review. Before using that model, the team needs to know whether held-out images truly come from acquisition contexts absent from training. It also needs the number of good cultures that would be incorrectly flagged. A single balanced-accuracy value hides both questions.
 
