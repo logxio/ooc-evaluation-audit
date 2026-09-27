@@ -278,6 +278,22 @@ def percentile(values, p):
     return x[i] + (x[min(i + 1, len(x) - 1)] - x[i]) * (z - i)
 
 
+def review_lift_permutation(ranked, by_key, denominator):
+    """Shuffle the 34 observed key error rates under no score-error association."""
+    rates = [by_key[row["group"]]["error_rate"] for row in ranked]
+    observed = (sum(rates[:8]) / 8) / denominator
+    rng = random.Random(SEED)
+    draws = 10_000
+    greater_or_equal = 0
+    for _ in range(draws):
+        shuffled = rates.copy()
+        rng.shuffle(shuffled)
+        if (sum(shuffled[:8]) / 8) / denominator >= observed - 1e-12:
+            greater_or_equal += 1
+    return {"draws": draws, "seed": SEED, "at_least_observed": greater_or_equal,
+            "p_one_sided_plus_one": (greater_or_equal + 1) / (draws + 1)}
+
+
 def review_validation(score_records, ranked, y_true, y_pred, group_codes, group_names):
     """Use atlas labels only after the score-only order has been frozen."""
     errors = {row["group"]: 0 for row in score_records}
@@ -299,10 +315,12 @@ def review_validation(score_records, ranked, y_true, y_pred, group_codes, group_
             draws.append(value)
     top = [by_key[row["group"]] for row in ranked[:8]]
     ratio = (sum(row["error_rate"] for row in top) / 8) / (sum(error) / len(error))
+    permutation = review_lift_permutation(ranked, by_key, sum(error) / len(error))
     low, high = percentile(draws, .025), percentile(draws, .975)
     return {"label_source": "HNOCA shared-atlas annot_level_1",
             "rho": rho, "rho_ci95": [low, high], "draws": 2000,
             "valid_draws": len(draws), "top8_error_rate_ratio_to_all_groups": ratio,
+            "top8_lift_permutation": permutation,
             "top8": top, "group_errors": {row["group"]: {"n": row["n"],
                              "errors": row["errors"], "error_rate": row["error_rate"]} for row in records},
             "gate": bool(rho >= .35 and low > 0 and ratio >= 1.3)}
@@ -400,7 +418,7 @@ def html_report(result):
                          for name, train, tg, test, vg, score in rows)
     return f"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Neural organoid phenotype audit</title>
+<title>Phenotype Transfer Map</title>
 <style>
 :root{{color-scheme:light;font-family:system-ui,-apple-system,sans-serif;color:#1e2926;background:#f5f7f3}}
 body{{max-width:1100px;margin:0 auto;padding:clamp(20px,5vw,60px);line-height:1.5}}
@@ -412,17 +430,17 @@ th,td{{padding:10px;border-bottom:1px solid #d7dfd8;text-align:left;vertical-ali
 code{{overflow-wrap:anywhere}}summary{{cursor:pointer;color:#24563b}}
 a{{color:#24563b}}footer{{margin-top:48px;color:#42574b;font-size:.9rem}}
 </style></head><body><main>
-<h1>Review keys in the atlas-selected three-class cohort.</h1>
-<p class="lede">Start with the groups whose selected cells have the smallest gaps between their top two model decision scores. Check marker genes and original annotations there first.</p>
+<h1>Phenotype Transfer Map</h1>
+<p class="lede">The Velasco-trained three-class model reached {main['macro_f1']:.4f} macro-F1 on {main['n']:,} Bhaduri cells (34-key 95% interval {boot['macro_f1_ci95'][0]:.4f}–{boot['macro_f1_ci95'][1]:.4f}). This map pairs that cross-source result with score-based sample review priorities and a separate known-label error audit.</p>
 <p class="note">HNOCA labels selected NPC, Neuron, and Glioblast cells before this calculation. Within that selected cohort, group order uses model scores and <code>bio_sample</code> keys only. This is not an end-to-end test on wholly unannotated input. HNOCA's shared 3,000-gene panel includes the external study. The score is unitless and uncalibrated, not an error probability. The keys identify biological samples, not verified physical organoids.</p>
 <h2>Score-only group order within the selected cohort</h2>
 <div class="scroll"><table><thead><tr><th>Rank</th><th>Sample key</th><th>Cells</th><th>Mean score uncertainty</th></tr></thead><tbody>{review_rows}</tbody></table></div>
 <p>Open a sample name for its exact key. <a href="review_queue.csv">All {review['groups']} score-only ranks</a> omit labels and errors; the upstream three-class cell selection used HNOCA labels.</p>
 <h2>How this order associated with atlas errors</h2>
-<p>On these {review['groups']} Bhaduri sample keys, the score-only order and HNOCA consensus-label error rates had Spearman rho {review_check['rho']:.3f}; the 2,000-draw group bootstrap 95% interval was {review_check['rho_ci95'][0]:.3f}–{review_check['rho_ci95'][1]:.3f}. The top eight ranked groups had {review_check['top8_error_rate_ratio_to_all_groups']:.3f} times the equal-weight mean error rate across all groups. Labels selected the three-class cells and measured errors afterward, while the ordering formula used scores alone. This is an exploratory check on shared-atlas labels, not independent blind validation.</p>
+<p>On these {review['groups']} Bhaduri sample keys, the score-only order and HNOCA consensus-label error rates had Spearman rho {review_check['rho']:.3f}; the 2,000-draw group bootstrap 95% interval was {review_check['rho_ci95'][0]:.3f}–{review_check['rho_ci95'][1]:.3f}. The top eight ranked groups had {review_check['top8_error_rate_ratio_to_all_groups']:.3f} times the equal-weight mean error rate across all groups. In {review_check['top8_lift_permutation']['draws']:,} shuffles of the 34 observed group error rates, {review_check['top8_lift_permutation']['at_least_observed']} reached this fixed-top-eight ratio (one-sided plus-one p={review_check['top8_lift_permutation']['p_one_sided_plus_one']:.5f}). Labels selected the three-class cells and measured errors afterward, while the ordering formula used scores alone. This is an exploratory check on shared-atlas labels, not independent blind validation.</p>
 <h2>Known-label evaluation</h2>
 <div class="cards"><div class="card"><strong>{main['macro_f1']:.4f}</strong><span>Bhaduri macro-F1, {main['n']:,} cells across {boot['groups']} sample keys</span></div>
-<div class="card"><strong>{glioblast['precision']:.3f}</strong><span>Glioblast precision; {fp:,} false positives</span></div>
+<div class="card"><strong>{glioblast['precision']:.3f}</strong><span>Glioblast cell-label precision; {fp:,} false positives, no tumor diagnosis</span></div>
 <div class="card"><strong>+{boot['paired_difference']:.4f}</strong><span>macro-F1 above the Velasco nearest-centroid baseline on the same cells</span></div>
 <div class="card"><strong>{glioblast_large_groups}/{boot['groups']}</strong><span>sample keys with at least 100 atlas-labeled Glioblast cells</span></div></div>
 <p class="note">This is a Velasco-to-Bhaduri collection-source test under HNOCA's shared 3,000-gene panel and atlas labels. Bhaduri contributed to that panel and common annotation. Biological sample keys are not verified physical organoid IDs.</p>
