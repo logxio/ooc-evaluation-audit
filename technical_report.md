@@ -7,7 +7,7 @@ lang: en-US
 documentclass: article
 fontsize: 12pt
 geometry: margin=0.92in
-linestretch: 1.28
+linestretch: 1.25
 colorlinks: true
 linkcolor: black
 urlcolor: blue
@@ -146,7 +146,7 @@ The Bhaduri macro-F1 95% sample-key interval is **0.842324-0.937195**. The main 
 | Neuron (94,733) | 3,207 | 91,467 | 59 |
 | Glioblast (3,071) | 159 | 50 | 2,862 |
 
-NPC, Neuron, and Glioblast F1 scores are 0.968022, 0.969855, and 0.785616. Glioblast recall is 0.931944, but precision is **0.679004**: 209 true Glioblast cells are missed, while **1,353** NPC/Neuron cells are incorrectly flagged. Of 4,215 predicted Glioblast cells, about 32.1% are false positives. One Bhaduri key with 3,030 selected cells has eight consensus-labeled Glioblast cells but 96 model calls. A researcher can place that sample ahead of lower-disagreement samples for marker-gene and annotation review. The prediction alone cannot establish that those 88 extra calls are true disease-related cells. No test key was removed after inspection, and the output retains every key's denominators and matrix.
+NPC, Neuron, and Glioblast F1 scores are 0.968022, 0.969855, and 0.785616. Here **Glioblast is HNOCA's neural progenitor cell-type label**, not a glioblastoma diagnosis. Glioblast recall is 0.931944, but precision is **0.679004**: 209 true Glioblast cells are missed, while **1,353** NPC/Neuron cells are incorrectly flagged. Of 4,215 predicted Glioblast cells, about 32.1% are false positives. One Bhaduri key with 3,030 selected cells has eight consensus-labeled Glioblast cells but 96 model calls. A researcher can place that sample ahead of lower-disagreement samples for marker-gene and annotation review. The prediction alone cannot establish that those 88 extra calls are truly of the annotated cell type. No test key was removed after inspection, and the output retains every key's denominators and matrix.
 
 ## Score-only ordering within an atlas-selected cohort
 
