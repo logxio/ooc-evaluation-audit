@@ -1,8 +1,18 @@
-# Organ-on-Chip Image Evaluation Audit
+# Audit organoid cell types across labs
+
+A fixed three-class model trained on [Velasco's neural organoids](https://doi.org/10.1038/s41586-019-1289-x) reached **0.9078 macro-F1** on **207,871 cells** from [Bhaduri's separate laboratory](https://doi.org/10.1038/s41586-020-1962-0). Resampling **34 biological-sample keys** gives a 95% interval of **0.8423–0.9372**. A source-trained nearest-centroid comparator scored **0.8068** on those same cells; the paired difference is **+0.1010** with a group interval of **+0.0705 to +0.1205**.
+
+Use the per-sample report to decide which annotations to review first. Glioblast is the sharpest example: the model found 2,862 of 3,071 consensus-labeled cells, while **1,353** other cells were incorrectly flagged. One 3,030-cell sample has **8** consensus Glioblast labels and **96** model calls. Inspect those cells before using a predicted composition as a research result.
+
+The two experiments were collected independently, but the [HNOCA atlas](https://www.nature.com/articles/s41586-024-08172-8) selected its 3,000-gene panel across studies and harmonized their labels. This is a cross-laboratory **acquisition-source** test under a shared panel and annotation, not a blind independent-label validation. `bio_sample` is an atlas key, not a verified physical organoid or donor ID. These organoids are not perfused organ-on-chip cultures; the image audit below uses actual chip images. The [organoid run guide](ORGANOID_PHENOTYPE.md) covers the free-CPU source-to-report route; the [technical report](technical_report.pdf) gives the full protocol, class errors, license attribution, and limits ([source](technical_report.md)).
+
+**Reproduce the main result:** On a free Kaggle Linux CPU with Internet enabled, install [`requirements-organoid.txt`](requirements-organoid.txt) if needed, then run `python organoid_phenotype.py`. The command checks the 2,880,860,613-byte HNOCA original against its published MD5 and writes `organoid_audit/audit.html`, `audit.json`, and `groups.csv`. A clean Kaggle Python 3.12 run from the original completed with exit **0** in **675 seconds**, peaking at **2.56 GB** resident memory. Its 207,871-cell score, 34-key interval, and every group matrix exactly matched the first full run; the [run guide](ORGANOID_PHENOTYPE.md) states the full protocol and limits. This remote run is longer than a short local process, and its source file requires temporary scratch space.
+
+## Organ-on-chip image audit
 
 Give the audit per-image labels, acquisition groups, train/validation/test splits, and test predictions. It gives you an offline report showing group overlap, each test set's good/bad errors, and what changes when both evaluations score the same images.
 
-The [technical report](technical_report.pdf) gives the dataset provenance, frozen model protocol, exact denominators, and limits of this single-dataset result. Its [source](technical_report.md) is included for review.
+The image case examines a different task and dataset. Its full method and exact denominators are in the same [technical report](technical_report.pdf).
 
 To reproduce the [Zenodo image-quality example](https://zenodo.org/records/10203721) from the original files, install `requirements.txt`, then run:
 
@@ -18,13 +28,13 @@ For another image dataset, use `python audit_report.py records --source-records 
 
 For this OoC dataset, the date-like prefix is an acquisition-context proxy. The source does not supply independent physical chip IDs. These image-quality scores do not measure toxicity or neural connectivity.
 
-## Data and license
+### Data and license
 
 The source is the [Organ-on-a-Chip Image Dataset](https://zenodo.org/records/10203721) by Movčana et al., DOI [10.5281/zenodo.10203721](https://doi.org/10.5281/zenodo.10203721), with 3,072 PNGs, six cell types, and an XLSX datasheet. The [data description](https://www.mdpi.com/2306-5729/9/2/28), DOI [10.3390/data9020028](https://doi.org/10.3390/data9020028), explains how experts assigned quality labels. Label `1` is good; label `2` is bad, confirmed against the ZIP folder names.
 
 Zenodo's record metadata lists **CC BY 4.0** for the two source files. The description paper calls the **dataset license CC-BY-SA** without a version. We record both statements rather than silently choosing one. This repository is **MIT licensed code only**. It downloads source files from Zenodo, attributes their creators, and does not rehost images or adapted image data. Resolve the license discrepancy before redistributing adapted data. [Zenodo record/API](https://zenodo.org/api/records/10203721), [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/), [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
 
-## First measured baseline
+### First measured baseline
 
 The fixed split uses the first six digits of each image ID, which look like a date. Compute `int(sha256(utf8("26" + prefix)).hexdigest(), 16) % 100`; buckets 0–19 are test, 20–29 validation, and 30–99 training. There are 38/6/15 prefix groups and 2,084/252/736 images in train/validation/test. The test set has 376 good and 360 bad images.
 
@@ -38,7 +48,7 @@ The metadata-only logistic baseline uses cell type, seeding density, time after 
 
 The image result comes from all 3,072 source PNGs. The downloaded ZIP matched Zenodo's MD5 `8f7e058996203d48eb03b2d86c0a2e4d`; all 3,072 extracted feature IDs matched the datasheet. The image model improves balanced accuracy by 0.0855 over metadata, but incorrectly flags 220 of 376 good test images (58.5%). A prefix-group bootstrap with 2,000 resamples gives a wide approximate 95% interval of 0.492–0.719 for image balanced accuracy; the prefixes are not confirmed chip IDs. The image score is below our predefined 0.65 continuation target. These results support a review queue for potentially bad images, not automatic rejection of a culture. A549 and HSAEC remain weak; HUVEC and NHBE have only bad examples in this test split, so per-cell balanced accuracy is undefined for them.
 
-## What the example shows
+### What the example shows
 
 The source ZIP's test folder contains 57 date-like image-ID prefixes; all 57 also occur in its training folder. The alternative holdout keeps all images with a prefix in one split. A prefix is an acquisition-context proxy, not a verified physical chip ID.
 
@@ -51,7 +61,7 @@ The same frozen 29-feature, 300-tree random-forest specification is fitted separ
 
 The full-test difference is +0.142005. It compares different test images and separately fitted models, so it cannot measure the causal effect of prefix overlap. F2 also flags 48.14% of expert-good test images, above the prespecified 45% ceiling for an automatic quality gate. F2 follows the viewed F1 test and is not a fresh blind test.
 
-## The 151 shared test images
+### The 151 shared test images
 
 The intersection contains 68 good and 83 bad images from 14 date-like prefixes. Scoring these exact IDs with both models removes test-composition differences. Training rows, validation rows, and thresholds still differ.
 
@@ -62,7 +72,7 @@ The intersection contains 68 good and 83 bad images from 14 date-like prefixes. 
 
 The paired balanced-accuracy difference is +0.066088. Of the 151 images, both models classify 92 correctly, only the source model 21, only the grouped model 14, and neither 24. A 2,000-draw paired bootstrap over the 14 prefixes gives an approximate 95% difference interval of −0.042091 to +0.122483. It crosses zero and does not support a general claim that image-level splits are optimistic. The report also lists each test set's class denominators, subgroup scores, transitions, and input hashes.
 
-## Platform history and reproducibility
+### Platform history and reproducibility
 
 The original macOS run used the same source data, feature SHA-256, model specification, and validation rule. The first divergent random-forest node appears in tree 3 with 2,084 training rows, before validation probabilities and threshold selection. A single-tree fit agrees across macOS and Linux. The underlying platform operation causing the tree split is not established.
 
@@ -75,7 +85,7 @@ The original macOS run used the same source data, feature SHA-256, model specifi
 
 `frozen_reference.json` retains both records and checks the Linux run's feature SHA-256, full validation/test summaries, confusion matrices, thresholds, overlap, and paired results. Numeric comparisons use an absolute tolerance of `1e-12`; class counts and other discrete fields must match exactly. This tolerance is below the observed cross-platform differences. A changed source or feature file is a mismatch, not an accepted variation.
 
-## Reproduce
+### Reproduce
 
 Use Python 3.12 and install the pinned CPU dependencies:
 

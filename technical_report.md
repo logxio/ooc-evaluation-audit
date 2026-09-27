@@ -1,8 +1,8 @@
 ---
-title: "Organ-on-Chip Image Evaluation Audit"
-subtitle: "A reproducible case study of acquisition-context overlap and split sensitivity"
+title: "Organoid Phenotype Transfer and Organ-on-Chip Evaluation Audit"
+subtitle: "Cross-laboratory cell typing with sample-level uncertainty and an image-evaluation case study"
 author: "Yan Su"
-date: "26 September 2026"
+date: "27 September 2026"
 lang: en-US
 documentclass: article
 fontsize: 12pt
@@ -22,7 +22,7 @@ header-includes:
   - \usepackage{fancyhdr}
   - \pagestyle{fancy}
   - \fancyhf{}
-  - \fancyhead[L]{Organ-on-Chip Image Evaluation Audit}
+  - \fancyhead[L]{Organoid Phenotype and Evaluation Audit}
   - \fancyhead[R]{Yan Su}
   - \fancyfoot[C]{\thepage}
 ---
@@ -30,23 +30,27 @@ header-includes:
 **Submission category: Tool & Platform**  
 **Team: Yan Su (individual entrant)**
 
+**Measured result:** A fixed Velasco-trained model reached **0.9078 macro-F1** on **207,871 Bhaduri neural-organoid cells** (34 sample-key bootstrap interval **0.8423-0.9372**). It beat a source-trained nearest-centroid comparator by **+0.1010** on the same cells (paired interval **+0.0705 to +0.1205**). HNOCA's gene panel and labels were harmonized across studies; the useful output is a sample annotation review queue, not an independent biological ground truth.
+
 \newpage
 \tableofcontents
 \newpage
 
 # Abstract
 
-An image-quality model can score well on a held-out folder while failing to answer the question an organ-on-chip researcher actually asks: will it work on a new acquisition context? We built an offline audit that joins image identifiers, expert quality labels, acquisition groups, train/validation/test assignments, and test predictions. It reports group overlap, class denominators, confusion matrices, false alarms on good images, and a same-image comparison between two evaluations. The report is generated from records and includes the records and calculations in JSON.
+A fixed three-class model trained on one neural-organoid study can help a researcher decide which samples from another laboratory need cell-type annotation review. We trained on 135,053 cells from Velasco et al. and evaluated once on all 207,871 selected cells from Bhaduri et al. in the public Human Neural Organoid Cell Atlas (HNOCA) [9-12]. The held-out-study macro-F1 was **0.907831**; a 2,000-draw bootstrap over 34 `bio_sample` keys gave a 95% interval of **0.842324-0.937195**. A source-trained nearest-centroid comparator scored 0.806783 on the same cells. The paired macro-F1 difference was +0.101048, with a sample-key interval of +0.070494 to +0.120536. Glioblast precision was only 0.679004: 1,353 cells of other classes were flagged as Glioblast. The usable action is to prioritize sample-level annotation review, not to treat predicted proportions as a new biological ground truth.
 
-We demonstrate the tool on 3,072 real organ-on-chip brightfield images and expert good/bad labels from the public Zenodo dataset by Movčana and colleagues [1, 2]. The original ZIP's image-level test contains 57 date-like filename prefixes; all 57 also occur in its training set. In the clean Linux CPU run, a fixed 29-feature random forest scores 0.799925 balanced accuracy on that test, while the corresponding model evaluated on a prefix-group holdout scores 0.657920. These test sets share only 151 images, so their 0.142005 difference is descriptive. On the shared images, the source-split and grouped-split models score 0.756467 and 0.690379, a difference of 0.066088. A paired percentile bootstrap over 14 prefixes gives an approximate 95% interval from -0.042091 to 0.122483. The interval crosses zero, and the two models were trained and calibrated on different rows. These observations do not establish a general optimistic bias, a causal effect of overlap, or leakage between physical chips.
+The two experiments were collected in different laboratories, but HNOCA chose its 3,000-gene panel across studies and assigned harmonized labels. This is a **cross-acquisition-source test conditional on a shared panel and annotation**, not a blind independent-label validation, donor-level replication, drug-response measure, or clinical result. These are neural **organoids**, not perfused organ-on-chip cultures; the score does not validate cell typing in a chip. Source-internal random-cell and held-`bio_sample` validation scored 0.953046 and 0.955731 on different validation rows. Their differences from the cross-study score describe protocol changes and do not isolate the cause of a performance gap.
 
-The dataset does not provide independently verified physical chip IDs. Filename prefixes are therefore treated only as acquisition-context proxies. The Linux CPU result is the frozen reference for the public command; the original macOS run is retained as a historical measurement. Both runs used a byte-identical feature file but built different forest trees, while the prespecified research decisions were unchanged. The tool checks Linux outputs against the Linux reference and marks a macOS difference. The contribution is an inspectable evaluation workflow, a fully worked real-data case, and explicit limits on what each comparison can establish. It requires no paid API, GPU, proprietary model, or redistribution of the source images.
+The same evaluation discipline is illustrated on 3,072 expert-labeled organ-on-chip brightfield images [1, 2]. The source ZIP has 57 of 57 date-like test prefixes also present in training. A frozen image model scored 0.799925 balanced accuracy on its 656-image source test and 0.657920 on a different 736-image prefix-held-out test. On the 151 shared images, the paired difference was +0.066088 with a 14-prefix interval of -0.042091 to +0.122483. That interval crosses zero; the prefixes are not verified physical chip IDs. These two cases show the same practical rule: publish source and group denominators, false alarms, comparable test rows, and uncertainty beside the headline score. The workflow uses public data and free CPU computation, without a paid API or proprietary model.
 
-**Keywords:** organ-on-chip; brightfield imaging; evaluation audit; grouped holdout; reproducibility; image quality.
+**Keywords:** neural organoid; single-cell phenotype; cross-study validation; organ-on-chip; evaluation audit; grouped bootstrap; reproducibility.
 
 # Research problem and intended use
 
-## A concrete decision at the bench
+## Two decisions at the bench
+
+A neural-organoid team may want to estimate NPC, Neuron, and Glioblast cell-type composition in a new sequencing batch. A model trained on another study can rank samples for annotation review, but a high aggregate score can conceal rare-class false positives or a few dominant samples. The evaluation must therefore show each class's errors, the full source split, and uncertainty over sample keys. We do not use model output to replace marker-gene review or the study's original annotation process.
 
 An organ-on-chip imaging team may train a classifier to send low-quality brightfield images for manual review. Before using that model, the team needs to know whether held-out images truly come from acquisition contexts absent from training. It also needs the number of good cultures that would be incorrectly flagged. A single balanced-accuracy value hides both questions.
 
@@ -56,7 +60,7 @@ Our worked example uses the public image-quality dataset. In it, the first six d
 
 ## Why this is an AI-for-life-science problem
 
-The useful unit of generalization depends on how the life-science data were collected. Many images from the same chip or imaging session are not equivalent to independent future experiments. The dataset at hand has expert quality labels and actual brightfield images, so it supports a real, reproducible image-evaluation case. It does not contain toxicity outcomes, neural connectivity labels, or drug-response ground truth; none is claimed here. The practical value of the audit is that a researcher can examine evaluation units and false alarms before interpreting a model score as a deployment result.
+The useful unit of generalization depends on how the life-science data were collected. Many cells from the same biological sample are not independent laboratories; many images from the same imaging context are not independent future acquisitions. The organoid case has independently collected expression experiments but a shared atlas panel and annotation. The image case has expert quality labels and real brightfield images but no verified physical chip IDs. Reporting those distinctions helps a researcher decide what to check next. Neither dataset supplies toxicity outcomes, neural connectivity labels, or drug-response ground truth; none is claimed here.
 
 The prior classification study using this same source data reports a single image-level split and identifies stability across splits as future work [3]. Our contribution is a different question: expose grouping assumptions, test-set composition, and same-image prediction changes using a reusable record contract. We neither reproduce its InceptionV3 model nor claim superiority over it.
 
@@ -64,13 +68,15 @@ The prior classification study using this same source data reports a single imag
 
 ## Source material
 
+The [HNOCA v1 archive](https://zenodo.org/records/15004818) [9, 10] supplies `hnoca_minimal_for_mapping.h5ad`, a 2,880,860,613-byte file whose published MD5 is `078675d6108e93cebc99676b6b0626aa`. A clean free Kaggle CPU run downloaded the entire file and recomputed that MD5. It contains a 1,770,578-by-3,000 sparse count-like expression matrix, harmonized `annot_level_1` labels, publication names, and `bio_sample` keys. We select Velasco 2019 [11] as development and Bhaduri 2020 [12] as a whole-study test. The selected three classes contain 135,053 and 207,871 cells respectively. Their 21 and 34 complete `bio_sample` keys do not overlap. These keys are not established physical organoid or donor identities. HNOCA's global highly variable gene choice and harmonized annotation used information from the studies represented in the atlas, including the held-out acquisition source. We do not use its cross-study scPoli model weights or embedding.
+
 The [Organ-on-a-Chip Image Dataset](https://zenodo.org/records/10203721) [1] contains 3,072 PNG images, a spreadsheet of experimental metadata and expert image-quality labels, and original train/validation/test folders. The accompanying data descriptor explains image capture, cultures, and expert labeling [2]. The original table's quality code is 1 for good and 2 for bad, as checked against the source ZIP folders. We map good to 0 and bad to 1 in the audit records. Six cell types occur in the table. No patient-level or private clinical data are used.
 
 The spreadsheet is 119,712 bytes and is checked by SHA-256 before parsing. The image ZIP is 6,710,767,405 bytes; its downloaded content matched the Zenodo MD5 `8f7e058996203d48eb03b2d86c0a2e4d`. Extracted image IDs are checked one-to-one against the 3,072 table rows. The source split is read from the ZIP64 central directory via range requests, then every mapped ID, folder label, and cell type is reconciled to the spreadsheet. The source directory mapping has 2,130 training, 286 validation, and 656 test images. The code stores raw images and derived feature records locally; the public code repository does not redistribute them.
 
 ## License boundary
 
-The Zenodo record metadata lists CC BY 4.0 for its files [1]. The associated descriptor refers to the dataset as CC-BY-SA without a version [2]. We report both statements. The downloadable images and their adapted forms are not included in our code repository, so the discrepancy is not resolved by silently republishing under either license. Users follow the source record and its attribution terms when obtaining the data. Our own code is MIT licensed. NumPy uses BSD-3-Clause; Pillow describes its license as MIT-CMU; SciPy and scikit-learn use BSD-3-Clause [4-6, 8]. The source of each external component is listed in the references.
+HNOCA v1's official Zenodo metadata identifies its archive as CC BY 4.0 [9]. The organ-on-chip image Zenodo record lists CC BY 4.0 for its files [1], while the associated descriptor refers to the image dataset as CC-BY-SA without a version [2]. We report both image statements. Neither raw dataset nor derived per-cell or per-image records are included in our code repository. Users obtain data from the attributed source. Our own code is MIT licensed. NumPy and SciPy use BSD-3-Clause, Pillow describes its license as MIT-CMU, scikit-learn and h5py use BSD-3-Clause, and Requests uses Apache-2.0 [4-8, 13, 14]. The source of each external component is listed in the references.
 
 ## Evaluation groups
 
@@ -95,6 +101,46 @@ On the shared test images, we resample observed prefix groups with replacement, 
 ## Evidence categories
 
 The HTML and JSON distinguish three claims. Group overlap is directly observable for the supplied group IDs. The full-test score difference compares different images and is descriptive. The shared-test comparison holds test image IDs fixed, but the two fitted models still use different training rows and different validation rows and thresholds. It therefore narrows one source of confounding without isolating the cause of the difference. All conclusions remain specific to one dataset.
+
+# Cross-study neural-organoid phenotype audit
+
+## Frozen question and sample accounting
+
+Before model fitting, we fixed NPC, Neuron, and Glioblast as the primary classes. A four-class plan was stopped before training because the held-out Bhaduri Astrocyte label had 1,312 cells in only six `bio_sample` keys, with at least 100 cells in only four keys. **This choice inspected target-study label counts before training, so the endpoint definition was not blind to the target study.** The three-class training set contains 22,587 NPC, 94,395 Neuron, and 18,071 Glioblast cells from Velasco (135,053 cells, 21 keys). The whole Bhaduri test contains 110,067 NPC, 94,733 Neuron, and 3,071 Glioblast cells (207,871 cells, 34 keys). NPC and Neuron occur in all 34 test keys; Glioblast occurs in 20, with at least 100 cells in eight. Astrocyte remains descriptive and is not silently included in the reported three-class score.
+
+We fixed the main decision before the full run: a whole-study test macro-F1 above 0.45, and a paired `bio_sample` bootstrap interval for the main-minus-best-prespecified-comparator difference entirely above zero, would justify presenting the model as a review aid. This does not set a biological deployment threshold. The preregistered point prediction for whole-study macro-F1 was 0.55-0.83; the observed 0.907831 exceeded that range. The source-internal random and grouped validation predictions were also lower than the observed scores; none was rewritten to fit the result.
+
+## Count transform, model, and comparison
+
+We extract the same 3,000 HNOCA genes for selected cells. For each cell, we divide its panel counts by that cell's panel total, multiply by 10,000, then apply `log1p` to nonzero values. This fixed operation does not fit on the test rows, although the **choice of the panel itself was made by HNOCA across studies**. We fit `SGDClassifier` with log loss, L2 penalty, `alpha=1e-4`, 30 maximum iterations, tolerance `1e-3`, balanced class weights, averaged coefficients, one fitting thread, and seed 26. No Bhaduri labels enter the transform definition, weight fitting, threshold selection, or hyperparameter choice. The full model is trained on all Velasco cells and evaluated once on all selected Bhaduri cells.
+
+As source-internal diagnostics, we fit the same specification separately after a seed-26 stratified 20% cell holdout and a seed-26 `bio_sample` holdout of about 20% of keys. The random split trains on 108,042 cells and validates on 27,011; all 21 source keys appear on both sides. The grouped split trains on 96,022 cells in 16 keys and validates on 39,031 cells in five other keys. Because groups have unequal sizes, 20% of keys does not mean 20% of cells. These are **three separately fitted models and three different test rows**. The score gaps are descriptive; they are not a causal leakage estimate.
+
+We fixed two inexpensive external comparators: predict the most common Velasco class for every Bhaduri cell, and assign each transformed Bhaduri cell to the highest-cosine-similarity Velasco class centroid. The centroids use only Velasco rows. We report the larger comparator macro-F1, but this choice uses external test scores and its paired interval is conditional on that selection. No comparator was added or retuned after seeing Bhaduri outcomes.
+
+For uncertainty, we compute a 3-by-3 confusion matrix for each of the 34 Bhaduri `bio_sample` keys. In each of 2,000 seed-26 draws, we sample 34 keys with replacement and sum their entire matrices, recompute three-class macro-F1, and take the 2.5th and 97.5th percentiles. The same sampled keys are used for the main model and selected comparator, so their difference is paired at the sample-key level. All 2,000 draws retained all three true classes. This interval expresses variation over observed keys under this resampling scheme, not over independently established donors or physical organoids.
+
+## Measured external result and failure cases
+
+| Evaluation | Test cells / keys | Macro-F1 | Interpretation |
+|:--|--:|--:|:--|
+| Velasco random cell holdout | 27,011 / 21 overlapping | 0.953046 | Source-internal diagnostic |
+| Velasco held `bio_sample` keys | 39,031 / 5 disjoint | 0.955731 | Source-internal diagnostic |
+| Bhaduri whole-study test | 207,871 / 34 | **0.907831** | Cross-acquisition-source test with a shared atlas panel and labels |
+| Velasco majority class on Bhaduri | 207,871 / 34 | 0.208706 | Fixed comparator |
+| Velasco nearest centroid on Bhaduri | 207,871 / 34 | **0.806783** | Best of the two prespecified comparators |
+
+The Bhaduri macro-F1 95% sample-key interval is **0.842324-0.937195**. The main model exceeds the nearest-centroid comparator by **+0.101048** on exactly the same cells, with a paired sample-key interval of **+0.070494 to +0.120536**. Both prespecified screens passed. The grouped source validation score exceeds the whole-study score by 0.047900, while random source validation is 0.002685 *lower* than grouped validation. Thus this dataset does not show a monotone random-split inflation story. Different test compositions, training sets, and shared atlas preprocessing prevent attributing any one gap to sample overlap.
+
+| True class / predicted class | NPC | Neuron | Glioblast |
+|:--|--:|--:|--:|
+| NPC (110,067) | 106,403 | 2,370 | 1,294 |
+| Neuron (94,733) | 3,207 | 91,467 | 59 |
+| Glioblast (3,071) | 159 | 50 | 2,862 |
+
+NPC, Neuron, and Glioblast F1 scores are 0.968022, 0.969855, and 0.785616. Glioblast recall is 0.931944, but precision is **0.679004**: 209 true Glioblast cells are missed, while **1,353** NPC/Neuron cells are incorrectly flagged. Of 4,215 predicted Glioblast cells, about 32.1% are false positives. One Bhaduri key with 3,030 selected cells has eight consensus-labeled Glioblast cells but 96 model calls. A researcher can place that sample ahead of lower-disagreement samples for marker-gene and annotation review. The prediction alone cannot establish that those 88 extra calls are true disease-related cells. No test key was removed after inspection, and the output retains every key's denominators and matrix.
+
+The three full Velasco fits emitted scikit-learn's maximum-iteration `ConvergenceWarning`; we did not raise the iteration limit after viewing the test. Numerical stability under longer or alternative optimization remains to be measured. The model's linear decision values are not calibrated probabilities. HNOCA's unified annotation, cross-study gene selection, and the low number of keys with large Glioblast counts are material limits even though the prespecified score screen passed. Independently assigned original-study labels were not established as a matched reference for these exact cells. This result supports **annotation review prioritization under the HNOCA label convention**, not clinical classification, drug toxicity, neural function, or an unbiased estimate of biological composition.
 
 # Image features and frozen model protocol
 
@@ -161,35 +207,47 @@ The grouped F2 full test includes A549 (151 good/81 bad), CACO (27/55), HPMEC (1
 
 # Software artifact and real workflow
 
-The offline tool has a generic core and an adapter for this dataset. The generic command reads two JSONL record sets, validates them, and writes `audit.html` and `audit.json`. The HTML is a single local page that summarizes overlap, test denominators and errors, the shared-image comparison, and the interpretation limits. The JSON stores both input records, computed counts, metadata, and input file hashes. The artifact does not call a model API or upload images.
+The offline workflow makes group identity and error denominators explicit in two biological settings. Its image-audit core reads two JSONL record sets, validates them, and writes `audit.html` and `audit.json`. The HTML summarizes overlap, test denominators and errors, the shared-image comparison, and interpretation limits. The JSON stores input records, counts, metadata, and input file hashes. The organoid route produces a whole-study three-class score, per-class and per-`bio_sample` matrices, comparator scores, and sample-key intervals from the HNOCA original. Both routes use local or free CPU computation and do not call a model API or upload research data to a service.
 
-For this case study, the `ooc` command rebuilds test predictions from locally extracted image features and fixed model specifications. Before export, it checks fresh F2 and F3 results against the refitted models and checks F4's shared-image counts, confusion matrices, transitions, paired difference, and interval. On a prepared real feature cache, Linux ARM64 reproduced the independent Kaggle Linux x86-64 deterministic F2-F4 fields and exported the report with `status: verified`. This checks the reporting path; it is not a second biological dataset or a new external validation result.
+For the image case, the `ooc` command rebuilds test predictions from locally extracted image features and fixed model specifications. Before export, it checks fresh F2 and F3 results against the refitted models and checks F4's shared-image counts, confusion matrices, transitions, paired difference, and interval. On a prepared real feature cache, Linux ARM64 reproduced the independent Kaggle Linux x86-64 deterministic F2-F4 fields and exported the report with `status: verified`. This checks the image-reporting path; it is not a second biological dataset or a new external validation result.
 
 A researcher with their own per-image predictions can bypass the example adapter. They supply source and grouped JSONL records, with group IDs that reflect their actual experimental provenance. The generic report then exposes group overlap and both test compositions. If the test sets have no shared IDs, it cannot compute a same-image contrast. If a test has only one class, balanced accuracy is undefined. These are intentional boundaries of the evidence.
 
-The source-to-report route is `python run_full_audit.py`. It downloads and verifies both original Zenodo files, extracts the 3,072 image feature vectors, computes F1-F4, and writes the offline HTML, JSON, and `run_evidence.json`. On a local machine its default four-minute budget allows the same command to resume the ZIP download and feature extraction. A clean Kaggle Linux CPU run used `--time-budget 0` to complete the route in one invocation, produced the report, matched the Linux reference, and exited 0. The corresponding macOS run uses the same feature SHA-256 but different forest trees; its report marks the platform difference and the command exits 3.
+The organoid route is `python organoid_phenotype.py` on a free Kaggle Linux CPU with Internet enabled. The dependency versions are pinned in `requirements-organoid.txt`; the command downloads and checks the 2,880,860,613-byte HNOCA v1 file against MD5 `078675d6108e93cebc99676b6b0626aa`, extracts selected sparse rows, fits the fixed Velasco model, and writes `organoid_audit/audit.html`, `audit.json`, and `groups.csv`. The first whole-study run completed with script exit 0 in 669.356 seconds, with 2,554,363,904 bytes peak resident memory. An independent local verifier read all 207,871 scored cell records and recomputed the 34 group matrices, external macro-F1, and 2,000-draw primary interval. A second **clean run of the final public entry point**, from the original file on Kaggle Linux x86-64 with Python 3.12.13 and four free CPU cores, completed with script exit **0** in **675.147 seconds** and peak resident memory **2,561,519,616 bytes**. It exactly reproduced the first run's 207,871-cell and 34-key denominators, full confusion matrix, macro-F1 `0.9078308669478505`, interval `[0.8423242754145907, 0.9371954104623934]`, and paired difference interval `[0.07049358560024495, 0.12053559237535703]`. Ninety-three compared floating fields had maximum observed difference **0**; exact integer and key equality was required and `1e-12` was the preregistered absolute tolerance for floats. The output HTML is rendered from the JSON written by that same run. The source file is removed after extraction; no raw atlas, per-cell predictions, or fitted weights are published with this repository.
+
+The image source-to-report route is `python run_full_audit.py`. It downloads and verifies both original Zenodo files, extracts the 3,072 image feature vectors, computes F1-F4, and writes the offline HTML, JSON, and `run_evidence.json`. On a local machine its default four-minute budget allows the same command to resume the ZIP download and feature extraction. A clean Kaggle Linux CPU run used `--time-budget 0` to complete the route in one invocation, produced the report, matched the Linux reference, and exited 0. The corresponding macOS run uses the same feature SHA-256 but different forest trees; its report marks the platform difference and the command exits 3.
 
 # Reliability, limitations, and application value
 
 ## What is directly observed
 
+The HNOCA source file's full MD5 and size, 342,924 selected cells, 21/34 distinct source/test `bio_sample` keys, per-cell predictions, class matrices, source-internal and external scores, and 34-key bootstrap outputs are recorded. The Velasco and Bhaduri experiments were collected by separate research teams [11, 12]. The external metric is above the prespecified screen and its difference from the prespecified comparator has a positive paired interval. The rare Glioblast false-positive count remains visible beside the high macro-F1.
+
 The source folder assignments, the labels, the date-like image prefixes, and the predictions are inspectable. For those supplied identifiers, 57 of 57 source-test prefix groups also occur in source training. The different full-test scores and their denominators are observable, as are the same-image predictions on the 151-image intersection. We supply counts rather than only a single summary score so a researcher can see false alarms on good cultures.
 
 ## What is not identified
 
-A filename prefix is not independently validated as a physical chip, biological replicate, or day of acquisition. Even if the apparent date meaning were exact, images from different dates could share a chip, and images from the same date could come from different chips. The dataset does not resolve that ambiguity. The same-image result cannot isolate group overlap from a change of training data or threshold. The paired interval uses only 14 observed prefixes and crosses zero. No second non-pathogen organ-on-chip dataset with verified per-sample groups and labels has yet produced an effect estimate. Repeated attention to this source test during F1-F4 also limits how much the later numeric comparisons can be treated as confirmatory.
+HNOCA's cross-study panel selection and harmonized labels limit independence: an acquisition-source holdout is not a fully external annotation gold standard. Its `bio_sample` values do not prove physical organoid or donor identities. The grouped interval resamples 34 keys, and the rare Glioblast class has at least 100 cells in only eight keys. No prospective deployment or independently blinded annotation test is reported.
+
+A filename prefix is not independently validated as a physical chip, biological replicate, or day of acquisition. Even if the apparent date meaning were exact, images from different dates could share a chip, and images from the same date could come from different chips. The dataset does not resolve that ambiguity. The same-image result cannot isolate group overlap from a change of training data or threshold. The paired interval uses only 14 observed prefixes and crosses zero. No second non-pathogen organ-on-chip *image-quality* dataset with verified per-sample groups and labels has yet produced an effect estimate. Repeated attention to this source test during F1-F4 also limits how much the later numeric comparisons can be treated as confirmatory.
 
 The quality labels assess brightfield image suitability. They do not quantify cell viability, therapeutic effect, toxicity, or clinical outcome. In particular, our false-positive counts are flags on expert-labeled good images, not measured damage to cultures. Any production triage workflow would require prospective testing, a definition of the actual acquisition unit, and user-selected costs for missed bad images versus good images sent to review.
 
 ## Intended application
 
-The audit can serve as an evaluation checklist with executable calculations. When a team has real chip IDs, it can use them as group fields and inspect whether its test chips were truly absent from training. When it has only acquisition sessions or batches, the result must carry that weaker name. The same code can also compare two test protocols on their shared images, so apparent improvements on different test sets are not casually treated as paired effects. This is a useful research workflow even when a model score does not clear a deployment gate.
+For neural-organoid single-cell work, the model can put samples with unusually high predicted-versus-consensus Glioblast proportions into an annotation review queue. The per-key table identifies where marker genes or original cell annotations deserve inspection. This is a review workflow, not automated release of an unbiased composition estimate.
+
+For organ-on-chip brightfield work, the image audit can serve as an evaluation checklist with executable calculations. When a team has real chip IDs, it can use them as group fields and inspect whether its test chips were truly absent from training. When it has only acquisition sessions or batches, the result must carry that weaker name. The same code can also compare two test protocols on their shared images, so apparent improvements on different test sets are not casually treated as paired effects. This remains useful even when an image model does not clear a deployment gate.
 
 # Reproducibility and dependency disclosure
 
 ## Hardware and software
 
-The code runs on CPU with Python 3.12. `requirements.txt` pins NumPy 2.5.3, Pillow 12.3.0, SciPy 1.18.1, and scikit-learn 1.9.1. It uses no paid service, proprietary model, non-public data, or GPU. The source ZIP is roughly 6.7 GB, so obtaining all images is the largest transfer; the Python downloader saves progress and the main command defaults to a 240-second local budget. The generated feature cache and results stay in ignored local files. Runtime measurements are specific to their stated environments.
+The image audit runs on CPU with Python 3.12. `requirements.txt` pins NumPy 2.5.3, Pillow 12.3.0, SciPy 1.18.1, and scikit-learn 1.9.1. The initial organoid result used free Kaggle CPU with Python 3.12.13, NumPy 2.0.2, SciPy 1.16.3, scikit-learn 1.6.1, and h5py 3.16.0; its public dependency set and clean-run check are reported with the published organoid entry point. Both cases use no paid service, proprietary model, non-public data, or GPU. The source image ZIP is 6.71 GB and the HNOCA archive is 2.88 GB, so source transfer dominates a clean run. Raw source data, generated features, scored cells, and fitted weights remain local or in temporary Kaggle job outputs; they are not redistributed in this repository. Runtime measurements are specific to their stated environments.
+
+## HNOCA original-file run and output checks
+
+The initial free Kaggle CPU job fetched all 2,880,860,613 bytes from Zenodo, recomputed MD5 `078675d6108e93cebc99676b6b0626aa`, and extracted a 342,924-by-3,000 sparse matrix with 57,695,927 nonzero entries. Its 669.356-second script runtime included 608.708 seconds for download and hash verification; peak resident memory was 2,554,363,904 bytes on four CPU cores. The job reached `COMPLETE` and the script reported exit 0. The result JSON recorded the three-class full-test matrix and every Bhaduri sample key. Its SHA-256 was `67cbaec484e7fc4dded61b3b82b8d317faab80c34c4f5949a51b8ce92291099f` and the compressed 207,871-row prediction file's SHA-256 was `37bd891dea647dbcdc77b428643ce8cdeebebe82c908c0db9eb560a81eff64af`. A separate verifier read that file and reconstructed the full and per-key confusion matrices, macro-F1 0.9078308669, and 95% sample-key interval 0.8423242754-0.9371954105 in 2,000 effective draws. The comparator predictions and paired interval come from the same full job; the separate verifier did not independently refit or reconstruct the nearest-centroid predictions. We keep that limit explicit.
 
 ## Linux reference and independent clean run
 
@@ -229,11 +287,11 @@ Each JSONL record must use a stable `id`, a provenance-backed `group`, `label` 0
 
 # Prior work, originality, and responsible disclosure
 
-The image dataset and its expert quality labels predate this competition [1, 2]. The published same-data classification study also predates this work [3]. We did not create the source images, labels, or the prior paper's model. Our competition work consists of the frozen grouped and source-split evaluations, the same-image comparison, the generic audit calculations, the offline report generator, and the reproducibility checks. All results in this report are generated by those scripts from publicly obtainable inputs. No result or demo is simulated.
+The HNOCA atlas, its 3,000-gene panel, harmonized labels, and the original Velasco and Bhaduri experiments predate this competition [9-12]. We did not create those cells or annotations and do not present their label convention as an independent gold standard. The image dataset, expert quality labels, and a same-data classification study also predate this work [1-3]. Our competition work is the fixed cross-study cell-type model and sample-level evaluation, plus the organ-on-chip image split and shared-image audit, offline report routes, and reproducibility checks. All reported numeric results are derived from publicly obtainable inputs by the described scripts. No result or demo is simulated.
 
 The source package's split was accepted as an object of study, not as an independent ground truth about physical chips. A finding of 57/57 prefix overlap is not a finding of chip-level data leakage. The full-test accuracy difference does not compare identical samples. The paired difference and its crossing-zero interval do not warrant a claim that source splits are systematically optimistic. We make these distinctions because the competition asks for verifiable results and because an evaluation tool loses value if its own headline overstates the evidence.
 
-There is one individual entrant, Yan Su. Python, NumPy, Pillow, and scikit-learn are the software runtime; no foundation model or paid inference API is part of the product or the reported quantitative result. AI coding assistance may be used to write and review code and prose, but numeric results are recomputed by the published scripts and checked against per-image records. Images remain attributed to their source and are not redistributed in this repository. The code is released under MIT.
+There is one individual entrant, Yan Su. Python, NumPy, SciPy, scikit-learn, h5py, Requests, and Pillow provide the runtime; no foundation model or paid inference API is part of the quantitative result. AI coding assistance may be used to write and review code and prose, but reported numbers come from real runs and are checked against scored records. Research data remain attributed to their sources and are not redistributed in this repository. The code is released under MIT.
 
 # References
 
@@ -245,6 +303,12 @@ There is one individual entrant, Yan Su. Python, NumPy, Pillow, and scikit-learn
 6. [scikit-learn 1.9.1 release](https://pypi.org/project/scikit-learn/1.9.1/). Official PyPI distribution and license metadata.
 7. [CC BY 4.0 legal code](https://creativecommons.org/licenses/by/4.0/) and [CC BY-SA 4.0 legal code](https://creativecommons.org/licenses/by-sa/4.0/). Creative Commons.
 8. [SciPy license](https://projects.scipy.org/scipylib/license.html). Official SciPy project license.
+9. [HNOCA v1 archive](https://zenodo.org/records/15004818). Zenodo (2025), DOI: [10.5281/zenodo.15004818](https://doi.org/10.5281/zenodo.15004818). Original file, MD5, and CC BY 4.0 archive metadata.
+10. He et al. [An integrated transcriptomic cell atlas of human neural organoids](https://www.nature.com/articles/s41586-024-08172-8). *Nature* 635, 690-698 (2024), DOI: [10.1038/s41586-024-08172-8](https://doi.org/10.1038/s41586-024-08172-8). Cross-study gene selection and harmonized annotation methods.
+11. Velasco et al. [Individual brain organoids reproducibly form cell diversity of the human cerebral cortex](https://www.nature.com/articles/s41586-019-1289-x). *Nature* (2019), DOI: [10.1038/s41586-019-1289-x](https://doi.org/10.1038/s41586-019-1289-x). Development-study provenance.
+12. Bhaduri et al. [Cell stress in cortical organoids impairs molecular subtype specification](https://www.nature.com/articles/s41586-020-1962-0). *Nature* (2020), DOI: [10.1038/s41586-020-1962-0](https://doi.org/10.1038/s41586-020-1962-0). Held-out acquisition-study provenance.
+13. [h5py license](https://github.com/h5py/h5py/blob/master/licenses/license.txt). Official project repository.
+14. [Requests license](https://github.com/psf/requests/blob/main/LICENSE). Official project repository.
 
 # Appendix A: denominators and decision gates
 
