@@ -1,6 +1,6 @@
 ---
-title: "Organoid Phenotype Transfer and Organ-on-Chip Evaluation Audit"
-subtitle: "Cross-laboratory cell typing with sample-level uncertainty and an image-evaluation case study"
+title: "Phenotype Transfer Maps"
+subtitle: "Cross-study organoid cell typing with measured sample review priorities"
 author: "Yan Su"
 date: "27 September 2026"
 lang: en-US
@@ -22,7 +22,7 @@ header-includes:
   - \usepackage{fancyhdr}
   - \pagestyle{fancy}
   - \fancyhf{}
-  - \fancyhead[L]{Organoid Phenotype and Evaluation Audit}
+  - \fancyhead[L]{Phenotype Transfer Maps}
   - \fancyhead[R]{Yan Su}
   - \fancyfoot[C]{\thepage}
 ---
@@ -30,7 +30,7 @@ header-includes:
 **Submission category: Tool & Platform**  
 **Team: Yan Su (individual entrant)**
 
-**Measured result:** A fixed Velasco-trained model reached **0.9078 macro-F1** on **207,871 Bhaduri neural-organoid cells** (34 sample-key bootstrap interval **0.8423-0.9372**). It beat a source-trained nearest-centroid comparator by **+0.1010** on the same cells (paired interval **+0.0705 to +0.1205**). HNOCA's gene panel and labels were harmonized across studies; the useful output is a sample annotation review queue, not an independent biological ground truth.
+**Measured result:** A Phenotype Transfer Map joins a cross-acquisition-source phenotype score, score-based review order within an atlas-selected cohort, and separate label-backed error audit. A fixed Velasco-trained model reached **0.9078 macro-F1** on **207,871 Bhaduri neural-organoid cells** (34 sample-key bootstrap interval **0.8423-0.9372**). It beat a source-trained nearest-centroid comparator by **+0.1010** on the same cells (paired interval **+0.0705 to +0.1205**). HNOCA's gene panel and labels were harmonized across studies; this is not an independent biological ground truth.
 
 **Exploratory review queue:** Ranking the 34 Bhaduri sample keys by mean model-score uncertainty, without using their labels in the ranking calculation, correlated with their observed classification error (Spearman **0.7791**, key-resampling interval **0.5546-0.9010**). The highest-ranked eight keys had **1.721 times** the equal-key average error rate. HNOCA labels selected the three-class cohort before ranking. This is retrospective evidence on the same test source, not an end-to-end unannotated-batch validation or calibrated error probability.
 
@@ -40,7 +40,7 @@ header-includes:
 
 # Abstract
 
-A fixed three-class model trained on one neural-organoid study can help a researcher decide which samples from another laboratory need cell-type annotation review. We trained on 135,053 cells from Velasco et al. and evaluated once on all 207,871 selected cells from Bhaduri et al. in the public Human Neural Organoid Cell Atlas (HNOCA) [9-12]. The held-out-study macro-F1 was **0.907831**; a 2,000-draw bootstrap over 34 `bio_sample` keys gave a 95% interval of **0.842324-0.937195**. A source-trained nearest-centroid comparator scored 0.806783 on the same cells. The paired macro-F1 difference was +0.101048, with a sample-key interval of +0.070494 to +0.120536. Glioblast precision was only 0.679004: 1,353 cells of other classes were flagged as Glioblast. The usable action is to prioritize sample-level annotation review, not to treat predicted proportions as a new biological ground truth.
+A Phenotype Transfer Map measures a cell-type model across acquisition sources, orders atlas-selected sample keys by model-score uncertainty for review, and separately audits errors where reference labels exist. We trained on 135,053 cells from Velasco et al. and evaluated once on all 207,871 selected cells from Bhaduri et al. in the public Human Neural Organoid Cell Atlas (HNOCA) [9-12]. The held-out-study macro-F1 was **0.907831**; a 2,000-draw bootstrap over 34 `bio_sample` keys gave a 95% interval of **0.842324-0.937195**. A source-trained nearest-centroid comparator scored 0.806783 on the same cells. The paired macro-F1 difference was +0.101048, with a sample-key interval of +0.070494 to +0.120536. Glioblast precision was only 0.679004: 1,353 cells of other classes were flagged as Glioblast. The usable action is to prioritize sample-level annotation review, not to treat predicted proportions as a new biological ground truth.
 
 In a subsequent exploratory analysis, a queue based only on classifier decision-score margins ranked all 34 Bhaduri sample keys without using their HNOCA labels in the ranking calculation. Mean score uncertainty and observed key error rate had equal-key Spearman correlation **0.779068**, with a 2,000-draw key-resampling interval **0.554570-0.901040**. The eight most uncertain keys had **1.720951 times** the all-key mean error rate. HNOCA labels selected the three-class cohort before ranking, and the utility check reused the same Bhaduri source and labels; it has not been tested prospectively on a wholly unannotated batch.
 
@@ -58,7 +58,9 @@ A neural-organoid team may want to estimate NPC, Neuron, and Glioblast cell-type
 
 An organ-on-chip imaging team may train a classifier to send low-quality brightfield images for manual review. Before using that model, the team needs to know whether held-out images truly come from acquisition contexts absent from training. It also needs the number of good cultures that would be incorrectly flagged. A single balanced-accuracy value hides both questions.
 
-This project provides a small audit for those decisions. Its inputs are one record per image from each evaluation: a stable image ID, a group identifier, the reference good/bad label, the split assignment, and a test prediction. The group might be a physical chip, an experiment, an imaging session, or a weaker proxy. The scientist must identify which it is from the source data. The tool computes what the records support and labels the comparison's evidence level. It does not infer a physical chip ID from a filename.
+The Phenotype Transfer Map answers the organoid decision with three explicitly different measurements: source-held-out macro-F1 and sample-key interval, model-score review order within the atlas-selected three-class cohort, and a retrospective known-label error audit. A single aggregate test score does not show that Glioblast precision is 0.679004 or that the highest-scored review keys have 1.721 times the equal-key mean error rate. The map is exploratory evidence for review order, not proof of benefit on wholly unannotated future batches.
+
+A separate organ-on-chip image audit answers the imaging decision. Its inputs are one record per image from each evaluation: a stable image ID, a group identifier, the reference good/bad label, the split assignment, and a test prediction. The group might be a physical chip, an experiment, an imaging session, or a weaker proxy. The scientist must identify which it is from the source data. The tool computes what the records support and labels the comparison's evidence level. It does not infer a physical chip ID from a filename.
 
 Our worked example uses the public image-quality dataset. In it, the first six digits of each image ID resemble a date. We use that prefix to ask whether the source folder split reuses acquisition context across training and test. The prefix is not a verified chip identifier. Accordingly, the user-facing report says "acquisition-context overlap," not "chip leakage."
 
@@ -72,7 +74,7 @@ The prior classification study using this same source data reports a single imag
 
 ## Source material
 
-The [HNOCA v1 archive](https://zenodo.org/records/15004818) [9, 10] supplies `hnoca_minimal_for_mapping.h5ad`, a 2,880,860,613-byte file whose published MD5 is `078675d6108e93cebc99676b6b0626aa`. A clean free Kaggle CPU run downloaded the entire file and recomputed that MD5. It contains a 1,770,578-by-3,000 sparse count-like expression matrix, harmonized `annot_level_1` labels, publication names, and `bio_sample` keys. We select Velasco 2019 [11] as development and Bhaduri 2020 [12] as a whole-study test. The selected three classes contain 135,053 and 207,871 cells respectively. Their 21 and 34 complete `bio_sample` keys do not overlap. These keys are not established physical organoid or donor identities. HNOCA's global highly variable gene choice and harmonized annotation used information from the studies represented in the atlas, including the held-out acquisition source. We do not use its cross-study scPoli model weights or embedding.
+The [HNOCA v1 archive](https://zenodo.org/records/15004818) [9, 10] supplies `hnoca_minimal_for_mapping.h5ad`, a 2,880,860,613-byte file whose published MD5 is `078675d6108e93cebc99676b6b0626aa`. A clean free Kaggle CPU run downloaded the entire file and recomputed that MD5. It contains a 1,770,578-by-3,000 sparse count-like expression matrix, harmonized `annot_level_1` labels, publication names, and `bio_sample` keys. We select Velasco 2019 [11] as development and Bhaduri 2020 [12] as a whole-study test. The selected three classes contain 135,053 and 207,871 cells respectively. Their 21 and 34 complete `bio_sample` keys do not overlap. Some composite Bhaduri keys contain the text “Velasco, 2019”; source assignment uses the separate `publication` field, never a name parsed from the key. These keys are not established physical organoid or donor identities. HNOCA's global highly variable gene choice and harmonized annotation used information from the studies represented in the atlas, including the held-out acquisition source. We do not use its cross-study scPoli model weights or embedding.
 
 The [Organ-on-a-Chip Image Dataset](https://zenodo.org/records/10203721) [1] contains 3,072 PNG images, a spreadsheet of experimental metadata and expert image-quality labels, and original train/validation/test folders. The accompanying data descriptor explains image capture, cultures, and expert labeling [2]. The original table's quality code is 1 for good and 2 for bad, as checked against the source ZIP folders. We map good to 0 and bad to 1 in the audit records. Six cell types occur in the table. No patient-level or private clinical data are used.
 
@@ -144,7 +146,7 @@ The Bhaduri macro-F1 95% sample-key interval is **0.842324-0.937195**. The main 
 
 NPC, Neuron, and Glioblast F1 scores are 0.968022, 0.969855, and 0.785616. Glioblast recall is 0.931944, but precision is **0.679004**: 209 true Glioblast cells are missed, while **1,353** NPC/Neuron cells are incorrectly flagged. Of 4,215 predicted Glioblast cells, about 32.1% are false positives. One Bhaduri key with 3,030 selected cells has eight consensus-labeled Glioblast cells but 96 model calls. A researcher can place that sample ahead of lower-disagreement samples for marker-gene and annotation review. The prediction alone cannot establish that those 88 extra calls are true disease-related cells. No test key was removed after inspection, and the output retains every key's denominators and matrix.
 
-## Exploratory label-free sample queue
+## Score-only ordering within an atlas-selected cohort
 
 The error audit above uses known HNOCA labels; it cannot rank an unannotated future sample by its observed mistakes. Before analyzing the saved decision scores, we registered a separate ranking: for each cell, take the highest minus second-highest of the three `SGDClassifier.decision_function` values, transform that nonnegative margin to `1/(1+margin)`, then average these values within each `bio_sample` key. The rank uses model scores and keys only. The transform is monotone and is **not** a calibrated probability of being wrong.
 
@@ -249,7 +251,7 @@ The quality labels assess brightfield image suitability. They do not quantify ce
 
 ## Intended application
 
-For neural-organoid single-cell work, the model can put samples with unusually high predicted-versus-consensus Glioblast proportions into an annotation review queue. The per-key table identifies where marker genes or original cell annotations deserve inspection. This is a review workflow, not automated release of an unbiased composition estimate.
+For neural-organoid single-cell work, the score-based queue can prioritize keys **within the already atlas-selected three-class cohort** without using those keys' outcome labels in its ordering. When HNOCA consensus labels are available, a separate error audit puts samples with unusually high predicted-versus-consensus Glioblast proportions into an annotation review queue. The per-key tables identify where marker genes or original cell annotations deserve inspection. A wholly unannotated new batch has not passed this end-to-end test; neither queue is automated release of an unbiased composition estimate.
 
 For organ-on-chip brightfield work, the image audit can serve as an evaluation checklist with executable calculations. When a team has real chip IDs, it can use them as group fields and inspect whether its test chips were truly absent from training. When it has only acquisition sessions or batches, the result must carry that weaker name. The same code can also compare two test protocols on their shared images, so apparent improvements on different test sets are not casually treated as paired effects. This remains useful even when an image model does not clear a deployment gate.
 
