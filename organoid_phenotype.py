@@ -416,6 +416,29 @@ def html_report(result):
     split_rows = "".join(f"<tr><th scope='row'>{name}</th><td>{train:,} / {tg}</td>"
                          f"<td>{test:,} / {vg}</td><td>{score:.4f}</td></tr>"
                          for name, train, tg, test, vg, score in rows)
+    author_section = ""
+    if "original_author_sensitivity" in external:
+        author = external["original_author_sensitivity"]
+        a = author["results"]
+        n = author["eligibility"]
+        author_section = (
+            "<h2>Original-author annotation sensitivity</h2>"
+            f"<p>Within the HNOCA-selected cohort, {n['retained']:,} cells across "
+            f"{n['retained_bio_sample_keys']} keys had unambiguous Bhaduri author labels of "
+            "Neuron or Radial Glia. The fixed model reached binary macro-F1 "
+            f"{a['model']['macro_f1']:.4f} (key-bootstrap 95% interval "
+            f"{a['model']['group_ci95'][0]:.4f}–{a['model']['group_ci95'][1]:.4f}); "
+            f"the prespecified nearest-centroid baseline reached {a['nearest_centroid']['macro_f1']:.4f}. "
+            f"The paired model-minus-centroid difference was "
+            f"{a['nearest_centroid']['paired_model_advantage']:+.4f} "
+            f"({a['nearest_centroid']['paired_advantage_ci95'][0]:+.4f} to "
+            f"{a['nearest_centroid']['paired_advantage_ci95'][1]:+.4f}). "
+            "The baseline order reverses under this annotation source, so this result does not "
+            "establish a new model advantage. These author labels come from the same Bhaduri "
+            "acquisition source via the <a href='https://zenodo.org/records/14161275'>"
+            "CC BY cleaned HNOCA archive</a> and may have informed atlas harmonization; this is neither "
+            "independently blind nor an unselected cohort. Full counts, exclusions, and "
+            "confusion matrices are in <a href='author_label_sensitivity.json'>JSON</a>.</p>")
     return f"""<!doctype html>
 <html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Phenotype Transfer Map</title>
@@ -456,6 +479,7 @@ a{{color:#24563b}}footer{{margin-top:48px;color:#42574b;font-size:.9rem}}
 <div class="scroll"><table><thead><tr><th>Evaluation</th><th>Train cells / keys</th><th>Test cells / keys</th><th>Macro-F1</th></tr></thead><tbody>{split_rows}</tbody></table></div>
 <p>The two Velasco validation fits and the full-source external fit use the same fixed model specification. Their test rows differ, so their score gaps describe different evaluation protocols and do not isolate a cause. The three-class endpoint was chosen after inspecting Bhaduri class counts. Bhaduri labels also scored the external test and compared the two prespecified baselines; they did not fit the classifier or tune its settings. The shared atlas selected the gene panel across studies.</p>
 <p>The atlas panel and labels are shared across studies. Predictions are a review queue, not independent composition truth, a clinical diagnosis, or a drug-toxicity readout. Astrocyte is outside this three-class score; its sample denominators are in the JSON.</p>
+{author_section}
 <footer>HNOCA v1 source: <a href="https://zenodo.org/records/15004818">Zenodo record 15004818</a>, CC BY 4.0. Original size {result['data']['bytes']:,} bytes; MD5 {result['data']['md5']}. Code: MIT. Python dependencies: NumPy, SciPy, scikit-learn, h5py (BSD-3-Clause), Requests (Apache-2.0). All figures on this page come from this run's <a href="audit.json">audit.json</a>.</footer>
 </main></body></html>"""
 
@@ -465,6 +489,8 @@ def main():
     parser.add_argument("--output-dir", type=Path, default=Path("organoid_audit"),
                         help="Visible HTML, JSON, labeled group CSV, and score-only queue CSV (default: ./organoid_audit)")
     parser.add_argument("--input", type=Path, help="Previously downloaded HNOCA v1 H5AD; verified before use")
+    parser.add_argument("--author-label-sensitivity", action="store_true",
+                        help="Also compare Neuron versus Radial Glia against preserved Bhaduri author labels")
     args = parser.parse_args()
     args.output_dir.mkdir(parents=True, exist_ok=True)
     output_path = args.output_dir / "audit.json"
@@ -479,6 +505,7 @@ def main():
             rows, all_counts = choose_rows(p, yraw, pc, lc)
             y = np.array([LABELS.index(lc[v]) for v in yraw[rows]], dtype=np.int8)
             source = np.array([SOURCES.index(pc[v]) for v in p[rows]], dtype=np.int8)
+            test_global_rows = rows[source == 1]
             g = graw[rows]
             if len(set(g[source == 0]) & set(g[source == 1])):
                 raise RuntimeError("source group key overlap")
@@ -514,6 +541,14 @@ def main():
     majority_class = int(np.bincount(yd, minlength=3).argmax())
     pmajor = np.full(len(yt), majority_class, dtype=np.int8)
     pcentroid = nearest_centroid(xd, yd, xt)
+    author_result = None
+    if args.author_label_sensitivity:
+        from original_author_labels import evaluate
+        author_result = evaluate(test_global_rows, pred, pmajor, pcentroid, gt, macro_cm, gc)
+        (args.output_dir / "author_label_sensitivity.json").write_text(
+            json.dumps(author_result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        stage("author_label_sensitivity_complete", retained=author_result["eligibility"]["retained"],
+              macro_f1=author_result["results"]["model"]["macro_f1"])
     stage("full_source_model_and_baselines_complete")
     per_group = {}
     for code in np.unique(gt):
@@ -538,6 +573,8 @@ def main():
     result["external"]["score_only_review"] = review_queue
     result["external"]["review_validation"] = review_validation(
         score_records, review_queue["ranking"], yt, pred, gt, gc)
+    if author_result is not None:
+        result["external"]["original_author_sensitivity"] = author_result
     stage("bootstrap_complete", **{k: result["external"]["bootstrap"][k] for k in ("effective_draws", "macro_f1_ci95", "paired_difference_ci95")})
     result["runtime"] = {"seconds": round(time.monotonic() - START, 3), "maxrss_bytes": rss(),
                          "exit_code": 0, "cpu_count": os.cpu_count(),
