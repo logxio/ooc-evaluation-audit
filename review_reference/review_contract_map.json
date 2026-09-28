@@ -1,0 +1,1675 @@
+{
+  "schema": "pazhou.f32.review_contract_map.v1",
+  "definition": "Each contract fixes eligible rows, a score-only sample-key queue, and a later error endpoint. The displayed measure is mean top-eight per-key error rate divided by mean all-34 per-key error rate; no pooling across datasets.",
+  "source_sha256": {
+    "review_reference/source/audit.json": "1facb79fa6eb5bbd8bffee3f8adba91e8861213faf6b3e93b5c3b807c2d8ead2",
+    "review_reference/source/author_label_sensitivity.json": "ede4a6c3a863be9a287a7e6f78ed34c9193bb34da98961e8909fc3dc6ae0513d",
+    "review_reference/source/unfiltered_review.json": "16f6bda75390eb9f992f30de32198f0685d424b1ed7e09151e3a4bd905ff7e89",
+    "review_reference/source/distance_review.json": "325fe92e2b1603af964817ee3cbfc78fdf240917a90df7c439ec35d69ea52a44",
+    "review_reference/source/image_case.json": "47828f262d89e81f8a98fc3cf1b702414c761b78fd48d579e1389d12b9ee817c"
+  },
+  "seed": 320926,
+  "selection_status": "All endpoint contrasts and F29 queue are retrospective and partly chosen after F27 failure; permutation/bootstrap are descriptive, not independent confirmation.",
+  "limit": "Author binary endpoint changes labels and retained rows within the same Bhaduri acquisition; full-cohort outcome adds outside-endpoint findings. Fixed selected queue itself depends on HNOCA preselection. Source/grouped OoC predictions come from different training and test protocols.",
+  "contracts": [
+    {
+      "contract": "selected_hnoca_frozen_queue",
+      "group_count": 34,
+      "outcome_rows": 207871,
+      "outcome_errors": 7139,
+      "top8_keys": [
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_24_Least Directed_1323_4",
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_24_Directed_1323_4",
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_24_Least Directed_H1",
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_8_Most Directed_H28126",
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_5_Least Directed_1323_4",
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_8_Least Directed_H28126",
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_5_Least Directed_YH10",
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_8_Least Directed_1323_4"
+      ],
+      "top8_equal_key_rate": 0.06095480137697977,
+      "all_equal_key_rate": 0.03541925788799378,
+      "top8_lift": 1.720950833293486,
+      "exploratory_permutation_p_one_sided": 9.999000099990002e-05,
+      "exploratory_group_bootstrap_95": [
+        1.3067127665129203,
+        2.0145043544176136
+      ],
+      "per_group": {
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_24_Least Directed_1323_4": {
+          "n": 1447,
+          "errors": 93,
+          "error_rate": 0.06427090532135453,
+          "rate": 0.06427090532135453,
+          "rank": 1
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_24_Directed_1323_4": {
+          "n": 1288,
+          "errors": 81,
+          "error_rate": 0.06288819875776397,
+          "rate": 0.06288819875776397,
+          "rank": 2
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_24_Least Directed_H1": {
+          "n": 235,
+          "errors": 27,
+          "error_rate": 0.1148936170212766,
+          "rate": 0.1148936170212766,
+          "rank": 3
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_8_Most Directed_H28126": {
+          "n": 696,
+          "errors": 40,
+          "error_rate": 0.05747126436781609,
+          "rate": 0.05747126436781609,
+          "rank": 4
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_5_Least Directed_1323_4": {
+          "n": 10058,
+          "errors": 468,
+          "error_rate": 0.0465301252734142,
+          "rate": 0.0465301252734142,
+          "rank": 5
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_8_Least Directed_H28126": {
+          "n": 10124,
+          "errors": 371,
+          "error_rate": 0.03664559462662979,
+          "rate": 0.03664559462662979,
+          "rank": 6
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_5_Least Directed_YH10": {
+          "n": 10588,
+          "errors": 556,
+          "error_rate": 0.05251227805062335,
+          "rate": 0.05251227805062335,
+          "rank": 7
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_8_Least Directed_1323_4": {
+          "n": 5131,
+          "errors": 269,
+          "error_rate": 0.05242642759695966,
+          "rate": 0.05242642759695966,
+          "rank": 8
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_8_Least Directed_YH10": {
+          "n": 5678,
+          "errors": 158,
+          "error_rate": 0.027826699542092288,
+          "rate": 0.027826699542092288,
+          "rank": 9
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_5_Most Directed_H28126": {
+          "n": 4594,
+          "errors": 105,
+          "error_rate": 0.02285589899869395,
+          "rate": 0.02285589899869395,
+          "rank": 10
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_10_Least Directed_H1": {
+          "n": 17429,
+          "errors": 961,
+          "error_rate": 0.05513798841012106,
+          "rate": 0.05513798841012106,
+          "rank": 11
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_5_Directed_YH10": {
+          "n": 6197,
+          "errors": 238,
+          "error_rate": 0.03840568016782314,
+          "rate": 0.03840568016782314,
+          "rank": 12
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_8_Directed_YH10": {
+          "n": 4654,
+          "errors": 201,
+          "error_rate": 0.0431886549204985,
+          "rate": 0.0431886549204985,
+          "rank": 13
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_8_Least Directed_H1": {
+          "n": 6279,
+          "errors": 228,
+          "error_rate": 0.036311514572384136,
+          "rate": 0.036311514572384136,
+          "rank": 14
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_5_Least Directed_H28126": {
+          "n": 12349,
+          "errors": 346,
+          "error_rate": 0.028018463033444005,
+          "rate": 0.028018463033444005,
+          "rank": 15
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_8_Directed_1323_4": {
+          "n": 6465,
+          "errors": 205,
+          "error_rate": 0.0317092034029389,
+          "rate": 0.0317092034029389,
+          "rank": 16
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_3_Most Directed_H28126": {
+          "n": 13304,
+          "errors": 364,
+          "error_rate": 0.02736019242333133,
+          "rate": 0.02736019242333133,
+          "rank": 17
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_10_Least Directed_H28126": {
+          "n": 18029,
+          "errors": 479,
+          "error_rate": 0.026568306617116868,
+          "rate": 0.026568306617116868,
+          "rank": 18
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_15_Least Directed_1323_4": {
+          "n": 2421,
+          "errors": 119,
+          "error_rate": 0.049153242461792646,
+          "rate": 0.049153242461792646,
+          "rank": 19
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_10_Most Directed_H28126": {
+          "n": 8200,
+          "errors": 415,
+          "error_rate": 0.05060975609756098,
+          "rate": 0.05060975609756098,
+          "rank": 20
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_10_Least Directed_1323_4": {
+          "n": 5773,
+          "errors": 249,
+          "error_rate": 0.04313182054391131,
+          "rate": 0.04313182054391131,
+          "rank": 21
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_10_Least Directed_YH10": {
+          "n": 3815,
+          "errors": 80,
+          "error_rate": 0.020969855832241154,
+          "rate": 0.020969855832241154,
+          "rank": 22
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_5_Most Directed_H1": {
+          "n": 3616,
+          "errors": 62,
+          "error_rate": 0.017146017699115043,
+          "rate": 0.017146017699115043,
+          "rank": 23
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_8_Most Directed_H1": {
+          "n": 1583,
+          "errors": 29,
+          "error_rate": 0.01831964624131396,
+          "rate": 0.01831964624131396,
+          "rank": 24
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_3_Least Directed_H28126": {
+          "n": 12130,
+          "errors": 270,
+          "error_rate": 0.02225886232481451,
+          "rate": 0.02225886232481451,
+          "rank": 25
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_3_Most Directed_H1": {
+          "n": 5709,
+          "errors": 96,
+          "error_rate": 0.016815554387808723,
+          "rate": 0.016815554387808723,
+          "rank": 26
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_10_Most Directed_H1": {
+          "n": 3030,
+          "errors": 147,
+          "error_rate": 0.048514851485148516,
+          "rate": 0.048514851485148516,
+          "rank": 27
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_5_Directed_1323_4": {
+          "n": 36,
+          "errors": 0,
+          "error_rate": 0.0,
+          "rate": 0.0,
+          "rank": 28
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_10_Directed_YH10": {
+          "n": 2905,
+          "errors": 81,
+          "error_rate": 0.027882960413080894,
+          "rate": 0.027882960413080894,
+          "rank": 29
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_8_Directed_H28126": {
+          "n": 4637,
+          "errors": 84,
+          "error_rate": 0.018115160664222557,
+          "rate": 0.018115160664222557,
+          "rank": 30
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_5_Least Directed_H1": {
+          "n": 1464,
+          "errors": 6,
+          "error_rate": 0.004098360655737705,
+          "rate": 0.004098360655737705,
+          "rank": 31
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_5_Directed_H28126": {
+          "n": 4277,
+          "errors": 71,
+          "error_rate": 0.016600420855740004,
+          "rate": 0.016600420855740004,
+          "rank": 32
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_10_Directed_1323_4": {
+          "n": 9572,
+          "errors": 236,
+          "error_rate": 0.024655244463017135,
+          "rate": 0.024655244463017135,
+          "rank": 33
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_3_Least Directed_H1": {
+          "n": 4158,
+          "errors": 4,
+          "error_rate": 0.000962000962000962,
+          "rate": 0.000962000962000962,
+          "rank": 34
+        }
+      }
+    },
+    {
+      "contract": "selected_author_binary_frozen_queue",
+      "group_count": 34,
+      "outcome_rows": 175160,
+      "outcome_errors": 10228,
+      "top8_keys": [
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_24_Least Directed_1323_4",
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_24_Directed_1323_4",
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_24_Least Directed_H1",
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_8_Most Directed_H28126",
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_5_Least Directed_1323_4",
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_8_Least Directed_H28126",
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_5_Least Directed_YH10",
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_8_Least Directed_1323_4"
+      ],
+      "top8_equal_key_rate": 0.12447864736628976,
+      "all_equal_key_rate": 0.06690721750317,
+      "top8_lift": 1.8604666583301284,
+      "exploratory_permutation_p_one_sided": 0.003999600039996,
+      "exploratory_group_bootstrap_95": [
+        1.1772899906250232,
+        2.323163224748385
+      ],
+      "per_group": {
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_24_Least Directed_1323_4": {
+          "n": 1297,
+          "errors": 283,
+          "rate": 0.2181958365458751,
+          "rank": 1
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_24_Directed_1323_4": {
+          "n": 1158,
+          "errors": 255,
+          "rate": 0.22020725388601037,
+          "rank": 2
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_24_Least Directed_H1": {
+          "n": 158,
+          "errors": 18,
+          "rate": 0.11392405063291139,
+          "rank": 3
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_8_Most Directed_H28126": {
+          "n": 503,
+          "errors": 49,
+          "rate": 0.09741550695825049,
+          "rank": 4
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_5_Least Directed_1323_4": {
+          "n": 8775,
+          "errors": 507,
+          "rate": 0.057777777777777775,
+          "rank": 5
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_8_Least Directed_H28126": {
+          "n": 7417,
+          "errors": 283,
+          "rate": 0.03815558851287582,
+          "rank": 6
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_5_Least Directed_YH10": {
+          "n": 7073,
+          "errors": 912,
+          "rate": 0.12894104340449597,
+          "rank": 7
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_8_Least Directed_1323_4": {
+          "n": 4455,
+          "errors": 540,
+          "rate": 0.12121212121212122,
+          "rank": 8
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_8_Least Directed_YH10": {
+          "n": 4521,
+          "errors": 186,
+          "rate": 0.0411413404114134,
+          "rank": 9
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_5_Most Directed_H28126": {
+          "n": 4128,
+          "errors": 157,
+          "rate": 0.03803294573643411,
+          "rank": 10
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_10_Least Directed_H1": {
+          "n": 15730,
+          "errors": 1207,
+          "rate": 0.07673235855054036,
+          "rank": 11
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_5_Directed_YH10": {
+          "n": 6145,
+          "errors": 305,
+          "rate": 0.04963384865744508,
+          "rank": 12
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_8_Directed_YH10": {
+          "n": 4396,
+          "errors": 286,
+          "rate": 0.06505914467697907,
+          "rank": 13
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_8_Least Directed_H1": {
+          "n": 5766,
+          "errors": 489,
+          "rate": 0.08480749219562955,
+          "rank": 14
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_5_Least Directed_H28126": {
+          "n": 11259,
+          "errors": 358,
+          "rate": 0.03179678479438671,
+          "rank": 15
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_8_Directed_1323_4": {
+          "n": 5637,
+          "errors": 1044,
+          "rate": 0.18520489622139436,
+          "rank": 16
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_3_Most Directed_H28126": {
+          "n": 12130,
+          "errors": 357,
+          "rate": 0.02943116240725474,
+          "rank": 17
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_10_Least Directed_H28126": {
+          "n": 10097,
+          "errors": 139,
+          "rate": 0.013766465286718828,
+          "rank": 18
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_15_Least Directed_1323_4": {
+          "n": 1422,
+          "errors": 68,
+          "rate": 0.04781997187060478,
+          "rank": 19
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_10_Most Directed_H28126": {
+          "n": 7218,
+          "errors": 247,
+          "rate": 0.0342200055417013,
+          "rank": 20
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_10_Least Directed_1323_4": {
+          "n": 5322,
+          "errors": 1153,
+          "rate": 0.2166478767380684,
+          "rank": 21
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_10_Least Directed_YH10": {
+          "n": 3270,
+          "errors": 76,
+          "rate": 0.023241590214067277,
+          "rank": 22
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_5_Most Directed_H1": {
+          "n": 3297,
+          "errors": 71,
+          "rate": 0.021534728541097968,
+          "rank": 23
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_8_Most Directed_H1": {
+          "n": 1419,
+          "errors": 22,
+          "rate": 0.015503875968992248,
+          "rank": 24
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_3_Least Directed_H28126": {
+          "n": 11124,
+          "errors": 201,
+          "rate": 0.018069039913700107,
+          "rank": 25
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_3_Most Directed_H1": {
+          "n": 5071,
+          "errors": 100,
+          "rate": 0.019719976336028396,
+          "rank": 26
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_10_Most Directed_H1": {
+          "n": 2839,
+          "errors": 28,
+          "rate": 0.009862627685804861,
+          "rank": 27
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_5_Directed_1323_4": {
+          "n": 36,
+          "errors": 3,
+          "rate": 0.08333333333333333,
+          "rank": 28
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_10_Directed_YH10": {
+          "n": 2578,
+          "errors": 61,
+          "rate": 0.023661753297129558,
+          "rank": 29
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_8_Directed_H28126": {
+          "n": 2735,
+          "errors": 97,
+          "rate": 0.03546617915904936,
+          "rank": 30
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_5_Least Directed_H1": {
+          "n": 1403,
+          "errors": 7,
+          "rate": 0.004989308624376337,
+          "rank": 31
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_5_Directed_H28126": {
+          "n": 3999,
+          "errors": 189,
+          "rate": 0.047261815453863466,
+          "rank": 32
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_10_Directed_1323_4": {
+          "n": 8662,
+          "errors": 523,
+          "rate": 0.060378665435234354,
+          "rank": 33
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_3_Least Directed_H1": {
+          "n": 4120,
+          "errors": 7,
+          "rate": 0.0016990291262135922,
+          "rank": 34
+        }
+      }
+    },
+    {
+      "contract": "unfiltered_combined_findings_frozen_selected_queue",
+      "group_count": 34,
+      "outcome_rows": 223453,
+      "outcome_errors": 22721,
+      "top8_keys": [
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_24_Least Directed_1323_4",
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_24_Directed_1323_4",
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_24_Least Directed_H1",
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_8_Most Directed_H28126",
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_5_Least Directed_1323_4",
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_8_Least Directed_H28126",
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_5_Least Directed_YH10",
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_8_Least Directed_1323_4"
+      ],
+      "top8_equal_key_rate": 0.21459374177778268,
+      "all_equal_key_rate": 0.14886858037812656,
+      "top8_lift": 1.441497871698071,
+      "exploratory_permutation_p_one_sided": 0.16868313168683133,
+      "exploratory_group_bootstrap_95": [
+        0.5100336780280711,
+        2.3462794972146175
+      ],
+      "per_group": {
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_24_Least Directed_1323_4": {
+          "n": 1741,
+          "errors": 387,
+          "rate": 0.22228604250430786,
+          "rank": 1
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_24_Directed_1323_4": {
+          "n": 1487,
+          "errors": 280,
+          "rate": 0.1882985877605918,
+          "rank": 2
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_24_Least Directed_H1": {
+          "n": 964,
+          "errors": 756,
+          "rate": 0.7842323651452282,
+          "rank": 3
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_8_Most Directed_H28126": {
+          "n": 707,
+          "errors": 51,
+          "rate": 0.07213578500707214,
+          "rank": 4
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_5_Least Directed_1323_4": {
+          "n": 10067,
+          "errors": 477,
+          "rate": 0.04738253700208602,
+          "rank": 5
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_8_Least Directed_H28126": {
+          "n": 10169,
+          "errors": 416,
+          "rate": 0.04090864391778936,
+          "rank": 6
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_5_Least Directed_YH10": {
+          "n": 14188,
+          "errors": 4156,
+          "rate": 0.2929235974062588,
+          "rank": 7
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_8_Least Directed_1323_4": {
+          "n": 5220,
+          "errors": 358,
+          "rate": 0.0685823754789272,
+          "rank": 8
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_8_Least Directed_YH10": {
+          "n": 5720,
+          "errors": 200,
+          "rate": 0.03496503496503497,
+          "rank": 9
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_5_Most Directed_H28126": {
+          "n": 4690,
+          "errors": 201,
+          "rate": 0.04285714285714286,
+          "rank": 10
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_10_Least Directed_H1": {
+          "n": 17553,
+          "errors": 1085,
+          "rate": 0.06181279553352703,
+          "rank": 11
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_5_Directed_YH10": {
+          "n": 6252,
+          "errors": 293,
+          "rate": 0.04686500319897633,
+          "rank": 12
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_8_Directed_YH10": {
+          "n": 4863,
+          "errors": 410,
+          "rate": 0.08431009664815957,
+          "rank": 13
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_8_Least Directed_H1": {
+          "n": 6346,
+          "errors": 295,
+          "rate": 0.04648597541758588,
+          "rank": 14
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_5_Least Directed_H28126": {
+          "n": 12921,
+          "errors": 918,
+          "rate": 0.0710471325748781,
+          "rank": 15
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_8_Directed_1323_4": {
+          "n": 6492,
+          "errors": 232,
+          "rate": 0.035736290819470114,
+          "rank": 16
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_3_Most Directed_H28126": {
+          "n": 13306,
+          "errors": 366,
+          "rate": 0.027506388095595972,
+          "rank": 17
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_10_Least Directed_H28126": {
+          "n": 18070,
+          "errors": 520,
+          "rate": 0.02877697841726619,
+          "rank": 18
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_15_Least Directed_1323_4": {
+          "n": 2573,
+          "errors": 271,
+          "rate": 0.10532452390205985,
+          "rank": 19
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_10_Most Directed_H28126": {
+          "n": 8783,
+          "errors": 998,
+          "rate": 0.11362860070590915,
+          "rank": 20
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_10_Least Directed_1323_4": {
+          "n": 5808,
+          "errors": 284,
+          "rate": 0.048898071625344354,
+          "rank": 21
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_10_Least Directed_YH10": {
+          "n": 3864,
+          "errors": 129,
+          "rate": 0.033385093167701864,
+          "rank": 22
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_5_Most Directed_H1": {
+          "n": 4801,
+          "errors": 1247,
+          "rate": 0.25973755467610915,
+          "rank": 23
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_8_Most Directed_H1": {
+          "n": 1587,
+          "errors": 33,
+          "rate": 0.020793950850661626,
+          "rank": 24
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_3_Least Directed_H28126": {
+          "n": 12268,
+          "errors": 408,
+          "rate": 0.03325725464623411,
+          "rank": 25
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_3_Most Directed_H1": {
+          "n": 5725,
+          "errors": 112,
+          "rate": 0.019563318777292577,
+          "rank": 26
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_10_Most Directed_H1": {
+          "n": 6156,
+          "errors": 3273,
+          "rate": 0.5316764132553606,
+          "rank": 27
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_5_Directed_1323_4": {
+          "n": 2017,
+          "errors": 1981,
+          "rate": 0.9821517104610809,
+          "rank": 28
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_10_Directed_YH10": {
+          "n": 2925,
+          "errors": 101,
+          "rate": 0.03452991452991453,
+          "rank": 29
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_8_Directed_H28126": {
+          "n": 4653,
+          "errors": 100,
+          "rate": 0.02149151085321298,
+          "rank": 30
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_5_Least Directed_H1": {
+          "n": 2372,
+          "errors": 914,
+          "rate": 0.38532883642495785,
+          "rank": 31
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_5_Directed_H28126": {
+          "n": 5003,
+          "errors": 797,
+          "rate": 0.15930441734959025,
+          "rank": 32
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_10_Directed_1323_4": {
+          "n": 9616,
+          "errors": 280,
+          "rate": 0.029118136439267885,
+          "rank": 33
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_3_Least Directed_H1": {
+          "n": 4546,
+          "errors": 392,
+          "rate": 0.086229652441707,
+          "rank": 34
+        }
+      }
+    },
+    {
+      "contract": "unfiltered_combined_findings_full_rescored_queue",
+      "group_count": 34,
+      "outcome_rows": 223453,
+      "outcome_errors": 22721,
+      "top8_keys": [
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_24_Directed_1323_4",
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_24_Least Directed_1323_4",
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_8_Most Directed_H28126",
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_5_Least Directed_1323_4",
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_8_Least Directed_H28126",
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_5_Least Directed_YH10",
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_8_Least Directed_1323_4",
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_5_Most Directed_H28126"
+      ],
+      "top8_equal_key_rate": 0.121921838991772,
+      "all_equal_key_rate": 0.14886858037812656,
+      "top8_lift": 0.818989733643528,
+      "exploratory_permutation_p_one_sided": 0.5860413958604139,
+      "exploratory_group_bootstrap_95": [
+        0.3742787235286012,
+        1.5471675653281867
+      ],
+      "per_group": {
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_24_Directed_1323_4": {
+          "n": 1487,
+          "errors": 280,
+          "rate": 0.1882985877605918,
+          "rank": 1
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_24_Least Directed_1323_4": {
+          "n": 1741,
+          "errors": 387,
+          "rate": 0.22228604250430786,
+          "rank": 2
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_8_Most Directed_H28126": {
+          "n": 707,
+          "errors": 51,
+          "rate": 0.07213578500707214,
+          "rank": 3
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_5_Least Directed_1323_4": {
+          "n": 10067,
+          "errors": 477,
+          "rate": 0.04738253700208602,
+          "rank": 4
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_8_Least Directed_H28126": {
+          "n": 10169,
+          "errors": 416,
+          "rate": 0.04090864391778936,
+          "rank": 5
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_5_Least Directed_YH10": {
+          "n": 14188,
+          "errors": 4156,
+          "rate": 0.2929235974062588,
+          "rank": 6
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_8_Least Directed_1323_4": {
+          "n": 5220,
+          "errors": 358,
+          "rate": 0.0685823754789272,
+          "rank": 7
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_5_Most Directed_H28126": {
+          "n": 4690,
+          "errors": 201,
+          "rate": 0.04285714285714286,
+          "rank": 8
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_10_Least Directed_H1": {
+          "n": 17553,
+          "errors": 1085,
+          "rate": 0.06181279553352703,
+          "rank": 9
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_8_Least Directed_YH10": {
+          "n": 5720,
+          "errors": 200,
+          "rate": 0.03496503496503497,
+          "rank": 10
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_5_Directed_YH10": {
+          "n": 6252,
+          "errors": 293,
+          "rate": 0.04686500319897633,
+          "rank": 11
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_5_Least Directed_H1": {
+          "n": 2372,
+          "errors": 914,
+          "rate": 0.38532883642495785,
+          "rank": 12
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_8_Least Directed_H1": {
+          "n": 6346,
+          "errors": 295,
+          "rate": 0.04648597541758588,
+          "rank": 13
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_8_Directed_YH10": {
+          "n": 4863,
+          "errors": 410,
+          "rate": 0.08431009664815957,
+          "rank": 14
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_5_Least Directed_H28126": {
+          "n": 12921,
+          "errors": 918,
+          "rate": 0.0710471325748781,
+          "rank": 15
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_8_Directed_1323_4": {
+          "n": 6492,
+          "errors": 232,
+          "rate": 0.035736290819470114,
+          "rank": 16
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_5_Most Directed_H1": {
+          "n": 4801,
+          "errors": 1247,
+          "rate": 0.25973755467610915,
+          "rank": 17
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_10_Most Directed_H1": {
+          "n": 6156,
+          "errors": 3273,
+          "rate": 0.5316764132553606,
+          "rank": 18
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_3_Most Directed_H28126": {
+          "n": 13306,
+          "errors": 366,
+          "rate": 0.027506388095595972,
+          "rank": 19
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_5_Directed_1323_4": {
+          "n": 2017,
+          "errors": 1981,
+          "rate": 0.9821517104610809,
+          "rank": 20
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_10_Least Directed_H28126": {
+          "n": 18070,
+          "errors": 520,
+          "rate": 0.02877697841726619,
+          "rank": 21
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_15_Least Directed_1323_4": {
+          "n": 2573,
+          "errors": 271,
+          "rate": 0.10532452390205985,
+          "rank": 22
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_10_Most Directed_H28126": {
+          "n": 8783,
+          "errors": 998,
+          "rate": 0.11362860070590915,
+          "rank": 23
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_10_Least Directed_1323_4": {
+          "n": 5808,
+          "errors": 284,
+          "rate": 0.048898071625344354,
+          "rank": 24
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_10_Least Directed_YH10": {
+          "n": 3864,
+          "errors": 129,
+          "rate": 0.033385093167701864,
+          "rank": 25
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_8_Most Directed_H1": {
+          "n": 1587,
+          "errors": 33,
+          "rate": 0.020793950850661626,
+          "rank": 26
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_3_Least Directed_H28126": {
+          "n": 12268,
+          "errors": 408,
+          "rate": 0.03325725464623411,
+          "rank": 27
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_3_Most Directed_H1": {
+          "n": 5725,
+          "errors": 112,
+          "rate": 0.019563318777292577,
+          "rank": 28
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_10_Directed_YH10": {
+          "n": 2925,
+          "errors": 101,
+          "rate": 0.03452991452991453,
+          "rank": 29
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_8_Directed_H28126": {
+          "n": 4653,
+          "errors": 100,
+          "rate": 0.02149151085321298,
+          "rank": 30
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_5_Directed_H28126": {
+          "n": 5003,
+          "errors": 797,
+          "rate": 0.15930441734959025,
+          "rank": 31
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_10_Directed_1323_4": {
+          "n": 9616,
+          "errors": 280,
+          "rate": 0.029118136439267885,
+          "rank": 32
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_24_Least Directed_H1": {
+          "n": 964,
+          "errors": 756,
+          "rate": 0.7842323651452282,
+          "rank": 33
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_3_Least Directed_H1": {
+          "n": 4546,
+          "errors": 392,
+          "rate": 0.086229652441707,
+          "rank": 34
+        }
+      }
+    },
+    {
+      "contract": "unfiltered_combined_findings_f29_combined_queue",
+      "group_count": 34,
+      "outcome_rows": 223453,
+      "outcome_errors": 22721,
+      "top8_keys": [
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_24_Directed_1323_4",
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_24_Least Directed_1323_4",
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_5_Directed_YH10",
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_8_Least Directed_1323_4",
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_8_Most Directed_H28126",
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_5_Least Directed_YH10",
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_10_Least Directed_H1",
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_5_Least Directed_1323_4"
+      ],
+      "top8_equal_key_rate": 0.1250358404864684,
+      "all_equal_key_rate": 0.14886858037812656,
+      "top8_lift": 0.8399075222513512,
+      "exploratory_permutation_p_one_sided": 0.5712428757124287,
+      "exploratory_group_bootstrap_95": [
+        0.4310458414798402,
+        1.7337462555184615
+      ],
+      "per_group": {
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_24_Directed_1323_4": {
+          "n": 1487,
+          "errors": 280,
+          "rate": 0.1882985877605918,
+          "rank": 1
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_24_Least Directed_1323_4": {
+          "n": 1741,
+          "errors": 387,
+          "rate": 0.22228604250430786,
+          "rank": 2
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_5_Directed_YH10": {
+          "n": 6252,
+          "errors": 293,
+          "rate": 0.04686500319897633,
+          "rank": 3
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_8_Least Directed_1323_4": {
+          "n": 5220,
+          "errors": 358,
+          "rate": 0.0685823754789272,
+          "rank": 4
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_8_Most Directed_H28126": {
+          "n": 707,
+          "errors": 51,
+          "rate": 0.07213578500707214,
+          "rank": 5
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_5_Least Directed_YH10": {
+          "n": 14188,
+          "errors": 4156,
+          "rate": 0.2929235974062588,
+          "rank": 6
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_10_Least Directed_H1": {
+          "n": 17553,
+          "errors": 1085,
+          "rate": 0.06181279553352703,
+          "rank": 7
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_5_Least Directed_1323_4": {
+          "n": 10067,
+          "errors": 477,
+          "rate": 0.04738253700208602,
+          "rank": 8
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_8_Least Directed_H1": {
+          "n": 6346,
+          "errors": 295,
+          "rate": 0.04648597541758588,
+          "rank": 9
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_8_Least Directed_H28126": {
+          "n": 10169,
+          "errors": 416,
+          "rate": 0.04090864391778936,
+          "rank": 10
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_10_Most Directed_H1": {
+          "n": 6156,
+          "errors": 3273,
+          "rate": 0.5316764132553606,
+          "rank": 11
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_5_Most Directed_H28126": {
+          "n": 4690,
+          "errors": 201,
+          "rate": 0.04285714285714286,
+          "rank": 12
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_5_Directed_1323_4": {
+          "n": 2017,
+          "errors": 1981,
+          "rate": 0.9821517104610809,
+          "rank": 13
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_8_Directed_1323_4": {
+          "n": 6492,
+          "errors": 232,
+          "rate": 0.035736290819470114,
+          "rank": 14
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_5_Least Directed_H1": {
+          "n": 2372,
+          "errors": 914,
+          "rate": 0.38532883642495785,
+          "rank": 15
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_8_Least Directed_YH10": {
+          "n": 5720,
+          "errors": 200,
+          "rate": 0.03496503496503497,
+          "rank": 16
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_8_Most Directed_H1": {
+          "n": 1587,
+          "errors": 33,
+          "rate": 0.020793950850661626,
+          "rank": 17
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_5_Most Directed_H1": {
+          "n": 4801,
+          "errors": 1247,
+          "rate": 0.25973755467610915,
+          "rank": 18
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_3_Most Directed_H28126": {
+          "n": 13306,
+          "errors": 366,
+          "rate": 0.027506388095595972,
+          "rank": 19
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_15_Least Directed_1323_4": {
+          "n": 2573,
+          "errors": 271,
+          "rate": 0.10532452390205985,
+          "rank": 20
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_5_Least Directed_H28126": {
+          "n": 12921,
+          "errors": 918,
+          "rate": 0.0710471325748781,
+          "rank": 21
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_10_Least Directed_H28126": {
+          "n": 18070,
+          "errors": 520,
+          "rate": 0.02877697841726619,
+          "rank": 22
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_8_Directed_YH10": {
+          "n": 4863,
+          "errors": 410,
+          "rate": 0.08431009664815957,
+          "rank": 23
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_3_Least Directed_H28126": {
+          "n": 12268,
+          "errors": 408,
+          "rate": 0.03325725464623411,
+          "rank": 24
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_3_Most Directed_H1": {
+          "n": 5725,
+          "errors": 112,
+          "rate": 0.019563318777292577,
+          "rank": 25
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_10_Most Directed_H28126": {
+          "n": 8783,
+          "errors": 998,
+          "rate": 0.11362860070590915,
+          "rank": 26
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_10_Least Directed_1323_4": {
+          "n": 5808,
+          "errors": 284,
+          "rate": 0.048898071625344354,
+          "rank": 27
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_10_Directed_YH10": {
+          "n": 2925,
+          "errors": 101,
+          "rate": 0.03452991452991453,
+          "rank": 28
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_10_Least Directed_YH10": {
+          "n": 3864,
+          "errors": 129,
+          "rate": 0.033385093167701864,
+          "rank": 29
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_24_Least Directed_H1": {
+          "n": 964,
+          "errors": 756,
+          "rate": 0.7842323651452282,
+          "rank": 30
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_3_Least Directed_H1": {
+          "n": 4546,
+          "errors": 392,
+          "rate": 0.086229652441707,
+          "rank": 31
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_5_Directed_H28126": {
+          "n": 5003,
+          "errors": 797,
+          "rate": 0.15930441734959025,
+          "rank": 32
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_8_Directed_H28126": {
+          "n": 4653,
+          "errors": 100,
+          "rate": 0.02149151085321298,
+          "rank": 33
+        },
+        "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_10_Directed_1323_4": {
+          "n": 9616,
+          "errors": 280,
+          "rate": 0.029118136439267885,
+          "rank": 34
+        }
+      }
+    }
+  ],
+  "image_case": {
+    "group": "230529",
+    "n": 38,
+    "good_n": 13,
+    "bad_n": 25,
+    "source_good_false_flags": 3,
+    "grouped_good_false_flags": 9,
+    "good_false_flag_absolute_delta": 6,
+    "source_bad_misses": 4,
+    "grouped_bad_misses": 0
+  },
+  "key_overlap": {
+    "selected_vs_full_score_top8": 7,
+    "selected_vs_f29_top8": 6
+  },
+  "endpoint_dilution": {
+    "derivation": "outside mean uncertainty = (all_rows * full_mean - selected_rows * selected_mean) / outside_rows; same fixed model, score and sample key",
+    "all_34_keys": [
+      {
+        "group": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_24_Least Directed_H1",
+        "selected_rank": 3,
+        "full_rank": 33,
+        "rank_drop": 30,
+        "selected_rows": 235,
+        "outside_rows": 729,
+        "all_rows": 964,
+        "selected_uncertainty": 0.02566764308221322,
+        "outside_uncertainty_derived": 0.0032065839701019487,
+        "full_uncertainty": 0.00868204962502534,
+        "full_review_finding_rate": 0.7842323651452282
+      },
+      {
+        "group": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_10_Most Directed_H28126",
+        "selected_rank": 20,
+        "full_rank": 23,
+        "rank_drop": 3,
+        "selected_rows": 8200,
+        "outside_rows": 583,
+        "all_rows": 8783,
+        "selected_uncertainty": 0.01665578231860678,
+        "outside_uncertainty_derived": 0.016641698499896076,
+        "full_uncertainty": 0.016654847459639646,
+        "full_review_finding_rate": 0.11362860070590915
+      },
+      {
+        "group": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_10_Least Directed_1323_4",
+        "selected_rank": 21,
+        "full_rank": 24,
+        "rank_drop": 3,
+        "selected_rows": 5773,
+        "outside_rows": 35,
+        "all_rows": 5808,
+        "selected_uncertainty": 0.0158337786996473,
+        "outside_uncertainty_derived": 0.021562584752757224,
+        "full_uncertainty": 0.015868301463397103,
+        "full_review_finding_rate": 0.048898071625344354
+      },
+      {
+        "group": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_10_Least Directed_H28126",
+        "selected_rank": 18,
+        "full_rank": 21,
+        "rank_drop": 3,
+        "selected_rows": 18029,
+        "outside_rows": 41,
+        "all_rows": 18070,
+        "selected_uncertainty": 0.018097489603924183,
+        "outside_uncertainty_derived": 0.017131062891943345,
+        "full_uncertainty": 0.018095296826105077,
+        "full_review_finding_rate": 0.02877697841726619
+      },
+      {
+        "group": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_10_Least Directed_YH10",
+        "selected_rank": 22,
+        "full_rank": 25,
+        "rank_drop": 3,
+        "selected_rows": 3815,
+        "outside_rows": 49,
+        "all_rows": 3864,
+        "selected_uncertainty": 0.015397286184206441,
+        "outside_uncertainty_derived": 0.013095724310074342,
+        "full_uncertainty": 0.015368099711164911,
+        "full_review_finding_rate": 0.033385093167701864
+      },
+      {
+        "group": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_15_Least Directed_1323_4",
+        "selected_rank": 19,
+        "full_rank": 22,
+        "rank_drop": 3,
+        "selected_rows": 2421,
+        "outside_rows": 152,
+        "all_rows": 2573,
+        "selected_uncertainty": 0.01770355889011031,
+        "outside_uncertainty_derived": 0.0033537959648813724,
+        "full_uncertainty": 0.016855846505876033,
+        "full_review_finding_rate": 0.10532452390205985
+      },
+      {
+        "group": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_3_Most Directed_H1",
+        "selected_rank": 26,
+        "full_rank": 28,
+        "rank_drop": 2,
+        "selected_rows": 5709,
+        "outside_rows": 16,
+        "all_rows": 5725,
+        "selected_uncertainty": 0.013319319401840224,
+        "outside_uncertainty_derived": 0.036891355065737486,
+        "full_uncertainty": 0.01338519758011487,
+        "full_review_finding_rate": 0.019563318777292577
+      },
+      {
+        "group": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_3_Most Directed_H28126",
+        "selected_rank": 17,
+        "full_rank": 19,
+        "rank_drop": 2,
+        "selected_rows": 13304,
+        "outside_rows": 2,
+        "all_rows": 13306,
+        "selected_uncertainty": 0.01815492327973643,
+        "outside_uncertainty_derived": 0.04050438728373251,
+        "full_uncertainty": 0.018158282585914693,
+        "full_review_finding_rate": 0.027506388095595972
+      },
+      {
+        "group": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_8_Most Directed_H1",
+        "selected_rank": 24,
+        "full_rank": 26,
+        "rank_drop": 2,
+        "selected_rows": 1583,
+        "outside_rows": 4,
+        "all_rows": 1587,
+        "selected_uncertainty": 0.01475894948768235,
+        "outside_uncertainty_derived": 0.03815139455689387,
+        "full_uncertainty": 0.014817909651687925,
+        "full_review_finding_rate": 0.020793950850661626
+      },
+      {
+        "group": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_3_Least Directed_H28126",
+        "selected_rank": 25,
+        "full_rank": 27,
+        "rank_drop": 2,
+        "selected_rows": 12130,
+        "outside_rows": 138,
+        "all_rows": 12268,
+        "selected_uncertainty": 0.013782412619297451,
+        "outside_uncertainty_derived": 0.01681978445183885,
+        "full_uncertainty": 0.0138165793386397,
+        "full_review_finding_rate": 0.03325725464623411
+      },
+      {
+        "group": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_8_Directed_YH10",
+        "selected_rank": 13,
+        "full_rank": 14,
+        "rank_drop": 1,
+        "selected_rows": 4654,
+        "outside_rows": 209,
+        "all_rows": 4863,
+        "selected_uncertainty": 0.01964838766959664,
+        "outside_uncertainty_derived": 0.02358452342274256,
+        "full_uncertainty": 0.01981755328185399,
+        "full_review_finding_rate": 0.08431009664815957
+      },
+      {
+        "group": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_24_Least Directed_1323_4",
+        "selected_rank": 1,
+        "full_rank": 2,
+        "rank_drop": 1,
+        "selected_rows": 1447,
+        "outside_rows": 294,
+        "all_rows": 1741,
+        "selected_uncertainty": 0.028804330636360575,
+        "outside_uncertainty_derived": 0.005460948093239878,
+        "full_uncertainty": 0.024862369425747433,
+        "full_review_finding_rate": 0.22228604250430786
+      },
+      {
+        "group": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_8_Least Directed_YH10",
+        "selected_rank": 9,
+        "full_rank": 10,
+        "rank_drop": 1,
+        "selected_rows": 5678,
+        "outside_rows": 42,
+        "all_rows": 5720,
+        "selected_uncertainty": 0.020093630973751223,
+        "outside_uncertainty_derived": 0.0322519228290454,
+        "full_uncertainty": 0.02018290514471667,
+        "full_review_finding_rate": 0.03496503496503497
+      },
+      {
+        "group": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_10_Directed_YH10",
+        "selected_rank": 29,
+        "full_rank": 29,
+        "rank_drop": 0,
+        "selected_rows": 2905,
+        "outside_rows": 20,
+        "all_rows": 2925,
+        "selected_uncertainty": 0.011094387965887373,
+        "outside_uncertainty_derived": 0.029663809932638684,
+        "full_uncertainty": 0.011221358372497638,
+        "full_review_finding_rate": 0.03452991452991453
+      },
+      {
+        "group": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_8_Directed_1323_4",
+        "selected_rank": 16,
+        "full_rank": 16,
+        "rank_drop": 0,
+        "selected_rows": 6465,
+        "outside_rows": 27,
+        "all_rows": 6492,
+        "selected_uncertainty": 0.018724443879917937,
+        "outside_uncertainty_derived": 0.0507393000981485,
+        "full_uncertainty": 0.018857592542563074,
+        "full_review_finding_rate": 0.035736290819470114
+      },
+      {
+        "group": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_8_Directed_H28126",
+        "selected_rank": 30,
+        "full_rank": 30,
+        "rank_drop": 0,
+        "selected_rows": 4637,
+        "outside_rows": 16,
+        "all_rows": 4653,
+        "selected_uncertainty": 0.010704618089792733,
+        "outside_uncertainty_derived": 0.014037369244654041,
+        "full_uncertainty": 0.010716078227011254,
+        "full_review_finding_rate": 0.02149151085321298
+      },
+      {
+        "group": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_3_Least Directed_H1",
+        "selected_rank": 34,
+        "full_rank": 34,
+        "rank_drop": 0,
+        "selected_rows": 4158,
+        "outside_rows": 388,
+        "all_rows": 4546,
+        "selected_uncertainty": 0.006540387376565867,
+        "outside_uncertainty_derived": 0.007910884599155529,
+        "full_uncertainty": 0.006657358982893362,
+        "full_review_finding_rate": 0.086229652441707
+      },
+      {
+        "group": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_5_Least Directed_H28126",
+        "selected_rank": 15,
+        "full_rank": 15,
+        "rank_drop": 0,
+        "selected_rows": 12349,
+        "outside_rows": 572,
+        "all_rows": 12921,
+        "selected_uncertainty": 0.0192851959500657,
+        "outside_uncertainty_derived": 0.019315660895342188,
+        "full_uncertainty": 0.019286544603319952,
+        "full_review_finding_rate": 0.0710471325748781
+      },
+      {
+        "group": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_10_Directed_1323_4",
+        "selected_rank": 33,
+        "full_rank": 32,
+        "rank_drop": -1,
+        "selected_rows": 9572,
+        "outside_rows": 44,
+        "all_rows": 9616,
+        "selected_uncertainty": 0.009350720506491843,
+        "outside_uncertainty_derived": 0.03577929463506635,
+        "full_uncertainty": 0.009471649922221595,
+        "full_review_finding_rate": 0.029118136439267885
+      },
+      {
+        "group": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_24_Directed_1323_4",
+        "selected_rank": 2,
+        "full_rank": 1,
+        "rank_drop": -1,
+        "selected_rows": 1288,
+        "outside_rows": 199,
+        "all_rows": 1487,
+        "selected_uncertainty": 0.026983065545778687,
+        "outside_uncertainty_derived": 0.019309625532615806,
+        "full_uncertainty": 0.025956155954239068,
+        "full_review_finding_rate": 0.1882985877605918
+      },
+      {
+        "group": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_5_Directed_H28126",
+        "selected_rank": 32,
+        "full_rank": 31,
+        "rank_drop": -1,
+        "selected_rows": 4277,
+        "outside_rows": 726,
+        "all_rows": 5003,
+        "selected_uncertainty": 0.009437581326722833,
+        "outside_uncertainty_derived": 0.011099373390229513,
+        "full_uncertainty": 0.009678728845832537,
+        "full_review_finding_rate": 0.15930441734959025
+      },
+      {
+        "group": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_5_Directed_YH10",
+        "selected_rank": 12,
+        "full_rank": 11,
+        "rank_drop": -1,
+        "selected_rows": 6197,
+        "outside_rows": 55,
+        "all_rows": 6252,
+        "selected_uncertainty": 0.020029999639843366,
+        "outside_uncertainty_derived": 0.02479015358657493,
+        "full_uncertainty": 0.02007187559426919,
+        "full_review_finding_rate": 0.04686500319897633
+      },
+      {
+        "group": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_8_Most Directed_H28126",
+        "selected_rank": 4,
+        "full_rank": 3,
+        "rank_drop": -1,
+        "selected_rows": 696,
+        "outside_rows": 11,
+        "all_rows": 707,
+        "selected_uncertainty": 0.02280918317151765,
+        "outside_uncertainty_derived": 0.04080546546920678,
+        "full_uncertainty": 0.023089181905993718,
+        "full_review_finding_rate": 0.07213578500707214
+      },
+      {
+        "group": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_5_Least Directed_1323_4",
+        "selected_rank": 5,
+        "full_rank": 4,
+        "rank_drop": -1,
+        "selected_rows": 10058,
+        "outside_rows": 9,
+        "all_rows": 10067,
+        "selected_uncertainty": 0.0222234752691803,
+        "outside_uncertainty_derived": 0.014708548428785662,
+        "full_uncertainty": 0.022216756848442883,
+        "full_review_finding_rate": 0.04738253700208602
+      },
+      {
+        "group": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_5_Least Directed_YH10",
+        "selected_rank": 7,
+        "full_rank": 6,
+        "rank_drop": -1,
+        "selected_rows": 10588,
+        "outside_rows": 3600,
+        "all_rows": 14188,
+        "selected_uncertainty": 0.02175464949448287,
+        "outside_uncertainty_derived": 0.020543176018602654,
+        "full_uncertainty": 0.021447255604352563,
+        "full_review_finding_rate": 0.2929235974062588
+      },
+      {
+        "group": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_8_Least Directed_1323_4",
+        "selected_rank": 8,
+        "full_rank": 7,
+        "rank_drop": -1,
+        "selected_rows": 5131,
+        "outside_rows": 89,
+        "all_rows": 5220,
+        "selected_uncertainty": 0.021119407961549787,
+        "outside_uncertainty_derived": 0.03196712369899557,
+        "full_uncertainty": 0.021304359436766774,
+        "full_review_finding_rate": 0.0685823754789272
+      },
+      {
+        "group": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_8_Least Directed_H1",
+        "selected_rank": 14,
+        "full_rank": 13,
+        "rank_drop": -1,
+        "selected_rows": 6279,
+        "outside_rows": 67,
+        "all_rows": 6346,
+        "selected_uncertainty": 0.019601563114021753,
+        "outside_uncertainty_derived": 0.04712119758006934,
+        "full_uncertainty": 0.019892110783297706,
+        "full_review_finding_rate": 0.04648597541758588
+      },
+      {
+        "group": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_8_Least Directed_H28126",
+        "selected_rank": 6,
+        "full_rank": 5,
+        "rank_drop": -1,
+        "selected_rows": 10124,
+        "outside_rows": 45,
+        "all_rows": 10169,
+        "selected_uncertainty": 0.02181127271282574,
+        "outside_uncertainty_derived": 0.04133875863276697,
+        "full_uncertainty": 0.0218976860146644,
+        "full_review_finding_rate": 0.04090864391778936
+      },
+      {
+        "group": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_5_Most Directed_H28126",
+        "selected_rank": 10,
+        "full_rank": 8,
+        "rank_drop": -2,
+        "selected_rows": 4594,
+        "outside_rows": 96,
+        "all_rows": 4690,
+        "selected_uncertainty": 0.020082839546977375,
+        "outside_uncertainty_derived": 0.045667715955868125,
+        "full_uncertainty": 0.020606538509717998,
+        "full_review_finding_rate": 0.04285714285714286
+      },
+      {
+        "group": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_10_Least Directed_H1",
+        "selected_rank": 11,
+        "full_rank": 9,
+        "rank_drop": -2,
+        "selected_rows": 17429,
+        "outside_rows": 124,
+        "all_rows": 17553,
+        "selected_uncertainty": 0.020064224676776026,
+        "outside_uncertainty_derived": 0.038280472537168875,
+        "full_uncertainty": 0.0201929100715626,
+        "full_review_finding_rate": 0.06181279553352703
+      },
+      {
+        "group": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_5_Most Directed_H1",
+        "selected_rank": 23,
+        "full_rank": 17,
+        "rank_drop": -6,
+        "selected_rows": 3616,
+        "outside_rows": 1185,
+        "all_rows": 4801,
+        "selected_uncertainty": 0.015359961417655136,
+        "outside_uncertainty_derived": 0.028863628158140076,
+        "full_uncertainty": 0.018692984764348462,
+        "full_review_finding_rate": 0.25973755467610915
+      },
+      {
+        "group": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_5_Directed_1323_4",
+        "selected_rank": 28,
+        "full_rank": 20,
+        "rank_drop": -8,
+        "selected_rows": 36,
+        "outside_rows": 1981,
+        "all_rows": 2017,
+        "selected_uncertainty": 0.011866500992646396,
+        "outside_uncertainty_derived": 0.018241615308208788,
+        "full_uncertainty": 0.018127830422060922,
+        "full_review_finding_rate": 0.9821517104610809
+      },
+      {
+        "group": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_10_Most Directed_H1",
+        "selected_rank": 27,
+        "full_rank": 18,
+        "rank_drop": -9,
+        "selected_rows": 3030,
+        "outside_rows": 3126,
+        "all_rows": 6156,
+        "selected_uncertainty": 0.01221755587468877,
+        "outside_uncertainty_derived": 0.024512873848466562,
+        "full_uncertainty": 0.01846108478729913,
+        "full_review_finding_rate": 0.5316764132553606
+      },
+      {
+        "group": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_5_Least Directed_H1",
+        "selected_rank": 31,
+        "full_rank": 12,
+        "rank_drop": -19,
+        "selected_rows": 1464,
+        "outside_rows": 908,
+        "all_rows": 2372,
+        "selected_uncertainty": 0.010227292244228666,
+        "outside_uncertainty_derived": 0.03566430460723331,
+        "full_uncertainty": 0.019964563418599753,
+        "full_review_finding_rate": 0.38532883642495785
+      }
+    ],
+    "largest_rank_drop": {
+      "group": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_24_Least Directed_H1",
+      "selected_rank": 3,
+      "full_rank": 33,
+      "rank_drop": 30,
+      "selected_rows": 235,
+      "outside_rows": 729,
+      "all_rows": 964,
+      "selected_uncertainty": 0.02566764308221322,
+      "outside_uncertainty_derived": 0.0032065839701019487,
+      "full_uncertainty": 0.00868204962502534,
+      "full_review_finding_rate": 0.7842323651452282
+    }
+  }
+}

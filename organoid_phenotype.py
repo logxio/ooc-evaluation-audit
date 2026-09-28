@@ -167,6 +167,22 @@ def nearest_centroid(train_x, train_y, test_x):
     return np.asarray(test_x @ centroids.T).argmax(axis=1).astype(np.int8)
 
 
+def source_centroid_distance(train_x, train_y, target_x):
+    """Distance to the nearest Velasco class mean in cosine space."""
+    centroids = np.vstack([np.asarray(train_x[train_y == i].mean(axis=0)).ravel() for i in range(3)])
+    centroids /= np.maximum(np.linalg.norm(centroids, axis=1, keepdims=True), 1e-12)
+
+    def distance(x):
+        norms = np.sqrt(np.asarray(x.multiply(x).sum(axis=1)).ravel())
+        if np.any(norms <= 0):
+            raise RuntimeError("zero transformed row norm")
+        cosine = np.asarray(x @ centroids.T) / norms[:, None]
+        return 1 - cosine.max(axis=1)
+
+    threshold = float(np.quantile(distance(train_x), .95))
+    return threshold, distance(target_x)
+
+
 def metrics(y_true, y_pred):
     cm = confusion_matrix(y_true, y_pred, labels=np.arange(3))
     pr, re, f1, support = precision_recall_fscore_support(y_true, y_pred, labels=np.arange(3), zero_division=0)
@@ -228,7 +244,7 @@ def bootstrap(y, pmain, pmajor, pcentroid, groups):
 
 
 def score_only_review(scores, group_codes, group_names):
-    """Rank keys by scores within the atlas-label-selected three-class cohort."""
+    """Rank sample keys using model scores and sample keys only."""
     groups = {}
     for values, code in zip(scores, group_codes):
         ordered = sorted(float(value) for value in values)
@@ -335,6 +351,82 @@ def write_review_csv(path, ranking):
                              "cells": row["n"], "mean_score_uncertainty": row["uncertainty"]})
 
 
+def unfiltered_review(scores, label_codes, group_codes, label_names, group_names):
+    """Freeze an all-row score queue, then check it against atlas labels."""
+    if scores.shape != (len(label_codes), 3) or len(group_codes) != len(label_codes):
+        raise RuntimeError("unfiltered score and metadata shapes differ")
+    records, queue = score_only_review(scores, group_codes, group_names)
+    truth = np.full(len(label_codes), 3, dtype=np.int8)
+    for i, label in enumerate(LABELS):
+        truth[label_codes == label_names.index(label)] = i
+    prediction = np.argmax(scores, axis=1).astype(np.int8)
+    check = review_validation(records, queue["ranking"], truth, prediction,
+                              group_codes, group_names)
+    outside = truth == 3
+    wrong_inside = (truth != 3) & (truth != prediction)
+    per_key = {}
+    for row in queue["ranking"]:
+        mask = group_codes == group_names.index(row["group"])
+        per_key[row["group"]] = {
+            "cells": int(mask.sum()),
+            "outside_three_class_endpoint": int(outside[mask].sum()),
+            "wrong_within_three_class_endpoint": int(wrong_inside[mask].sum()),
+            "review_finding_rate": float((outside[mask] | wrong_inside[mask]).mean()),
+        }
+    return {
+        "cohort": "all Bhaduri rows, selected by publication only",
+        "score_queue": queue,
+        "retrospective_check": check,
+        "three_class_endpoint_coverage": {
+            "all_rows": int(len(truth)),
+            "inside_endpoint": int((~outside).sum()),
+            "outside_endpoint": int(outside.sum()),
+            "inside_fraction": float((~outside).mean()),
+            "wrong_inside_endpoint": int(wrong_inside.sum()),
+            "review_findings": int((outside | wrong_inside).sum()),
+        },
+        "group_findings": per_key,
+    }
+
+
+def distance_review(source_threshold, target_distances, group_codes, group_names,
+                    score_queue, label_codes, label_names, full_scores):
+    """Freeze source-distance and equal-rank queues before checking Bhaduri labels."""
+    if len(target_distances) != len(group_codes):
+        raise RuntimeError("target distances and group codes differ")
+    records = []
+    for code in np.unique(group_codes):
+        mask = group_codes == code
+        records.append({"group": group_names[int(code)], "n": int(mask.sum()),
+                        "uncertainty": float(np.mean(target_distances[mask] > source_threshold))})
+    distance_ranked = [{"rank": i, **row} for i, row in enumerate(
+        sorted(records, key=lambda row: (-row["uncertainty"], row["group"])), 1)]
+    old_ranks = {row["group"]: row["rank"] for row in score_queue["ranking"]}
+    distance_ranks = {row["group"]: row["rank"] for row in distance_ranked}
+    combined = [{"group": row["group"], "n": row["n"],
+                 "uncertainty": -(old_ranks[row["group"]] + distance_ranks[row["group"]])}
+                for row in records]
+    combined_ranked = [{"rank": i, **row} for i, row in enumerate(
+        sorted(combined, key=lambda row: (-row["uncertainty"], row["group"])), 1)]
+    truth = np.full(len(label_codes), 3, dtype=np.int8)
+    for i, label in enumerate(LABELS):
+        truth[label_codes == label_names.index(label)] = i
+    prediction = np.argmax(full_scores, axis=1).astype(np.int8)
+    outside = (truth == 3).astype(np.int8)
+    outside_check = review_validation(records, distance_ranked, outside,
+                                      np.zeros(len(outside), dtype=np.int8),
+                                      group_codes, group_names)
+    combined_check = review_validation(combined, combined_ranked, truth, prediction,
+                                       group_codes, group_names)
+    return {"distance": "1 - max cosine to three Velasco training-class means",
+            "source_distance_p95": source_threshold,
+            "distance_queue": distance_ranked,
+            "distance_outside_endpoint_check": outside_check,
+            "combined_order": "ascending sum of old-margin and source-distance group ranks; group-name tie break",
+            "combined_queue": combined_ranked,
+            "combined_total_findings_check": combined_check}
+
+
 def group_diagnostics(per_group):
     records = []
     for key, group in per_group.items():
@@ -417,6 +509,35 @@ def html_report(result):
                          f"<td>{test:,} / {vg}</td><td>{score:.4f}</td></tr>"
                          for name, train, tg, test, vg, score in rows)
     author_section = ""
+    unfiltered_section = ""
+    if "unfiltered_review" in external:
+        full = external["unfiltered_review"]
+        coverage = full["three_class_endpoint_coverage"]
+        checked = full["retrospective_check"]
+        full_rows = "".join(
+            f"<tr><td>{row['rank']}</td><th scope='row'><details>"
+            f"<summary>{escape(row['group'].rsplit(')_', 1)[-1].lstrip('; '))}</summary>"
+            f"<code>{escape(row['group'])}</code></details></th><td>{row['n']:,}</td>"
+            f"<td>{row['uncertainty']:.6f}</td>"
+            f"<td>{full['group_findings'][row['group']]['review_finding_rate']:.3f}</td></tr>"
+            for row in full["score_queue"]["ranking"][:8])
+        unfiltered_section = (
+            "<h2>Which Bhaduri samples would you review first?</h2>"
+            f"<p>All {coverage['all_rows']:,} cells enter by study name; no cell label selects a row "
+            "or orders a sample key. The last column checks that order afterward "
+            "against HNOCA atlas labels: it counts cells outside the three trained classes and "
+            "cells misclassified within them.</p>"
+            "<div class='scroll'><table><thead><tr><th>Rank</th><th>Sample key</th>"
+            "<th>Cells</th><th>Score uncertainty</th><th>Findings after label check</th>"
+            f"</tr></thead><tbody>{full_rows}</tbody></table></div>"
+            f"<p>{coverage['inside_endpoint']:,} cells have one of the three trained atlas labels; "
+            f"{coverage['outside_endpoint']:,} lie outside that endpoint. The score queue reaches "
+            f"{checked['top8_error_rate_ratio_to_all_groups']:.3f} times the mean finding rate "
+            f"in its first eight of {full['score_queue']['groups']} sample keys, compared with "
+            "random key order. This is a retrospective check under the shared atlas, not a "
+            "calibrated unknown-class detector. "
+            "<a href='unfiltered_review_queue.csv'>Download the score-only queue</a>; "
+            "<a href='unfiltered_review.json'>see every post-label finding</a>.</p>")
     if "original_author_sensitivity" in external:
         author = external["original_author_sensitivity"]
         a = author["results"]
@@ -455,7 +576,8 @@ a{{color:#24563b}}footer{{margin-top:48px;color:#42574b;font-size:.9rem}}
 </style></head><body><main>
 <h1>Phenotype Transfer Map</h1>
 <p class="lede">The Velasco-trained three-class model reached {main['macro_f1']:.4f} macro-F1 on {main['n']:,} Bhaduri cells (34-key 95% interval {boot['macro_f1_ci95'][0]:.4f}–{boot['macro_f1_ci95'][1]:.4f}). This map pairs that cross-source result with score-based sample review priorities and a separate known-label error audit.</p>
-<p class="note">HNOCA labels selected NPC, Neuron, and Glioblast cells before this calculation. Within that selected cohort, group order uses model scores and <code>bio_sample</code> keys only. This is not an end-to-end test on wholly unannotated input. HNOCA's shared 3,000-gene panel includes the external study. The score is unitless and uncalibrated, not an error probability. The keys identify biological samples, not verified physical organoids.</p>
+{unfiltered_section}
+<p class="note">In the selected-cohort analysis below, HNOCA labels selected NPC, Neuron, and Glioblast cells before ranking. Within that selected cohort, group order uses model scores and <code>bio_sample</code> keys only. This is not an end-to-end test on wholly unannotated input. HNOCA's shared 3,000-gene panel includes the external study. The score is unitless and uncalibrated, not an error probability. The keys identify biological samples, not verified physical organoids.</p>
 <h2>Score-only group order within the selected cohort</h2>
 <div class="scroll"><table><thead><tr><th>Rank</th><th>Sample key</th><th>Cells</th><th>Mean score uncertainty</th></tr></thead><tbody>{review_rows}</tbody></table></div>
 <p>Open a sample name for its exact key. <a href="review_queue.csv">All {review['groups']} score-only ranks</a> omit labels and errors; the upstream three-class cell selection used HNOCA labels.</p>
@@ -491,7 +613,13 @@ def main():
     parser.add_argument("--input", type=Path, help="Previously downloaded HNOCA v1 H5AD; verified before use")
     parser.add_argument("--author-label-sensitivity", action="store_true",
                         help="Also compare Neuron versus Radial Glia against preserved Bhaduri author labels")
+    parser.add_argument("--unfiltered-review", action="store_true",
+                        help="Order all Bhaduri sample keys before using atlas labels to check review findings")
+    parser.add_argument("--distance-review", action="store_true",
+                        help="Add source-only centroid distance and an equal-rank all-row review queue")
     args = parser.parse_args()
+    if args.distance_review and not args.unfiltered_review:
+        parser.error("--distance-review requires --unfiltered-review")
     args.output_dir.mkdir(parents=True, exist_ok=True)
     output_path = args.output_dir / "audit.json"
     source_hash = sha256(__file__)
@@ -506,6 +634,14 @@ def main():
             y = np.array([LABELS.index(lc[v]) for v in yraw[rows]], dtype=np.int8)
             source = np.array([SOURCES.index(pc[v]) for v in p[rows]], dtype=np.int8)
             test_global_rows = rows[source == 1]
+            if args.unfiltered_review:
+                full_test_rows = np.flatnonzero(p == pc.index(SOURCES[1]))
+                extra_test_rows = np.setdiff1d(full_test_rows, test_global_rows, assume_unique=True)
+                full_test_label_codes = yraw[full_test_rows]
+                full_test_group_codes = graw[full_test_rows]
+                x_extra = extract(h, extra_test_rows)
+                stage("unfiltered_rows_extracted", all_rows=int(len(full_test_rows)),
+                      additional_rows=int(len(extra_test_rows)))
             g = graw[rows]
             if len(set(g[source == 0]) & set(g[source == 1])):
                 raise RuntimeError("source group key overlap")
@@ -524,6 +660,8 @@ def main():
                               "groups_at_least_100": int(sum(v >= 100 for v in c.values())),
                               "group_counts": {gc[k]: int(v) for k, v in c.items()}}
     x = transform(x)
+    if args.unfiltered_review:
+        x_extra = transform(x_extra)
     stage("transformed", cells=x.shape[0], nnz=int(x.nnz))
     dev = source == 0
     test = source == 1
@@ -537,6 +675,34 @@ def main():
     pred = clf.predict(xt)
     scores = clf.decision_function(xt)
     score_records, review_queue = score_only_review(scores, gt, gc)
+    unfiltered_result = None
+    distance_result = None
+    if args.unfiltered_review:
+        full_scores = np.empty((len(full_test_rows), 3), dtype=scores.dtype)
+        selected_positions = np.searchsorted(full_test_rows, test_global_rows)
+        extra_positions = np.searchsorted(full_test_rows, extra_test_rows)
+        if not np.array_equal(full_test_rows[selected_positions], test_global_rows):
+            raise RuntimeError("selected rows missing from full Bhaduri cohort")
+        if not np.array_equal(full_test_rows[extra_positions], extra_test_rows):
+            raise RuntimeError("additional rows missing from full Bhaduri cohort")
+        full_scores[selected_positions] = scores
+        full_scores[extra_positions] = clf.decision_function(x_extra)
+        unfiltered_result = unfiltered_review(full_scores, full_test_label_codes,
+                                               full_test_group_codes, lc, gc)
+        stage("unfiltered_review_complete", **unfiltered_result["three_class_endpoint_coverage"],
+              rho=unfiltered_result["retrospective_check"]["rho"])
+        if args.distance_review:
+            threshold, selected_distances = source_centroid_distance(xd, yd, xt)
+            _, extra_distances = source_centroid_distance(xd, yd, x_extra)
+            full_distances = np.empty(len(full_test_rows), dtype=selected_distances.dtype)
+            full_distances[selected_positions] = selected_distances
+            full_distances[extra_positions] = extra_distances
+            distance_result = distance_review(threshold, full_distances, full_test_group_codes,
+                                              gc, unfiltered_result["score_queue"],
+                                              full_test_label_codes, lc, full_scores)
+            stage("distance_review_complete", source_distance_p95=threshold,
+                  outside_lift=distance_result["distance_outside_endpoint_check"]["top8_error_rate_ratio_to_all_groups"],
+                  combined_lift=distance_result["combined_total_findings_check"]["top8_error_rate_ratio_to_all_groups"])
     stage("score_only_review_complete", groups=review_queue["groups"])
     majority_class = int(np.bincount(yd, minlength=3).argmax())
     pmajor = np.full(len(yt), majority_class, dtype=np.int8)
@@ -575,6 +741,16 @@ def main():
         score_records, review_queue["ranking"], yt, pred, gt, gc)
     if author_result is not None:
         result["external"]["original_author_sensitivity"] = author_result
+    if unfiltered_result is not None:
+        result["external"]["unfiltered_review"] = unfiltered_result
+        (args.output_dir / "unfiltered_review.json").write_text(
+            json.dumps(unfiltered_result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
+        write_review_csv(args.output_dir / "unfiltered_review_queue.csv",
+                         unfiltered_result["score_queue"]["ranking"])
+    if distance_result is not None:
+        result["external"]["distance_review"] = distance_result
+        (args.output_dir / "distance_review.json").write_text(
+            json.dumps(distance_result, ensure_ascii=False, indent=2) + "\n", encoding="utf-8")
     stage("bootstrap_complete", **{k: result["external"]["bootstrap"][k] for k in ("effective_draws", "macro_f1_ci95", "paired_difference_ci95")})
     result["runtime"] = {"seconds": round(time.monotonic() - START, 3), "maxrss_bytes": rss(),
                          "exit_code": 0, "cpu_count": os.cpu_count(),

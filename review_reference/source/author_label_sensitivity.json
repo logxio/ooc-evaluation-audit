@@ -1,0 +1,1275 @@
+{
+  "endpoint": "original_author_neuron_vs_radial_glia_in_HNOCA_selected_three_class_cohort",
+  "eligibility": {
+    "all_test_cells": 207871,
+    "retained": 175160,
+    "excluded": 32711,
+    "original_label_counts": {
+      "Astrocyte_Astrocyte": 422,
+      "Endothelial_Endothelial": 749,
+      "Excitatory Neuron _Layer VI Occipital": 16037,
+      "Excitatory Neuron _Pan-neuronal": 37443,
+      "Excitatory Neuron _Upper Layer": 11994,
+      "Excitatory Neuron _V1 Neurons": 4674,
+      "Excitatory Neuron_Low quality": 8213,
+      "Excitatory Neuron_Newborn Low-Quality": 4435,
+      "Excitatory Neuron_Pan-neuronal": 5856,
+      "Inhibitory Neuron_SST-MGE1": 3352,
+      "Mixed Neuron/Radial Glia_Mixed": 3018,
+      "Radial Glia_Glycolytic RG": 10965,
+      "Radial Glia_Hindbrain RG": 12958,
+      "Radial Glia_Low quality": 3637,
+      "Radial Glia_Pan-radial glia": 61122,
+      "Radial Glia_oRG": 10759,
+      "Unknown_Unknown": 12237
+    },
+    "retained_neuron": 79356,
+    "retained_radial_glia": 95804,
+    "retained_bio_sample_keys": 34
+  },
+  "method": {
+    "author_neuron": "Excitatory Neuron* or Inhibitory Neuron*",
+    "author_non_neuron": "Radial Glia*",
+    "excluded": "Low quality/Low-Quality, Mixed, Unknown, other",
+    "model_neuron": "HNOCA prediction Neuron; NPC/Glioblast are non-neuron",
+    "bootstrap": {
+      "seed": 26,
+      "draws": 2000,
+      "effective": 2000
+    }
+  },
+  "results": {
+    "model": {
+      "macro_f1": 0.9411926970686877,
+      "confusion": [
+        [
+          89823,
+          5981
+        ],
+        [
+          4247,
+          75109
+        ]
+      ],
+      "group_ci95": [
+        0.922402904821457,
+        0.9566089238506565
+      ]
+    },
+    "source_majority": {
+      "macro_f1": 0.31179179305033866,
+      "confusion": [
+        [
+          0,
+          95804
+        ],
+        [
+          0,
+          79356
+        ]
+      ],
+      "group_ci95": [
+        0.26589265424897146,
+        0.3538420478561035
+      ],
+      "paired_model_advantage": 0.629400904018349,
+      "paired_advantage_ci95": [
+        0.5772320428961186,
+        0.6817701429592093
+      ]
+    },
+    "nearest_centroid": {
+      "macro_f1": 0.9472196842979156,
+      "confusion": [
+        [
+          91041,
+          4763
+        ],
+        [
+          4404,
+          74952
+        ]
+      ],
+      "group_ci95": [
+        0.9289344323491512,
+        0.9616443438168596
+      ],
+      "paired_model_advantage": -0.006026987229227898,
+      "paired_advantage_ci95": [
+        -0.010067093868822518,
+        -0.0025305710978319102
+      ]
+    }
+  },
+  "per_group": [
+    {
+      "bio_sample": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_5_Directed_1323_4",
+      "cells": 36,
+      "model_confusion": [
+        [
+          33,
+          3
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "source_majority_confusion": [
+        [
+          0,
+          36
+        ],
+        [
+          0,
+          0
+        ]
+      ],
+      "nearest_centroid_confusion": [
+        [
+          33,
+          3
+        ],
+        [
+          0,
+          0
+        ]
+      ]
+    },
+    {
+      "bio_sample": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_5_Directed_H28126",
+      "cells": 3999,
+      "model_confusion": [
+        [
+          3561,
+          3
+        ],
+        [
+          186,
+          249
+        ]
+      ],
+      "source_majority_confusion": [
+        [
+          0,
+          3564
+        ],
+        [
+          0,
+          435
+        ]
+      ],
+      "nearest_centroid_confusion": [
+        [
+          3563,
+          1
+        ],
+        [
+          195,
+          240
+        ]
+      ]
+    },
+    {
+      "bio_sample": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_5_Directed_YH10",
+      "cells": 6145,
+      "model_confusion": [
+        [
+          4872,
+          127
+        ],
+        [
+          178,
+          968
+        ]
+      ],
+      "source_majority_confusion": [
+        [
+          0,
+          4999
+        ],
+        [
+          0,
+          1146
+        ]
+      ],
+      "nearest_centroid_confusion": [
+        [
+          4927,
+          72
+        ],
+        [
+          201,
+          945
+        ]
+      ]
+    },
+    {
+      "bio_sample": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_8_Directed_1323_4",
+      "cells": 5637,
+      "model_confusion": [
+        [
+          1573,
+          1043
+        ],
+        [
+          1,
+          3020
+        ]
+      ],
+      "source_majority_confusion": [
+        [
+          0,
+          2616
+        ],
+        [
+          0,
+          3021
+        ]
+      ],
+      "nearest_centroid_confusion": [
+        [
+          1734,
+          882
+        ],
+        [
+          2,
+          3019
+        ]
+      ]
+    },
+    {
+      "bio_sample": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_8_Directed_H28126",
+      "cells": 2735,
+      "model_confusion": [
+        [
+          1708,
+          7
+        ],
+        [
+          90,
+          930
+        ]
+      ],
+      "source_majority_confusion": [
+        [
+          0,
+          1715
+        ],
+        [
+          0,
+          1020
+        ]
+      ],
+      "nearest_centroid_confusion": [
+        [
+          1712,
+          3
+        ],
+        [
+          128,
+          892
+        ]
+      ]
+    },
+    {
+      "bio_sample": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_8_Directed_YH10",
+      "cells": 4396,
+      "model_confusion": [
+        [
+          2052,
+          141
+        ],
+        [
+          145,
+          2058
+        ]
+      ],
+      "source_majority_confusion": [
+        [
+          0,
+          2193
+        ],
+        [
+          0,
+          2203
+        ]
+      ],
+      "nearest_centroid_confusion": [
+        [
+          2145,
+          48
+        ],
+        [
+          205,
+          1998
+        ]
+      ]
+    },
+    {
+      "bio_sample": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_10_Directed_1323_4",
+      "cells": 8662,
+      "model_confusion": [
+        [
+          832,
+          518
+        ],
+        [
+          5,
+          7307
+        ]
+      ],
+      "source_majority_confusion": [
+        [
+          0,
+          1350
+        ],
+        [
+          0,
+          7312
+        ]
+      ],
+      "nearest_centroid_confusion": [
+        [
+          918,
+          432
+        ],
+        [
+          5,
+          7307
+        ]
+      ]
+    },
+    {
+      "bio_sample": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_10_Directed_YH10",
+      "cells": 2578,
+      "model_confusion": [
+        [
+          2182,
+          5
+        ],
+        [
+          56,
+          335
+        ]
+      ],
+      "source_majority_confusion": [
+        [
+          0,
+          2187
+        ],
+        [
+          0,
+          391
+        ]
+      ],
+      "nearest_centroid_confusion": [
+        [
+          2183,
+          4
+        ],
+        [
+          52,
+          339
+        ]
+      ]
+    },
+    {
+      "bio_sample": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); directed_guided_24_Directed_1323_4",
+      "cells": 1158,
+      "model_confusion": [
+        [
+          236,
+          2
+        ],
+        [
+          253,
+          667
+        ]
+      ],
+      "source_majority_confusion": [
+        [
+          0,
+          238
+        ],
+        [
+          0,
+          920
+        ]
+      ],
+      "nearest_centroid_confusion": [
+        [
+          235,
+          3
+        ],
+        [
+          231,
+          689
+        ]
+      ]
+    },
+    {
+      "bio_sample": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_3_Most Directed_H1",
+      "cells": 5071,
+      "model_confusion": [
+        [
+          4808,
+          5
+        ],
+        [
+          95,
+          163
+        ]
+      ],
+      "source_majority_confusion": [
+        [
+          0,
+          4813
+        ],
+        [
+          0,
+          258
+        ]
+      ],
+      "nearest_centroid_confusion": [
+        [
+          4802,
+          11
+        ],
+        [
+          74,
+          184
+        ]
+      ]
+    },
+    {
+      "bio_sample": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_3_Most Directed_H28126",
+      "cells": 12130,
+      "model_confusion": [
+        [
+          7000,
+          67
+        ],
+        [
+          290,
+          4773
+        ]
+      ],
+      "source_majority_confusion": [
+        [
+          0,
+          7067
+        ],
+        [
+          0,
+          5063
+        ]
+      ],
+      "nearest_centroid_confusion": [
+        [
+          7003,
+          64
+        ],
+        [
+          253,
+          4810
+        ]
+      ]
+    },
+    {
+      "bio_sample": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_5_Most Directed_H1",
+      "cells": 3297,
+      "model_confusion": [
+        [
+          1338,
+          63
+        ],
+        [
+          8,
+          1888
+        ]
+      ],
+      "source_majority_confusion": [
+        [
+          0,
+          1401
+        ],
+        [
+          0,
+          1896
+        ]
+      ],
+      "nearest_centroid_confusion": [
+        [
+          1362,
+          39
+        ],
+        [
+          15,
+          1881
+        ]
+      ]
+    },
+    {
+      "bio_sample": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_5_Most Directed_H28126",
+      "cells": 4128,
+      "model_confusion": [
+        [
+          1772,
+          154
+        ],
+        [
+          3,
+          2199
+        ]
+      ],
+      "source_majority_confusion": [
+        [
+          0,
+          1926
+        ],
+        [
+          0,
+          2202
+        ]
+      ],
+      "nearest_centroid_confusion": [
+        [
+          1826,
+          100
+        ],
+        [
+          13,
+          2189
+        ]
+      ]
+    },
+    {
+      "bio_sample": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_8_Most Directed_H1",
+      "cells": 1419,
+      "model_confusion": [
+        [
+          119,
+          14
+        ],
+        [
+          8,
+          1278
+        ]
+      ],
+      "source_majority_confusion": [
+        [
+          0,
+          133
+        ],
+        [
+          0,
+          1286
+        ]
+      ],
+      "nearest_centroid_confusion": [
+        [
+          116,
+          17
+        ],
+        [
+          11,
+          1275
+        ]
+      ]
+    },
+    {
+      "bio_sample": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_8_Most Directed_H28126",
+      "cells": 503,
+      "model_confusion": [
+        [
+          200,
+          49
+        ],
+        [
+          0,
+          254
+        ]
+      ],
+      "source_majority_confusion": [
+        [
+          0,
+          249
+        ],
+        [
+          0,
+          254
+        ]
+      ],
+      "nearest_centroid_confusion": [
+        [
+          211,
+          38
+        ],
+        [
+          0,
+          254
+        ]
+      ]
+    },
+    {
+      "bio_sample": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_10_Most Directed_H1",
+      "cells": 2839,
+      "model_confusion": [
+        [
+          106,
+          23
+        ],
+        [
+          5,
+          2705
+        ]
+      ],
+      "source_majority_confusion": [
+        [
+          0,
+          129
+        ],
+        [
+          0,
+          2710
+        ]
+      ],
+      "nearest_centroid_confusion": [
+        [
+          117,
+          12
+        ],
+        [
+          14,
+          2696
+        ]
+      ]
+    },
+    {
+      "bio_sample": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Bhaduri, 2020 (doi: 10.1038/s41586-020-1962-0); most directed_guided_10_Most Directed_H28126",
+      "cells": 7218,
+      "model_confusion": [
+        [
+          3092,
+          145
+        ],
+        [
+          102,
+          3879
+        ]
+      ],
+      "source_majority_confusion": [
+        [
+          0,
+          3237
+        ],
+        [
+          0,
+          3981
+        ]
+      ],
+      "nearest_centroid_confusion": [
+        [
+          3110,
+          127
+        ],
+        [
+          95,
+          3886
+        ]
+      ]
+    },
+    {
+      "bio_sample": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_3_Least Directed_H1",
+      "cells": 4120,
+      "model_confusion": [
+        [
+          4103,
+          2
+        ],
+        [
+          5,
+          10
+        ]
+      ],
+      "source_majority_confusion": [
+        [
+          0,
+          4105
+        ],
+        [
+          0,
+          15
+        ]
+      ],
+      "nearest_centroid_confusion": [
+        [
+          4101,
+          4
+        ],
+        [
+          5,
+          10
+        ]
+      ]
+    },
+    {
+      "bio_sample": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_3_Least Directed_H28126",
+      "cells": 11124,
+      "model_confusion": [
+        [
+          7860,
+          18
+        ],
+        [
+          183,
+          3063
+        ]
+      ],
+      "source_majority_confusion": [
+        [
+          0,
+          7878
+        ],
+        [
+          0,
+          3246
+        ]
+      ],
+      "nearest_centroid_confusion": [
+        [
+          7867,
+          11
+        ],
+        [
+          199,
+          3047
+        ]
+      ]
+    },
+    {
+      "bio_sample": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_5_Least Directed_1323_4",
+      "cells": 8775,
+      "model_confusion": [
+        [
+          3280,
+          491
+        ],
+        [
+          16,
+          4988
+        ]
+      ],
+      "source_majority_confusion": [
+        [
+          0,
+          3771
+        ],
+        [
+          0,
+          5004
+        ]
+      ],
+      "nearest_centroid_confusion": [
+        [
+          3201,
+          570
+        ],
+        [
+          5,
+          4999
+        ]
+      ]
+    },
+    {
+      "bio_sample": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_5_Least Directed_H1",
+      "cells": 1403,
+      "model_confusion": [
+        [
+          284,
+          6
+        ],
+        [
+          1,
+          1112
+        ]
+      ],
+      "source_majority_confusion": [
+        [
+          0,
+          290
+        ],
+        [
+          0,
+          1113
+        ]
+      ],
+      "nearest_centroid_confusion": [
+        [
+          283,
+          7
+        ],
+        [
+          1,
+          1112
+        ]
+      ]
+    },
+    {
+      "bio_sample": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_5_Least Directed_H28126",
+      "cells": 11259,
+      "model_confusion": [
+        [
+          6822,
+          219
+        ],
+        [
+          139,
+          4079
+        ]
+      ],
+      "source_majority_confusion": [
+        [
+          0,
+          7041
+        ],
+        [
+          0,
+          4218
+        ]
+      ],
+      "nearest_centroid_confusion": [
+        [
+          6917,
+          124
+        ],
+        [
+          214,
+          4004
+        ]
+      ]
+    },
+    {
+      "bio_sample": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_5_Least Directed_YH10",
+      "cells": 7073,
+      "model_confusion": [
+        [
+          4633,
+          10
+        ],
+        [
+          902,
+          1528
+        ]
+      ],
+      "source_majority_confusion": [
+        [
+          0,
+          4643
+        ],
+        [
+          0,
+          2430
+        ]
+      ],
+      "nearest_centroid_confusion": [
+        [
+          4623,
+          20
+        ],
+        [
+          881,
+          1549
+        ]
+      ]
+    },
+    {
+      "bio_sample": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_8_Least Directed_1323_4",
+      "cells": 4455,
+      "model_confusion": [
+        [
+          1319,
+          523
+        ],
+        [
+          17,
+          2596
+        ]
+      ],
+      "source_majority_confusion": [
+        [
+          0,
+          1842
+        ],
+        [
+          0,
+          2613
+        ]
+      ],
+      "nearest_centroid_confusion": [
+        [
+          1388,
+          454
+        ],
+        [
+          16,
+          2597
+        ]
+      ]
+    },
+    {
+      "bio_sample": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_8_Least Directed_H1",
+      "cells": 5766,
+      "model_confusion": [
+        [
+          2647,
+          470
+        ],
+        [
+          19,
+          2630
+        ]
+      ],
+      "source_majority_confusion": [
+        [
+          0,
+          3117
+        ],
+        [
+          0,
+          2649
+        ]
+      ],
+      "nearest_centroid_confusion": [
+        [
+          2704,
+          413
+        ],
+        [
+          13,
+          2636
+        ]
+      ]
+    },
+    {
+      "bio_sample": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_8_Least Directed_H28126",
+      "cells": 7417,
+      "model_confusion": [
+        [
+          5053,
+          205
+        ],
+        [
+          78,
+          2081
+        ]
+      ],
+      "source_majority_confusion": [
+        [
+          0,
+          5258
+        ],
+        [
+          0,
+          2159
+        ]
+      ],
+      "nearest_centroid_confusion": [
+        [
+          5161,
+          97
+        ],
+        [
+          102,
+          2057
+        ]
+      ]
+    },
+    {
+      "bio_sample": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_8_Least Directed_YH10",
+      "cells": 4521,
+      "model_confusion": [
+        [
+          1877,
+          131
+        ],
+        [
+          55,
+          2458
+        ]
+      ],
+      "source_majority_confusion": [
+        [
+          0,
+          2008
+        ],
+        [
+          0,
+          2513
+        ]
+      ],
+      "nearest_centroid_confusion": [
+        [
+          1907,
+          101
+        ],
+        [
+          49,
+          2464
+        ]
+      ]
+    },
+    {
+      "bio_sample": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_10_Least Directed_1323_4",
+      "cells": 5322,
+      "model_confusion": [
+        [
+          1214,
+          233
+        ],
+        [
+          920,
+          2955
+        ]
+      ],
+      "source_majority_confusion": [
+        [
+          0,
+          1447
+        ],
+        [
+          0,
+          3875
+        ]
+      ],
+      "nearest_centroid_confusion": [
+        [
+          1247,
+          200
+        ],
+        [
+          961,
+          2914
+        ]
+      ]
+    },
+    {
+      "bio_sample": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_10_Least Directed_H1",
+      "cells": 15730,
+      "model_confusion": [
+        [
+          3190,
+          1162
+        ],
+        [
+          45,
+          11333
+        ]
+      ],
+      "source_majority_confusion": [
+        [
+          0,
+          4352
+        ],
+        [
+          0,
+          11378
+        ]
+      ],
+      "nearest_centroid_confusion": [
+        [
+          3550,
+          802
+        ],
+        [
+          69,
+          11309
+        ]
+      ]
+    },
+    {
+      "bio_sample": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_10_Least Directed_H28126",
+      "cells": 10097,
+      "model_confusion": [
+        [
+          9199,
+          89
+        ],
+        [
+          50,
+          759
+        ]
+      ],
+      "source_majority_confusion": [
+        [
+          0,
+          9288
+        ],
+        [
+          0,
+          809
+        ]
+      ],
+      "nearest_centroid_confusion": [
+        [
+          9219,
+          69
+        ],
+        [
+          51,
+          758
+        ]
+      ]
+    },
+    {
+      "bio_sample": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_10_Least Directed_YH10",
+      "cells": 3270,
+      "model_confusion": [
+        [
+          1584,
+          8
+        ],
+        [
+          68,
+          1610
+        ]
+      ],
+      "source_majority_confusion": [
+        [
+          0,
+          1592
+        ],
+        [
+          0,
+          1678
+        ]
+      ],
+      "nearest_centroid_confusion": [
+        [
+          1590,
+          2
+        ],
+        [
+          77,
+          1601
+        ]
+      ]
+    },
+    {
+      "bio_sample": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_15_Least Directed_1323_4",
+      "cells": 1422,
+      "model_confusion": [
+        [
+          751,
+          43
+        ],
+        [
+          25,
+          603
+        ]
+      ],
+      "source_majority_confusion": [
+        [
+          0,
+          794
+        ],
+        [
+          0,
+          628
+        ]
+      ],
+      "nearest_centroid_confusion": [
+        [
+          766,
+          28
+        ],
+        [
+          36,
+          592
+        ]
+      ]
+    },
+    {
+      "bio_sample": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_24_Least Directed_1323_4",
+      "cells": 1297,
+      "model_confusion": [
+        [
+          386,
+          2
+        ],
+        [
+          281,
+          628
+        ]
+      ],
+      "source_majority_confusion": [
+        [
+          0,
+          388
+        ],
+        [
+          0,
+          909
+        ]
+      ],
+      "nearest_centroid_confusion": [
+        [
+          383,
+          5
+        ],
+        [
+          212,
+          697
+        ]
+      ]
+    },
+    {
+      "bio_sample": "homosapiens_None_2020_10x3v2_bhaduriaparna_001_d10_1038_s41586_020_1962_0Velasco, 2019 (doi: 10.1038/s41586-019-1289-x)_guided_24_Least Directed_H1",
+      "cells": 158,
+      "model_confusion": [
+        [
+          137,
+          0
+        ],
+        [
+          18,
+          3
+        ]
+      ],
+      "source_majority_confusion": [
+        [
+          0,
+          137
+        ],
+        [
+          0,
+          21
+        ]
+      ],
+      "nearest_centroid_confusion": [
+        [
+          137,
+          0
+        ],
+        [
+          19,
+          2
+        ]
+      ]
+    }
+  ],
+  "provenance": {
+    "clean_archive": "https://zenodo.org/api/records/14161275/files/hnoca_cleanedmeta.h5ad/content",
+    "declared_archive_size": 18740061388,
+    "license_record": "https://zenodo.org/records/14161275",
+    "index_ordered_sha256": "77a0ff74a31468084253534e0244d3368b706e0bcb3514d067f821f74d5986ee",
+    "data_lineage": "Bhaduri supplementary Type+Subtype -> sfaira celltype -> HNOCA preserved original obs"
+  },
+  "range": {
+    "downloaded_bytes": 41854156,
+    "requests": 40,
+    "seconds": 23.639,
+    "maxrss_bytes_linux": 2605174784
+  }
+}

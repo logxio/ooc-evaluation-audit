@@ -1,8 +1,8 @@
 ---
-title: "Phenotype Transfer Maps"
-subtitle: "Cross-study organoid cell typing with measured sample review priorities"
+title: "Review Contract Map"
+subtitle: "Cross-source organoid cell typing and fixed-budget review audits"
 author: "Yan Su"
-date: "27 September 2026"
+date: "28 September 2026"
 lang: en-US
 documentclass: article
 fontsize: 12pt
@@ -22,7 +22,7 @@ header-includes:
   - \usepackage{fancyhdr}
   - \pagestyle{fancy}
   - \fancyhf{}
-  - \fancyhead[L]{Phenotype Transfer Maps}
+  - \fancyhead[L]{Review Contract Map}
   - \fancyhead[R]{Yan Su}
   - \fancyfoot[C]{\thepage}
 ---
@@ -30,9 +30,9 @@ header-includes:
 **Submission category: Tool & Platform**  
 **Team: Yan Su (individual entrant)**
 
-**Measured result:** A Phenotype Transfer Map joins a cross-acquisition-source phenotype score, score-based review order within an atlas-selected cohort, and separate label-backed error audit. A fixed Velasco-trained model reached **0.9078 macro-F1** on **207,871 Bhaduri neural-organoid cells** (34 sample-key bootstrap interval **0.8423-0.9372**). It beat a source-trained nearest-centroid comparator by **+0.1010** on the same cells (paired interval **+0.0705 to +0.1205**). HNOCA's gene panel and labels were harmonized across studies; this is not an independent biological ground truth.
+**Measured result:** Review Contract Map records eligible rows, a score-only sample-key order, later label-defined findings, and what the review budget misses. A fixed Velasco-trained model reached **0.9078 macro-F1** on **207,871 Bhaduri cells** and **0.9374** on **236,453 selected Uzquiano cells**. In a separately frozen complete-intake replay of **263,827 Uzquiano cells**, the margin queue reviewed 51,993 cells and exposed **17,046/34,656** retrospective findings, leaving **17,610**. This remains a same-atlas label comparison, not independently adjudicated biology or measured staff time.
 
-**Exploratory review queue:** Ranking the 34 Bhaduri sample keys by mean model-score uncertainty, without using their labels in the ranking calculation, correlated with their observed classification error (Spearman **0.7791**, key-resampling interval **0.5546-0.9010**). The highest-ranked eight keys had **1.721 times** the equal-key average error rate; a post hoc, fixed-rank shuffle of their 34 observed error rates reached this ratio 0/10,000 times (plus-one **p=0.00010**). HNOCA labels selected the three-class cohort before ranking. This is retrospective evidence on the same test source, not an end-to-end unannotated-batch validation or calibrated error probability.
+**Decision boundary:** Bhaduri's unfiltered sample-key order did not establish stable enrichment under a fixed 20% cell budget. On the separately acquired Uzquiano publication, a predeclared selected-cohort replay exposed 2,989/7,282 HNOCA disagreements, and the complete-intake replay exposed 17,046/34,656 later findings at the same proportional budget. The publication was selected using HNOCA metadata and class labels, and those labels define the findings. Results across these intakes are not interchangeable; a matching metadata contract alone cannot certify review yield.
 
 \newpage
 \tableofcontents
@@ -51,6 +51,30 @@ The two experiments were collected in different laboratories, but HNOCA chose it
 The same evaluation discipline is illustrated on 3,072 expert-labeled organ-on-chip brightfield images [1, 2]. The source ZIP has 57 of 57 date-like test prefixes also present in training. A frozen image model scored 0.799925 balanced accuracy on its 656-image source test and 0.657920 on a different 736-image prefix-held-out test. On the 151 shared images, the paired difference was +0.066088 with a 14-prefix interval of -0.042091 to +0.122483. That interval crosses zero; the prefixes are not verified physical chip IDs. These two cases show the same practical rule: publish source and group denominators, false alarms, comparable test rows, and uncertainty beside the headline score. The workflow uses public data and free CPU computation, without a paid API or proprietary model.
 
 **Keywords:** neural organoid; single-cell phenotype; cross-study validation; organ-on-chip; evaluation audit; grouped bootstrap; reproducibility.
+
+# Review Contract Map: fixed-budget review evidence
+
+## A decision record, not a new cell classifier
+
+Each contract fixes four items before counting findings: eligible rows, the sample-key order computed only from model scores, the later reference-label endpoint, and a whole-key cell budget. The downstream action is to inspect the chosen keys and retain the explicit missed-finding count; a changed intake or endpoint requires a new test. The underlying classifier, nearest-centroid comparator, HNOCA panel, and harmonized labels are existing methods and data. The margin score `1/(1 + gap between the top two decision scores)` is an ordering signal, **not** a calibrated probability of error. `bio_sample` is an atlas key, not a proven physical organoid, donor, or chip.
+
+Five Bhaduri contracts use the same 34 keys but change retained rows, the later endpoint, or the score order. Their first-eight equal-key error-rate ratios were 1.721 in the HNOCA-selected three-class cohort, 1.860 under retained original-author binary labels, 1.441 when carrying that selected queue into all rows, 0.819 after rescoring all rows, and 0.840 after a combined score. These are descriptive contrasts on reused data. Under a **floor(all eligible cells / 5)** cap, complete keys are accepted in order when they fit and oversized keys are skipped. On Bhaduri all-row rescoring, 44,543 of 223,453 cells were reviewed; 6,881 of 22,721 later findings were exposed and **15,840 missed**. A 10,000-order random whole-key reference reached at least 6,881 findings in 19.33% of orders. The selected-cohort result did **not** rescue complete intake on Bhaduri. The five-row map, per-key output, fixed-budget replay, and source summaries can be recomputed with `python review_contract_map.py` and `python fixed_budget.py`; see `review_reference/` in the public code repository.
+
+## Frozen third-publication test and review queues
+
+A metadata rule excluded Velasco and Bhaduri, required 10,000-250,000 HNOCA-selected NPC/Neuron/Glioblast rows, at least 100 cells in each class, at least five `bio_sample` keys, and no key overlap with Velasco. It selected the largest eligible publication before model fitting or inspection of candidate outcomes: **Uzquiano 2022**, with 236,453 selected cells and 47 keys. The unchanged Velasco model trained on 135,053 selected cells reached macro-F1 **0.937418** on this publication (2,000-draw whole-key interval **0.918595-0.952664**). Source-trained nearest centroid reached **0.815074**; the paired difference was **+0.122344** (47-key interval **+0.099082 to +0.147403**). This tests another acquisition publication under the same HNOCA 3,000-gene panel and harmonized labels, not independent biological truth.
+
+The selected-cohort review replay used the same model and 20% whole-key budget, then inspected HNOCA disagreements only after computing the score-only order. Of 47,290 allowable cells, the margin order reviewed **47,228** across ten keys and exposed **2,989/7,282** disagreements; **4,293** remained. None of 10,000 seeded random whole-key orders reached 2,989 (plus-one estimate 0.00010); their 95% descriptive finding range was 784-2,153. A source-trained nearest-centroid distance order reviewed 47,048 cells and exposed 1,759. The margin queue found 1,230 more while reviewing 180 more cells. These counts are retrospective label disagreements, not expert-confirmed errors.
+
+A separate, preregistered replay admitted **all 263,827 Uzquiano rows** without a three-class row filter. Its later finding endpoint was either an HNOCA label outside the three classes or a within-class prediction disagreement. There were 27,374 endpoint-outside cells and 7,282 within-class disagreements, hence **34,656** later findings. The 20% cap was 52,765 cells. The margin queue admitted seven full keys and reviewed **51,993** cells, exposing **17,046** findings (14,442 outside endpoint and 2,604 within class) while missing **17,610**. Ten thousand seeded random whole-key orders had a 95% total-finding range of 3,095-13,100; three reached at least 17,046 (0.03% high tail). The random outside-endpoint median was 4,464.5, versus 14,442 observed (0.10% high tail). The nearest-centroid distance order reviewed 51,954 cells and exposed 9,181 findings, 7,534 of them outside endpoint. Margin found **7,865** more items while reviewing **39** more cells.
+
+The three full-intake pass conditions were set before that run: total-finding random high tail below 5%, more total findings than centroid distance, and more outside-endpoint findings than the random median. All three passed. This is a **retrospective complete-intake replay within one atlas**. HNOCA metadata and selected-class counts chose the publication, and HNOCA labels define the later finding endpoint; it is not a fresh independent source relative to the selected-cohort replay, expert adjudication, prospective deployment, or measured labor saving. Bhaduri's complete-intake failure remains a direct counterexample to carrying this order across intakes. A metadata gate (`review_contract_gate.py`) rejects changed publication, eligibility, score, group, label scheme, or endpoint before reuse; matching declared metadata is necessary but does not prove effective selection, and the current gate does not inspect actual row membership.
+
+## Reproduction and disclosure
+
+The [HNOCA v1 archive](https://zenodo.org/records/15004818) supplies the original 2,880,860,613-byte file and published MD5 `078675d6108e93cebc99676b6b0626aa`; the free-CPU runs verified both. The public repository includes `f32_third_source.py`, `f36_third_review.py`, `f38_full_intake.py`, the existing `organoid_phenotype.py`, and small JSON references in `review_reference/`. Each third-source script downloads and verifies the same HNOCA archive when no `--input` is supplied. To avoid three downloads, pass the same verified local H5AD to all runs. Run in order: `python f32_third_source.py --input hnoca_minimal_for_mapping.h5ad`, then `python f36_third_review.py --input hnoca_minimal_for_mapping.h5ad --f32-reference f32_third_source/third_source.json`, then `python f38_full_intake.py --input hnoca_minimal_for_mapping.h5ad --f32-reference f32_third_source/third_source.json`. The later scripts assert the frozen publication selection, training row identity, and 47 selected-key confusion matrices against the first output. Their outputs contain the complete per-key scores, choices, random reference, found and missed counts. Our source code is MIT licensed; the derived summary JSON retains attribution to HNOCA under its CC BY 4.0 data record, and the original data remain at that source. No paid service, proprietary model or special hardware is needed; our completed runs used free Kaggle CPU. Each full-source run exceeds the five-minute local development budget and belongs on a remote free CPU.
+
+The additional real organ-on-chip image case remains a separate task: on 38 post hoc chosen images from one date-like prefix, the source-folder and prefix-held-out image models falsely flagged 3 versus 9 of 13 expert-good images and missed 4 versus 0 of 25 expert-bad images. This selected example illustrates both review costs; it does not validate the organoid cell queue, identify a physical chip, or establish a population effect.
 
 # Research problem and intended use
 
