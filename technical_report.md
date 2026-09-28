@@ -34,6 +34,8 @@ header-includes:
 
 **Physical chip results:** In the published Schuster et al. pancreatic tumor-organoid chip data, 8/48 temporal-versus-static drug-response contrasts reverse sign between 24 and 72 hours; a leave-one-patient-out forecast loses to carrying the 24-hour reading forward (MAE 0.4071 versus 0.1526). In separate Dai et al. colorectal patient-derived chip data, the prespecified mean of two optimized assay channels classifies 17/22 clinical responses in a patient-held-out threshold audit. An exploratory optimized vessel-only channel classifies 21/22. Nested channel selection inside each outer patient holdout classifies 20/22. Both channel strategies were devised after examining the six readouts. In Steinberg et al.'s adjacent patient-derived spheroid assay, area and viability signs disagree in 14/49 complete patient-treatment pairs; 12/40 reduced-viability pairs show no area reduction. The article caption says n=48, while its source workbook has 49 numeric pairs. The method does not clearly identify these patient rows as perfused-chip measurements. None of these reanalyses is a new chip or clinical deployment.
 
+**Channel consensus result:** A new exploratory release-or-abstain rule fits separate vessel and tumoroid cutoffs using the other 21 Dai patients. When held-out calls agree, optimized chips release **20/22**, with **19/20** correct and one error; two cases abstain. At illustrative error/abstention costs of 1/0.25, its cost per patient is **0.068182**, versus **0.227273** for the prespecified mean. The post hoc vessel-only call achieves **0.045455** at full coverage, so the gate does not dominate that comparator. Original chips release **18/22**, with **15/18** correct and four abstentions; cost **0.181818** versus **0.318182** for their mean. Abstention is not a correct call. Rule design and costs follow inspection of this cohort; the numbers do not measure patient utility.
+
 **Clinical linkage result:** In a second original on-chip clinical study, Hu et al. tested 21 lung organoid lines and designated 10 as comparable with a clinical response. Our source-workbook audit reproduces that **10/21** coverage and finds eight unlinked lines without an evaluable response or subsequent treatment and three with an untested or confounded regimen. The authors reported agreement in all ten selected lines. Two of the ten use a previous treatment comparison without a post-collection drug in the table. This is a coverage and timing audit of the authors' claims, not a new binary drug-response model or proof that the other eleven patients would agree.
 
 **Decision boundary:** Bhaduri's unfiltered sample-key order did not establish stable enrichment under a fixed 20% cell budget. On the separately acquired Uzquiano publication, a predeclared selected-cohort replay exposed 2,989/7,282 HNOCA disagreements, and the complete-intake replay exposed 17,046/34,656 later findings at the same proportional budget. The publication was selected using HNOCA metadata and class labels, and those labels define the findings. Results across these intakes are not interchangeable; a matching metadata contract alone cannot certify review yield.
@@ -56,7 +58,7 @@ The same evaluation discipline is illustrated on 3,072 expert-labeled organ-on-c
 
 Two further physical-chip reanalyses test what a readout can support. In Schuster et al. 17, 8/48 patient-by-regimen-by-comparator-by-marker contrasts change temporal-versus-static sign between 24 and 72 hours, while a three-patient leave-one-out forecast fails against a persistence baseline. In Dai et al. 18, 22 patient-derived colorectal chip responses have paired clinical outcomes. A threshold learned on the other 21 patients classifies 17/22 with the prespecified average of two optimized readouts, versus 15/22 with the original-chip average. An optimized vessel-only channel reaches 21/22, versus 17/22 in the original vessel channel, but it was chosen after outcomes were inspected. A nested, training-only channel choice makes 20/22 outer patient calls, but the algorithm itself was designed after observing those six results. Steinberg et al. 19 supply an adjacent patient-derived spheroid assay: 14/49 complete patient-treatment pairs have opposite area and viability signs, including 12 reduced-viability pairs with no area reduction. Their Figure 5 caption says n=48 while the source workbook yields 49. Those patient rows are not clearly documented as perfused-chip measurements or exact clinical regimen matches. None of these sources supports clinical treatment advice. Hu et al. 20 add a second physical-chip study with 21 tested lung organoid lines, but their reported ten of ten clinical agreements apply only to ten eligible lines; our workbook audit measures **10/21** coverage and the eleven missing comparisons, not independent prediction accuracy.
 
-**Keywords:** neural organoid; single-cell phenotype; cross-study validation; organ-on-chip; patient holdout; clinical linkage; review audit; reproducibility.
+**Keywords:** neural organoid; single-cell phenotype; cross-study validation; organ-on-chip; patient holdout; channel consensus; clinical linkage; review audit; reproducibility.
 
 # Review Contract Map: fixed-budget review evidence
 
@@ -320,6 +322,32 @@ The original workbook expressly allows prior-treatment comparisons. Among the te
 Given the original authors' ten reported agreements and eleven unknown comparisons, the total number agreeing among all 21 is bounded only by **10–21** under extreme assignments. The lower end is not an observed all-cohort accuracy, and the upper end is not a validated result. The contract therefore reports eligible coverage beside selected-case agreement. It does not pool this lung cohort with the Dai 22-patient colorectal cohort, test our Dai threshold algorithm on Hu patients, or infer benefit from clinical treatment changes.
 
 `clinical_linkage.py` downloads Supplementary Data 2, verifies SHA256 `a9ba00bc14e3a4b0ecac6161243aff41ff192e1295622beeccd6003d105b91b7`, and reads the same 21 source rows and gray author markings on free CPU. It prints only aggregate findings; optional `--out` writes a patient-level local audit that is not redistributed. The Hu article and workbook are CC BY 4.0; this repository provides MIT audit code and attribution, not a copy of the clinical source table. The competition notebook embeds the same script and writes a small aggregate completion marker.
+
+## Channel Consensus Release: when two chip channels disagree
+
+This exploratory contract names the patient, chip condition, two assay-channel calls, a release or abstain action, and the later clinical response used to audit it. Three technical repeats are averaged within each channel and patient. For each omitted patient, vessel and tumoroid cutoffs are separately learned from the other 21 patients by the balanced-accuracy-maximizing midpoint rule described above. Agreeing held-out calls yield one binary release; differing calls abstain and request another assay or expert review. We apply the same rule to optimized and original chips without pooling them. An abstention is neither correct nor incorrect; accuracy among released cases is conditional on coverage.
+
+| Chip condition | Released /22 | Correct / released | Errors / released | Abstained | Prespecified mean correct /22 | Exploratory vessel correct /22 |
+|:--|--:|--:|--:|--:|--:|--:|
+| Optimized | 20 | 19/20 | 1/20 | 2 | 17 | 21 |
+| Original | 18 | 15/18 | 3/18 | 4 | 15 | 17 |
+
+Among eleven clinically sensitive optimized-chip patients, ten are released with no error; among eleven resistant patients, ten are released with one error. The two abstentions are both errors of the prespecified optimized mean, but both are correct under the exploratory vessel-only call. Thus the gate removes two mean errors while sacrificing two correct vessel decisions. On original chips nine of eleven patients in each class are released, with no sensitive and three resistant errors. All four original-chip abstentions are errors of the original mean. These paired observations do not add patients or an independent cohort.
+
+For a transparent sensitivity calculation, charge 1 for a wrong released call, 0 for a correct release, and respectively 0.10, 0.25, or 0.50 for abstention. Divide total cost by all **22** patients. Costs are illustrative preferences, not observed clinical utilities or measured staff time.
+
+| Condition and rule | Abstention 0.10 | Abstention 0.25 | Abstention 0.50 |
+|:--|--:|--:|--:|
+| Optimized consensus gate | 0.054545 | 0.068182 | 0.090909 |
+| Optimized prespecified mean, no abstention | 0.227273 | 0.227273 | 0.227273 |
+| Optimized exploratory vessel, no abstention | 0.045455 | 0.045455 | 0.045455 |
+| Original consensus gate | 0.154545 | 0.181818 | 0.227273 |
+| Original mean, no abstention | 0.318182 | 0.318182 | 0.318182 |
+| Original vessel, no abstention | 0.227273 | 0.227273 | 0.227273 |
+
+At cost 0.25, the optimized gate improves on the prespecified mean by **0.159091** per patient yet loses to the exploratory vessel by **0.022727**. The original-chip gate improves on its mean by **0.136364** and on its vessel comparator by **0.045455**. The break-even abstention cost against each mean is 2.0 for optimized and 1.0 for original. Values above 1 are mathematical thresholds under this artificial scale, not recommendations. The rule was designed after earlier six-channel and nested outcomes were seen, so held-out threshold fitting does not undo design-level selection. This one-study, one-treatment, 22-patient audit cannot validate a prospective release policy.
+
+`channel_consensus.py` downloads and SHA256-verifies the same Dai source ZIP and clinical figure as `chip_clinic.py`, then prints aggregate condition, class, coverage, error, and cost fields on free CPU. Optional `--out` writes patient-level calls locally; the competition notebook records only aggregate fields. The source files are CC BY-NC-ND 4.0 and remain at the publisher.
 
 # Software artifact and real workflow
 
