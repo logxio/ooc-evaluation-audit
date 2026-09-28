@@ -1,6 +1,6 @@
 ---
-title: "Review Contract Map"
-subtitle: "Cross-source organoid cell typing and fixed-budget review audits"
+title: "Decision Contract Map"
+subtitle: "Cell review, drug-schedule stability, and patient-held-out chip response"
 author: "Yan Su"
 date: "28 September 2026"
 lang: en-US
@@ -22,7 +22,7 @@ header-includes:
   - \usepackage{fancyhdr}
   - \pagestyle{fancy}
   - \fancyhf{}
-  - \fancyhead[L]{Review Contract Map}
+  - \fancyhead[L]{Decision Contract Map}
   - \fancyhead[R]{Yan Su}
   - \fancyfoot[C]{\thepage}
 ---
@@ -31,6 +31,8 @@ header-includes:
 **Team: Yan Su (individual entrant)**
 
 **Measured result:** Review Contract Map records eligible rows, a score-only sample-key order, later label-defined findings, and what the review budget misses. A fixed Velasco-trained model reached **0.9078 macro-F1** on **207,871 Bhaduri cells** and **0.9374** on **236,453 selected Uzquiano cells**. In a separately frozen complete-intake replay of **263,827 Uzquiano cells**, the margin queue reviewed 51,993 cells and exposed **17,046/34,656** retrospective findings, leaving **17,610**. This remains a same-atlas label comparison, not independently adjudicated biology or measured staff time.
+
+**Physical chip results:** In the published Schuster et al. pancreatic tumor-organoid chip data, 8/48 temporal-versus-static drug-response contrasts reverse sign between 24 and 72 hours; a leave-one-patient-out forecast loses to carrying the 24-hour reading forward (MAE 0.4071 versus 0.1526). In separate Dai et al. colorectal patient-derived chip data, the prespecified mean of two optimized assay channels classifies 17/22 clinical responses in a patient-held-out threshold audit. An exploratory optimized vessel-only channel classifies 21/22; that channel was selected after examining six readouts. These are retrospective reanalyses of the authors' data, not new chips or clinical deployment.
 
 **Decision boundary:** Bhaduri's unfiltered sample-key order did not establish stable enrichment under a fixed 20% cell budget. On the separately acquired Uzquiano publication, a predeclared selected-cohort replay exposed 2,989/7,282 HNOCA disagreements, and the complete-intake replay exposed 17,046/34,656 later findings at the same proportional budget. The publication was selected using HNOCA metadata and class labels, and those labels define the findings. Results across these intakes are not interchangeable; a matching metadata contract alone cannot certify review yield.
 
@@ -50,7 +52,9 @@ The two experiments were collected in different laboratories, but HNOCA chose it
 
 The same evaluation discipline is illustrated on 3,072 expert-labeled organ-on-chip brightfield images [1, 2]. The source ZIP has 57 of 57 date-like test prefixes also present in training. A frozen image model scored 0.799925 balanced accuracy on its 656-image source test and 0.657920 on a different 736-image prefix-held-out test. On the 151 shared images, the paired difference was +0.066088 with a 14-prefix interval of -0.042091 to +0.122483. That interval crosses zero; the prefixes are not verified physical chip IDs. These two cases show the same practical rule: publish source and group denominators, false alarms, comparable test rows, and uncertainty beside the headline score. The workflow uses public data and free CPU computation, without a paid API or proprietary model.
 
-**Keywords:** neural organoid; single-cell phenotype; cross-study validation; organ-on-chip; evaluation audit; grouped bootstrap; reproducibility.
+Two further physical-chip reanalyses test what a readout can support. In Schuster et al. 17, 8/48 patient-by-regimen-by-comparator-by-marker contrasts change temporal-versus-static sign between 24 and 72 hours, while a three-patient leave-one-out forecast fails against a persistence baseline. In Dai et al. 18, 22 patient-derived colorectal chip responses have paired clinical outcomes. A threshold learned on the other 21 patients classifies 17/22 with the prespecified average of two optimized readouts, versus 15/22 with the original-chip average. An optimized vessel-only channel reaches 21/22, versus 17/22 in the original vessel channel, but this channel was chosen after outcomes were inspected. Both sources are single-study retrospective analyses; neither supports clinical treatment advice.
+
+**Keywords:** neural organoid; single-cell phenotype; cross-study validation; organ-on-chip; patient holdout; review audit; reproducibility.
 
 # Review Contract Map: fixed-budget review evidence
 
@@ -259,6 +263,38 @@ Holding test images fixed removes test-composition differences. It does not equa
 
 The grouped F2 full test includes A549 (151 good/81 bad), CACO (27/55), HPMEC (187/152), HSAEC (11/24), HUVEC (0/39), and NHBE (0/9). With no good images in the last two cell types, their good recall and balanced accuracy are undefined. The generated JSON retains each cell type's denominator and confusion matrix; no single cell-type result is promoted as a separate discovery.
 
+# Physical-chip decision contracts
+
+## Schedule Decision Horizon: later signs in a three-patient chip study
+
+Schuster et al. 17 developed the programmable microfluidic pancreatic tumor-organoid platform, ran temporal and static drug schedules, and published Figure 5a-b source data. We add a retrospective readout contract. A contract unit is one patient, one of four combination therapies, one of two static comparators (4-hour or 72-hour exposure), and one marker (caspase 3/7 apoptosis or propidium-iodide death). Each arm's two to four technical replicate traces is normalized as `signal(t)/signal(0)-1`; normalized replicates are averaged before temporal delivery is compared with the corresponding static schedule. This yields **48 contrasts from three patients**, not 48 independent patients.
+
+The temporal-minus-static effect changes sign between 24 and 72 hours in **8/48** contrasts: 7/24 death-marker contrasts and 1/24 apoptosis contrasts. A retrospective terminal-stability horizon, defined as the first four-hour sampled time after which every remaining contrast sign matches the 72-hour sign, occurs after 24 hours in **13/48**. A 24-hour difference between the two markers captures only four of eight matched pairs with a later reversal. The horizon uses the completed future trace and is not a prospective alert. One nearly zero contrast moves from +0.005 to -0.037, so a sign flip alone does not imply a large biological effect.
+
+A frozen leave-one-patient-out trajectory template fits the other two patients' same-schedule traces at 0-24 hours and predicts the held-out patient's 72-hour temporal-minus-static effect. It obtains MAE **0.407105**, compared with **0.152629** for carrying the 24-hour effect forward and **0.267345** for 16-24-hour linear extrapolation. It loses to persistence in each held-out patient and predicts the final sign in **27/48** contrasts. Of five preregistered gates (48 complete pairs, at least ten flips, at least 20% error reduction, improvement in every patient, and at least 75% sign accuracy), only completeness passed. This negative forecast is part of the result. A scientist may inspect the full trace and both markers before interpreting an early schedule difference; these data cannot justify stopping a run or choosing a patient's treatment at 24 hours.
+
+`schedule_horizon.py` verifies the original XLSX against a pinned SHA256 and writes the 48-row CSV and JSON in `review_reference/`. The original article and source workbook remain at the publisher; its article is CC BY 4.0. The script runs on CPU with `requirements-schedule.txt`. The authors' platform, schedules, and original endpoint comparison are prior work; the sampled sign-horizon ledger and failed holdout forecast are our reanalysis. Independent chip-lab or clinical validation is absent.
+
+## Clinical Holdout Contract: 22 paired patient responses
+
+Dai et al. 18 published patient-derived vascularized colorectal tumoroid chips exposed to FOLFOX plus bevacizumab. In the article's Figure 5 source workbook, sheet 5n contains vessel response and sheet 5o tumoroid response. Each sheet gives three original-chip and three optimized-chip measurements for each of **22 patient IDs**. Figure 5P's third colored row records clinical response: 11 sensitive (RECIST CR or PR) and 11 resistant (SD or PD). Its first two rows contain chip calls and are not clinical truth. We link the two source files by the same patient ordering and verify both SHA256 values before extraction. Because individual outcomes are only published in the figure, their transcription is a reproducibility limit.
+
+The contract unit is a patient, chip condition, assay channel, other-patient-trained cutoff, and held-out clinical label. Three technical replicates are averaged per patient and channel. Lower relative vessel density or tumoroid size predicts sensitivity. Before effect calculation, we fixed the primary score as the simple mean of the two optimized channel means. For each patient, all adjacent midpoints among the other 21 patient scores compete on training balanced accuracy (the Youden index); the smallest threshold wins ties. We then classify the omitted patient once. The original-chip mean, each individual channel in both conditions, and an all-resistant fixed rule are comparators. Class recall, balanced accuracy, accuracy, and ranking AUROC are calculated on the 22 held-out calls or raw scores as appropriate; AUROC does not use the held-out thresholds.
+
+| Patient-held-out readout | Correct /22 | Balanced accuracy | Sensitive recall | Resistant recall | AUROC |
+|:--|--:|--:|--:|--:|--:|
+| Optimized two-channel mean, prespecified | 17 | 0.772727 | 9/11 | 8/11 | 0.917355 |
+| Original two-channel mean | 15 | 0.681818 | 9/11 | 6/11 | 0.776860 |
+| Optimized vessel, exploratory | 21 | 0.954545 | 11/11 | 10/11 | 0.966942 |
+| Original vessel | 17 | 0.772727 | 10/11 | 7/11 | 0.801653 |
+| Optimized tumoroid | 19 | 0.863636 | 10/11 | 9/11 | 0.834711 |
+| Original tumoroid | 17 | 0.772727 | 10/11 | 7/11 | 0.735537 |
+| Fixed all-resistant | 11 | 0.500000 | 0/11 | 11/11 | 0.500000 |
+
+The optimized vessel channel corrects four of the original vessel channel's errors and adds none; both miss resistant patient P36. Combining optimized vessel and tumoroid readouts by an unweighted mean loses four correct classifications relative to vessel alone, despite its high AUROC. **This is a channel-selection warning, not a validated 95% clinical predictor.** The vessel-only channel was chosen after inspecting six readouts in the same 22 patients. The source cohort, treatment, and assay were already published; our threshold audit remains single-lab and retrospective. The original authors' optimized 86.36% and original 72.73% accuracy used same-cohort selected cutoffs and their own rule, so they are context rather than independent holdout comparators. The authors' sensitivity treats resistance as positive; this table instead names each clinical class explicitly. No confidence claim of superiority, future-patient treatment decision, or cross-lab generalization follows from 22 patients.
+
+`chip_clinic.py` downloads the original source ZIP and figure from the article's PMC mirror, verifies their SHA256 values, reads the two sheets and clinical color row, and prints aggregate metrics on CPU using `requirements-chip.txt`. It can write a patient-level audit JSON locally when `--out` is supplied. The article files are CC BY-NC-ND 4.0 and are linked, never copied into this repository. The MIT license covers our audit code only. An independently registered cohort should fix the vessel channel, threshold procedure, treatment, and clinical endpoint before data collection.
+
 # Software artifact and real workflow
 
 The offline workflow makes group identity and error denominators explicit in two biological settings. Its image-audit core reads two JSONL record sets, validates them, and writes `audit.html` and `audit.json`. The HTML summarizes overlap, test denominators and errors, the shared-image comparison, and interpretation limits. The JSON stores input records, counts, metadata, and input file hashes. The organoid route produces a whole-study three-class score, per-class and per-`bio_sample` matrices, comparator scores, and sample-key intervals from the HNOCA original. Both routes use local or free CPU computation and do not call a model API or upload research data to a service.
@@ -369,6 +405,8 @@ There is one individual entrant, Yan Su. Python, NumPy, SciPy, scikit-learn, h5p
 14. [Requests license](https://github.com/psf/requests/blob/main/LICENSE). Official project repository.
 15. Khatri and Bonn. [Uncertainty Estimation for Single-cell Label Transfer](https://proceedings.mlr.press/v179/khatri22a.html). *Proceedings of Machine Learning Research* 179, 109-128 (2022). Prior work on calibrated uncertainty for transferred single-cell labels.
 16. [HNOCA cleaned archive](https://zenodo.org/records/14161275). Zenodo (2024), DOI: [10.5281/zenodo.14161275](https://doi.org/10.5281/zenodo.14161275). Preserved original annotation fields, published MD5 and CC BY 4.0 metadata.
+17. Schuster et al. [Automated microfluidic platform for dynamic and combinatorial drug screening of tumor organoids](https://doi.org/10.1038/s41467-020-19058-4). *Nature Communications* (2020). Original Figure 5a-b Source Data and CC BY 4.0 article.
+18. Dai et al. [Self-assembly of tumor-related vascularized colorectal tumoroid-on-a-chip for precision medicine drug testing](https://doi.org/10.1016/j.xcrm.2026.102873). *Cell Reports Medicine* (2026). Figure 5 Source Data and Figure 5P, article CC BY-NC-ND 4.0.
 
 # Appendix A: denominators and decision gates
 
