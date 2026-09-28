@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """Recompute an exploratory assay-discordance and nested channel-selection audit.
 
-The Shtenberg Figure 5 patient-derived spheroid measurements are an adjacent
+The Steinberg Figure 5 patient-derived spheroid measurements are an adjacent
 assay, not confirmed measurements in a perfused chip. No clinical accuracy is
 inferred from those rows.
 """
@@ -140,12 +140,12 @@ def main():
     result = {
         'schema': 'assay.discordance.v1',
         'dai_source_sha256': SOURCE_SHA256, 'dai_figure_sha256': FIGURE_SHA256,
-        'shtenberg_source_url': SPHEROID_URL, 'shtenberg_source_sha256': SPHEROID_SHA256,
-        'shtenberg_license': 'CC BY 4.0',
+        'steinberg_source_url': SPHEROID_URL, 'steinberg_source_sha256': SPHEROID_SHA256,
+        'steinberg_license': 'CC BY 4.0',
         'channel_priority': list(CHANNEL_PRIORITY),
         'nested_patient': patient_result, 'spheroid_assay': spheroid_result,
         'limits': ['Nested algorithm conceived after inspecting six A9 readouts; exploratory, no independent patient cohort.',
-                   'Shtenberg Fig.5 does not explicitly establish perfused-chip measurements for patient spheroids; adjacent assay only.',
+                   'Steinberg Fig.5 does not explicitly establish perfused-chip measurements for patient spheroids; adjacent assay only.',
                    'Treatment and sampling time do not support pooled patient-level clinical accuracy from the spheroid table.'],
     }
     if args.out:
