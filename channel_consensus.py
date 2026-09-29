@@ -12,6 +12,14 @@ from chip_clinic import (FIGURE_SHA256, FIGURE_URL, PATIENTS, SOURCE_SHA256,
 ABSTAIN_COSTS = (0.10, 0.25, 0.50)
 
 
+def release_counts(first_calls, second_calls, truth):
+    """Release a call only when two independent calls agree; count released errors."""
+    released = [a==b for a,b in zip(first_calls,second_calls)]
+    n_release = sum(released)
+    errors = sum(flag and call!=actual for flag,call,actual in zip(released,first_calls,truth))
+    return released, n_release, errors, len(truth)-n_release
+
+
 def one_condition(condition, chip, truth):
     vessel = [chip[p]['vessel'][condition] for p in PATIENTS]
     tumoroid = [chip[p]['tumoroid'][condition] for p in PATIENTS]
@@ -21,10 +29,7 @@ def one_condition(condition, chip, truth):
     vessel_calls = evaluations['vessel']['predictions']
     tumoroid_calls = evaluations['tumoroid']['predictions']
     mean_calls = evaluations['mean']['predictions']
-    released = [a==b for a,b in zip(vessel_calls,tumoroid_calls)]
-    n_release = sum(released)
-    errors = sum(flag and call!=actual for flag,call,actual in zip(released,vessel_calls,truth))
-    abstain = len(truth)-n_release
+    released, n_release, errors, abstain = release_counts(vessel_calls, tumoroid_calls, truth)
     mean_errors = sum(a!=b for a,b in zip(mean_calls,truth))
     vessel_errors = sum(a!=b for a,b in zip(vessel_calls,truth))
     tumoroid_errors = sum(a!=b for a,b in zip(tumoroid_calls,truth))
