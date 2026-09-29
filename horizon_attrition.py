@@ -34,14 +34,24 @@ def column(ref):
     return number
 
 
-def cells(xlsx_bytes):
+def sheet_path(archive, sheet_name):
+    rel = '{http://schemas.openxmlformats.org/officeDocument/2006/relationships}id'
+    book = ET.fromstring(archive.read('xl/workbook.xml'))
+    rid = next(s.attrib[rel] for s in book.iter(X+'sheet') if s.attrib['name'] == sheet_name)
+    rels = ET.fromstring(archive.read('xl/_rels/workbook.xml.rels'))
+    target = next(r.attrib['Target'] for r in rels if r.attrib['Id'] == rid)
+    return target.lstrip('/') if target.startswith('/xl/') else 'xl/' + target
+
+
+def cells(xlsx_bytes, sheet_name=None):
     with zipfile.ZipFile(io.BytesIO(xlsx_bytes)) as archive:
         strings = []
         if 'xl/sharedStrings.xml' in archive.namelist():
             root = ET.fromstring(archive.read('xl/sharedStrings.xml'))
             strings = [''.join(t.text or '' for t in node.iter(X+'t'))
                        for node in root.iter(X+'si')]
-        root = ET.fromstring(archive.read('xl/worksheets/sheet1.xml'))
+        path = sheet_path(archive, sheet_name) if sheet_name else 'xl/worksheets/sheet1.xml'
+        root = ET.fromstring(archive.read(path))
         output = []
         for cell in root.iter(X+'c'):
             ref = cell.attrib['r']
@@ -165,19 +175,132 @@ def certificate(groups, day):
     return result
 
 
-def main():
-    parser = argparse.ArgumentParser(description=__doc__)
-    parser.add_argument('--source-zip', type=Path, help='Optional original source ZIP')
-    parser.add_argument('--out', type=Path, help='Optional aggregate JSON output')
-    args = parser.parse_args()
-    if args.source_zip:
-        data = args.source_zip.read_bytes()
+ZHAI_URL = ('https://media.springernature.com/original/springer-static/esm/'
+            'art%3A10.1038%2Fs41467-024-48616-3/MediaObjects/'
+            '41467_2024_48616_MOESM13_ESM.xlsx')
+ZHAI_SHA256 = 'd09231a19108faf96f89973a565b02e5115de1f98a744b1b751168f5b56f8ee8'
+ZHAI_DESIGNS = {
+    'figure_3d': {'sheet': 'figure 3', 'preferred': ('effective',), 'rejected': 'ineffective',
+                  'arms': (('Pos', 'effective'), ('Neg', 'ineffective'), ('Ctrl', 'control'))},
+    'figure_4c': {'sheet': 'figure 4', 'preferred': ('single_effective', 'combination_effective'),
+                  'rejected': 'ineffective',
+                  'arms': (('Single effective', 'single_effective'), ('Negative', 'ineffective'),
+                           ('Combinational Effective', 'combination_effective'), ('Ctrl', 'control'))},
+}
+
+
+def fetch(path, url, expected):
+    if path:
+        data = path.read_bytes()
     else:
-        with urllib.request.urlopen(SOURCE_URL, timeout=60) as response:
+        with urllib.request.urlopen(url, timeout=60) as response:
             data = response.read()
     actual = hashlib.sha256(data).hexdigest()
-    if actual != SOURCE_SHA256:
+    if actual != expected:
         raise ValueError(f'Source SHA256 mismatch: {actual}')
+    return data
+
+
+def bonferroni_interval(a, b, seed, comparisons):
+    rng = random.Random(seed)
+    differences = sorted(statistics.mean(rng.choice(a) for _ in a) -
+                         statistics.mean(rng.choice(b) for _ in b) for _ in range(10000))
+    tail = int(10000 * 0.05 / comparisons / 2)
+    return [round(differences[tail-1], 6), round(differences[10000-tail-1], 6)]
+
+
+def tumour_block(table, design):
+    """Per-mouse tumour volumes from the first tumour-volume block of a sheet."""
+    rows = {}
+    for ref, col, value in table:
+        rows.setdefault(int(ref[len(ref.rstrip('0123456789')):]), {})[col] = value
+    header = next(r for r in sorted(rows) if any(str(v).startswith(design['arms'][0][0]) for v in rows[r].values()))
+    stop = min([r for r in rows if r > header and any(str(v).startswith('Original data') for v in rows[r].values())] + [10**6])
+    mice = {}
+    for col, label in rows[header].items():
+        for prefix, arm in design['arms']:
+            if str(label).startswith(prefix):
+                mice[col] = (arm, str(label).strip())
+    series = {col: {} for col in mice}
+    tcol = min(mice) - 1
+    for r in sorted(rows):
+        if header < r < stop and tcol in rows[r]:
+            try:
+                time = int(float(rows[r][tcol]))
+            except ValueError:
+                continue
+            for col in mice:
+                if col in rows[r]:
+                    series[col][time] = float(rows[r][col])
+    return mice, series
+
+
+def zhai_certificate(design, mice, series, relative, seed_base):
+    arms = {}
+    for col, (arm, _) in mice.items():
+        arms.setdefault(arm, []).append(col)
+    compared = list(design['preferred']) + [design['rejected']]
+    times = sorted({t for s in series.values() for t in s})
+    per_time = {}
+    for t in times:
+        value = {col: series[col][t] / series[col][1] if relative else series[col][t]
+                 for col in mice if t in series[col] and (not relative or 1 in series[col])}
+        groups = {arm: [value[c] for c in cols if c in value] for arm, cols in arms.items()}
+        comparisons = {}
+        for j, arm in enumerate(design['preferred']):
+            a, b = groups[arm], groups[design['rejected']]
+            ci = bonferroni_interval(a, b, seed_base + t*10 + j, len(design['preferred']))
+            pairs = [1.0 if x < y else 0.5 if x == y else 0.0 for x in a for y in b]
+            comparisons[arm] = {'difference': round(statistics.mean(a) - statistics.mean(b), 6),
+                                'adjusted_interval': ci, 'confirmed': ci[1] < 0,
+                                'per_mouse_concordance': round(sum(pairs) / len(pairs), 6)}
+        low = min(v for arm in compared for v in groups[arm])
+        high = max(v for arm in compared for v in groups[arm])
+        bounds = {arm: {'nominal': len(arms[arm]), 'observed': len(groups[arm]),
+                        'lower': round((sum(groups[arm]) + (len(arms[arm])-len(groups[arm]))*low)/len(arms[arm]), 6),
+                        'upper': round((sum(groups[arm]) + (len(arms[arm])-len(groups[arm]))*high)/len(arms[arm]), 6)}
+                  for arm in compared}
+        control = bonferroni_interval(groups[design['rejected']], groups['control'], seed_base + 5000 + t, 1)
+        per_time[t] = {
+            'observed': {arm: len(g) for arm, g in groups.items()},
+            'comparisons': comparisons,
+            'confirmed_among_observed': all(c['confirmed'] for c in comparisons.values()),
+            'full_n_bounds': bounds,
+            'attrition_robust': all(bounds[arm]['upper'] < bounds[design['rejected']]['lower']
+                                    for arm in design['preferred']),
+            'rejected_minus_control': {'difference': round(statistics.mean(groups[design['rejected']]) -
+                                                           statistics.mean(groups['control']), 6),
+                                       'interval_95': control},
+        }
+    confirmed = [t for t in times if per_time[t]['confirmed_among_observed']]
+    onset = next((t for t in times if all(per_time[u]['confirmed_among_observed'] for u in times if u >= t)), None)
+    complete = [t for t in times if all(per_time[t]['full_n_bounds'][arm]['observed'] ==
+                                        per_time[t]['full_n_bounds'][arm]['nominal'] for arm in compared)]
+    return {'administrations': times, 'first_confirmed': confirmed[0] if confirmed else None,
+            'stable_confirmation_from': onset, 'last_complete_administration': max(complete) if complete else None,
+            'by_administration': {str(t): per_time[t] for t in times}}
+
+
+def zhai(data):
+    output = {}
+    for key, design in ZHAI_DESIGNS.items():
+        mice, series = tumour_block(cells(data, design['sheet']), design)
+        seed = 55000 + (1000 if key == 'figure_4c' else 0)
+        output[key] = {'mice': {arm: sum(1 for a, _ in mice.values() if a == arm)
+                                for arm in dict.fromkeys(a for a, _ in mice.values())},
+                       'relative_volume': zhai_certificate(design, mice, series, True, seed),
+                       'absolute_volume': zhai_certificate(design, mice, series, False, seed + 500)}
+    return output
+
+
+def main():
+    parser = argparse.ArgumentParser(description=__doc__)
+    parser.add_argument('--source-zip', type=Path, help='Optional original Petreus source ZIP')
+    parser.add_argument('--zhai-xlsx', type=Path, help='Optional original Zhai source XLSX')
+    parser.add_argument('--out', type=Path, help='Optional aggregate JSON output')
+    args = parser.parse_args()
+    data = fetch(args.source_zip, SOURCE_URL, SOURCE_SHA256)
+    actual = hashlib.sha256(data).hexdigest()
     results, certificates = {}, {}
     with zipfile.ZipFile(io.BytesIO(data)) as archive:
         for timepoint, name in FILE_MAP.items():
@@ -205,6 +328,17 @@ def main():
                    'Numeric mouse cells in the source tables are fewer than the nominal 15 per arm; missing mechanism and mouse identities are unknown.',
                    'The observed day-35 range is a sensitivity scenario, not a biologically justified bound.',
                    'The authors already reported the main 24-hour efficacy trend.'],
+    }
+    zhai_bytes = fetch(args.zhai_xlsx, ZHAI_URL, ZHAI_SHA256)
+    payload['schema'] = 'horizon.attrition.decision.certificate.v2'
+    payload['zhai2024'] = {
+        'source': 'https://doi.org/10.1038/s41467-024-48616-3',
+        'source_sha256': ZHAI_SHA256,
+        **zhai(zhai_bytes),
+        'limits': ['MDA-MB-231 xenografts; each mouse was treated according to a chip screen of its own tumour cells.',
+                   'Chip readouts and the tumour table share no published per-mouse key; arms are the authors\' chip-assigned treatment groups.',
+                   'Later administrations have missing tumour volumes without a stated mechanism.',
+                   'The authors already reported suppression in chip-effective groups.'],
     }
     if args.out:
         args.out.parent.mkdir(parents=True, exist_ok=True)
