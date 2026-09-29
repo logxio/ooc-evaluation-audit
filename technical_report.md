@@ -32,7 +32,7 @@ header-includes:
 
 A patient-chip drug result is ready to act on when two independent readouts agree, the signal has stopped changing, and the claim can be checked against a real outcome. Decision Contract Map runs these checks on published chip data on free CPU and returns one of four actions for each call: **release**, **retest**, **wait**, or **unlinked**.
 
-**Release or retest.** On Dai et al.'s 22 colorectal tumoroid-on-chip patients, calls are released only when the vessel and tumoroid channels agree, each with a cutoff learned without that patient: **20/22** are released and **19/20** are correct. Applied unchanged to an independent osteosarcoma organoid cohort, the same rule releases **11 of 13** post-treatment calls with **10** correct, against 11 of 13 for either readout alone. In both cohorts it has the lowest loss among the rules that never see the held-out outcome whenever a retest costs less than half of a wrong call.
+**Release or retest.** On Dai et al.'s 22 colorectal tumoroid-on-chip patients, calls are released only when the vessel and tumoroid channels agree, each with a cutoff learned without that patient: **20/22** are released and **19/20** are correct. Applied unchanged to an independent osteosarcoma organoid cohort, the same rule releases **11 of 13** post-treatment calls with **10** correct, against 11 of 13 for either readout alone. In both cohorts it has the lowest loss among the rules that never see the held-out outcome whenever a retest costs less than half of a wrong call; per 100 patients on the optimized chips it turns the prespecified mean's 23 wrong calls into 5 wrong calls and 9 retests. In a blind test on two further organoid cohorts, with every prediction published before the outcomes were read, agreement released 7 biliary calls with 6 correct, fewer errors than either drug alone; in the gastric cohort, where each drug alone was near chance, it released 9 calls with 4 correct.
 
 **Retest because readouts conflict.** In Steinberg et al.'s patient-derived spheroids, area and viability move in opposite directions in **14/49** patient-drug pairs; area alone misses **12/40** viability drops.
 
@@ -44,7 +44,7 @@ A patient-chip drug result is ready to act on when two independent readouts agre
 
 **Scale.** A classifier trained once on Velasco neural-organoid cells reaches macro-F1 **0.9374** on 236,453 cells from a laboratory it never saw, **+0.1223** over a nearest-centroid baseline; on all **263,827** of those cells a 20% review budget exposes **17,046/34,656** later label disagreements.
 
-**Where each result stops.** The colorectal release rule was designed after exploring those 22 patients; the osteosarcoma cohort is the independent test, with organoids instead of chips, the authors' own cutoffs, and tables read before the replay was written. The rule needs two informative readouts: on pre-treatment osteosarcoma samples, where each readout alone gets 8 and 9 of 17 right, agreement releases 6 calls and 3 are correct. Petreus and Zhai are single cell lines in mice, Hu's agreements are the authors' report, and HNOCA disagreements are measured against shared atlas labels. No result is treatment advice.
+**Where each result stops.** The colorectal release rule was designed after exploring those 22 patients; the osteosarcoma cohort is the independent test, with organoids instead of chips, the authors' own cutoffs, and tables read before the replay was written. The rule needs two informative readouts: on pre-treatment osteosarcoma samples, where each readout alone gets 8 and 9 of 17 right, agreement releases 6 calls and 3 are correct, and the blind gastric cohort fails the same way. The blind test's registered outcome words missed "metastasis" and "death", so its gastric result is reported both as registered and with that amendment. Petreus and Zhai are single cell lines in mice, Hu's agreements are the authors' report, and HNOCA disagreements are measured against shared atlas labels. No result is treatment advice.
 
 \newpage
 \tableofcontents
@@ -54,7 +54,7 @@ A patient-chip drug result is ready to act on when two independent readouts agre
 
 A patient-chip drug result should drive a treatment choice only when two independent readouts agree, the signal has settled, and the claim can be checked against an outcome. Decision Contract Map records each chip decision as a contract (the entity, the input the rule may see, the rule learned without the held-out unit, the later check, and the loss) and turns it into one of four actions: release, retest, wait, or unlinked.
 
-Channel Consensus Release fits separate cutoffs for two readouts without the held-out patient and releases a call only when both agree. On Dai et al.'s 22 colorectal chip patients [18] it releases 20 calls with 19 correct; with a wrong call costing 1 and a retest costing c, it beats the prespecified two-channel mean for c below 2 and a nested channel selector for c below 0.5. On an independent osteosarcoma organoid cohort [23] the unchanged rule releases 11 of 13 post-treatment calls with 10 correct, against 11 of 13 for either readout alone, with the same break-even c of 0.5; on pre-treatment samples, where both readouts are near chance, agreement releases 6 calls with 3 correct.
+Channel Consensus Release fits separate cutoffs for two readouts without the held-out patient and releases a call only when both agree. On Dai et al.'s 22 colorectal chip patients [18] it releases 20 calls with 19 correct; with a wrong call costing 1 and a retest costing c, it beats the prespecified two-channel mean for c below 2 and a nested channel selector for c below 0.5. On an independent osteosarcoma organoid cohort [23] the unchanged rule releases 11 of 13 post-treatment calls with 10 correct, against 11 of 13 for either readout alone, with the same break-even c of 0.5; on pre-treatment samples, where both readouts are near chance, agreement releases 6 calls with 3 correct. In a blind test with predictions published before outcomes were read [24, 25], agreement released 7 of 10 biliary calls with 6 correct and beat either drug alone, while in a gastric cohort whose single-drug readouts were near chance it released 9 of 12 calls with 4 correct.
 
 Three further contracts come from published chips. Area and viability disagree in 14/49 spheroid patient-drug pairs [19]. Early schedule signals reverse by 72 hours in 8/48 organoid-chip contrasts, and an early forecast loses to persistence [17]. A chip's schedule ranking is confirmed in mouse xenografts only at day 35 among observed animals and is not robust to 25 missing values [21]; the same certificate, frozen before the analysis, confirms chip-guided treatment calls in Zhai et al.'s mice from the third administration with per-mouse concordance 0.98 [22]. Published ten-of-ten agreement covers 10 of 21 tested lung organoid lines [20].
 
@@ -368,6 +368,25 @@ When both readouts carry signal, agreement removes errors: on the post-treatment
 
 The replay tests the release step on a different cancer, laboratory and assay; it does not test the colorectal cutoffs. The readouts are organoid cultures, not a perfused chip, and both binary cut-offs were chosen by the original authors on this cohort. `python consensus_external.py` downloads the article PDF from the publisher, verifies SHA256 `cb8e77c2758231c6d28bd3e37e5abbde63f75139d2fbfba449df87170d905cd0`, and prints the aggregates above; `--out` writes the per-sample calls locally.
 
+## Blind test: predictions published before outcomes were read
+
+Two patient-organoid studies report organoid drug responses and the clinical course of the patients who later received a two-drug regimen: gastric cancer [24] (41 organoids with readouts, 12 followed patients) and biliary tract cancer [25] (54 patients with readouts, 13 followed). Both articles are CC BY 4.0. We read only their Table S3 (organoid AUC per drug) and, for the biliary study, the organoid-to-patient columns of Table S1. Neither clinical-response table was opened before the predictions were published.
+
+`blind_consensus.py` predicts every patient from readouts alone. Each drug is called sensitive when the patient's AUC is at or below the cohort median, with several organoids of one patient averaged first; a regimen call is released only when its two drugs agree, and is otherwise sent to retest. The same file fixes the regimen-to-drug map, the words that define a clinical responder, and the comparators. Its output, `blind_predictions.json` (SHA256 `bfb980002d8bdb16ab04ef736f044066f9f27a4b4be366d25d0279aeda4524ea`), was committed at `51d2023` at 14:59:58 JST on 29 September 2026. `blind_consensus_score.py` checks that hash, reads the two clinical tables and was committed at `4707187` at 15:05:37 JST.
+
+Two things were fixed after the tables were opened, and both are reported. The registered outcome words did not include "metastasis" or "death", so four gastric patients have no registered outcome; an amended list counts both as non-response. One biliary patient is called ECC17T in the clinical table and ICC-17T in the readout table; both tables give it the same gemcitabine and cisplatin AUCs, so it is matched as one organoid.
+
+Drug 1 and drug 2 are the two drugs of each patient's regimen in the order of the pre-registered pair list (fluoropyrimidine first for oxaliplatin regimens, gemcitabine first otherwise).
+
+| Cohort, outcome words | n | Released (right) | Retests | Drug 1 right | Drug 2 right | Loss at c = 0.25: gate, drug 1, drug 2 |
+|:-------------------------|-----:|:-------------|-------:|-------:|-------:|:---------------------|
+| Biliary, amended or author class | 10 | 7 (6) | 3 | 7 | 8 | 0.175, 0.30, 0.20 |
+| Biliary, registered words | 7 | 4 (3) | 3 | 4 | 5 | 0.25, 0.43, 0.29 |
+| Gastric, amended words | 12 | 9 (4) | 3 | 5 | 6 | 0.48, 0.58, 0.50 |
+| Gastric, registered words | 8 | 6 (4) | 2 | 5 | 5 | 0.31, 0.38, 0.38 |
+
+The blind test repeats the condition found in the osteosarcoma replay. In the biliary cohort, where each drug's organoid readout already agrees with the clinical course for 7 and 8 of 10 patients, agreement releases 7 calls with one error and has lower loss than either drug alone. In the gastric cohort, where each drug's readout agrees for only 5 and 6 of 12 patients, agreement releases 9 calls and 4 are right; it cannot recover signal the readouts do not carry. The cohorts are small, the regimens differ between patients, and the organoids are not a perfused chip.
+
 ## Horizon and Attrition Certificate: when does the mouse result confirm the chip?
 
 Petreus et al. [21] built a tumour-on-chip system that replays mouse plasma exposure profiles of irinotecan (active metabolite SN38) and the ATM inhibitor AZD0156 on SW620 colorectal cancer spheroids, and compared schedules with a mouse xenograft study. Their CC BY 4.0 Supplementary Data 1 contains the Figure 5a chip readout at day 7 and the Figure 5b mouse relative tumour size at days 7, 15 and 35. We use the three arms tested in both systems: irinotecan (SN38 on chip) alone, the combination with a 24-hour gap, and the combination with a 72-hour gap. Lower values are better; untreated chip spheroids have the largest readouts.
@@ -420,6 +439,16 @@ The chip's calls are confirmed in vivo from the third administration in Figure 3
 The original authors already reported tumour suppression in chip-effective groups and control-like growth in chip-ineffective groups. Our contribution is that a certificate frozen on another study reproduces that conclusion without modification, dates it to a specific administration, puts a per-mouse concordance on it, and marks where missing animals make it fragile. The source table does not link each mouse to its own chip readout, so the arms are the authors' chip-assigned treatment groups; the drugs differ between mice; the model is one breast-cancer cell line in mice; and the reason for missing later volumes is not stated.
 
 `python horizon_attrition.py` now downloads and verifies both the Petreus ZIP and the Zhai workbook and writes both certificates in one aggregate JSON on CPU in about 30 seconds including downloads; `--zhai-xlsx` reads a local copy. The Petreus fields are unchanged from the previous version. The Zhai article and data are CC BY 4.0 and are not redistributed.
+
+## Use it on your own chip data
+
+`chip_release.py` applies the release rule to any two-readout table a lab already has: one row per patient and two drug-response columns, such as a chip's vessel and tumoroid responses or the two drugs of a regimen. With an outcome column it learns each readout's cutoff leave-one-patient-out and reports released calls, errors, retests, loss and the break-even retest cost against each readout alone; without one it splits each readout at the cohort median and returns release or retest for every patient. It imports the same `release_counts` function as the published analyses.
+
+```text
+python chip_release.py examples/biliary_gemcis_auc.csv --a gemcitabine_auc --b cisplatin_auc --out actions.csv
+```
+
+The example file holds the biliary organoids' gemcitabine and cisplatin AUCs for 48 patients (CC BY 4.0, Table S3 of [25]) and no outcomes; the command releases 34 calls and sends 14 patients to retest.
 
 # Software artifact and real workflow
 
@@ -538,6 +567,8 @@ There is one individual entrant, Yan Su. Python, NumPy, SciPy, scikit-learn, h5p
 21. Petreus et al. [Tumour-on-chip microfluidic platform for assessment of drug pharmacokinetics and treatment response](https://doi.org/10.1038/s42003-021-02526-y). *Communications Biology* 4, 1001 (2021). Supplementary Data 1 figure source tables; article CC BY 4.0.
 22. Zhai et al. [Drug screening on digital microfluidics for cancer precision medicine](https://doi.org/10.1038/s41467-024-48616-3). *Nature Communications* 15, 4363 (2024). Source Data figures 3d and 4c; article CC BY 4.0.
 23. [Personalized prediction of chemotherapy efficacy in osteosarcoma through patient-derived organoids: correlation with survival and tumor proliferation potential](https://doi.org/10.1186/s13046-025-03541-1). *Journal of Experimental & Clinical Cancer Research* 45, 16 (2025). Tables 2-4; article CC BY 4.0.
+24. [Personalized drug screening using patient-derived organoid and its clinical relevance in gastric cancer](https://doi.org/10.1016/j.xcrm.2024.101627). *Cell Reports Medicine* (2024). Tables S3 and S4; article CC BY 4.0.
+25. [Personalized drug screening in patient-derived organoids of biliary tract cancer and its clinical application](https://doi.org/10.1016/j.xcrm.2023.101277). *Cell Reports Medicine* (2023). Tables S1, S3 and S4; article CC BY 4.0.
 
 # Appendix A: denominators and decision gates
 
