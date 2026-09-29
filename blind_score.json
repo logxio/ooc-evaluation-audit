@@ -1,0 +1,1015 @@
+{
+ "schema": "blind.consensus.score.v1",
+ "predictions_sha256": "bfb980002d8bdb16ab04ef736f044066f9f27a4b4be366d25d0279aeda4524ea",
+ "analyses": {
+  "registered_words": {
+   "gastric": {
+    "evaluable": 8,
+    "responders": 8,
+    "released": 6,
+    "released_correct": 4,
+    "retests": 2,
+    "drug_1_errors": 3,
+    "drug_2_errors": 3,
+    "cost_per_patient": {
+     "0.1": 0.275,
+     "0.25": 0.3125,
+     "0.5": 0.375
+    },
+    "single_drug_cost_per_patient": {
+     "drug_1_errors": 0.375,
+     "drug_2_errors": 0.375
+    }
+   },
+   "biliary": {
+    "evaluable": 7,
+    "responders": 6,
+    "released": 4,
+    "released_correct": 3,
+    "retests": 3,
+    "drug_1_errors": 3,
+    "drug_2_errors": 2,
+    "cost_per_patient": {
+     "0.1": 0.185714,
+     "0.25": 0.25,
+     "0.5": 0.357143
+    },
+    "single_drug_cost_per_patient": {
+     "drug_1_errors": 0.428571,
+     "drug_2_errors": 0.285714
+    }
+   }
+  },
+  "registered_words_rows": {
+   "gastric": [
+    {
+     "patient": "G9T",
+     "evaluable": true,
+     "pair": "5-FU+Oxaliplatin",
+     "truth": "responder",
+     "prediction": "responder",
+     "single": {
+      "5-FU": "responder",
+      "Oxaliplatin": "responder"
+     }
+    },
+    {
+     "patient": "G32T",
+     "evaluable": true,
+     "pair": "5-FU+Oxaliplatin",
+     "truth": "responder",
+     "prediction": "responder",
+     "single": {
+      "5-FU": "responder",
+      "Oxaliplatin": "responder"
+     }
+    },
+    {
+     "patient": "G36T",
+     "evaluable": true,
+     "pair": "5-FU+Oxaliplatin",
+     "truth": "responder",
+     "prediction": "non_responder",
+     "single": {
+      "5-FU": "non_responder",
+      "Oxaliplatin": "non_responder"
+     }
+    },
+    {
+     "patient": "G39T",
+     "evaluable": false,
+     "pair": [
+      "5-FU",
+      "Oxaliplatin"
+     ],
+     "truth": null
+    },
+    {
+     "patient": "G41T",
+     "evaluable": true,
+     "pair": "5-FU+Oxaliplatin",
+     "truth": "responder",
+     "prediction": "responder",
+     "single": {
+      "5-FU": "responder",
+      "Oxaliplatin": "responder"
+     }
+    },
+    {
+     "patient": "G43T",
+     "evaluable": true,
+     "pair": "5-FU+Oxaliplatin",
+     "truth": "responder",
+     "prediction": "non_responder",
+     "single": {
+      "5-FU": "non_responder",
+      "Oxaliplatin": "non_responder"
+     }
+    },
+    {
+     "patient": "G59T",
+     "evaluable": true,
+     "pair": "5-FU+Oxaliplatin",
+     "truth": "responder",
+     "prediction": "responder",
+     "single": {
+      "5-FU": "responder",
+      "Oxaliplatin": "responder"
+     }
+    },
+    {
+     "patient": "G62T",
+     "evaluable": true,
+     "pair": "5-FU+Oxaliplatin",
+     "truth": "responder",
+     "prediction": "retest",
+     "single": {
+      "5-FU": "responder",
+      "Oxaliplatin": "non_responder"
+     }
+    },
+    {
+     "patient": "G20T",
+     "evaluable": false,
+     "pair": [
+      "5-FU",
+      "Oxaliplatin"
+     ],
+     "truth": null
+    },
+    {
+     "patient": "G30T",
+     "evaluable": true,
+     "pair": "5-FU+Oxaliplatin",
+     "truth": "responder",
+     "prediction": "retest",
+     "single": {
+      "5-FU": "non_responder",
+      "Oxaliplatin": "responder"
+     }
+    },
+    {
+     "patient": "G50T",
+     "evaluable": false,
+     "pair": [
+      "5-FU",
+      "Oxaliplatin"
+     ],
+     "truth": null
+    },
+    {
+     "patient": "G56T",
+     "evaluable": false,
+     "pair": [
+      "5-FU",
+      "Oxaliplatin"
+     ],
+     "truth": null
+    }
+   ],
+   "biliary": [
+    {
+     "patient": "ECC1T-P",
+     "evaluable": true,
+     "pair": "5-FU+Oxaliplatin",
+     "truth": "responder",
+     "prediction": "retest",
+     "single": {
+      "5-FU": "non_responder",
+      "Oxaliplatin": "responder"
+     }
+    },
+    {
+     "patient": "ECC8T-P",
+     "evaluable": false,
+     "pair": [
+      "Gemcitabine",
+      "Paclitaxel"
+     ],
+     "truth": null
+    },
+    {
+     "patient": "ICC49T-P",
+     "evaluable": false,
+     "pair": [
+      "Gemcitabine",
+      "Oxaliplatin"
+     ],
+     "truth": null
+    },
+    {
+     "patient": "ECC21T-P",
+     "evaluable": false,
+     "pair": null,
+     "truth": "responder"
+    },
+    {
+     "patient": "ICC65T-P",
+     "evaluable": false,
+     "pair": null,
+     "truth": "responder"
+    },
+    {
+     "patient": "ECC27T-P",
+     "evaluable": true,
+     "pair": "Gemcitabine+5-FU",
+     "truth": "responder",
+     "prediction": "responder",
+     "single": {
+      "Gemcitabine": "responder",
+      "5-FU": "responder"
+     }
+    },
+    {
+     "patient": "ICC63T-P",
+     "evaluable": false,
+     "pair": null,
+     "truth": "non_responder"
+    },
+    {
+     "patient": "ECC17T-P",
+     "evaluable": true,
+     "pair": "Gemcitabine+Cisplatin",
+     "truth": "responder",
+     "prediction": "retest",
+     "single": {
+      "Gemcitabine": "responder",
+      "Cisplatin": "non_responder"
+     }
+    },
+    {
+     "patient": "ICC50T-P",
+     "evaluable": true,
+     "pair": "Gemcitabine+Cisplatin",
+     "truth": "non_responder",
+     "prediction": "retest",
+     "single": {
+      "Gemcitabine": "responder",
+      "Cisplatin": "non_responder"
+     }
+    },
+    {
+     "patient": "ECC20T-P",
+     "evaluable": true,
+     "pair": "Gemcitabine+Oxaliplatin",
+     "truth": "responder",
+     "prediction": "responder",
+     "single": {
+      "Gemcitabine": "responder",
+      "Oxaliplatin": "responder"
+     }
+    },
+    {
+     "patient": "ICC71T-P",
+     "evaluable": true,
+     "pair": "Gemcitabine+Cisplatin",
+     "truth": "responder",
+     "prediction": "responder",
+     "single": {
+      "Gemcitabine": "responder",
+      "Cisplatin": "responder"
+     }
+    },
+    {
+     "patient": "ICC69T-P",
+     "evaluable": true,
+     "pair": "Gemcitabine+Cisplatin",
+     "truth": "responder",
+     "prediction": "non_responder",
+     "single": {
+      "Gemcitabine": "non_responder",
+      "Cisplatin": "non_responder"
+     }
+    },
+    {
+     "patient": "ICC73T-P",
+     "evaluable": false,
+     "pair": [
+      "Gemcitabine",
+      "Cisplatin"
+     ],
+     "truth": null
+    }
+   ]
+  },
+  "amended_words": {
+   "gastric": {
+    "evaluable": 12,
+    "responders": 8,
+    "released": 9,
+    "released_correct": 4,
+    "retests": 3,
+    "drug_1_errors": 7,
+    "drug_2_errors": 6,
+    "cost_per_patient": {
+     "0.1": 0.441667,
+     "0.25": 0.479167,
+     "0.5": 0.541667
+    },
+    "single_drug_cost_per_patient": {
+     "drug_1_errors": 0.583333,
+     "drug_2_errors": 0.5
+    }
+   },
+   "biliary": {
+    "evaluable": 10,
+    "responders": 6,
+    "released": 7,
+    "released_correct": 6,
+    "retests": 3,
+    "drug_1_errors": 3,
+    "drug_2_errors": 2,
+    "cost_per_patient": {
+     "0.1": 0.13,
+     "0.25": 0.175,
+     "0.5": 0.25
+    },
+    "single_drug_cost_per_patient": {
+     "drug_1_errors": 0.3,
+     "drug_2_errors": 0.2
+    }
+   }
+  },
+  "amended_words_rows": {
+   "gastric": [
+    {
+     "patient": "G9T",
+     "evaluable": true,
+     "pair": "5-FU+Oxaliplatin",
+     "truth": "responder",
+     "prediction": "responder",
+     "single": {
+      "5-FU": "responder",
+      "Oxaliplatin": "responder"
+     }
+    },
+    {
+     "patient": "G32T",
+     "evaluable": true,
+     "pair": "5-FU+Oxaliplatin",
+     "truth": "responder",
+     "prediction": "responder",
+     "single": {
+      "5-FU": "responder",
+      "Oxaliplatin": "responder"
+     }
+    },
+    {
+     "patient": "G36T",
+     "evaluable": true,
+     "pair": "5-FU+Oxaliplatin",
+     "truth": "responder",
+     "prediction": "non_responder",
+     "single": {
+      "5-FU": "non_responder",
+      "Oxaliplatin": "non_responder"
+     }
+    },
+    {
+     "patient": "G39T",
+     "evaluable": true,
+     "pair": "5-FU+Oxaliplatin",
+     "truth": "non_responder",
+     "prediction": "retest",
+     "single": {
+      "5-FU": "responder",
+      "Oxaliplatin": "non_responder"
+     }
+    },
+    {
+     "patient": "G41T",
+     "evaluable": true,
+     "pair": "5-FU+Oxaliplatin",
+     "truth": "responder",
+     "prediction": "responder",
+     "single": {
+      "5-FU": "responder",
+      "Oxaliplatin": "responder"
+     }
+    },
+    {
+     "patient": "G43T",
+     "evaluable": true,
+     "pair": "5-FU+Oxaliplatin",
+     "truth": "responder",
+     "prediction": "non_responder",
+     "single": {
+      "5-FU": "non_responder",
+      "Oxaliplatin": "non_responder"
+     }
+    },
+    {
+     "patient": "G59T",
+     "evaluable": true,
+     "pair": "5-FU+Oxaliplatin",
+     "truth": "responder",
+     "prediction": "responder",
+     "single": {
+      "5-FU": "responder",
+      "Oxaliplatin": "responder"
+     }
+    },
+    {
+     "patient": "G62T",
+     "evaluable": true,
+     "pair": "5-FU+Oxaliplatin",
+     "truth": "responder",
+     "prediction": "retest",
+     "single": {
+      "5-FU": "responder",
+      "Oxaliplatin": "non_responder"
+     }
+    },
+    {
+     "patient": "G20T",
+     "evaluable": true,
+     "pair": "5-FU+Oxaliplatin",
+     "truth": "non_responder",
+     "prediction": "responder",
+     "single": {
+      "5-FU": "responder",
+      "Oxaliplatin": "responder"
+     }
+    },
+    {
+     "patient": "G30T",
+     "evaluable": true,
+     "pair": "5-FU+Oxaliplatin",
+     "truth": "responder",
+     "prediction": "retest",
+     "single": {
+      "5-FU": "non_responder",
+      "Oxaliplatin": "responder"
+     }
+    },
+    {
+     "patient": "G50T",
+     "evaluable": true,
+     "pair": "5-FU+Oxaliplatin",
+     "truth": "non_responder",
+     "prediction": "responder",
+     "single": {
+      "5-FU": "responder",
+      "Oxaliplatin": "responder"
+     }
+    },
+    {
+     "patient": "G56T",
+     "evaluable": true,
+     "pair": "5-FU+Oxaliplatin",
+     "truth": "non_responder",
+     "prediction": "responder",
+     "single": {
+      "5-FU": "responder",
+      "Oxaliplatin": "responder"
+     }
+    }
+   ],
+   "biliary": [
+    {
+     "patient": "ECC1T-P",
+     "evaluable": true,
+     "pair": "5-FU+Oxaliplatin",
+     "truth": "responder",
+     "prediction": "retest",
+     "single": {
+      "5-FU": "non_responder",
+      "Oxaliplatin": "responder"
+     }
+    },
+    {
+     "patient": "ECC8T-P",
+     "evaluable": true,
+     "pair": "Gemcitabine+Paclitaxel",
+     "truth": "non_responder",
+     "prediction": "non_responder",
+     "single": {
+      "Gemcitabine": "non_responder",
+      "Paclitaxel": "non_responder"
+     }
+    },
+    {
+     "patient": "ICC49T-P",
+     "evaluable": true,
+     "pair": "Gemcitabine+Oxaliplatin",
+     "truth": "non_responder",
+     "prediction": "non_responder",
+     "single": {
+      "Gemcitabine": "non_responder",
+      "Oxaliplatin": "non_responder"
+     }
+    },
+    {
+     "patient": "ECC21T-P",
+     "evaluable": false,
+     "pair": null,
+     "truth": "responder"
+    },
+    {
+     "patient": "ICC65T-P",
+     "evaluable": false,
+     "pair": null,
+     "truth": "responder"
+    },
+    {
+     "patient": "ECC27T-P",
+     "evaluable": true,
+     "pair": "Gemcitabine+5-FU",
+     "truth": "responder",
+     "prediction": "responder",
+     "single": {
+      "Gemcitabine": "responder",
+      "5-FU": "responder"
+     }
+    },
+    {
+     "patient": "ICC63T-P",
+     "evaluable": false,
+     "pair": null,
+     "truth": "non_responder"
+    },
+    {
+     "patient": "ECC17T-P",
+     "evaluable": true,
+     "pair": "Gemcitabine+Cisplatin",
+     "truth": "responder",
+     "prediction": "retest",
+     "single": {
+      "Gemcitabine": "responder",
+      "Cisplatin": "non_responder"
+     }
+    },
+    {
+     "patient": "ICC50T-P",
+     "evaluable": true,
+     "pair": "Gemcitabine+Cisplatin",
+     "truth": "non_responder",
+     "prediction": "retest",
+     "single": {
+      "Gemcitabine": "responder",
+      "Cisplatin": "non_responder"
+     }
+    },
+    {
+     "patient": "ECC20T-P",
+     "evaluable": true,
+     "pair": "Gemcitabine+Oxaliplatin",
+     "truth": "responder",
+     "prediction": "responder",
+     "single": {
+      "Gemcitabine": "responder",
+      "Oxaliplatin": "responder"
+     }
+    },
+    {
+     "patient": "ICC71T-P",
+     "evaluable": true,
+     "pair": "Gemcitabine+Cisplatin",
+     "truth": "responder",
+     "prediction": "responder",
+     "single": {
+      "Gemcitabine": "responder",
+      "Cisplatin": "responder"
+     }
+    },
+    {
+     "patient": "ICC69T-P",
+     "evaluable": true,
+     "pair": "Gemcitabine+Cisplatin",
+     "truth": "responder",
+     "prediction": "non_responder",
+     "single": {
+      "Gemcitabine": "non_responder",
+      "Cisplatin": "non_responder"
+     }
+    },
+    {
+     "patient": "ICC73T-P",
+     "evaluable": true,
+     "pair": "Gemcitabine+Cisplatin",
+     "truth": "non_responder",
+     "prediction": "non_responder",
+     "single": {
+      "Gemcitabine": "non_responder",
+      "Cisplatin": "non_responder"
+     }
+    }
+   ]
+  },
+  "objective_response": {
+   "gastric": {
+    "evaluable": 0,
+    "responders": 0,
+    "released": 0,
+    "released_correct": 0,
+    "retests": 0,
+    "drug_1_errors": 0,
+    "drug_2_errors": 0,
+    "cost_per_patient": null,
+    "single_drug_cost_per_patient": null
+   },
+   "biliary": {
+    "evaluable": 5,
+    "responders": 3,
+    "released": 3,
+    "released_correct": 3,
+    "retests": 2,
+    "drug_1_errors": 1,
+    "drug_2_errors": 1,
+    "cost_per_patient": {
+     "0.1": 0.04,
+     "0.25": 0.1,
+     "0.5": 0.2
+    },
+    "single_drug_cost_per_patient": {
+     "drug_1_errors": 0.2,
+     "drug_2_errors": 0.2
+    }
+   }
+  },
+  "objective_response_rows": {
+   "gastric": [
+    {
+     "patient": "G9T",
+     "evaluable": false,
+     "pair": [
+      "5-FU",
+      "Oxaliplatin"
+     ],
+     "truth": null
+    },
+    {
+     "patient": "G32T",
+     "evaluable": false,
+     "pair": [
+      "5-FU",
+      "Oxaliplatin"
+     ],
+     "truth": null
+    },
+    {
+     "patient": "G36T",
+     "evaluable": false,
+     "pair": [
+      "5-FU",
+      "Oxaliplatin"
+     ],
+     "truth": null
+    },
+    {
+     "patient": "G39T",
+     "evaluable": false,
+     "pair": [
+      "5-FU",
+      "Oxaliplatin"
+     ],
+     "truth": null
+    },
+    {
+     "patient": "G41T",
+     "evaluable": false,
+     "pair": [
+      "5-FU",
+      "Oxaliplatin"
+     ],
+     "truth": null
+    },
+    {
+     "patient": "G43T",
+     "evaluable": false,
+     "pair": [
+      "5-FU",
+      "Oxaliplatin"
+     ],
+     "truth": null
+    },
+    {
+     "patient": "G59T",
+     "evaluable": false,
+     "pair": [
+      "5-FU",
+      "Oxaliplatin"
+     ],
+     "truth": null
+    },
+    {
+     "patient": "G62T",
+     "evaluable": false,
+     "pair": [
+      "5-FU",
+      "Oxaliplatin"
+     ],
+     "truth": null
+    },
+    {
+     "patient": "G20T",
+     "evaluable": false,
+     "pair": [
+      "5-FU",
+      "Oxaliplatin"
+     ],
+     "truth": null
+    },
+    {
+     "patient": "G30T",
+     "evaluable": false,
+     "pair": [
+      "5-FU",
+      "Oxaliplatin"
+     ],
+     "truth": null
+    },
+    {
+     "patient": "G50T",
+     "evaluable": false,
+     "pair": [
+      "5-FU",
+      "Oxaliplatin"
+     ],
+     "truth": null
+    },
+    {
+     "patient": "G56T",
+     "evaluable": false,
+     "pair": [
+      "5-FU",
+      "Oxaliplatin"
+     ],
+     "truth": null
+    }
+   ],
+   "biliary": [
+    {
+     "patient": "ECC1T-P",
+     "evaluable": false,
+     "pair": [
+      "5-FU",
+      "Oxaliplatin"
+     ],
+     "truth": null
+    },
+    {
+     "patient": "ECC8T-P",
+     "evaluable": false,
+     "pair": [
+      "Gemcitabine",
+      "Paclitaxel"
+     ],
+     "truth": null
+    },
+    {
+     "patient": "ICC49T-P",
+     "evaluable": false,
+     "pair": [
+      "Gemcitabine",
+      "Oxaliplatin"
+     ],
+     "truth": null
+    },
+    {
+     "patient": "ECC21T-P",
+     "evaluable": false,
+     "pair": null,
+     "truth": null
+    },
+    {
+     "patient": "ICC65T-P",
+     "evaluable": false,
+     "pair": null,
+     "truth": null
+    },
+    {
+     "patient": "ECC27T-P",
+     "evaluable": false,
+     "pair": [
+      "Gemcitabine",
+      "5-FU"
+     ],
+     "truth": null
+    },
+    {
+     "patient": "ICC63T-P",
+     "evaluable": false,
+     "pair": null,
+     "truth": null
+    },
+    {
+     "patient": "ECC17T-P",
+     "evaluable": true,
+     "pair": "Gemcitabine+Cisplatin",
+     "truth": "responder",
+     "prediction": "retest",
+     "single": {
+      "Gemcitabine": "responder",
+      "Cisplatin": "non_responder"
+     }
+    },
+    {
+     "patient": "ICC50T-P",
+     "evaluable": true,
+     "pair": "Gemcitabine+Cisplatin",
+     "truth": "non_responder",
+     "prediction": "retest",
+     "single": {
+      "Gemcitabine": "responder",
+      "Cisplatin": "non_responder"
+     }
+    },
+    {
+     "patient": "ECC20T-P",
+     "evaluable": true,
+     "pair": "Gemcitabine+Oxaliplatin",
+     "truth": "responder",
+     "prediction": "responder",
+     "single": {
+      "Gemcitabine": "responder",
+      "Oxaliplatin": "responder"
+     }
+    },
+    {
+     "patient": "ICC71T-P",
+     "evaluable": true,
+     "pair": "Gemcitabine+Cisplatin",
+     "truth": "responder",
+     "prediction": "responder",
+     "single": {
+      "Gemcitabine": "responder",
+      "Cisplatin": "responder"
+     }
+    },
+    {
+     "patient": "ICC69T-P",
+     "evaluable": true,
+     "pair": "Gemcitabine+Cisplatin",
+     "truth": "non_responder",
+     "prediction": "non_responder",
+     "single": {
+      "Gemcitabine": "non_responder",
+      "Cisplatin": "non_responder"
+     }
+    },
+    {
+     "patient": "ICC73T-P",
+     "evaluable": false,
+     "pair": [
+      "Gemcitabine",
+      "Cisplatin"
+     ],
+     "truth": null
+    }
+   ]
+  },
+  "biliary_author_class": {
+   "biliary": {
+    "evaluable": 10,
+    "responders": 6,
+    "released": 7,
+    "released_correct": 6,
+    "retests": 3,
+    "drug_1_errors": 3,
+    "drug_2_errors": 2,
+    "cost_per_patient": {
+     "0.1": 0.13,
+     "0.25": 0.175,
+     "0.5": 0.25
+    },
+    "single_drug_cost_per_patient": {
+     "drug_1_errors": 0.3,
+     "drug_2_errors": 0.2
+    }
+   }
+  },
+  "biliary_author_class_rows": {
+   "biliary": [
+    {
+     "patient": "ECC1T-P",
+     "evaluable": true,
+     "pair": "5-FU+Oxaliplatin",
+     "truth": "responder",
+     "prediction": "retest",
+     "single": {
+      "5-FU": "non_responder",
+      "Oxaliplatin": "responder"
+     }
+    },
+    {
+     "patient": "ECC8T-P",
+     "evaluable": true,
+     "pair": "Gemcitabine+Paclitaxel",
+     "truth": "non_responder",
+     "prediction": "non_responder",
+     "single": {
+      "Gemcitabine": "non_responder",
+      "Paclitaxel": "non_responder"
+     }
+    },
+    {
+     "patient": "ICC49T-P",
+     "evaluable": true,
+     "pair": "Gemcitabine+Oxaliplatin",
+     "truth": "non_responder",
+     "prediction": "non_responder",
+     "single": {
+      "Gemcitabine": "non_responder",
+      "Oxaliplatin": "non_responder"
+     }
+    },
+    {
+     "patient": "ECC21T-P",
+     "evaluable": false,
+     "pair": null,
+     "truth": "responder"
+    },
+    {
+     "patient": "ICC65T-P",
+     "evaluable": false,
+     "pair": null,
+     "truth": "responder"
+    },
+    {
+     "patient": "ECC27T-P",
+     "evaluable": true,
+     "pair": "Gemcitabine+5-FU",
+     "truth": "responder",
+     "prediction": "responder",
+     "single": {
+      "Gemcitabine": "responder",
+      "5-FU": "responder"
+     }
+    },
+    {
+     "patient": "ICC63T-P",
+     "evaluable": false,
+     "pair": null,
+     "truth": "non_responder"
+    },
+    {
+     "patient": "ECC17T-P",
+     "evaluable": true,
+     "pair": "Gemcitabine+Cisplatin",
+     "truth": "responder",
+     "prediction": "retest",
+     "single": {
+      "Gemcitabine": "responder",
+      "Cisplatin": "non_responder"
+     }
+    },
+    {
+     "patient": "ICC50T-P",
+     "evaluable": true,
+     "pair": "Gemcitabine+Cisplatin",
+     "truth": "non_responder",
+     "prediction": "retest",
+     "single": {
+      "Gemcitabine": "responder",
+      "Cisplatin": "non_responder"
+     }
+    },
+    {
+     "patient": "ECC20T-P",
+     "evaluable": true,
+     "pair": "Gemcitabine+Oxaliplatin",
+     "truth": "responder",
+     "prediction": "responder",
+     "single": {
+      "Gemcitabine": "responder",
+      "Oxaliplatin": "responder"
+     }
+    },
+    {
+     "patient": "ICC71T-P",
+     "evaluable": true,
+     "pair": "Gemcitabine+Cisplatin",
+     "truth": "responder",
+     "prediction": "responder",
+     "single": {
+      "Gemcitabine": "responder",
+      "Cisplatin": "responder"
+     }
+    },
+    {
+     "patient": "ICC69T-P",
+     "evaluable": true,
+     "pair": "Gemcitabine+Cisplatin",
+     "truth": "responder",
+     "prediction": "non_responder",
+     "single": {
+      "Gemcitabine": "non_responder",
+      "Cisplatin": "non_responder"
+     }
+    },
+    {
+     "patient": "ICC73T-P",
+     "evaluable": true,
+     "pair": "Gemcitabine+Cisplatin",
+     "truth": "non_responder",
+     "prediction": "non_responder",
+     "single": {
+      "Gemcitabine": "non_responder",
+      "Cisplatin": "non_responder"
+     }
+    }
+   ]
+  }
+ }
+}
