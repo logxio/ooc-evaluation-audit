@@ -1,0 +1,4409 @@
+{
+ "assertions": [
+  "P1. In each primary analysis the two single readouts share more wrong calls than independence predicts, n(1-p1)(1-p2), where p1 and p2 are the readouts' observed accuracies on the same patients.",
+  "P2. In each primary analysis the observed accuracy of released calls is within 0.09 of p1*p2 / (p1*p2 + (1-p1)*(1-p2)).",
+  "P3. In any analysis where the weaker readout is not better than a coin flip (min(p1, p2) <= 0.5), released calls are not more accurate than the better readout alone.",
+  "Checked, not predicted: when p1 + p2 > 1, released accuracy falls below the formula exactly when shared wrong calls exceed the independence count; the two break-even retest costs sum to 1."
+ ],
+ "cohorts": {
+  "crlm": {
+   "liver_metastasis_organoid": {
+    "medians": {
+     "5-FU": 8.054,
+     "Irinotecan": 4.117,
+     "Oxaliplatin": 36.68
+    },
+    "patients": {
+     "P1": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": true,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "P10": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": false,
+       "Irinotecan": false,
+       "Oxaliplatin": false
+      }
+     },
+     "P11": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": true,
+       "Irinotecan": true,
+       "Oxaliplatin": false
+      }
+     },
+     "P12": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": true,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "P13": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": true,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "P14": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": true,
+       "Irinotecan": false,
+       "Oxaliplatin": false
+      }
+     },
+     "P15": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": true,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "P16": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": true,
+       "Irinotecan": true,
+       "Oxaliplatin": false
+      }
+     },
+     "P17": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": false,
+       "Irinotecan": false,
+       "Oxaliplatin": false
+      }
+     },
+     "P18": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": true,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "P19": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": false,
+       "Irinotecan": false,
+       "Oxaliplatin": true
+      }
+     },
+     "P2": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": true,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "P20": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": false,
+       "Irinotecan": false,
+       "Oxaliplatin": true
+      }
+     },
+     "P21": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": false,
+       "Irinotecan": false,
+       "Oxaliplatin": false
+      }
+     },
+     "P22": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": false,
+       "Irinotecan": false,
+       "Oxaliplatin": true
+      }
+     },
+     "P23": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": true,
+       "Irinotecan": false,
+       "Oxaliplatin": false
+      }
+     },
+     "P24": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": false,
+       "Irinotecan": true,
+       "Oxaliplatin": false
+      }
+     },
+     "P25": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": false,
+       "Irinotecan": false,
+       "Oxaliplatin": true
+      }
+     },
+     "P3": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": false,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "P4": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": true,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "P5": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": true,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "P6": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": true,
+       "Irinotecan": false,
+       "Oxaliplatin": false
+      }
+     },
+     "P7": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": false,
+       "Irinotecan": false,
+       "Oxaliplatin": false
+      }
+     },
+     "P8": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": false,
+       "Irinotecan": true,
+       "Oxaliplatin": false
+      }
+     },
+     "P9": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": false,
+       "Irinotecan": false,
+       "Oxaliplatin": false
+      }
+     }
+    }
+   },
+   "mean_of_both_organoids": {
+    "medians": {
+     "5-FU": 6.5985,
+     "Irinotecan": 4.327,
+     "Oxaliplatin": 37.48
+    },
+    "patients": {
+     "P1": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": true,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "P10": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": false,
+       "Irinotecan": false,
+       "Oxaliplatin": false
+      }
+     },
+     "P11": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": true,
+       "Irinotecan": true,
+       "Oxaliplatin": false
+      }
+     },
+     "P12": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": true,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "P13": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": true,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "P14": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": true,
+       "Irinotecan": false,
+       "Oxaliplatin": false
+      }
+     },
+     "P15": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": true,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "P16": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": true,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "P17": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": false,
+       "Irinotecan": false,
+       "Oxaliplatin": false
+      }
+     },
+     "P18": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": true,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "P19": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": false,
+       "Irinotecan": false,
+       "Oxaliplatin": true
+      }
+     },
+     "P2": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": true,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "P20": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": false,
+       "Irinotecan": false,
+       "Oxaliplatin": true
+      }
+     },
+     "P21": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": false,
+       "Irinotecan": false,
+       "Oxaliplatin": false
+      }
+     },
+     "P22": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": false,
+       "Irinotecan": false,
+       "Oxaliplatin": true
+      }
+     },
+     "P23": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": true,
+       "Irinotecan": true,
+       "Oxaliplatin": false
+      }
+     },
+     "P24": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": false,
+       "Irinotecan": true,
+       "Oxaliplatin": false
+      }
+     },
+     "P25": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": false,
+       "Irinotecan": false,
+       "Oxaliplatin": true
+      }
+     },
+     "P3": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": false,
+       "Irinotecan": false,
+       "Oxaliplatin": false
+      }
+     },
+     "P4": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": true,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "P5": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": true,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "P6": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": true,
+       "Irinotecan": false,
+       "Oxaliplatin": false
+      }
+     },
+     "P7": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": false,
+       "Irinotecan": false,
+       "Oxaliplatin": false
+      }
+     },
+     "P8": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": false,
+       "Irinotecan": true,
+       "Oxaliplatin": false
+      }
+     },
+     "P9": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": false,
+       "Irinotecan": false,
+       "Oxaliplatin": false
+      }
+     }
+    }
+   },
+   "primary_tumour_organoid": {
+    "medians": {
+     "5-FU": 8.1,
+     "Irinotecan": 4.776,
+     "Oxaliplatin": 39.3
+    },
+    "patients": {
+     "P1": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": true,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "P10": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": false,
+       "Irinotecan": false,
+       "Oxaliplatin": false
+      }
+     },
+     "P11": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": true,
+       "Irinotecan": true,
+       "Oxaliplatin": false
+      }
+     },
+     "P12": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": true,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "P13": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": true,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "P14": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": true,
+       "Irinotecan": false,
+       "Oxaliplatin": false
+      }
+     },
+     "P15": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": true,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "P16": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": true,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "P17": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": false,
+       "Irinotecan": false,
+       "Oxaliplatin": false
+      }
+     },
+     "P18": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": true,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "P19": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": true,
+       "Irinotecan": false,
+       "Oxaliplatin": true
+      }
+     },
+     "P2": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": true,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "P20": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": false,
+       "Irinotecan": false,
+       "Oxaliplatin": true
+      }
+     },
+     "P21": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": false,
+       "Irinotecan": false,
+       "Oxaliplatin": false
+      }
+     },
+     "P22": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": false,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "P23": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": true,
+       "Irinotecan": true,
+       "Oxaliplatin": false
+      }
+     },
+     "P24": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": false,
+       "Irinotecan": true,
+       "Oxaliplatin": false
+      }
+     },
+     "P25": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": false,
+       "Irinotecan": false,
+       "Oxaliplatin": false
+      }
+     },
+     "P3": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": false,
+       "Irinotecan": false,
+       "Oxaliplatin": false
+      }
+     },
+     "P4": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": true,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "P5": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": false,
+       "Irinotecan": true,
+       "Oxaliplatin": false
+      }
+     },
+     "P6": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": true,
+       "Irinotecan": false,
+       "Oxaliplatin": true
+      }
+     },
+     "P7": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": false,
+       "Irinotecan": false,
+       "Oxaliplatin": false
+      }
+     },
+     "P8": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": false,
+       "Irinotecan": false,
+       "Oxaliplatin": true
+      }
+     },
+     "P9": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "readout_sensitive": {
+       "5-FU": false,
+       "Irinotecan": false,
+       "Oxaliplatin": false
+      }
+     }
+    }
+   },
+   "primary_variant": "mean_of_both_organoids"
+  },
+  "rectal": {
+   "blind_patients": [
+    "Patient43",
+    "Patient44",
+    "Patient45",
+    "Patient46",
+    "Patient47",
+    "Patient48",
+    "Patient49",
+    "Patient50",
+    "Patient51",
+    "Patient52",
+    "Patient53",
+    "Patient54",
+    "Patient55",
+    "Patient56",
+    "Patient57",
+    "Patient58",
+    "Patient59",
+    "Patient60",
+    "Patient61",
+    "Patient62",
+    "Patient63",
+    "Patient64",
+    "Patient65",
+    "Patient66",
+    "Patient67",
+    "Patient68",
+    "Patient69",
+    "Patient70",
+    "Patient71",
+    "Patient72",
+    "Patient73",
+    "Patient74",
+    "Patient75",
+    "Patient76",
+    "Patient77",
+    "Patient78",
+    "Patient79",
+    "Patient80",
+    "Patient81",
+    "Patient82",
+    "Patient83",
+    "Patient84",
+    "Patient85",
+    "Patient86",
+    "Patient87",
+    "Patient88",
+    "Patient89",
+    "Patient90",
+    "Patient91",
+    "Patient92",
+    "Patient93",
+    "Patient94",
+    "Patient95",
+    "Patient96",
+    "Patient97",
+    "Patient98",
+    "Patient99",
+    "Patient100",
+    "Patient101",
+    "Patient102",
+    "Patient103",
+    "Patient104",
+    "Patient105",
+    "Patient106",
+    "Patient107",
+    "Patient108",
+    "Patient109",
+    "Patient110",
+    "Patient111",
+    "Patient112",
+    "Patient113",
+    "Patient114",
+    "Patient115",
+    "Patient116",
+    "Patient117",
+    "Patient118",
+    "Patient119",
+    "Patient120",
+    "Patient121",
+    "Patient122",
+    "Patient123",
+    "Patient124",
+    "Patient125",
+    "Patient126",
+    "Patient127",
+    "Patient128"
+   ],
+   "medians": {
+    "5-FU": 0.6736,
+    "Combined": 0.4143,
+    "Irinotecan": 0.5077,
+    "Irradiation": 1.39815
+   },
+   "patients": {
+    "Patient1": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": true,
+      "Irinotecan": true,
+      "Irradiation": true
+     }
+    },
+    "Patient10": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": false,
+      "Irinotecan": false,
+      "Irradiation": true
+     }
+    },
+    "Patient100": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": true,
+      "Irinotecan": true,
+      "Irradiation": true
+     }
+    },
+    "Patient101": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": true,
+      "Irinotecan": true,
+      "Irradiation": true
+     }
+    },
+    "Patient102": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": true,
+      "Irinotecan": true,
+      "Irradiation": true
+     }
+    },
+    "Patient103": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+5-FU": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": false,
+      "Irinotecan": true,
+      "Irradiation": false
+     }
+    },
+    "Patient104": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": true,
+      "Irinotecan": false,
+      "Irradiation": false
+     }
+    },
+    "Patient105": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+5-FU": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": false,
+      "Irinotecan": false,
+      "Irradiation": true
+     }
+    },
+    "Patient106": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": false,
+      "Irinotecan": false,
+      "Irradiation": false
+     }
+    },
+    "Patient107": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": true,
+      "Irinotecan": false,
+      "Irradiation": true
+     }
+    },
+    "Patient108": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": true,
+      "Irinotecan": true,
+      "Irradiation": false
+     }
+    },
+    "Patient109": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": false,
+      "Irinotecan": false,
+      "Irradiation": true
+     }
+    },
+    "Patient11": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": false,
+      "Irinotecan": false,
+      "Irradiation": true
+     }
+    },
+    "Patient110": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": false,
+      "Irinotecan": false,
+      "Irradiation": false
+     }
+    },
+    "Patient111": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": false,
+      "Irinotecan": true,
+      "Irradiation": true
+     }
+    },
+    "Patient112": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": false,
+      "Irinotecan": false,
+      "Irradiation": false
+     }
+    },
+    "Patient113": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": false,
+      "Irinotecan": false,
+      "Irradiation": true
+     }
+    },
+    "Patient114": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": true,
+      "Irinotecan": true,
+      "Irradiation": false
+     }
+    },
+    "Patient115": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": false,
+      "Irinotecan": false,
+      "Irradiation": false
+     }
+    },
+    "Patient116": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": false,
+      "Irinotecan": false,
+      "Irradiation": true
+     }
+    },
+    "Patient117": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+5-FU": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": false,
+      "Irinotecan": false,
+      "Irradiation": true
+     }
+    },
+    "Patient118": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": true,
+      "Irinotecan": false,
+      "Irradiation": false
+     }
+    },
+    "Patient119": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+5-FU": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": true,
+      "Irinotecan": true,
+      "Irradiation": false
+     }
+    },
+    "Patient12": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": true,
+      "Irinotecan": true,
+      "Irradiation": true
+     }
+    },
+    "Patient120": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+5-FU": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": true,
+      "Irinotecan": false,
+      "Irradiation": true
+     }
+    },
+    "Patient121": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": false,
+      "Irinotecan": false,
+      "Irradiation": false
+     }
+    },
+    "Patient122": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": false,
+      "Irinotecan": false,
+      "Irradiation": false
+     }
+    },
+    "Patient123": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": false,
+      "Irinotecan": true,
+      "Irradiation": false
+     }
+    },
+    "Patient124": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": false,
+      "Irinotecan": false,
+      "Irradiation": false
+     }
+    },
+    "Patient125": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": false,
+      "Irinotecan": true,
+      "Irradiation": true
+     }
+    },
+    "Patient126": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+5-FU": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": false,
+      "Irinotecan": true,
+      "Irradiation": false
+     }
+    },
+    "Patient127": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": false,
+      "Irinotecan": true,
+      "Irradiation": true
+     }
+    },
+    "Patient128": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": false,
+      "Irinotecan": true,
+      "Irradiation": false
+     }
+    },
+    "Patient13": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": true,
+      "Irinotecan": false,
+      "Irradiation": true
+     }
+    },
+    "Patient14": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+5-FU": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": false,
+      "Irinotecan": false,
+      "Irradiation": true
+     }
+    },
+    "Patient15": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": false,
+      "Irinotecan": false,
+      "Irradiation": false
+     }
+    },
+    "Patient16": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": true,
+      "Irinotecan": true,
+      "Irradiation": true
+     }
+    },
+    "Patient17": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": true,
+      "Irinotecan": true,
+      "Irradiation": true
+     }
+    },
+    "Patient18": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": true,
+      "Irinotecan": false,
+      "Irradiation": true
+     }
+    },
+    "Patient19": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": true,
+      "Irinotecan": true,
+      "Irradiation": true
+     }
+    },
+    "Patient2": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": true,
+      "Irinotecan": false,
+      "Irradiation": false
+     }
+    },
+    "Patient20": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": false,
+      "Irinotecan": false,
+      "Irradiation": false
+     }
+    },
+    "Patient21": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": false,
+      "Irinotecan": true,
+      "Irradiation": true
+     }
+    },
+    "Patient22": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+5-FU": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": true,
+      "Irinotecan": true,
+      "Irradiation": false
+     }
+    },
+    "Patient23": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": true,
+      "Irinotecan": true,
+      "Irradiation": false
+     }
+    },
+    "Patient24": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": false,
+      "Irinotecan": false,
+      "Irradiation": false
+     }
+    },
+    "Patient25": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": false,
+      "Irinotecan": false,
+      "Irradiation": true
+     }
+    },
+    "Patient26": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": true,
+      "Irinotecan": true,
+      "Irradiation": true
+     }
+    },
+    "Patient27": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": false,
+      "Irinotecan": false,
+      "Irradiation": false
+     }
+    },
+    "Patient28": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": false,
+      "Irinotecan": true,
+      "Irradiation": true
+     }
+    },
+    "Patient29": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": false,
+      "Irinotecan": false,
+      "Irradiation": true
+     }
+    },
+    "Patient3": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": false,
+      "Irinotecan": true,
+      "Irradiation": true
+     }
+    },
+    "Patient30": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": true,
+      "Irinotecan": true,
+      "Irradiation": true
+     }
+    },
+    "Patient31": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+5-FU": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": true,
+      "Irinotecan": false,
+      "Irradiation": true
+     }
+    },
+    "Patient32": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": true,
+      "Irinotecan": true,
+      "Irradiation": true
+     }
+    },
+    "Patient33": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+5-FU": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": true,
+      "Irinotecan": false,
+      "Irradiation": true
+     }
+    },
+    "Patient34": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": false,
+      "Irinotecan": false,
+      "Irradiation": true
+     }
+    },
+    "Patient35": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": true,
+      "Irinotecan": true,
+      "Irradiation": true
+     }
+    },
+    "Patient36": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": true,
+      "Irinotecan": true,
+      "Irradiation": true
+     }
+    },
+    "Patient37": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": true,
+      "Irinotecan": true,
+      "Irradiation": false
+     }
+    },
+    "Patient38": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": true,
+      "Irinotecan": true,
+      "Irradiation": true
+     }
+    },
+    "Patient39": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": true,
+      "Irinotecan": true,
+      "Irradiation": false
+     }
+    },
+    "Patient4": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": true,
+      "Irinotecan": true,
+      "Irradiation": true
+     }
+    },
+    "Patient40": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": true,
+      "Irinotecan": true,
+      "Irradiation": false
+     }
+    },
+    "Patient41": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": false,
+      "Irinotecan": false,
+      "Irradiation": false
+     }
+    },
+    "Patient42": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": true,
+      "Irinotecan": true,
+      "Irradiation": false
+     }
+    },
+    "Patient43": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": true,
+      "Irinotecan": true,
+      "Irradiation": true
+     }
+    },
+    "Patient44": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": true,
+      "Irinotecan": false,
+      "Irradiation": false
+     }
+    },
+    "Patient45": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+5-FU": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": true,
+      "Irinotecan": false,
+      "Irradiation": true
+     }
+    },
+    "Patient46": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": false,
+      "Irinotecan": true,
+      "Irradiation": true
+     }
+    },
+    "Patient47": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+5-FU": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": false,
+      "Irinotecan": true,
+      "Irradiation": false
+     }
+    },
+    "Patient48": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": false,
+      "Irinotecan": false,
+      "Irradiation": false
+     }
+    },
+    "Patient49": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+5-FU": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": true,
+      "Irinotecan": true,
+      "Irradiation": false
+     }
+    },
+    "Patient5": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": false,
+      "Irinotecan": false,
+      "Irradiation": true
+     }
+    },
+    "Patient50": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": true,
+      "Irinotecan": true,
+      "Irradiation": false
+     }
+    },
+    "Patient51": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": true,
+      "Irinotecan": true,
+      "Irradiation": true
+     }
+    },
+    "Patient52": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": true,
+      "Irinotecan": true,
+      "Irradiation": false
+     }
+    },
+    "Patient53": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": false,
+      "Irinotecan": false,
+      "Irradiation": false
+     }
+    },
+    "Patient54": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": true,
+      "Irinotecan": true,
+      "Irradiation": true
+     }
+    },
+    "Patient55": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": false,
+      "Irinotecan": false,
+      "Irradiation": false
+     }
+    },
+    "Patient56": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": false,
+      "Irinotecan": false,
+      "Irradiation": false
+     }
+    },
+    "Patient57": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": true,
+      "Irinotecan": true,
+      "Irradiation": false
+     }
+    },
+    "Patient58": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+5-FU": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": false,
+      "Irinotecan": true,
+      "Irradiation": false
+     }
+    },
+    "Patient59": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": false,
+      "Irinotecan": false,
+      "Irradiation": false
+     }
+    },
+    "Patient6": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": true,
+      "Irinotecan": true,
+      "Irradiation": true
+     }
+    },
+    "Patient60": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": true,
+      "Irinotecan": true,
+      "Irradiation": true
+     }
+    },
+    "Patient61": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": false,
+      "Irinotecan": false,
+      "Irradiation": false
+     }
+    },
+    "Patient62": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": false,
+      "Irinotecan": true,
+      "Irradiation": true
+     }
+    },
+    "Patient63": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": false,
+      "Irinotecan": false,
+      "Irradiation": false
+     }
+    },
+    "Patient64": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+5-FU": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": true,
+      "Irinotecan": false,
+      "Irradiation": true
+     }
+    },
+    "Patient65": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": false,
+      "Irinotecan": false,
+      "Irradiation": false
+     }
+    },
+    "Patient66": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": false,
+      "Irinotecan": false,
+      "Irradiation": false
+     }
+    },
+    "Patient67": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+5-FU": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": true,
+      "Irinotecan": true,
+      "Irradiation": false
+     }
+    },
+    "Patient68": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": true,
+      "Irinotecan": true,
+      "Irradiation": true
+     }
+    },
+    "Patient69": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": true,
+      "Irinotecan": false,
+      "Irradiation": false
+     }
+    },
+    "Patient7": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": false,
+      "Irinotecan": true,
+      "Irradiation": true
+     }
+    },
+    "Patient70": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": false,
+      "Irinotecan": false,
+      "Irradiation": false
+     }
+    },
+    "Patient71": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": false,
+      "Irinotecan": false,
+      "Irradiation": false
+     }
+    },
+    "Patient72": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": false,
+      "Irinotecan": false,
+      "Irradiation": false
+     }
+    },
+    "Patient73": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": true,
+      "Irinotecan": true,
+      "Irradiation": false
+     }
+    },
+    "Patient74": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+5-FU": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": false,
+      "Irinotecan": false,
+      "Irradiation": true
+     }
+    },
+    "Patient75": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": true,
+      "Irinotecan": true,
+      "Irradiation": true
+     }
+    },
+    "Patient76": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": true,
+      "Irinotecan": true,
+      "Irradiation": false
+     }
+    },
+    "Patient77": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": true,
+      "Irinotecan": true,
+      "Irradiation": true
+     }
+    },
+    "Patient78": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": false,
+      "Irinotecan": false,
+      "Irradiation": false
+     }
+    },
+    "Patient79": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": false,
+      "Irinotecan": false,
+      "Irradiation": false
+     }
+    },
+    "Patient8": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": true,
+      "Irinotecan": true,
+      "Irradiation": true
+     }
+    },
+    "Patient80": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": false,
+      "Irinotecan": false,
+      "Irradiation": false
+     }
+    },
+    "Patient81": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": true,
+      "Irinotecan": true,
+      "Irradiation": true
+     }
+    },
+    "Patient82": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": true,
+      "Irinotecan": true,
+      "Irradiation": false
+     }
+    },
+    "Patient83": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": false,
+      "Irinotecan": false,
+      "Irradiation": true
+     }
+    },
+    "Patient84": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": true,
+      "Irinotecan": true,
+      "Irradiation": false
+     }
+    },
+    "Patient85": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": false,
+      "Irinotecan": false,
+      "Irradiation": false
+     }
+    },
+    "Patient86": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": true,
+      "Irinotecan": true,
+      "Irradiation": true
+     }
+    },
+    "Patient87": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": true,
+      "Irinotecan": true,
+      "Irradiation": true
+     }
+    },
+    "Patient88": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": false,
+      "Irinotecan": false,
+      "Irradiation": true
+     }
+    },
+    "Patient89": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+5-FU": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": true,
+      "Irinotecan": true,
+      "Irradiation": false
+     }
+    },
+    "Patient9": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": false,
+      "Irinotecan": false,
+      "Irradiation": false
+     }
+    },
+    "Patient90": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": false,
+      "Irinotecan": false,
+      "Irradiation": true
+     }
+    },
+    "Patient91": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": false,
+      "Irinotecan": false,
+      "Irradiation": false
+     }
+    },
+    "Patient92": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+5-FU": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": false,
+      "Irinotecan": false,
+      "Irradiation": true
+     }
+    },
+    "Patient93": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": false,
+      "Irinotecan": false,
+      "Irradiation": true
+     }
+    },
+    "Patient94": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": false,
+      "Irinotecan": false,
+      "Irradiation": false
+     }
+    },
+    "Patient95": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": true,
+      "Irinotecan": false,
+      "Irradiation": false
+     }
+    },
+    "Patient96": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "retest",
+       "release": false
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": true,
+      "Irinotecan": true,
+      "Irradiation": false
+     }
+    },
+    "Patient97": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "non_responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": false,
+      "Combined": true,
+      "Irinotecan": false,
+      "Irradiation": false
+     }
+    },
+    "Patient98": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": true,
+      "Irinotecan": true,
+      "Irradiation": true
+     }
+    },
+    "Patient99": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+5-FU": {
+       "predicted": "responder",
+       "release": true
+      },
+      "Irradiation+Irinotecan": {
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "readout_sensitive": {
+      "5-FU": true,
+      "Combined": true,
+      "Irinotecan": true,
+      "Irradiation": true
+     }
+    }
+   },
+   "primary_pair": "Irradiation+5-FU",
+   "seen_before_freeze": [
+    "Patient1",
+    "Patient2",
+    "Patient3",
+    "Patient4",
+    "Patient5",
+    "Patient6",
+    "Patient7",
+    "Patient8",
+    "Patient9",
+    "Patient10",
+    "Patient11",
+    "Patient12",
+    "Patient13",
+    "Patient14",
+    "Patient15",
+    "Patient16",
+    "Patient17",
+    "Patient18",
+    "Patient19",
+    "Patient20",
+    "Patient21",
+    "Patient22",
+    "Patient23",
+    "Patient24",
+    "Patient25",
+    "Patient26",
+    "Patient27",
+    "Patient28",
+    "Patient29",
+    "Patient30",
+    "Patient31",
+    "Patient32",
+    "Patient33",
+    "Patient34",
+    "Patient35",
+    "Patient36",
+    "Patient37",
+    "Patient38",
+    "Patient39",
+    "Patient40",
+    "Patient41",
+    "Patient42"
+   ],
+   "single_readout_comparator": "Combined"
+  }
+ },
+ "endpoints": {
+  "crlm": {
+   "column": "Treatment Response",
+   "disease_control_primary": {
+    "non_responder": [
+     "pd",
+     "progressive disease",
+     "progression",
+     "resistant",
+     "ineffective",
+     "recurrence",
+     "relapse"
+    ],
+    "responder": [
+     "cr",
+     "pr",
+     "sd",
+     "complete response",
+     "partial response",
+     "stable disease",
+     "sensitive",
+     "effective",
+     "no recurrence",
+     "disease-free",
+     "no relapse",
+     "ned"
+    ]
+   },
+   "objective_response_secondary": {
+    "non_responder": [
+     "sd",
+     "pd",
+     "stable disease",
+     "progressive disease",
+     "progression"
+    ],
+    "responder": [
+     "cr",
+     "pr",
+     "complete response",
+     "partial response"
+    ]
+   },
+   "other_entries": "not evaluable",
+   "regimen_pairs": {
+    "CAPIRI": [
+     "5-FU",
+     "Irinotecan"
+    ],
+    "CAPOX": [
+     "5-FU",
+     "Oxaliplatin"
+    ],
+    "FOLFIRI": [
+     "5-FU",
+     "Irinotecan"
+    ],
+    "FOLFOX": [
+     "5-FU",
+     "Oxaliplatin"
+    ],
+    "FOLFOXIRI": [
+     "5-FU",
+     "Oxaliplatin"
+    ],
+    "MFOLFOX6": [
+     "5-FU",
+     "Oxaliplatin"
+    ],
+    "XELIRI": [
+     "5-FU",
+     "Irinotecan"
+    ],
+    "XELOX": [
+     "5-FU",
+     "Oxaliplatin"
+    ]
+   },
+   "regimen_rule": "antibodies added to a backbone are ignored; the organoids were tested with chemotherapy only"
+  },
+  "rectal": {
+   "column": "TRG (tumour regression grade, 0-3) with cCR for clinical complete response",
+   "complete_response_secondary": {
+    "non_responder": [
+     "1",
+     "2",
+     "3"
+    ],
+    "responder": [
+     "0",
+     "ccr",
+     "pcr"
+    ]
+   },
+   "good_response_primary": {
+    "non_responder": [
+     "2",
+     "3"
+    ],
+    "responder": [
+     "0",
+     "1",
+     "ccr",
+     "pcr"
+    ]
+   },
+   "other_entries": "not evaluable"
+  }
+ },
+ "primary_analyses": {
+  "crlm": "patients with a Table S7 regimen, mean of the two organoids, the regimen's two drugs, disease control = CR, PR or SD",
+  "rectal": "patients 43-128, Irradiation + 5-FU (every patient received radiation with capecitabine), good response = TRG 0-1 or cCR"
+ },
+ "rule": "per readout, sensitive if value <= cohort median; release only when the two readouts agree",
+ "rule_source": "blind_consensus.calls",
+ "schema": "blind2.consensus.predictions.v1",
+ "sources": {
+  "crlm": {
+   "article": "https://doi.org/10.1002/advs.202204097",
+   "clinical_table": "Table S7, Regimen and Treatment Response columns (same file)",
+   "license": "CC BY 4.0",
+   "readout_file": "https://pmc-oa-opendata.s3.amazonaws.com/PMC9631073.1/ADVS-9-2204097-s002.xls",
+   "readout_sha256": "9e217844434fb72e9d379770b7072fa6fd93de5cc87c685d1ae867e0e6784d4c",
+   "readout_table": "Table S6, IC50 (uM)"
+  },
+  "rectal": {
+   "article": "https://doi.org/10.1016/j.xcrm.2025.102397",
+   "clinical_table": "Supplementary Table 1, Treatments and TRG columns (same file)",
+   "license": "CC BY 4.0",
+   "readout_file": "https://pmc-oa-opendata.s3.amazonaws.com/PMC12629783.1/mmc1.pdf",
+   "readout_sha256": "cdab09edc26e223bcc436d698570e587e44d48237608b7d844b9f0fe1485bf07",
+   "readout_table": "Supplementary Table 2, organoid size ratio day 24 / day 0"
+  }
+ }
+}
