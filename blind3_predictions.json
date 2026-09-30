@@ -1,0 +1,4993 @@
+{
+ "assertions": [
+  "P1. In the primary analysis the two single readouts share more wrong calls than independence predicts, n(1-p1)(1-p2), where p1 and p2 are the readouts' observed accuracies on the same treatments.",
+  "P2. In the primary analysis the observed accuracy of released calls is within 0.09 of p1*p2 / (p1*p2 + (1-p1)*(1-p2)).",
+  "P3. In any analysis where the weaker readout is not better than a coin flip (min(p1, p2) <= 0.5), released calls are not more accurate than the better readout alone.",
+  "P4. In the primary analysis the organoid readout of the matching combination, split at its own median, classifies at least as many treatments correctly as the better single readout.",
+  "Checked, not predicted: when p1 + p2 > 1, released accuracy falls below the formula exactly when shared wrong calls exceed the independence count; the two break-even retest costs sum to 1."
+ ],
+ "calls": {
+  "whole_table_median": {
+   "medians": {
+    "5-FU": 0.78,
+    "FOLFIRI combination": 0.45,
+    "FOLFOX combination": 0.65,
+    "Irinotecan": 0.66,
+    "Oxaliplatin": 0.88
+   },
+   "patients": {
+    "WCB015": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "retest",
+       "release": false
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": false,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": true,
+      "Irinotecan": true,
+      "Oxaliplatin": false
+     }
+    },
+    "WCB019": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "non_responder",
+       "predicted": "non_responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "non_responder",
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": false,
+      "FOLFIRI combination": false,
+      "FOLFOX combination": false,
+      "Irinotecan": false,
+      "Oxaliplatin": false
+     }
+    },
+    "WCB020": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "retest",
+       "release": false
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "sensitive": {
+      "5-FU": false,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": true,
+      "Irinotecan": true,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB021": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "non_responder",
+       "predicted": "retest",
+       "release": false
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "non_responder",
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": false,
+      "FOLFOX combination": false,
+      "Irinotecan": false,
+      "Oxaliplatin": false
+     }
+    },
+    "WCB024": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "retest",
+       "release": false
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "non_responder",
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": false,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": false,
+      "Irinotecan": true,
+      "Oxaliplatin": false
+     }
+    },
+    "WCB025": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "non_responder",
+       "predicted": "retest",
+       "release": false
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "non_responder",
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "sensitive": {
+      "5-FU": false,
+      "FOLFIRI combination": false,
+      "FOLFOX combination": false,
+      "Irinotecan": true,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB027": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "retest",
+       "release": false
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": false,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": true,
+      "Irinotecan": true,
+      "Oxaliplatin": false
+     }
+    },
+    "WCB031": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "retest",
+       "release": false
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "sensitive": {
+      "5-FU": false,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": true,
+      "Irinotecan": true,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB041": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "retest",
+       "release": false
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "sensitive": {
+      "5-FU": false,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": true,
+      "Irinotecan": true,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB045": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": true,
+      "Irinotecan": true,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB046": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": true,
+      "Irinotecan": true,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB047": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": true,
+      "Irinotecan": true,
+      "Oxaliplatin": false
+     }
+    },
+    "WCB052": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "non_responder",
+       "predicted": "retest",
+       "release": false
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "non_responder",
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": false,
+      "FOLFIRI combination": false,
+      "FOLFOX combination": false,
+      "Irinotecan": true,
+      "Oxaliplatin": false
+     }
+    },
+    "WCB053": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "retest",
+       "release": false
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "non_responder",
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "sensitive": {
+      "5-FU": false,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": false,
+      "Irinotecan": true,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB058": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "retest",
+       "release": false
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "sensitive": {
+      "5-FU": false,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": true,
+      "Irinotecan": true,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB060": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": true,
+      "Irinotecan": true,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB066": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": true,
+      "Irinotecan": true,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB067": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "non_responder",
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": false,
+      "Irinotecan": true,
+      "Oxaliplatin": false
+     }
+    },
+    "WCB074": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": true,
+      "Irinotecan": true,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB084": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "non_responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "non_responder",
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "sensitive": {
+      "5-FU": false,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": false,
+      "Irinotecan": false,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB087": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "non_responder",
+       "predicted": "retest",
+       "release": false
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "non_responder",
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": false,
+      "FOLFIRI combination": false,
+      "FOLFOX combination": false,
+      "Irinotecan": true,
+      "Oxaliplatin": false
+     }
+    },
+    "WCB088": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": true,
+      "Irinotecan": true,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB089": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": true,
+      "Irinotecan": true,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB090": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": true,
+      "Irinotecan": true,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB091": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "retest",
+       "release": false
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": true,
+      "Irinotecan": false,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB094": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "retest",
+       "release": false
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": true,
+      "Irinotecan": false,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB098": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": true,
+      "Irinotecan": true,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB100": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": true,
+      "Irinotecan": true,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB116": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "non_responder",
+       "predicted": "non_responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "non_responder",
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": false,
+      "FOLFIRI combination": false,
+      "FOLFOX combination": false,
+      "Irinotecan": false,
+      "Oxaliplatin": false
+     }
+    },
+    "WCB117": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "non_responder",
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": false,
+      "Irinotecan": true,
+      "Oxaliplatin": false
+     }
+    },
+    "WCB119": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "non_responder",
+       "predicted": "non_responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": false,
+      "FOLFIRI combination": false,
+      "FOLFOX combination": true,
+      "Irinotecan": false,
+      "Oxaliplatin": false
+     }
+    },
+    "WCB121": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "non_responder",
+       "predicted": "non_responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "non_responder",
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "sensitive": {
+      "5-FU": false,
+      "FOLFIRI combination": false,
+      "FOLFOX combination": false,
+      "Irinotecan": false,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB123": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "retest",
+       "release": false
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "sensitive": {
+      "5-FU": false,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": true,
+      "Irinotecan": true,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB128": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "non_responder",
+       "predicted": "responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "non_responder",
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": false,
+      "FOLFOX combination": false,
+      "Irinotecan": true,
+      "Oxaliplatin": false
+     }
+    },
+    "WCB135": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "non_responder",
+       "predicted": "retest",
+       "release": false
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": false,
+      "FOLFOX combination": true,
+      "Irinotecan": false,
+      "Oxaliplatin": false
+     }
+    },
+    "WCB139": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "non_responder",
+       "predicted": "non_responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "non_responder",
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "sensitive": {
+      "5-FU": false,
+      "FOLFIRI combination": false,
+      "FOLFOX combination": false,
+      "Irinotecan": false,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB146": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": true,
+      "Irinotecan": true,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB150": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "non_responder",
+       "predicted": "non_responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "non_responder",
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": false,
+      "FOLFIRI combination": false,
+      "FOLFOX combination": false,
+      "Irinotecan": false,
+      "Oxaliplatin": false
+     }
+    },
+    "WCB152": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "retest",
+       "release": false
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "non_responder",
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "sensitive": {
+      "5-FU": false,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": false,
+      "Irinotecan": true,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB154": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "non_responder",
+       "predicted": "retest",
+       "release": false
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": false,
+      "FOLFOX combination": true,
+      "Irinotecan": false,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB155": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "retest",
+       "release": false
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": true,
+      "Irinotecan": false,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB156": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "retest",
+       "release": false
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "non_responder",
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": false,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": false,
+      "Irinotecan": true,
+      "Oxaliplatin": false
+     }
+    },
+    "WCB157": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "retest",
+       "release": false
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "non_responder",
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": false,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": false,
+      "Irinotecan": true,
+      "Oxaliplatin": false
+     }
+    },
+    "WCB161": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "non_responder",
+       "predicted": "retest",
+       "release": false
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": false,
+      "FOLFOX combination": true,
+      "Irinotecan": false,
+      "Oxaliplatin": false
+     }
+    },
+    "WCB170": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "non_responder",
+       "predicted": "non_responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "non_responder",
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "sensitive": {
+      "5-FU": false,
+      "FOLFIRI combination": false,
+      "FOLFOX combination": false,
+      "Irinotecan": false,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB172": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "non_responder",
+       "predicted": "non_responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "non_responder",
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": false,
+      "FOLFIRI combination": false,
+      "FOLFOX combination": false,
+      "Irinotecan": false,
+      "Oxaliplatin": false
+     }
+    },
+    "WCB177": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "non_responder",
+       "predicted": "retest",
+       "release": false
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "non_responder",
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": false,
+      "FOLFOX combination": false,
+      "Irinotecan": false,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB187": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": true,
+      "Irinotecan": true,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB192": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "retest",
+       "release": false
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": false,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": true,
+      "Irinotecan": true,
+      "Oxaliplatin": false
+     }
+    },
+    "WCB197": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": true,
+      "Irinotecan": true,
+      "Oxaliplatin": false
+     }
+    },
+    "WCB203": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": true,
+      "Irinotecan": true,
+      "Oxaliplatin": false
+     }
+    },
+    "WCB217": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "non_responder",
+       "predicted": "retest",
+       "release": false
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": false,
+      "FOLFOX combination": true,
+      "Irinotecan": false,
+      "Oxaliplatin": false
+     }
+    },
+    "WCB219": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "non_responder",
+       "predicted": "non_responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "non_responder",
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": false,
+      "FOLFIRI combination": false,
+      "FOLFOX combination": false,
+      "Irinotecan": false,
+      "Oxaliplatin": false
+     }
+    },
+    "WCB221": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "retest",
+       "release": false
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": true,
+      "Irinotecan": false,
+      "Oxaliplatin": false
+     }
+    },
+    "WCB237": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "non_responder",
+       "predicted": "responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "non_responder",
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": false,
+      "FOLFOX combination": false,
+      "Irinotecan": true,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB238": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": true,
+      "Irinotecan": true,
+      "Oxaliplatin": false
+     }
+    },
+    "WCB239": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": true,
+      "Irinotecan": true,
+      "Oxaliplatin": false
+     }
+    },
+    "WCB240": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "non_responder",
+       "predicted": "responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "non_responder",
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": false,
+      "FOLFOX combination": false,
+      "Irinotecan": true,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB242": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "non_responder",
+       "predicted": "non_responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "non_responder",
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": false,
+      "FOLFIRI combination": false,
+      "FOLFOX combination": false,
+      "Irinotecan": false,
+      "Oxaliplatin": false
+     }
+    },
+    "WCB243": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": true,
+      "Irinotecan": true,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB244": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": true,
+      "Irinotecan": true,
+      "Oxaliplatin": false
+     }
+    },
+    "WCB245": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "non_responder",
+       "predicted": "non_responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "non_responder",
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": false,
+      "FOLFIRI combination": false,
+      "FOLFOX combination": false,
+      "Irinotecan": false,
+      "Oxaliplatin": false
+     }
+    },
+    "WCB248": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "non_responder",
+       "predicted": "non_responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "non_responder",
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "sensitive": {
+      "5-FU": false,
+      "FOLFIRI combination": false,
+      "FOLFOX combination": false,
+      "Irinotecan": false,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB250": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "non_responder",
+       "predicted": "non_responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "non_responder",
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": false,
+      "FOLFIRI combination": false,
+      "FOLFOX combination": false,
+      "Irinotecan": false,
+      "Oxaliplatin": false
+     }
+    },
+    "WCB251": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "non_responder",
+       "predicted": "non_responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "non_responder",
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": false,
+      "FOLFIRI combination": false,
+      "FOLFOX combination": false,
+      "Irinotecan": false,
+      "Oxaliplatin": false
+     }
+    },
+    "WCB252": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "retest",
+       "release": false
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "non_responder",
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": false,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": false,
+      "Irinotecan": true,
+      "Oxaliplatin": false
+     }
+    },
+    "WCB254": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "non_responder",
+       "predicted": "non_responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "non_responder",
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": false,
+      "FOLFIRI combination": false,
+      "FOLFOX combination": false,
+      "Irinotecan": false,
+      "Oxaliplatin": false
+     }
+    },
+    "WCB259": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": true,
+      "Irinotecan": true,
+      "Oxaliplatin": false
+     }
+    },
+    "WCB261": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "non_responder",
+       "predicted": "retest",
+       "release": false
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "non_responder",
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": false,
+      "FOLFOX combination": false,
+      "Irinotecan": false,
+      "Oxaliplatin": false
+     }
+    },
+    "WCB262": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "non_responder",
+       "predicted": "responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "non_responder",
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": false,
+      "FOLFOX combination": false,
+      "Irinotecan": true,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB263": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "non_responder",
+       "predicted": "non_responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "non_responder",
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": false,
+      "FOLFIRI combination": false,
+      "FOLFOX combination": false,
+      "Irinotecan": false,
+      "Oxaliplatin": false
+     }
+    },
+    "WCB265": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "retest",
+       "release": false
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "non_responder",
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "sensitive": {
+      "5-FU": false,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": false,
+      "Irinotecan": true,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB269": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "non_responder",
+       "predicted": "non_responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "non_responder",
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": false,
+      "FOLFIRI combination": false,
+      "FOLFOX combination": false,
+      "Irinotecan": false,
+      "Oxaliplatin": false
+     }
+    },
+    "WCB270": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "non_responder",
+       "predicted": "non_responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "non_responder",
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": false,
+      "FOLFIRI combination": false,
+      "FOLFOX combination": false,
+      "Irinotecan": false,
+      "Oxaliplatin": false
+     }
+    },
+    "WCB271": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": true,
+      "Irinotecan": true,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB272": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "non_responder",
+       "predicted": "non_responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "non_responder",
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": false,
+      "FOLFIRI combination": false,
+      "FOLFOX combination": false,
+      "Irinotecan": false,
+      "Oxaliplatin": false
+     }
+    },
+    "WCB273": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "non_responder",
+       "predicted": "responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": false,
+      "FOLFOX combination": true,
+      "Irinotecan": true,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB275": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "non_responder",
+       "predicted": "non_responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "non_responder",
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": false,
+      "FOLFIRI combination": false,
+      "FOLFOX combination": false,
+      "Irinotecan": false,
+      "Oxaliplatin": false
+     }
+    },
+    "WCB276": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "retest",
+       "release": false
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": true,
+      "Irinotecan": false,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB277": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "non_responder",
+       "predicted": "non_responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "non_responder",
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": false,
+      "FOLFIRI combination": false,
+      "FOLFOX combination": false,
+      "Irinotecan": false,
+      "Oxaliplatin": false
+     }
+    },
+    "WCB278": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "non_responder",
+       "predicted": "retest",
+       "release": false
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": false,
+      "FOLFOX combination": true,
+      "Irinotecan": false,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB279": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": true,
+      "Irinotecan": true,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB281": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "non_responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": false,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": true,
+      "Irinotecan": false,
+      "Oxaliplatin": false
+     }
+    },
+    "WCB282": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "retest",
+       "release": false
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": true,
+      "Irinotecan": false,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB285": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "non_responder",
+       "predicted": "non_responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "non_responder",
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "sensitive": {
+      "5-FU": false,
+      "FOLFIRI combination": false,
+      "FOLFOX combination": false,
+      "Irinotecan": false,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB286": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "non_responder",
+       "predicted": "retest",
+       "release": false
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "non_responder",
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": false,
+      "FOLFOX combination": false,
+      "Irinotecan": false,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB287": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "non_responder",
+       "predicted": "retest",
+       "release": false
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "non_responder",
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": false,
+      "FOLFOX combination": false,
+      "Irinotecan": false,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB288": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "non_responder",
+       "predicted": "retest",
+       "release": false
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "non_responder",
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": false,
+      "FOLFOX combination": false,
+      "Irinotecan": false,
+      "Oxaliplatin": false
+     }
+    },
+    "WCB289": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "non_responder",
+       "predicted": "responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": false,
+      "FOLFOX combination": true,
+      "Irinotecan": true,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB290": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "non_responder",
+       "predicted": "responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "non_responder",
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": false,
+      "FOLFOX combination": false,
+      "Irinotecan": true,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB291": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "non_responder",
+       "predicted": "non_responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "non_responder",
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": false,
+      "FOLFIRI combination": false,
+      "FOLFOX combination": false,
+      "Irinotecan": false,
+      "Oxaliplatin": false
+     }
+    },
+    "WCB295": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "non_responder",
+       "predicted": "non_responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "non_responder",
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": false,
+      "FOLFIRI combination": false,
+      "FOLFOX combination": false,
+      "Irinotecan": false,
+      "Oxaliplatin": false
+     }
+    },
+    "WCB296": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "non_responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": false,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": true,
+      "Irinotecan": false,
+      "Oxaliplatin": false
+     }
+    },
+    "WCB297": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "non_responder",
+       "predicted": "retest",
+       "release": false
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": false,
+      "FOLFOX combination": true,
+      "Irinotecan": false,
+      "Oxaliplatin": false
+     }
+    },
+    "WCB298": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "non_responder",
+       "predicted": "retest",
+       "release": false
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "non_responder",
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": false,
+      "FOLFOX combination": false,
+      "Irinotecan": false,
+      "Oxaliplatin": false
+     }
+    },
+    "WCB301": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "retest",
+       "release": false
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": true,
+      "Irinotecan": false,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB302": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "non_responder",
+       "predicted": "non_responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "non_responder",
+       "predicted": "retest",
+       "release": false
+      }
+     },
+     "sensitive": {
+      "5-FU": false,
+      "FOLFIRI combination": false,
+      "FOLFOX combination": false,
+      "Irinotecan": false,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB303": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": true,
+      "Irinotecan": true,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB309": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": true,
+      "Irinotecan": true,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB310": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "responder",
+       "predicted": "retest",
+       "release": false
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "responder",
+       "predicted": "responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": true,
+      "FOLFIRI combination": true,
+      "FOLFOX combination": true,
+      "Irinotecan": false,
+      "Oxaliplatin": true
+     }
+    },
+    "WCB311": {
+     "pairs": {
+      "5-FU+Irinotecan": {
+       "combination_readout": "non_responder",
+       "predicted": "retest",
+       "release": false
+      },
+      "5-FU+Oxaliplatin": {
+       "combination_readout": "non_responder",
+       "predicted": "non_responder",
+       "release": true
+      }
+     },
+     "sensitive": {
+      "5-FU": false,
+      "FOLFIRI combination": false,
+      "FOLFOX combination": false,
+      "Irinotecan": true,
+      "Oxaliplatin": false
+     }
+    }
+   }
+  },
+  "within_cohort_median": {
+   "Community": {
+    "medians": {
+     "5-FU": 0.78,
+     "FOLFIRI combination": 0.405,
+     "FOLFOX combination": 0.63,
+     "Irinotecan": 0.65,
+     "Oxaliplatin": 0.88
+    },
+    "patients": {
+     "WCB015": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "non_responder",
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": false,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": false,
+       "Irinotecan": true,
+       "Oxaliplatin": false
+      }
+     },
+     "WCB019": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "non_responder",
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "non_responder",
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": false,
+       "FOLFIRI combination": false,
+       "FOLFOX combination": false,
+       "Irinotecan": false,
+       "Oxaliplatin": false
+      }
+     },
+     "WCB020": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "non_responder",
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "sensitive": {
+       "5-FU": false,
+       "FOLFIRI combination": false,
+       "FOLFOX combination": true,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB021": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "non_responder",
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "non_responder",
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": false,
+       "FOLFOX combination": false,
+       "Irinotecan": false,
+       "Oxaliplatin": false
+      }
+     },
+     "WCB024": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "non_responder",
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": false,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": false,
+       "Irinotecan": true,
+       "Oxaliplatin": false
+      }
+     },
+     "WCB025": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "non_responder",
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "non_responder",
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "sensitive": {
+       "5-FU": false,
+       "FOLFIRI combination": false,
+       "FOLFOX combination": false,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB027": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": false,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": true,
+       "Irinotecan": true,
+       "Oxaliplatin": false
+      }
+     },
+     "WCB031": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "sensitive": {
+       "5-FU": false,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": true,
+       "Irinotecan": false,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB041": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "sensitive": {
+       "5-FU": false,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": true,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB045": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "non_responder",
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": false,
+       "FOLFOX combination": true,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB046": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": true,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB047": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": true,
+       "Irinotecan": true,
+       "Oxaliplatin": false
+      }
+     },
+     "WCB052": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "non_responder",
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "non_responder",
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": false,
+       "FOLFIRI combination": false,
+       "FOLFOX combination": false,
+       "Irinotecan": true,
+       "Oxaliplatin": false
+      }
+     },
+     "WCB053": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "non_responder",
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "sensitive": {
+       "5-FU": false,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": false,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB058": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "sensitive": {
+       "5-FU": false,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": true,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB060": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": true,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB066": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": true,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB067": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "non_responder",
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "non_responder",
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": false,
+       "FOLFOX combination": false,
+       "Irinotecan": true,
+       "Oxaliplatin": false
+      }
+     },
+     "WCB074": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": true,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB084": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "non_responder",
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "sensitive": {
+       "5-FU": false,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": false,
+       "Irinotecan": false,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB087": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "non_responder",
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "non_responder",
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": false,
+       "FOLFIRI combination": false,
+       "FOLFOX combination": false,
+       "Irinotecan": true,
+       "Oxaliplatin": false
+      }
+     },
+     "WCB088": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": true,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB089": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": true,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB090": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": true,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB091": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "non_responder",
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": false,
+       "FOLFOX combination": true,
+       "Irinotecan": false,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB094": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": true,
+       "Irinotecan": false,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB098": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": true,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB100": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": true,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB116": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "non_responder",
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "non_responder",
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": false,
+       "FOLFIRI combination": false,
+       "FOLFOX combination": false,
+       "Irinotecan": false,
+       "Oxaliplatin": false
+      }
+     },
+     "WCB117": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "non_responder",
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": false,
+       "Irinotecan": true,
+       "Oxaliplatin": false
+      }
+     },
+     "WCB119": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "non_responder",
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": false,
+       "FOLFIRI combination": false,
+       "FOLFOX combination": true,
+       "Irinotecan": false,
+       "Oxaliplatin": false
+      }
+     },
+     "WCB121": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "non_responder",
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "non_responder",
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "sensitive": {
+       "5-FU": false,
+       "FOLFIRI combination": false,
+       "FOLFOX combination": false,
+       "Irinotecan": false,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB123": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "sensitive": {
+       "5-FU": false,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": true,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB128": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "non_responder",
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "non_responder",
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": false,
+       "FOLFOX combination": false,
+       "Irinotecan": true,
+       "Oxaliplatin": false
+      }
+     },
+     "WCB135": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "non_responder",
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": false,
+       "FOLFOX combination": true,
+       "Irinotecan": false,
+       "Oxaliplatin": false
+      }
+     },
+     "WCB139": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "non_responder",
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "non_responder",
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "sensitive": {
+       "5-FU": false,
+       "FOLFIRI combination": false,
+       "FOLFOX combination": false,
+       "Irinotecan": false,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB146": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "non_responder",
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": false,
+       "FOLFOX combination": true,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB150": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "non_responder",
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "non_responder",
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": false,
+       "FOLFIRI combination": false,
+       "FOLFOX combination": false,
+       "Irinotecan": false,
+       "Oxaliplatin": false
+      }
+     },
+     "WCB152": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "non_responder",
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "sensitive": {
+       "5-FU": false,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": false,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB154": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "non_responder",
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": false,
+       "FOLFOX combination": true,
+       "Irinotecan": false,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB155": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": true,
+       "Irinotecan": false,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB156": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "non_responder",
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": false,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": false,
+       "Irinotecan": true,
+       "Oxaliplatin": false
+      }
+     },
+     "WCB157": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "non_responder",
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": false,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": false,
+       "Irinotecan": true,
+       "Oxaliplatin": false
+      }
+     },
+     "WCB161": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "non_responder",
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": false,
+       "FOLFOX combination": true,
+       "Irinotecan": false,
+       "Oxaliplatin": false
+      }
+     },
+     "WCB170": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "non_responder",
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "non_responder",
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "sensitive": {
+       "5-FU": false,
+       "FOLFIRI combination": false,
+       "FOLFOX combination": false,
+       "Irinotecan": false,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB172": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "non_responder",
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "non_responder",
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": false,
+       "FOLFIRI combination": false,
+       "FOLFOX combination": false,
+       "Irinotecan": false,
+       "Oxaliplatin": false
+      }
+     },
+     "WCB177": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "non_responder",
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "non_responder",
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": false,
+       "FOLFOX combination": false,
+       "Irinotecan": false,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB187": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": true,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB192": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "non_responder",
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": false,
+       "FOLFIRI combination": false,
+       "FOLFOX combination": true,
+       "Irinotecan": true,
+       "Oxaliplatin": false
+      }
+     },
+     "WCB197": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "non_responder",
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": false,
+       "Irinotecan": true,
+       "Oxaliplatin": false
+      }
+     },
+     "WCB203": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": true,
+       "Irinotecan": true,
+       "Oxaliplatin": false
+      }
+     },
+     "WCB217": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "non_responder",
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": false,
+       "FOLFOX combination": true,
+       "Irinotecan": false,
+       "Oxaliplatin": false
+      }
+     },
+     "WCB219": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "non_responder",
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "non_responder",
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": false,
+       "FOLFIRI combination": false,
+       "FOLFOX combination": false,
+       "Irinotecan": false,
+       "Oxaliplatin": false
+      }
+     },
+     "WCB221": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": true,
+       "Irinotecan": false,
+       "Oxaliplatin": false
+      }
+     },
+     "WCB237": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "non_responder",
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "non_responder",
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": false,
+       "FOLFOX combination": false,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB238": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": true,
+       "Irinotecan": true,
+       "Oxaliplatin": false
+      }
+     },
+     "WCB239": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": true,
+       "Irinotecan": true,
+       "Oxaliplatin": false
+      }
+     },
+     "WCB240": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "non_responder",
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "non_responder",
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": false,
+       "FOLFOX combination": false,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB242": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "non_responder",
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "non_responder",
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": false,
+       "FOLFIRI combination": false,
+       "FOLFOX combination": false,
+       "Irinotecan": false,
+       "Oxaliplatin": false
+      }
+     },
+     "WCB243": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": true,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB245": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "non_responder",
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "non_responder",
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": false,
+       "FOLFIRI combination": false,
+       "FOLFOX combination": false,
+       "Irinotecan": false,
+       "Oxaliplatin": false
+      }
+     },
+     "WCB252": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "non_responder",
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": false,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": false,
+       "Irinotecan": true,
+       "Oxaliplatin": false
+      }
+     },
+     "WCB254": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "non_responder",
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "non_responder",
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": false,
+       "FOLFIRI combination": false,
+       "FOLFOX combination": false,
+       "Irinotecan": false,
+       "Oxaliplatin": false
+      }
+     },
+     "WCB261": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "non_responder",
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "non_responder",
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": false,
+       "FOLFOX combination": false,
+       "Irinotecan": false,
+       "Oxaliplatin": false
+      }
+     },
+     "WCB265": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "non_responder",
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "sensitive": {
+       "5-FU": false,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": false,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB270": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "non_responder",
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "non_responder",
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": false,
+       "FOLFIRI combination": false,
+       "FOLFOX combination": false,
+       "Irinotecan": false,
+       "Oxaliplatin": false
+      }
+     },
+     "WCB273": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "non_responder",
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": false,
+       "FOLFOX combination": true,
+       "Irinotecan": false,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB275": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "non_responder",
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "non_responder",
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": false,
+       "FOLFIRI combination": false,
+       "FOLFOX combination": false,
+       "Irinotecan": false,
+       "Oxaliplatin": false
+      }
+     },
+     "WCB276": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": true,
+       "Irinotecan": false,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB279": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": true,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB282": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": true,
+       "Irinotecan": false,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB290": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "non_responder",
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "non_responder",
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": false,
+       "FOLFOX combination": false,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB291": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "non_responder",
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "non_responder",
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": false,
+       "FOLFIRI combination": false,
+       "FOLFOX combination": false,
+       "Irinotecan": false,
+       "Oxaliplatin": false
+      }
+     },
+     "WCB295": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "non_responder",
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "non_responder",
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": false,
+       "FOLFIRI combination": false,
+       "FOLFOX combination": false,
+       "Irinotecan": false,
+       "Oxaliplatin": false
+      }
+     },
+     "WCB296": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": false,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": true,
+       "Irinotecan": false,
+       "Oxaliplatin": false
+      }
+     },
+     "WCB297": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "non_responder",
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": false,
+       "FOLFOX combination": true,
+       "Irinotecan": false,
+       "Oxaliplatin": false
+      }
+     },
+     "WCB298": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "non_responder",
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "non_responder",
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": false,
+       "FOLFOX combination": false,
+       "Irinotecan": false,
+       "Oxaliplatin": false
+      }
+     },
+     "WCB301": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": true,
+       "Irinotecan": false,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB302": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "non_responder",
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "non_responder",
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "sensitive": {
+       "5-FU": false,
+       "FOLFIRI combination": false,
+       "FOLFOX combination": false,
+       "Irinotecan": false,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB303": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": true,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB309": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": true,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB310": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "non_responder",
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": false,
+       "FOLFOX combination": true,
+       "Irinotecan": false,
+       "Oxaliplatin": true
+      }
+     }
+    }
+   },
+   "FORECAST-1": {
+    "medians": {
+     "5-FU": 0.81,
+     "FOLFIRI combination": 0.54,
+     "FOLFOX combination": 0.73,
+     "Irinotecan": 0.71,
+     "Oxaliplatin": 0.9
+    },
+    "patients": {
+     "WCB244": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": true,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB248": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "non_responder",
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "sensitive": {
+       "5-FU": false,
+       "FOLFIRI combination": false,
+       "FOLFOX combination": true,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB250": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": false,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": true,
+       "Irinotecan": false,
+       "Oxaliplatin": false
+      }
+     },
+     "WCB251": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "non_responder",
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "non_responder",
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": false,
+       "FOLFIRI combination": false,
+       "FOLFOX combination": false,
+       "Irinotecan": false,
+       "Oxaliplatin": false
+      }
+     },
+     "WCB259": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": true,
+       "Irinotecan": true,
+       "Oxaliplatin": false
+      }
+     },
+     "WCB262": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": true,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB263": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "non_responder",
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": false,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB269": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "non_responder",
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": false,
+       "Irinotecan": true,
+       "Oxaliplatin": false
+      }
+     },
+     "WCB271": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": true,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB272": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "non_responder",
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": false,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": false,
+       "Irinotecan": true,
+       "Oxaliplatin": false
+      }
+     },
+     "WCB277": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "non_responder",
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "non_responder",
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": false,
+       "FOLFIRI combination": false,
+       "FOLFOX combination": false,
+       "Irinotecan": false,
+       "Oxaliplatin": false
+      }
+     },
+     "WCB278": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": true,
+       "Irinotecan": false,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB281": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": false,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": true,
+       "Irinotecan": true,
+       "Oxaliplatin": false
+      }
+     },
+     "WCB285": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "non_responder",
+        "predicted": "non_responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "non_responder",
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "sensitive": {
+       "5-FU": false,
+       "FOLFIRI combination": false,
+       "FOLFOX combination": false,
+       "Irinotecan": false,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB286": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "non_responder",
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "non_responder",
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": false,
+       "FOLFOX combination": false,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB287": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "non_responder",
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "non_responder",
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": false,
+       "FOLFOX combination": false,
+       "Irinotecan": false,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB288": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "non_responder",
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "non_responder",
+        "predicted": "retest",
+        "release": false
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": false,
+       "FOLFOX combination": false,
+       "Irinotecan": true,
+       "Oxaliplatin": false
+      }
+     },
+     "WCB289": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": true,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": true,
+       "Irinotecan": true,
+       "Oxaliplatin": true
+      }
+     },
+     "WCB311": {
+      "pairs": {
+       "5-FU+Irinotecan": {
+        "combination_readout": "responder",
+        "predicted": "retest",
+        "release": false
+       },
+       "5-FU+Oxaliplatin": {
+        "combination_readout": "responder",
+        "predicted": "non_responder",
+        "release": true
+       }
+      },
+      "sensitive": {
+       "5-FU": false,
+       "FOLFIRI combination": true,
+       "FOLFOX combination": true,
+       "Irinotecan": true,
+       "Oxaliplatin": false
+      }
+     }
+    }
+   }
+  }
+ },
+ "endpoints": {
+  "clinical_benefit_primary": "the authors' clinical benefit: complete response, partial response, or stable disease for more than 24 weeks = responder; otherwise non-responder. Where the table gives best response and duration instead of the benefit label, the same definition is applied to them",
+  "disease_control_secondary": {
+   "non_responder": [
+    "pd",
+    "progressive disease",
+    "progression",
+    "resistant",
+    "ineffective",
+    "recurrence",
+    "relapse"
+   ],
+   "responder": [
+    "cr",
+    "pr",
+    "sd",
+    "complete response",
+    "partial response",
+    "stable disease",
+    "sensitive",
+    "effective",
+    "no recurrence",
+    "disease-free",
+    "no relapse",
+    "ned"
+   ]
+  },
+  "eligible_regimens": {
+   "CAPIRI": [
+    "5-FU",
+    "Irinotecan"
+   ],
+   "CAPOX": [
+    "5-FU",
+    "Oxaliplatin"
+   ],
+   "FOLFIRI": [
+    "5-FU",
+    "Irinotecan"
+   ],
+   "FOLFOX": [
+    "5-FU",
+    "Oxaliplatin"
+   ],
+   "FOLFOXIRI": [
+    "5-FU",
+    "Oxaliplatin"
+   ],
+   "MFOLFOX6": [
+    "5-FU",
+    "Oxaliplatin"
+   ],
+   "XELIRI": [
+    "5-FU",
+    "Irinotecan"
+   ],
+   "XELOX": [
+    "5-FU",
+    "Oxaliplatin"
+   ]
+  },
+  "objective_response_secondary": {
+   "non_responder": [
+    "sd",
+    "pd",
+    "stable disease",
+    "progressive disease",
+    "progression"
+   ],
+   "responder": [
+    "cr",
+    "pr",
+    "complete response",
+    "partial response"
+   ]
+  },
+  "other_entries": "not evaluable",
+  "regimen_rule": "antibodies added to a backbone are ignored; single-agent regimens (5-FU or capecitabine alone, irinotecan or oxaliplatin alone, TAS-102, regorafenib and others) and regimens outside the map are not evaluable; capecitabine counts as 5-FU",
+  "unit": "treatment (patient x regimen line) listed in Table S5 (community cohort) or Table S8 (FORECAST-1); a patient with two eligible regimens contributes two treatments, reported also as first eligible treatment per patient"
+ },
+ "patients": {
+  "WCB015": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB015LM",
+    "WCB015T"
+   ]
+  },
+  "WCB019": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB019T"
+   ]
+  },
+  "WCB020": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB020T"
+   ]
+  },
+  "WCB021": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB021T"
+   ]
+  },
+  "WCB024": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB024T"
+   ]
+  },
+  "WCB025": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB025T"
+   ]
+  },
+  "WCB027": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB027T"
+   ]
+  },
+  "WCB031": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB031T"
+   ]
+  },
+  "WCB041": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB041LM"
+   ]
+  },
+  "WCB045": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB045T"
+   ]
+  },
+  "WCB046": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB046T"
+   ]
+  },
+  "WCB047": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB047T"
+   ]
+  },
+  "WCB052": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB052T"
+   ]
+  },
+  "WCB053": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB053T"
+   ]
+  },
+  "WCB058": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB058T"
+   ]
+  },
+  "WCB060": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB060T"
+   ]
+  },
+  "WCB066": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB066T"
+   ]
+  },
+  "WCB067": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB067T"
+   ]
+  },
+  "WCB074": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB074T"
+   ]
+  },
+  "WCB084": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB084T"
+   ]
+  },
+  "WCB087": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB087LM"
+   ]
+  },
+  "WCB088": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB088T"
+   ]
+  },
+  "WCB089": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB089T"
+   ]
+  },
+  "WCB090": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB090T"
+   ]
+  },
+  "WCB091": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB091T"
+   ]
+  },
+  "WCB094": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB094T"
+   ]
+  },
+  "WCB098": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB098T"
+   ]
+  },
+  "WCB100": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB100T"
+   ]
+  },
+  "WCB116": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB116T"
+   ]
+  },
+  "WCB117": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB117T"
+   ]
+  },
+  "WCB119": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB119T"
+   ]
+  },
+  "WCB121": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB121T"
+   ]
+  },
+  "WCB123": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB123LM",
+    "WCB123LU"
+   ]
+  },
+  "WCB128": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB128LM"
+   ]
+  },
+  "WCB135": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB135T"
+   ]
+  },
+  "WCB139": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB139T"
+   ]
+  },
+  "WCB146": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB146T"
+   ]
+  },
+  "WCB150": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB150LM"
+   ]
+  },
+  "WCB152": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB152T"
+   ]
+  },
+  "WCB154": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB154T"
+   ]
+  },
+  "WCB155": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB155T"
+   ]
+  },
+  "WCB156": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB156LU"
+   ]
+  },
+  "WCB157": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB157T"
+   ]
+  },
+  "WCB161": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB161T"
+   ]
+  },
+  "WCB170": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB170LM"
+   ]
+  },
+  "WCB172": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB172T"
+   ]
+  },
+  "WCB177": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB177T"
+   ]
+  },
+  "WCB187": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB187T"
+   ]
+  },
+  "WCB192": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB192T"
+   ]
+  },
+  "WCB197": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB197T"
+   ]
+  },
+  "WCB203": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB203T"
+   ]
+  },
+  "WCB217": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB217LM"
+   ]
+  },
+  "WCB219": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB219T"
+   ]
+  },
+  "WCB221": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB221T"
+   ]
+  },
+  "WCB237": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB237LN"
+   ]
+  },
+  "WCB238": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB238T"
+   ]
+  },
+  "WCB239": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB239T"
+   ]
+  },
+  "WCB240": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB240T"
+   ]
+  },
+  "WCB242": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB242AbM"
+   ]
+  },
+  "WCB243": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB243T"
+   ]
+  },
+  "WCB244": {
+   "cohort": "FORECAST-1",
+   "organoid_lines": [
+    "WCB244BrM"
+   ]
+  },
+  "WCB245": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB245T"
+   ]
+  },
+  "WCB248": {
+   "cohort": "FORECAST-1",
+   "organoid_lines": [
+    "WCB248LM"
+   ]
+  },
+  "WCB250": {
+   "cohort": "FORECAST-1",
+   "organoid_lines": [
+    "WCB250LN"
+   ]
+  },
+  "WCB251": {
+   "cohort": "FORECAST-1",
+   "organoid_lines": [
+    "WCB251LM"
+   ]
+  },
+  "WCB252": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB252T"
+   ]
+  },
+  "WCB254": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB254FM"
+   ]
+  },
+  "WCB259": {
+   "cohort": "FORECAST-1",
+   "organoid_lines": [
+    "WCB259LM"
+   ]
+  },
+  "WCB261": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB261LM"
+   ]
+  },
+  "WCB262": {
+   "cohort": "FORECAST-1",
+   "organoid_lines": [
+    "WCB262T"
+   ]
+  },
+  "WCB263": {
+   "cohort": "FORECAST-1",
+   "organoid_lines": [
+    "WCB263PM"
+   ]
+  },
+  "WCB265": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB265T"
+   ]
+  },
+  "WCB269": {
+   "cohort": "FORECAST-1",
+   "organoid_lines": [
+    "WCB269OM"
+   ]
+  },
+  "WCB270": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB270LM"
+   ]
+  },
+  "WCB271": {
+   "cohort": "FORECAST-1",
+   "organoid_lines": [
+    "WCB271LM"
+   ]
+  },
+  "WCB272": {
+   "cohort": "FORECAST-1",
+   "organoid_lines": [
+    "WCB272SM"
+   ]
+  },
+  "WCB273": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB273T"
+   ]
+  },
+  "WCB275": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB275T"
+   ]
+  },
+  "WCB276": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB276T"
+   ]
+  },
+  "WCB277": {
+   "cohort": "FORECAST-1",
+   "organoid_lines": [
+    "WCB277LM"
+   ]
+  },
+  "WCB278": {
+   "cohort": "FORECAST-1",
+   "organoid_lines": [
+    "WCB278LM"
+   ]
+  },
+  "WCB279": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB279T"
+   ]
+  },
+  "WCB281": {
+   "cohort": "FORECAST-1",
+   "organoid_lines": [
+    "WCB281LU"
+   ]
+  },
+  "WCB282": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB282T"
+   ]
+  },
+  "WCB285": {
+   "cohort": "FORECAST-1",
+   "organoid_lines": [
+    "WCB285LM"
+   ]
+  },
+  "WCB286": {
+   "cohort": "FORECAST-1",
+   "organoid_lines": [
+    "WCB286LM"
+   ]
+  },
+  "WCB287": {
+   "cohort": "FORECAST-1",
+   "organoid_lines": [
+    "WCB287LM"
+   ]
+  },
+  "WCB288": {
+   "cohort": "FORECAST-1",
+   "organoid_lines": [
+    "WCB288LM"
+   ]
+  },
+  "WCB289": {
+   "cohort": "FORECAST-1",
+   "organoid_lines": [
+    "WCB289LM"
+   ]
+  },
+  "WCB290": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB290T"
+   ]
+  },
+  "WCB291": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB291T"
+   ]
+  },
+  "WCB295": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB295T"
+   ]
+  },
+  "WCB296": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB296T"
+   ]
+  },
+  "WCB297": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB297T"
+   ]
+  },
+  "WCB298": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB298T"
+   ]
+  },
+  "WCB301": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB301T"
+   ]
+  },
+  "WCB302": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB302T"
+   ]
+  },
+  "WCB303": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB303T"
+   ]
+  },
+  "WCB309": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB309T"
+   ]
+  },
+  "WCB310": {
+   "cohort": "Community",
+   "organoid_lines": [
+    "WCB310LM"
+   ]
+  },
+  "WCB311": {
+   "cohort": "FORECAST-1",
+   "organoid_lines": [
+    "WCB311LM"
+   ]
+  }
+ },
+ "primary_analysis": "all eligible treatments of both cohorts pooled, patient-level mean of organoid lines, calls from the median of all 101 patients in Table S4, the regimen's two drugs, clinical benefit endpoint",
+ "rule": "per readout, sensitive if value <= cohort median; release only when the two readouts agree",
+ "rule_source": "blind_consensus.calls, blind2_predict.pair_calls",
+ "schema": "blind3.consensus.predictions.v1",
+ "secondary_analyses": "medians taken within each cohort (82 community, 19 FORECAST-1); each cohort alone; first eligible treatment per patient; disease control and objective response endpoints",
+ "source": {
+  "article": "https://doi.org/10.1016/j.xcrm.2023.101335",
+  "clinical_file": "https://pmc-oa-opendata.s3.amazonaws.com/PMC10783557.1/mmc1.pdf",
+  "clinical_sha256": "b2357dfaf12ea45aafa7b0250751ed510af59793e53258ed4c3ff1852b166a00",
+  "clinical_tables": "Tables S5 and S8 (Document S1) and Figures 4B and 5C, not opened before this file",
+  "license": "CC BY-NC-ND 4.0",
+  "readout_file": "https://pmc-oa-opendata.s3.amazonaws.com/PMC10783557.1/mmc4.xlsx",
+  "readout_sha256": "c769732edc1ef21bdf8981bbf6ffa141c390a1a5af839a908a63e86ed1b165a9",
+  "readout_table": "Table S4 (processed drug sensitivity)"
+ }
+}
