@@ -1,0 +1,1921 @@
+{
+  "status": "retrospective sensitivity, not a replacement for the primary split",
+  "split": "floor(n/5) training, floor(3n/5) calibration, remainder test; same hash seed",
+  "pooling": "sources are kept separate because pooled mixture control would not guarantee each source",
+  "sources": {
+    "rectal_2025": {
+      "patients": 127,
+      "split": {
+        "training": 25,
+        "calibration": 76,
+        "test": 26
+      },
+      "ids": {
+        "training": [
+          "Patient124",
+          "Patient111",
+          "Patient64",
+          "Patient102",
+          "Patient81",
+          "Patient18",
+          "Patient17",
+          "Patient6",
+          "Patient7",
+          "Patient104",
+          "Patient70",
+          "Patient127",
+          "Patient31",
+          "Patient34",
+          "Patient38",
+          "Patient90",
+          "Patient118",
+          "Patient15",
+          "Patient29",
+          "Patient120",
+          "Patient11",
+          "Patient46",
+          "Patient19",
+          "Patient27",
+          "Patient128"
+        ],
+        "calibration": [
+          "Patient56",
+          "Patient83",
+          "Patient3",
+          "Patient43",
+          "Patient25",
+          "Patient45",
+          "Patient24",
+          "Patient66",
+          "Patient123",
+          "Patient5",
+          "Patient51",
+          "Patient75",
+          "Patient50",
+          "Patient116",
+          "Patient80",
+          "Patient99",
+          "Patient22",
+          "Patient126",
+          "Patient30",
+          "Patient78",
+          "Patient48",
+          "Patient117",
+          "Patient103",
+          "Patient14",
+          "Patient77",
+          "Patient55",
+          "Patient95",
+          "Patient52",
+          "Patient33",
+          "Patient96",
+          "Patient62",
+          "Patient58",
+          "Patient59",
+          "Patient10",
+          "Patient85",
+          "Patient100",
+          "Patient112",
+          "Patient106",
+          "Patient53",
+          "Patient125",
+          "Patient76",
+          "Patient98",
+          "Patient88",
+          "Patient84",
+          "Patient93",
+          "Patient47",
+          "Patient73",
+          "Patient40",
+          "Patient114",
+          "Patient28",
+          "Patient74",
+          "Patient68",
+          "Patient119",
+          "Patient82",
+          "Patient42",
+          "Patient107",
+          "Patient57",
+          "Patient9",
+          "Patient72",
+          "Patient8",
+          "Patient26",
+          "Patient1",
+          "Patient35",
+          "Patient69",
+          "Patient79",
+          "Patient23",
+          "Patient39",
+          "Patient65",
+          "Patient92",
+          "Patient44",
+          "Patient110",
+          "Patient87",
+          "Patient37",
+          "Patient4",
+          "Patient115",
+          "Patient2"
+        ],
+        "test": [
+          "Patient16",
+          "Patient41",
+          "Patient54",
+          "Patient63",
+          "Patient91",
+          "Patient12",
+          "Patient67",
+          "Patient101",
+          "Patient108",
+          "Patient13",
+          "Patient61",
+          "Patient97",
+          "Patient89",
+          "Patient121",
+          "Patient32",
+          "Patient20",
+          "Patient86",
+          "Patient94",
+          "Patient49",
+          "Patient36",
+          "Patient113",
+          "Patient60",
+          "Patient21",
+          "Patient122",
+          "Patient71",
+          "Patient105"
+        ]
+      },
+      "model_sha256": "dd73ed5602d4e4959e17019255e70a6bceeed3022a999ecdf3a23c9f472e678b",
+      "levels": [
+        {
+          "alpha": 0.1,
+          "threshold": -1.0,
+          "fallback": "none",
+          "calibration": {
+            "patients": 76,
+            "released": 37,
+            "wrong_released": 3,
+            "released_correct": 34,
+            "retests": 39,
+            "coverage": 0.4868421052631579,
+            "overall_wrong_release": 0.039473684210526314,
+            "released_error_rate": 0.08108108108108109,
+            "released_accuracy": 0.9189189189189189,
+            "observed_within_alpha": true,
+            "conditional_error_within_alpha": true,
+            "loss": 0.16776315789473684
+          },
+          "test": {
+            "patients": 26,
+            "released": 17,
+            "wrong_released": 4,
+            "released_correct": 13,
+            "retests": 9,
+            "coverage": 0.6538461538461539,
+            "overall_wrong_release": 0.15384615384615385,
+            "released_error_rate": 0.23529411764705882,
+            "released_accuracy": 0.7647058823529411,
+            "observed_within_alpha": false,
+            "conditional_error_within_alpha": false,
+            "loss": 0.2403846153846154
+          },
+          "forecast": {
+            "basis": "calibration outcomes only; calculated before test scoring",
+            "pilot_readout_accuracies": [
+              0.6842105263157895,
+              0.7236842105263158
+            ],
+            "independence_formula_for_plain_agreement": 0.8501783590963139,
+            "certificate_release_share": 0.4868421052631579,
+            "certificate_released_accuracy_smoothed": 0.9078947368421053,
+            "expected_releases_from_pilot": 12.657894736842106,
+            "expected_retests_from_pilot": 13.342105263157894,
+            "assumptions": "transportable calibration distribution; smoothed empirical accuracy is a point estimate, not the CRC risk bound"
+          },
+          "forecast_released_accuracy_error": -0.14318885448916419,
+          "before_scoring_sha256": "f15022856bba873e4d142c0528cd442467af407dbf8a05d0fd9a0bc5042f9851",
+          "test_predictions": [
+            {
+              "patient": "Patient16",
+              "calls": [
+                1,
+                1
+              ],
+              "agree": true,
+              "margin": 0.15999999999999998,
+              "prediction": 1,
+              "released": true
+            },
+            {
+              "patient": "Patient41",
+              "calls": [
+                0,
+                0
+              ],
+              "agree": true,
+              "margin": 0.36,
+              "prediction": 0,
+              "released": true
+            },
+            {
+              "patient": "Patient54",
+              "calls": [
+                0,
+                0
+              ],
+              "agree": true,
+              "margin": 0.03999999999999998,
+              "prediction": 0,
+              "released": true
+            },
+            {
+              "patient": "Patient63",
+              "calls": [
+                0,
+                1
+              ],
+              "agree": false,
+              "margin": 0.0,
+              "prediction": 0,
+              "released": false
+            },
+            {
+              "patient": "Patient91",
+              "calls": [
+                0,
+                0
+              ],
+              "agree": true,
+              "margin": 0.48,
+              "prediction": 0,
+              "released": true
+            },
+            {
+              "patient": "Patient12",
+              "calls": [
+                1,
+                1
+              ],
+              "agree": true,
+              "margin": 0.12000000000000002,
+              "prediction": 1,
+              "released": true
+            },
+            {
+              "patient": "Patient67",
+              "calls": [
+                0,
+                0
+              ],
+              "agree": true,
+              "margin": 0.24,
+              "prediction": 0,
+              "released": true
+            },
+            {
+              "patient": "Patient101",
+              "calls": [
+                0,
+                1
+              ],
+              "agree": false,
+              "margin": 0.24,
+              "prediction": 0,
+              "released": false
+            },
+            {
+              "patient": "Patient108",
+              "calls": [
+                0,
+                1
+              ],
+              "agree": false,
+              "margin": 0.31999999999999995,
+              "prediction": 0,
+              "released": false
+            },
+            {
+              "patient": "Patient13",
+              "calls": [
+                0,
+                0
+              ],
+              "agree": true,
+              "margin": 0.07999999999999996,
+              "prediction": 0,
+              "released": true
+            },
+            {
+              "patient": "Patient61",
+              "calls": [
+                0,
+                1
+              ],
+              "agree": false,
+              "margin": 0.24,
+              "prediction": 0,
+              "released": false
+            },
+            {
+              "patient": "Patient97",
+              "calls": [
+                0,
+                0
+              ],
+              "agree": true,
+              "margin": 0.48,
+              "prediction": 0,
+              "released": true
+            },
+            {
+              "patient": "Patient89",
+              "calls": [
+                0,
+                0
+              ],
+              "agree": true,
+              "margin": 0.44000000000000006,
+              "prediction": 0,
+              "released": true
+            },
+            {
+              "patient": "Patient121",
+              "calls": [
+                0,
+                0
+              ],
+              "agree": true,
+              "margin": 0.08000000000000007,
+              "prediction": 0,
+              "released": true
+            },
+            {
+              "patient": "Patient32",
+              "calls": [
+                1,
+                1
+              ],
+              "agree": true,
+              "margin": 0.28,
+              "prediction": 1,
+              "released": true
+            },
+            {
+              "patient": "Patient20",
+              "calls": [
+                0,
+                0
+              ],
+              "agree": true,
+              "margin": 0.44000000000000006,
+              "prediction": 0,
+              "released": true
+            },
+            {
+              "patient": "Patient86",
+              "calls": [
+                1,
+                1
+              ],
+              "agree": true,
+              "margin": 0.24000000000000002,
+              "prediction": 1,
+              "released": true
+            },
+            {
+              "patient": "Patient94",
+              "calls": [
+                0,
+                0
+              ],
+              "agree": true,
+              "margin": 0.44000000000000006,
+              "prediction": 0,
+              "released": true
+            },
+            {
+              "patient": "Patient49",
+              "calls": [
+                0,
+                0
+              ],
+              "agree": true,
+              "margin": 0.36,
+              "prediction": 0,
+              "released": true
+            },
+            {
+              "patient": "Patient36",
+              "calls": [
+                1,
+                0
+              ],
+              "agree": false,
+              "margin": 0.0,
+              "prediction": 1,
+              "released": false
+            },
+            {
+              "patient": "Patient113",
+              "calls": [
+                0,
+                0
+              ],
+              "agree": true,
+              "margin": 0.28,
+              "prediction": 0,
+              "released": true
+            },
+            {
+              "patient": "Patient60",
+              "calls": [
+                0,
+                1
+              ],
+              "agree": false,
+              "margin": 0.27999999999999997,
+              "prediction": 0,
+              "released": false
+            },
+            {
+              "patient": "Patient21",
+              "calls": [
+                0,
+                1
+              ],
+              "agree": false,
+              "margin": 0.0,
+              "prediction": 0,
+              "released": false
+            },
+            {
+              "patient": "Patient122",
+              "calls": [
+                0,
+                0
+              ],
+              "agree": true,
+              "margin": 0.48,
+              "prediction": 0,
+              "released": true
+            },
+            {
+              "patient": "Patient71",
+              "calls": [
+                0,
+                1
+              ],
+              "agree": false,
+              "margin": 0.03999999999999998,
+              "prediction": 0,
+              "released": false
+            },
+            {
+              "patient": "Patient105",
+              "calls": [
+                0,
+                1
+              ],
+              "agree": false,
+              "margin": 0.07999999999999996,
+              "prediction": 0,
+              "released": false
+            }
+          ],
+          "same_model_in_calibration_and_deployment": true,
+          "cli_actions_equal_library": true
+        },
+        {
+          "alpha": 0.15,
+          "threshold": -1.0,
+          "fallback": "none",
+          "calibration": {
+            "patients": 76,
+            "released": 37,
+            "wrong_released": 3,
+            "released_correct": 34,
+            "retests": 39,
+            "coverage": 0.4868421052631579,
+            "overall_wrong_release": 0.039473684210526314,
+            "released_error_rate": 0.08108108108108109,
+            "released_accuracy": 0.9189189189189189,
+            "observed_within_alpha": true,
+            "conditional_error_within_alpha": true,
+            "loss": 0.16776315789473684
+          },
+          "test": {
+            "patients": 26,
+            "released": 17,
+            "wrong_released": 4,
+            "released_correct": 13,
+            "retests": 9,
+            "coverage": 0.6538461538461539,
+            "overall_wrong_release": 0.15384615384615385,
+            "released_error_rate": 0.23529411764705882,
+            "released_accuracy": 0.7647058823529411,
+            "observed_within_alpha": false,
+            "conditional_error_within_alpha": false,
+            "loss": 0.2403846153846154
+          },
+          "forecast": {
+            "basis": "calibration outcomes only; calculated before test scoring",
+            "pilot_readout_accuracies": [
+              0.6842105263157895,
+              0.7236842105263158
+            ],
+            "independence_formula_for_plain_agreement": 0.8501783590963139,
+            "certificate_release_share": 0.4868421052631579,
+            "certificate_released_accuracy_smoothed": 0.9078947368421053,
+            "expected_releases_from_pilot": 12.657894736842106,
+            "expected_retests_from_pilot": 13.342105263157894,
+            "assumptions": "transportable calibration distribution; smoothed empirical accuracy is a point estimate, not the CRC risk bound"
+          },
+          "forecast_released_accuracy_error": -0.14318885448916419,
+          "before_scoring_sha256": "9dd449431d205589335b552726f3d5b90140590355ad8c876c10624d7bba21b2",
+          "test_predictions": [
+            {
+              "patient": "Patient16",
+              "calls": [
+                1,
+                1
+              ],
+              "agree": true,
+              "margin": 0.15999999999999998,
+              "prediction": 1,
+              "released": true
+            },
+            {
+              "patient": "Patient41",
+              "calls": [
+                0,
+                0
+              ],
+              "agree": true,
+              "margin": 0.36,
+              "prediction": 0,
+              "released": true
+            },
+            {
+              "patient": "Patient54",
+              "calls": [
+                0,
+                0
+              ],
+              "agree": true,
+              "margin": 0.03999999999999998,
+              "prediction": 0,
+              "released": true
+            },
+            {
+              "patient": "Patient63",
+              "calls": [
+                0,
+                1
+              ],
+              "agree": false,
+              "margin": 0.0,
+              "prediction": 0,
+              "released": false
+            },
+            {
+              "patient": "Patient91",
+              "calls": [
+                0,
+                0
+              ],
+              "agree": true,
+              "margin": 0.48,
+              "prediction": 0,
+              "released": true
+            },
+            {
+              "patient": "Patient12",
+              "calls": [
+                1,
+                1
+              ],
+              "agree": true,
+              "margin": 0.12000000000000002,
+              "prediction": 1,
+              "released": true
+            },
+            {
+              "patient": "Patient67",
+              "calls": [
+                0,
+                0
+              ],
+              "agree": true,
+              "margin": 0.24,
+              "prediction": 0,
+              "released": true
+            },
+            {
+              "patient": "Patient101",
+              "calls": [
+                0,
+                1
+              ],
+              "agree": false,
+              "margin": 0.24,
+              "prediction": 0,
+              "released": false
+            },
+            {
+              "patient": "Patient108",
+              "calls": [
+                0,
+                1
+              ],
+              "agree": false,
+              "margin": 0.31999999999999995,
+              "prediction": 0,
+              "released": false
+            },
+            {
+              "patient": "Patient13",
+              "calls": [
+                0,
+                0
+              ],
+              "agree": true,
+              "margin": 0.07999999999999996,
+              "prediction": 0,
+              "released": true
+            },
+            {
+              "patient": "Patient61",
+              "calls": [
+                0,
+                1
+              ],
+              "agree": false,
+              "margin": 0.24,
+              "prediction": 0,
+              "released": false
+            },
+            {
+              "patient": "Patient97",
+              "calls": [
+                0,
+                0
+              ],
+              "agree": true,
+              "margin": 0.48,
+              "prediction": 0,
+              "released": true
+            },
+            {
+              "patient": "Patient89",
+              "calls": [
+                0,
+                0
+              ],
+              "agree": true,
+              "margin": 0.44000000000000006,
+              "prediction": 0,
+              "released": true
+            },
+            {
+              "patient": "Patient121",
+              "calls": [
+                0,
+                0
+              ],
+              "agree": true,
+              "margin": 0.08000000000000007,
+              "prediction": 0,
+              "released": true
+            },
+            {
+              "patient": "Patient32",
+              "calls": [
+                1,
+                1
+              ],
+              "agree": true,
+              "margin": 0.28,
+              "prediction": 1,
+              "released": true
+            },
+            {
+              "patient": "Patient20",
+              "calls": [
+                0,
+                0
+              ],
+              "agree": true,
+              "margin": 0.44000000000000006,
+              "prediction": 0,
+              "released": true
+            },
+            {
+              "patient": "Patient86",
+              "calls": [
+                1,
+                1
+              ],
+              "agree": true,
+              "margin": 0.24000000000000002,
+              "prediction": 1,
+              "released": true
+            },
+            {
+              "patient": "Patient94",
+              "calls": [
+                0,
+                0
+              ],
+              "agree": true,
+              "margin": 0.44000000000000006,
+              "prediction": 0,
+              "released": true
+            },
+            {
+              "patient": "Patient49",
+              "calls": [
+                0,
+                0
+              ],
+              "agree": true,
+              "margin": 0.36,
+              "prediction": 0,
+              "released": true
+            },
+            {
+              "patient": "Patient36",
+              "calls": [
+                1,
+                0
+              ],
+              "agree": false,
+              "margin": 0.0,
+              "prediction": 1,
+              "released": false
+            },
+            {
+              "patient": "Patient113",
+              "calls": [
+                0,
+                0
+              ],
+              "agree": true,
+              "margin": 0.28,
+              "prediction": 0,
+              "released": true
+            },
+            {
+              "patient": "Patient60",
+              "calls": [
+                0,
+                1
+              ],
+              "agree": false,
+              "margin": 0.27999999999999997,
+              "prediction": 0,
+              "released": false
+            },
+            {
+              "patient": "Patient21",
+              "calls": [
+                0,
+                1
+              ],
+              "agree": false,
+              "margin": 0.0,
+              "prediction": 0,
+              "released": false
+            },
+            {
+              "patient": "Patient122",
+              "calls": [
+                0,
+                0
+              ],
+              "agree": true,
+              "margin": 0.48,
+              "prediction": 0,
+              "released": true
+            },
+            {
+              "patient": "Patient71",
+              "calls": [
+                0,
+                1
+              ],
+              "agree": false,
+              "margin": 0.03999999999999998,
+              "prediction": 0,
+              "released": false
+            },
+            {
+              "patient": "Patient105",
+              "calls": [
+                0,
+                1
+              ],
+              "agree": false,
+              "margin": 0.07999999999999996,
+              "prediction": 0,
+              "released": false
+            }
+          ],
+          "same_model_in_calibration_and_deployment": true,
+          "cli_actions_equal_library": true
+        },
+        {
+          "alpha": 0.2,
+          "threshold": -1.0,
+          "fallback": "none",
+          "calibration": {
+            "patients": 76,
+            "released": 37,
+            "wrong_released": 3,
+            "released_correct": 34,
+            "retests": 39,
+            "coverage": 0.4868421052631579,
+            "overall_wrong_release": 0.039473684210526314,
+            "released_error_rate": 0.08108108108108109,
+            "released_accuracy": 0.9189189189189189,
+            "observed_within_alpha": true,
+            "conditional_error_within_alpha": true,
+            "loss": 0.16776315789473684
+          },
+          "test": {
+            "patients": 26,
+            "released": 17,
+            "wrong_released": 4,
+            "released_correct": 13,
+            "retests": 9,
+            "coverage": 0.6538461538461539,
+            "overall_wrong_release": 0.15384615384615385,
+            "released_error_rate": 0.23529411764705882,
+            "released_accuracy": 0.7647058823529411,
+            "observed_within_alpha": true,
+            "conditional_error_within_alpha": false,
+            "loss": 0.2403846153846154
+          },
+          "forecast": {
+            "basis": "calibration outcomes only; calculated before test scoring",
+            "pilot_readout_accuracies": [
+              0.6842105263157895,
+              0.7236842105263158
+            ],
+            "independence_formula_for_plain_agreement": 0.8501783590963139,
+            "certificate_release_share": 0.4868421052631579,
+            "certificate_released_accuracy_smoothed": 0.9078947368421053,
+            "expected_releases_from_pilot": 12.657894736842106,
+            "expected_retests_from_pilot": 13.342105263157894,
+            "assumptions": "transportable calibration distribution; smoothed empirical accuracy is a point estimate, not the CRC risk bound"
+          },
+          "forecast_released_accuracy_error": -0.14318885448916419,
+          "before_scoring_sha256": "652fdf9e63b64eb0694d3797fd5e8cb183d0878fb601a609f845293aa61105d3",
+          "test_predictions": [
+            {
+              "patient": "Patient16",
+              "calls": [
+                1,
+                1
+              ],
+              "agree": true,
+              "margin": 0.15999999999999998,
+              "prediction": 1,
+              "released": true
+            },
+            {
+              "patient": "Patient41",
+              "calls": [
+                0,
+                0
+              ],
+              "agree": true,
+              "margin": 0.36,
+              "prediction": 0,
+              "released": true
+            },
+            {
+              "patient": "Patient54",
+              "calls": [
+                0,
+                0
+              ],
+              "agree": true,
+              "margin": 0.03999999999999998,
+              "prediction": 0,
+              "released": true
+            },
+            {
+              "patient": "Patient63",
+              "calls": [
+                0,
+                1
+              ],
+              "agree": false,
+              "margin": 0.0,
+              "prediction": 0,
+              "released": false
+            },
+            {
+              "patient": "Patient91",
+              "calls": [
+                0,
+                0
+              ],
+              "agree": true,
+              "margin": 0.48,
+              "prediction": 0,
+              "released": true
+            },
+            {
+              "patient": "Patient12",
+              "calls": [
+                1,
+                1
+              ],
+              "agree": true,
+              "margin": 0.12000000000000002,
+              "prediction": 1,
+              "released": true
+            },
+            {
+              "patient": "Patient67",
+              "calls": [
+                0,
+                0
+              ],
+              "agree": true,
+              "margin": 0.24,
+              "prediction": 0,
+              "released": true
+            },
+            {
+              "patient": "Patient101",
+              "calls": [
+                0,
+                1
+              ],
+              "agree": false,
+              "margin": 0.24,
+              "prediction": 0,
+              "released": false
+            },
+            {
+              "patient": "Patient108",
+              "calls": [
+                0,
+                1
+              ],
+              "agree": false,
+              "margin": 0.31999999999999995,
+              "prediction": 0,
+              "released": false
+            },
+            {
+              "patient": "Patient13",
+              "calls": [
+                0,
+                0
+              ],
+              "agree": true,
+              "margin": 0.07999999999999996,
+              "prediction": 0,
+              "released": true
+            },
+            {
+              "patient": "Patient61",
+              "calls": [
+                0,
+                1
+              ],
+              "agree": false,
+              "margin": 0.24,
+              "prediction": 0,
+              "released": false
+            },
+            {
+              "patient": "Patient97",
+              "calls": [
+                0,
+                0
+              ],
+              "agree": true,
+              "margin": 0.48,
+              "prediction": 0,
+              "released": true
+            },
+            {
+              "patient": "Patient89",
+              "calls": [
+                0,
+                0
+              ],
+              "agree": true,
+              "margin": 0.44000000000000006,
+              "prediction": 0,
+              "released": true
+            },
+            {
+              "patient": "Patient121",
+              "calls": [
+                0,
+                0
+              ],
+              "agree": true,
+              "margin": 0.08000000000000007,
+              "prediction": 0,
+              "released": true
+            },
+            {
+              "patient": "Patient32",
+              "calls": [
+                1,
+                1
+              ],
+              "agree": true,
+              "margin": 0.28,
+              "prediction": 1,
+              "released": true
+            },
+            {
+              "patient": "Patient20",
+              "calls": [
+                0,
+                0
+              ],
+              "agree": true,
+              "margin": 0.44000000000000006,
+              "prediction": 0,
+              "released": true
+            },
+            {
+              "patient": "Patient86",
+              "calls": [
+                1,
+                1
+              ],
+              "agree": true,
+              "margin": 0.24000000000000002,
+              "prediction": 1,
+              "released": true
+            },
+            {
+              "patient": "Patient94",
+              "calls": [
+                0,
+                0
+              ],
+              "agree": true,
+              "margin": 0.44000000000000006,
+              "prediction": 0,
+              "released": true
+            },
+            {
+              "patient": "Patient49",
+              "calls": [
+                0,
+                0
+              ],
+              "agree": true,
+              "margin": 0.36,
+              "prediction": 0,
+              "released": true
+            },
+            {
+              "patient": "Patient36",
+              "calls": [
+                1,
+                0
+              ],
+              "agree": false,
+              "margin": 0.0,
+              "prediction": 1,
+              "released": false
+            },
+            {
+              "patient": "Patient113",
+              "calls": [
+                0,
+                0
+              ],
+              "agree": true,
+              "margin": 0.28,
+              "prediction": 0,
+              "released": true
+            },
+            {
+              "patient": "Patient60",
+              "calls": [
+                0,
+                1
+              ],
+              "agree": false,
+              "margin": 0.27999999999999997,
+              "prediction": 0,
+              "released": false
+            },
+            {
+              "patient": "Patient21",
+              "calls": [
+                0,
+                1
+              ],
+              "agree": false,
+              "margin": 0.0,
+              "prediction": 0,
+              "released": false
+            },
+            {
+              "patient": "Patient122",
+              "calls": [
+                0,
+                0
+              ],
+              "agree": true,
+              "margin": 0.48,
+              "prediction": 0,
+              "released": true
+            },
+            {
+              "patient": "Patient71",
+              "calls": [
+                0,
+                1
+              ],
+              "agree": false,
+              "margin": 0.03999999999999998,
+              "prediction": 0,
+              "released": false
+            },
+            {
+              "patient": "Patient105",
+              "calls": [
+                0,
+                1
+              ],
+              "agree": false,
+              "margin": 0.07999999999999996,
+              "prediction": 0,
+              "released": false
+            }
+          ],
+          "same_model_in_calibration_and_deployment": true,
+          "cli_actions_equal_library": true
+        }
+      ]
+    },
+    "liver_metastasis_2022": {
+      "patients": 23,
+      "split": {
+        "training": 4,
+        "calibration": 13,
+        "test": 6
+      },
+      "ids": {
+        "training": [
+          "P17",
+          "P15",
+          "P18",
+          "P9"
+        ],
+        "calibration": [
+          "P5",
+          "P16",
+          "P10",
+          "P23",
+          "P24",
+          "P25",
+          "P21",
+          "P12",
+          "P14",
+          "P22",
+          "P8",
+          "P11",
+          "P3"
+        ],
+        "test": [
+          "P4",
+          "P13",
+          "P2",
+          "P7",
+          "P19",
+          "P6"
+        ]
+      },
+      "model_sha256": "af57aa288df9e3ab2bff2ca98ed990edd4e45ecdee52eb4eb6d41a5384bef3ec",
+      "levels": [
+        {
+          "alpha": 0.1,
+          "threshold": 0.0,
+          "fallback": "none",
+          "calibration": {
+            "patients": 13,
+            "released": 2,
+            "wrong_released": 0,
+            "released_correct": 2,
+            "retests": 11,
+            "coverage": 0.15384615384615385,
+            "overall_wrong_release": 0.0,
+            "released_error_rate": 0.0,
+            "released_accuracy": 1.0,
+            "observed_within_alpha": true,
+            "conditional_error_within_alpha": true,
+            "loss": 0.21153846153846154
+          },
+          "test": {
+            "patients": 6,
+            "released": 1,
+            "wrong_released": 0,
+            "released_correct": 1,
+            "retests": 5,
+            "coverage": 0.16666666666666666,
+            "overall_wrong_release": 0.0,
+            "released_error_rate": 0.0,
+            "released_accuracy": 1.0,
+            "observed_within_alpha": true,
+            "conditional_error_within_alpha": true,
+            "loss": 0.20833333333333334
+          },
+          "forecast": {
+            "basis": "calibration outcomes only; calculated before test scoring",
+            "pilot_readout_accuracies": [
+              0.7692307692307693,
+              0.46153846153846156
+            ],
+            "independence_formula_for_plain_agreement": 0.7407407407407408,
+            "certificate_release_share": 0.15384615384615385,
+            "certificate_released_accuracy_smoothed": 0.8333333333333334,
+            "expected_releases_from_pilot": 0.9230769230769231,
+            "expected_retests_from_pilot": 5.076923076923077,
+            "assumptions": "transportable calibration distribution; smoothed empirical accuracy is a point estimate, not the CRC risk bound"
+          },
+          "forecast_released_accuracy_error": 0.16666666666666663,
+          "before_scoring_sha256": "f34d068c2ec5492e9d65968dc2d48fb3f91b6258bbc45869c8cedfba0effe19b",
+          "test_predictions": [
+            {
+              "patient": "P4",
+              "calls": [
+                1,
+                1
+              ],
+              "agree": true,
+              "margin": 0.0,
+              "prediction": 1,
+              "released": false
+            },
+            {
+              "patient": "P13",
+              "calls": [
+                1,
+                1
+              ],
+              "agree": true,
+              "margin": 0.0,
+              "prediction": 1,
+              "released": false
+            },
+            {
+              "patient": "P2",
+              "calls": [
+                1,
+                1
+              ],
+              "agree": true,
+              "margin": 0.25,
+              "prediction": 1,
+              "released": true
+            },
+            {
+              "patient": "P7",
+              "calls": [
+                0,
+                0
+              ],
+              "agree": true,
+              "margin": 0.0,
+              "prediction": 0,
+              "released": false
+            },
+            {
+              "patient": "P19",
+              "calls": [
+                0,
+                1
+              ],
+              "agree": false,
+              "margin": 0.0,
+              "prediction": 0,
+              "released": false
+            },
+            {
+              "patient": "P6",
+              "calls": [
+                1,
+                0
+              ],
+              "agree": false,
+              "margin": 0.0,
+              "prediction": 1,
+              "released": false
+            }
+          ],
+          "same_model_in_calibration_and_deployment": true,
+          "cli_actions_equal_library": true
+        },
+        {
+          "alpha": 0.15,
+          "threshold": -1.0,
+          "fallback": "none",
+          "calibration": {
+            "patients": 13,
+            "released": 5,
+            "wrong_released": 1,
+            "released_correct": 4,
+            "retests": 8,
+            "coverage": 0.38461538461538464,
+            "overall_wrong_release": 0.07692307692307693,
+            "released_error_rate": 0.2,
+            "released_accuracy": 0.8,
+            "observed_within_alpha": true,
+            "conditional_error_within_alpha": false,
+            "loss": 0.23076923076923078
+          },
+          "test": {
+            "patients": 6,
+            "released": 4,
+            "wrong_released": 0,
+            "released_correct": 4,
+            "retests": 2,
+            "coverage": 0.6666666666666666,
+            "overall_wrong_release": 0.0,
+            "released_error_rate": 0.0,
+            "released_accuracy": 1.0,
+            "observed_within_alpha": true,
+            "conditional_error_within_alpha": true,
+            "loss": 0.08333333333333333
+          },
+          "forecast": {
+            "basis": "calibration outcomes only; calculated before test scoring",
+            "pilot_readout_accuracies": [
+              0.7692307692307693,
+              0.46153846153846156
+            ],
+            "independence_formula_for_plain_agreement": 0.7407407407407408,
+            "certificate_release_share": 0.38461538461538464,
+            "certificate_released_accuracy_smoothed": 0.75,
+            "expected_releases_from_pilot": 2.307692307692308,
+            "expected_retests_from_pilot": 3.6923076923076925,
+            "assumptions": "transportable calibration distribution; smoothed empirical accuracy is a point estimate, not the CRC risk bound"
+          },
+          "forecast_released_accuracy_error": 0.25,
+          "before_scoring_sha256": "37729db5f69c41a978795d2978a2c463c0a8e97e2a316ecbf6fb1c9deb188e1d",
+          "test_predictions": [
+            {
+              "patient": "P4",
+              "calls": [
+                1,
+                1
+              ],
+              "agree": true,
+              "margin": 0.0,
+              "prediction": 1,
+              "released": true
+            },
+            {
+              "patient": "P13",
+              "calls": [
+                1,
+                1
+              ],
+              "agree": true,
+              "margin": 0.0,
+              "prediction": 1,
+              "released": true
+            },
+            {
+              "patient": "P2",
+              "calls": [
+                1,
+                1
+              ],
+              "agree": true,
+              "margin": 0.25,
+              "prediction": 1,
+              "released": true
+            },
+            {
+              "patient": "P7",
+              "calls": [
+                0,
+                0
+              ],
+              "agree": true,
+              "margin": 0.0,
+              "prediction": 0,
+              "released": true
+            },
+            {
+              "patient": "P19",
+              "calls": [
+                0,
+                1
+              ],
+              "agree": false,
+              "margin": 0.0,
+              "prediction": 0,
+              "released": false
+            },
+            {
+              "patient": "P6",
+              "calls": [
+                1,
+                0
+              ],
+              "agree": false,
+              "margin": 0.0,
+              "prediction": 1,
+              "released": false
+            }
+          ],
+          "same_model_in_calibration_and_deployment": true,
+          "cli_actions_equal_library": true
+        },
+        {
+          "alpha": 0.2,
+          "threshold": -1.0,
+          "fallback": "none",
+          "calibration": {
+            "patients": 13,
+            "released": 5,
+            "wrong_released": 1,
+            "released_correct": 4,
+            "retests": 8,
+            "coverage": 0.38461538461538464,
+            "overall_wrong_release": 0.07692307692307693,
+            "released_error_rate": 0.2,
+            "released_accuracy": 0.8,
+            "observed_within_alpha": true,
+            "conditional_error_within_alpha": true,
+            "loss": 0.23076923076923078
+          },
+          "test": {
+            "patients": 6,
+            "released": 4,
+            "wrong_released": 0,
+            "released_correct": 4,
+            "retests": 2,
+            "coverage": 0.6666666666666666,
+            "overall_wrong_release": 0.0,
+            "released_error_rate": 0.0,
+            "released_accuracy": 1.0,
+            "observed_within_alpha": true,
+            "conditional_error_within_alpha": true,
+            "loss": 0.08333333333333333
+          },
+          "forecast": {
+            "basis": "calibration outcomes only; calculated before test scoring",
+            "pilot_readout_accuracies": [
+              0.7692307692307693,
+              0.46153846153846156
+            ],
+            "independence_formula_for_plain_agreement": 0.7407407407407408,
+            "certificate_release_share": 0.38461538461538464,
+            "certificate_released_accuracy_smoothed": 0.75,
+            "expected_releases_from_pilot": 2.307692307692308,
+            "expected_retests_from_pilot": 3.6923076923076925,
+            "assumptions": "transportable calibration distribution; smoothed empirical accuracy is a point estimate, not the CRC risk bound"
+          },
+          "forecast_released_accuracy_error": 0.25,
+          "before_scoring_sha256": "547108f85a34abea82b7cc77f99f8afb3afa2b9e1de06b16b7c3eb152136cafb",
+          "test_predictions": [
+            {
+              "patient": "P4",
+              "calls": [
+                1,
+                1
+              ],
+              "agree": true,
+              "margin": 0.0,
+              "prediction": 1,
+              "released": true
+            },
+            {
+              "patient": "P13",
+              "calls": [
+                1,
+                1
+              ],
+              "agree": true,
+              "margin": 0.0,
+              "prediction": 1,
+              "released": true
+            },
+            {
+              "patient": "P2",
+              "calls": [
+                1,
+                1
+              ],
+              "agree": true,
+              "margin": 0.25,
+              "prediction": 1,
+              "released": true
+            },
+            {
+              "patient": "P7",
+              "calls": [
+                0,
+                0
+              ],
+              "agree": true,
+              "margin": 0.0,
+              "prediction": 0,
+              "released": true
+            },
+            {
+              "patient": "P19",
+              "calls": [
+                0,
+                1
+              ],
+              "agree": false,
+              "margin": 0.0,
+              "prediction": 0,
+              "released": false
+            },
+            {
+              "patient": "P6",
+              "calls": [
+                1,
+                0
+              ],
+              "agree": false,
+              "margin": 0.0,
+              "prediction": 1,
+              "released": false
+            }
+          ],
+          "same_model_in_calibration_and_deployment": true,
+          "cli_actions_equal_library": true
+        }
+      ]
+    },
+    "tan_2023": {
+      "patients": 18,
+      "split": {
+        "training": 3,
+        "calibration": 10,
+        "test": 5
+      },
+      "ids": {
+        "training": [
+          "WCB254",
+          "WCB242",
+          "WCB262"
+        ],
+        "calibration": [
+          "WCB123",
+          "WCB091",
+          "WCB250",
+          "WCB027",
+          "WCB278",
+          "WCB239",
+          "WCB015",
+          "WCB259",
+          "WCB150",
+          "WCB311"
+        ],
+        "test": [
+          "WCB296",
+          "WCB041",
+          "WCB221",
+          "WCB288",
+          "WCB245"
+        ]
+      },
+      "model_sha256": "0ad0d82ce9ef0e1d7672f3762126450e2522f26dcb1982a0de9dd1e2f35e9383",
+      "levels": [
+        {
+          "alpha": 0.1,
+          "threshold": 0.0,
+          "fallback": "none",
+          "calibration": {
+            "patients": 10,
+            "released": 1,
+            "wrong_released": 0,
+            "released_correct": 1,
+            "retests": 9,
+            "coverage": 0.1,
+            "overall_wrong_release": 0.0,
+            "released_error_rate": 0.0,
+            "released_accuracy": 1.0,
+            "observed_within_alpha": true,
+            "conditional_error_within_alpha": true,
+            "loss": 0.225
+          },
+          "test": {
+            "patients": 5,
+            "released": 1,
+            "wrong_released": 1,
+            "released_correct": 0,
+            "retests": 4,
+            "coverage": 0.2,
+            "overall_wrong_release": 0.2,
+            "released_error_rate": 1.0,
+            "released_accuracy": 0.0,
+            "observed_within_alpha": false,
+            "conditional_error_within_alpha": false,
+            "loss": 0.4
+          },
+          "forecast": {
+            "basis": "calibration outcomes only; calculated before test scoring",
+            "pilot_readout_accuracies": [
+              0.5,
+              0.7
+            ],
+            "independence_formula_for_plain_agreement": 0.7,
+            "certificate_release_share": 0.1,
+            "certificate_released_accuracy_smoothed": 0.75,
+            "expected_releases_from_pilot": 0.5,
+            "expected_retests_from_pilot": 4.5,
+            "assumptions": "transportable calibration distribution; smoothed empirical accuracy is a point estimate, not the CRC risk bound"
+          },
+          "forecast_released_accuracy_error": -0.75,
+          "before_scoring_sha256": "eb1f3905c821832b2d0835bf628137e68ab024616240a6549a0909aaa8c03278",
+          "test_predictions": [
+            {
+              "patient": "WCB296",
+              "calls": [
+                0,
+                0
+              ],
+              "agree": true,
+              "margin": 0.0,
+              "prediction": 0,
+              "released": false
+            },
+            {
+              "patient": "WCB041",
+              "calls": [
+                1,
+                1
+              ],
+              "agree": true,
+              "margin": 0.0,
+              "prediction": 1,
+              "released": false
+            },
+            {
+              "patient": "WCB221",
+              "calls": [
+                1,
+                0
+              ],
+              "agree": false,
+              "margin": 0.3333333333333333,
+              "prediction": 1,
+              "released": false
+            },
+            {
+              "patient": "WCB288",
+              "calls": [
+                1,
+                0
+              ],
+              "agree": false,
+              "margin": 0.0,
+              "prediction": 1,
+              "released": false
+            },
+            {
+              "patient": "WCB245",
+              "calls": [
+                0,
+                0
+              ],
+              "agree": true,
+              "margin": 0.3333333333333333,
+              "prediction": 0,
+              "released": true
+            }
+          ],
+          "same_model_in_calibration_and_deployment": true,
+          "cli_actions_equal_library": true
+        },
+        {
+          "alpha": 0.15,
+          "threshold": 0.0,
+          "fallback": "none",
+          "calibration": {
+            "patients": 10,
+            "released": 1,
+            "wrong_released": 0,
+            "released_correct": 1,
+            "retests": 9,
+            "coverage": 0.1,
+            "overall_wrong_release": 0.0,
+            "released_error_rate": 0.0,
+            "released_accuracy": 1.0,
+            "observed_within_alpha": true,
+            "conditional_error_within_alpha": true,
+            "loss": 0.225
+          },
+          "test": {
+            "patients": 5,
+            "released": 1,
+            "wrong_released": 1,
+            "released_correct": 0,
+            "retests": 4,
+            "coverage": 0.2,
+            "overall_wrong_release": 0.2,
+            "released_error_rate": 1.0,
+            "released_accuracy": 0.0,
+            "observed_within_alpha": false,
+            "conditional_error_within_alpha": false,
+            "loss": 0.4
+          },
+          "forecast": {
+            "basis": "calibration outcomes only; calculated before test scoring",
+            "pilot_readout_accuracies": [
+              0.5,
+              0.7
+            ],
+            "independence_formula_for_plain_agreement": 0.7,
+            "certificate_release_share": 0.1,
+            "certificate_released_accuracy_smoothed": 0.75,
+            "expected_releases_from_pilot": 0.5,
+            "expected_retests_from_pilot": 4.5,
+            "assumptions": "transportable calibration distribution; smoothed empirical accuracy is a point estimate, not the CRC risk bound"
+          },
+          "forecast_released_accuracy_error": -0.75,
+          "before_scoring_sha256": "4b4e2b372c69e4252d186be9e07538be44c79c526b2d213322de3456dd2e5149",
+          "test_predictions": [
+            {
+              "patient": "WCB296",
+              "calls": [
+                0,
+                0
+              ],
+              "agree": true,
+              "margin": 0.0,
+              "prediction": 0,
+              "released": false
+            },
+            {
+              "patient": "WCB041",
+              "calls": [
+                1,
+                1
+              ],
+              "agree": true,
+              "margin": 0.0,
+              "prediction": 1,
+              "released": false
+            },
+            {
+              "patient": "WCB221",
+              "calls": [
+                1,
+                0
+              ],
+              "agree": false,
+              "margin": 0.3333333333333333,
+              "prediction": 1,
+              "released": false
+            },
+            {
+              "patient": "WCB288",
+              "calls": [
+                1,
+                0
+              ],
+              "agree": false,
+              "margin": 0.0,
+              "prediction": 1,
+              "released": false
+            },
+            {
+              "patient": "WCB245",
+              "calls": [
+                0,
+                0
+              ],
+              "agree": true,
+              "margin": 0.3333333333333333,
+              "prediction": 0,
+              "released": true
+            }
+          ],
+          "same_model_in_calibration_and_deployment": true,
+          "cli_actions_equal_library": true
+        },
+        {
+          "alpha": 0.2,
+          "threshold": -1.0,
+          "fallback": "none",
+          "calibration": {
+            "patients": 10,
+            "released": 4,
+            "wrong_released": 1,
+            "released_correct": 3,
+            "retests": 6,
+            "coverage": 0.4,
+            "overall_wrong_release": 0.1,
+            "released_error_rate": 0.25,
+            "released_accuracy": 0.75,
+            "observed_within_alpha": true,
+            "conditional_error_within_alpha": false,
+            "loss": 0.25
+          },
+          "test": {
+            "patients": 5,
+            "released": 3,
+            "wrong_released": 2,
+            "released_correct": 1,
+            "retests": 2,
+            "coverage": 0.6,
+            "overall_wrong_release": 0.4,
+            "released_error_rate": 0.6666666666666666,
+            "released_accuracy": 0.33333333333333337,
+            "observed_within_alpha": false,
+            "conditional_error_within_alpha": false,
+            "loss": 0.5
+          },
+          "forecast": {
+            "basis": "calibration outcomes only; calculated before test scoring",
+            "pilot_readout_accuracies": [
+              0.5,
+              0.7
+            ],
+            "independence_formula_for_plain_agreement": 0.7,
+            "certificate_release_share": 0.4,
+            "certificate_released_accuracy_smoothed": 0.7,
+            "expected_releases_from_pilot": 2.0,
+            "expected_retests_from_pilot": 3.0,
+            "assumptions": "transportable calibration distribution; smoothed empirical accuracy is a point estimate, not the CRC risk bound"
+          },
+          "forecast_released_accuracy_error": -0.3666666666666666,
+          "before_scoring_sha256": "12239158e659b2cf0699702d3c33a80e13d10de54ae0b785baadd417c05959b1",
+          "test_predictions": [
+            {
+              "patient": "WCB296",
+              "calls": [
+                0,
+                0
+              ],
+              "agree": true,
+              "margin": 0.0,
+              "prediction": 0,
+              "released": true
+            },
+            {
+              "patient": "WCB041",
+              "calls": [
+                1,
+                1
+              ],
+              "agree": true,
+              "margin": 0.0,
+              "prediction": 1,
+              "released": true
+            },
+            {
+              "patient": "WCB221",
+              "calls": [
+                1,
+                0
+              ],
+              "agree": false,
+              "margin": 0.3333333333333333,
+              "prediction": 1,
+              "released": false
+            },
+            {
+              "patient": "WCB288",
+              "calls": [
+                1,
+                0
+              ],
+              "agree": false,
+              "margin": 0.0,
+              "prediction": 1,
+              "released": false
+            },
+            {
+              "patient": "WCB245",
+              "calls": [
+                0,
+                0
+              ],
+              "agree": true,
+              "margin": 0.3333333333333333,
+              "prediction": 0,
+              "released": true
+            }
+          ],
+          "same_model_in_calibration_and_deployment": true,
+          "cli_actions_equal_library": true
+        }
+      ]
+    }
+  }
+}
