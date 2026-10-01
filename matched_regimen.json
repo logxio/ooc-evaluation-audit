@@ -1,0 +1,105 @@
+{
+  "schema": "release.matched_regimen.result.v1",
+  "freeze_sha256": "5d4ba0052e39de4b9079cef7b750b14d87b637adac49c16fa041133ab71503cb",
+  "status": "Previously seen retrospective cohort; one prespecified signal change, no fresh clinical outcomes.",
+  "split": [
+    42,
+    42,
+    43
+  ],
+  "conditional_scope": "95% for this prespecified source and method only, assuming iid calibration/future patients; no joint guarantee across sources or methods.",
+  "modes": {
+    "fixed_threshold": {
+      "margin": -1.0,
+      "forecast": {
+        "released": 43,
+        "retests": 0,
+        "accuracy": 0.9186046511627907
+      },
+      "calibration": {
+        "patients": 42,
+        "released": 42,
+        "retests": 0,
+        "wrong_released": 3,
+        "coverage": 1.0,
+        "overall_wrong_release": 0.07142857142857142,
+        "released_error": 0.07142857142857142,
+        "released_accuracy": 0.9285714285714286
+      },
+      "test": {
+        "patients": 43,
+        "released": 43,
+        "retests": 0,
+        "wrong_released": 1,
+        "coverage": 1.0,
+        "overall_wrong_release": 0.023255813953488372,
+        "released_error": 0.023255813953488372,
+        "released_accuracy": 0.9767441860465116
+      }
+    },
+    "overall_crc": {
+      "margin": -1.0,
+      "forecast": {
+        "released": 43,
+        "retests": 0,
+        "accuracy": 0.9186046511627907
+      },
+      "calibration": {
+        "patients": 42,
+        "released": 42,
+        "retests": 0,
+        "wrong_released": 3,
+        "coverage": 1.0,
+        "overall_wrong_release": 0.07142857142857142,
+        "released_error": 0.07142857142857142,
+        "released_accuracy": 0.9285714285714286
+      },
+      "test": {
+        "patients": 43,
+        "released": 43,
+        "retests": 0,
+        "wrong_released": 1,
+        "coverage": 1.0,
+        "overall_wrong_release": 0.023255813953488372,
+        "released_error": 0.023255813953488372,
+        "released_accuracy": 0.9767441860465116
+      }
+    },
+    "conditional_ltt": {
+      "margin": 1.0,
+      "forecast": {
+        "released": 0,
+        "retests": 43,
+        "accuracy": null
+      },
+      "calibration": {
+        "patients": 42,
+        "released": 0,
+        "retests": 42,
+        "wrong_released": 0,
+        "coverage": 0.0,
+        "overall_wrong_release": 0.0,
+        "released_error": null,
+        "released_accuracy": null
+      },
+      "test": {
+        "patients": 43,
+        "released": 0,
+        "retests": 43,
+        "wrong_released": 0,
+        "coverage": 0.0,
+        "overall_wrong_release": 0.0,
+        "released_error": null,
+        "released_accuracy": null
+      }
+    }
+  },
+  "conditional_first_test": {
+    "margin": 0.18,
+    "calibration_released": 26,
+    "calibration_wrong": 0,
+    "upper": 0.10883035576078483,
+    "p": 0.06461081889226673
+  },
+  "conditional_certified": false
+}

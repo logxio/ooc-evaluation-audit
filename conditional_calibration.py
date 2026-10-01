@@ -13,7 +13,6 @@ import json
 import math
 from pathlib import Path
 
-from calibration_replay import ALPHAS, SEED, sources, split
 from release_calibration import GRID, apply, check_rows, digest, fit, measure, predict
 
 
@@ -103,6 +102,7 @@ def calibrate_conditional(model, training, calibration, alpha, eta):
 
 
 def run_source(name, rows, delta, source_count):
+    from calibration_replay import ALPHAS, split
     training, calibration, test = split(name, rows)
     if len({r['patient'] for r in training + calibration + test}) != len(rows):
         raise ValueError('Split contains duplicate or overlapping patients')
@@ -148,6 +148,7 @@ def run_source(name, rows, delta, source_count):
 
 
 def main():
+    from calibration_replay import SEED, sources
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument('--third-xlsx', type=Path)
     parser.add_argument('--out', type=Path, default=Path('conditional_calibration.json'))

@@ -1,0 +1,139 @@
+{
+  "schema": "tiriac.clinical-outcomes.v1",
+  "attribution": "Derived from Tiriac et al., Organoid Profiling Identifies Common Responders to Chemotherapy in Pancreatic Cancer, Cancer Discovery (2018), doi:10.1158/2159-8290.CD-18-0349.",
+  "license": "CC BY 4.0",
+  "license_url": "https://creativecommons.org/licenses/by/4.0/",
+  "source": {
+    "supplement_url": "https://ndownloader.figshare.com/files/39996310",
+    "metadata_url": "https://api.figshare.com/v2/articles/22533064",
+    "supplement_sha256": "1a8d3529cd3f874c4909111e43da4ded15457afb9a3807c4da51090eebb98df6",
+    "figure": "S6A",
+    "pdf_page": 6,
+    "legend_url": "https://ndownloader.figshare.com/files/39996313",
+    "legend_sha256": "c97a3d193d37cee97333e6e550b18106974e17cc925ce8793a4ae07a35d2a203",
+    "article_url": "https://pmc.ncbi.nlm.nih.gov/articles/PMC6125219/"
+  },
+  "interpretation": {
+    "method": "Manual interpretation checked against the original chart. Days are rounded visual estimates with a five-day reading range, not exact author-supplied event times.",
+    "author_title": "Progression Free Survival in Advanced Disease",
+    "axis_label": "Time to progression (days)",
+    "unit": "days",
+    "threshold_months": 6,
+    "days_per_month": 30.4375,
+    "threshold_days": 182.625,
+    "binary_rule": "Label 1 when the known event-free lower bound is at least 182.625 days. Label 0 for observed progression with upper time bound below 182.625 days. An interval crossing the threshold or censoring before it yields an unknown label.",
+    "progression": "Orange bar: Progressive Disease.",
+    "censoring": "Green bar and arrow: No Evidence of Progression. Read the green shaft endpoint, not the arrow tip.",
+    "reading_range": "The lower/upper range reflects graphical precision and is not a statistical confidence interval. Every recorded range lies on one side of the fixed threshold.",
+    "hF2": "The main text reports initial progression, a switch to second-line gemcitabine/irinotecan/5FU and 388 days of partial response. This corroborates the plotted approximately 390 days; it is not substituted as an exact PFS value. The predeclared primary analysis excludes this sequential-treatment case.",
+    "hF50": "The clinical regimen has only 5FU and is outside the predeclared paired-readout primary analysis. Its erroneous prediction remains visible in the full-nine sensitivity.",
+    "hF28": "The source reports GEM+5FU components; their sequence was uncertain before unblinding. The predeclared strict sensitivity excludes this case."
+  },
+  "freeze": {
+    "file": "tiriac_frozen_predictions.json",
+    "sha256": "1da509ad8f9cb5de6fa8af79038f6b424a8191c4855bc2f4278adcacd9cb0e95",
+    "public_commit": "ba866a8",
+    "scope": "Predictions and numerical forecasts were published before reading outcome values. Clinical-figure layout and patient/drug label coordinates had been visible. The source is a retrospective published cohort."
+  },
+  "rows": [
+    {
+      "patient_id": "38",
+      "pdo_id": "hF31",
+      "reported_regimen": "gemcitabine+paclitaxel",
+      "time_days_approx": 455,
+      "time_days_lower": 450,
+      "time_days_upper": 460,
+      "progression_event": false,
+      "right_censored": true,
+      "outcome_6_months": 1
+    },
+    {
+      "patient_id": "32",
+      "pdo_id": "hF2",
+      "reported_regimen": "5fu+gemcitabine+sn38",
+      "time_days_approx": 390,
+      "time_days_lower": 385,
+      "time_days_upper": 395,
+      "progression_event": true,
+      "right_censored": false,
+      "outcome_6_months": 1
+    },
+    {
+      "patient_id": "57",
+      "pdo_id": "hM1A",
+      "reported_regimen": "5fu+oxaliplatin+sn38",
+      "time_days_approx": 360,
+      "time_days_lower": 355,
+      "time_days_upper": 365,
+      "progression_event": true,
+      "right_censored": false,
+      "outcome_6_months": 1
+    },
+    {
+      "patient_id": "47",
+      "pdo_id": "hF57",
+      "reported_regimen": "gemcitabine+paclitaxel",
+      "time_days_approx": 285,
+      "time_days_lower": 280,
+      "time_days_upper": 290,
+      "progression_event": false,
+      "right_censored": true,
+      "outcome_6_months": 1
+    },
+    {
+      "patient_id": "43",
+      "pdo_id": "hF44",
+      "reported_regimen": "5fu+oxaliplatin+sn38",
+      "time_days_approx": 210,
+      "time_days_lower": 205,
+      "time_days_upper": 215,
+      "progression_event": false,
+      "right_censored": true,
+      "outcome_6_months": 1
+    },
+    {
+      "patient_id": "34",
+      "pdo_id": "hF23",
+      "reported_regimen": "gemcitabine+paclitaxel",
+      "time_days_approx": 295,
+      "time_days_lower": 290,
+      "time_days_upper": 300,
+      "progression_event": true,
+      "right_censored": false,
+      "outcome_6_months": 1
+    },
+    {
+      "patient_id": "45",
+      "pdo_id": "hF50",
+      "reported_regimen": "5fu",
+      "time_days_approx": 125,
+      "time_days_lower": 120,
+      "time_days_upper": 130,
+      "progression_event": true,
+      "right_censored": false,
+      "outcome_6_months": 0
+    },
+    {
+      "patient_id": "33",
+      "pdo_id": "hF3",
+      "reported_regimen": "5fu+oxaliplatin",
+      "time_days_approx": 125,
+      "time_days_lower": 120,
+      "time_days_upper": 130,
+      "progression_event": true,
+      "right_censored": false,
+      "outcome_6_months": 0
+    },
+    {
+      "patient_id": "37",
+      "pdo_id": "hF28",
+      "reported_regimen": "5fu+gemcitabine",
+      "time_days_approx": 100,
+      "time_days_lower": 95,
+      "time_days_upper": 105,
+      "progression_event": true,
+      "right_censored": false,
+      "outcome_6_months": 0
+    }
+  ]
+}

@@ -1,0 +1,224 @@
+{
+  "patients": 12,
+  "methods": {
+    "shrinkage": {
+      "uncontrolled": {
+        "margin": -1.0,
+        "calibration": {
+          "patients": 12,
+          "released": 12,
+          "retests": 0,
+          "wrong_released": 4,
+          "coverage": 1.0,
+          "overall_wrong_release": 0.3333333333333333,
+          "released_error": 0.3333333333333333,
+          "released_accuracy": 0.6666666666666667
+        },
+        "forecast": {
+          "released": 12,
+          "retests": 0,
+          "accuracy": 0.6538461538461539
+        },
+        "test": {
+          "patients": 12,
+          "released": 12,
+          "retests": 0,
+          "wrong_released": 5,
+          "coverage": 1.0,
+          "overall_wrong_release": 0.4166666666666667,
+          "released_error": 0.4166666666666667,
+          "released_accuracy": 0.5833333333333333
+        }
+      },
+      "overall_crc": {
+        "margin": 0.34,
+        "calibration": {
+          "patients": 12,
+          "released": 5,
+          "retests": 7,
+          "wrong_released": 0,
+          "coverage": 0.4166666666666667,
+          "overall_wrong_release": 0.0,
+          "released_error": 0.0,
+          "released_accuracy": 1.0
+        },
+        "forecast": {
+          "released": 4,
+          "retests": 8,
+          "accuracy": 0.9166666666666666
+        },
+        "test": {
+          "patients": 12,
+          "released": 4,
+          "retests": 8,
+          "wrong_released": 1,
+          "coverage": 0.3333333333333333,
+          "overall_wrong_release": 0.08333333333333333,
+          "released_error": 0.25,
+          "released_accuracy": 0.75
+        }
+      },
+      "conditional_ltt": {
+        "margin": 1.0,
+        "calibration": {
+          "patients": 12,
+          "released": 0,
+          "retests": 12,
+          "wrong_released": 0,
+          "coverage": 0.0,
+          "overall_wrong_release": 0.0,
+          "released_error": null,
+          "released_accuracy": null
+        },
+        "forecast": {
+          "released": 0,
+          "retests": 12,
+          "accuracy": null
+        },
+        "test": {
+          "patients": 12,
+          "released": 0,
+          "retests": 12,
+          "wrong_released": 0,
+          "coverage": 0.0,
+          "overall_wrong_release": 0.0,
+          "released_error": null,
+          "released_accuracy": null
+        }
+      }
+    },
+    "fixed_baseline": {
+      "uncontrolled": {
+        "margin": -1.0,
+        "calibration": {
+          "patients": 12,
+          "released": 12,
+          "retests": 0,
+          "wrong_released": 3,
+          "coverage": 1.0,
+          "overall_wrong_release": 0.25,
+          "released_error": 0.25,
+          "released_accuracy": 0.75
+        },
+        "forecast": {
+          "released": 12,
+          "retests": 0,
+          "accuracy": 0.7307692307692307
+        },
+        "test": {
+          "patients": 12,
+          "released": 12,
+          "retests": 0,
+          "wrong_released": 4,
+          "coverage": 1.0,
+          "overall_wrong_release": 0.3333333333333333,
+          "released_error": 0.3333333333333333,
+          "released_accuracy": 0.6666666666666667
+        }
+      },
+      "overall_crc": {
+        "margin": 0.42,
+        "calibration": {
+          "patients": 12,
+          "released": 5,
+          "retests": 7,
+          "wrong_released": 0,
+          "coverage": 0.4166666666666667,
+          "overall_wrong_release": 0.0,
+          "released_error": 0.0,
+          "released_accuracy": 1.0
+        },
+        "forecast": {
+          "released": 4,
+          "retests": 8,
+          "accuracy": 0.9166666666666666
+        },
+        "test": {
+          "patients": 12,
+          "released": 4,
+          "retests": 8,
+          "wrong_released": 1,
+          "coverage": 0.3333333333333333,
+          "overall_wrong_release": 0.08333333333333333,
+          "released_error": 0.25,
+          "released_accuracy": 0.75
+        }
+      },
+      "conditional_ltt": {
+        "margin": 1.0,
+        "calibration": {
+          "patients": 12,
+          "released": 0,
+          "retests": 12,
+          "wrong_released": 0,
+          "coverage": 0.0,
+          "overall_wrong_release": 0.0,
+          "released_error": null,
+          "released_accuracy": null
+        },
+        "forecast": {
+          "released": 0,
+          "retests": 12,
+          "accuracy": null
+        },
+        "test": {
+          "patients": 12,
+          "released": 0,
+          "retests": 12,
+          "wrong_released": 0,
+          "coverage": 0.0,
+          "overall_wrong_release": 0.0,
+          "released_error": null,
+          "released_accuracy": null
+        }
+      }
+    }
+  },
+  "global_cut_log10": 0.2855048361546525,
+  "global_cut_micromolar": 1.929766825292631,
+  "drug_cuts_micromolar": {
+    "Alectinib": 1.929766825292631,
+    "Bozitinib": 1.929766825292631,
+    "EP": 1.929766825292631,
+    "Osimertinib": 1.929766825292631,
+    "Osimertinib + Cabozantinib": 1.929766825292631,
+    "Pyrotinib": 1.929766825292631
+  },
+  "excluded_count": 0,
+  "exclusion_reasons": [],
+  "model_sha256": "6314c35efaf49120e886b0c4cb4abfad8a421fcced237622bc4fd0b38cb7fc4d",
+  "checks": {
+    "readout_csv_matches": true,
+    "refitted_model_matches": true,
+    "calibration_certificates_match": true,
+    "patient_predictions_match": true,
+    "calibration_denominators_and_forecasts_match": true
+  },
+  "schema": "release.lung_reproduction.v1",
+  "source": {
+    "article": "https://doi.org/10.1016/j.xcrm.2022.100911",
+    "supplement": "https://pmc-oa-opendata.s3.amazonaws.com/PMC9975107.1/mmc1.pdf",
+    "sha256": "aa43b02a1c0bb3aeb87fbfccfcb77e33343887f3d5ccfc94cf35e4c9aac7796e",
+    "license": "CC BY-NC-ND 4.0",
+    "table": "Table S6, PDF pages 18-20"
+  },
+  "parser": "pdftotext version 26.01.0",
+  "source_records": 54,
+  "unique_patients": 36,
+  "split_counts": {
+    "training": 12,
+    "calibration": 12,
+    "test": 12
+  },
+  "protocol_sha256": "9f6248b90a39e00f5f0104b9224a1fa7e2bfb50948c4b2c75861c68802c9cff6",
+  "test_freeze_sha256": "e32d3e150c7a20364cd97adc81e57f1e143903225612454a391809fcf4ee2a5b",
+  "limitations": [
+    "Published retrospective cohort; this command replays an existing freeze.",
+    "One first-occurring organoid record per patient; 18 later records are excluded from the primary analysis.",
+    "IC50 spans distinct treatment regimens; drug-specific estimates shrink toward the training-only pooled cutoff.",
+    "Overall wrong release uses all test patients as denominator; conditional error uses released patients.",
+    "Zero conditional releases give zero coverage and no measured released accuracy.",
+    "Right-censored and extreme extrapolated IC50 values retain the frozen interpretation.",
+    "Original publisher files and patient-level clinical tables are temporary runtime inputs, not output artifacts."
+  ]
+}

@@ -1,0 +1,407 @@
+{
+  "schema": "tiriac.reproduced-score.v1",
+  "attribution": "Derived from Tiriac et al., Organoid Profiling Identifies Common Responders to Chemotherapy in Pancreatic Cancer, Cancer Discovery (2018), doi:10.1158/2159-8290.CD-18-0349.",
+  "source_doi": "10.1158/2159-8290.CD-18-0349",
+  "freeze_sha256": "1da509ad8f9cb5de6fa8af79038f6b424a8191c4855bc2f4278adcacd9cb0e95",
+  "reproduction": {
+    "frozen_model_and_all_279_predictions_identical": true,
+    "only_ignored_field": "created_utc",
+    "outcomes_loaded_after_prediction_comparison": true,
+    "model_sha256": "ab838359eb49633e9b42093d895aaa5b576cff517703854a353485002eaa5546",
+    "input_sha256": {
+      "reference": "5de63dba565e3675c8dec6cc2d666d8d597772caf878bbd481af1815fc1d250c",
+      "clinical_readouts": "7b7e8a02e93324ef387dc083dcd729556049f87fee387f4995ecccfded307a16"
+    }
+  },
+  "blinding_scope": "Predictions and numerical forecasts were published before reading outcome values. Clinical-figure layout and patient/drug label coordinates had been visible. The source is a retrospective published cohort.",
+  "endpoint": {
+    "method": "Manual interpretation checked against the original chart. Days are rounded visual estimates with a five-day reading range, not exact author-supplied event times.",
+    "author_title": "Progression Free Survival in Advanced Disease",
+    "axis_label": "Time to progression (days)",
+    "unit": "days",
+    "threshold_months": 6,
+    "days_per_month": 30.4375,
+    "threshold_days": 182.625,
+    "binary_rule": "Label 1 when the known event-free lower bound is at least 182.625 days. Label 0 for observed progression with upper time bound below 182.625 days. An interval crossing the threshold or censoring before it yields an unknown label.",
+    "progression": "Orange bar: Progressive Disease.",
+    "censoring": "Green bar and arrow: No Evidence of Progression. Read the green shaft endpoint, not the arrow tip.",
+    "reading_range": "The lower/upper range reflects graphical precision and is not a statistical confidence interval. Every recorded range lies on one side of the fixed threshold.",
+    "hF2": "The main text reports initial progression, a switch to second-line gemcitabine/irinotecan/5FU and 388 days of partial response. This corroborates the plotted approximately 390 days; it is not substituted as an exact PFS value. The predeclared primary analysis excludes this sequential-treatment case.",
+    "hF50": "The clinical regimen has only 5FU and is outside the predeclared paired-readout primary analysis. Its erroneous prediction remains visible in the full-nine sensitivity.",
+    "hF28": "The source reports GEM+5FU components; their sequence was uncertain before unblinding. The predeclared strict sensitivity excludes this case."
+  },
+  "metrics": {
+    "all_9": {
+      "agreement": {
+        "n_total": 9,
+        "n_endpoint_evaluable": 9,
+        "endpoint_unknown": 0,
+        "released": 5,
+        "retested": 4,
+        "errors": 0,
+        "correct": 5,
+        "coverage": 0.5555555555555556,
+        "released_accuracy": 1.0,
+        "released_error_rate": 0.0,
+        "overall_wrong_release_rate": 0.0,
+        "released_ids": [
+          "hF31",
+          "hF2",
+          "hM1A",
+          "hF23",
+          "hF28"
+        ],
+        "wrong_ids": [],
+        "empirical_error_at_most_10_percent": true,
+        "single_rule_one_sided_95_percent_binomial_upper_if_zero_errors": 0.4507197283469412,
+        "risk_certificate": false
+      },
+      "fixed_anchor": {
+        "n_total": 9,
+        "n_endpoint_evaluable": 9,
+        "endpoint_unknown": 0,
+        "released": 9,
+        "retested": 0,
+        "errors": 3,
+        "correct": 6,
+        "coverage": 1.0,
+        "released_accuracy": 0.6666666666666667,
+        "released_error_rate": 0.3333333333333333,
+        "overall_wrong_release_rate": 0.3333333333333333,
+        "released_ids": [
+          "hF31",
+          "hF2",
+          "hM1A",
+          "hF57",
+          "hF44",
+          "hF23",
+          "hF50",
+          "hF3",
+          "hF28"
+        ],
+        "wrong_ids": [
+          "hF57",
+          "hF50",
+          "hF3"
+        ],
+        "empirical_error_at_most_10_percent": false,
+        "single_rule_one_sided_95_percent_binomial_upper_if_zero_errors": null,
+        "risk_certificate": false
+      },
+      "mean_rank": {
+        "n_total": 9,
+        "n_endpoint_evaluable": 9,
+        "endpoint_unknown": 0,
+        "released": 9,
+        "retested": 0,
+        "errors": 1,
+        "correct": 8,
+        "coverage": 1.0,
+        "released_accuracy": 0.8888888888888888,
+        "released_error_rate": 0.1111111111111111,
+        "overall_wrong_release_rate": 0.1111111111111111,
+        "released_ids": [
+          "hF31",
+          "hF2",
+          "hM1A",
+          "hF57",
+          "hF44",
+          "hF23",
+          "hF50",
+          "hF3",
+          "hF28"
+        ],
+        "wrong_ids": [
+          "hF50"
+        ],
+        "empirical_error_at_most_10_percent": false,
+        "single_rule_one_sided_95_percent_binomial_upper_if_zero_errors": null,
+        "risk_certificate": false
+      },
+      "margin_gt_one_sixth": {
+        "n_total": 9,
+        "n_endpoint_evaluable": 9,
+        "endpoint_unknown": 0,
+        "released": 7,
+        "retested": 2,
+        "errors": 1,
+        "correct": 6,
+        "coverage": 0.7777777777777778,
+        "released_accuracy": 0.8571428571428572,
+        "released_error_rate": 0.14285714285714285,
+        "overall_wrong_release_rate": 0.1111111111111111,
+        "released_ids": [
+          "hF31",
+          "hF2",
+          "hM1A",
+          "hF44",
+          "hF23",
+          "hF50",
+          "hF28"
+        ],
+        "wrong_ids": [
+          "hF50"
+        ],
+        "empirical_error_at_most_10_percent": false,
+        "single_rule_one_sided_95_percent_binomial_upper_if_zero_errors": null,
+        "risk_certificate": false
+      }
+    },
+    "primary_7": {
+      "agreement": {
+        "n_total": 7,
+        "n_endpoint_evaluable": 7,
+        "endpoint_unknown": 0,
+        "released": 4,
+        "retested": 3,
+        "errors": 0,
+        "correct": 4,
+        "coverage": 0.5714285714285714,
+        "released_accuracy": 1.0,
+        "released_error_rate": 0.0,
+        "overall_wrong_release_rate": 0.0,
+        "released_ids": [
+          "hF31",
+          "hM1A",
+          "hF23",
+          "hF28"
+        ],
+        "wrong_ids": [],
+        "empirical_error_at_most_10_percent": true,
+        "single_rule_one_sided_95_percent_binomial_upper_if_zero_errors": 0.5271291954984121,
+        "risk_certificate": false
+      },
+      "fixed_anchor": {
+        "n_total": 7,
+        "n_endpoint_evaluable": 7,
+        "endpoint_unknown": 0,
+        "released": 7,
+        "retested": 0,
+        "errors": 2,
+        "correct": 5,
+        "coverage": 1.0,
+        "released_accuracy": 0.7142857142857143,
+        "released_error_rate": 0.2857142857142857,
+        "overall_wrong_release_rate": 0.2857142857142857,
+        "released_ids": [
+          "hF31",
+          "hM1A",
+          "hF57",
+          "hF44",
+          "hF23",
+          "hF3",
+          "hF28"
+        ],
+        "wrong_ids": [
+          "hF57",
+          "hF3"
+        ],
+        "empirical_error_at_most_10_percent": false,
+        "single_rule_one_sided_95_percent_binomial_upper_if_zero_errors": null,
+        "risk_certificate": false
+      },
+      "mean_rank": {
+        "n_total": 7,
+        "n_endpoint_evaluable": 7,
+        "endpoint_unknown": 0,
+        "released": 7,
+        "retested": 0,
+        "errors": 0,
+        "correct": 7,
+        "coverage": 1.0,
+        "released_accuracy": 1.0,
+        "released_error_rate": 0.0,
+        "overall_wrong_release_rate": 0.0,
+        "released_ids": [
+          "hF31",
+          "hM1A",
+          "hF57",
+          "hF44",
+          "hF23",
+          "hF3",
+          "hF28"
+        ],
+        "wrong_ids": [],
+        "empirical_error_at_most_10_percent": true,
+        "single_rule_one_sided_95_percent_binomial_upper_if_zero_errors": 0.3481636551311609,
+        "risk_certificate": false
+      },
+      "margin_gt_one_sixth": {
+        "n_total": 7,
+        "n_endpoint_evaluable": 7,
+        "endpoint_unknown": 0,
+        "released": 5,
+        "retested": 2,
+        "errors": 0,
+        "correct": 5,
+        "coverage": 0.7142857142857143,
+        "released_accuracy": 1.0,
+        "released_error_rate": 0.0,
+        "overall_wrong_release_rate": 0.0,
+        "released_ids": [
+          "hF31",
+          "hM1A",
+          "hF44",
+          "hF23",
+          "hF28"
+        ],
+        "wrong_ids": [],
+        "empirical_error_at_most_10_percent": true,
+        "single_rule_one_sided_95_percent_binomial_upper_if_zero_errors": 0.4507197283469412,
+        "risk_certificate": false
+      }
+    },
+    "strict_6": {
+      "agreement": {
+        "n_total": 6,
+        "n_endpoint_evaluable": 6,
+        "endpoint_unknown": 0,
+        "released": 3,
+        "retested": 3,
+        "errors": 0,
+        "correct": 3,
+        "coverage": 0.5,
+        "released_accuracy": 1.0,
+        "released_error_rate": 0.0,
+        "overall_wrong_release_rate": 0.0,
+        "released_ids": [
+          "hF31",
+          "hM1A",
+          "hF23"
+        ],
+        "wrong_ids": [],
+        "empirical_error_at_most_10_percent": true,
+        "single_rule_one_sided_95_percent_binomial_upper_if_zero_errors": 0.6315968501359612,
+        "risk_certificate": false
+      },
+      "fixed_anchor": {
+        "n_total": 6,
+        "n_endpoint_evaluable": 6,
+        "endpoint_unknown": 0,
+        "released": 6,
+        "retested": 0,
+        "errors": 2,
+        "correct": 4,
+        "coverage": 1.0,
+        "released_accuracy": 0.6666666666666667,
+        "released_error_rate": 0.3333333333333333,
+        "overall_wrong_release_rate": 0.3333333333333333,
+        "released_ids": [
+          "hF31",
+          "hM1A",
+          "hF57",
+          "hF44",
+          "hF23",
+          "hF3"
+        ],
+        "wrong_ids": [
+          "hF57",
+          "hF3"
+        ],
+        "empirical_error_at_most_10_percent": false,
+        "single_rule_one_sided_95_percent_binomial_upper_if_zero_errors": null,
+        "risk_certificate": false
+      },
+      "mean_rank": {
+        "n_total": 6,
+        "n_endpoint_evaluable": 6,
+        "endpoint_unknown": 0,
+        "released": 6,
+        "retested": 0,
+        "errors": 0,
+        "correct": 6,
+        "coverage": 1.0,
+        "released_accuracy": 1.0,
+        "released_error_rate": 0.0,
+        "overall_wrong_release_rate": 0.0,
+        "released_ids": [
+          "hF31",
+          "hM1A",
+          "hF57",
+          "hF44",
+          "hF23",
+          "hF3"
+        ],
+        "wrong_ids": [],
+        "empirical_error_at_most_10_percent": true,
+        "single_rule_one_sided_95_percent_binomial_upper_if_zero_errors": 0.39303776899708276,
+        "risk_certificate": false
+      },
+      "margin_gt_one_sixth": {
+        "n_total": 6,
+        "n_endpoint_evaluable": 6,
+        "endpoint_unknown": 0,
+        "released": 4,
+        "retested": 2,
+        "errors": 0,
+        "correct": 4,
+        "coverage": 0.6666666666666666,
+        "released_accuracy": 1.0,
+        "released_error_rate": 0.0,
+        "overall_wrong_release_rate": 0.0,
+        "released_ids": [
+          "hF31",
+          "hM1A",
+          "hF44",
+          "hF23"
+        ],
+        "wrong_ids": [],
+        "empirical_error_at_most_10_percent": true,
+        "single_rule_one_sided_95_percent_binomial_upper_if_zero_errors": 0.5271291954984121,
+        "risk_certificate": false
+      }
+    }
+  },
+  "forecast_vs_actual": {
+    "forecast": {
+      "released": 4,
+      "retests": 3,
+      "released_accuracy": 0.7083333333333334,
+      "expected_correct": 2.8333333333333335
+    },
+    "actual_released": 4,
+    "actual_retests": 3,
+    "actual_released_accuracy": 1.0,
+    "release_count_error": 0,
+    "retest_count_error": 0,
+    "accuracy_actual_minus_forecast": 0.29166666666666663,
+    "actual_correct": 4,
+    "correct_actual_minus_forecast": 1.1666666666666665
+  },
+  "method_gain": {
+    "primary_mean_rank_vs_fixed_anchor_same_coverage": {
+      "coverage_each": 1.0,
+      "error_reduction": 2,
+      "accuracy_gain": 0.2857142857142857
+    },
+    "primary_mean_rank_vs_agreement_same_observed_zero_error": {
+      "additional_releases": 3,
+      "coverage_gain": 0.4285714285714286
+    },
+    "primary_margin_vs_agreement_same_observed_zero_error": {
+      "additional_releases": 1,
+      "coverage_gain": 0.1428571428571429
+    },
+    "strict_mean_rank_vs_agreement_same_observed_zero_error": {
+      "additional_releases": 3,
+      "coverage_gain": 0.5
+    },
+    "interpretation": "All methods and subgroups were frozen. Equal observed error does not establish equal guaranteed population risk. Full-nine sensitivity retains the hF50 error."
+  },
+  "high_confidence_conditional_risk_10_percent": {
+    "calibration_outcome_patients_before_freeze": 0,
+    "certified_releases": 0,
+    "certified_coverage": 0,
+    "retests_all_9": 9,
+    "retests_primary_7": 7,
+    "retests_strict_6": 6,
+    "reason": "No outcome-labelled calibration from this source; high-probability conditional-risk mode sends every patient to retest. Uncertified observed error is reported separately.",
+    "distinction": "Seven correct primary predictions provide an observed result. Under an iid Bernoulli model, the single fixed-rule 95% upper error bound for 0/7 is 34.82%, so these data do not certify a 10% population conditional error bound."
+  },
+  "source_sha256": {
+    "s1": "0a2e0220e3cbc41359c5b68744d216507d331aadbe2a590fd5555c1d5b1ca16d",
+    "s4": "d80eb561b653f9a2c78d7db79e9c9220a105d3c8bbe8ece700a7698ed0abc8c8",
+    "s6": "1a8d3529cd3f874c4909111e43da4ded15457afb9a3807c4da51090eebb98df6"
+  },
+  "outcomes_sha256": "cff1e7fcba32a7334a03e9220061f478b6f2c4bb8cbeeeed24255b87c1bb1eef"
+}
