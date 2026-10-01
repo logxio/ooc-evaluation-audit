@@ -1,0 +1,40 @@
+{
+  "schema": "release.patient_signal_comparison.protocol.v1",
+  "created_utc": "2026-10-01T17:28:40.514849+00:00",
+  "status": "Exploratory reanalysis of already viewed clinical outcomes; protocol fixed before this paired-comparison calculation, not a new outcome-blind study.",
+  "decision": "Does treatment-aligned signal construction provide a positive coverage gain versus a training-selected single-component baseline under the same 10% expected overall wrong-release-risk procedure?",
+  "prediction": {
+    "coverage_gain": 0.1,
+    "interval_expectation": "May include zero."
+  },
+  "primary": {
+    "source": "rectal_2025",
+    "split": "Reuse original F78 hash-ranked 42 training / 42 calibration / 43 test split, seed release-calibration-v2-20261001; never reshuffle.",
+    "population": "Test patients whose clinical treatment string includes radiation, capecitabine and irinotecan. Population membership selected from treatment fields before paired-result calculation. 5-FU remains the assay proxy for capecitabine.",
+    "fit_population": "Same existing 42 training and 42 calibration patients for both signals; restrict primary evaluation by regimen only, so the original full-population risk guarantee does not automatically transfer to the subgroup.",
+    "new_signal": "Measured combined irradiation + 5-FU + irinotecan assay (one readout).",
+    "single_baseline": "Choose among irradiation, 5-FU and irinotecan using training balanced accuracy with each cutoff fitted only to those 42 patients; ties favor original channel order. This is training-best single-component, not test oracle.",
+    "margins": "Identical fixed GRID [-1] + [0,0.01,...,1] and training-only reference ECDF; separate calibration per signal using same expected overall-risk CRC selection.",
+    "conditional": "Report each identical fixed-sequence conditional LTT result separately; alpha=.1 and one-source eta=.05.",
+    "outcome": "TRG 0/1 or cCR/pCR positive, other TRG negative."
+  },
+  "sensitivity": [
+    "All 43 original rectal test patients with unchanged models and certificates.",
+    "Tiriac primary 7 and stricter 6 use unchanged frozen mean-rank and fixed-anchor predictions. No labelled training/calibration cohort exists for Tiriac; fixed-anchor is not asserted to be the best single drug. Tiriac supplies observed equal-coverage accuracy evidence, not a 10% risk certificate.",
+    "Original rectal two-readout agreement comparator retained only under that exact name; it is not a single-drug baseline."
+  ],
+  "statistics": {
+    "unit": "independent patient",
+    "bootstrap_replicates": 10000,
+    "bootstrap_seed": "patient-signal-comparison-20261002-v1",
+    "method": "paired percentile bootstrap; within-source resampling for cross-source descriptive aggregate, preserving source sample sizes; 2.5/97.5 percentiles",
+    "primary_effect": "CRC new coverage minus training-best single-component CRC coverage",
+    "error_effect": "At fixed full coverage, comparator wrong-call fraction minus new-signal wrong-call fraction",
+    "paired_tests": "Two-sided exact McNemar binomial test for discordant patient-level release indicators and separately for full-coverage correctness; cross-source test sums discordances as a descriptive shared directional null, never pools endpoint/risk calibration.",
+    "gate": "Both methods observed overall wrong-release risk <=10%, and paired 95% coverage-gain interval lower bound >0. Subgroup label limits population-risk interpretation.",
+    "refit_in_bootstrap": false,
+    "test_tuning": false
+  },
+  "cross_source": "Rectal matched subgroup plus Tiriac primary seven: source-stratified descriptive error reduction at full coverage; endpoints remain distinct and no cross-source exchangeability or pooled risk guarantee is claimed.",
+  "constraints": "No paid calls; one single-thread low-priority process; first 100 bootstrap replicates measure RSS, final 10000 run only within 4 GB and 5 minutes."
+}

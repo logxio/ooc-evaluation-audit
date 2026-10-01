@@ -1,0 +1,8595 @@
+{
+  "schema": "epa-release-result-v1",
+  "protocol_sha256": "b3636350287695c032c0713b6b3c5553b430144fd480168dbef6688a920abe06",
+  "source_url": "https://raw.githubusercontent.com/USEPA/CompTox-DNT-NFA-Refinement/01adf3e1a0068c87fe221d60df36b9f96c4b4b1d/source_files/All_DIV_Data.Rdata",
+  "source_sha256": "fe8015c789770092b485fb63dd8aa0f643120e366df73c5624665454ee982af6",
+  "source_bytes": 2319541,
+  "source_rows": 31756,
+  "independent_chemicals": 243,
+  "split_counts": {
+    "train": 81,
+    "calibrate": 81,
+    "test": 81
+  },
+  "endpoint": "For each positive concentration and readout, take replicate means at each DIV, then the mean over DIV 5/7/9/12. At least one absolute mean >=3 means full-series assay activity. Missing readout/DIV entries contribute zero, with their mask retained. This is an operational assay activity endpoint, not a clinical hazard label.",
+  "transform": {
+    "meanfiringrate": {
+      "asinh_scale": 0.4951131887292175,
+      "vehicle_robust_sd_by_day": {
+        "5": 0.2933445010381449,
+        "7": 0.2859879056651638,
+        "9": 0.18572474191424138,
+        "12": 0.18663880147619816
+      }
+    },
+    "burst.per.min": {
+      "asinh_scale": 1.30359375,
+      "vehicle_robust_sd_by_day": {
+        "5": 0.13707397119170106,
+        "7": 0.22469034510889946,
+        "9": 0.17941279208681932,
+        "12": 0.17510513484586032
+      }
+    },
+    "mean.isis": {
+      "asinh_scale": 0.00546064375,
+      "vehicle_robust_sd_by_day": {
+        "5": 0.21767225690333764,
+        "7": 0.17435002157778356,
+        "9": 0.1599837186832978,
+        "12": 0.15524531400744954
+      }
+    },
+    "per.spikes.in.burst": {
+      "asinh_scale": 20.505921875,
+      "vehicle_robust_sd_by_day": {
+        "5": 0.09611697539474238,
+        "7": 0.12947846832762344,
+        "9": 0.06527183593820379,
+        "12": 0.05
+      }
+    },
+    "mean.dur": {
+      "asinh_scale": 0.087203125,
+      "vehicle_robust_sd_by_day": {
+        "5": 0.24850492373444732,
+        "7": 0.23204008143202637,
+        "9": 0.17053412991728867,
+        "12": 0.19783702153504676
+      }
+    },
+    "mean.IBIs": {
+      "asinh_scale": 3.460375,
+      "vehicle_robust_sd_by_day": {
+        "5": 0.29977027555189684,
+        "7": 0.18104171612130204,
+        "9": 0.17966949863075388,
+        "12": 0.19660557938797926
+      }
+    },
+    "nAE": {
+      "asinh_scale": 4.0,
+      "vehicle_robust_sd_by_day": {
+        "5": 0.1834468879449864,
+        "7": 0.1053362632895728,
+        "9": 0.05,
+        "12": 0.05
+      }
+    },
+    "nABE": {
+      "asinh_scale": 4.0,
+      "vehicle_robust_sd_by_day": {
+        "5": 0.09879474180234174,
+        "7": 0.15847375171428485,
+        "9": 0.05,
+        "12": 0.05
+      }
+    },
+    "ns.n": {
+      "asinh_scale": 31.5,
+      "vehicle_robust_sd_by_day": {
+        "5": 0.05,
+        "7": 0.10884630578470303,
+        "9": 0.1814102278264968,
+        "12": 0.232957576700942
+      }
+    },
+    "ns.peak.m": {
+      "asinh_scale": 3.284420289855075,
+      "vehicle_robust_sd_by_day": {
+        "5": 0.11029995062174838,
+        "7": 0.08463053695209702,
+        "9": 0.07838840033937783,
+        "12": 0.06434187263956452
+      }
+    },
+    "ns.durn.m": {
+      "asinh_scale": 0.04211998984202925,
+      "vehicle_robust_sd_by_day": {
+        "5": 0.1589067280356953,
+        "7": 0.1537575693817399,
+        "9": 0.12911457106548702,
+        "12": 0.11807447971158751
+      }
+    },
+    "ns.percent.of.spikes.in.ns": {
+      "asinh_scale": 6.442266198138225,
+      "vehicle_robust_sd_by_day": {
+        "5": 0.05,
+        "7": 0.18135157994782017,
+        "9": 0.17390723255622711,
+        "12": 0.1392091024484404
+      }
+    },
+    "ns.mean.insis": {
+      "asinh_scale": 1.7589139345,
+      "vehicle_robust_sd_by_day": {
+        "5": 0.18200468199687875,
+        "7": 0.2083995537705045,
+        "9": 0.2515553396510313,
+        "12": 0.2416012578228622
+      }
+    },
+    "ns.durn.sd": {
+      "asinh_scale": 0.019439232,
+      "vehicle_robust_sd_by_day": {
+        "5": 0.21513772971474965,
+        "7": 0.29285520345192084,
+        "9": 0.22743985643924486,
+        "12": 0.17521400188790973
+      }
+    },
+    "ns.mean.spikes.in.ns": {
+      "asinh_scale": 13.859929078014176,
+      "vehicle_robust_sd_by_day": {
+        "5": 0.2121005153371844,
+        "7": 0.2201115035241363,
+        "9": 0.1958754657296032,
+        "12": 0.16022750635025676
+      }
+    },
+    "r": {
+      "asinh_scale": 0.096798844239936,
+      "vehicle_robust_sd_by_day": {
+        "5": 0.05,
+        "7": 0.16180559386472892,
+        "9": 0.1570450099557962,
+        "12": 0.10795908290552847
+      }
+    },
+    "mi": {
+      "asinh_scale": 0.0042690820219139745,
+      "vehicle_robust_sd_by_day": {
+        "5": 0.05,
+        "7": 0.117713107150698,
+        "9": 0.1811717032788177,
+        "12": 0.19410716228903224
+      }
+    }
+  },
+  "transform_sha256": "22ceb3af707ba13873a8d4b0247a6cac3b2fc1a42b3b36f292e8b2494361fd26",
+  "baseline_cutoff": -1.0,
+  "baseline_calibration": {
+    "released": 81,
+    "errors": 4,
+    "corrected_overall_risk": 0.06097560975609756
+  },
+  "naive": {
+    "n": 81,
+    "released": 81,
+    "retest": 0,
+    "wrong_releases": 6,
+    "coverage": 1.0,
+    "overall_wrong_release_fraction": 0.07407407407407407,
+    "conditional_wrong_release_fraction": 0.07407407407407407,
+    "overall_risk_ci95": [
+      0.02766836052440393,
+      0.1542861687152946
+    ],
+    "conditional_risk_ci95": [
+      0.02766836052440393,
+      0.1542861687152946
+    ]
+  },
+  "strong_baseline": {
+    "n": 81,
+    "released": 81,
+    "retest": 0,
+    "wrong_releases": 6,
+    "coverage": 1.0,
+    "overall_wrong_release_fraction": 0.07407407407407407,
+    "conditional_wrong_release_fraction": 0.07407407407407407,
+    "overall_risk_ci95": [
+      0.02766836052440393,
+      0.1542861687152946
+    ],
+    "conditional_risk_ci95": [
+      0.02766836052440393,
+      0.1542861687152946
+    ]
+  },
+  "batch_overlap": {
+    "train_calibrate": 147,
+    "train_test": 135,
+    "calibrate_test": 136
+  },
+  "candidate_trained": false,
+  "decision": "stop_coverage_ceiling",
+  "pass": false,
+  "maximum_attainable_coverage_gain": 0.0,
+  "reason": "The risk-qualified fixed baseline already releases every held-out chemical. No candidate can have a positive release-coverage difference on this endpoint and budget.",
+  "paired_gain_ci95": null,
+  "ablations": "Not run: the prespecified minimum-probe stop rule was reached.",
+  "rows": [
+    {
+      "chemical": "(-)-nicotine",
+      "stage": "calibrate",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1008-41",
+        "MW1008-42"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 3.594962387314441,
+      "baseline_prediction": true,
+      "baseline_score": 0.5949623873144412,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "(methylcyclopentadienyl)tricarbonylmanganese",
+      "stage": "train",
+      "source_files": [
+        "NTP91_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1140-20",
+        "MW1140-21",
+        "MW1140-22"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 4.1019371307258305,
+      "baseline_prediction": true,
+      "baseline_score": 1.1019371307258305,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "1,2-propylene glycol",
+      "stage": "train",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1008-37",
+        "MW1008-41",
+        "MW1008-42"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 2.335524132103795,
+      "baseline_prediction": false,
+      "baseline_score": 0.664475867896205,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "1-ethyl-3-methyl-1h-imidazol-3-ium diethyl phosphate",
+      "stage": "test",
+      "source_files": [
+        "NTP91_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1140-17",
+        "MW1140-18",
+        "MW1140-19"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 2.533972342333498,
+      "baseline_prediction": false,
+      "baseline_score": 0.4660276576665021,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "1-methyl-4-phenylpyridinium iodide",
+      "stage": "calibrate",
+      "source_files": [
+        "NTP91_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1147-10",
+        "MW1147-11",
+        "MW1147-12"
+      ],
+      "concentrations": [
+        0.01,
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0
+      ],
+      "selected_concentrations": [
+        0.01,
+        0.3,
+        10.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 7.9145383516125545,
+      "baseline_prediction": true,
+      "baseline_score": 4.9145383516125545,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "17beta-estradiol",
+      "stage": "train",
+      "source_files": [
+        "NTP91_parameters_by_DIV.csv",
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1140-17",
+        "MW1140-18",
+        "MW1140-19",
+        "MW1147-10",
+        "MW1147-11",
+        "MW1147-12",
+        "MW1147-23",
+        "MW1147-24",
+        "MW1147-25"
+      ],
+      "concentrations": [
+        0.01,
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.01,
+        0.3,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 4.9872112675452325,
+      "baseline_prediction": true,
+      "baseline_score": 1.9872112675452325,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "1h,1h,2h,2h-perfluorooctyl iodide",
+      "stage": "calibrate",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1147-28",
+        "MW1147-29",
+        "MW1147-30"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 2.222948999807241,
+      "baseline_prediction": false,
+      "baseline_score": 0.7770510001927589,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "2,2',4,4',5,5'-hexabromodiphenyl ether",
+      "stage": "train",
+      "source_files": [
+        "NTP91_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1139-19",
+        "MW1139-21",
+        "MW1139-22"
+      ],
+      "concentrations": [
+        0.02,
+        0.05,
+        0.15,
+        0.5,
+        1.5,
+        5.0,
+        10.0
+      ],
+      "selected_concentrations": [
+        0.02,
+        0.5,
+        10.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 3.8447368297764517,
+      "baseline_prediction": true,
+      "baseline_score": 0.8447368297764517,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "2,2',4,4',5-pentabromodiphenyl ether",
+      "stage": "test",
+      "source_files": [
+        "NTP91_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1139-19",
+        "MW1139-21",
+        "MW1139-22"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 10.0,
+      "baseline_prediction": true,
+      "baseline_score": 7.0,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "2,2',4,4'-tetrabromodiphenyl ether",
+      "stage": "test",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv",
+        "NTP91_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1053-26",
+        "MW1053-31",
+        "MW1053-33",
+        "MW1139-19",
+        "MW1139-21",
+        "MW1139-22"
+      ],
+      "concentrations": [
+        0.01,
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.01,
+        0.3,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 8.957461192075979,
+      "baseline_prediction": true,
+      "baseline_score": 5.957461192075979,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "2,2-bis(4-hydroxyphenyl)-1,1,1-trichloroethane",
+      "stage": "calibrate",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1146-32",
+        "MW1146-33",
+        "MW1146-34"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 6.163864332400145,
+      "baseline_prediction": true,
+      "baseline_score": 3.163864332400145,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "2-(m-chlorophenoxy)propionic acid",
+      "stage": "test",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1147-20",
+        "MW1147-21",
+        "MW1147-22"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 4.569649584491147,
+      "baseline_prediction": true,
+      "baseline_score": 1.569649584491147,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "2-ethylhexyl 2,3,4,5-tetrabromobenzoate",
+      "stage": "calibrate",
+      "source_files": [
+        "NTP91_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1139-19",
+        "MW1139-21",
+        "MW1139-22"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 10.0,
+      "baseline_prediction": true,
+      "baseline_score": 7.0,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "2-ethylhexyl diphenyl phosphate",
+      "stage": "train",
+      "source_files": [
+        "NTP91_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1139-19",
+        "MW1139-21",
+        "MW1139-22"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 5.817187059762495,
+      "baseline_prediction": true,
+      "baseline_score": 2.817187059762495,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "2-methoxyethanol",
+      "stage": "calibrate",
+      "source_files": [
+        "NTP91_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1147-7",
+        "MW1147-8",
+        "MW1147-9"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 2.936944812691813,
+      "baseline_prediction": false,
+      "baseline_score": 0.06305518730818704,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "3,3',5,5'-tetrabromobisphenol a",
+      "stage": "calibrate",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1042-42",
+        "MW1042-43",
+        "MW1042-44",
+        "MW1086-39",
+        "MW1086-41"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 1.7381814247749114,
+      "baseline_prediction": false,
+      "baseline_score": 1.2618185752250886,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "3,3'-iminobispropanenitrile",
+      "stage": "train",
+      "source_files": [
+        "NTP91_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1147-7",
+        "MW1147-8",
+        "MW1147-9"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 2.1469926511269293,
+      "baseline_prediction": false,
+      "baseline_score": 0.8530073488730707,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "3-iodo-2-propynyl-n-butylcarbamate",
+      "stage": "train",
+      "source_files": [
+        "NTP91_parameters_by_DIV.csv",
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1140-17",
+        "MW1140-18",
+        "MW1140-19",
+        "MW1140-26",
+        "MW1140-27",
+        "MW1140-28",
+        "MW1145-22",
+        "MW1145-23",
+        "MW1145-24",
+        "MW1147-17",
+        "MW1147-18",
+        "MW1147-19"
+      ],
+      "concentrations": [
+        0.01,
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.01,
+        0.3,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 7.982061469287588,
+      "baseline_prediction": true,
+      "baseline_score": 4.982061469287588,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "4,4'-sulfonyldiphenol",
+      "stage": "train",
+      "source_files": [
+        "NTP91_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1140-23",
+        "MW1140-24",
+        "MW1140-25"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 5.076071831036935,
+      "baseline_prediction": true,
+      "baseline_score": 2.076071831036935,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "4h-cyclopenta(def)phenanthrene",
+      "stage": "calibrate",
+      "source_files": [
+        "NTP91_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1139-27",
+        "MW1139-28",
+        "MW1139-29"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 2.916985872649243,
+      "baseline_prediction": false,
+      "baseline_score": 0.08301412735075697,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "5,5-diphenylhydantoin",
+      "stage": "train",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1007-70",
+        "MW1007-81",
+        "MW1007-84"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 2.397524540742164,
+      "baseline_prediction": false,
+      "baseline_score": 0.6024754592578359,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "5-chloro-2-methyl-3(2h)-isothiazolone",
+      "stage": "test",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1045-02",
+        "MW1045-06",
+        "MW1045-09"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 8.23677380880998,
+      "baseline_prediction": true,
+      "baseline_score": 5.23677380880998,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "5-fluorouracil",
+      "stage": "calibrate",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1008-39",
+        "MW1008-40",
+        "MW1008-68"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 8.510143182351962,
+      "baseline_prediction": true,
+      "baseline_score": 5.510143182351962,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "6-aminopyridine-3-carboxamide",
+      "stage": "train",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1044-2",
+        "MW1044-6",
+        "MW1044-7"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 10.0,
+      "baseline_prediction": true,
+      "baseline_score": 7.0,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "6-methyl-2-thiouracil",
+      "stage": "calibrate",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1146-29",
+        "MW1146-30",
+        "MW1146-31"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 4.134926591417307,
+      "baseline_prediction": true,
+      "baseline_score": 1.1349265914173072,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "6-propyl-2-thiouracil",
+      "stage": "train",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv",
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1007-107",
+        "MW1007-108",
+        "MW1008-39",
+        "MW1147-20",
+        "MW1147-21",
+        "MW1147-22"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 7.345596611234697,
+      "baseline_prediction": true,
+      "baseline_score": 4.345596611234697,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "abamectin",
+      "stage": "train",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1146-3",
+        "MW1146-4",
+        "MW1146-5",
+        "MW1147-23",
+        "MW1147-24",
+        "MW1147-25"
+      ],
+      "concentrations": [
+        0.0003,
+        0.001,
+        0.003,
+        0.01,
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.0003,
+        0.1,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 9.166666666666668,
+      "baseline_prediction": true,
+      "baseline_score": 6.166666666666668,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "acenaphthene",
+      "stage": "calibrate",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1146-35",
+        "MW1147-1",
+        "MW1147-2"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 2.645048967288332,
+      "baseline_prediction": false,
+      "baseline_score": 0.35495103271166784,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "acenaphthylene",
+      "stage": "test",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1147-16",
+        "MW1147-26",
+        "MW1147-27",
+        "MW1147-3",
+        "MW1147-4",
+        "MW1147-5"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 1.877147162964538,
+      "baseline_prediction": false,
+      "baseline_score": 1.122852837035462,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "acephate",
+      "stage": "train",
+      "source_files": [
+        "OPP2015_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1056-28",
+        "MW1056-29",
+        "MW1056-36"
+      ],
+      "concentrations": [
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0,
+        100.0
+      ],
+      "selected_concentrations": [
+        0.1,
+        3.0,
+        100.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 2.698551636610612,
+      "baseline_prediction": false,
+      "baseline_score": 0.3014483633893881,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "acetaminophen",
+      "stage": "train",
+      "source_files": [
+        "Brown2014_parameters_by_DIV.csv",
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1007-100",
+        "MW1007-26",
+        "MW1007-27",
+        "MW1007-38",
+        "MW1007-91",
+        "MW1007-98",
+        "MW1040-11",
+        "MW1040-12",
+        "MW1041-17",
+        "MW1041-25",
+        "MW1041-28",
+        "MW1042-42",
+        "MW1042-43",
+        "MW1042-44",
+        "MW1044-2",
+        "MW1044-6",
+        "MW1044-7"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 1.1178296920298356,
+      "baseline_prediction": false,
+      "baseline_score": 1.8821703079701644,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "acetamiprid",
+      "stage": "train",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1008-37",
+        "MW1008-41",
+        "MW1008-42"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 3.454716700427761,
+      "baseline_prediction": true,
+      "baseline_score": 0.454716700427761,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "acrylamide",
+      "stage": "test",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1053-26",
+        "MW1053-31",
+        "MW1053-33"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 3.141581053274996,
+      "baseline_prediction": true,
+      "baseline_score": 0.14158105327499593,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "aldicarb",
+      "stage": "calibrate",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1007-109",
+        "MW1008-1",
+        "MW1008-40"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 3.0184597499705403,
+      "baseline_prediction": true,
+      "baseline_score": 0.01845974997054034,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "aldrin",
+      "stage": "train",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1144-22",
+        "MW1144-23",
+        "MW1144-24"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 8.818783539832921,
+      "baseline_prediction": true,
+      "baseline_score": 5.818783539832921,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "allethrin",
+      "stage": "train",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1146-26",
+        "MW1146-27",
+        "MW1146-28"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 5.192160317651755,
+      "baseline_prediction": true,
+      "baseline_score": 2.192160317651755,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "amoxicillin",
+      "stage": "train",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1007-70",
+        "MW1007-81",
+        "MW1007-84"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 3.3165996752271414,
+      "baseline_prediction": true,
+      "baseline_score": 0.3165996752271414,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "anthracene",
+      "stage": "test",
+      "source_files": [
+        "NTP91_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1139-27",
+        "MW1139-28",
+        "MW1139-29"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 2.0890920197020613,
+      "baseline_prediction": false,
+      "baseline_score": 0.9109079802979387,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "aspirin",
+      "stage": "calibrate",
+      "source_files": [
+        "NTP91_parameters_by_DIV.csv",
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1140-23",
+        "MW1140-24",
+        "MW1140-25",
+        "MW1144-22",
+        "MW1144-23",
+        "MW1144-24",
+        "MW1147-7",
+        "MW1147-8",
+        "MW1147-9"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 1.5354088131145922,
+      "baseline_prediction": false,
+      "baseline_score": 1.4645911868854078,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "atrazine",
+      "stage": "test",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1146-09",
+        "MW1146-10",
+        "MW1146-11"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 1.4694789442110956,
+      "baseline_prediction": false,
+      "baseline_score": 1.5305210557889044,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "auramine hydrochloride",
+      "stage": "calibrate",
+      "source_files": [
+        "NTP91_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1140-17",
+        "MW1140-18",
+        "MW1140-19",
+        "MW1140-26",
+        "MW1140-27",
+        "MW1140-28"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 7.12405105547287,
+      "baseline_prediction": true,
+      "baseline_score": 4.12405105547287,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "azoxystrobin",
+      "stage": "test",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1145-25",
+        "MW1145-26",
+        "MW1145-27",
+        "MW1147-17",
+        "MW1147-18",
+        "MW1147-19"
+      ],
+      "concentrations": [
+        0.003,
+        0.01,
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.003,
+        0.3,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 10.0,
+      "baseline_prediction": true,
+      "baseline_score": 7.0,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "bensulide",
+      "stage": "train",
+      "source_files": [
+        "OPP2015_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1056-28",
+        "MW1056-29",
+        "MW1056-36",
+        "MW1117-22",
+        "MW1117-23",
+        "MW1117-24"
+      ],
+      "concentrations": [
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0,
+        100.0
+      ],
+      "selected_concentrations": [
+        0.1,
+        3.0,
+        100.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 9.260272453781567,
+      "baseline_prediction": true,
+      "baseline_score": 6.2602724537815675,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "benz(a)anthracene",
+      "stage": "train",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1146-35",
+        "MW1147-1",
+        "MW1147-2"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 5.428104081334346,
+      "baseline_prediction": true,
+      "baseline_score": 2.4281040813343457,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "benzo(b)fluoranthene",
+      "stage": "calibrate",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1147-16",
+        "MW1147-26",
+        "MW1147-27",
+        "MW1147-3",
+        "MW1147-4",
+        "MW1147-5"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 7.8681215045222945,
+      "baseline_prediction": true,
+      "baseline_score": 4.8681215045222945,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "benzo[a]pyrene",
+      "stage": "test",
+      "source_files": [
+        "NTP91_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1139-27",
+        "MW1139-28",
+        "MW1139-29"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 3.9286281539751045,
+      "baseline_prediction": true,
+      "baseline_score": 0.9286281539751045,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "benzo[e]pyrene",
+      "stage": "calibrate",
+      "source_files": [
+        "NTP91_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1139-27",
+        "MW1139-28",
+        "MW1139-29"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 3.304856937342131,
+      "baseline_prediction": true,
+      "baseline_score": 0.30485693734213104,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "benzo[g,h,i]perylene",
+      "stage": "test",
+      "source_files": [
+        "NTP91_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1139-27",
+        "MW1139-28",
+        "MW1139-29"
+      ],
+      "concentrations": [
+        0.0012,
+        0.004,
+        0.012,
+        0.04,
+        0.12,
+        0.4,
+        0.8
+      ],
+      "selected_concentrations": [
+        0.0012,
+        0.04,
+        0.8
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 3.1587281726242162,
+      "baseline_prediction": true,
+      "baseline_score": 0.15872817262421623,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "benzo[k]fluoranthene",
+      "stage": "train",
+      "source_files": [
+        "NTP91_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1139-27",
+        "MW1139-28",
+        "MW1139-29"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 4.57107984168838,
+      "baseline_prediction": true,
+      "baseline_score": 1.5710798416883804,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "berberine chloride",
+      "stage": "calibrate",
+      "source_files": [
+        "NTP91_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1140-23",
+        "MW1140-24",
+        "MW1140-25",
+        "MW1147-10",
+        "MW1147-11",
+        "MW1147-12"
+      ],
+      "concentrations": [
+        0.0001,
+        0.0003,
+        0.001,
+        0.003,
+        0.01,
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.0001,
+        0.03,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 8.145884249793143,
+      "baseline_prediction": true,
+      "baseline_score": 5.145884249793143,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "bifenthrin",
+      "stage": "test",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1146-26",
+        "MW1146-27",
+        "MW1146-28"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 7.777921315402822,
+      "baseline_prediction": true,
+      "baseline_score": 4.777921315402822,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "bis(2-ethylhexyl) tetrabromophthalate",
+      "stage": "test",
+      "source_files": [
+        "NTP91_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1139-19",
+        "MW1139-21",
+        "MW1139-22"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 5.533580588482252,
+      "baseline_prediction": true,
+      "baseline_score": 2.533580588482252,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "bis(tributyltin)oxide",
+      "stage": "calibrate",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1044-2",
+        "MW1044-6",
+        "MW1044-7"
+      ],
+      "concentrations": [
+        0.001,
+        0.003,
+        0.01,
+        0.03,
+        0.1,
+        0.3,
+        1.0
+      ],
+      "selected_concentrations": [
+        0.001,
+        0.03,
+        1.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 10.0,
+      "baseline_prediction": true,
+      "baseline_score": 7.0,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "bisindolylmaleimide i",
+      "stage": "test",
+      "source_files": [
+        "Brown2014_parameters_by_DIV.csv",
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1007-104",
+        "MW1007-26",
+        "MW1007-27",
+        "MW1007-38",
+        "MW1042-42",
+        "MW1042-43",
+        "MW1042-44"
+      ],
+      "concentrations": [
+        0.01,
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0
+      ],
+      "selected_concentrations": [
+        0.01,
+        0.3,
+        10.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 8.41175832701962,
+      "baseline_prediction": true,
+      "baseline_score": 5.411758327019619,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "bisphenol a",
+      "stage": "train",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1007-100",
+        "MW1007-91",
+        "MW1007-98",
+        "MW1041-17",
+        "MW1041-25",
+        "MW1041-28"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 6.357847452459714,
+      "baseline_prediction": true,
+      "baseline_score": 3.3578474524597137,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "bisphenol af",
+      "stage": "calibrate",
+      "source_files": [
+        "NTP91_parameters_by_DIV.csv",
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1140-23",
+        "MW1140-24",
+        "MW1140-25",
+        "MW1147-20",
+        "MW1147-21",
+        "MW1147-22"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 6.229885797397931,
+      "baseline_prediction": true,
+      "baseline_score": 3.229885797397931,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "bisphenol b",
+      "stage": "test",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1147-23",
+        "MW1147-24",
+        "MW1147-25"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 5.941376300901939,
+      "baseline_prediction": true,
+      "baseline_score": 2.941376300901939,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "boric acid (h3bo3)",
+      "stage": "test",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1146-09",
+        "MW1146-10",
+        "MW1146-11"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 1.4038257037457196,
+      "baseline_prediction": false,
+      "baseline_score": 1.5961742962542804,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "boscalid",
+      "stage": "train",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1145-22",
+        "MW1145-23",
+        "MW1145-24",
+        "MW1147-13",
+        "MW1147-14",
+        "MW1147-15"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 3.919677471516895,
+      "baseline_prediction": true,
+      "baseline_score": 0.9196774715168949,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "busulfan",
+      "stage": "train",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1146-06",
+        "MW1146-07",
+        "MW1146-08"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 1.5104905686485735,
+      "baseline_prediction": false,
+      "baseline_score": 1.4895094313514265,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "cadmium(ii) chloride hydrate (2:5)",
+      "stage": "calibrate",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1036-8"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 10.0,
+      "baseline_prediction": true,
+      "baseline_score": 7.0,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "caffeine",
+      "stage": "calibrate",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1076-42",
+        "MW1076-43",
+        "MW1076-44"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 2.5168966397422903,
+      "baseline_prediction": false,
+      "baseline_score": 0.4831033602577097,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "captan",
+      "stage": "calibrate",
+      "source_files": [
+        "NTP91_parameters_by_DIV.csv",
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1140-23",
+        "MW1140-24",
+        "MW1140-25",
+        "MW1145-25",
+        "MW1145-26",
+        "MW1145-27",
+        "MW1147-13",
+        "MW1147-14",
+        "MW1147-15"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 6.9059787301428655,
+      "baseline_prediction": true,
+      "baseline_score": 3.9059787301428655,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "captopril",
+      "stage": "train",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1076-42",
+        "MW1076-43",
+        "MW1076-44"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 2.0263110093752412,
+      "baseline_prediction": false,
+      "baseline_score": 0.9736889906247588,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "carbamazepine",
+      "stage": "calibrate",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1062-29",
+        "MW1062-43",
+        "MW1062-44"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 2.3840299478424507,
+      "baseline_prediction": false,
+      "baseline_score": 0.6159700521575493,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "carbaryl",
+      "stage": "calibrate",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1007-109",
+        "MW1008-1",
+        "MW1008-40"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 9.92861434086213,
+      "baseline_prediction": true,
+      "baseline_score": 6.928614340862129,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "carbofuran",
+      "stage": "test",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1145-25",
+        "MW1145-26",
+        "MW1145-27",
+        "MW1147-13",
+        "MW1147-14",
+        "MW1147-15"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 6.506690146839169,
+      "baseline_prediction": true,
+      "baseline_score": 3.506690146839169,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "cariporide mesylate",
+      "stage": "train",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1146-32",
+        "MW1146-33",
+        "MW1146-34"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 3.877364116515074,
+      "baseline_prediction": true,
+      "baseline_score": 0.8773641165150741,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "chloramben",
+      "stage": "train",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1047-22",
+        "MW1047-29",
+        "MW1047-30",
+        "MW1053-26",
+        "MW1053-31",
+        "MW1053-33"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 3.5264250150817475,
+      "baseline_prediction": true,
+      "baseline_score": 0.5264250150817475,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "chlordiazepoxide hydrochloride",
+      "stage": "calibrate",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1044-2",
+        "MW1044-6",
+        "MW1044-7"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 10.0,
+      "baseline_prediction": true,
+      "baseline_score": 7.0,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "chlorendic acid",
+      "stage": "train",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1160-24",
+        "MW1160-25",
+        "MW1160-26"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 2.520780748809746,
+      "baseline_prediction": false,
+      "baseline_score": 0.479219251190254,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "chlorethoxyfos",
+      "stage": "train",
+      "source_files": [
+        "OPP2015_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1125-3",
+        "MW1125-4",
+        "MW1125-5"
+      ],
+      "concentrations": [
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0,
+        100.0
+      ],
+      "selected_concentrations": [
+        0.1,
+        3.0,
+        100.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 9.761059626218655,
+      "baseline_prediction": true,
+      "baseline_score": 6.761059626218655,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "chlorpromazine hydrochloride",
+      "stage": "train",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1062-29",
+        "MW1062-43",
+        "MW1062-44"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 7.996518566470169,
+      "baseline_prediction": true,
+      "baseline_score": 4.996518566470169,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "chlorpyrifos",
+      "stage": "calibrate",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv",
+        "OPP2015_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1007-70",
+        "MW1007-81",
+        "MW1007-84",
+        "MW1105-20",
+        "MW1105-23",
+        "MW1105-26"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0,
+        100.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        100.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 7.612415126579433,
+      "baseline_prediction": true,
+      "baseline_score": 4.612415126579433,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "chlorpyrifos oxon",
+      "stage": "calibrate",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv",
+        "OPP2015_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1007-70",
+        "MW1007-81",
+        "MW1007-84",
+        "MW1125-3",
+        "MW1125-4",
+        "MW1125-5"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0,
+        100.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        100.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 2.5396371665750674,
+      "baseline_prediction": false,
+      "baseline_score": 0.46036283342493256,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "chrysene",
+      "stage": "calibrate",
+      "source_files": [
+        "NTP91_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1139-30",
+        "MW1139-31",
+        "MW1139-34"
+      ],
+      "concentrations": [
+        0.01,
+        0.05,
+        0.15,
+        0.49,
+        1.46,
+        4.85,
+        9.7
+      ],
+      "selected_concentrations": [
+        0.01,
+        0.49,
+        9.7
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 1.7672255057798496,
+      "baseline_prediction": false,
+      "baseline_score": 1.2327744942201504,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "clodinafop-propargyl",
+      "stage": "test",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1146-06",
+        "MW1146-07",
+        "MW1146-08"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 1.062327204108616,
+      "baseline_prediction": false,
+      "baseline_score": 1.937672795891384,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "clothianidin",
+      "stage": "test",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1160-24",
+        "MW1160-25",
+        "MW1160-26"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 1.6909620795145521,
+      "baseline_prediction": false,
+      "baseline_score": 1.3090379204854479,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "clove leaf oil",
+      "stage": "calibrate",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1147-23",
+        "MW1147-24",
+        "MW1147-25"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 4.509710608988209,
+      "baseline_prediction": true,
+      "baseline_score": 1.5097106089882093,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "cocaine",
+      "stage": "test",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1007-100",
+        "MW1007-91",
+        "MW1007-98",
+        "MW1041-17",
+        "MW1041-25",
+        "MW1041-28"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 2.7519988378300306,
+      "baseline_prediction": false,
+      "baseline_score": 0.24800116216996937,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "colchicine",
+      "stage": "calibrate",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1044-2",
+        "MW1044-6",
+        "MW1044-7"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 10.0,
+      "baseline_prediction": true,
+      "baseline_score": 7.0,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "cotinine",
+      "stage": "train",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1047-22",
+        "MW1047-29",
+        "MW1047-30",
+        "MW1053-26",
+        "MW1053-31",
+        "MW1053-33"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 2.2080255839905534,
+      "baseline_prediction": false,
+      "baseline_score": 0.7919744160094466,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "coumaphos",
+      "stage": "test",
+      "source_files": [
+        "OPP2015_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1056-28",
+        "MW1056-29",
+        "MW1056-36"
+      ],
+      "concentrations": [
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0,
+        100.0
+      ],
+      "selected_concentrations": [
+        0.1,
+        3.0,
+        100.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 8.903060478675837,
+      "baseline_prediction": true,
+      "baseline_score": 5.903060478675837,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "cp-409092",
+      "stage": "train",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1146-29",
+        "MW1146-30",
+        "MW1146-31"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 6.64492944543542,
+      "baseline_prediction": true,
+      "baseline_score": 3.6449294454354204,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "cp-457920",
+      "stage": "calibrate",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1146-29",
+        "MW1146-30",
+        "MW1146-31"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 4.154169760637155,
+      "baseline_prediction": true,
+      "baseline_score": 1.1541697606371546,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "cyclophosphamide monohydrate",
+      "stage": "train",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1062-29",
+        "MW1062-43",
+        "MW1062-44"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 2.5806610949662554,
+      "baseline_prediction": false,
+      "baseline_score": 0.4193389050337446,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "cyfluthrin",
+      "stage": "calibrate",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1146-26",
+        "MW1146-27",
+        "MW1146-28"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 7.777921315402822,
+      "baseline_prediction": true,
+      "baseline_score": 4.777921315402822,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "cymoxanil",
+      "stage": "test",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1145-25",
+        "MW1145-26",
+        "MW1145-27",
+        "MW1147-13",
+        "MW1147-14",
+        "MW1147-15"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 2.51490421667773,
+      "baseline_prediction": false,
+      "baseline_score": 0.48509578332227,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "cypermethrin",
+      "stage": "train",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1045-02",
+        "MW1045-06",
+        "MW1045-09"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 8.23677380880998,
+      "baseline_prediction": true,
+      "baseline_score": 5.23677380880998,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "cytarabine",
+      "stage": "calibrate",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1007-100",
+        "MW1007-91",
+        "MW1007-98",
+        "MW1041-17",
+        "MW1041-25",
+        "MW1041-28",
+        "MW1047-22",
+        "MW1047-29",
+        "MW1047-30"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 9.552464309217648,
+      "baseline_prediction": true,
+      "baseline_score": 6.5524643092176476,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "d-glucitol",
+      "stage": "calibrate",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv",
+        "NTP91_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1008-41",
+        "MW1008-42",
+        "MW1076-42",
+        "MW1076-43",
+        "MW1076-44",
+        "MW1140-17",
+        "MW1140-18",
+        "MW1140-19"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 1.8136630884707778,
+      "baseline_prediction": false,
+      "baseline_score": 1.1863369115292222,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "d-mannitol",
+      "stage": "test",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1146-23",
+        "MW1146-24",
+        "MW1146-25"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 2.5140009374423267,
+      "baseline_prediction": false,
+      "baseline_score": 0.48599906255767333,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "ddt",
+      "stage": "calibrate",
+      "source_files": [
+        "NTP91_parameters_by_DIV.csv",
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1140-26",
+        "MW1140-27",
+        "MW1140-28",
+        "MW1144-19",
+        "MW1144-20",
+        "MW1144-21",
+        "MW1147-7",
+        "MW1147-8",
+        "MW1147-9"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 8.6233226413156,
+      "baseline_prediction": true,
+      "baseline_score": 5.6233226413156,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "deltamethrin",
+      "stage": "calibrate",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1007-100",
+        "MW1007-91",
+        "MW1007-98",
+        "MW1041-17",
+        "MW1041-25",
+        "MW1041-28"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 9.452555461621873,
+      "baseline_prediction": true,
+      "baseline_score": 6.452555461621873,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "dexamethasone",
+      "stage": "test",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1007-70",
+        "MW1007-81",
+        "MW1007-84"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 2.423202266645826,
+      "baseline_prediction": false,
+      "baseline_score": 0.5767977333541738,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "dextroamphetamine sulfate",
+      "stage": "test",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1044-2",
+        "MW1044-6",
+        "MW1044-7"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 4.370589091352878,
+      "baseline_prediction": true,
+      "baseline_score": 1.370589091352878,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "di(2-ethylhexyl) phthalate",
+      "stage": "train",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv",
+        "NTP91_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1007-100",
+        "MW1007-91",
+        "MW1007-98",
+        "MW1041-17",
+        "MW1041-25",
+        "MW1041-28",
+        "MW1140-23",
+        "MW1140-24",
+        "MW1140-25"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 9.051121565947685,
+      "baseline_prediction": true,
+      "baseline_score": 6.051121565947685,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "diazepam",
+      "stage": "calibrate",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1007-70",
+        "MW1007-81",
+        "MW1007-84"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 7.272807352977617,
+      "baseline_prediction": true,
+      "baseline_score": 4.272807352977617,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "diazinon",
+      "stage": "test",
+      "source_files": [
+        "OPP2015_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1117-22",
+        "MW1117-23",
+        "MW1117-24"
+      ],
+      "concentrations": [
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0,
+        100.0
+      ],
+      "selected_concentrations": [
+        0.1,
+        3.0,
+        100.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 9.677546940669577,
+      "baseline_prediction": true,
+      "baseline_score": 6.677546940669577,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "diazoxon",
+      "stage": "calibrate",
+      "source_files": [
+        "OPP2015_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1125-3",
+        "MW1125-4",
+        "MW1125-5"
+      ],
+      "concentrations": [
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0,
+        100.0
+      ],
+      "selected_concentrations": [
+        0.1,
+        3.0,
+        100.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 2.666592816373654,
+      "baseline_prediction": false,
+      "baseline_score": 0.3334071836263459,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "dibenz[a,c]anthracene",
+      "stage": "test",
+      "source_files": [
+        "NTP91_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1139-30",
+        "MW1139-31",
+        "MW1139-34"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 4.484471066061188,
+      "baseline_prediction": true,
+      "baseline_score": 1.4844710660611877,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "dibenz[a,h]anthracene",
+      "stage": "test",
+      "source_files": [
+        "NTP91_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1139-30",
+        "MW1139-31",
+        "MW1139-34"
+      ],
+      "concentrations": [
+        0.02,
+        0.05,
+        0.15,
+        0.5,
+        1.5,
+        5.0,
+        10.0
+      ],
+      "selected_concentrations": [
+        0.02,
+        0.5,
+        10.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 2.7259766649138406,
+      "baseline_prediction": false,
+      "baseline_score": 0.2740233350861594,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "dichlorvos",
+      "stage": "calibrate",
+      "source_files": [
+        "OPP2015_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1092-29",
+        "MW1092-5",
+        "MW1092-6"
+      ],
+      "concentrations": [
+        0.01,
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0
+      ],
+      "selected_concentrations": [
+        0.01,
+        0.3,
+        10.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 1.657866614477002,
+      "baseline_prediction": false,
+      "baseline_score": 1.342133385522998,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "dicrotophos",
+      "stage": "calibrate",
+      "source_files": [
+        "OPP2015_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1117-22",
+        "MW1117-23",
+        "MW1117-24"
+      ],
+      "concentrations": [
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0,
+        100.0
+      ],
+      "selected_concentrations": [
+        0.1,
+        3.0,
+        100.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 1.8161239727219618,
+      "baseline_prediction": false,
+      "baseline_score": 1.1838760272780382,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "dieldrin",
+      "stage": "train",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1008-41",
+        "MW1008-42"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 10.0,
+      "baseline_prediction": true,
+      "baseline_score": 7.0,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "diethylene glycol",
+      "stage": "calibrate",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1047-22",
+        "MW1047-29",
+        "MW1047-30"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 1.6757007354977498,
+      "baseline_prediction": false,
+      "baseline_score": 1.3242992645022502,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "diethylstilbestrol",
+      "stage": "test",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1053-26",
+        "MW1053-31",
+        "MW1053-33"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 8.84384271559449,
+      "baseline_prediction": true,
+      "baseline_score": 5.843842715594491,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "difpas-pyrazole",
+      "stage": "test",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1146-32",
+        "MW1146-33",
+        "MW1146-34"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 5.834884210953486,
+      "baseline_prediction": true,
+      "baseline_score": 2.8348842109534864,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "dimethoate",
+      "stage": "train",
+      "source_files": [
+        "OPP2015_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1117-22",
+        "MW1117-23",
+        "MW1117-24"
+      ],
+      "concentrations": [
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0,
+        100.0
+      ],
+      "selected_concentrations": [
+        0.1,
+        3.0,
+        100.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 9.677546940669577,
+      "baseline_prediction": true,
+      "baseline_score": 6.677546940669577,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "diphenhydramine hydrochloride",
+      "stage": "train",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1147-23",
+        "MW1147-24",
+        "MW1147-25"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 5.408734013938079,
+      "baseline_prediction": true,
+      "baseline_score": 2.408734013938079,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "disulfoton",
+      "stage": "test",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1147-16",
+        "MW1147-26",
+        "MW1147-27",
+        "MW1147-3",
+        "MW1147-4",
+        "MW1147-5"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 2.3948817110163856,
+      "baseline_prediction": false,
+      "baseline_score": 0.6051182889836144,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "emamectin benzoate",
+      "stage": "calibrate",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1045-02",
+        "MW1045-06",
+        "MW1045-09",
+        "MW1086-39",
+        "MW1086-41"
+      ],
+      "concentrations": [
+        0.0001,
+        0.0003,
+        0.001,
+        0.003,
+        0.01,
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.0001,
+        0.03,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 8.23677380880998,
+      "baseline_prediction": true,
+      "baseline_score": 5.23677380880998,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "enadoline",
+      "stage": "calibrate",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1146-29",
+        "MW1146-30",
+        "MW1146-31"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 6.567568356391947,
+      "baseline_prediction": true,
+      "baseline_score": 3.5675683563919467,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "endosulfan",
+      "stage": "calibrate",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1144-22",
+        "MW1144-23",
+        "MW1144-24"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 8.818783539832921,
+      "baseline_prediction": true,
+      "baseline_score": 5.818783539832921,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "endrin",
+      "stage": "train",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1144-22",
+        "MW1144-23",
+        "MW1144-24"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 3.6610697543918516,
+      "baseline_prediction": true,
+      "baseline_score": 0.6610697543918516,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "erythromycin",
+      "stage": "calibrate",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1146-35",
+        "MW1147-1",
+        "MW1147-2"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 5.168619783842318,
+      "baseline_prediction": true,
+      "baseline_score": 2.168619783842318,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "es-fenvalerate",
+      "stage": "train",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1146-23",
+        "MW1146-24",
+        "MW1146-25"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 7.890336441982255,
+      "baseline_prediction": true,
+      "baseline_score": 4.890336441982255,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "esketamine hydrochloride",
+      "stage": "test",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1008-39",
+        "MW1008-40",
+        "MW1008-68"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 5.1420516317632305,
+      "baseline_prediction": true,
+      "baseline_score": 2.1420516317632305,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "ethoprop",
+      "stage": "calibrate",
+      "source_files": [
+        "OPP2015_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1105-20",
+        "MW1105-23",
+        "MW1105-26"
+      ],
+      "concentrations": [
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0,
+        100.0
+      ],
+      "selected_concentrations": [
+        0.1,
+        3.0,
+        100.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 7.524884128062775,
+      "baseline_prediction": true,
+      "baseline_score": 4.524884128062775,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "etofenprox",
+      "stage": "test",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1146-26",
+        "MW1146-27",
+        "MW1146-28"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 7.777921315402822,
+      "baseline_prediction": true,
+      "baseline_score": 4.777921315402822,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "eugenol",
+      "stage": "test",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1147-20",
+        "MW1147-21",
+        "MW1147-22"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 3.442886192208291,
+      "baseline_prediction": true,
+      "baseline_score": 0.4428861922082912,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "fenamiphos",
+      "stage": "test",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1146-35",
+        "MW1147-1",
+        "MW1147-2"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 4.372470721655377,
+      "baseline_prediction": true,
+      "baseline_score": 1.372470721655377,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "fenitrothion",
+      "stage": "test",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1147-16",
+        "MW1147-26",
+        "MW1147-27",
+        "MW1147-3",
+        "MW1147-4",
+        "MW1147-5"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 2.708266205973666,
+      "baseline_prediction": false,
+      "baseline_score": 0.2917337940263338,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "fenpropathrin",
+      "stage": "calibrate",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1146-23",
+        "MW1146-24",
+        "MW1146-25"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 7.890336441982255,
+      "baseline_prediction": true,
+      "baseline_score": 4.890336441982255,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "fipronil",
+      "stage": "test",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1045-02",
+        "MW1045-06",
+        "MW1045-09"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 3.7976655374845194,
+      "baseline_prediction": true,
+      "baseline_score": 0.7976655374845194,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "firemaster 550",
+      "stage": "test",
+      "source_files": [
+        "NTP91_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1139-23",
+        "MW1139-24",
+        "MW1139-25"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 6.0924041920051,
+      "baseline_prediction": true,
+      "baseline_score": 3.0924041920051,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "fluconazole",
+      "stage": "calibrate",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1047-22",
+        "MW1047-29",
+        "MW1047-30"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 2.5293458450415427,
+      "baseline_prediction": false,
+      "baseline_score": 0.4706541549584573,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "flufenacet",
+      "stage": "train",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1147-16",
+        "MW1147-26",
+        "MW1147-27",
+        "MW1147-3",
+        "MW1147-4",
+        "MW1147-5"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 2.6667560348472152,
+      "baseline_prediction": false,
+      "baseline_score": 0.33324396515278476,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "fluorene",
+      "stage": "calibrate",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1147-16",
+        "MW1147-26",
+        "MW1147-27",
+        "MW1147-3",
+        "MW1147-4",
+        "MW1147-5"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 1.4960453786331958,
+      "baseline_prediction": false,
+      "baseline_score": 1.5039546213668042,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "fluoxastrobin",
+      "stage": "train",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1145-22",
+        "MW1145-23",
+        "MW1145-24",
+        "MW1147-17",
+        "MW1147-18",
+        "MW1147-19"
+      ],
+      "concentrations": [
+        0.001,
+        0.003,
+        0.01,
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.001,
+        0.1,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 10.0,
+      "baseline_prediction": true,
+      "baseline_score": 7.0,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "fluoxetine hydrochloride",
+      "stage": "train",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1062-29",
+        "MW1062-43",
+        "MW1062-44"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 7.996518566470169,
+      "baseline_prediction": true,
+      "baseline_score": 4.996518566470169,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "flusilazole",
+      "stage": "train",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1045-02",
+        "MW1045-06",
+        "MW1045-09"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 7.339698807120968,
+      "baseline_prediction": true,
+      "baseline_score": 4.339698807120968,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "folic acid",
+      "stage": "test",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1146-32",
+        "MW1146-33",
+        "MW1146-34"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 2.171567803129909,
+      "baseline_prediction": false,
+      "baseline_score": 0.8284321968700912,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "fosthiazate",
+      "stage": "calibrate",
+      "source_files": [
+        "OPP2015_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1092-29",
+        "MW1092-5",
+        "MW1092-6"
+      ],
+      "concentrations": [
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0,
+        100.0
+      ],
+      "selected_concentrations": [
+        0.1,
+        3.0,
+        100.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 2.1333488970782137,
+      "baseline_prediction": false,
+      "baseline_score": 0.8666511029217863,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "glycerol",
+      "stage": "train",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1145-22",
+        "MW1145-23",
+        "MW1145-24",
+        "MW1147-13",
+        "MW1147-14",
+        "MW1147-15"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 1.588286815703774,
+      "baseline_prediction": false,
+      "baseline_score": 1.411713184296226,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "glyphosate",
+      "stage": "calibrate",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1008-39",
+        "MW1008-40",
+        "MW1008-68"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 2.4825029613415506,
+      "baseline_prediction": false,
+      "baseline_score": 0.5174970386584494,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "haloperidol",
+      "stage": "test",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1008-39",
+        "MW1008-40",
+        "MW1008-68"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 8.510143182351962,
+      "baseline_prediction": true,
+      "baseline_score": 5.510143182351962,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "heptachlor epoxide b",
+      "stage": "test",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1007-109",
+        "MW1008-1",
+        "MW1008-40",
+        "MW1076-42",
+        "MW1076-43",
+        "MW1076-44"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 8.833615843449312,
+      "baseline_prediction": true,
+      "baseline_score": 5.833615843449312,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "hexachlorophene",
+      "stage": "test",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv",
+        "NTP91_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1040-11",
+        "MW1040-12",
+        "MW1140-17",
+        "MW1140-18",
+        "MW1140-19",
+        "MW1147-10",
+        "MW1147-11",
+        "MW1147-12"
+      ],
+      "concentrations": [
+        0.01,
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.01,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 10.0,
+      "baseline_prediction": true,
+      "baseline_score": 7.0,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "hydroxyurea",
+      "stage": "test",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1040-11",
+        "MW1040-12"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 4.405586956195635,
+      "baseline_prediction": true,
+      "baseline_score": 1.4055869561956351,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "imidacloprid",
+      "stage": "train",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1007-109",
+        "MW1008-1",
+        "MW1008-40"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 3.2822228912935705,
+      "baseline_prediction": true,
+      "baseline_score": 0.2822228912935705,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "isodecyl diphenyl phosphate",
+      "stage": "train",
+      "source_files": [
+        "NTP91_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1139-23",
+        "MW1139-24",
+        "MW1139-25"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 2.463881292260467,
+      "baseline_prediction": false,
+      "baseline_score": 0.5361187077395329,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "isoniazid",
+      "stage": "calibrate",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1053-26",
+        "MW1053-31",
+        "MW1053-33"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 4.526401646043762,
+      "baseline_prediction": true,
+      "baseline_score": 1.5264016460437624,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "kepone",
+      "stage": "train",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1144-22",
+        "MW1144-23",
+        "MW1144-24"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 8.818783539832921,
+      "baseline_prediction": true,
+      "baseline_score": 5.818783539832921,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "l-ascorbic acid",
+      "stage": "calibrate",
+      "source_files": [
+        "NTP91_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1140-20",
+        "MW1140-21",
+        "MW1140-22"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 1.297459021470158,
+      "baseline_prediction": false,
+      "baseline_score": 1.702540978529842,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "l-domoic acid",
+      "stage": "calibrate",
+      "source_files": [
+        "Brown2014_parameters_by_DIV.csv",
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1007-26",
+        "MW1007-27",
+        "MW1007-38",
+        "MW1042-42",
+        "MW1042-43",
+        "MW1042-44"
+      ],
+      "concentrations": [
+        0.003,
+        0.01,
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0
+      ],
+      "selected_concentrations": [
+        0.003,
+        0.1,
+        10.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 10.0,
+      "baseline_prediction": true,
+      "baseline_score": 7.0,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "lactofen",
+      "stage": "calibrate",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1045-02",
+        "MW1045-06",
+        "MW1045-09"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 2.66908113542251,
+      "baseline_prediction": false,
+      "baseline_score": 0.3309188645774901,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "lead(ii) acetate trihydrate",
+      "stage": "test",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1008-41",
+        "MW1008-42"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 10.0,
+      "baseline_prediction": true,
+      "baseline_score": 7.0,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "lindane",
+      "stage": "train",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1007-109",
+        "MW1008-1",
+        "MW1008-40"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 6.396829118358574,
+      "baseline_prediction": true,
+      "baseline_score": 3.396829118358574,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "loperamide",
+      "stage": "calibrate",
+      "source_files": [
+        "Brown2014_parameters_by_DIV.csv",
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1007-26",
+        "MW1007-27",
+        "MW1007-38",
+        "MW1008-39",
+        "MW1008-40",
+        "MW1008-68",
+        "MW1042-42",
+        "MW1042-43",
+        "MW1042-44"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 8.910190880662029,
+      "baseline_prediction": true,
+      "baseline_score": 5.910190880662029,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "lovastatin",
+      "stage": "train",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1146-20",
+        "MW1146-21",
+        "MW1146-22",
+        "MW1159-40",
+        "MW1159-43",
+        "MW1160-23"
+      ],
+      "concentrations": [
+        0.003,
+        0.01,
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.003,
+        0.3,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 6.960803975517238,
+      "baseline_prediction": true,
+      "baseline_score": 3.960803975517238,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "malaoxon",
+      "stage": "test",
+      "source_files": [
+        "OPP2015_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1092-29",
+        "MW1092-5",
+        "MW1092-6"
+      ],
+      "concentrations": [
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0,
+        100.0
+      ],
+      "selected_concentrations": [
+        0.1,
+        3.0,
+        100.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 2.8999877576365223,
+      "baseline_prediction": false,
+      "baseline_score": 0.10001224236347772,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "malathion",
+      "stage": "train",
+      "source_files": [
+        "OPP2015_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1105-20",
+        "MW1105-23",
+        "MW1105-26"
+      ],
+      "concentrations": [
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0,
+        100.0
+      ],
+      "selected_concentrations": [
+        0.1,
+        3.0,
+        100.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 7.612415126579433,
+      "baseline_prediction": true,
+      "baseline_score": 4.612415126579433,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "mancozeb",
+      "stage": "train",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1145-22",
+        "MW1145-23",
+        "MW1145-24",
+        "MW1147-13",
+        "MW1147-14",
+        "MW1147-15"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 2.2620714401832793,
+      "baseline_prediction": false,
+      "baseline_score": 0.7379285598167207,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "maneb",
+      "stage": "train",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1008-39",
+        "MW1008-40",
+        "MW1008-68"
+      ],
+      "concentrations": [
+        0.01,
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0
+      ],
+      "selected_concentrations": [
+        0.01,
+        0.3,
+        10.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 2.302601358934627,
+      "baseline_prediction": false,
+      "baseline_score": 0.697398641065373,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "manganese dichloride",
+      "stage": "calibrate",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1112-16",
+        "MW1112-17",
+        "MW1112-18"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 2.5252336301166634,
+      "baseline_prediction": false,
+      "baseline_score": 0.47476636988333665,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "manganese(ii) acetate",
+      "stage": "test",
+      "source_files": [
+        "NTP91_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1147-7",
+        "MW1147-8",
+        "MW1147-9"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 1.6871962223760233,
+      "baseline_prediction": false,
+      "baseline_score": 1.3128037776239767,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "mercuric chloride",
+      "stage": "calibrate",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1146-20",
+        "MW1146-21",
+        "MW1146-22",
+        "MW1159-40",
+        "MW1159-43",
+        "MW1160-23"
+      ],
+      "concentrations": [
+        0.003,
+        0.01,
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.003,
+        0.3,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 6.960803975517238,
+      "baseline_prediction": true,
+      "baseline_score": 3.960803975517238,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "methadone hydrochloride",
+      "stage": "calibrate",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1146-32",
+        "MW1146-33",
+        "MW1146-34"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 6.893051122854666,
+      "baseline_prediction": true,
+      "baseline_score": 3.893051122854666,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "methamidophos",
+      "stage": "test",
+      "source_files": [
+        "OPP2015_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1056-28",
+        "MW1056-29",
+        "MW1056-36",
+        "MW1117-22",
+        "MW1117-23",
+        "MW1117-24"
+      ],
+      "concentrations": [
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0,
+        100.0
+      ],
+      "selected_concentrations": [
+        0.1,
+        3.0,
+        100.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 3.368413854508007,
+      "baseline_prediction": true,
+      "baseline_score": 0.3684138545080069,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "methimazole",
+      "stage": "test",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1146-32",
+        "MW1146-33",
+        "MW1146-34"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 3.9126839670682836,
+      "baseline_prediction": true,
+      "baseline_score": 0.9126839670682836,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "methotrexate",
+      "stage": "test",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1040-11",
+        "MW1040-12"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 10.0,
+      "baseline_prediction": true,
+      "baseline_score": 7.0,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "methoxychlor",
+      "stage": "train",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1144-19",
+        "MW1144-20",
+        "MW1144-21"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 8.15579175320204,
+      "baseline_prediction": true,
+      "baseline_score": 5.15579175320204,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "methylmercuric(ii) chloride",
+      "stage": "test",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1036-8"
+      ],
+      "concentrations": [
+        0.01,
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0
+      ],
+      "selected_concentrations": [
+        0.01,
+        0.3,
+        10.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 10.0,
+      "baseline_prediction": true,
+      "baseline_score": 7.0,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "mevastatin",
+      "stage": "test",
+      "source_files": [
+        "Brown2014_parameters_by_DIV.csv",
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1007-26",
+        "MW1007-27",
+        "MW1007-38",
+        "MW1008-37",
+        "MW1008-41",
+        "MW1008-42"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 8.72449703708063,
+      "baseline_prediction": true,
+      "baseline_score": 5.72449703708063,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "mirex",
+      "stage": "test",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1144-19",
+        "MW1144-20",
+        "MW1144-21"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 8.15579175320204,
+      "baseline_prediction": true,
+      "baseline_score": 5.15579175320204,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "molinate",
+      "stage": "test",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1146-29",
+        "MW1146-30",
+        "MW1146-31"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 5.071407110200022,
+      "baseline_prediction": true,
+      "baseline_score": 2.071407110200022,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "naled",
+      "stage": "train",
+      "source_files": [
+        "OPP2015_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1105-20",
+        "MW1105-23",
+        "MW1105-26"
+      ],
+      "concentrations": [
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0,
+        100.0
+      ],
+      "selected_concentrations": [
+        0.1,
+        3.0,
+        100.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 7.612415126579433,
+      "baseline_prediction": true,
+      "baseline_score": 4.612415126579433,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "naloxone hydrochloride dihydrate",
+      "stage": "train",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1062-29",
+        "MW1062-43",
+        "MW1062-44"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 1.1832091656636825,
+      "baseline_prediction": false,
+      "baseline_score": 1.8167908343363175,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "naphthalene",
+      "stage": "test",
+      "source_files": [
+        "NTP91_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1139-30",
+        "MW1139-31",
+        "MW1139-34"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 3.0396335129361534,
+      "baseline_prediction": true,
+      "baseline_score": 0.03963351293615336,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "o,p'-ddt",
+      "stage": "train",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1144-22",
+        "MW1144-23",
+        "MW1144-24"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 8.818783539832921,
+      "baseline_prediction": true,
+      "baseline_score": 5.818783539832921,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "octachloro-4,7-methanotetrahydroindane",
+      "stage": "calibrate",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1144-19",
+        "MW1144-20",
+        "MW1144-21"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 8.15579175320204,
+      "baseline_prediction": true,
+      "baseline_score": 5.15579175320204,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "octylbicycloheptenedicarboximide",
+      "stage": "test",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1147-23",
+        "MW1147-24",
+        "MW1147-25"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 5.742263219446289,
+      "baseline_prediction": true,
+      "baseline_score": 2.742263219446289,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "omethoate",
+      "stage": "train",
+      "source_files": [
+        "OPP2015_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1092-29",
+        "MW1092-5",
+        "MW1092-6"
+      ],
+      "concentrations": [
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0,
+        100.0
+      ],
+      "selected_concentrations": [
+        0.1,
+        3.0,
+        100.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 2.977649079225914,
+      "baseline_prediction": false,
+      "baseline_score": 0.02235092077408618,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "oxidopamine hydrochloride",
+      "stage": "calibrate",
+      "source_files": [
+        "NTP91_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1140-26",
+        "MW1140-27",
+        "MW1140-28",
+        "MW1147-10",
+        "MW1147-11",
+        "MW1147-12"
+      ],
+      "concentrations": [
+        0.01,
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.01,
+        0.3,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 8.332617119531264,
+      "baseline_prediction": true,
+      "baseline_score": 5.332617119531264,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "p,p'-ddd",
+      "stage": "test",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1144-19",
+        "MW1144-20",
+        "MW1144-21"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 8.15579175320204,
+      "baseline_prediction": true,
+      "baseline_score": 5.15579175320204,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "p,p'-dde",
+      "stage": "test",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1144-19",
+        "MW1144-20",
+        "MW1144-21"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 8.15579175320204,
+      "baseline_prediction": true,
+      "baseline_score": 5.15579175320204,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "paraquat dichloride",
+      "stage": "train",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1112-16",
+        "MW1112-17",
+        "MW1112-18"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 10.0,
+      "baseline_prediction": true,
+      "baseline_score": 7.0,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "parathion",
+      "stage": "train",
+      "source_files": [
+        "NTP91_parameters_by_DIV.csv",
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1140-20",
+        "MW1140-21",
+        "MW1140-22",
+        "MW1146-35",
+        "MW1147-1",
+        "MW1147-2"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 1.8909762870499753,
+      "baseline_prediction": false,
+      "baseline_score": 1.1090237129500247,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "perfluoroundecanoic acid",
+      "stage": "train",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1147-28",
+        "MW1147-29",
+        "MW1147-30"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 2.2288321496625447,
+      "baseline_prediction": false,
+      "baseline_score": 0.7711678503374553,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "permethrin",
+      "stage": "train",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv",
+        "NTP91_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1112-16",
+        "MW1112-17",
+        "MW1112-18",
+        "MW1140-20",
+        "MW1140-21",
+        "MW1140-22"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 10.0,
+      "baseline_prediction": true,
+      "baseline_score": 7.0,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "pharmagsid_47330",
+      "stage": "train",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1146-29",
+        "MW1146-30",
+        "MW1146-31"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 5.798214816690752,
+      "baseline_prediction": true,
+      "baseline_score": 2.798214816690752,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "phenanthrene",
+      "stage": "train",
+      "source_files": [
+        "NTP91_parameters_by_DIV.csv",
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1139-30",
+        "MW1139-31",
+        "MW1139-34",
+        "MW1146-06",
+        "MW1146-07",
+        "MW1146-08"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 1.4572325159840522,
+      "baseline_prediction": false,
+      "baseline_score": 1.5427674840159478,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "phenobarbital",
+      "stage": "test",
+      "source_files": [
+        "NTP91_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1140-26",
+        "MW1140-27",
+        "MW1140-28"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 2.0180714709445606,
+      "baseline_prediction": false,
+      "baseline_score": 0.9819285290554394,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "phenobarbital sodium",
+      "stage": "calibrate",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1047-22",
+        "MW1047-29",
+        "MW1047-30"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 1.9947588160579275,
+      "baseline_prediction": false,
+      "baseline_score": 1.0052411839420725,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "phenol",
+      "stage": "test",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1076-42",
+        "MW1076-43",
+        "MW1076-44"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 3.1899210239949176,
+      "baseline_prediction": true,
+      "baseline_score": 0.18992102399491761,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "phenylmercuric acetate",
+      "stage": "calibrate",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1146-20",
+        "MW1146-21",
+        "MW1146-22",
+        "MW1159-40",
+        "MW1159-43",
+        "MW1160-23"
+      ],
+      "concentrations": [
+        0.0003,
+        0.001,
+        0.003,
+        0.01,
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.0003,
+        0.1,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 6.960803975517238,
+      "baseline_prediction": true,
+      "baseline_score": 3.960803975517238,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "phorate",
+      "stage": "test",
+      "source_files": [
+        "OPP2015_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1125-3",
+        "MW1125-4",
+        "MW1125-5"
+      ],
+      "concentrations": [
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0,
+        100.0
+      ],
+      "selected_concentrations": [
+        0.1,
+        3.0,
+        100.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 9.761059626218655,
+      "baseline_prediction": true,
+      "baseline_score": 6.761059626218655,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "phosmet",
+      "stage": "test",
+      "source_files": [
+        "OPP2015_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1092-29",
+        "MW1092-5",
+        "MW1092-6"
+      ],
+      "concentrations": [
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0,
+        100.0
+      ],
+      "selected_concentrations": [
+        0.1,
+        3.0,
+        100.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 8.03264637651209,
+      "baseline_prediction": true,
+      "baseline_score": 5.032646376512091,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "picoxystrobin",
+      "stage": "calibrate",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1145-22",
+        "MW1145-23",
+        "MW1145-24",
+        "MW1147-17",
+        "MW1147-18",
+        "MW1147-19"
+      ],
+      "concentrations": [
+        0.0003,
+        0.001,
+        0.003,
+        0.01,
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.0003,
+        0.1,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 10.0,
+      "baseline_prediction": true,
+      "baseline_score": 7.0,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "piperonyl butoxide",
+      "stage": "train",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1147-20",
+        "MW1147-21",
+        "MW1147-22"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 5.784436688385071,
+      "baseline_prediction": true,
+      "baseline_score": 2.784436688385071,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "pirimiphos-methyl",
+      "stage": "test",
+      "source_files": [
+        "OPP2015_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1105-20",
+        "MW1105-23",
+        "MW1105-26"
+      ],
+      "concentrations": [
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0,
+        100.0
+      ],
+      "selected_concentrations": [
+        0.1,
+        3.0,
+        100.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 7.612415126579433,
+      "baseline_prediction": true,
+      "baseline_score": 4.612415126579433,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "prallethrin",
+      "stage": "calibrate",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1146-26",
+        "MW1146-27",
+        "MW1146-28"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 7.580103609998537,
+      "baseline_prediction": true,
+      "baseline_score": 4.580103609998537,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "pravastatin sodium",
+      "stage": "test",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1160-24",
+        "MW1160-25",
+        "MW1160-26"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 8.844336909252533,
+      "baseline_prediction": true,
+      "baseline_score": 5.844336909252533,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "profenofos",
+      "stage": "calibrate",
+      "source_files": [
+        "OPP2015_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1056-28",
+        "MW1056-29",
+        "MW1056-36"
+      ],
+      "concentrations": [
+        0.01,
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0
+      ],
+      "selected_concentrations": [
+        0.01,
+        0.3,
+        10.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 2.408759506810477,
+      "baseline_prediction": false,
+      "baseline_score": 0.591240493189523,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "pyraclostrobin",
+      "stage": "calibrate",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1145-25",
+        "MW1145-26",
+        "MW1145-27",
+        "MW1147-17",
+        "MW1147-18",
+        "MW1147-19"
+      ],
+      "concentrations": [
+        0.0003,
+        0.001,
+        0.003,
+        0.01,
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.0003,
+        0.1,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 10.0,
+      "baseline_prediction": true,
+      "baseline_score": 7.0,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "pyrene",
+      "stage": "test",
+      "source_files": [
+        "NTP91_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1139-30",
+        "MW1139-31",
+        "MW1139-34"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 1.4390551495678443,
+      "baseline_prediction": false,
+      "baseline_score": 1.5609448504321557,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "reserpine",
+      "stage": "test",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1146-35",
+        "MW1147-1",
+        "MW1147-2"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 10.0,
+      "baseline_prediction": true,
+      "baseline_score": 7.0,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "resmethrin",
+      "stage": "test",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1146-23",
+        "MW1146-24",
+        "MW1146-25"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 5.067990070710361,
+      "baseline_prediction": true,
+      "baseline_score": 2.067990070710361,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "retinoic acid",
+      "stage": "calibrate",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1007-107",
+        "MW1007-108",
+        "MW1008-39"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 9.379953593362057,
+      "baseline_prediction": true,
+      "baseline_score": 6.379953593362057,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "rotenone",
+      "stage": "test",
+      "source_files": [
+        "NTP91_parameters_by_DIV.csv",
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1140-20",
+        "MW1140-21",
+        "MW1140-22",
+        "MW1146-09",
+        "MW1146-10",
+        "MW1146-11",
+        "MW1147-28",
+        "MW1147-29",
+        "MW1147-30",
+        "MW1147-7",
+        "MW1147-8",
+        "MW1147-9"
+      ],
+      "concentrations": [
+        3e-05,
+        0.0001,
+        0.0003,
+        0.001,
+        0.003,
+        0.01,
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        3e-05,
+        0.03,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 7.536004648400047,
+      "baseline_prediction": true,
+      "baseline_score": 4.536004648400047,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "s-bioallethrin",
+      "stage": "train",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1146-23",
+        "MW1146-24",
+        "MW1146-25"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 5.951751608536413,
+      "baseline_prediction": true,
+      "baseline_score": 2.951751608536413,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "s-ethyl dipropylthiocarbamate",
+      "stage": "calibrate",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1146-06",
+        "MW1146-07",
+        "MW1146-08"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 1.6946865979077816,
+      "baseline_prediction": false,
+      "baseline_score": 1.3053134020922184,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "simvastatin",
+      "stage": "calibrate",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1146-20",
+        "MW1146-21",
+        "MW1146-22",
+        "MW1159-40",
+        "MW1159-43",
+        "MW1160-23"
+      ],
+      "concentrations": [
+        0.003,
+        0.01,
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.003,
+        0.3,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 6.960803975517238,
+      "baseline_prediction": true,
+      "baseline_score": 3.960803975517238,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "sodium arsenite",
+      "stage": "test",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1112-16",
+        "MW1112-17",
+        "MW1112-18"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 10.0,
+      "baseline_prediction": true,
+      "baseline_score": 7.0,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "sodium benzoate",
+      "stage": "calibrate",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1076-42",
+        "MW1076-43",
+        "MW1076-44"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 1.8501363600512746,
+      "baseline_prediction": false,
+      "baseline_score": 1.1498636399487254,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "sodium fluoride",
+      "stage": "train",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1112-16",
+        "MW1112-17",
+        "MW1112-18"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 1.8610672780950075,
+      "baseline_prediction": false,
+      "baseline_score": 1.1389327219049925,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "sodium orthovanadate",
+      "stage": "calibrate",
+      "source_files": [
+        "Brown2014_parameters_by_DIV.csv",
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1007-104",
+        "MW1007-26",
+        "MW1007-27",
+        "MW1007-38",
+        "MW1042-42",
+        "MW1042-43",
+        "MW1042-44"
+      ],
+      "concentrations": [
+        0.01,
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.01,
+        0.3,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 7.488931695633681,
+      "baseline_prediction": true,
+      "baseline_score": 4.488931695633681,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "sodium saccharin hydrate",
+      "stage": "test",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1007-107",
+        "MW1007-108",
+        "MW1008-39",
+        "MW1086-39",
+        "MW1086-41"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 2.130795987285838,
+      "baseline_prediction": false,
+      "baseline_score": 0.869204012714162,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "sodium valproate",
+      "stage": "calibrate",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1112-16",
+        "MW1112-17",
+        "MW1112-18"
+      ],
+      "concentrations": [
+        3.0,
+        10.0,
+        30.0,
+        100.0,
+        300.0,
+        1000.0,
+        3000.0
+      ],
+      "selected_concentrations": [
+        3.0,
+        100.0,
+        3000.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 4.185901679225576,
+      "baseline_prediction": true,
+      "baseline_score": 1.1859016792255757,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "spirodiclofen",
+      "stage": "train",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1146-06",
+        "MW1146-07",
+        "MW1146-08"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 1.4334528929274293,
+      "baseline_prediction": false,
+      "baseline_score": 1.5665471070725707,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "spiroxamine",
+      "stage": "test",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1007-109",
+        "MW1008-1",
+        "MW1008-40",
+        "MW1086-39",
+        "MW1086-41"
+      ],
+      "concentrations": [
+        0.0003,
+        0.001,
+        0.003,
+        0.01,
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.0003,
+        0.1,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 10.0,
+      "baseline_prediction": true,
+      "baseline_score": 7.0,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "tamoxifen",
+      "stage": "train",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1147-20",
+        "MW1147-21",
+        "MW1147-22"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 6.999107913956623,
+      "baseline_prediction": true,
+      "baseline_score": 3.999107913956623,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "tebuconazole",
+      "stage": "test",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1040-11",
+        "MW1040-12"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 9.646087401998251,
+      "baseline_prediction": true,
+      "baseline_score": 6.646087401998251,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "tebupirimfos",
+      "stage": "train",
+      "source_files": [
+        "OPP2015_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1092-29",
+        "MW1092-5",
+        "MW1092-6"
+      ],
+      "concentrations": [
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0,
+        100.0
+      ],
+      "selected_concentrations": [
+        0.1,
+        3.0,
+        100.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 8.03264637651209,
+      "baseline_prediction": true,
+      "baseline_score": 5.032646376512091,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "tefluthrin",
+      "stage": "test",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1146-26",
+        "MW1146-27",
+        "MW1146-28"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 7.777921315402822,
+      "baseline_prediction": true,
+      "baseline_score": 4.777921315402822,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "terbufos",
+      "stage": "test",
+      "source_files": [
+        "OPP2015_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1105-20",
+        "MW1105-23",
+        "MW1105-26"
+      ],
+      "concentrations": [
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0,
+        100.0
+      ],
+      "selected_concentrations": [
+        0.1,
+        3.0,
+        100.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 7.612415126579433,
+      "baseline_prediction": true,
+      "baseline_score": 4.612415126579433,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "terbutaline hemisulfate",
+      "stage": "train",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1007-107",
+        "MW1007-108",
+        "MW1008-39"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 2.1839831496406354,
+      "baseline_prediction": false,
+      "baseline_score": 0.8160168503593646,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "tert-butylhydroquinone",
+      "stage": "train",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1146-06",
+        "MW1146-07",
+        "MW1146-08"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 7.985331812674202,
+      "baseline_prediction": true,
+      "baseline_score": 4.985331812674202,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "tert-butylphenyl diphenyl phosphate",
+      "stage": "test",
+      "source_files": [
+        "NTP91_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1139-23",
+        "MW1139-24",
+        "MW1139-25"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 7.048903353963975,
+      "baseline_prediction": true,
+      "baseline_score": 4.048903353963975,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "tetracycline",
+      "stage": "train",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1146-09",
+        "MW1146-10",
+        "MW1146-11"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 1.527048907052067,
+      "baseline_prediction": false,
+      "baseline_score": 1.472951092947933,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "tetraethylthiuram disulfide",
+      "stage": "train",
+      "source_files": [
+        "NTP91_parameters_by_DIV.csv",
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1140-20",
+        "MW1140-21",
+        "MW1140-22",
+        "MW1146-09",
+        "MW1146-10",
+        "MW1146-11",
+        "MW1147-10",
+        "MW1147-11",
+        "MW1147-12",
+        "MW1147-28",
+        "MW1147-29",
+        "MW1147-30"
+      ],
+      "concentrations": [
+        0.0001,
+        0.0003,
+        0.001,
+        0.003,
+        0.01,
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.0001,
+        0.03,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 7.536004648400047,
+      "baseline_prediction": true,
+      "baseline_score": 4.536004648400047,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "tetramethrin",
+      "stage": "calibrate",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1146-23",
+        "MW1146-24",
+        "MW1146-25"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 4.281926206498927,
+      "baseline_prediction": true,
+      "baseline_score": 1.2819262064989267,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "thalidomide",
+      "stage": "train",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1040-11",
+        "MW1040-12"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 4.994412317555241,
+      "baseline_prediction": true,
+      "baseline_score": 1.9944123175552413,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "thiacloprid",
+      "stage": "train",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1160-24",
+        "MW1160-25",
+        "MW1160-26"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 2.585976479106768,
+      "baseline_prediction": false,
+      "baseline_score": 0.4140235208932319,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "thiamethoxam",
+      "stage": "train",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1160-24",
+        "MW1160-25",
+        "MW1160-26"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 1.833474110761232,
+      "baseline_prediction": false,
+      "baseline_score": 1.166525889238768,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "tribufos",
+      "stage": "calibrate",
+      "source_files": [
+        "OPP2015_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1125-3",
+        "MW1125-4",
+        "MW1125-5"
+      ],
+      "concentrations": [
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0,
+        100.0
+      ],
+      "selected_concentrations": [
+        0.1,
+        3.0,
+        100.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 9.761059626218655,
+      "baseline_prediction": true,
+      "baseline_score": 6.761059626218655,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "tributyltin chloride",
+      "stage": "train",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1146-20",
+        "MW1146-21",
+        "MW1146-22",
+        "MW1159-40",
+        "MW1159-43",
+        "MW1160-23"
+      ],
+      "concentrations": [
+        0.0003,
+        0.001,
+        0.003,
+        0.01,
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.0003,
+        0.1,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 6.960803975517238,
+      "baseline_prediction": true,
+      "baseline_score": 3.960803975517238,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "tributyltin methacrylate",
+      "stage": "calibrate",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1146-20",
+        "MW1146-21",
+        "MW1146-22",
+        "MW1159-40",
+        "MW1159-43",
+        "MW1160-23"
+      ],
+      "concentrations": [
+        0.0003,
+        0.001,
+        0.003,
+        0.01,
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.0003,
+        0.1,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 6.960803975517238,
+      "baseline_prediction": true,
+      "baseline_score": 3.960803975517238,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "trichlorfon",
+      "stage": "test",
+      "source_files": [
+        "OPP2015_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1125-3",
+        "MW1125-4",
+        "MW1125-5"
+      ],
+      "concentrations": [
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0,
+        100.0
+      ],
+      "selected_concentrations": [
+        0.1,
+        3.0,
+        100.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 9.761059626218655,
+      "baseline_prediction": true,
+      "baseline_score": 6.761059626218655,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "triclosan",
+      "stage": "calibrate",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1146-09",
+        "MW1146-10",
+        "MW1146-11"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 8.137813997042937,
+      "baseline_prediction": true,
+      "baseline_score": 5.137813997042937,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "triethyltin bromide",
+      "stage": "test",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1062-29",
+        "MW1062-43",
+        "MW1062-44"
+      ],
+      "concentrations": [
+        0.01,
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0
+      ],
+      "selected_concentrations": [
+        0.01,
+        0.3,
+        10.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 7.996518566470169,
+      "baseline_prediction": true,
+      "baseline_score": 4.996518566470169,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "trifloxystrobin",
+      "stage": "calibrate",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1145-25",
+        "MW1145-26",
+        "MW1145-27",
+        "MW1147-17",
+        "MW1147-18",
+        "MW1147-19"
+      ],
+      "concentrations": [
+        0.001,
+        0.003,
+        0.01,
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.001,
+        0.1,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 10.0,
+      "baseline_prediction": true,
+      "baseline_score": 7.0,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "trimethyltin hydroxide",
+      "stage": "train",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1007-107",
+        "MW1007-108",
+        "MW1008-39"
+      ],
+      "concentrations": [
+        0.01,
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0
+      ],
+      "selected_concentrations": [
+        0.01,
+        0.3,
+        10.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 9.379953593362057,
+      "baseline_prediction": true,
+      "baseline_score": 6.379953593362057,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "triphenyl phosphate",
+      "stage": "test",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1008-37",
+        "MW1008-41",
+        "MW1008-42",
+        "MW1086-39",
+        "MW1086-41"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 6.116481105524226,
+      "baseline_prediction": true,
+      "baseline_score": 3.116481105524226,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "triphenyl phosphates isopropylated",
+      "stage": "calibrate",
+      "source_files": [
+        "NTP91_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1139-23",
+        "MW1139-24",
+        "MW1139-25"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 7.498604181212179,
+      "baseline_prediction": true,
+      "baseline_score": 4.498604181212179,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "triphenyl phosphite",
+      "stage": "test",
+      "source_files": [
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1160-24",
+        "MW1160-25",
+        "MW1160-26"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 1.518035488695722,
+      "baseline_prediction": false,
+      "baseline_score": 1.481964511304278,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "tris(1,3-dichloro-2-propyl) phosphate",
+      "stage": "test",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1008-37",
+        "MW1008-41",
+        "MW1008-42",
+        "MW1086-39",
+        "MW1086-41"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 4.9280292533556675,
+      "baseline_prediction": true,
+      "baseline_score": 1.9280292533556675,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "tris(2-chloroethyl) phosphate",
+      "stage": "train",
+      "source_files": [
+        "Frank2017_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1008-37",
+        "MW1008-41",
+        "MW1008-42"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        30.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 3.6019753693979792,
+      "baseline_prediction": true,
+      "baseline_score": 0.6019753693979792,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "tris(2-chloroisopropyl)phosphate",
+      "stage": "calibrate",
+      "source_files": [
+        "NTP91_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1139-23",
+        "MW1139-24",
+        "MW1139-25"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 2.575657336199992,
+      "baseline_prediction": false,
+      "baseline_score": 0.42434266380000807,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "tris(methylphenyl) phosphate",
+      "stage": "train",
+      "source_files": [
+        "NTP91_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1139-23",
+        "MW1139-24",
+        "MW1139-25"
+      ],
+      "concentrations": [
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.03,
+        1.0,
+        20.0
+      ],
+      "reference_active": false,
+      "sparse_max_effect": 2.9810391915308805,
+      "baseline_prediction": false,
+      "baseline_score": 0.018960808469119517,
+      "baseline_release": true,
+      "naive_prediction": false,
+      "naive_release": true
+    },
+    {
+      "chemical": "valinomycin",
+      "stage": "calibrate",
+      "source_files": [
+        "NTP91_parameters_by_DIV.csv",
+        "ToxCast2016_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1140-26",
+        "MW1140-27",
+        "MW1140-28",
+        "MW1147-28",
+        "MW1147-29",
+        "MW1147-30"
+      ],
+      "concentrations": [
+        0.0001,
+        0.0003,
+        0.001,
+        0.003,
+        0.01,
+        0.03,
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        20.0
+      ],
+      "selected_concentrations": [
+        0.0001,
+        0.03,
+        20.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 8.963917253191017,
+      "baseline_prediction": true,
+      "baseline_score": 5.963917253191017,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    },
+    {
+      "chemical": "z-tetrachlorvinphos",
+      "stage": "test",
+      "source_files": [
+        "OPP2015_parameters_by_DIV.csv"
+      ],
+      "plates": [
+        "MW1056-28",
+        "MW1056-29",
+        "MW1056-36",
+        "MW1117-22",
+        "MW1117-23",
+        "MW1117-24"
+      ],
+      "concentrations": [
+        0.1,
+        0.3,
+        1.0,
+        3.0,
+        10.0,
+        30.0,
+        100.0
+      ],
+      "selected_concentrations": [
+        0.1,
+        3.0,
+        100.0
+      ],
+      "reference_active": true,
+      "sparse_max_effect": 6.963310396151888,
+      "baseline_prediction": true,
+      "baseline_score": 3.963310396151888,
+      "baseline_release": true,
+      "naive_prediction": true,
+      "naive_release": true
+    }
+  ],
+  "runtime": {
+    "seconds": 7.574107000022195,
+    "peak_rss_bytes": 445333504
+  }
+}

@@ -178,6 +178,32 @@ The command uses ignored `.cache/` files. Its default local process budget is 24
 
 For the individual stages, run `python ooc_qc.py --help`, `python f2_rf.py --help`, `python source_split_audit.py --help`, and `python f4_paired.py --help`. F3 reads the F2 result from the **same** run so its full-test gap compares two scores from one environment. The generic `audit_report.py records` command above accepts another dataset's own predictions without using our image model.
 
+## Choose a signal and compare its release coverage
+
+On 36 rectal-cancer patients with all three clinical treatment components, a measured combination signal releases 36 calls with one error, versus 20 with three errors for the earlier two-readout agreement rule: **+44.44 percentage points of coverage, patient-paired 95% interval [27.78, 61.11]**. Both observed overall errors are below 10%. This is a prespecified secondary comparison on previously analysed data. Its fixed-threshold version gives the same releases; the gain belongs to the signal. 5-FU remains the capecitabine assay proxy.
+
+The stronger single-component comparator is selected from training alone. It releases 12 of those 36 patients with six errors; its 16.67% observed overall error fails the common 10% comparison criterion. At the same full coverage, the combination reduces errors from 12 to one (30.56 points [13.89, 47.22], paired p=0.00342). Descriptively combining this contrast with seven pancreatic patients gives 13 fewer errors among 43 people, 30.23 points [16.28, 46.51]. Pancreatic endpoints and the frozen anchor-drug comparator differ; this summary supplies no joint calibration guarantee.
+
+Two larger-data trials locate the remaining coverage limits. On 14 acquisition-prefix groups containing 366 images, an independently trained error score with group CRC releases 71 with seven wrong, versus probability with the same CRC at 54 with ten wrong: **+4.64 points [−4.18, +10.39]**. The naive probability threshold releases 158 with 23 wrong and wins coverage on this test. Removing group calibration yields 200 releases/44 wrong, exceeding the 10% budget; the independent-score removal stays unexecuted under the failed-primary stopping rule. Prefixes represent acquisition proxies, with biological chip independence unconfirmed; CRC controls equal-group expected loss.
+
+From the original USEPA neural-network-formation asset, a fixed 81/81/81 split of 243 chemicals gives the three-concentration baseline **81/81 test releases with six wrong (7.41%, exact 95% risk interval [2.77%, 15.43%])**. Coverage is already 100%, so positive coverage headroom is zero at the registered observed-risk budget. The endpoint is full-series operational assay activity, distinct from clinical toxicity or trajectory error. Chemical partitions share acquisition plates. The registered ceiling stops further model training and ablations.
+
+Protocols and unit-level results accompany [image_release.py](image_release.py), [epa_release.py](epa_release.py), and [patient_signal_comparison.py](patient_signal_comparison.py). The [technical report](technical_report.pdf) gives the frozen target, all failed primary comparisons, paired intervals and component scope. Current scripts run separately from the earlier COMPLETE Notebook v12.
+
+```bash
+# Existing image features come from the public full audit above.
+python -m pip install -r requirements.txt -r requirements-chip.txt
+python image_release.py evaluate
+python patient_signal_comparison.py
+
+# Use a separate environment to reproduce the recorded EPA library versions.
+python -m venv .venv-epa
+.venv-epa/bin/python -m pip install -r requirements-epa.txt
+.venv-epa/bin/python epa_release.py
+```
+
+The image entry normalizes existing features to the frozen 12-decimal convention in memory and verifies their canonical hash. Default-entry replay matches predictions/intervals in 5.10 seconds at 207MB; patient pairing runs in 0.67 seconds at 50MB; EPA network reproduction runs in 5.15 seconds at 446MB. The EPA original is downloaded directly at runtime; dataset-specific redistribution terms remain unconfirmed and raw files remain outside this repository.
+
 ## A frozen-model release certificate and pilot forecasts
 
 Training, calibration and deployment now use one explicit contract. `release_calibration.py` learns each readout cutoff and its empirical reference distribution on a separate training set. The fixed margin family is {-1, 0, 0.01, ..., 1}; its loss for a patient is 1 exactly when the two training-fitted calls agree, their minimum ECDF margin exceeds the selected threshold, and that released call is wrong. The same fitted model and prediction function compute calibration losses and deployed actions. Patient IDs are checked for training/calibration overlap, and a SHA256 digest detects changes to cutoffs, reference distributions or the margin family.

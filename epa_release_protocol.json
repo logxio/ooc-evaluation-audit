@@ -1,0 +1,39 @@
+{
+  "schema": "epa-release-feasibility-v1",
+  "frozen_at": "2026-10-02T02:33:50.615682+09:00",
+  "purpose": "Decide whether three measured concentrations leave room for a positive release-coverage gain at 10% overall wrong-release risk on real EPA neural network formation assay data.",
+  "source_commit": "01adf3e1a0068c87fe221d60df36b9f96c4b4b1d",
+  "source_url": "https://raw.githubusercontent.com/USEPA/CompTox-DNT-NFA-Refinement/01adf3e1a0068c87fe221d60df36b9f96c4b4b1d/source_files/All_DIV_Data.Rdata",
+  "source_sha256": "fe8015c789770092b485fb63dd8aa0f643120e366df73c5624665454ee982af6",
+  "exposure_before_freeze": "Metadata and published aggregate comparator results were inspected. The same source had been used in a previous dose-selection experiment. This is a newly prespecified retrospective decision problem, not new outcome-blind data.",
+  "eligible": "All raw treatment names with at least three positive concentration levels and all four recorded DIV values; collapse repeated SPIDs under the same treatment name.",
+  "independent_unit": "chemical treatment name; all wells, concentrations and DIV measurements for that chemical remain together",
+  "split": "Sort names by SHA256('epa-release-20261002-v1|' + normalized treatment name), then first floor(N/3) train, next floor(N/3) calibrate, remainder test. One seed, one split.",
+  "normalization": "For each of 17 readouts, asinh(raw / c), where c is one quarter of the positive DIV12 median vehicle value from training-associated plates only (fallback 1 if absent). At each DIV use the training-plate median of within-plate robust vehicle SD, lower-bounded at 0.05. Subtract the matching plate/date/DIV vehicle median and clip to [-10,10]. Vehicle controls only determine these quantities; held-out treatment readouts never fit the transform.",
+  "reference": "For each positive concentration and readout, take replicate means at each DIV, then the mean over DIV 5/7/9/12. At least one absolute mean >=3 means full-series assay activity. Missing readout/DIV entries contribute zero, with their mask retained. This is an operational assay activity endpoint, not a clinical hazard label.",
+  "sparse_budget": "Three concentrations: lowest, lower middle index floor((L-1)/2), highest. Same observed wells for every method. No active dose selection.",
+  "naive_baseline": "Apply the same activity rule to the three observed concentrations; release all its activity decisions.",
+  "strong_baseline": "Same sparse rule, ranked by absolute distance of its maximum absolute developmental response from 3. Candidate confidence thresholds are 51 equally spaced quantiles of training chemical margins, plus release-all and release-none. Select maximum calibration coverage satisfying (wrong releases + 1)/(calibration chemicals + 1) <= 0.10.",
+  "trained_candidate_if_headroom": "RandomForestClassifier(n_estimators=200,min_samples_leaf=5,max_features='sqrt',random_state=20261002,n_jobs=1), trained only on training chemical full-series activity labels. Inputs are the sparse 3x4x17 measurements, observed masks, log concentrations and sparse rule margin. Score is maximum class probability. Freeze before calibration and use the identical chemical-level corrected-risk rule. No hyperparameter search.",
+  "primary_alpha": 0.1,
+  "risk_denominator": "All held-out test chemicals; conditional wrong-release fraction reported separately.",
+  "pass": "Both methods' observed overall wrong-release fractions <=0.10, and lower bound of 95% paired chemical bootstrap CI of learned-minus-strong-baseline release fraction >0.",
+  "bootstrap": {
+    "unit": "chemical",
+    "replicates": 10000,
+    "seed": 20261002,
+    "percentiles": [
+      2.5,
+      97.5
+    ]
+  },
+  "risk_interval": "Two-sided exact Clopper-Pearson 95% interval; distinct from the expected marginal risk-control interpretation.",
+  "stop_rule": "If the strong baseline releases every test chemical and its observed wrong-release fraction is <=0.10, positive release-coverage gain is mathematically impossible on this endpoint/budget. Stop after the minimum baseline measurement; do not train a candidate, run ablations or change the budget, endpoint, split, seed or risk target.",
+  "prediction": {
+    "strong_baseline_coverage": 1.0,
+    "overall_wrong_release_fraction": 0.06,
+    "maximum_attainable_coverage_gain": 0.0
+  },
+  "batch_scope": "Plate/date vehicle controls are measured covariates. Plate sharing between chemical partitions is reported; this experiment addresses held-out chemicals within these assay sources, not a new plate/source guarantee.",
+  "data_license": "The upstream repository provides no dataset-specific license file in its pinned tree. Data are fetched directly from USEPA and raw files are not redistributed. EPA's general disclaimer does not establish a repository-specific unrestricted commercial license. Scientific-use replication only; data-license clarification remains required for unrestricted redistribution."
+}
