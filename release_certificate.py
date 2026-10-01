@@ -1,14 +1,13 @@
 #!/usr/bin/env python3
-"""Certify the two-readout release rule with conformal risk control, and correct its
+"""Empirically calibrate the two-readout release rule, and correct its
 forecast for shared errors.
 
 1. Release certificate. A call is released only when the two readouts agree and both sit
    farther than a threshold from their own cutoffs (margin, measured as the gap in each
    readout's empirical distribution). Conformal risk control (Angelopoulos, Bates, Fisch,
    Lei and Schuster, ICLR 2024) picks the threshold on a pilot of n patients with outcomes:
-   the smallest one whose released errors e satisfy (e + 1) / (n + 1) <= alpha. For any new
-   patient exchangeable with the pilot, the expected rate of released wrong calls is then at
-   most alpha, whether or not the two readouts err independently. Every setting is also
+   the smallest one whose released errors e satisfy (e + 1) / (n + 1) <= alpha. The current
+   data-dependent cutoffs and margins have no established conformal guarantee. Every setting is also
    checked by nested leave-one-out: the threshold is recalibrated without each patient and
    applied to that patient.
 2. Shared-error correction. The independence forecast of release_theory.py runs high when
@@ -212,6 +211,8 @@ def main():
                           'nested_loo_wrong_rate': round(sum(r['nested_loo_released_wrong'] for r in rows) / n, 4)}
     result = {'schema': 'release.certificate.v1',
               'method': 'conformal risk control on the released-and-wrong loss; margin = min over the two readouts of the empirical-CDF gap to the cutoff',
+              'guarantee_status': 'unestablished',
+              'interpretation': 'Empirical calibration. Leave-one-out here recalibrates the margin only; previously constructed patient cutoffs and empirical-CDF margins remain fixed. A formal guarantee for this data-dependent loss family has not been established.',
               'settings': settings, 'settings_pooled_by_alpha': pooled,
               'pilot_size_to_certify': pilot_sizes(),
               'shared_error_forecast': corrected, 'shared_error_fit': fit}

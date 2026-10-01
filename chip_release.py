@@ -7,10 +7,9 @@ tumoroid response, or the two drugs of a regimen). Lower values mean more sensit
 leave-one-patient-out; without one, each readout is split at its cohort median. A call is
 released only when both readouts agree; otherwise the patient is sent to retest.
 
-With an outcome column, --certify ALPHA also calibrates a release certificate on that pilot
-(conformal risk control): a call is released only when both readouts agree and each lies
-beyond a margin from its cutoff, and the margin is set so that new patients like the pilot
-get a wrong released call at most ALPHA of the time. --save-certificate keeps the cutoffs
+With an outcome column, --certify ALPHA empirically calibrates a release margin.
+The present data reuse and the change from leave-one-out to full-pilot cutoffs leave
+a formal conformal guarantee unestablished. --save-certificate keeps the cutoffs
 and margin; --certificate applies them to new patients without outcomes.
 
     python chip_release.py examples/biliary_gemcis_auc.csv --a gemcitabine_auc --b cisplatin_auc
@@ -30,6 +29,9 @@ from release_certificate import calibrate, ecdf, patient
 
 POSITIVE = {'1', 'responder', 'sensitive', 'yes', 'cr', 'pr', 'sd', 'true'}
 NEGATIVE = {'0', 'non_responder', 'non-responder', 'resistant', 'no', 'pd', 'false'}
+CALIBRATION_SCOPE = ('Empirical calibration only: leave-one-out calls calibrate the margin, '
+                     'but deployment uses full-pilot cutoffs; data-dependent margins and '
+                     'cutoffs have no established conformal guarantee in this implementation.')
 
 
 def margins(a, b, cut_a, cut_b, ref_a, ref_b):
@@ -47,7 +49,7 @@ def main():
     parser.add_argument('--higher-is-sensitive', action='store_true')
     parser.add_argument('--retest-cost', type=float, default=0.25, help='cost of a retest relative to a wrong call')
     parser.add_argument('--certify', type=float, default=None, metavar='ALPHA',
-                        help='with --outcome: certify at most ALPHA wrong released calls per patient')
+                        help='with --outcome: empirical wrong-release calibration at nominal ALPHA')
     parser.add_argument('--save-certificate', default=None, help='with --certify: write cutoffs and margin to this JSON')
     parser.add_argument('--certificate', default=None, help='apply a saved certificate to patients without outcomes')
     parser.add_argument('--out', default=None, help='optional per-patient CSV')
@@ -89,14 +91,15 @@ def main():
                 'releases_every_agreed_call': lam < 0, 'releases_none': math.isinf(lam),
                 'released': sum(released), 'released_wrong': wrong, 'retests': n - sum(released),
                 'pilot_bound': round((wrong + 1) / (n + 1), 6),
-                'guarantee': f'expected wrong released calls per new patient <= {args.certify} for patients exchangeable with this pilot',
+                'guarantee_status': 'unestablished', 'guarantee': CALIBRATION_SCOPE,
                 'smallest_alpha_this_pilot_can_certify': round(1 / (n + 1), 6)}
             if args.save_certificate:
                 with open(args.save_certificate, 'w') as handle:
                     json.dump({'readouts': [args.a, args.b], 'higher_is_sensitive': args.higher_is_sensitive,
                                'cutoffs': [threshold(a, truth), threshold(b, truth)], 'reference': [sorted(a), sorted(b)],
                                'margin': None if math.isinf(lam) else lam, 'alpha': args.certify,
-                               'pilot_patients': n, 'pilot_released_wrong': wrong}, handle, indent=2)
+                               'pilot_patients': n, 'pilot_released_wrong': wrong,
+                               'guarantee_status': 'unestablished', 'calibration_scope': CALIBRATION_SCOPE}, handle, indent=2)
     elif args.certificate:
         with open(args.certificate) as handle:
             cert = json.load(handle)
@@ -108,6 +111,7 @@ def main():
         gaps = margins(a, b, [cut_a] * len(a), [cut_b] * len(b), *cert['reference'])
         released = [x == y and m > lam for x, y, m in zip(calls_a, calls_b, gaps)]
         summary.update({'cutoffs': 'from certificate', 'certificate_alpha': cert['alpha'],
+                        'guarantee_status': 'unestablished', 'calibration_scope': CALIBRATION_SCOPE,
                         'released': sum(released), 'retests': len(rows) - sum(released)})
     else:
         ma, mb = statistics.median(a), statistics.median(b)

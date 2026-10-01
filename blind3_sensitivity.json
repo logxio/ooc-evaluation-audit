@@ -1,0 +1,2298 @@
+{
+  "schema": "blind3.scope_sensitivity.v1",
+  "analysis_status": "Exploratory post-outcome scope sensitivity; not a new blind test or a replacement primary analysis.",
+  "source_file": "blind3_score.json",
+  "source_score_sha256": "ce8921fc3bdf3464336807f9be9ec27a4574f729baaf6e558695ad31d5d092a8",
+  "source_predictions_sha256": "754902dc84e04ec5b9682cc379fe0ab50352e01af146c988fba6bf5498393342",
+  "source_freeze_commit": "258e60f5e5513fd69090385e70a9818f8468f20c",
+  "input_field": "analyses.primary.rows",
+  "readout_order": [
+    "5-FU",
+    "The frozen regimen-matched partner: oxaliplatin or irinotecan"
+  ],
+  "added_antibody_values": [
+    "Bevacizumab",
+    "Cetuximab",
+    "Panitumumab"
+  ],
+  "formulas": {
+    "accuracy": "correct / evaluated treatments; released accuracy uses released treatments only",
+    "release_and_retest_loss": "(released_wrong + cost * retest_treatments) / treatments",
+    "single_loss": "single_wrong / treatments",
+    "break_even_cost": "disagreement errors of the better single readout / retest_treatments",
+    "cost_assumption": "A retest resolves the call correctly at the stated relative cost; actual retests were not observed."
+  },
+  "groups": {
+    "original_primary": {
+      "description": "All original primary-analysis treatments.",
+      "treatments": 22,
+      "unique_patients": 18,
+      "clinical_benefits": 10,
+      "single_readouts": [
+        {
+          "correct": 12,
+          "wrong": 10,
+          "accuracy": 0.54545455,
+          "loss": 0.45454545
+        },
+        {
+          "correct": 17,
+          "wrong": 5,
+          "accuracy": 0.77272727,
+          "loss": 0.22727273
+        }
+      ],
+      "combination_readout": {
+        "correct": 16,
+        "wrong": 6,
+        "accuracy": 0.72727273
+      },
+      "released": {
+        "treatments": 13,
+        "correct": 10,
+        "wrong": 3,
+        "accuracy": 0.76923077,
+        "coverage": 0.59090909
+      },
+      "retest_treatments": 9,
+      "better_single_indices_zero_based": [
+        1
+      ],
+      "disagreement_errors_by_single": [
+        7,
+        2
+      ],
+      "break_even_retest_cost_vs_better_single": 0.22222222,
+      "break_even_numerator": 2,
+      "break_even_denominator": 9,
+      "cost_analysis": {
+        "0.1": {
+          "release_and_retest_loss": 0.17727273,
+          "better_single_loss": 0.22727273,
+          "release_minus_better_single_loss": -0.05,
+          "release_has_lower_loss": true
+        },
+        "0.25": {
+          "release_and_retest_loss": 0.23863636,
+          "better_single_loss": 0.22727273,
+          "release_minus_better_single_loss": 0.01136364,
+          "release_has_lower_loss": false
+        }
+      },
+      "row_ids": [
+        "4B:1",
+        "4B:2",
+        "4B:5",
+        "4B:7",
+        "4B:9",
+        "4B:10",
+        "4B:11",
+        "4B:16",
+        "4B:21",
+        "4B:22",
+        "4B:23",
+        "4B:24",
+        "4B:25",
+        "4B:26",
+        "4B:27",
+        "4B:29",
+        "5C:1",
+        "5C:4",
+        "5C:5",
+        "5C:7",
+        "5C:9",
+        "5C:10"
+      ],
+      "rows": [
+        {
+          "id": "4B:1",
+          "patient": "WCB015",
+          "cohort": "Community",
+          "regimen": "FOLFOX",
+          "targeted_therapy": null,
+          "source": "Figure 4B, row 1, patient-response column",
+          "phase": "immediate",
+          "phase_source": "Figure S4A, row 1, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "non_responder",
+          "calls": [
+            0,
+            0
+          ],
+          "combination_call": 1,
+          "correct": [
+            true,
+            true
+          ],
+          "combination_correct": false,
+          "released": true,
+          "released_correct": true
+        },
+        {
+          "id": "4B:2",
+          "patient": "WCB015",
+          "cohort": "Community",
+          "regimen": "FOLFIRI",
+          "targeted_therapy": "Bevacizumab",
+          "source": "Figure 4B, row 2, patient-response column",
+          "phase": "subsequent",
+          "phase_source": "Figure S4B, row 1, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Irinotecan"
+          ],
+          "truth": "non_responder",
+          "calls": [
+            0,
+            1
+          ],
+          "combination_call": 1,
+          "correct": [
+            true,
+            false
+          ],
+          "combination_correct": false,
+          "released": false,
+          "released_correct": false
+        },
+        {
+          "id": "4B:5",
+          "patient": "WCB027",
+          "cohort": "Community",
+          "regimen": "XELOX",
+          "targeted_therapy": null,
+          "source": "Figure 4B, row 5, patient-response column",
+          "phase": "subsequent",
+          "phase_source": "Figure S4B, row 3, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "responder",
+          "calls": [
+            0,
+            0
+          ],
+          "combination_call": 1,
+          "correct": [
+            false,
+            false
+          ],
+          "combination_correct": true,
+          "released": true,
+          "released_correct": false
+        },
+        {
+          "id": "4B:7",
+          "patient": "WCB041",
+          "cohort": "Community",
+          "regimen": "FOLFIRI",
+          "targeted_therapy": "Bevacizumab",
+          "source": "Figure 4B, row 7, patient-response column",
+          "phase": "subsequent",
+          "phase_source": "Figure S4B, row 4, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Irinotecan"
+          ],
+          "truth": "responder",
+          "calls": [
+            0,
+            1
+          ],
+          "combination_call": 1,
+          "correct": [
+            false,
+            true
+          ],
+          "combination_correct": true,
+          "released": false,
+          "released_correct": false
+        },
+        {
+          "id": "4B:9",
+          "patient": "WCB091",
+          "cohort": "Community",
+          "regimen": "FOLFOX",
+          "targeted_therapy": "Bevacizumab",
+          "source": "Figure 4B, row 9, patient-response column",
+          "phase": "immediate",
+          "phase_source": "Figure S4A, row 5, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "responder",
+          "calls": [
+            1,
+            1
+          ],
+          "combination_call": 1,
+          "correct": [
+            true,
+            true
+          ],
+          "combination_correct": true,
+          "released": true,
+          "released_correct": true
+        },
+        {
+          "id": "4B:10",
+          "patient": "WCB123",
+          "cohort": "Community",
+          "regimen": "FOLFOX",
+          "targeted_therapy": null,
+          "source": "Figure 4B, row 10, patient-response column",
+          "phase": "immediate",
+          "phase_source": "Figure S4A, row 6, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "responder",
+          "calls": [
+            0,
+            1
+          ],
+          "combination_call": 1,
+          "correct": [
+            false,
+            true
+          ],
+          "combination_correct": true,
+          "released": false,
+          "released_correct": false
+        },
+        {
+          "id": "4B:11",
+          "patient": "WCB123",
+          "cohort": "Community",
+          "regimen": "FOLFOXIRI",
+          "targeted_therapy": null,
+          "source": "Figure 4B, row 11, patient-response column",
+          "phase": "subsequent",
+          "phase_source": "Figure S4B, row 5, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "responder",
+          "calls": [
+            0,
+            1
+          ],
+          "combination_call": 1,
+          "correct": [
+            false,
+            true
+          ],
+          "combination_correct": true,
+          "released": false,
+          "released_correct": false
+        },
+        {
+          "id": "4B:16",
+          "patient": "WCB150",
+          "cohort": "Community",
+          "regimen": "FOLFIRI",
+          "targeted_therapy": null,
+          "source": "Figure 4B, row 16, patient-response column",
+          "phase": "subsequent",
+          "phase_source": "Figure S4B, row 7, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Irinotecan"
+          ],
+          "truth": "non_responder",
+          "calls": [
+            0,
+            0
+          ],
+          "combination_call": 0,
+          "correct": [
+            true,
+            true
+          ],
+          "combination_correct": true,
+          "released": true,
+          "released_correct": true
+        },
+        {
+          "id": "4B:21",
+          "patient": "WCB221",
+          "cohort": "Community",
+          "regimen": "FOLFOX",
+          "targeted_therapy": null,
+          "source": "Figure 4B, row 21, patient-response column",
+          "phase": "immediate",
+          "phase_source": "Figure S4A, row 12, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "responder",
+          "calls": [
+            1,
+            0
+          ],
+          "combination_call": 1,
+          "correct": [
+            true,
+            false
+          ],
+          "combination_correct": true,
+          "released": false,
+          "released_correct": false
+        },
+        {
+          "id": "4B:22",
+          "patient": "WCB239",
+          "cohort": "Community",
+          "regimen": "FOLFOX",
+          "targeted_therapy": "Bevacizumab",
+          "source": "Figure 4B, row 22, patient-response column",
+          "phase": "immediate",
+          "phase_source": "Figure S4A, row 13, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "non_responder",
+          "calls": [
+            1,
+            0
+          ],
+          "combination_call": 1,
+          "correct": [
+            false,
+            true
+          ],
+          "combination_correct": false,
+          "released": false,
+          "released_correct": false
+        },
+        {
+          "id": "4B:23",
+          "patient": "WCB239",
+          "cohort": "Community",
+          "regimen": "FOLFIRI",
+          "targeted_therapy": "Cetuximab",
+          "source": "Figure 4B, row 23, patient-response column",
+          "phase": "subsequent",
+          "phase_source": "Figure S4B, row 10, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Irinotecan"
+          ],
+          "truth": "responder",
+          "calls": [
+            1,
+            1
+          ],
+          "combination_call": 1,
+          "correct": [
+            true,
+            true
+          ],
+          "combination_correct": true,
+          "released": true,
+          "released_correct": true
+        },
+        {
+          "id": "4B:24",
+          "patient": "WCB242",
+          "cohort": "Community",
+          "regimen": "FOLFIRI",
+          "targeted_therapy": "Panitumumab",
+          "source": "Figure 4B, row 24, patient-response column",
+          "phase": "immediate",
+          "phase_source": "Figure S4A, row 14, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Irinotecan"
+          ],
+          "truth": "non_responder",
+          "calls": [
+            0,
+            0
+          ],
+          "combination_call": 0,
+          "correct": [
+            true,
+            true
+          ],
+          "combination_correct": true,
+          "released": true,
+          "released_correct": true
+        },
+        {
+          "id": "4B:25",
+          "patient": "WCB245",
+          "cohort": "Community",
+          "regimen": "FOLFOX",
+          "targeted_therapy": "Cetuximab",
+          "source": "Figure 4B, row 25, patient-response column",
+          "phase": "immediate",
+          "phase_source": "Figure S4A, row 15, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "responder",
+          "calls": [
+            0,
+            0
+          ],
+          "combination_call": 0,
+          "correct": [
+            false,
+            false
+          ],
+          "combination_correct": false,
+          "released": true,
+          "released_correct": false
+        },
+        {
+          "id": "4B:26",
+          "patient": "WCB254",
+          "cohort": "Community",
+          "regimen": "FOLFOXIRI",
+          "targeted_therapy": null,
+          "source": "Figure 4B, row 26, patient-response column",
+          "phase": "immediate",
+          "phase_source": "Figure S4A, row 16, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "non_responder",
+          "calls": [
+            0,
+            0
+          ],
+          "combination_call": 0,
+          "correct": [
+            true,
+            true
+          ],
+          "combination_correct": true,
+          "released": true,
+          "released_correct": true
+        },
+        {
+          "id": "4B:27",
+          "patient": "WCB254",
+          "cohort": "Community",
+          "regimen": "FOLFOX",
+          "targeted_therapy": "Cetuximab",
+          "source": "Figure 4B, row 27, patient-response column",
+          "phase": "subsequent",
+          "phase_source": "Figure S4B, row 11, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "non_responder",
+          "calls": [
+            0,
+            0
+          ],
+          "combination_call": 0,
+          "correct": [
+            true,
+            true
+          ],
+          "combination_correct": true,
+          "released": true,
+          "released_correct": true
+        },
+        {
+          "id": "4B:29",
+          "patient": "WCB296",
+          "cohort": "Community",
+          "regimen": "FOLFOXIRI",
+          "targeted_therapy": null,
+          "source": "Figure 4B, row 29, patient-response column",
+          "phase": "immediate",
+          "phase_source": "Figure S4A, row 18, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "responder",
+          "calls": [
+            0,
+            0
+          ],
+          "combination_call": 1,
+          "correct": [
+            false,
+            false
+          ],
+          "combination_correct": true,
+          "released": true,
+          "released_correct": false
+        },
+        {
+          "id": "5C:1",
+          "patient": "WCB250",
+          "cohort": "FORECAST-1",
+          "regimen": "FOLFOX",
+          "targeted_therapy": null,
+          "source": "Figure 5C, row 1, patient-response column",
+          "phase": "immediate",
+          "phase_source": "Figure S4A, row 19, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "non_responder",
+          "calls": [
+            0,
+            0
+          ],
+          "combination_call": 0,
+          "correct": [
+            true,
+            true
+          ],
+          "combination_correct": true,
+          "released": true,
+          "released_correct": true
+        },
+        {
+          "id": "5C:4",
+          "patient": "WCB259",
+          "cohort": "FORECAST-1",
+          "regimen": "CAPOX",
+          "targeted_therapy": null,
+          "source": "Figure 5C, row 4, patient-response column",
+          "phase": "subsequent",
+          "phase_source": "Figure S4B, row 12, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "non_responder",
+          "calls": [
+            1,
+            0
+          ],
+          "combination_call": 1,
+          "correct": [
+            false,
+            true
+          ],
+          "combination_correct": false,
+          "released": false,
+          "released_correct": false
+        },
+        {
+          "id": "5C:5",
+          "patient": "WCB262",
+          "cohort": "FORECAST-1",
+          "regimen": "FOLFIRI",
+          "targeted_therapy": "Panitumumab",
+          "source": "Figure 5C, row 5, patient-response column",
+          "phase": "immediate",
+          "phase_source": "Figure S4A, row 22, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Irinotecan"
+          ],
+          "truth": "responder",
+          "calls": [
+            1,
+            1
+          ],
+          "combination_call": 0,
+          "correct": [
+            true,
+            true
+          ],
+          "combination_correct": false,
+          "released": true,
+          "released_correct": true
+        },
+        {
+          "id": "5C:7",
+          "patient": "WCB278",
+          "cohort": "FORECAST-1",
+          "regimen": "FOLFIRI",
+          "targeted_therapy": "Cetuximab",
+          "source": "Figure 5C, row 7, patient-response column",
+          "phase": "immediate",
+          "phase_source": "Figure S4A, row 24, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Irinotecan"
+          ],
+          "truth": "non_responder",
+          "calls": [
+            1,
+            0
+          ],
+          "combination_call": 0,
+          "correct": [
+            false,
+            true
+          ],
+          "combination_correct": true,
+          "released": false,
+          "released_correct": false
+        },
+        {
+          "id": "5C:9",
+          "patient": "WCB288",
+          "cohort": "FORECAST-1",
+          "regimen": "FOLFOX",
+          "targeted_therapy": "Bevacizumab",
+          "source": "Figure 5C, row 9, patient-response column",
+          "phase": "immediate",
+          "phase_source": "Figure S4A, row 26, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "non_responder",
+          "calls": [
+            1,
+            0
+          ],
+          "combination_call": 0,
+          "correct": [
+            false,
+            true
+          ],
+          "combination_correct": true,
+          "released": false,
+          "released_correct": false
+        },
+        {
+          "id": "5C:10",
+          "patient": "WCB311",
+          "cohort": "FORECAST-1",
+          "regimen": "FOLFOX",
+          "targeted_therapy": null,
+          "source": "Figure 5C, row 10, patient-response column",
+          "phase": "immediate",
+          "phase_source": "Figure S4A, row 27, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "non_responder",
+          "calls": [
+            0,
+            0
+          ],
+          "combination_call": 0,
+          "correct": [
+            true,
+            true
+          ],
+          "combination_correct": true,
+          "released": true,
+          "released_correct": true
+        }
+      ],
+      "excluded_row_ids": []
+    },
+    "exclude_folfoxiri": {
+      "description": "Exclude regimen == FOLFOXIRI; retain added antibodies.",
+      "treatments": 19,
+      "unique_patients": 17,
+      "clinical_benefits": 8,
+      "single_readouts": [
+        {
+          "correct": 11,
+          "wrong": 8,
+          "accuracy": 0.57894737,
+          "loss": 0.42105263
+        },
+        {
+          "correct": 15,
+          "wrong": 4,
+          "accuracy": 0.78947368,
+          "loss": 0.21052632
+        }
+      ],
+      "combination_readout": {
+        "correct": 13,
+        "wrong": 6,
+        "accuracy": 0.68421053
+      },
+      "released": {
+        "treatments": 11,
+        "correct": 9,
+        "wrong": 2,
+        "accuracy": 0.81818182,
+        "coverage": 0.57894737
+      },
+      "retest_treatments": 8,
+      "better_single_indices_zero_based": [
+        1
+      ],
+      "disagreement_errors_by_single": [
+        6,
+        2
+      ],
+      "break_even_retest_cost_vs_better_single": 0.25,
+      "break_even_numerator": 2,
+      "break_even_denominator": 8,
+      "cost_analysis": {
+        "0.1": {
+          "release_and_retest_loss": 0.14736842,
+          "better_single_loss": 0.21052632,
+          "release_minus_better_single_loss": -0.06315789,
+          "release_has_lower_loss": true
+        },
+        "0.25": {
+          "release_and_retest_loss": 0.21052632,
+          "better_single_loss": 0.21052632,
+          "release_minus_better_single_loss": 0.0,
+          "release_has_lower_loss": false
+        }
+      },
+      "row_ids": [
+        "4B:1",
+        "4B:2",
+        "4B:5",
+        "4B:7",
+        "4B:9",
+        "4B:10",
+        "4B:16",
+        "4B:21",
+        "4B:22",
+        "4B:23",
+        "4B:24",
+        "4B:25",
+        "4B:27",
+        "5C:1",
+        "5C:4",
+        "5C:5",
+        "5C:7",
+        "5C:9",
+        "5C:10"
+      ],
+      "rows": [
+        {
+          "id": "4B:1",
+          "patient": "WCB015",
+          "cohort": "Community",
+          "regimen": "FOLFOX",
+          "targeted_therapy": null,
+          "source": "Figure 4B, row 1, patient-response column",
+          "phase": "immediate",
+          "phase_source": "Figure S4A, row 1, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "non_responder",
+          "calls": [
+            0,
+            0
+          ],
+          "combination_call": 1,
+          "correct": [
+            true,
+            true
+          ],
+          "combination_correct": false,
+          "released": true,
+          "released_correct": true
+        },
+        {
+          "id": "4B:2",
+          "patient": "WCB015",
+          "cohort": "Community",
+          "regimen": "FOLFIRI",
+          "targeted_therapy": "Bevacizumab",
+          "source": "Figure 4B, row 2, patient-response column",
+          "phase": "subsequent",
+          "phase_source": "Figure S4B, row 1, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Irinotecan"
+          ],
+          "truth": "non_responder",
+          "calls": [
+            0,
+            1
+          ],
+          "combination_call": 1,
+          "correct": [
+            true,
+            false
+          ],
+          "combination_correct": false,
+          "released": false,
+          "released_correct": false
+        },
+        {
+          "id": "4B:5",
+          "patient": "WCB027",
+          "cohort": "Community",
+          "regimen": "XELOX",
+          "targeted_therapy": null,
+          "source": "Figure 4B, row 5, patient-response column",
+          "phase": "subsequent",
+          "phase_source": "Figure S4B, row 3, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "responder",
+          "calls": [
+            0,
+            0
+          ],
+          "combination_call": 1,
+          "correct": [
+            false,
+            false
+          ],
+          "combination_correct": true,
+          "released": true,
+          "released_correct": false
+        },
+        {
+          "id": "4B:7",
+          "patient": "WCB041",
+          "cohort": "Community",
+          "regimen": "FOLFIRI",
+          "targeted_therapy": "Bevacizumab",
+          "source": "Figure 4B, row 7, patient-response column",
+          "phase": "subsequent",
+          "phase_source": "Figure S4B, row 4, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Irinotecan"
+          ],
+          "truth": "responder",
+          "calls": [
+            0,
+            1
+          ],
+          "combination_call": 1,
+          "correct": [
+            false,
+            true
+          ],
+          "combination_correct": true,
+          "released": false,
+          "released_correct": false
+        },
+        {
+          "id": "4B:9",
+          "patient": "WCB091",
+          "cohort": "Community",
+          "regimen": "FOLFOX",
+          "targeted_therapy": "Bevacizumab",
+          "source": "Figure 4B, row 9, patient-response column",
+          "phase": "immediate",
+          "phase_source": "Figure S4A, row 5, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "responder",
+          "calls": [
+            1,
+            1
+          ],
+          "combination_call": 1,
+          "correct": [
+            true,
+            true
+          ],
+          "combination_correct": true,
+          "released": true,
+          "released_correct": true
+        },
+        {
+          "id": "4B:10",
+          "patient": "WCB123",
+          "cohort": "Community",
+          "regimen": "FOLFOX",
+          "targeted_therapy": null,
+          "source": "Figure 4B, row 10, patient-response column",
+          "phase": "immediate",
+          "phase_source": "Figure S4A, row 6, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "responder",
+          "calls": [
+            0,
+            1
+          ],
+          "combination_call": 1,
+          "correct": [
+            false,
+            true
+          ],
+          "combination_correct": true,
+          "released": false,
+          "released_correct": false
+        },
+        {
+          "id": "4B:16",
+          "patient": "WCB150",
+          "cohort": "Community",
+          "regimen": "FOLFIRI",
+          "targeted_therapy": null,
+          "source": "Figure 4B, row 16, patient-response column",
+          "phase": "subsequent",
+          "phase_source": "Figure S4B, row 7, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Irinotecan"
+          ],
+          "truth": "non_responder",
+          "calls": [
+            0,
+            0
+          ],
+          "combination_call": 0,
+          "correct": [
+            true,
+            true
+          ],
+          "combination_correct": true,
+          "released": true,
+          "released_correct": true
+        },
+        {
+          "id": "4B:21",
+          "patient": "WCB221",
+          "cohort": "Community",
+          "regimen": "FOLFOX",
+          "targeted_therapy": null,
+          "source": "Figure 4B, row 21, patient-response column",
+          "phase": "immediate",
+          "phase_source": "Figure S4A, row 12, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "responder",
+          "calls": [
+            1,
+            0
+          ],
+          "combination_call": 1,
+          "correct": [
+            true,
+            false
+          ],
+          "combination_correct": true,
+          "released": false,
+          "released_correct": false
+        },
+        {
+          "id": "4B:22",
+          "patient": "WCB239",
+          "cohort": "Community",
+          "regimen": "FOLFOX",
+          "targeted_therapy": "Bevacizumab",
+          "source": "Figure 4B, row 22, patient-response column",
+          "phase": "immediate",
+          "phase_source": "Figure S4A, row 13, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "non_responder",
+          "calls": [
+            1,
+            0
+          ],
+          "combination_call": 1,
+          "correct": [
+            false,
+            true
+          ],
+          "combination_correct": false,
+          "released": false,
+          "released_correct": false
+        },
+        {
+          "id": "4B:23",
+          "patient": "WCB239",
+          "cohort": "Community",
+          "regimen": "FOLFIRI",
+          "targeted_therapy": "Cetuximab",
+          "source": "Figure 4B, row 23, patient-response column",
+          "phase": "subsequent",
+          "phase_source": "Figure S4B, row 10, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Irinotecan"
+          ],
+          "truth": "responder",
+          "calls": [
+            1,
+            1
+          ],
+          "combination_call": 1,
+          "correct": [
+            true,
+            true
+          ],
+          "combination_correct": true,
+          "released": true,
+          "released_correct": true
+        },
+        {
+          "id": "4B:24",
+          "patient": "WCB242",
+          "cohort": "Community",
+          "regimen": "FOLFIRI",
+          "targeted_therapy": "Panitumumab",
+          "source": "Figure 4B, row 24, patient-response column",
+          "phase": "immediate",
+          "phase_source": "Figure S4A, row 14, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Irinotecan"
+          ],
+          "truth": "non_responder",
+          "calls": [
+            0,
+            0
+          ],
+          "combination_call": 0,
+          "correct": [
+            true,
+            true
+          ],
+          "combination_correct": true,
+          "released": true,
+          "released_correct": true
+        },
+        {
+          "id": "4B:25",
+          "patient": "WCB245",
+          "cohort": "Community",
+          "regimen": "FOLFOX",
+          "targeted_therapy": "Cetuximab",
+          "source": "Figure 4B, row 25, patient-response column",
+          "phase": "immediate",
+          "phase_source": "Figure S4A, row 15, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "responder",
+          "calls": [
+            0,
+            0
+          ],
+          "combination_call": 0,
+          "correct": [
+            false,
+            false
+          ],
+          "combination_correct": false,
+          "released": true,
+          "released_correct": false
+        },
+        {
+          "id": "4B:27",
+          "patient": "WCB254",
+          "cohort": "Community",
+          "regimen": "FOLFOX",
+          "targeted_therapy": "Cetuximab",
+          "source": "Figure 4B, row 27, patient-response column",
+          "phase": "subsequent",
+          "phase_source": "Figure S4B, row 11, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "non_responder",
+          "calls": [
+            0,
+            0
+          ],
+          "combination_call": 0,
+          "correct": [
+            true,
+            true
+          ],
+          "combination_correct": true,
+          "released": true,
+          "released_correct": true
+        },
+        {
+          "id": "5C:1",
+          "patient": "WCB250",
+          "cohort": "FORECAST-1",
+          "regimen": "FOLFOX",
+          "targeted_therapy": null,
+          "source": "Figure 5C, row 1, patient-response column",
+          "phase": "immediate",
+          "phase_source": "Figure S4A, row 19, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "non_responder",
+          "calls": [
+            0,
+            0
+          ],
+          "combination_call": 0,
+          "correct": [
+            true,
+            true
+          ],
+          "combination_correct": true,
+          "released": true,
+          "released_correct": true
+        },
+        {
+          "id": "5C:4",
+          "patient": "WCB259",
+          "cohort": "FORECAST-1",
+          "regimen": "CAPOX",
+          "targeted_therapy": null,
+          "source": "Figure 5C, row 4, patient-response column",
+          "phase": "subsequent",
+          "phase_source": "Figure S4B, row 12, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "non_responder",
+          "calls": [
+            1,
+            0
+          ],
+          "combination_call": 1,
+          "correct": [
+            false,
+            true
+          ],
+          "combination_correct": false,
+          "released": false,
+          "released_correct": false
+        },
+        {
+          "id": "5C:5",
+          "patient": "WCB262",
+          "cohort": "FORECAST-1",
+          "regimen": "FOLFIRI",
+          "targeted_therapy": "Panitumumab",
+          "source": "Figure 5C, row 5, patient-response column",
+          "phase": "immediate",
+          "phase_source": "Figure S4A, row 22, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Irinotecan"
+          ],
+          "truth": "responder",
+          "calls": [
+            1,
+            1
+          ],
+          "combination_call": 0,
+          "correct": [
+            true,
+            true
+          ],
+          "combination_correct": false,
+          "released": true,
+          "released_correct": true
+        },
+        {
+          "id": "5C:7",
+          "patient": "WCB278",
+          "cohort": "FORECAST-1",
+          "regimen": "FOLFIRI",
+          "targeted_therapy": "Cetuximab",
+          "source": "Figure 5C, row 7, patient-response column",
+          "phase": "immediate",
+          "phase_source": "Figure S4A, row 24, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Irinotecan"
+          ],
+          "truth": "non_responder",
+          "calls": [
+            1,
+            0
+          ],
+          "combination_call": 0,
+          "correct": [
+            false,
+            true
+          ],
+          "combination_correct": true,
+          "released": false,
+          "released_correct": false
+        },
+        {
+          "id": "5C:9",
+          "patient": "WCB288",
+          "cohort": "FORECAST-1",
+          "regimen": "FOLFOX",
+          "targeted_therapy": "Bevacizumab",
+          "source": "Figure 5C, row 9, patient-response column",
+          "phase": "immediate",
+          "phase_source": "Figure S4A, row 26, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "non_responder",
+          "calls": [
+            1,
+            0
+          ],
+          "combination_call": 0,
+          "correct": [
+            false,
+            true
+          ],
+          "combination_correct": true,
+          "released": false,
+          "released_correct": false
+        },
+        {
+          "id": "5C:10",
+          "patient": "WCB311",
+          "cohort": "FORECAST-1",
+          "regimen": "FOLFOX",
+          "targeted_therapy": null,
+          "source": "Figure 5C, row 10, patient-response column",
+          "phase": "immediate",
+          "phase_source": "Figure S4A, row 27, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "non_responder",
+          "calls": [
+            0,
+            0
+          ],
+          "combination_call": 0,
+          "correct": [
+            true,
+            true
+          ],
+          "combination_correct": true,
+          "released": true,
+          "released_correct": true
+        }
+      ],
+      "excluded_row_ids": [
+        "4B:11",
+        "4B:26",
+        "4B:29"
+      ]
+    },
+    "exclude_added_antibody": {
+      "description": "Exclude targeted_therapy != null; retain FOLFOXIRI.",
+      "treatments": 11,
+      "unique_patients": 10,
+      "clinical_benefits": 5,
+      "single_readouts": [
+        {
+          "correct": 6,
+          "wrong": 5,
+          "accuracy": 0.54545455,
+          "loss": 0.45454545
+        },
+        {
+          "correct": 8,
+          "wrong": 3,
+          "accuracy": 0.72727273,
+          "loss": 0.27272727
+        }
+      ],
+      "combination_readout": {
+        "correct": 9,
+        "wrong": 2,
+        "accuracy": 0.81818182
+      },
+      "released": {
+        "treatments": 7,
+        "correct": 5,
+        "wrong": 2,
+        "accuracy": 0.71428571,
+        "coverage": 0.63636364
+      },
+      "retest_treatments": 4,
+      "better_single_indices_zero_based": [
+        1
+      ],
+      "disagreement_errors_by_single": [
+        3,
+        1
+      ],
+      "break_even_retest_cost_vs_better_single": 0.25,
+      "break_even_numerator": 1,
+      "break_even_denominator": 4,
+      "cost_analysis": {
+        "0.1": {
+          "release_and_retest_loss": 0.21818182,
+          "better_single_loss": 0.27272727,
+          "release_minus_better_single_loss": -0.05454545,
+          "release_has_lower_loss": true
+        },
+        "0.25": {
+          "release_and_retest_loss": 0.27272727,
+          "better_single_loss": 0.27272727,
+          "release_minus_better_single_loss": 0.0,
+          "release_has_lower_loss": false
+        }
+      },
+      "row_ids": [
+        "4B:1",
+        "4B:5",
+        "4B:10",
+        "4B:11",
+        "4B:16",
+        "4B:21",
+        "4B:26",
+        "4B:29",
+        "5C:1",
+        "5C:4",
+        "5C:10"
+      ],
+      "rows": [
+        {
+          "id": "4B:1",
+          "patient": "WCB015",
+          "cohort": "Community",
+          "regimen": "FOLFOX",
+          "targeted_therapy": null,
+          "source": "Figure 4B, row 1, patient-response column",
+          "phase": "immediate",
+          "phase_source": "Figure S4A, row 1, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "non_responder",
+          "calls": [
+            0,
+            0
+          ],
+          "combination_call": 1,
+          "correct": [
+            true,
+            true
+          ],
+          "combination_correct": false,
+          "released": true,
+          "released_correct": true
+        },
+        {
+          "id": "4B:5",
+          "patient": "WCB027",
+          "cohort": "Community",
+          "regimen": "XELOX",
+          "targeted_therapy": null,
+          "source": "Figure 4B, row 5, patient-response column",
+          "phase": "subsequent",
+          "phase_source": "Figure S4B, row 3, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "responder",
+          "calls": [
+            0,
+            0
+          ],
+          "combination_call": 1,
+          "correct": [
+            false,
+            false
+          ],
+          "combination_correct": true,
+          "released": true,
+          "released_correct": false
+        },
+        {
+          "id": "4B:10",
+          "patient": "WCB123",
+          "cohort": "Community",
+          "regimen": "FOLFOX",
+          "targeted_therapy": null,
+          "source": "Figure 4B, row 10, patient-response column",
+          "phase": "immediate",
+          "phase_source": "Figure S4A, row 6, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "responder",
+          "calls": [
+            0,
+            1
+          ],
+          "combination_call": 1,
+          "correct": [
+            false,
+            true
+          ],
+          "combination_correct": true,
+          "released": false,
+          "released_correct": false
+        },
+        {
+          "id": "4B:11",
+          "patient": "WCB123",
+          "cohort": "Community",
+          "regimen": "FOLFOXIRI",
+          "targeted_therapy": null,
+          "source": "Figure 4B, row 11, patient-response column",
+          "phase": "subsequent",
+          "phase_source": "Figure S4B, row 5, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "responder",
+          "calls": [
+            0,
+            1
+          ],
+          "combination_call": 1,
+          "correct": [
+            false,
+            true
+          ],
+          "combination_correct": true,
+          "released": false,
+          "released_correct": false
+        },
+        {
+          "id": "4B:16",
+          "patient": "WCB150",
+          "cohort": "Community",
+          "regimen": "FOLFIRI",
+          "targeted_therapy": null,
+          "source": "Figure 4B, row 16, patient-response column",
+          "phase": "subsequent",
+          "phase_source": "Figure S4B, row 7, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Irinotecan"
+          ],
+          "truth": "non_responder",
+          "calls": [
+            0,
+            0
+          ],
+          "combination_call": 0,
+          "correct": [
+            true,
+            true
+          ],
+          "combination_correct": true,
+          "released": true,
+          "released_correct": true
+        },
+        {
+          "id": "4B:21",
+          "patient": "WCB221",
+          "cohort": "Community",
+          "regimen": "FOLFOX",
+          "targeted_therapy": null,
+          "source": "Figure 4B, row 21, patient-response column",
+          "phase": "immediate",
+          "phase_source": "Figure S4A, row 12, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "responder",
+          "calls": [
+            1,
+            0
+          ],
+          "combination_call": 1,
+          "correct": [
+            true,
+            false
+          ],
+          "combination_correct": true,
+          "released": false,
+          "released_correct": false
+        },
+        {
+          "id": "4B:26",
+          "patient": "WCB254",
+          "cohort": "Community",
+          "regimen": "FOLFOXIRI",
+          "targeted_therapy": null,
+          "source": "Figure 4B, row 26, patient-response column",
+          "phase": "immediate",
+          "phase_source": "Figure S4A, row 16, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "non_responder",
+          "calls": [
+            0,
+            0
+          ],
+          "combination_call": 0,
+          "correct": [
+            true,
+            true
+          ],
+          "combination_correct": true,
+          "released": true,
+          "released_correct": true
+        },
+        {
+          "id": "4B:29",
+          "patient": "WCB296",
+          "cohort": "Community",
+          "regimen": "FOLFOXIRI",
+          "targeted_therapy": null,
+          "source": "Figure 4B, row 29, patient-response column",
+          "phase": "immediate",
+          "phase_source": "Figure S4A, row 18, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "responder",
+          "calls": [
+            0,
+            0
+          ],
+          "combination_call": 1,
+          "correct": [
+            false,
+            false
+          ],
+          "combination_correct": true,
+          "released": true,
+          "released_correct": false
+        },
+        {
+          "id": "5C:1",
+          "patient": "WCB250",
+          "cohort": "FORECAST-1",
+          "regimen": "FOLFOX",
+          "targeted_therapy": null,
+          "source": "Figure 5C, row 1, patient-response column",
+          "phase": "immediate",
+          "phase_source": "Figure S4A, row 19, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "non_responder",
+          "calls": [
+            0,
+            0
+          ],
+          "combination_call": 0,
+          "correct": [
+            true,
+            true
+          ],
+          "combination_correct": true,
+          "released": true,
+          "released_correct": true
+        },
+        {
+          "id": "5C:4",
+          "patient": "WCB259",
+          "cohort": "FORECAST-1",
+          "regimen": "CAPOX",
+          "targeted_therapy": null,
+          "source": "Figure 5C, row 4, patient-response column",
+          "phase": "subsequent",
+          "phase_source": "Figure S4B, row 12, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "non_responder",
+          "calls": [
+            1,
+            0
+          ],
+          "combination_call": 1,
+          "correct": [
+            false,
+            true
+          ],
+          "combination_correct": false,
+          "released": false,
+          "released_correct": false
+        },
+        {
+          "id": "5C:10",
+          "patient": "WCB311",
+          "cohort": "FORECAST-1",
+          "regimen": "FOLFOX",
+          "targeted_therapy": null,
+          "source": "Figure 5C, row 10, patient-response column",
+          "phase": "immediate",
+          "phase_source": "Figure S4A, row 27, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "non_responder",
+          "calls": [
+            0,
+            0
+          ],
+          "combination_call": 0,
+          "correct": [
+            true,
+            true
+          ],
+          "combination_correct": true,
+          "released": true,
+          "released_correct": true
+        }
+      ],
+      "excluded_row_ids": [
+        "4B:2",
+        "4B:7",
+        "4B:9",
+        "4B:22",
+        "4B:23",
+        "4B:24",
+        "4B:25",
+        "4B:27",
+        "5C:5",
+        "5C:7",
+        "5C:9"
+      ]
+    },
+    "exclude_both": {
+      "description": "Exclude FOLFOXIRI and all non-null targeted_therapy.",
+      "treatments": 8,
+      "unique_patients": 8,
+      "clinical_benefits": 3,
+      "single_readouts": [
+        {
+          "correct": 5,
+          "wrong": 3,
+          "accuracy": 0.625,
+          "loss": 0.375
+        },
+        {
+          "correct": 6,
+          "wrong": 2,
+          "accuracy": 0.75,
+          "loss": 0.25
+        }
+      ],
+      "combination_readout": {
+        "correct": 6,
+        "wrong": 2,
+        "accuracy": 0.75
+      },
+      "released": {
+        "treatments": 5,
+        "correct": 4,
+        "wrong": 1,
+        "accuracy": 0.8,
+        "coverage": 0.625
+      },
+      "retest_treatments": 3,
+      "better_single_indices_zero_based": [
+        1
+      ],
+      "disagreement_errors_by_single": [
+        2,
+        1
+      ],
+      "break_even_retest_cost_vs_better_single": 0.33333333,
+      "break_even_numerator": 1,
+      "break_even_denominator": 3,
+      "cost_analysis": {
+        "0.1": {
+          "release_and_retest_loss": 0.1625,
+          "better_single_loss": 0.25,
+          "release_minus_better_single_loss": -0.0875,
+          "release_has_lower_loss": true
+        },
+        "0.25": {
+          "release_and_retest_loss": 0.21875,
+          "better_single_loss": 0.25,
+          "release_minus_better_single_loss": -0.03125,
+          "release_has_lower_loss": true
+        }
+      },
+      "row_ids": [
+        "4B:1",
+        "4B:5",
+        "4B:10",
+        "4B:16",
+        "4B:21",
+        "5C:1",
+        "5C:4",
+        "5C:10"
+      ],
+      "rows": [
+        {
+          "id": "4B:1",
+          "patient": "WCB015",
+          "cohort": "Community",
+          "regimen": "FOLFOX",
+          "targeted_therapy": null,
+          "source": "Figure 4B, row 1, patient-response column",
+          "phase": "immediate",
+          "phase_source": "Figure S4A, row 1, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "non_responder",
+          "calls": [
+            0,
+            0
+          ],
+          "combination_call": 1,
+          "correct": [
+            true,
+            true
+          ],
+          "combination_correct": false,
+          "released": true,
+          "released_correct": true
+        },
+        {
+          "id": "4B:5",
+          "patient": "WCB027",
+          "cohort": "Community",
+          "regimen": "XELOX",
+          "targeted_therapy": null,
+          "source": "Figure 4B, row 5, patient-response column",
+          "phase": "subsequent",
+          "phase_source": "Figure S4B, row 3, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "responder",
+          "calls": [
+            0,
+            0
+          ],
+          "combination_call": 1,
+          "correct": [
+            false,
+            false
+          ],
+          "combination_correct": true,
+          "released": true,
+          "released_correct": false
+        },
+        {
+          "id": "4B:10",
+          "patient": "WCB123",
+          "cohort": "Community",
+          "regimen": "FOLFOX",
+          "targeted_therapy": null,
+          "source": "Figure 4B, row 10, patient-response column",
+          "phase": "immediate",
+          "phase_source": "Figure S4A, row 6, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "responder",
+          "calls": [
+            0,
+            1
+          ],
+          "combination_call": 1,
+          "correct": [
+            false,
+            true
+          ],
+          "combination_correct": true,
+          "released": false,
+          "released_correct": false
+        },
+        {
+          "id": "4B:16",
+          "patient": "WCB150",
+          "cohort": "Community",
+          "regimen": "FOLFIRI",
+          "targeted_therapy": null,
+          "source": "Figure 4B, row 16, patient-response column",
+          "phase": "subsequent",
+          "phase_source": "Figure S4B, row 7, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Irinotecan"
+          ],
+          "truth": "non_responder",
+          "calls": [
+            0,
+            0
+          ],
+          "combination_call": 0,
+          "correct": [
+            true,
+            true
+          ],
+          "combination_correct": true,
+          "released": true,
+          "released_correct": true
+        },
+        {
+          "id": "4B:21",
+          "patient": "WCB221",
+          "cohort": "Community",
+          "regimen": "FOLFOX",
+          "targeted_therapy": null,
+          "source": "Figure 4B, row 21, patient-response column",
+          "phase": "immediate",
+          "phase_source": "Figure S4A, row 12, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "responder",
+          "calls": [
+            1,
+            0
+          ],
+          "combination_call": 1,
+          "correct": [
+            true,
+            false
+          ],
+          "combination_correct": true,
+          "released": false,
+          "released_correct": false
+        },
+        {
+          "id": "5C:1",
+          "patient": "WCB250",
+          "cohort": "FORECAST-1",
+          "regimen": "FOLFOX",
+          "targeted_therapy": null,
+          "source": "Figure 5C, row 1, patient-response column",
+          "phase": "immediate",
+          "phase_source": "Figure S4A, row 19, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "non_responder",
+          "calls": [
+            0,
+            0
+          ],
+          "combination_call": 0,
+          "correct": [
+            true,
+            true
+          ],
+          "combination_correct": true,
+          "released": true,
+          "released_correct": true
+        },
+        {
+          "id": "5C:4",
+          "patient": "WCB259",
+          "cohort": "FORECAST-1",
+          "regimen": "CAPOX",
+          "targeted_therapy": null,
+          "source": "Figure 5C, row 4, patient-response column",
+          "phase": "subsequent",
+          "phase_source": "Figure S4B, row 12, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "non_responder",
+          "calls": [
+            1,
+            0
+          ],
+          "combination_call": 1,
+          "correct": [
+            false,
+            true
+          ],
+          "combination_correct": false,
+          "released": false,
+          "released_correct": false
+        },
+        {
+          "id": "5C:10",
+          "patient": "WCB311",
+          "cohort": "FORECAST-1",
+          "regimen": "FOLFOX",
+          "targeted_therapy": null,
+          "source": "Figure 5C, row 10, patient-response column",
+          "phase": "immediate",
+          "phase_source": "Figure S4A, row 27, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "non_responder",
+          "calls": [
+            0,
+            0
+          ],
+          "combination_call": 0,
+          "correct": [
+            true,
+            true
+          ],
+          "combination_correct": true,
+          "released": true,
+          "released_correct": true
+        }
+      ],
+      "excluded_row_ids": [
+        "4B:2",
+        "4B:7",
+        "4B:9",
+        "4B:11",
+        "4B:22",
+        "4B:23",
+        "4B:24",
+        "4B:25",
+        "4B:26",
+        "4B:27",
+        "4B:29",
+        "5C:5",
+        "5C:7",
+        "5C:9"
+      ]
+    },
+    "strict_first_per_patient": {
+      "description": "After both exclusions, keep each patient's first retained row in original source order.",
+      "treatments": 8,
+      "unique_patients": 8,
+      "clinical_benefits": 3,
+      "single_readouts": [
+        {
+          "correct": 5,
+          "wrong": 3,
+          "accuracy": 0.625,
+          "loss": 0.375
+        },
+        {
+          "correct": 6,
+          "wrong": 2,
+          "accuracy": 0.75,
+          "loss": 0.25
+        }
+      ],
+      "combination_readout": {
+        "correct": 6,
+        "wrong": 2,
+        "accuracy": 0.75
+      },
+      "released": {
+        "treatments": 5,
+        "correct": 4,
+        "wrong": 1,
+        "accuracy": 0.8,
+        "coverage": 0.625
+      },
+      "retest_treatments": 3,
+      "better_single_indices_zero_based": [
+        1
+      ],
+      "disagreement_errors_by_single": [
+        2,
+        1
+      ],
+      "break_even_retest_cost_vs_better_single": 0.33333333,
+      "break_even_numerator": 1,
+      "break_even_denominator": 3,
+      "cost_analysis": {
+        "0.1": {
+          "release_and_retest_loss": 0.1625,
+          "better_single_loss": 0.25,
+          "release_minus_better_single_loss": -0.0875,
+          "release_has_lower_loss": true
+        },
+        "0.25": {
+          "release_and_retest_loss": 0.21875,
+          "better_single_loss": 0.25,
+          "release_minus_better_single_loss": -0.03125,
+          "release_has_lower_loss": true
+        }
+      },
+      "row_ids": [
+        "4B:1",
+        "4B:5",
+        "4B:10",
+        "4B:16",
+        "4B:21",
+        "5C:1",
+        "5C:4",
+        "5C:10"
+      ],
+      "rows": [
+        {
+          "id": "4B:1",
+          "patient": "WCB015",
+          "cohort": "Community",
+          "regimen": "FOLFOX",
+          "targeted_therapy": null,
+          "source": "Figure 4B, row 1, patient-response column",
+          "phase": "immediate",
+          "phase_source": "Figure S4A, row 1, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "non_responder",
+          "calls": [
+            0,
+            0
+          ],
+          "combination_call": 1,
+          "correct": [
+            true,
+            true
+          ],
+          "combination_correct": false,
+          "released": true,
+          "released_correct": true
+        },
+        {
+          "id": "4B:5",
+          "patient": "WCB027",
+          "cohort": "Community",
+          "regimen": "XELOX",
+          "targeted_therapy": null,
+          "source": "Figure 4B, row 5, patient-response column",
+          "phase": "subsequent",
+          "phase_source": "Figure S4B, row 3, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "responder",
+          "calls": [
+            0,
+            0
+          ],
+          "combination_call": 1,
+          "correct": [
+            false,
+            false
+          ],
+          "combination_correct": true,
+          "released": true,
+          "released_correct": false
+        },
+        {
+          "id": "4B:10",
+          "patient": "WCB123",
+          "cohort": "Community",
+          "regimen": "FOLFOX",
+          "targeted_therapy": null,
+          "source": "Figure 4B, row 10, patient-response column",
+          "phase": "immediate",
+          "phase_source": "Figure S4A, row 6, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "responder",
+          "calls": [
+            0,
+            1
+          ],
+          "combination_call": 1,
+          "correct": [
+            false,
+            true
+          ],
+          "combination_correct": true,
+          "released": false,
+          "released_correct": false
+        },
+        {
+          "id": "4B:16",
+          "patient": "WCB150",
+          "cohort": "Community",
+          "regimen": "FOLFIRI",
+          "targeted_therapy": null,
+          "source": "Figure 4B, row 16, patient-response column",
+          "phase": "subsequent",
+          "phase_source": "Figure S4B, row 7, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Irinotecan"
+          ],
+          "truth": "non_responder",
+          "calls": [
+            0,
+            0
+          ],
+          "combination_call": 0,
+          "correct": [
+            true,
+            true
+          ],
+          "combination_correct": true,
+          "released": true,
+          "released_correct": true
+        },
+        {
+          "id": "4B:21",
+          "patient": "WCB221",
+          "cohort": "Community",
+          "regimen": "FOLFOX",
+          "targeted_therapy": null,
+          "source": "Figure 4B, row 21, patient-response column",
+          "phase": "immediate",
+          "phase_source": "Figure S4A, row 12, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "responder",
+          "calls": [
+            1,
+            0
+          ],
+          "combination_call": 1,
+          "correct": [
+            true,
+            false
+          ],
+          "combination_correct": true,
+          "released": false,
+          "released_correct": false
+        },
+        {
+          "id": "5C:1",
+          "patient": "WCB250",
+          "cohort": "FORECAST-1",
+          "regimen": "FOLFOX",
+          "targeted_therapy": null,
+          "source": "Figure 5C, row 1, patient-response column",
+          "phase": "immediate",
+          "phase_source": "Figure S4A, row 19, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "non_responder",
+          "calls": [
+            0,
+            0
+          ],
+          "combination_call": 0,
+          "correct": [
+            true,
+            true
+          ],
+          "combination_correct": true,
+          "released": true,
+          "released_correct": true
+        },
+        {
+          "id": "5C:4",
+          "patient": "WCB259",
+          "cohort": "FORECAST-1",
+          "regimen": "CAPOX",
+          "targeted_therapy": null,
+          "source": "Figure 5C, row 4, patient-response column",
+          "phase": "subsequent",
+          "phase_source": "Figure S4B, row 12, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "non_responder",
+          "calls": [
+            1,
+            0
+          ],
+          "combination_call": 1,
+          "correct": [
+            false,
+            true
+          ],
+          "combination_correct": false,
+          "released": false,
+          "released_correct": false
+        },
+        {
+          "id": "5C:10",
+          "patient": "WCB311",
+          "cohort": "FORECAST-1",
+          "regimen": "FOLFOX",
+          "targeted_therapy": null,
+          "source": "Figure 5C, row 10, patient-response column",
+          "phase": "immediate",
+          "phase_source": "Figure S4A, row 27, Document S1 PDF page 5",
+          "readout_pair": [
+            "5-FU",
+            "Oxaliplatin"
+          ],
+          "truth": "non_responder",
+          "calls": [
+            0,
+            0
+          ],
+          "combination_call": 0,
+          "correct": [
+            true,
+            true
+          ],
+          "combination_correct": true,
+          "released": true,
+          "released_correct": true
+        }
+      ],
+      "excluded_row_ids": [
+        "4B:2",
+        "4B:7",
+        "4B:9",
+        "4B:11",
+        "4B:22",
+        "4B:23",
+        "4B:24",
+        "4B:25",
+        "4B:26",
+        "4B:27",
+        "4B:29",
+        "5C:5",
+        "5C:7",
+        "5C:9"
+      ]
+    }
+  },
+  "limitations": [
+    "The exclusion scopes were chosen after clinical outcomes and the primary result were available.",
+    "The original frozen calls, thresholds, regimen mapping and primary score are unchanged.",
+    "Treatments from the same patient are not independent patients.",
+    "The last group preserves source order; phase and phase_source are retained for review.",
+    "These small subsets describe scope dependence and do not establish a new prospective clinical performance guarantee."
+  ],
+  "execution": {
+    "elapsed_seconds_before_serialization": 0.00395,
+    "peak_resident_bytes": 21331968
+  }
+}
