@@ -209,6 +209,8 @@ From the original USEPA neural-network-formation asset, a fixed 81/81/81 split o
 
 Protocols and unit-level results accompany [image_release.py](image_release.py), [epa_release.py](epa_release.py), and [patient_signal_comparison.py](patient_signal_comparison.py). The [technical report](technical_report.pdf) gives the frozen target, all failed primary comparisons, paired intervals and component scope. These scripts also run in the 70-cell COMPLETE Notebook v14; original-image extraction remains a separate verified source-to-report command.
 
+The completed image experiment has platform-dependent refits: the main candidate releases 71 images with seven errors on macOS and 66 with seven on the hosted Linux run; the grouped probability comparator releases 54/10 and 52/9 respectively. Both primary comparisons fail. The source feature hash and declared package versions match; no cross-platform bitwise equivalence is claimed for this image model. [Platform counts](notebook_platform_comparison.json) retain both results. Patient actions and corrected Liver-Chip counts reproduce unchanged.
+
 ```bash
 # Existing image features come from the public full audit above.
 python -m pip install -r requirements.txt -r requirements-chip.txt

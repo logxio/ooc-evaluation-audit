@@ -1,0 +1,70 @@
+{
+  "notebook_version": 14,
+  "scope": "Platform reproduction of completed experiments; original hypotheses and splits retained.",
+  "image": {
+    "source_feature_hash_matches": false,
+    "sklearn": "1.9.1",
+    "numpy": "2.5.3",
+    "macos": {
+      "trained_group_crc": {
+        "accepted": 71,
+        "wrong_release": 7,
+        "coverage": 0.19398907103825136
+      },
+      "probability_group_crc": {
+        "accepted": 54,
+        "wrong_release": 10,
+        "coverage": 0.14754098360655737
+      },
+      "probability_naive_threshold": {
+        "accepted": 158,
+        "wrong_release": 23,
+        "coverage": 0.43169398907103823
+      },
+      "trained_image_crc": {
+        "accepted": 200,
+        "wrong_release": 44,
+        "coverage": 0.546448087431694
+      }
+    },
+    "linux": {
+      "trained_group_crc": {
+        "accepted": 66,
+        "wrong_release": 7,
+        "coverage": 0.18032786885245902
+      },
+      "probability_group_crc": {
+        "accepted": 52,
+        "wrong_release": 9,
+        "coverage": 0.14207650273224043
+      },
+      "probability_naive_threshold": {
+        "accepted": 158,
+        "wrong_release": 23,
+        "coverage": 0.43169398907103823
+      },
+      "trained_image_crc": {
+        "accepted": 196,
+        "wrong_release": 44,
+        "coverage": 0.5355191256830601
+      },
+      "calibration_fitted_score_invalid": {
+        "accepted": 185,
+        "wrong_release": 42,
+        "coverage": 0.505464480874317
+      }
+    },
+    "macos_primary_pass": false,
+    "linux_primary_pass": false,
+    "interpretation": "Image refits are platform-dependent; both primary comparisons fail. Candidate development stays closed. The hosted ablations command also executed the invalid calibration-fitted-score diagnostic; it supplies no valid method gain."
+  },
+  "epa": {
+    "counts_and_gate_match": true,
+    "largest_interval_float_delta": 1.3877787807814457e-17
+  },
+  "patient": {
+    "measurements_predictions_actions_counts_match": true,
+    "diagnostic_ordering_hashes_differ": true,
+    "largest_upper_bound_float_delta": 2.220446049250313e-16
+  }
+}
