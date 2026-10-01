@@ -1,0 +1,51 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="description" content="Review paired organoid readouts, choose release or retest, and compare outcomes. A local browser worksheet and timed usability study.">
+<title>Patient action workbench</title>
+<link rel="stylesheet" href="style.css">
+<script defer src="data.js"></script><script defer src="engine.js"></script><script defer src="app.js"></script>
+</head>
+<body>
+<header><a class="wordmark" href="https://github.com/logxio/ooc-evaluation-audit">Decision Contract Map</a><nav><a href="guide.html">2-minute guide</a><button id="export" class="quiet">Export anonymous record</button></nav></header>
+<main>
+<div class="intro"><div><h1>Which patients need a retest?</h1><p>Review two organoid readouts, freeze your actions, then reveal the outcomes.</p></div><span class="local">Runs in this browser · files stay here</span></div>
+<div class="tabs" role="tablist" aria-label="Workflow"><button id="explore-tab" role="tab" aria-selected="true">Explore a batch</button><button id="study-tab" role="tab" aria-selected="false">Timed study · 6 tasks</button></div>
+<section id="setup" class="panel" hidden>
+  <h2>Use the code your facilitator assigned</h2><p>Six tasks, six different patient batches. Use your usual spreadsheet or paper for manual tasks. The tool handles the other three.</p>
+  <div class="row"><label>Participant code <select id="participant"><option>P01</option><option>P02</option><option>P03</option><option>P04</option><option>P05</option><option>P06</option></select></label><label>Record type <select id="record-type"><option value="researcher">Researcher study</option><option value="agent_self_test">Agent self-test</option><option value="facilitator_pilot">Facilitator pilot</option></select></label><label>Usual manual workflow <select id="workflow"><option value="spreadsheet">Spreadsheet</option><option value="paper">Paper and calculator</option><option value="script">Existing analysis script</option></select></label><button id="begin-study">Begin study</button></div>
+  <p class="small">The record contains coded task decisions and timing. Use coded IDs; keep names and contact details outside this worksheet.</p>
+</section>
+<section id="study-bar" class="panel taskbar" hidden><div><strong id="task-status"></strong><p id="task-instruction"></p></div><div class="timer"><output id="timer">0:00</output><button id="start-task">Start task</button><button id="pause" class="quiet" hidden>Pause</button></div></section>
+<div id="error" role="alert" hidden></div>
+<section id="workspace">
+<section class="panel input-panel" id="input-panel">
+  <div class="section-head"><h2><span class="step">1</span> Load patient readouts</h2><div class="row"><label class="file">Open input CSV<input type="file" id="input-file" accept=".csv,text/csv"></label><button id="download-input" class="quiet">Download input CSV</button></div></div>
+  <div id="example-controls" class="row"><label>Example <select id="example"></select></label><button id="load-example" class="quiet">Load example</button><label>Retest cost, relative to one wrong release <input id="cost" type="number" min="0" max="10" step="0.05" value="0.25"></label></div>
+  <details id="csv-editor"><summary>Edit or paste input CSV</summary><textarea id="csv-text" rows="7" spellcheck="false" aria-label="Patient input CSV"></textarea><button id="apply-input" class="quiet">Apply edited input</button></details>
+  <p class="small" id="source-caption">Public rectal-organoid replay. Readouts are day-24/day-0 size ratios after irradiation and 5-FU. Lower values mean more response.</p>
+  <details id="rule"><summary>Frozen rule and manual worksheet</summary><div id="rule-body"></div><a href="study/manual.html">Open the printable manual method</a></details>
+</section>
+<section class="panel">
+  <div class="section-head"><h2><span class="step">2</span> Choose patient actions</h2><button id="predict">Predict actions</button></div>
+  <p id="mode-help">Review the proposed list and choose a different action when needed.</p>
+  <div class="table-scroll"><table id="patient-table"><thead><tr><th>Patient</th><th>Readout 1</th><th>Readout 2</th><th class="prediction-col">Frozen rule</th><th>Your action</th><th class="truth-col">Outcome</th></tr></thead><tbody></tbody></table></div>
+  <div class="row action-footer"><span id="action-count"></span><button id="download-actions" class="quiet">Download action list</button><label class="file" id="outcome-upload">Load outcome CSV<input type="file" id="outcome-file" accept=".csv,text/csv"></label><button id="reveal">Lock actions &amp; reveal outcomes</button></div>
+</section>
+<section class="panel" id="results-panel">
+  <div class="section-head"><h2><span class="step">3</span> Read risk and cost</h2><span id="result-status">Outcomes are hidden</span><button id="download-outcomes" class="quiet" hidden>Download revealed worksheet</button></div>
+  <div id="metrics" class="metrics"></div>
+  <p class="small" id="risk-note">The 10% certificate concerns expected wrong releases among all patients under exchangeability. Error among released patients is a separate quantity.</p>
+  <h3>Strong baselines on the same patients</h3><p id="baseline-intro" class="small"></p><div class="table-scroll"><table id="baseline-table"><thead><tr><th>Baseline</th><th>Release / retest</th><th>Wrong / all</th><th>Wrong / released</th><th>Cost / patient</th></tr></thead><tbody></tbody></table></div><p id="winner"></p>
+</section>
+<section class="panel" id="finish-panel" hidden>
+  <h2><span class="step">4</span> Submit your task worksheet</h2><p id="answer-instruction">Report the risk and cost of your locked actions. A zero-release error rate is undefined; enter NA.</p>
+  <div class="answers"><label>Wrong releases / all patients (%)<input id="answer-overall" inputmode="decimal"></label><label>Wrong releases / released patients (%)<input id="answer-conditional" inputmode="decimal"></label><label>Cost per patient<input id="answer-cost" inputmode="decimal"></label><label>Lowest-cost baseline<select id="answer-baseline"><option value="">Choose a baseline</option></select></label></div>
+  <button id="fill-answers" class="quiet">Use calculated results</button><button id="finish-task">Finish task</button>
+</section>
+</section>
+<section class="panel" id="completion" hidden><h2>Your six tasks are complete.</h2><p>Export the anonymous record and send that JSON file to your facilitator.</p><button id="export-complete">Export completed record</button><div id="completion-summary"></div></section>
+<footer><p>Research workflow replay · <a href="https://doi.org/10.1016/j.xcrm.2025.102397">Published source, CC BY 4.0</a> · <a href="study/protocol.md">Study protocol</a></p><details><summary>Data and model details</summary><p id="provenance"></p><p>Known historical outcomes power these curated usability exercises. The study measures workflow behaviour; new clinical validation belongs to a separate patient cohort. Local files can be inspected, so outcome reveal is a workflow lock rather than secure blinding.</p></details><p id="export-status" role="status">Open files here; export your record before closing this tab.</p></footer>
+</main>
+</body></html>

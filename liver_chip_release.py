@@ -5,8 +5,11 @@ Source: Ewart et al. 2022, Communications Medicine (CC BY 4.0), the NCBI open-ac
 Table 1 gives each drug's Garside clinical liver-injury rank (1 severe ... 5 none); Table 4
 gives each drug's margin-of-safety-like value (free IC50 over total human Cmax) for chips
 from hepatocyte donor 1, donor 2, both donors combined, and 3D spheroids. As in the paper's
-Table 6, a chip value below 375 (spheroid: 2250) calls the drug toxic, and a censored value
-('>x', no IC50 reached) calls it safe; ranks 1-3 are hepatotoxic.
+Table 5, a value below 50 calls the drug toxic for both chips and spheroids. Values
+marked '>x' represent no measured IC50 and use the paper's non-hit convention;
+the inequality alone does not establish MOS > 50. Ranks 1-3 are hepatotoxic.
+Table 6 uses different, protein-binding-corrected inputs and thresholds (375/2250);
+those thresholds do not apply to Table 4.
 
 The two readouts are the two donors' chips, on the drugs run in both. A call is released
 when the donors agree and sent to a third-donor retest when they disagree. The script
@@ -28,7 +31,7 @@ from pathlib import Path
 ARTICLE = 'https://doi.org/10.1038/s43856-022-00209-1'
 SOURCE_URL = 'https://pmc-oa-opendata.s3.amazonaws.com/PMC9727064.1/PMC9727064.1.xml'
 SOURCE_SHA256 = 'f7209ddfd62008ef853fd18946c5162f6581ced639f3f8891945a4eb8a00ac5c'
-CHIP_CUT, SPHEROID_CUT = 375.0, 2250.0
+CHIP_CUT, SPHEROID_CUT = 50.0, 50.0
 COSTS = (0.10, 0.25, 0.50)
 # Mean correlation between the two readouts' right/wrong indicators over the six patient
 # settings in release_certificate.py (colorectal chips, osteosarcoma and blind organoids).
@@ -104,7 +107,7 @@ def main():
     found = tables(root)
     drugs_t = next(t for t in found if t['caption'].startswith('Small-molecule drugs used'))
     mos_t = next(t for t in found if t['caption'].startswith('Calculation of margin of safety'))
-    perf_t = next(t for t in found if t['caption'].startswith('Sensitivity and specificity') and '375' in t['foot'])
+    perf_t = next(t for t in found if t['caption'].startswith('Sensitivity and specificity') and 'does not account for protein binding' in t['foot'])
     drug_rows, mos_rows = drugs_t['rows'][1:], mos_t['rows'][1:]
     assert len(drug_rows) == len(mos_rows) == 27
     rows = []
@@ -123,7 +126,11 @@ def main():
     printed = published(perf_t)
     check = {name: {'published': printed[name], 'recomputed': recomputed[name],
                     'match': printed[name] == recomputed[name]} for name in printed}
-    assert check['Chip donor 1']['match'] and check['Chip both donors']['match'], check
+    assert all(check[name]['match'] for name in ('Chip donor 1', 'Chip both donors', 'Spheroid')), check
+    # Table 4 lists ten donor-2 hepatotoxic hits below 50; Table 5 reports nine.
+    # Keep every Table 4 row and expose the source-table discrepancy.
+    assert check['Chip donor 2']['recomputed'] == {'tp': 10, 'tn': 3, 'fp': 0, 'fn': 5}, check
+    assert check['Chip donor 2']['published'] == {'tp': 9, 'tn': 3, 'fp': 0, 'fn': 6}, check
 
     both = [r for r in rows if r['donor1'] is not None and r['donor2'] is not None]
     n = len(both)
@@ -143,10 +150,16 @@ def main():
     shared = [r for r, a, b in zip(both, right1, right2) if not a and not b]
     observed = (released - wrong) / released
     result = {
-        'schema': 'liver_chip.release.v1', 'article': ARTICLE, 'source_url': SOURCE_URL,
+        'schema': 'liver_chip.release.v2', 'article': ARTICLE, 'source_url': SOURCE_URL,
         'source_sha256': SOURCE_SHA256, 'license': license_text,
-        'rule': 'chip toxic if MOS-like value < 375 (spheroid < 2250), censored > value = safe; Garside rank 1-3 hepatotoxic',
-        'transcription_check_vs_table6': check,
+        'rule': 'Table 4 uncorrected MOS-like value < 50 for chips and spheroids; > values use published no-measured-IC50 non-hit convention; Garside rank 1-3 hepatotoxic',
+        'input_contract': {'source_table': 4, 'performance_table': 5,
+                          'protein_binding_corrected': False, 'chip_cutoff': CHIP_CUT,
+                          'spheroid_cutoff': SPHEROID_CUT,
+                          'censoring': 'Published assay non-hit convention; a >x lower bound below 50 does not mathematically prove safety.',
+                          'table6': 'Protein-binding-corrected MOS and 375/2250 thresholds form a separate analysis.'},
+        'transcription_check_vs_table5': check,
+        'source_table_discrepancies': ['Donor 2: Table 4 yields 10 TP/5 FN; Table 5 reports 9 TP/6 FN. Per-drug replay retains Table 4.'],
         'drugs': len(rows), 'hepatotoxic': sum(truth),
         'two_donor_setting': {
             'drugs': n, 'hepatotoxic': sum(t), 'safe': n - sum(t),

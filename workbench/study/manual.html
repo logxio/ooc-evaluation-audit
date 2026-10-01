@@ -1,0 +1,18 @@
+<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Manual patient-action worksheet</title><link rel="stylesheet" href="../style.css"></head><body><main class="print-page">
+<h1>Manual worksheet</h1>
+<p>Use your usual spreadsheet, paper and calculator, or existing script. Download the input CSV at the start of the task. Complete the same frozen rule that the tool applies.</p>
+<table><thead><tr><th>Step</th><th>Calculation</th></tr></thead><tbody>
+<tr><td>Readout 1 call</td><td>Sensitive (1) when R1 ≤ 0.7291000000000001; resistant (0) otherwise.</td></tr>
+<tr><td>Readout 2 call</td><td>Sensitive (1) when R2 ≤ 0.69765; resistant (0) otherwise.</td></tr>
+<tr><td>Patient action</td><td>Release the shared call if calls agree. Retest if they disagree. The frozen margin is −1; every agreement passes.</td></tr>
+<tr><td>After reveal</td><td>Response 1 = responder, response 0 = non-responder. Count a wrong release when its released call differs from response. Retested patients contribute retest cost.</td></tr>
+<tr><td>Two risks</td><td>100 × wrong / all patients; 100 × wrong / released patients. Enter NA if released = 0.</td></tr>
+<tr><td>Cost</td><td>(wrong + 0.25 × retests) / all patients. Units are relative to one wrong release.</td></tr>
+</tbody></table>
+<h2 style="margin-top:24px">Score five baselines</h2>
+<p>Readout 1 alone and readout 2 alone each release every patient's own call. “Both sensitive” releases 1 only if both calls are 1; “Either sensitive” releases 1 if either call is 1. Each releases 0 otherwise. “Retest everyone” releases zero and costs 0.25 per patient. Count errors against the revealed responses and choose any tied lowest-cost baseline.</p>
+<h2 style="margin-top:24px">Spreadsheet starting point</h2>
+<p>With patient in A, R1 in B, R2 in C: D2 <code>=--(B2&lt;=0.7291000000000001)</code>; E2 <code>=--(C2&lt;=0.69765)</code>; action F2 <code>=IF(D2=E2,D2,"retest")</code>. Copy the formulas down. With revealed response in G, wrong-release H2 <code>=IF(F2="retest",0,--(F2&lt;&gt;G2))</code>. Use the sums and counts above for the batch.</p>
+<p>Outcome comparisons use the same patients and cost as the tool. The task is a workflow exercise with existing public data.</p>
+<p><a href="../index.html">Back to the workbench</a></p>
+</main></body></html>

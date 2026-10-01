@@ -26,8 +26,10 @@ import tempfile
 import urllib.request
 from xml.etree import ElementTree as ET
 
-from lung_signal import calibrate, fit, predict
-from pooled_signal import summary
+from lung_signal import GRID, calibrate, fit, predict
+from pooled_signal import counts, summary
+from conditional_calibration import upper_bound
+from release_calibration import digest
 
 
 SOURCE_URL = 'https://pmc-oa-opendata.s3.amazonaws.com/PMC9975107.1/mmc1.pdf'
@@ -47,6 +49,50 @@ def file_hash(path):
 def require_equal(actual, expected, description):
     if actual != expected:
         raise ValueError(f'{description} differs from the published freeze')
+
+
+def verify_certificate(actual, expected, model, training, reference, method):
+    """Verify decisions exactly and libm diagnostics against archived training scores."""
+    differences = []
+    def compare(a, b, path):
+        if isinstance(a, dict) and isinstance(b, dict):
+            require_equal(set(a), set(b), path + ' keys')
+            for key in a:
+                compare(a[key], b[key], path + '.' + key)
+        elif isinstance(a, (list, tuple)) and isinstance(b, (list, tuple)):
+            require_equal(len(a), len(b), path + ' length')
+            for index, (x, y) in enumerate(zip(a, b)):
+                compare(x, y, f'{path}[{index}]')
+        elif isinstance(a, float) and isinstance(b, float):
+            if a != b:
+                if not math.isclose(a, b, rel_tol=0., abs_tol=1e-12):
+                    raise ValueError(f'{path}: {a!r} versus frozen {b!r}')
+                differences.append({'field': path, 'actual': a, 'frozen': b,
+                                    'absolute_difference': abs(a-b)})
+        else:
+            require_equal(a, b, path)
+
+    archived = reference['methods'][method]
+    require_equal(digest(archived), expected['ordering_sha256'], 'Archived training ordering hash')
+    cases = predict(model, training, method)
+    ordering = []
+    for margin in GRID[:-1]:
+        n, e = counts(cases, training, margin)
+        ordering.append((upper_bound(e, n, expected['eta']), -n, margin))
+    ordering.sort()
+    require_equal(digest(ordering), actual['ordering_sha256'], 'Recomputed training ordering hash')
+    # Candidate identity and order are discrete decisions, kept exact.
+    require_equal([tuple(row[1:]) for row in ordering],
+                  [tuple(row[1:]) for row in archived], 'Training candidate order and counts')
+    compare(ordering, archived, method + '.training_order')
+    for key in ('overall_margin', 'conditional_margin', 'conditional_certified'):
+        require_equal(actual[key], expected[key], method + '.' + key)
+    compare({k:v for k,v in actual.items() if k != 'ordering_sha256'},
+            {k:v for k,v in expected.items() if k != 'ordering_sha256'}, method + '.certificate')
+    return {'ordering_hash_exact': actual['ordering_sha256'] == expected['ordering_sha256'],
+            'decisions_exact': True, 'absolute_tolerance': 1e-12,
+            'maximum_absolute_difference': max((r['absolute_difference'] for r in differences), default=0.),
+            'floating_differences': differences}
 
 
 def parse_table(pdf, temporary):
@@ -140,10 +186,14 @@ def replay(first, outcomes, readout_hash, protocol, frozen_model, frozen_test):
     future = [first[patient] for patient in split['test']]
     require_equal(split['test'], frozen_test['test_ids'], 'Test patient order')
     methods = {}
+    numerical_checks = {}
+    reference = json.loads((Path(__file__).resolve().parent / 'lung_ordering_reference.json').read_text())
+    require_equal(reference['training_sha256'], model['training_sha256'], 'Ordering reference training hash')
     for method in ('shrinkage', 'fixed_baseline'):
         frozen = frozen_test['methods'][method]
         certificate = calibrate(model, training, calibration, method)
-        require_equal(certificate, frozen['certificate'], f'{method} calibration certificate')
+        numerical_checks[method] = verify_certificate(
+            certificate, frozen['certificate'], model, training, reference, method)
         cases = predict(model, future, method)
         require_equal(cases, frozen['cases'], f'{method} patient predictions and margins')
         calibration_cases = predict(model, calibration, method)
@@ -171,7 +221,7 @@ def replay(first, outcomes, readout_hash, protocol, frozen_model, frozen_test):
             'global_cut_micromolar': math.pow(10, model['global_cut']),
             'drug_cuts_micromolar': {drug: math.pow(10, cut) for drug, cut in model['drug_cuts'].items()},
             'excluded_count': len(excluded), 'exclusion_reasons': excluded,
-            'model_sha256': model['model_sha256'],
+            'model_sha256': model['model_sha256'], 'numerical_verification': numerical_checks,
             'checks': {'readout_csv_matches': True, 'refitted_model_matches': True,
                        'calibration_certificates_match': True, 'patient_predictions_match': True,
                        'calibration_denominators_and_forecasts_match': True}}

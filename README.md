@@ -1,4 +1,23 @@
-# Decision Contract Map: when a patient-chip drug result is ready to act on
+# From patient readouts to a research report or retest list
+
+## Use the patient workbench
+
+For organoid and tumour-chip researchers, Decision Contract Map turns patient assay measurements into a research report list and a retest list. Supply a patient table, load the frozen signal rule, then reveal clinical outcomes to see each error and compare the earlier rule on the same patients. Download the patient actions and use the remaining errors to plan the next validation batch.
+
+[Open the workbench source](https://github.com/logxio/ooc-evaluation-audit/tree/main/workbench) and [download the combined-regimen result](https://github.com/logxio/ooc-evaluation-audit/raw/refs/heads/main/patient_workbench_result.json). After downloading the repository, open `workbench/index.html`, choose **Frozen rule and study details → Open updated result packet**, and select `patient_workbench_result.json`. The page loads the fixed predictions; **Reveal outcomes** shows the observed errors, and **Download patient action list** exports the rows. The five-step input → predict → reveal → compare → act chain runs locally in a browser. A compatible new table follows `python patient_workbench.py --csv patients.csv`; the same control opens its result. Measurements stay on the reader's computer.
+
+The primary rule uses one measured combined-regimen assay from the published rectal study. On the fixed 43-patient test split it returns **43 reports, one wrong call and zero retests**, versus **27 reports, four wrong calls and 16 retests** for the earlier agreement rule. At a retest cost of 0.25 relative to one wrong call, total loss is **1 versus 8**. These are measured errors plus an explicit cost assumption. Original investigators produced the assays; our contribution selects, freezes, compares and delivers the signal as a usable patient action list.
+
+| Evidence a researcher can inspect | Result | What it supports |
+|:--|:--|:--|
+| Same clinical treatment components, 36 rectal patients | Combined signal 36 reports/1 wrong; earlier agreement 20/3; coverage **+44.44 percentage points, paired 95% interval [27.78,61.11]** | Signal construction and regimen matching improve this retrospective reporting workflow |
+| Two newly accessed publications, 45 clinically paired patients | **19 primary test patients** had model predictions frozen before the relevant outcome values were read: pancreatic 7, lung 12 | A staged, outcome-value-blind test of frozen decisions, with source-specific endpoints |
+| Browser and CLI action lists | Original chain: 568 numeric comparisons passed; new primary packet: 43 patient actions and both score columns match the CLI | Researchers and reviewers can reproduce the actual output |
+
+The strongest single-component comparison keeps its registered result: on the matched 36 patients it releases 12 with six errors and exceeds the common 10% overall-error budget, so the equal-risk primary comparison fails. The fixed combined-signal threshold itself already yields 43/1; calibration adds zero observed gain. The 36-patient result is the prespecified secondary comparison on previously analysed data, with 5-FU acting as the capecitabine assay proxy. The seven additional patients in the 43-person sensitivity lack clinical irinotecan. Strict 10% conditional-risk certificates retain zero coverage. This table lets a researcher choose a supported signal, inspect failures, and size a validation batch with the relevant endpoint.
+
+
+## Published study checks
 
 Patient-derived organ-on-chip tests are being used to rank cancer drugs and dosing schedules for individual patients. This toolkit checks whether a chip readout is ready to act on before it drives that choice. Each check ends in one of four actions: **release** the call, **retest** with another readout, **wait** for a later readout, or mark the accuracy claim **unlinked** to any evaluable outcome. Every check runs on free CPU from the original publisher files of five published physical-chip studies, one patient-spheroid assay and patient-organoid studies.
 
@@ -62,7 +81,7 @@ The later scripts assert the selected publication, training-row identity, and al
 
 ## Physical-chip readout audits
 
-The [competition-linked chip Notebook](https://www.kaggle.com/code/loxigicck/chip-decision-contract-map) v12 completes44 cells on free Kaggle CPU in65.51 seconds and returns51 outputs, including the repaired three-source calibration and original-file checks. Newly added pancreatic/lung experiments run through the separate commands above. It downloads and checks the original files, prints aggregate numbers, and does not publish 22 patient-level measurements or clinical labels.
+The [competition-linked chip Notebook](https://www.kaggle.com/code/loxigicck/chip-decision-contract-map) v14 has official COMPLETE for all 70 cells, including the corrected Liver-Chip results, combined-regimen packet, pancreatic/lung frozen tests and completed method comparisons. It downloads the publisher files and verifies their hashes; the image comparison starts from checksum-verified derived features. See [the completed-run marker](notebook_complete.json).
 
 **Schedule Decision Horizon** uses [Schuster et al.'s Figure 5a-b source workbook](https://www.nature.com/articles/s41467-020-19058-4#Sec25). Run `python schedule_horizon.py --source original-source.xlsx --out schedule_horizon.json` after installing `requirements-schedule.txt`; the script verifies the original workbook SHA256 and writes a 48-row CSV beside the JSON. There are **8/48** sign reversals between 24 and 72 hours and **13/48** retrospective stability horizons later than 24 hours. The three-patient leave-one-out forecast loses to 24-hour persistence (MAE **0.407105** versus **0.152629**). The horizon uses future data, so it cannot authorize an early stop or treatment decision. The original article is CC BY 4.0 and developed the chip and drug schedules.
 
@@ -188,7 +207,7 @@ Two larger-data trials locate the remaining coverage limits. On 14 acquisition-p
 
 From the original USEPA neural-network-formation asset, a fixed 81/81/81 split of 243 chemicals gives the three-concentration baseline **81/81 test releases with six wrong (7.41%, exact 95% risk interval [2.77%, 15.43%])**. Coverage is already 100%, so positive coverage headroom is zero at the registered observed-risk budget. The endpoint is full-series operational assay activity, distinct from clinical toxicity or trajectory error. Chemical partitions share acquisition plates. The registered ceiling stops further model training and ablations.
 
-Protocols and unit-level results accompany [image_release.py](image_release.py), [epa_release.py](epa_release.py), and [patient_signal_comparison.py](patient_signal_comparison.py). The [technical report](technical_report.pdf) gives the frozen target, all failed primary comparisons, paired intervals and component scope. Current scripts run separately from the earlier COMPLETE Notebook v12.
+Protocols and unit-level results accompany [image_release.py](image_release.py), [epa_release.py](epa_release.py), and [patient_signal_comparison.py](patient_signal_comparison.py). The [technical report](technical_report.pdf) gives the frozen target, all failed primary comparisons, paired intervals and component scope. These scripts also run in the 70-cell COMPLETE Notebook v14; original-image extraction remains a separate verified source-to-report command.
 
 ```bash
 # Existing image features come from the public full audit above.

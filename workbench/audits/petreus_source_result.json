@@ -1,0 +1,111 @@
+{
+  "schema": "f53.attrition.certificate.v1",
+  "results": {
+    "mouse_day7": {
+      "n_of_15": {
+        "mono": 15,
+        "gap24": 12,
+        "gap72": 11
+      },
+      "comparisons": {
+        "mono": {
+          "gap24_minus_other": -0.007551,
+          "bonferroni_97_5_two_sided": [
+            -0.213953,
+            0.183412
+          ],
+          "observed_advantage": false
+        },
+        "gap72": {
+          "gap24_minus_other": -0.04036,
+          "bonferroni_97_5_two_sided": [
+            -0.200794,
+            0.126059
+          ],
+          "observed_advantage": false
+        }
+      },
+      "observed_double_advantage": false
+    },
+    "mouse_day15": {
+      "n_of_15": {
+        "mono": 10,
+        "gap24": 10,
+        "gap72": 6
+      },
+      "comparisons": {
+        "mono": {
+          "gap24_minus_other": -0.397086,
+          "bonferroni_97_5_two_sided": [
+            -0.931283,
+            0.050724
+          ],
+          "observed_advantage": false
+        },
+        "gap72": {
+          "gap24_minus_other": -0.527135,
+          "bonferroni_97_5_two_sided": [
+            -1.025887,
+            -0.085225
+          ],
+          "observed_advantage": true
+        }
+      },
+      "observed_double_advantage": false
+    },
+    "mouse_day35": {
+      "n_of_15": {
+        "mono": 7,
+        "gap24": 9,
+        "gap72": 4
+      },
+      "comparisons": {
+        "mono": {
+          "gap24_minus_other": -1.410204,
+          "bonferroni_97_5_two_sided": [
+            -2.228488,
+            -0.584939
+          ],
+          "observed_advantage": true
+        },
+        "gap72": {
+          "gap24_minus_other": -1.051848,
+          "bonferroni_97_5_two_sided": [
+            -2.099204,
+            -0.064222
+          ],
+          "observed_advantage": true
+        }
+      },
+      "observed_double_advantage": true,
+      "observed_global_range": [
+        0.154854,
+        3.4844
+      ],
+      "full_15_mean_bounds": {
+        "mono": {
+          "missing": 8,
+          "mean_if_missing_at_observed_min": 1.245014,
+          "mean_if_missing_at_observed_max": 3.020772
+        },
+        "gap24": {
+          "missing": 6,
+          "mean_if_missing_at_observed_min": 0.710366,
+          "mean_if_missing_at_observed_max": 2.042184
+        },
+        "gap72": {
+          "missing": 11,
+          "mean_if_missing_at_observed_min": 0.682241,
+          "mean_if_missing_at_observed_max": 3.123908
+        }
+      },
+      "missingness_robust_advantage": false
+    }
+  },
+  "limits": [
+    "The raw Figure 5b files contain fewer numeric values than the nominal 15 mice per arm.",
+    "A missing numeric cell does not identify a mouse or a dropout mechanism.",
+    "The endpoint range is a sensitivity scenario, not a clinically justified bound.",
+    "The two day-35 comparisons share the 24-hour group; Bonferroni is conservative."
+  ]
+}
