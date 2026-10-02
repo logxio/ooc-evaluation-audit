@@ -1,0 +1,13 @@
+{
+ "question": "Point-forecast mechanisms tried on development fold 0 at three measured concentrations after the AnchorBoost freeze; none moved the error enough to enter the frozen model.",
+ "reference": {"model": "frozen AnchorBoost (chip_forecast.py)", "fold0_k3_error": 1.0625},
+ "mechanisms": [
+  {"name": "analog design replay, 10 analogs", "command": "python chip_forecast_replay.py --folds 0 --n-replay 10", "fold0_k3_error": 1.0626, "change": 0.0001},
+  {"name": "analog design replay, 20 analogs", "command": "python chip_forecast_replay.py --folds 0 --n-replay 20", "fold0_k3_error": 1.0594, "change": -0.0031},
+  {"name": "self-replay errors as features", "command": "python chip_forecast_replay.py --folds 0 --self-replay", "fold0_k3_error": 1.0614, "change": -0.0011},
+  {"name": "cross-size episodes (k-1, k, k+1)", "command": "python chip_forecast_replay.py --folds 0 --cross-size", "fold0_k3_error": 1.0647, "change": 0.0022},
+  {"name": "replicate-well spread at measured concentrations", "command": "python chip_forecast_replay.py --folds 0 --replicates", "fold0_k3_error": 1.0627, "change": 0.0002},
+  {"name": "three-member ensemble with feature subsampling", "command": "python chip_forecast_replay.py --folds 0 --ensemble 3", "fold0_k3_error": 1.0597, "change": -0.0028}
+ ],
+ "conclusion": "Largest change 0.0031; the point model stays frozen. The mechanism whose ablation excludes zero, exhaustive design supervision, is tested on folds 1-4 by chip_forecast_designcurve.py."
+}
