@@ -1,0 +1,9 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "import re\n# print article paragraphs 12-20 and search four-digit IDs / numeric DSS patterns\nfor p in article:\n    t=p['text']\n    ids=re.findall(r'\\b\\d{4}\\b',t)\n    if ids: print(p['ref'],ids,t[:500])\nprint('paragraph count',len(article))\nfor i,p in enumerate(article): print(i,p['ref'],len(p['text']),p['text'][:80].replace('\\n',' '))\n"
+    },
+    "output_sha256": "9f2e93419b52f20f34ffe4b1da670004c1554c9b25b33650cacaab0bb2dd046f"
+  }
+]

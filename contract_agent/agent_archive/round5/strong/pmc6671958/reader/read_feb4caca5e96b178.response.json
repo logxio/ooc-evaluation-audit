@@ -1,0 +1,20 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "{\"columns\":[\"KIYATEC Test Response\",\"Patient\",\"Stage\",\"Grade\",\"Histology\",\"Therapy Received\",\"CA-125 Prior to Biopsy\",\"Tumor Size Reduction\",\"Carbo\",\"Pac\",\"Dox\",\"Top\"],\"legend\":{\"green\":\"green cell\",\"red\":\"red cell\",\"yellow\":\"yellow cell\"},\"rows\":[[\"True Positive (N = 6)\",\"OVC20\",\"IIIC\",\"High\",\"Serous\",\"Carbo/Pac\",\"++\",\"CR\",\"green\",\"red\",\"yellow\",\"yellow\"],[\"True Positive (N = 6)\",\"OVB07\",\"IIIB\",\"High\",\"Serous\",\"Carbo/Pac\",\"+++\",\"PR\",\"green\",\"green\",\"green\",\"green\"],[\"True Positive (N = 6)\",\"OVC01\",\"N/A\",\"High\",\"Serous\",\"Carbo/Pac\",\"N/A\",\"PR\",\"green\",\"red\",\"green\",\"yellow\"],[\"True Positive (N = 6)\",\"OVC95\",\"N/A\",\"High\",\"Serous\",\"Carbo/Pac\",\"+++\",\"PR\",\"green\",\"red\",\"yellow\",\"green\"],[\"True Positive (N = 6)\",\"OVC07\",\"IIIB\",\"High\",\"Serous\",\"Carbo/Pac\",\"+++\",\"PR\",\"red\",\"green\",\"green\",\"green\"],[\"True Positive (N = 6)\",\"OVC29\",\"IVA\",\"Low\",\"Serous\",\"Carbo/Pac\",\"+++\",\"PR\",\"red\",\"green\",\"green\",\"green\"],[\"True Negative (N = 2)\",\"OVB22\",\"III\",\"High\",\"Serous\",\"Carbo/Pac\",\"+++\",\"SD\",\"red\",\"red\",\"green\",\"red\"],[\"True Negative (N = 2)\",\"OVC68\",\"IIIC\",\"High\",\"Serous\",\"Carbo/Pac\",\"+++\",\"SD\",\"red\",\"red\",\"green\",\"yellow\"],[\"False Negative (N = 1)\",\"OVC14\",\"IIIC\",\"High\",\"Serous\",\"Carbo/Pac\",\"+++\",\"PR\",\"red\",\"red\",\"green\",\"green\"]],\"notes\":\"No color key is visible in the crop. The drug-response superheading is partially cut off; visible subcolumn labels are Carbo, Pac, Dox, and Top. Panel B is titled “First-Line Therapy Response by RECIST,” with y-axis “% Reduction in Tumor Volume (RECIST)” marked 0, 50, and 100. Dashed red threshold lines divide four labelled quadrants: upper-left True Positive (green), upper-right False Negative (peach), lower-left False Positive (peach), and lower-right True Negative (green). Panel C is a partial scatter plot with six visible black points at approximate y-values 38, 35, 48, 37, 30, and 100%; its x-axis title and right-side text are cut off.\"}"
+  },
+  "reasoning_content": "We need need transcribe visible table and plots maybe JSON columns rows. \n\nNo explicit legend is visible in the content to be processed. We assume green represents sensitivity, red resistance, and yellow intermediate status, and will transcribe all visible tables and plots as required.\n\nThe expected JSON column structure has been clarified, chart data will be organized as labeled rows, and I've confirmed the color coding of two sample groups.\n\nI've confirmed the color coding for all tested groups, and clarified that the primary task is to transcribe the target table, with supplementary notes for plot-related content. I've sorted out approximate values for plot points, but the x-axis units for plots are still unknown. I've also confirmed the expected JSON structure can cover both table and plot content.\n\nI’ve confirmed the exact column names for the table, clarified the label allocation rules for response groups, and decided to use table columns for table content and supplementary notes for plot content to meet the output requirements.\n\nI've confirmed there are no uncertain cells in the table, clarified the column count and corresponding header names, decided to use plain text without markdown fences for the output, and will formulate the content of note B next.\n\nI've sorted out the specifications for the first-line therapy response plot, including axis labels, threshold settings and classification rules for four quadrants. I've confirmed the full column list for the table, and will next formulate the corresponding legend and answer the query.\n",
+  "finish_reason": "stop",
+  "usage": {
+    "completion_tokens": 2001,
+    "prompt_tokens": 1565,
+    "total_tokens": 3566,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 1389
+    }
+  }
+}

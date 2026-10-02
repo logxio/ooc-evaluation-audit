@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_hkipb165wxfh830snpkfnlxe",
+        "type": "function",
+        "function": {
+          "name": "python",
+          "arguments": "{\"code\": \"for p in range(7,14):\\n sh=f'page{p}'\\n rows=get_rows('41698_2026_1663_MOESM1_ESM.pdf',sh)\\n print('\\\\n###',sh, 'n',len(rows))\\n for i,row in enumerate(rows,1):\\n  vals=[]\\n  for j,x in enumerate(row,1):\\n   if x not in (None,''):\\n    vals.append(f'C{j}:{x}')\\n  if vals: print(i, ' | '.join(vals)[:1000])\"}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "Tables likely pages 7-13. Need inspect.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 180,
+    "prompt_tokens": 33430,
+    "total_tokens": 33610,
+    "prompt_tokens_details": {
+      "cached_tokens": 1848
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 13
+    }
+  }
+}

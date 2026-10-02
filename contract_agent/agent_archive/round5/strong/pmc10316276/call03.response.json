@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_rh0svk3vrqyzkhcf8zyx4cq8",
+        "type": "function",
+        "function": {
+          "name": "python",
+          "arguments": "{\"code\": \"o=tables[PDF]['page1']\\nprint(o.keys())\\nfor k,v in o.items(): print(k,type(v), (len(v) if hasattr(v,'__len__') else None))\\n\"}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "Need inspect dict keys.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 81,
+    "prompt_tokens": 26825,
+    "total_tokens": 26906,
+    "prompt_tokens_details": {
+      "cached_tokens": 25912
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 6
+    }
+  }
+}

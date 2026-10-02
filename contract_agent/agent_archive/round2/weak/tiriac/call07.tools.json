@@ -1,0 +1,194 @@
+[
+  {
+    "name": "finish",
+    "arguments": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p13"
+            ],
+            "explanation": "9 advanced PDAC patients with matched PDOs and clinical outcome data"
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p2",
+              "article:p6"
+            ],
+            "explanation": "Patient-derived pancreatic cancer organoids used for pharmacotyping"
+          },
+          "readout": {
+            "value": "auc",
+            "evidence": [
+              "supp.xlsx/Key/A2",
+              "article:p13"
+            ],
+            "explanation": "Drug response measured via AUC of dose-response curves; lower AUC = higher sensitivity"
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "supp.xlsx/Key/A4",
+              "supp.xlsx/Key/A6",
+              "article:p13"
+            ],
+            "explanation": "Lower AUC (blue fill) = sensitive, higher AUC (red fill) = resistant"
+          },
+          "threshold_rule": {
+            "value": "cohort_quantile",
+            "evidence": [
+              "article:p13"
+            ],
+            "explanation": "Sensitive = lowest 33% AUC of 66 PDO cohort; Resistant = highest 34% AUC"
+          },
+          "threshold_timing": {
+            "value": "independent_reference",
+            "evidence": [
+              "article:p13"
+            ],
+            "explanation": "Thresholds defined on full 66-PDO cohort prior to evaluating the 9 patients"
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "article:p13",
+              "article:p14"
+            ],
+            "explanation": "Each patient has a uniquely matched PDO"
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p13"
+            ],
+            "explanation": "PDO sensitivity evaluated for the same chemotherapies the patient received"
+          },
+          "n_units": {
+            "value": 9,
+            "evidence": [
+              "article:p13"
+            ],
+            "explanation": "9 patients in the retrospective concordance analysis"
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p13"
+            ],
+            "explanation": "9 patients are a subset of the 66-PDO cohort; no independent held-out split"
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.8888888888888888,
+          "reported_evidence": [
+            "article:p13"
+          ],
+          "threshold": null,
+          "op": null,
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "patient_1",
+              "score": {
+                "ref": "article:p13",
+                "extract": "Of the 6 patients with a progression-free survival.*5 were treated with at least one drug to which the matched PDO culture was particularly sensitive and no drug to which the matched PDO culture was resistant"
+              },
+              "truth": {
+                "value": 1
+              }
+            },
+            {
+              "id": "patient_2",
+              "score": {
+                "ref": "article:p13",
+                "extract": "Of the 6 patients with a progression-free survival.*5 were treated with at least one drug to which the matched PDO culture was particularly sensitive and no drug to which the matched PDO culture was resistant"
+              },
+              "truth": {
+                "value": 1
+              }
+            },
+            {
+              "id": "patient_3",
+              "score": {
+                "ref": "article:p13",
+                "extract": "Of the 6 patients with a progression-free survival.*5 were treated with at least one drug to which the matched PDO culture was particularly sensitive and no drug to which the matched PDO culture was resistant"
+              },
+              "truth": {
+                "value": 1
+              }
+            },
+            {
+              "id": "patient_4",
+              "score": {
+                "ref": "article:p13",
+                "extract": "Of the 6 patients with a progression-free survival.*5 were treated with at least one drug to which the matched PDO culture was particularly sensitive and no drug to which the matched PDO culture was resistant"
+              },
+              "truth": {
+                "value": 1
+              }
+            },
+            {
+              "id": "patient_5",
+              "score": {
+                "ref": "article:p13",
+                "extract": "Of the 6 patients with a progression-free survival.*5 were treated with at least one drug to which the matched PDO culture was particularly sensitive and no drug to which the matched PDO culture was resistant"
+              },
+              "truth": {
+                "value": 1
+              }
+            },
+            {
+              "id": "patient_6",
+              "score": {
+                "ref": "article:p13",
+                "extract": "One of the nine patients exhibited an outcome inconsistent"
+              },
+              "truth": {
+                "value": 1
+              }
+            },
+            {
+              "id": "patient_7",
+              "score": {
+                "ref": "article:p13",
+                "extract": "Two (2) of the 3 patients who rapidly progressed were treated with a chemotherapeutic agent to which their PDO was markedly resistant"
+              },
+              "truth": {
+                "value": 0
+              }
+            },
+            {
+              "id": "patient_8",
+              "score": {
+                "ref": "article:p13",
+                "extract": "Two (2) of the 3 patients who rapidly progressed were treated with a chemotherapeutic agent to which their PDO was markedly resistant"
+              },
+              "truth": {
+                "value": 0
+              }
+            },
+            {
+              "id": "patient_9",
+              "score": {
+                "ref": "article:p13",
+                "extract": "Two (2) of the 3 patients who rapidly progressed were treated with a chemotherapeutic agent to which their PDO was markedly resistant"
+              },
+              "truth": {
+                "value": 0
+              }
+            }
+          ],
+          "blocked_reason": null
+        },
+        "notes": [
+          "Accuracy is explicitly reported as 8 correct out of 9 patients (8/9 = 0.8888888888888888) in article:p13: 5 of 6 good responders were correctly predicted, 2 of 3 poor responders were correctly predicted, 1 patient had an inconsistent outcome. All 9 units are accounted for, matching the target n=9 and accuracy value."
+        ]
+      }
+    },
+    "output_sha256": "bd6eca51a67e0408811a017fab55b580ed88dbdf204bb24447ef197a2cdb9086"
+  }
+]

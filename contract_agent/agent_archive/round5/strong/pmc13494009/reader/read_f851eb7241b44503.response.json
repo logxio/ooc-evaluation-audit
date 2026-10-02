@@ -1,0 +1,20 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "{\"columns\":[\"visible label / feature\"],\"legend\":{},\"rows\":[[\"UCLH\"],[\"horizontal white band\"],[\"CR\"]],\"uncertain\":[[1,1]],\"notes\":\"Blue background with a white horizontal band across the image. The top text is cropped and blurry; the lower text reads CR.\"}"
+  },
+  "reasoning_content": "We need need transcribe visible.  I've finished analyzing the target image. It has a blue background with a white horizontal stripe, no table exists, only visible text labels need to be extracted. The top text is blurry, possibly \"OILCT\", and the bottom clearly shows \"CR\".\n\nI’ve further cross-checked the blurry top text to rule out the possibility that it was cropped at the top, and have tentatively identified it as \"OILCI\" or \"OILH\", though the exact reading remains uncertain. The image is highly likely to be a label from a gel electrophoresis, western blot or similar medical/biological experiment diagram, with \"CR\" at the bottom being a clear identifier. I will continue to refine the reading of the blurry top text and confirm the exact type of the diagram.\n\nAfter re-analyzing the blurry top text, I now tentatively identify it as \"UCLH\", a plausible NHS trust identifier, though the reading remains partially uncertain due to blurriness.\n\nI’ve confirmed the image has a full-width white horizontal band, no legend or column titles, and will output valid pure JSON as required, with the white band categorized as a visible feature, the blurry top text marked as partially cropped, and all confirmed details included. I’ll mark the top text as uncertain and return the final result.\n",
+  "finish_reason": "stop",
+  "usage": {
+    "completion_tokens": 1227,
+    "prompt_tokens": 1611,
+    "total_tokens": 2838,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 1159
+    }
+  }
+}

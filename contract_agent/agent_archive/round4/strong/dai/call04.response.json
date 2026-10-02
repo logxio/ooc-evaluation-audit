@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_04oy3gxkaz17zlgd7leqcxl6",
+        "type": "function",
+        "function": {
+          "name": "python",
+          "arguments": "{\"code\": \"for sh in ['5d','5e','5f','5g','5i','5k']:\\n rows=get_rows('Source data figure 5.xlsx',sh)\\n print('\\\\n',sh,len(rows),max(map(len,rows)))\\n for i,r in enumerate(rows[:30]): print(i,repr(r))\\n\"}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "Need clinical outcomes likely figure 5 source other sheets 5d etc maybe labels. Inspect headers.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 130,
+    "prompt_tokens": 34904,
+    "total_tokens": 35034,
+    "prompt_tokens_details": {
+      "cached_tokens": 31544
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 24
+    }
+  }
+}

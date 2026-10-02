@@ -1,0 +1,116 @@
+[
+  {
+    "name": "initial_code",
+    "output": {
+      "returncode": 0,
+      "stdout": "MIBC rows: 0 biopsy rows: 0 total: 0\nnegatives: 0 TN: 0 specificity: None\n",
+      "stderr": "",
+      "seconds": 1.3786523750168271,
+      "peak_rss_bytes": 25362432,
+      "limit_error": null,
+      "code_sha256": "eec82c90c2d0630bc0d1cff5ef55c7d29347d580a0afe707d0683c547f616cb9",
+      "contract": {
+        "status": "blocked",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p34"
+            ],
+            "explanation": "EVOC results were correlated with clinical data for 34 individual patients."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p4",
+              "article:p9"
+            ],
+            "explanation": "The assay is an ex vivo organ culture system preserving tumor slices and their microenvironment."
+          },
+          "readout": {
+            "value": "viability",
+            "evidence": [
+              "article:p17"
+            ],
+            "explanation": "The EVOC score is based on viability, tissue damage, and Ki67 proliferation."
+          },
+          "direction": {
+            "value": "higher_sensitive",
+            "evidence": [
+              "article:p34",
+              "article:p37"
+            ],
+            "explanation": "Higher EVOC scores indicate greater treatment-induced cancer-cell death and better clinical response."
+          },
+          "threshold_rule": {
+            "value": "fixed_numeric",
+            "evidence": [
+              "article:p17",
+              "article:p37"
+            ],
+            "explanation": "A fixed EVOC score of 45 separates predicted responders from non-responders."
+          },
+          "threshold_timing": {
+            "value": "independent_reference",
+            "evidence": [
+              "article:p17"
+            ],
+            "explanation": "The threshold was established using a historical MIBC training set, not fitted to the evaluated subjects."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "article.xml/Table 1/R1C2",
+              "article.xml/Table 2/R1C1"
+            ],
+            "explanation": "Tables 1 and 2 provide patient-level assay scores and clinical outcomes."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article.xml/Table 1/R1C4",
+              "article.xml/Table 2/R1C3",
+              "article:p4"
+            ],
+            "explanation": "The EVOC treatment arm corresponds to the intended therapy subsequently received by each patient."
+          },
+          "n_units": {
+            "value": 34,
+            "evidence": [
+              "article:p34",
+              "article:p35"
+            ],
+            "explanation": "The combined analysis included 16 MIBC resected samples and 18 core-biopsy samples."
+          },
+          "split": {
+            "value": "independent_test",
+            "evidence": [
+              "article:p10",
+              "article:p17"
+            ],
+            "explanation": "The prospective cohort was tested with a threshold derived from an independent historical training set."
+          }
+        },
+        "headline": {
+          "metric": "specificity",
+          "reported": null,
+          "reported_evidence": [
+            "article:p34",
+            "article:p35",
+            "article:p5"
+          ],
+          "threshold": 45,
+          "op": ">=",
+          "score_direction": "higher",
+          "records": [],
+          "blocked_reason": "Expected 34 records, 9 clinical negatives, and 7 true negatives; found 0 records, 0 negatives, and 0 true negatives."
+        },
+        "notes": [
+          "Specificity is calculated among clinical non-responders (NR or PD) as TN/(TN+FP).",
+          "The published specificity is 7/9 = 77.7%.",
+          "Clinical responses NR and PD map to truth 0; SD, PR, and CR map to truth 1."
+        ]
+      }
+    }
+  }
+]

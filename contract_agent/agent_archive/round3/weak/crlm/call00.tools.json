@@ -1,0 +1,273 @@
+[
+  {
+    "name": "initial_code",
+    "output": {
+      "returncode": 0,
+      "stdout": "Calculated AUC: 0.850\n",
+      "stderr": "",
+      "seconds": 1.4590480830229353,
+      "peak_rss_bytes": 41910272,
+      "limit_error": null,
+      "code_sha256": "1369e402355bd493d42cf0b499aa677338a37ff549d3b235515b573a8a24c52b",
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p31"
+            ],
+            "explanation": "Each record is a unique CRLM patient receiving FOLFOX chemotherapy"
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p1"
+            ],
+            "explanation": "Predictor is patient-derived organoid (PDO) chemosensitivity"
+          },
+          "readout": {
+            "value": "ic50",
+            "evidence": [
+              "article:p31"
+            ],
+            "explanation": "IC50 of FOLFOX in PDOs is the predictive score"
+          },
+          "direction": {
+            "value": "higher_sensitive",
+            "evidence": [
+              "article:p31"
+            ],
+            "explanation": "Higher organoid IC50 correlates with progressive disease (PD, poor clinical response)"
+          },
+          "threshold_rule": {
+            "value": "no_binary_rule",
+            "evidence": [
+              "article:p31"
+            ],
+            "explanation": "AUC is computed across all thresholds, no single classification threshold used"
+          },
+          "threshold_timing": {
+            "value": "not_applicable",
+            "evidence": [],
+            "explanation": "Threshold not applicable for AUC calculation"
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "supp.xls/Table S7/R1C1"
+            ],
+            "explanation": "Each patient has a unique ID with matched organoid and clinical data"
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "supp.xls/Table S7/R1C2"
+            ],
+            "explanation": "Organoids are tested with the same FOLFOX regimen the patient received clinically"
+          },
+          "n_units": {
+            "value": 13,
+            "evidence": [
+              "article:p31"
+            ],
+            "explanation": "13 patients receiving FOLFOX chemotherapy are included in this analysis"
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p31"
+            ],
+            "explanation": "All 13 patients are from the same retrospective cohort, no independent training split reported"
+          }
+        },
+        "headline": {
+          "metric": "auc",
+          "reported": 0.85,
+          "reported_evidence": [
+            "article:p31"
+          ],
+          "threshold": null,
+          "op": null,
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "P3",
+              "score": {
+                "ref": "supp.xls/Table S7/R2C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R2C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P4",
+              "score": {
+                "ref": "supp.xls/Table S7/R3C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R3C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P5",
+              "score": {
+                "ref": "supp.xls/Table S7/R4C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R4C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P6",
+              "score": {
+                "ref": "supp.xls/Table S7/R5C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R5C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P9",
+              "score": {
+                "ref": "supp.xls/Table S7/R6C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R6C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P11",
+              "score": {
+                "ref": "supp.xls/Table S7/R7C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R7C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P12",
+              "score": {
+                "ref": "supp.xls/Table S7/R8C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R8C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P13",
+              "score": {
+                "ref": "supp.xls/Table S7/R9C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R9C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P14",
+              "score": {
+                "ref": "supp.xls/Table S7/R10C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R10C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P18",
+              "score": {
+                "ref": "supp.xls/Table S7/R11C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R11C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P19",
+              "score": {
+                "ref": "supp.xls/Table S7/R12C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R12C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P23",
+              "score": {
+                "ref": "supp.xls/Table S7/R13C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R13C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P25",
+              "score": {
+                "ref": "supp.xls/Table S7/R14C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R14C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            }
+          ],
+          "blocked_reason": ""
+        },
+        "notes": [
+          "Calculated AUC matches reported 0.85: 0.850",
+          "Positive class is progressive disease (PD), negative is stable/partial response (SD/PR)"
+        ]
+      }
+    }
+  }
+]

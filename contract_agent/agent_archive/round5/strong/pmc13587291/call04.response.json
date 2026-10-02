@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_lugi2rt968mvfjhhx6fksq7o",
+        "type": "function",
+        "function": {
+          "name": "python",
+          "arguments": "{\"code\": \"print(cell_ref(pdf,'page3',7,2))\\nprint(type(cell_ref(pdf,'page3',7,2)))\\nprint(list(cells.keys())[:3])\"}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "We need construct refs via cell_ref helper perhaps. To understand raw rows, I'll inspect the cell_ref helper.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 111,
+    "prompt_tokens": 28858,
+    "total_tokens": 28969,
+    "prompt_tokens_details": {
+      "cached_tokens": 25400
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 43
+    }
+  }
+}

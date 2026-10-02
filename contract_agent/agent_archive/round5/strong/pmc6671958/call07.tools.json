@@ -1,0 +1,836 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "p3='vision/44dbe663aa9d'\np7='vision/45b917d1cc11'\nprimary = [\n('OVA42',1,'R1C8'),('OVA49',1,'R2C8'),('OVA52',1,'R3C8'),('OVA54',1,'R4C8'),\n('OVA55',1,'R5C8'),('OVA73',1,'R6C9'),('OVA81',1,'R7C8'),('OVA86',1,'R8C8'),\n('OVA87',1,'R9C8'),('OVA89',1,'R10C8'),('OVA96',1,'R11C8'),('OVB34',1,'R12C8'),\n('OVB94',1,'R13C8'),('OVB96',1,'R14C8'),('OVC06',1,'R15C8'),('OVC13',1,'R16C10'),\n('OVC18',1,'R17C8'),('OVC19',1,'R18C8'),('OVC41',1,'R19C8'),('OVC45',1,'R20C8'),\n('OVC58',1,'R21C8'),('OVC82',1,'R22C8'),('OVC84',1,'R23C8'),('OVC87',1,'R24C9'),\n('OVC97',1,'R25C8'),('OVD01',1,'R26C8'),\n('OVA71',0,'R27C12'),('OVB03',0,'R28C8'),('OVB71',0,'R29C8'),('OVC09',0,'R30C8'),('OVC21',0,'R31C8'),\n('OVB27',1,'R32C8'),('OVC16',1,'R33C8'),('OVC37',1,'R34C8'),('OVC80',1,'R35C8')]\nneo = [\n('OVC20',1,'R1C9'),('OVB07',1,'R2C9'),('OVC01',1,'R3C9'),('OVC95',1,'R4C9'),\n('OVC07',1,'R5C10'),('OVC29',1,'R6C10'),('OVB22',0,'R7C9'),('OVC68',0,'R8C9'),('OVC14',1,'R9C9')]\nrecords=[]\nfor pid,truth,cell in primary:\n    row=int(cell[1:cell.index('C')])\n    records.append({'id':pid,'score':{'ref':f'{p3}/{cell}','map':{'green':1,'red':0}},\n                    'truth':{'ref':f'{p3}/R{row}C2','map':{pid:truth}}})\nfor pid,truth,cell in neo:\n    row=int(cell[1:cell.index('C')])\n    records.append({'id':pid,'score':{'ref':f'{p7}/{cell}','map':{'green':1,'red':0}},\n                    'truth':{'ref':f'{p7}/R{row}C2','map':{pid:truth}}})\nCONTRACT={'status':'computed','fields':{\n'unit':{'value':'patient','evidence':['article:p1','article:p22'],'explanation':'Forty-four newly diagnosed ovarian cancer patients each contribute one matched first-line regimen prediction.'},\n'platform':{'value':'spheroid','evidence':['article:p1','article:p14'],'explanation':'Primary patient cancer cells were cultured as 3D spheroids and exposed to drugs.'},\n'readout':{'value':'ic50','evidence':['article:p33'],'explanation':'Dose-response IC50 values were mapped to Responder, Moderate Responder, and Non-Responder categories.'},\n'direction':{'value':'lower_sensitive','evidence':['article:p33'],'explanation':'IC50 values below the lower threshold indicated response; values above the upper threshold indicated non-response.'},\n'threshold_rule':{'value':'categorical','evidence':['article:p33','article:p34'],'explanation':'A regimen prediction was positive when at least one received and tested drug was a Responder; otherwise it was negative.'},\n'threshold_timing':{'value':'outcome_optimized','evidence':['article:p33'],'explanation':'Carboplatin binary cutoffs were confirmed by ROC analysis against clinical response; other drug cutoffs were experimentally derived from response distributions.'},\n'patient_mapping':{'value':'individual_available','evidence':[f'{p3}/R1C2',f'{p7}/R1C2'],'explanation':'Figures 3 and 7 independently transcribe patient identifiers and per-patient assay cells for all 44 patients.'},\n'regimen_match':{'value':'matched','evidence':['article:p34'],'explanation':'Only drugs received clinically and tested in the assay entered the regimen-level prediction.'},\n'n_units':{'value':44,'evidence':['article:p1','article:p22'],'explanation':'The combined adjuvant and neoadjuvant newly diagnosed cohort contains 44 evaluable patients.'},\n'split':{'value':'same_cohort','evidence':['article:p1','article:p18','article:p22'],'explanation':'Accuracy was assessed in the prospectively followed enrolled cohort; no separate held-out cohort was used for this combined endpoint.'}},\n'headline':{'metric':'accuracy','reported':39/44,'reported_evidence':['article:p1','article:p22'],'threshold':0.5,'op':'>=','score_direction':'higher','records':records,'blocked_reason':None},\n'notes':['Primary-debulking cohort: 26 TP, 5 TN, and 4 FN = 31/35 correct.','Neoadjuvant laparoscopic-biopsy cohort: 6 TP, 2 TN, and 1 FN = 8/9 correct.','Combined: 32 TP, 7 TN, 5 FN, 0 FP; accuracy = 39/44 = 0.8863636363636364.']}\nassert len(records)==44\nassert all(r['score']['ref'] in cells for r in records)\nassert all(r['truth']['ref'] in cells for r in records)\nprint('ok',len(records),39/44)"
+    },
+    "output": {
+      "returncode": 0,
+      "stdout": "ok 44 0.8863636363636364\n",
+      "stderr": "",
+      "seconds": 1.5772574160073418,
+      "peak_rss_bytes": 30326784,
+      "limit_error": null,
+      "code_sha256": "409068013c5cc7110759c389d56e0ea6cd95c9dd32a3ad3a44ccfc553cfbf120",
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p1",
+              "article:p22"
+            ],
+            "explanation": "Forty-four newly diagnosed ovarian cancer patients each contribute one matched first-line regimen prediction."
+          },
+          "platform": {
+            "value": "spheroid",
+            "evidence": [
+              "article:p1",
+              "article:p14"
+            ],
+            "explanation": "Primary patient cancer cells were cultured as 3D spheroids and exposed to drugs."
+          },
+          "readout": {
+            "value": "ic50",
+            "evidence": [
+              "article:p33"
+            ],
+            "explanation": "Dose-response IC50 values were mapped to Responder, Moderate Responder, and Non-Responder categories."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p33"
+            ],
+            "explanation": "IC50 values below the lower threshold indicated response; values above the upper threshold indicated non-response."
+          },
+          "threshold_rule": {
+            "value": "categorical",
+            "evidence": [
+              "article:p33",
+              "article:p34"
+            ],
+            "explanation": "A regimen prediction was positive when at least one received and tested drug was a Responder; otherwise it was negative."
+          },
+          "threshold_timing": {
+            "value": "outcome_optimized",
+            "evidence": [
+              "article:p33"
+            ],
+            "explanation": "Carboplatin binary cutoffs were confirmed by ROC analysis against clinical response; other drug cutoffs were experimentally derived from response distributions."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "vision/44dbe663aa9d/R1C2",
+              "vision/45b917d1cc11/R1C2"
+            ],
+            "explanation": "Figures 3 and 7 independently transcribe patient identifiers and per-patient assay cells for all 44 patients."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p34"
+            ],
+            "explanation": "Only drugs received clinically and tested in the assay entered the regimen-level prediction."
+          },
+          "n_units": {
+            "value": 44,
+            "evidence": [
+              "article:p1",
+              "article:p22"
+            ],
+            "explanation": "The combined adjuvant and neoadjuvant newly diagnosed cohort contains 44 evaluable patients."
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p1",
+              "article:p18",
+              "article:p22"
+            ],
+            "explanation": "Accuracy was assessed in the prospectively followed enrolled cohort; no separate held-out cohort was used for this combined endpoint."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.8863636363636364,
+          "reported_evidence": [
+            "article:p1",
+            "article:p22"
+          ],
+          "threshold": 0.5,
+          "op": ">=",
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "OVA42",
+              "score": {
+                "ref": "vision/44dbe663aa9d/R1C8",
+                "map": {
+                  "green": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/44dbe663aa9d/R1C2",
+                "map": {
+                  "OVA42": 1
+                }
+              }
+            },
+            {
+              "id": "OVA49",
+              "score": {
+                "ref": "vision/44dbe663aa9d/R2C8",
+                "map": {
+                  "green": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/44dbe663aa9d/R2C2",
+                "map": {
+                  "OVA49": 1
+                }
+              }
+            },
+            {
+              "id": "OVA52",
+              "score": {
+                "ref": "vision/44dbe663aa9d/R3C8",
+                "map": {
+                  "green": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/44dbe663aa9d/R3C2",
+                "map": {
+                  "OVA52": 1
+                }
+              }
+            },
+            {
+              "id": "OVA54",
+              "score": {
+                "ref": "vision/44dbe663aa9d/R4C8",
+                "map": {
+                  "green": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/44dbe663aa9d/R4C2",
+                "map": {
+                  "OVA54": 1
+                }
+              }
+            },
+            {
+              "id": "OVA55",
+              "score": {
+                "ref": "vision/44dbe663aa9d/R5C8",
+                "map": {
+                  "green": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/44dbe663aa9d/R5C2",
+                "map": {
+                  "OVA55": 1
+                }
+              }
+            },
+            {
+              "id": "OVA73",
+              "score": {
+                "ref": "vision/44dbe663aa9d/R6C9",
+                "map": {
+                  "green": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/44dbe663aa9d/R6C2",
+                "map": {
+                  "OVA73": 1
+                }
+              }
+            },
+            {
+              "id": "OVA81",
+              "score": {
+                "ref": "vision/44dbe663aa9d/R7C8",
+                "map": {
+                  "green": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/44dbe663aa9d/R7C2",
+                "map": {
+                  "OVA81": 1
+                }
+              }
+            },
+            {
+              "id": "OVA86",
+              "score": {
+                "ref": "vision/44dbe663aa9d/R8C8",
+                "map": {
+                  "green": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/44dbe663aa9d/R8C2",
+                "map": {
+                  "OVA86": 1
+                }
+              }
+            },
+            {
+              "id": "OVA87",
+              "score": {
+                "ref": "vision/44dbe663aa9d/R9C8",
+                "map": {
+                  "green": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/44dbe663aa9d/R9C2",
+                "map": {
+                  "OVA87": 1
+                }
+              }
+            },
+            {
+              "id": "OVA89",
+              "score": {
+                "ref": "vision/44dbe663aa9d/R10C8",
+                "map": {
+                  "green": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/44dbe663aa9d/R10C2",
+                "map": {
+                  "OVA89": 1
+                }
+              }
+            },
+            {
+              "id": "OVA96",
+              "score": {
+                "ref": "vision/44dbe663aa9d/R11C8",
+                "map": {
+                  "green": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/44dbe663aa9d/R11C2",
+                "map": {
+                  "OVA96": 1
+                }
+              }
+            },
+            {
+              "id": "OVB34",
+              "score": {
+                "ref": "vision/44dbe663aa9d/R12C8",
+                "map": {
+                  "green": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/44dbe663aa9d/R12C2",
+                "map": {
+                  "OVB34": 1
+                }
+              }
+            },
+            {
+              "id": "OVB94",
+              "score": {
+                "ref": "vision/44dbe663aa9d/R13C8",
+                "map": {
+                  "green": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/44dbe663aa9d/R13C2",
+                "map": {
+                  "OVB94": 1
+                }
+              }
+            },
+            {
+              "id": "OVB96",
+              "score": {
+                "ref": "vision/44dbe663aa9d/R14C8",
+                "map": {
+                  "green": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/44dbe663aa9d/R14C2",
+                "map": {
+                  "OVB96": 1
+                }
+              }
+            },
+            {
+              "id": "OVC06",
+              "score": {
+                "ref": "vision/44dbe663aa9d/R15C8",
+                "map": {
+                  "green": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/44dbe663aa9d/R15C2",
+                "map": {
+                  "OVC06": 1
+                }
+              }
+            },
+            {
+              "id": "OVC13",
+              "score": {
+                "ref": "vision/44dbe663aa9d/R16C10",
+                "map": {
+                  "green": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/44dbe663aa9d/R16C2",
+                "map": {
+                  "OVC13": 1
+                }
+              }
+            },
+            {
+              "id": "OVC18",
+              "score": {
+                "ref": "vision/44dbe663aa9d/R17C8",
+                "map": {
+                  "green": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/44dbe663aa9d/R17C2",
+                "map": {
+                  "OVC18": 1
+                }
+              }
+            },
+            {
+              "id": "OVC19",
+              "score": {
+                "ref": "vision/44dbe663aa9d/R18C8",
+                "map": {
+                  "green": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/44dbe663aa9d/R18C2",
+                "map": {
+                  "OVC19": 1
+                }
+              }
+            },
+            {
+              "id": "OVC41",
+              "score": {
+                "ref": "vision/44dbe663aa9d/R19C8",
+                "map": {
+                  "green": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/44dbe663aa9d/R19C2",
+                "map": {
+                  "OVC41": 1
+                }
+              }
+            },
+            {
+              "id": "OVC45",
+              "score": {
+                "ref": "vision/44dbe663aa9d/R20C8",
+                "map": {
+                  "green": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/44dbe663aa9d/R20C2",
+                "map": {
+                  "OVC45": 1
+                }
+              }
+            },
+            {
+              "id": "OVC58",
+              "score": {
+                "ref": "vision/44dbe663aa9d/R21C8",
+                "map": {
+                  "green": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/44dbe663aa9d/R21C2",
+                "map": {
+                  "OVC58": 1
+                }
+              }
+            },
+            {
+              "id": "OVC82",
+              "score": {
+                "ref": "vision/44dbe663aa9d/R22C8",
+                "map": {
+                  "green": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/44dbe663aa9d/R22C2",
+                "map": {
+                  "OVC82": 1
+                }
+              }
+            },
+            {
+              "id": "OVC84",
+              "score": {
+                "ref": "vision/44dbe663aa9d/R23C8",
+                "map": {
+                  "green": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/44dbe663aa9d/R23C2",
+                "map": {
+                  "OVC84": 1
+                }
+              }
+            },
+            {
+              "id": "OVC87",
+              "score": {
+                "ref": "vision/44dbe663aa9d/R24C9",
+                "map": {
+                  "green": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/44dbe663aa9d/R24C2",
+                "map": {
+                  "OVC87": 1
+                }
+              }
+            },
+            {
+              "id": "OVC97",
+              "score": {
+                "ref": "vision/44dbe663aa9d/R25C8",
+                "map": {
+                  "green": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/44dbe663aa9d/R25C2",
+                "map": {
+                  "OVC97": 1
+                }
+              }
+            },
+            {
+              "id": "OVD01",
+              "score": {
+                "ref": "vision/44dbe663aa9d/R26C8",
+                "map": {
+                  "green": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/44dbe663aa9d/R26C2",
+                "map": {
+                  "OVD01": 1
+                }
+              }
+            },
+            {
+              "id": "OVA71",
+              "score": {
+                "ref": "vision/44dbe663aa9d/R27C12",
+                "map": {
+                  "green": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/44dbe663aa9d/R27C2",
+                "map": {
+                  "OVA71": 0
+                }
+              }
+            },
+            {
+              "id": "OVB03",
+              "score": {
+                "ref": "vision/44dbe663aa9d/R28C8",
+                "map": {
+                  "green": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/44dbe663aa9d/R28C2",
+                "map": {
+                  "OVB03": 0
+                }
+              }
+            },
+            {
+              "id": "OVB71",
+              "score": {
+                "ref": "vision/44dbe663aa9d/R29C8",
+                "map": {
+                  "green": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/44dbe663aa9d/R29C2",
+                "map": {
+                  "OVB71": 0
+                }
+              }
+            },
+            {
+              "id": "OVC09",
+              "score": {
+                "ref": "vision/44dbe663aa9d/R30C8",
+                "map": {
+                  "green": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/44dbe663aa9d/R30C2",
+                "map": {
+                  "OVC09": 0
+                }
+              }
+            },
+            {
+              "id": "OVC21",
+              "score": {
+                "ref": "vision/44dbe663aa9d/R31C8",
+                "map": {
+                  "green": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/44dbe663aa9d/R31C2",
+                "map": {
+                  "OVC21": 0
+                }
+              }
+            },
+            {
+              "id": "OVB27",
+              "score": {
+                "ref": "vision/44dbe663aa9d/R32C8",
+                "map": {
+                  "green": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/44dbe663aa9d/R32C2",
+                "map": {
+                  "OVB27": 1
+                }
+              }
+            },
+            {
+              "id": "OVC16",
+              "score": {
+                "ref": "vision/44dbe663aa9d/R33C8",
+                "map": {
+                  "green": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/44dbe663aa9d/R33C2",
+                "map": {
+                  "OVC16": 1
+                }
+              }
+            },
+            {
+              "id": "OVC37",
+              "score": {
+                "ref": "vision/44dbe663aa9d/R34C8",
+                "map": {
+                  "green": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/44dbe663aa9d/R34C2",
+                "map": {
+                  "OVC37": 1
+                }
+              }
+            },
+            {
+              "id": "OVC80",
+              "score": {
+                "ref": "vision/44dbe663aa9d/R35C8",
+                "map": {
+                  "green": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/44dbe663aa9d/R35C2",
+                "map": {
+                  "OVC80": 1
+                }
+              }
+            },
+            {
+              "id": "OVC20",
+              "score": {
+                "ref": "vision/45b917d1cc11/R1C9",
+                "map": {
+                  "green": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/45b917d1cc11/R1C2",
+                "map": {
+                  "OVC20": 1
+                }
+              }
+            },
+            {
+              "id": "OVB07",
+              "score": {
+                "ref": "vision/45b917d1cc11/R2C9",
+                "map": {
+                  "green": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/45b917d1cc11/R2C2",
+                "map": {
+                  "OVB07": 1
+                }
+              }
+            },
+            {
+              "id": "OVC01",
+              "score": {
+                "ref": "vision/45b917d1cc11/R3C9",
+                "map": {
+                  "green": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/45b917d1cc11/R3C2",
+                "map": {
+                  "OVC01": 1
+                }
+              }
+            },
+            {
+              "id": "OVC95",
+              "score": {
+                "ref": "vision/45b917d1cc11/R4C9",
+                "map": {
+                  "green": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/45b917d1cc11/R4C2",
+                "map": {
+                  "OVC95": 1
+                }
+              }
+            },
+            {
+              "id": "OVC07",
+              "score": {
+                "ref": "vision/45b917d1cc11/R5C10",
+                "map": {
+                  "green": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/45b917d1cc11/R5C2",
+                "map": {
+                  "OVC07": 1
+                }
+              }
+            },
+            {
+              "id": "OVC29",
+              "score": {
+                "ref": "vision/45b917d1cc11/R6C10",
+                "map": {
+                  "green": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/45b917d1cc11/R6C2",
+                "map": {
+                  "OVC29": 1
+                }
+              }
+            },
+            {
+              "id": "OVB22",
+              "score": {
+                "ref": "vision/45b917d1cc11/R7C9",
+                "map": {
+                  "green": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/45b917d1cc11/R7C2",
+                "map": {
+                  "OVB22": 0
+                }
+              }
+            },
+            {
+              "id": "OVC68",
+              "score": {
+                "ref": "vision/45b917d1cc11/R8C9",
+                "map": {
+                  "green": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/45b917d1cc11/R8C2",
+                "map": {
+                  "OVC68": 0
+                }
+              }
+            },
+            {
+              "id": "OVC14",
+              "score": {
+                "ref": "vision/45b917d1cc11/R9C9",
+                "map": {
+                  "green": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/45b917d1cc11/R9C2",
+                "map": {
+                  "OVC14": 1
+                }
+              }
+            }
+          ],
+          "blocked_reason": null
+        },
+        "notes": [
+          "Primary-debulking cohort: 26 TP, 5 TN, and 4 FN = 31/35 correct.",
+          "Neoadjuvant laparoscopic-biopsy cohort: 6 TP, 2 TN, and 1 FN = 8/9 correct.",
+          "Combined: 32 TP, 7 TN, 5 FN, 0 FP; accuracy = 39/44 = 0.8863636363636364."
+        ]
+      },
+      "execution_feedback": {
+        "matched": true,
+        "metric": "accuracy",
+        "computed": 0.8863636363636364,
+        "reported": 0.8863636363636364,
+        "difference": 0.0,
+        "n": 44,
+        "errors": [],
+        "expected": {
+          "metric": "accuracy",
+          "value": 0.8863636363636364,
+          "n": 44
+        }
+      }
+    }
+  }
+]

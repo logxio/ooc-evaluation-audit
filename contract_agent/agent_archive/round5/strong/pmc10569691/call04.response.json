@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_ub2l28wds3xap2zbmw58b65u",
+        "type": "function",
+        "function": {
+          "name": "read_figure",
+          "arguments": "{\"file\": \"Table_1_image1.jpeg\"}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "We have 14+18=32 rows. \n\nI found 2 MIBC rows are missing, likely due to omitted table row counting during parsing. The current total record count is 32, which falls short of the required 34. I will use the relevant tool to read the target image to get the complete table data.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 244,
+    "prompt_tokens": 18045,
+    "total_tokens": 18289,
+    "prompt_tokens_details": {
+      "cached_tokens": 16696
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 206
+    }
+  }
+}

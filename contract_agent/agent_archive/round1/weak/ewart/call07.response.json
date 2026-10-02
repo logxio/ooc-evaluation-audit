@@ -1,0 +1,28 @@
+{
+  "model": "qwen3.7-plus",
+  "message": {
+    "role": "assistant",
+    "content": "Let me search for a table in the PDF that contains the summary results with drug names and their toxicity predictions.\n\n",
+    "tool_calls": [
+      {
+        "id": "call_ab4b1656b9b8404a8adff2b4",
+        "type": "function",
+        "function": {
+          "name": "preview_table",
+          "arguments": "{\"file\": \"43856_2022_209_MOESM9_ESM.pdf\", \"sheet\": \"page12\", \"start\": 1, \"rows\": 40}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 106,
+    "prompt_tokens": 56317,
+    "prompt_tokens_details": {
+      "cached_tokens": 45696,
+      "text_tokens": 56317
+    },
+    "total_tokens": 56423
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "{\"columns\":[\"\",\"\",\"\"],\"legend\":{\"blue\":\"unlabeled\"},\"rows\":[[\"\",\"17\",\"\"],[\"\",\"FFX\",\"\"],[\"blue\",\"blue: 93.8\",\"blue\"],[\"blue\",\"blue: SD\",\"blue\"],[\"\",\"FFX\",\"\"],[\"\",\"1\",\"\"]],\"uncertain\":[[3,2],[4,2]],\"notes\":\"Cropped image with no visible axis titles or legend labels; blue horizontal bars are divided into three segments. Text in the blue bars is blurry.\"}"
+  },
+  "reasoning_content": "We need need transcribe visible.  After analysis, the image to be transcribed is cropped oddly, has no obvious axis titles and may be a forest plot. I have confirmed that the output should only be in JSON format, and sorted out preliminary column and row layout ideas, which can cover all visible content. I've finalized the row and column layout, confirmed to mark the image as cropped with no axis or legend content, set the legend entry for blue bars as unlabeled, and will include all visible text in the output strictly in the top-to-bottom reading order. I've confirmed the specific row and column layout for the transcription, marked relevant positions as uncertain due to blurriness, and will add a note about the cropped outer edges of the side bars. I'll ensure the final output is valid JSON with no markdown.\n",
+  "finish_reason": "stop",
+  "usage": {
+    "completion_tokens": 1005,
+    "prompt_tokens": 1601,
+    "total_tokens": 2606,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 895
+    }
+  }
+}

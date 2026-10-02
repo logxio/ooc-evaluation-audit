@@ -1,0 +1,9 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "# Search for tables with prediction/outcome related headers\nfor fname in [\"mmc1.pdf\", \"mmc6.pdf\", \"supp.pdf\"]:\n    if fname in tables:\n        for sname, t in tables[fname].items():\n            if t[\"rows\"]:\n                header = [str(c).lower() for c in t[\"rows\"][0]]\n                header_str = \" \".join(header)\n                # Look for tables that might contain patient-level prediction data\n                if any(kw in header_str for kw in [\"prediction\", \"outcome\", \"benefit\", \"response\", \"sensitive\", \"resistant\"]):\n                    print(f\"\\nCandidate in {fname}/{sname}:\")\n                    print(f\"  Header: {t['rows'][0][:12]}\")\n                    # Print first few data rows\n                    for i in range(1, min(5, t[\"nrows\"])):\n                        print(f\"  Row {i}: {t['rows'][i][:12]}\")"
+    },
+    "output_sha256": "d4449d08a2c8a44aee1b1b2207743418849f1f46c05003ccb7dc7bb226064813"
+  }
+]

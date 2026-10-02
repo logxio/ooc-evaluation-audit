@@ -1,0 +1,20 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "{\"columns\":[\"label\",\"bar\"],\"legend\":{\"green\":\"horizontal bar\",\"orange\":\"horizontal bar\",\"blue text\":\"drug abbreviation\",\"gray text\":\"drug abbreviation\"},\"rows\":[[\"hF44 (SN38 5FU OXA)\",\"green bar\"],[\"hF23 (GEM PAC)\",\"orange bar\"],[\"\",\"partial orange bar\"]],\"uncertain\":[[3,1],[3,2]],\"notes\":\"Cropped horizontal-bar chart with no visible axis values or titles. In the labels, SN38, 5FU, GEM and PAC are blue, while OXA is gray. The bottom row is truncated and its label is illegible.\"}"
+  },
+  "reasoning_content": "We need need transcribe visible cropped image. \n\nI've clarified the content and format requirements for the JSON output. The image is a wide, partially cropped chart with green and orange drug-related bars, labelled rows, no explicit column headers, and I'll transcribe only the visible content strictly as it appears.\n\nNo visible legend is available for reference, so I won't invent color attribution information. I will transcribe all visible drug labels and partial content in top-to-bottom order, leaving uncertain labels and truncated bars empty, and the chart has no value axis.\n\nI've confirmed the transcription schema: each row will store the corresponding drug label and bar appearance, with two inferred columns labeled \"label\" and \"bar (colour)\". I'll note the color coding rules for different drugs, and mark unclear content as empty in the JSON output. I will now output the result.\n",
+  "finish_reason": "stop",
+  "usage": {
+    "completion_tokens": 873,
+    "prompt_tokens": 1544,
+    "total_tokens": 2417,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 732
+    }
+  }
+}

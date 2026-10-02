@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_zov85rakg4seyq3nxqaqzk2s",
+        "type": "function",
+        "function": {
+          "name": "python",
+          "arguments": "{\"code\": \"for sh in tables['article.xml']:\\n print('\\\\n',sh)\\n for i,r in enumerate(get_rows('article.xml',sh)[:8],1): print(i,r)\\n\"}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "Truth likely spheroid false negative?What I will do is inspect tables for labels.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 95,
+    "prompt_tokens": 24823,
+    "total_tokens": 24918,
+    "prompt_tokens_details": {
+      "cached_tokens": 23352
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 24
+    }
+  }
+}

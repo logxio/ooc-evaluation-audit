@@ -1,0 +1,1388 @@
+{
+  "turn": 10,
+  "tool_count": 8,
+  "tokens": 356656,
+  "done": true,
+  "stop_reason": "verified",
+  "reader_calls": 1,
+  "checkpoints": {
+    "single_pass": {
+      "contract": null,
+      "evaluation": {
+        "matched": false,
+        "errors": [
+          "Python produced no CONTRACT"
+        ],
+        "execution": {
+          "returncode": 1,
+          "stdout": "",
+          "stderr": "Traceback (most recent call last):\n  File \"scratch/python01/worker.py\", line 19, in <module>\n    exec(compile(code,'<agent-code>','exec'))\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<agent-code>\", line 86, in <module>\nKeyError: 'P01'\n",
+          "seconds": 6.527623709000181,
+          "peak_rss_bytes": 60096512,
+          "limit_error": null,
+          "code_sha256": "499ccc8cb474a4fea71ee6b0eb029101de8544881770dae2b4ce9324ffeabbe7"
+        }
+      },
+      "calls": 1,
+      "tokens": 26926
+    },
+    "one_feedback": {
+      "contract": {
+        "status": "blocked",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "22 individual patient-derived chip models were compared with each patient’s clinical response."
+          },
+          "platform": {
+            "value": "perfused_chip",
+            "evidence": [
+              "article:p75",
+              "article:p76"
+            ],
+            "explanation": "Vascularized colorectal tumoroid-on-a-chip with self-assembled perfused vessels."
+          },
+          "readout": {
+            "value": "size_viability",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "Drug response was quantified by relative vessel density and relative tumoroid diameter."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "Lower relative vessel density or tumoroid diameter indicates drug sensitivity; higher values indicate resistance."
+          },
+          "threshold_rule": {
+            "value": "roc_optimized",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "Optimal cutoffs were selected with the Youden index and bootstrap sampling."
+          },
+          "threshold_timing": {
+            "value": "outcome_optimized",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "Cutoffs were determined using outcomes for the same 22 evaluated patients."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "Patient IDs are present in the Figure 5 source data."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "Both assay and clinical outcome concern FOLFOX plus bevacizumab."
+          },
+          "n_units": {
+            "value": 22,
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "The exact validation denominator is 22 patients."
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "No independent held-out cohort is reported; the cutoff was optimized in this validation cohort."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.8636363636363636,
+          "reported_evidence": [
+            "article:p76"
+          ],
+          "threshold": null,
+          "op": ">",
+          "score_direction": "higher",
+          "records": [],
+          "blocked_reason": "Missing complete independently identifiable row-level optimized-chip measurements and/or RECIST outcomes needed to reconstruct 19/22 accuracy."
+        },
+        "notes": [
+          "CR and PR are mapped to clinical sensitivity (truth 0); SD and PD are mapped to clinical resistance (truth 1).",
+          "Positive class for sensitivity is clinical resistance, matching the article definition."
+        ]
+      },
+      "evaluation": {
+        "matched": false,
+        "metric": "accuracy",
+        "computed": null,
+        "reported": 0.8636363636363636,
+        "difference": null,
+        "n": 0,
+        "errors": [
+          "No source-bound observations: Missing complete independently identifiable row-level optimized-chip measurements and/or RECIST outcomes needed to reconstruct 19/22 accuracy.",
+          "Expected 22 analysis units, got 0"
+        ],
+        "rows": [],
+        "expected": {
+          "metric": "accuracy",
+          "value": 0.8636363636363636,
+          "n": 22
+        }
+      },
+      "calls": 2,
+      "tokens": 52713
+    },
+    "tool_loop": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p76",
+              "vision/bb368cdd72f5/R1C1"
+            ],
+            "explanation": "The validation compared one optimized tumoroid-on-a-chip result with the clinical outcome for each of 22 patients."
+          },
+          "platform": {
+            "value": "perfused_chip",
+            "evidence": [
+              "article:p75",
+              "article:p76"
+            ],
+            "explanation": "The assay used a vascularized colorectal tumoroid-on-a-chip with self-assembled, perfused vessels."
+          },
+          "readout": {
+            "value": "size_viability",
+            "evidence": [
+              "article:p76",
+              "vision/bb368cdd72f5/R2C1"
+            ],
+            "explanation": "The bound assay row is the optimized-model tumoroid response, derived from relative tumoroid diameter after FOLFOX plus bevacizumab."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "Relative tumoroid diameter below the optimized-model cutoff was classified sensitive; higher values were classified resistant."
+          },
+          "threshold_rule": {
+            "value": "roc_optimized",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "The tumoroid-diameter cutoff was selected using the Youden index and bootstrap sampling."
+          },
+          "threshold_timing": {
+            "value": "outcome_optimized",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "The cutoff was optimized against clinical outcomes in the same 22-patient validation cohort."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "vision/bb368cdd72f5/R1C2",
+              "vision/bb368cdd72f5/R1C23"
+            ],
+            "explanation": "Figure 5P identifies each assay result and clinical response by patient ID."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "Both the chip drug test and evaluated clinical response concerned FOLFOX plus bevacizumab."
+          },
+          "n_units": {
+            "value": 22,
+            "evidence": [
+              "article:p76",
+              "vision/bb368cdd72f5/R7C24"
+            ],
+            "explanation": "The exact denominator for the reported accuracy was 22 patients."
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "No independent held-out cohort was reported; thresholds were optimized in this 22-patient cohort."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.8636363636363636,
+          "reported_evidence": [
+            "article:p76",
+            "vision/bb368cdd72f5/R7C24"
+          ],
+          "threshold": 0.5047,
+          "op": ">",
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "P01",
+              "score": {
+                "ref": "vision/bb368cdd72f5/R2C2",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/bb368cdd72f5/R3C2",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P02",
+              "score": {
+                "ref": "vision/bb368cdd72f5/R2C3",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/bb368cdd72f5/R3C3",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P03",
+              "score": {
+                "ref": "vision/bb368cdd72f5/R2C4",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/bb368cdd72f5/R3C4",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P05",
+              "score": {
+                "ref": "vision/bb368cdd72f5/R2C5",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/bb368cdd72f5/R3C5",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P06",
+              "score": {
+                "ref": "vision/bb368cdd72f5/R2C6",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/bb368cdd72f5/R3C6",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P10",
+              "score": {
+                "ref": "vision/bb368cdd72f5/R2C7",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/bb368cdd72f5/R3C7",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P11",
+              "score": {
+                "ref": "vision/bb368cdd72f5/R2C8",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/bb368cdd72f5/R3C8",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P12",
+              "score": {
+                "ref": "vision/bb368cdd72f5/R2C9",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/bb368cdd72f5/R3C9",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P13",
+              "score": {
+                "ref": "vision/bb368cdd72f5/R2C10",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/bb368cdd72f5/R3C10",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P14",
+              "score": {
+                "ref": "vision/bb368cdd72f5/R2C11",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/bb368cdd72f5/R3C11",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P32",
+              "score": {
+                "ref": "vision/bb368cdd72f5/R2C12",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/bb368cdd72f5/R3C12",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P33",
+              "score": {
+                "ref": "vision/bb368cdd72f5/R2C13",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/bb368cdd72f5/R3C13",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P34",
+              "score": {
+                "ref": "vision/bb368cdd72f5/R2C14",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/bb368cdd72f5/R3C14",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P35",
+              "score": {
+                "ref": "vision/bb368cdd72f5/R2C15",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/bb368cdd72f5/R3C15",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P36",
+              "score": {
+                "ref": "vision/bb368cdd72f5/R2C16",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/bb368cdd72f5/R3C16",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P37",
+              "score": {
+                "ref": "vision/bb368cdd72f5/R2C17",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/bb368cdd72f5/R3C17",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P38",
+              "score": {
+                "ref": "vision/bb368cdd72f5/R2C18",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/bb368cdd72f5/R3C18",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P39",
+              "score": {
+                "ref": "vision/bb368cdd72f5/R2C19",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/bb368cdd72f5/R3C19",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P40",
+              "score": {
+                "ref": "vision/bb368cdd72f5/R2C20",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/bb368cdd72f5/R3C20",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P41",
+              "score": {
+                "ref": "vision/bb368cdd72f5/R2C21",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/bb368cdd72f5/R3C21",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P42",
+              "score": {
+                "ref": "vision/bb368cdd72f5/R2C22",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/bb368cdd72f5/R3C22",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P43",
+              "score": {
+                "ref": "vision/bb368cdd72f5/R2C23",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/bb368cdd72f5/R3C23",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            }
+          ],
+          "blocked_reason": null
+        },
+        "notes": [
+          "RECIST CR and PR correspond to Good response/clinical sensitivity (0); SD and PD correspond to Poor response/clinical resistance (1), per article:p76.",
+          "The tumoroid-response classifications produce 19 agreements out of 22, equal to the published 86.36% accuracy. The three disagreements are P01, P12, and P36."
+        ]
+      },
+      "evaluation": {
+        "matched": true,
+        "metric": "accuracy",
+        "computed": 0.8636363636363636,
+        "reported": 0.8636363636363636,
+        "difference": 0.0,
+        "n": 22,
+        "errors": [],
+        "rows": [
+          {
+            "id": "P01",
+            "score": 1.0,
+            "truth": 0,
+            "prediction": 1
+          },
+          {
+            "id": "P02",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "P03",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "P05",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "P06",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "P10",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "P11",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "P12",
+            "score": 0.0,
+            "truth": 1,
+            "prediction": 0
+          },
+          {
+            "id": "P13",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "P14",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "P32",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "P33",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "P34",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "P35",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "P36",
+            "score": 0.0,
+            "truth": 1,
+            "prediction": 0
+          },
+          {
+            "id": "P37",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "P38",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "P39",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "P40",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "P41",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "P42",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "P43",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          }
+        ],
+        "expected": {
+          "metric": "accuracy",
+          "value": 0.8636363636363636,
+          "n": 22
+        }
+      },
+      "calls": 10,
+      "tokens": 356656
+    }
+  },
+  "last_contract": {
+    "status": "computed",
+    "fields": {
+      "unit": {
+        "value": "patient",
+        "evidence": [
+          "article:p76",
+          "vision/bb368cdd72f5/R1C1"
+        ],
+        "explanation": "The validation compared one optimized tumoroid-on-a-chip result with the clinical outcome for each of 22 patients."
+      },
+      "platform": {
+        "value": "perfused_chip",
+        "evidence": [
+          "article:p75",
+          "article:p76"
+        ],
+        "explanation": "The assay used a vascularized colorectal tumoroid-on-a-chip with self-assembled, perfused vessels."
+      },
+      "readout": {
+        "value": "size_viability",
+        "evidence": [
+          "article:p76",
+          "vision/bb368cdd72f5/R2C1"
+        ],
+        "explanation": "The bound assay row is the optimized-model tumoroid response, derived from relative tumoroid diameter after FOLFOX plus bevacizumab."
+      },
+      "direction": {
+        "value": "lower_sensitive",
+        "evidence": [
+          "article:p76"
+        ],
+        "explanation": "Relative tumoroid diameter below the optimized-model cutoff was classified sensitive; higher values were classified resistant."
+      },
+      "threshold_rule": {
+        "value": "roc_optimized",
+        "evidence": [
+          "article:p76"
+        ],
+        "explanation": "The tumoroid-diameter cutoff was selected using the Youden index and bootstrap sampling."
+      },
+      "threshold_timing": {
+        "value": "outcome_optimized",
+        "evidence": [
+          "article:p76"
+        ],
+        "explanation": "The cutoff was optimized against clinical outcomes in the same 22-patient validation cohort."
+      },
+      "patient_mapping": {
+        "value": "individual_available",
+        "evidence": [
+          "vision/bb368cdd72f5/R1C2",
+          "vision/bb368cdd72f5/R1C23"
+        ],
+        "explanation": "Figure 5P identifies each assay result and clinical response by patient ID."
+      },
+      "regimen_match": {
+        "value": "matched",
+        "evidence": [
+          "article:p76"
+        ],
+        "explanation": "Both the chip drug test and evaluated clinical response concerned FOLFOX plus bevacizumab."
+      },
+      "n_units": {
+        "value": 22,
+        "evidence": [
+          "article:p76",
+          "vision/bb368cdd72f5/R7C24"
+        ],
+        "explanation": "The exact denominator for the reported accuracy was 22 patients."
+      },
+      "split": {
+        "value": "same_cohort",
+        "evidence": [
+          "article:p76"
+        ],
+        "explanation": "No independent held-out cohort was reported; thresholds were optimized in this 22-patient cohort."
+      }
+    },
+    "headline": {
+      "metric": "accuracy",
+      "reported": 0.8636363636363636,
+      "reported_evidence": [
+        "article:p76",
+        "vision/bb368cdd72f5/R7C24"
+      ],
+      "threshold": 0.5047,
+      "op": ">",
+      "score_direction": "higher",
+      "records": [
+        {
+          "id": "P01",
+          "score": {
+            "ref": "vision/bb368cdd72f5/R2C2",
+            "map": {
+              "Sensitive": 0,
+              "Resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "vision/bb368cdd72f5/R3C2",
+            "map": {
+              "Good response": 0,
+              "Poor response": 1
+            }
+          }
+        },
+        {
+          "id": "P02",
+          "score": {
+            "ref": "vision/bb368cdd72f5/R2C3",
+            "map": {
+              "Sensitive": 0,
+              "Resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "vision/bb368cdd72f5/R3C3",
+            "map": {
+              "Good response": 0,
+              "Poor response": 1
+            }
+          }
+        },
+        {
+          "id": "P03",
+          "score": {
+            "ref": "vision/bb368cdd72f5/R2C4",
+            "map": {
+              "Sensitive": 0,
+              "Resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "vision/bb368cdd72f5/R3C4",
+            "map": {
+              "Good response": 0,
+              "Poor response": 1
+            }
+          }
+        },
+        {
+          "id": "P05",
+          "score": {
+            "ref": "vision/bb368cdd72f5/R2C5",
+            "map": {
+              "Sensitive": 0,
+              "Resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "vision/bb368cdd72f5/R3C5",
+            "map": {
+              "Good response": 0,
+              "Poor response": 1
+            }
+          }
+        },
+        {
+          "id": "P06",
+          "score": {
+            "ref": "vision/bb368cdd72f5/R2C6",
+            "map": {
+              "Sensitive": 0,
+              "Resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "vision/bb368cdd72f5/R3C6",
+            "map": {
+              "Good response": 0,
+              "Poor response": 1
+            }
+          }
+        },
+        {
+          "id": "P10",
+          "score": {
+            "ref": "vision/bb368cdd72f5/R2C7",
+            "map": {
+              "Sensitive": 0,
+              "Resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "vision/bb368cdd72f5/R3C7",
+            "map": {
+              "Good response": 0,
+              "Poor response": 1
+            }
+          }
+        },
+        {
+          "id": "P11",
+          "score": {
+            "ref": "vision/bb368cdd72f5/R2C8",
+            "map": {
+              "Sensitive": 0,
+              "Resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "vision/bb368cdd72f5/R3C8",
+            "map": {
+              "Good response": 0,
+              "Poor response": 1
+            }
+          }
+        },
+        {
+          "id": "P12",
+          "score": {
+            "ref": "vision/bb368cdd72f5/R2C9",
+            "map": {
+              "Sensitive": 0,
+              "Resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "vision/bb368cdd72f5/R3C9",
+            "map": {
+              "Good response": 0,
+              "Poor response": 1
+            }
+          }
+        },
+        {
+          "id": "P13",
+          "score": {
+            "ref": "vision/bb368cdd72f5/R2C10",
+            "map": {
+              "Sensitive": 0,
+              "Resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "vision/bb368cdd72f5/R3C10",
+            "map": {
+              "Good response": 0,
+              "Poor response": 1
+            }
+          }
+        },
+        {
+          "id": "P14",
+          "score": {
+            "ref": "vision/bb368cdd72f5/R2C11",
+            "map": {
+              "Sensitive": 0,
+              "Resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "vision/bb368cdd72f5/R3C11",
+            "map": {
+              "Good response": 0,
+              "Poor response": 1
+            }
+          }
+        },
+        {
+          "id": "P32",
+          "score": {
+            "ref": "vision/bb368cdd72f5/R2C12",
+            "map": {
+              "Sensitive": 0,
+              "Resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "vision/bb368cdd72f5/R3C12",
+            "map": {
+              "Good response": 0,
+              "Poor response": 1
+            }
+          }
+        },
+        {
+          "id": "P33",
+          "score": {
+            "ref": "vision/bb368cdd72f5/R2C13",
+            "map": {
+              "Sensitive": 0,
+              "Resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "vision/bb368cdd72f5/R3C13",
+            "map": {
+              "Good response": 0,
+              "Poor response": 1
+            }
+          }
+        },
+        {
+          "id": "P34",
+          "score": {
+            "ref": "vision/bb368cdd72f5/R2C14",
+            "map": {
+              "Sensitive": 0,
+              "Resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "vision/bb368cdd72f5/R3C14",
+            "map": {
+              "Good response": 0,
+              "Poor response": 1
+            }
+          }
+        },
+        {
+          "id": "P35",
+          "score": {
+            "ref": "vision/bb368cdd72f5/R2C15",
+            "map": {
+              "Sensitive": 0,
+              "Resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "vision/bb368cdd72f5/R3C15",
+            "map": {
+              "Good response": 0,
+              "Poor response": 1
+            }
+          }
+        },
+        {
+          "id": "P36",
+          "score": {
+            "ref": "vision/bb368cdd72f5/R2C16",
+            "map": {
+              "Sensitive": 0,
+              "Resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "vision/bb368cdd72f5/R3C16",
+            "map": {
+              "Good response": 0,
+              "Poor response": 1
+            }
+          }
+        },
+        {
+          "id": "P37",
+          "score": {
+            "ref": "vision/bb368cdd72f5/R2C17",
+            "map": {
+              "Sensitive": 0,
+              "Resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "vision/bb368cdd72f5/R3C17",
+            "map": {
+              "Good response": 0,
+              "Poor response": 1
+            }
+          }
+        },
+        {
+          "id": "P38",
+          "score": {
+            "ref": "vision/bb368cdd72f5/R2C18",
+            "map": {
+              "Sensitive": 0,
+              "Resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "vision/bb368cdd72f5/R3C18",
+            "map": {
+              "Good response": 0,
+              "Poor response": 1
+            }
+          }
+        },
+        {
+          "id": "P39",
+          "score": {
+            "ref": "vision/bb368cdd72f5/R2C19",
+            "map": {
+              "Sensitive": 0,
+              "Resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "vision/bb368cdd72f5/R3C19",
+            "map": {
+              "Good response": 0,
+              "Poor response": 1
+            }
+          }
+        },
+        {
+          "id": "P40",
+          "score": {
+            "ref": "vision/bb368cdd72f5/R2C20",
+            "map": {
+              "Sensitive": 0,
+              "Resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "vision/bb368cdd72f5/R3C20",
+            "map": {
+              "Good response": 0,
+              "Poor response": 1
+            }
+          }
+        },
+        {
+          "id": "P41",
+          "score": {
+            "ref": "vision/bb368cdd72f5/R2C21",
+            "map": {
+              "Sensitive": 0,
+              "Resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "vision/bb368cdd72f5/R3C21",
+            "map": {
+              "Good response": 0,
+              "Poor response": 1
+            }
+          }
+        },
+        {
+          "id": "P42",
+          "score": {
+            "ref": "vision/bb368cdd72f5/R2C22",
+            "map": {
+              "Sensitive": 0,
+              "Resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "vision/bb368cdd72f5/R3C22",
+            "map": {
+              "Good response": 0,
+              "Poor response": 1
+            }
+          }
+        },
+        {
+          "id": "P43",
+          "score": {
+            "ref": "vision/bb368cdd72f5/R2C23",
+            "map": {
+              "Sensitive": 0,
+              "Resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "vision/bb368cdd72f5/R3C23",
+            "map": {
+              "Good response": 0,
+              "Poor response": 1
+            }
+          }
+        }
+      ],
+      "blocked_reason": null
+    },
+    "notes": [
+      "RECIST CR and PR correspond to Good response/clinical sensitivity (0); SD and PD correspond to Poor response/clinical resistance (1), per article:p76.",
+      "The tumoroid-response classifications produce 19 agreements out of 22, equal to the published 86.36% accuracy. The three disagreements are P01, P12, and P36."
+    ]
+  },
+  "last_evaluation": {
+    "matched": true,
+    "metric": "accuracy",
+    "computed": 0.8636363636363636,
+    "reported": 0.8636363636363636,
+    "difference": 0.0,
+    "n": 22,
+    "errors": [],
+    "rows": [
+      {
+        "id": "P01",
+        "score": 1.0,
+        "truth": 0,
+        "prediction": 1
+      },
+      {
+        "id": "P02",
+        "score": 0.0,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "P03",
+        "score": 0.0,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "P05",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "P06",
+        "score": 0.0,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "P10",
+        "score": 0.0,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "P11",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "P12",
+        "score": 0.0,
+        "truth": 1,
+        "prediction": 0
+      },
+      {
+        "id": "P13",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "P14",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "P32",
+        "score": 0.0,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "P33",
+        "score": 0.0,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "P34",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "P35",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "P36",
+        "score": 0.0,
+        "truth": 1,
+        "prediction": 0
+      },
+      {
+        "id": "P37",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "P38",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "P39",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "P40",
+        "score": 0.0,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "P41",
+        "score": 0.0,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "P42",
+        "score": 0.0,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "P43",
+        "score": 0.0,
+        "truth": 0,
+        "prediction": 0
+      }
+    ],
+    "expected": {
+      "metric": "accuracy",
+      "value": 0.8636363636363636,
+      "n": 22
+    }
+  }
+}

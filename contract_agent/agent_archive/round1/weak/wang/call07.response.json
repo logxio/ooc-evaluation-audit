@@ -1,0 +1,28 @@
+{
+  "model": "qwen3.7-plus",
+  "message": {
+    "role": "assistant",
+    "content": "This is still Table S5. Let me search for Table S6 specifically by looking at later pages in the supplementary PDF.\n\n",
+    "tool_calls": [
+      {
+        "id": "call_6fd08ca5392b4816a5a83dca",
+        "type": "function",
+        "function": {
+          "name": "preview_table",
+          "arguments": "{\"file\": \"supp.pdf\", \"sheet\": \"page17\", \"start\": 1, \"rows\": 30}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 91,
+    "prompt_tokens": 63616,
+    "prompt_tokens_details": {
+      "cached_tokens": 54400,
+      "text_tokens": 63616
+    },
+    "total_tokens": 63707
+  }
+}

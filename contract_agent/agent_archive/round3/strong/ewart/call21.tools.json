@@ -1,0 +1,17 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "import os, glob\nprint(glob.glob('*'))\ntry:\n import PyPDF2; print('PyPDF2 yes')\nexcept Exception as e: print('no PyPDF2',e)\ntry:\n import pdfplumber; print('pdfplumber yes')\nexcept Exception as e: print('no pdfplumber',e)\n"
+    },
+    "output": {
+      "returncode": 0,
+      "stdout": "['worker.py', 'stdout.txt', 'profile.sb', 'code.py', 'stderr.txt']\nno PyPDF2 No module named 'PyPDF2'\nno pdfplumber No module named 'pdfplumber'\n",
+      "stderr": "",
+      "seconds": 1.2334492089867126,
+      "peak_rss_bytes": 48693248,
+      "limit_error": null,
+      "code_sha256": "387cdd9efe182b502567fd31832cea60e3959aae7c71305891c5439bd9684a6e"
+    }
+  }
+]

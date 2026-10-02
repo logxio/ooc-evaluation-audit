@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_nohitscevldbilpodbnchyeo",
+        "type": "function",
+        "function": {
+          "name": "python",
+          "arguments": "{\"code\": \"for p in ['page14','page15']:\\n    print('===',p)\\n    rows=get_rows('mmc1.pdf',p)\\n    for i,row in enumerate(rows,1):\\n        print(i,row)\\n\"}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "Let me inspect the actual rows.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 94,
+    "prompt_tokens": 24438,
+    "total_tokens": 24532,
+    "prompt_tokens_details": {
+      "cached_tokens": 2360
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 8
+    }
+  }
+}

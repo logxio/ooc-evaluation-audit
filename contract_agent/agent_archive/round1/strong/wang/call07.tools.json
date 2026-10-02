@@ -1,0 +1,9 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "\nrows18 = get_rows('supp.pdf','page18'); rows19 = get_rows('supp.pdf','page19'); rows20 = get_rows('supp.pdf','page20')\n\ndef parse(rows, start):\n    out=[]\n    i=start\n    while i < len(rows):\n        r=rows[i]\n        if len(r)>=2 and r[0].startswith('P-') and r[1].startswith('P-') and '-O' in r[1]:\n            oid=r[1]\n            # find IC50, response, consistency: scan from right of core fields\n            # core: case, organoid, gender, age, ps, stage, path, site... then mutation..., lines, regimen..., ic50, response, consistency\n            # locate response token PR/SD/PD\n            resp_idx=None\n            for j in range(len(r)-1,1,-1):\n                if r[j] in ('PR','SD','PD'):\n                    resp_idx=j; break\n            ic50 = r[resp_idx-1]; cons = r[resp_idx+1]\n            out.append((oid, ic50, r[resp_idx], cons, i))\n            i+=1\n        else:\n            i+=1\n    return out\n\nrecs = parse(rows18,9)+parse(rows19,0)+parse(rows20,0)\nprint(len(recs))\nfor x in recs: print(x)\nno = [x for x in recs if x[3]=='NO']\nyes=[x for x in recs if x[3]=='YES']\nprint('YES',len(yes),'NO',len(no))\n# confusion from flag+response\ntp=sum(1 for x in recs if x[3]=='YES' and x[2]=='PR')\nfn=sum(1 for x in recs if x[3]=='NO' and x[2]=='PR')\nfp=sum(1 for x in recs if x[3]=='NO' and x[2] in ('PD','SD'))\ntn=sum(1 for x in recs if x[3]=='YES' and x[2] in ('PD','SD'))\nprint(tp,fn,fp,tn, (tp+tn)/len(recs))\n"
+    },
+    "output_sha256": "01d254b1ae6f048223d4ecc2630b711ef05a8efd1f4af33af05d7058c8e51655"
+  }
+]

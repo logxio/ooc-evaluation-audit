@@ -1,0 +1,1364 @@
+{
+  "turn": 5,
+  "tool_count": 4,
+  "tokens": 123017,
+  "done": true,
+  "stop_reason": "verified",
+  "reader_calls": 1,
+  "checkpoints": {
+    "single_pass": {
+      "contract": {
+        "status": "blocked",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p2",
+              "article:p9"
+            ],
+            "explanation": "One PDO line represented each evaluated patient; the validation cohort contained 13 patients."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p8",
+              "article:p14"
+            ],
+            "explanation": "Drug responses were measured in patient-derived 3D organoid (PDO) cultures."
+          },
+          "readout": {
+            "value": "auc",
+            "evidence": [
+              "article:p15",
+              "article:p17"
+            ],
+            "explanation": "The predictor was relative area under the FLOT dose-response curve, AUCrel(FLOT), not individual viability wells."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p16"
+            ],
+            "explanation": "Responders had significantly lower AUCrel than non-responders."
+          },
+          "threshold_rule": {
+            "value": "fixed_numeric",
+            "evidence": [
+              "article:p17",
+              "article:p15"
+            ],
+            "explanation": "A fixed AUCthreshold of 0.559 was derived in the exploratory cohort and applied to the validation cohort."
+          },
+          "threshold_timing": {
+            "value": "independent_reference",
+            "evidence": [
+              "article:p9",
+              "article:p17",
+              "article:p18"
+            ],
+            "explanation": "The threshold was established on the chronologically first 13 PDOs and tested on the separate following 13 PDOs."
+          },
+          "patient_mapping": {
+            "value": "partial",
+            "evidence": [
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R18C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R19C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R20C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R21C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R22C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R23C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R24C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R25C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R26C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R27C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R28C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R29C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R18C8",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R19C8",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R20C8",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R21C8",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R22C8",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R23C8",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R24C8",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R25C8",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R26C8",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R27C8",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R28C8",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R29C8"
+            ],
+            "explanation": "Supplementary Table 2 individually maps validation organoid IDs to Becker grades, but structured row-level FLOT AUCrel scores are absent; Fig. 2I requires independent figure transcription."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p9",
+              "article:p14",
+              "article:p18"
+            ],
+            "explanation": "Only patients who received neoadjuvant FLOT were used for the FLOT assay comparison."
+          },
+          "n_units": {
+            "value": 13,
+            "evidence": [
+              "article:p18",
+              "article:p2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R18C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R19C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R20C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R21C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R22C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R23C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R24C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R25C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R26C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R27C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R28C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R29C2"
+            ],
+            "explanation": "The independent validation denominator was 13 patients/PDOs."
+          },
+          "split": {
+            "value": "independent_test",
+            "evidence": [
+              "article:p9",
+              "article:p18"
+            ],
+            "explanation": "The 12/13 accuracy was achieved in the independent validation cohort after threshold discovery in a separate exploratory cohort."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.9230769230769231,
+          "reported_evidence": [
+            "article:p18",
+            "article:p3"
+          ],
+          "threshold": 0.559,
+          "op": "<=",
+          "score_direction": "lower",
+          "records": [],
+          "blocked_reason": "Missing independently transcribed row-level FLOT AUCrel scores or threshold classifications for the 13 validation patients. Supplementary Table 2 provides individual Becker outcomes, while Fig. 2I is described as showing the individual FLOT test results and classifications but has not been supplied through read_figure. The 39 exploratory ROC measurements are assay replicates from 13 PDOs and cannot substitute for validation-patient records."
+        },
+        "notes": [
+          "Published text states 12 of 13 validation patients were correctly classified, giving sensitivity 90%, specificity 100%, and accuracy 92% (exact fraction 12/13).",
+          "Three replicates per PDO are assay replicates, not additional patients, and are not used to inflate the n=13 denominator."
+        ]
+      },
+      "evaluation": {
+        "matched": false,
+        "metric": "accuracy",
+        "computed": null,
+        "reported": 0.9230769230769231,
+        "difference": null,
+        "n": 0,
+        "errors": [
+          "No source-bound observations: Missing independently transcribed row-level FLOT AUCrel scores or threshold classifications for the 13 validation patients. Supplementary Table 2 provides individual Becker outcomes, while Fig. 2I is described as showing the individual FLOT test results and classifications but has not been supplied through read_figure. The 39 exploratory ROC measurements are assay replicates from 13 PDOs and cannot substitute for validation-patient records.",
+          "Expected 13 analysis units, got 0"
+        ],
+        "rows": [],
+        "expected": {
+          "metric": "accuracy",
+          "value": 0.9230769230769231,
+          "n": 13
+        }
+      },
+      "calls": 1,
+      "tokens": 18760
+    },
+    "one_feedback": {
+      "contract": {
+        "status": "blocked",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p2",
+              "article:p9"
+            ],
+            "explanation": "Each validation record is one patient represented by one PDO line."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p8",
+              "article:p14"
+            ],
+            "explanation": "Responses were measured in patient-derived organoids."
+          },
+          "readout": {
+            "value": "auc",
+            "evidence": [
+              "article:p15",
+              "article:p17"
+            ],
+            "explanation": "The assay predictor was AUCrel from the FLOT dose-response curve."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p16"
+            ],
+            "explanation": "Lower AUCrel indicated greater FLOT sensitivity and pathological response."
+          },
+          "threshold_rule": {
+            "value": "fixed_numeric",
+            "evidence": [
+              "article:p17",
+              "article:p15"
+            ],
+            "explanation": "The prespecified validation cutoff was AUCthreshold=0.559."
+          },
+          "threshold_timing": {
+            "value": "independent_reference",
+            "evidence": [
+              "article:p9",
+              "article:p17",
+              "article:p18"
+            ],
+            "explanation": "The threshold was fitted using the first 13 exploratory PDOs and evaluated in the next 13 independent PDOs."
+          },
+          "patient_mapping": {
+            "value": "partial",
+            "evidence": [
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R18C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R19C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R20C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R21C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R22C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R23C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R24C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R25C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R26C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R27C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R28C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R29C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R18C8",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R19C8",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R20C8",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R21C8",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R22C8",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R23C8",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R24C8",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R25C8",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R26C8",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R27C8",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R28C8",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R29C8"
+            ],
+            "explanation": "Validation patient IDs and pathological outcomes are individually available, but row-level assay scores are not present in the structured tables."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p9",
+              "article:p14",
+              "article:p18"
+            ],
+            "explanation": "Assay FLOT exposure was compared with pathological response after clinical neoadjuvant FLOT."
+          },
+          "n_units": {
+            "value": 13,
+            "evidence": [
+              "article:p18",
+              "article:p2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R18C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R19C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R20C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R21C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R22C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R23C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R24C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R25C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R26C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R27C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R28C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R29C2"
+            ],
+            "explanation": "The exact validation denominator was 13 patients/PDO lines."
+          },
+          "split": {
+            "value": "independent_test",
+            "evidence": [
+              "article:p9",
+              "article:p18"
+            ],
+            "explanation": "Threshold derivation and accuracy evaluation used separate exploratory and validation cohorts."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.9230769230769231,
+          "reported_evidence": [
+            "article:p18",
+            "article:p3"
+          ],
+          "threshold": 0.559,
+          "op": "<=",
+          "score_direction": "lower",
+          "records": [
+            {
+              "id": "OO87",
+              "score": null,
+              "truth": {
+                "ref": "12943_2023_1919_MOESM1_ESM.docx/table2/R18C8",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              },
+              "missing_score_ref": "vision/12943_2023_1919_Fig2_HTML.jpg/panelI/validation_1",
+              "evidence": [
+                "12943_2023_1919_MOESM1_ESM.docx/table2/R18C2",
+                "12943_2023_1919_MOESM1_ESM.docx/table2/R18C8"
+              ]
+            },
+            {
+              "id": "OO88",
+              "score": null,
+              "truth": {
+                "ref": "12943_2023_1919_MOESM1_ESM.docx/table2/R19C8",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              },
+              "missing_score_ref": "vision/12943_2023_1919_Fig2_HTML.jpg/panelI/validation_2",
+              "evidence": [
+                "12943_2023_1919_MOESM1_ESM.docx/table2/R19C2",
+                "12943_2023_1919_MOESM1_ESM.docx/table2/R19C8"
+              ]
+            },
+            {
+              "id": "OO90",
+              "score": null,
+              "truth": {
+                "ref": "12943_2023_1919_MOESM1_ESM.docx/table2/R20C8",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              },
+              "missing_score_ref": "vision/12943_2023_1919_Fig2_HTML.jpg/panelI/validation_3",
+              "evidence": [
+                "12943_2023_1919_MOESM1_ESM.docx/table2/R20C2",
+                "12943_2023_1919_MOESM1_ESM.docx/table2/R20C8"
+              ]
+            },
+            {
+              "id": "OO95",
+              "score": null,
+              "truth": {
+                "ref": "12943_2023_1919_MOESM1_ESM.docx/table2/R21C8",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              },
+              "missing_score_ref": "vision/12943_2023_1919_Fig2_HTML.jpg/panelI/validation_4",
+              "evidence": [
+                "12943_2023_1919_MOESM1_ESM.docx/table2/R21C2",
+                "12943_2023_1919_MOESM1_ESM.docx/table2/R21C8"
+              ]
+            },
+            {
+              "id": "OO98",
+              "score": null,
+              "truth": {
+                "ref": "12943_2023_1919_MOESM1_ESM.docx/table2/R22C8",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              },
+              "missing_score_ref": "vision/12943_2023_1919_Fig2_HTML.jpg/panelI/validation_5",
+              "evidence": [
+                "12943_2023_1919_MOESM1_ESM.docx/table2/R22C2",
+                "12943_2023_1919_MOESM1_ESM.docx/table2/R22C8"
+              ]
+            },
+            {
+              "id": "OO99",
+              "score": null,
+              "truth": {
+                "ref": "12943_2023_1919_MOESM1_ESM.docx/table2/R23C8",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              },
+              "missing_score_ref": "vision/12943_2023_1919_Fig2_HTML.jpg/panelI/validation_6",
+              "evidence": [
+                "12943_2023_1919_MOESM1_ESM.docx/table2/R23C2",
+                "12943_2023_1919_MOESM1_ESM.docx/table2/R23C8"
+              ]
+            },
+            {
+              "id": "OO100",
+              "score": null,
+              "truth": {
+                "ref": "12943_2023_1919_MOESM1_ESM.docx/table2/R24C8",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              },
+              "missing_score_ref": "vision/12943_2023_1919_Fig2_HTML.jpg/panelI/validation_7",
+              "evidence": [
+                "12943_2023_1919_MOESM1_ESM.docx/table2/R24C2",
+                "12943_2023_1919_MOESM1_ESM.docx/table2/R24C8"
+              ]
+            },
+            {
+              "id": "OO103",
+              "score": null,
+              "truth": {
+                "ref": "12943_2023_1919_MOESM1_ESM.docx/table2/R25C8",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              },
+              "missing_score_ref": "vision/12943_2023_1919_Fig2_HTML.jpg/panelI/validation_8",
+              "evidence": [
+                "12943_2023_1919_MOESM1_ESM.docx/table2/R25C2",
+                "12943_2023_1919_MOESM1_ESM.docx/table2/R25C8"
+              ]
+            },
+            {
+              "id": "OO106",
+              "score": null,
+              "truth": {
+                "ref": "12943_2023_1919_MOESM1_ESM.docx/table2/R26C8",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              },
+              "missing_score_ref": "vision/12943_2023_1919_Fig2_HTML.jpg/panelI/validation_9",
+              "evidence": [
+                "12943_2023_1919_MOESM1_ESM.docx/table2/R26C2",
+                "12943_2023_1919_MOESM1_ESM.docx/table2/R26C8"
+              ]
+            },
+            {
+              "id": "OO113",
+              "score": null,
+              "truth": {
+                "ref": "12943_2023_1919_MOESM1_ESM.docx/table2/R27C8",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              },
+              "missing_score_ref": "vision/12943_2023_1919_Fig2_HTML.jpg/panelI/validation_10",
+              "evidence": [
+                "12943_2023_1919_MOESM1_ESM.docx/table2/R27C2",
+                "12943_2023_1919_MOESM1_ESM.docx/table2/R27C8"
+              ]
+            },
+            {
+              "id": "OO116",
+              "score": null,
+              "truth": {
+                "ref": "12943_2023_1919_MOESM1_ESM.docx/table2/R28C8",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              },
+              "missing_score_ref": "vision/12943_2023_1919_Fig2_HTML.jpg/panelI/validation_11",
+              "evidence": [
+                "12943_2023_1919_MOESM1_ESM.docx/table2/R28C2",
+                "12943_2023_1919_MOESM1_ESM.docx/table2/R28C8"
+              ]
+            },
+            {
+              "id": "OO118",
+              "score": null,
+              "truth": {
+                "ref": "12943_2023_1919_MOESM1_ESM.docx/table2/R29C8",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              },
+              "missing_score_ref": "vision/12943_2023_1919_Fig2_HTML.jpg/panelI/validation_12",
+              "evidence": [
+                "12943_2023_1919_MOESM1_ESM.docx/table2/R29C2",
+                "12943_2023_1919_MOESM1_ESM.docx/table2/R29C8"
+              ]
+            }
+          ],
+          "blocked_reason": "The source text reports 12/13 correct validations, but the required independently identifiable row-level FLOT AUCrel scores or threshold classifications for the 13 validation patients exist only in Fig. 2I and have not been transcribed through read_figure. Supplementary Table 2 supplies individual outcomes but not assay predictions. Entering a score for any patient would invent the missing assay observation."
+        },
+        "notes": [
+          "The published rounded accuracy is 92%; the exact fraction is 12/13=0.9230769230769231.",
+          "The 39 exploratory ROC observations are three assay replicates for each of 13 exploratory PDOs and are not validation patients.",
+          "Three assay replicates per PDO must not be counted as three patients."
+        ]
+      },
+      "evaluation": {
+        "matched": false,
+        "metric": "accuracy",
+        "computed": null,
+        "reported": 0.9230769230769231,
+        "difference": null,
+        "n": 0,
+        "errors": [
+          "Observation must bind to source references, got literal None",
+          "Observation must bind to source references, got literal None",
+          "Observation must bind to source references, got literal None",
+          "Observation must bind to source references, got literal None",
+          "Observation must bind to source references, got literal None",
+          "Observation must bind to source references, got literal None",
+          "Observation must bind to source references, got literal None",
+          "Observation must bind to source references, got literal None",
+          "Observation must bind to source references, got literal None",
+          "Observation must bind to source references, got literal None",
+          "Observation must bind to source references, got literal None",
+          "Observation must bind to source references, got literal None",
+          "Contract denominator is 13 but it supplies 12 records",
+          "Expected 13 analysis units, got 0"
+        ],
+        "rows": [],
+        "expected": {
+          "metric": "accuracy",
+          "value": 0.9230769230769231,
+          "n": 13
+        }
+      },
+      "calls": 2,
+      "tokens": 39488
+    },
+    "tool_loop": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p2",
+              "article:p9"
+            ],
+            "explanation": "Each validation record is one patient represented by one PDO line; the independent validation cohort contained 13 patients."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p8",
+              "article:p14"
+            ],
+            "explanation": "Drug response was measured in patient-derived 3D organoid cultures."
+          },
+          "readout": {
+            "value": "auc",
+            "evidence": [
+              "article:p15",
+              "article:p17"
+            ],
+            "explanation": "The predictor was AUCrel from the FLOT dose-response curve; Fig. 2I shows the per-PDO summary values and classifications."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p16",
+              "article:p17"
+            ],
+            "explanation": "Responders had lower AUCrel values; AUCrel at or below 0.559 classified a PDO/patient as a responder."
+          },
+          "threshold_rule": {
+            "value": "fixed_numeric",
+            "evidence": [
+              "article:p17",
+              "article:p15"
+            ],
+            "explanation": "A fixed AUCthreshold of 0.559 was calculated from the exploratory cohort and applied unchanged in validation."
+          },
+          "threshold_timing": {
+            "value": "independent_reference",
+            "evidence": [
+              "article:p9",
+              "article:p17",
+              "article:p18"
+            ],
+            "explanation": "The threshold was established in the first 13 exploratory PDOs and evaluated in the following 13 independent validation PDOs."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R17C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R29C2",
+              "vision/ca4ecbdf3542/R1C1",
+              "vision/ca4ecbdf3542/R13C1"
+            ],
+            "explanation": "Fig. 2I identifies each validation PDO and Supplementary Table 2 maps those PDO IDs to individual patients and Becker regression grades."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p9",
+              "article:p14",
+              "article:p18"
+            ],
+            "explanation": "The in vitro FLOT combination assay was compared with pathological response after clinical neoadjuvant FLOT."
+          },
+          "n_units": {
+            "value": 13,
+            "evidence": [
+              "article:p18",
+              "article:p2",
+              "vision/ca4ecbdf3542/R1C1",
+              "vision/ca4ecbdf3542/R13C1"
+            ],
+            "explanation": "There were 13 independently validated patients/PDO lines."
+          },
+          "split": {
+            "value": "independent_test",
+            "evidence": [
+              "article:p9",
+              "article:p18"
+            ],
+            "explanation": "The 12/13 accuracy was obtained in the independent validation cohort after threshold discovery in a separate exploratory cohort."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.9230769230769231,
+          "reported_evidence": [
+            "article:p18",
+            "article:p3",
+            "vision/ca4ecbdf3542/R1C6",
+            "vision/ca4ecbdf3542/R13C6"
+          ],
+          "threshold": 0.559,
+          "op": "<=",
+          "score_direction": "lower",
+          "records": [
+            {
+              "id": "OO80",
+              "score": {
+                "ref": "vision/ca4ecbdf3542/R1C3"
+              },
+              "truth": {
+                "ref": "vision/ca4ecbdf3542/R1C5",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "OO87",
+              "score": {
+                "ref": "vision/ca4ecbdf3542/R2C3"
+              },
+              "truth": {
+                "ref": "vision/ca4ecbdf3542/R2C5",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "OO88",
+              "score": {
+                "ref": "vision/ca4ecbdf3542/R3C3"
+              },
+              "truth": {
+                "ref": "vision/ca4ecbdf3542/R3C5",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "OO90",
+              "score": {
+                "ref": "vision/ca4ecbdf3542/R4C3"
+              },
+              "truth": {
+                "ref": "vision/ca4ecbdf3542/R4C5",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "OO95",
+              "score": {
+                "ref": "vision/ca4ecbdf3542/R5C3"
+              },
+              "truth": {
+                "ref": "vision/ca4ecbdf3542/R5C5",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "OO98",
+              "score": {
+                "ref": "vision/ca4ecbdf3542/R6C3"
+              },
+              "truth": {
+                "ref": "vision/ca4ecbdf3542/R6C5",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "OO99",
+              "score": {
+                "ref": "vision/ca4ecbdf3542/R7C3"
+              },
+              "truth": {
+                "ref": "vision/ca4ecbdf3542/R7C5",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "OO100",
+              "score": {
+                "ref": "vision/ca4ecbdf3542/R8C3"
+              },
+              "truth": {
+                "ref": "vision/ca4ecbdf3542/R8C5",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "OO103",
+              "score": {
+                "ref": "vision/ca4ecbdf3542/R9C3"
+              },
+              "truth": {
+                "ref": "vision/ca4ecbdf3542/R9C5",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "OO106",
+              "score": {
+                "ref": "vision/ca4ecbdf3542/R10C3"
+              },
+              "truth": {
+                "ref": "vision/ca4ecbdf3542/R10C5",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "OO113",
+              "score": {
+                "ref": "vision/ca4ecbdf3542/R11C3"
+              },
+              "truth": {
+                "ref": "vision/ca4ecbdf3542/R11C5",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "OO116",
+              "score": {
+                "ref": "vision/ca4ecbdf3542/R12C3"
+              },
+              "truth": {
+                "ref": "vision/ca4ecbdf3542/R12C5",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "OO118",
+              "score": {
+                "ref": "vision/ca4ecbdf3542/R13C3"
+              },
+              "truth": {
+                "ref": "vision/ca4ecbdf3542/R13C5",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            }
+          ],
+          "blocked_reason": null
+        },
+        "notes": [
+          "Applying AUCrel <= 0.559 as responder yields 12 agreements and one disagreement: OO98 is classified R but its Becker grade is 2, matching the single X in Fig. 2I.",
+          "The exact accuracy is 12/13 = 0.9230769230769231, reported in the article as 92%.",
+          "The three dots per PDO are assay replicates; the analysis unit remains one patient/PDO, using the PDO summary bar for classification as shown in Fig. 2I and described for at least two testings."
+        ]
+      },
+      "evaluation": {
+        "matched": true,
+        "metric": "accuracy",
+        "computed": 0.9230769230769231,
+        "reported": 0.9230769230769231,
+        "difference": 0.0,
+        "n": 13,
+        "errors": [],
+        "rows": [
+          {
+            "id": "OO80",
+            "score": 0.73,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "OO87",
+            "score": 0.62,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "OO88",
+            "score": 0.53,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "OO90",
+            "score": 0.75,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "OO95",
+            "score": 0.75,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "OO98",
+            "score": 0.47,
+            "truth": 0,
+            "prediction": 1
+          },
+          {
+            "id": "OO99",
+            "score": 0.59,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "OO100",
+            "score": 0.61,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "OO103",
+            "score": 0.65,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "OO106",
+            "score": 0.64,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "OO113",
+            "score": 0.73,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "OO116",
+            "score": 0.55,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "OO118",
+            "score": 0.45,
+            "truth": 1,
+            "prediction": 1
+          }
+        ],
+        "expected": {
+          "metric": "accuracy",
+          "value": 0.9230769230769231,
+          "n": 13
+        }
+      },
+      "calls": 5,
+      "tokens": 123017
+    }
+  },
+  "last_contract": {
+    "status": "computed",
+    "fields": {
+      "unit": {
+        "value": "patient",
+        "evidence": [
+          "article:p2",
+          "article:p9"
+        ],
+        "explanation": "Each validation record is one patient represented by one PDO line; the independent validation cohort contained 13 patients."
+      },
+      "platform": {
+        "value": "organoid",
+        "evidence": [
+          "article:p8",
+          "article:p14"
+        ],
+        "explanation": "Drug response was measured in patient-derived 3D organoid cultures."
+      },
+      "readout": {
+        "value": "auc",
+        "evidence": [
+          "article:p15",
+          "article:p17"
+        ],
+        "explanation": "The predictor was AUCrel from the FLOT dose-response curve; Fig. 2I shows the per-PDO summary values and classifications."
+      },
+      "direction": {
+        "value": "lower_sensitive",
+        "evidence": [
+          "article:p16",
+          "article:p17"
+        ],
+        "explanation": "Responders had lower AUCrel values; AUCrel at or below 0.559 classified a PDO/patient as a responder."
+      },
+      "threshold_rule": {
+        "value": "fixed_numeric",
+        "evidence": [
+          "article:p17",
+          "article:p15"
+        ],
+        "explanation": "A fixed AUCthreshold of 0.559 was calculated from the exploratory cohort and applied unchanged in validation."
+      },
+      "threshold_timing": {
+        "value": "independent_reference",
+        "evidence": [
+          "article:p9",
+          "article:p17",
+          "article:p18"
+        ],
+        "explanation": "The threshold was established in the first 13 exploratory PDOs and evaluated in the following 13 independent validation PDOs."
+      },
+      "patient_mapping": {
+        "value": "individual_available",
+        "evidence": [
+          "12943_2023_1919_MOESM1_ESM.docx/table2/R17C2",
+          "12943_2023_1919_MOESM1_ESM.docx/table2/R29C2",
+          "vision/ca4ecbdf3542/R1C1",
+          "vision/ca4ecbdf3542/R13C1"
+        ],
+        "explanation": "Fig. 2I identifies each validation PDO and Supplementary Table 2 maps those PDO IDs to individual patients and Becker regression grades."
+      },
+      "regimen_match": {
+        "value": "matched",
+        "evidence": [
+          "article:p9",
+          "article:p14",
+          "article:p18"
+        ],
+        "explanation": "The in vitro FLOT combination assay was compared with pathological response after clinical neoadjuvant FLOT."
+      },
+      "n_units": {
+        "value": 13,
+        "evidence": [
+          "article:p18",
+          "article:p2",
+          "vision/ca4ecbdf3542/R1C1",
+          "vision/ca4ecbdf3542/R13C1"
+        ],
+        "explanation": "There were 13 independently validated patients/PDO lines."
+      },
+      "split": {
+        "value": "independent_test",
+        "evidence": [
+          "article:p9",
+          "article:p18"
+        ],
+        "explanation": "The 12/13 accuracy was obtained in the independent validation cohort after threshold discovery in a separate exploratory cohort."
+      }
+    },
+    "headline": {
+      "metric": "accuracy",
+      "reported": 0.9230769230769231,
+      "reported_evidence": [
+        "article:p18",
+        "article:p3",
+        "vision/ca4ecbdf3542/R1C6",
+        "vision/ca4ecbdf3542/R13C6"
+      ],
+      "threshold": 0.559,
+      "op": "<=",
+      "score_direction": "lower",
+      "records": [
+        {
+          "id": "OO80",
+          "score": {
+            "ref": "vision/ca4ecbdf3542/R1C3"
+          },
+          "truth": {
+            "ref": "vision/ca4ecbdf3542/R1C5",
+            "map": {
+              "1a": 1,
+              "1b": 1,
+              "2": 0,
+              "3": 0
+            }
+          }
+        },
+        {
+          "id": "OO87",
+          "score": {
+            "ref": "vision/ca4ecbdf3542/R2C3"
+          },
+          "truth": {
+            "ref": "vision/ca4ecbdf3542/R2C5",
+            "map": {
+              "1a": 1,
+              "1b": 1,
+              "2": 0,
+              "3": 0
+            }
+          }
+        },
+        {
+          "id": "OO88",
+          "score": {
+            "ref": "vision/ca4ecbdf3542/R3C3"
+          },
+          "truth": {
+            "ref": "vision/ca4ecbdf3542/R3C5",
+            "map": {
+              "1a": 1,
+              "1b": 1,
+              "2": 0,
+              "3": 0
+            }
+          }
+        },
+        {
+          "id": "OO90",
+          "score": {
+            "ref": "vision/ca4ecbdf3542/R4C3"
+          },
+          "truth": {
+            "ref": "vision/ca4ecbdf3542/R4C5",
+            "map": {
+              "1a": 1,
+              "1b": 1,
+              "2": 0,
+              "3": 0
+            }
+          }
+        },
+        {
+          "id": "OO95",
+          "score": {
+            "ref": "vision/ca4ecbdf3542/R5C3"
+          },
+          "truth": {
+            "ref": "vision/ca4ecbdf3542/R5C5",
+            "map": {
+              "1a": 1,
+              "1b": 1,
+              "2": 0,
+              "3": 0
+            }
+          }
+        },
+        {
+          "id": "OO98",
+          "score": {
+            "ref": "vision/ca4ecbdf3542/R6C3"
+          },
+          "truth": {
+            "ref": "vision/ca4ecbdf3542/R6C5",
+            "map": {
+              "1a": 1,
+              "1b": 1,
+              "2": 0,
+              "3": 0
+            }
+          }
+        },
+        {
+          "id": "OO99",
+          "score": {
+            "ref": "vision/ca4ecbdf3542/R7C3"
+          },
+          "truth": {
+            "ref": "vision/ca4ecbdf3542/R7C5",
+            "map": {
+              "1a": 1,
+              "1b": 1,
+              "2": 0,
+              "3": 0
+            }
+          }
+        },
+        {
+          "id": "OO100",
+          "score": {
+            "ref": "vision/ca4ecbdf3542/R8C3"
+          },
+          "truth": {
+            "ref": "vision/ca4ecbdf3542/R8C5",
+            "map": {
+              "1a": 1,
+              "1b": 1,
+              "2": 0,
+              "3": 0
+            }
+          }
+        },
+        {
+          "id": "OO103",
+          "score": {
+            "ref": "vision/ca4ecbdf3542/R9C3"
+          },
+          "truth": {
+            "ref": "vision/ca4ecbdf3542/R9C5",
+            "map": {
+              "1a": 1,
+              "1b": 1,
+              "2": 0,
+              "3": 0
+            }
+          }
+        },
+        {
+          "id": "OO106",
+          "score": {
+            "ref": "vision/ca4ecbdf3542/R10C3"
+          },
+          "truth": {
+            "ref": "vision/ca4ecbdf3542/R10C5",
+            "map": {
+              "1a": 1,
+              "1b": 1,
+              "2": 0,
+              "3": 0
+            }
+          }
+        },
+        {
+          "id": "OO113",
+          "score": {
+            "ref": "vision/ca4ecbdf3542/R11C3"
+          },
+          "truth": {
+            "ref": "vision/ca4ecbdf3542/R11C5",
+            "map": {
+              "1a": 1,
+              "1b": 1,
+              "2": 0,
+              "3": 0
+            }
+          }
+        },
+        {
+          "id": "OO116",
+          "score": {
+            "ref": "vision/ca4ecbdf3542/R12C3"
+          },
+          "truth": {
+            "ref": "vision/ca4ecbdf3542/R12C5",
+            "map": {
+              "1a": 1,
+              "1b": 1,
+              "2": 0,
+              "3": 0
+            }
+          }
+        },
+        {
+          "id": "OO118",
+          "score": {
+            "ref": "vision/ca4ecbdf3542/R13C3"
+          },
+          "truth": {
+            "ref": "vision/ca4ecbdf3542/R13C5",
+            "map": {
+              "1a": 1,
+              "1b": 1,
+              "2": 0,
+              "3": 0
+            }
+          }
+        }
+      ],
+      "blocked_reason": null
+    },
+    "notes": [
+      "Applying AUCrel <= 0.559 as responder yields 12 agreements and one disagreement: OO98 is classified R but its Becker grade is 2, matching the single X in Fig. 2I.",
+      "The exact accuracy is 12/13 = 0.9230769230769231, reported in the article as 92%.",
+      "The three dots per PDO are assay replicates; the analysis unit remains one patient/PDO, using the PDO summary bar for classification as shown in Fig. 2I and described for at least two testings."
+    ]
+  },
+  "last_evaluation": {
+    "matched": true,
+    "metric": "accuracy",
+    "computed": 0.9230769230769231,
+    "reported": 0.9230769230769231,
+    "difference": 0.0,
+    "n": 13,
+    "errors": [],
+    "rows": [
+      {
+        "id": "OO80",
+        "score": 0.73,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "OO87",
+        "score": 0.62,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "OO88",
+        "score": 0.53,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "OO90",
+        "score": 0.75,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "OO95",
+        "score": 0.75,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "OO98",
+        "score": 0.47,
+        "truth": 0,
+        "prediction": 1
+      },
+      {
+        "id": "OO99",
+        "score": 0.59,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "OO100",
+        "score": 0.61,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "OO103",
+        "score": 0.65,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "OO106",
+        "score": 0.64,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "OO113",
+        "score": 0.73,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "OO116",
+        "score": 0.55,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "OO118",
+        "score": 0.45,
+        "truth": 1,
+        "prediction": 1
+      }
+    ],
+    "expected": {
+      "metric": "accuracy",
+      "value": 0.9230769230769231,
+      "n": 13
+    }
+  }
+}

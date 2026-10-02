@@ -1,0 +1,17 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "# Get Table 1 to see the list of 27 drugs\nrows_t1 = get_rows('article.xml', 'Table 1')\nprint(\"Table 1 rows:\")\nfor i, row in enumerate(rows_t1[:30]):\n    print(f\"Row {i+1}: {row}\")\n\n# Also check Table 4 and Table 5 for drug lists\nrows_t4 = get_rows('article.xml', 'Table 4')\nprint(\"\\nTable 4 header:\", rows_t4[0] if rows_t4 else \"Empty\")\n\nrows_t5 = get_rows('article.xml', 'Table 5')\nprint(\"\\nTable 5:\")\nfor i, row in enumerate(rows_t5):\n    print(f\"Row {i+1}: {row}\")"
+    },
+    "output": {
+      "returncode": 0,
+      "stdout": "Table 1 rows:\nRow 1: ['Drug', 'IQ MPS list', 'Tested in spheroid', 'Spheroid false negative', 'Garside DILI rank']\nRow 2: ['Ambrisentan', 'Yes, matched with Sitaxsentan', 'Yes', 'No', '5']\nRow 3: ['Asunaprevir', 'Yes, no matched pair', 'No', 'No', '2']\nRow 4: ['Benoxaprofen', 'No', 'Yes', 'Yes', '1']\nRow 5: ['Beta-Estradiol', 'No', 'Yes', 'Yes', '3']\nRow 6: ['Buspirone', 'Yes, matched with Nefazodone', 'Yes', 'No', '4']\nRow 7: ['Chlorpheniramine', 'No', 'Yes', 'Yes', '3']\nRow 8: ['Clozapine', 'Yes, matched with Olanzapine', 'Yes', 'No', '2']\nRow 9: ['Diclofenac', 'Yes, no matched pair', 'Yes', 'No', '2']\nRow 10: ['Entacapone', 'Yes, matched with Tolcapone', 'Yes', 'No', '4']\nRow 11: ['Fialuridine', 'Yes, matched with FIRU', 'Yes', 'No', '1']\nRow 12: ['FIRU', 'Yes, matched with Fialuridine', 'No', 'No', '5']\nRow 13: ['Labetalol', 'No', 'Yes', 'Yes', '1']\nRow 14: ['Levofloxacin', 'Yes, matched with Trovafloxacin', 'Yes', 'Yes', '2']\nRow 15: ['Lomitapide', 'No, Mipomersen substitute', 'No', 'No', '3']\nRow 16: ['Nefazodone', 'Yes, matched with Buspirone', 'Yes', 'No', '1']\nRow 17: ['', 'Yes, matched with Clozapine', 'No', 'No', '5']\nRow 18: ['Pioglitazone', 'Yes, matched with Troglitazone', 'Yes', 'Yes', '3']\nRow 19: ['Simvastatin', 'No', 'Yes', 'Yes', '2']\nRow 20: ['Sitaxsentan', 'Yes, matched with Ambrisentan', 'Yes', 'No', '1']\nRow 21: ['Stavudine', 'No', 'Yes', 'Yes', '1']\nRow 22: ['Tacrine', 'No', 'Yes', 'Yes', '2']\nRow 23: ['Telithromycin', 'Yes, no matched pair', 'No', 'No', '1']\nRow 24: ['Tolcapone', 'Yes, matched with Entacapone', 'Yes', 'No', '1']\nRow 25: ['Troglitazone', 'Yes, matched with Pioglitazone', 'Yes', 'No', '1']\nRow 26: ['Trovafloxacin', 'Yes, matched with Levofloxacin', 'Yes', 'No', '1']\nRow 27: ['Ximelagatran', 'No', 'Yes', 'Yes', '1']\nRow 28: ['Zileuton', 'Yes, no matched pair', 'Yes', 'Yes', '2']\n\nTable 4 header: ['Drug', 'Chip MOS donor 1', 'Chip MOS donor 2', 'Chip MOS both donors', 'Spheroid MOS']\n\nTable 5:\nRow 1: ['Model', 'True positive', 'True negative', 'False positive', 'False negative', 'Sensitivity (%)', 'Specificity (%)']\nRow 2: ['Chip donor 1', '16', '5', '0', '6', '73 [51.4–86.8%]', '100']\nRow 3: ['Chip donor 2', '9', '3', '0', '6', '60 [35.3–80.3%]', '100']\nRow 4: ['Chip both donors', '12', '3', '0', '3', '80 [54.2–92.8%]', '100']\nRow 5: ['Spheroid', '8', '2', '1', '11', '42 [22.9–64.0%]', '67']\n",
+      "stderr": "",
+      "seconds": 0.23938208300387487,
+      "peak_rss_bytes": 45268992,
+      "limit_error": null,
+      "code_sha256": "cd42d82bcd9318d731a65c8d717c1b24e02d639ce2c3882571a2438cf734072b"
+    }
+  }
+]

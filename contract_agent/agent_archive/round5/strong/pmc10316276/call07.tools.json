@@ -1,0 +1,9 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "PDF='2022_281692_KUUSANMAKI_SUPPL.pdf'\nfor sh in ['page28','page29','page30']:\n print('\\n---',sh,'---')\n for r,gr in enumerate(tables[PDF][sh]['geometry']):\n  vals=[]\n  for c in gr['cells']:\n   vals.append(f\"{c.get('text')}@{c.get('x0'):.1f}\")\n  print(r+1, ' | '.join(vals))\n"
+    },
+    "output_sha256": "fdd732859d3132d6c606262fc9c9141ed917b50d455b667058e1995c0e293267"
+  }
+]

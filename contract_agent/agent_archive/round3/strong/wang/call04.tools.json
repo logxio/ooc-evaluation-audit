@@ -1,0 +1,9 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "o=tables['mmc1.pdf']['page18']\nprint(type(o), o.keys() if isinstance(o,dict) else '')\nrows=o['rows'] if isinstance(o,dict) else o.rows\nprint(type(rows[9]), len(rows[9]), rows[9][:5])\nprint(o.get('geometry',[])[:2] if isinstance(o,dict) else 'no')\nprint(cell_ref('mmc1.pdf','page18',10,2))\n"
+    },
+    "output_sha256": "b1c920fc9ddd9f5667d738a20b6f0ea2347aec9b650800435951d9d620ea43e0"
+  }
+]

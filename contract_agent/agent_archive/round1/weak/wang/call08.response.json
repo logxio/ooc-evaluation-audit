@@ -1,0 +1,28 @@
+{
+  "model": "qwen3.7-plus",
+  "message": {
+    "role": "assistant",
+    "content": "This is still Table S5. Let me search for Table S6 by looking at later pages. The article mentions Table S6 contains the concordance data.\n\n",
+    "tool_calls": [
+      {
+        "id": "call_e820cd09cb024cdd9ff05ac8",
+        "type": "function",
+        "function": {
+          "name": "preview_table",
+          "arguments": "{\"file\": \"supp.pdf\", \"sheet\": \"page18\", \"start\": 1, \"rows\": 30}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 98,
+    "prompt_tokens": 72435,
+    "prompt_tokens_details": {
+      "cached_tokens": 63104,
+      "text_tokens": 72435
+    },
+    "total_tokens": 72533
+  }
+}

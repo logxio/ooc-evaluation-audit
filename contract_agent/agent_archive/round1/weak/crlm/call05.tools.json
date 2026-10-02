@@ -1,0 +1,751 @@
+[
+  {
+    "name": "finish",
+    "arguments": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "supp.xls/Table S7/R1C1"
+            ],
+            "explanation": "Each row represents a unique patient receiving FOLFOX chemotherapy."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p1"
+            ],
+            "explanation": "Patient-derived organoids (PDOs) used for chemosensitivity testing."
+          },
+          "readout": {
+            "value": "ic50",
+            "evidence": [
+              "supp.xls/Table S7/R1C4"
+            ],
+            "explanation": "IC50 values used as predictive scores for chemotherapy response."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p31"
+            ],
+            "explanation": "Lower IC50 indicates sensitivity (SD/PR response)."
+          },
+          "threshold_rule": {
+            "value": "roc_optimized",
+            "evidence": [
+              "article:p31"
+            ],
+            "explanation": "ROC curve plotted to indicate predictive efficacy of organoids for FOLFOX treatment response."
+          },
+          "threshold_timing": {
+            "value": "outcome_optimized",
+            "evidence": [
+              "article:p31"
+            ],
+            "explanation": "ROC analysis performed on the same cohort of 13 patients used for evaluation."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "supp.xls/Table S7/R2C1"
+            ],
+            "explanation": "Individual patient IDs mapped to clinical outcomes."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "supp.xls/Table S7/R3C2"
+            ],
+            "explanation": "Regimen column matches clinical FOLFOX treatment."
+          },
+          "n_units": {
+            "value": 13,
+            "evidence": [
+              "supp.xls/Table S7/R3C2",
+              "supp.xls/Table S7/R4C2",
+              "supp.xls/Table S7/R5C2",
+              "supp.xls/Table S7/R6C2",
+              "supp.xls/Table S7/R9C2",
+              "supp.xls/Table S7/R11C2",
+              "supp.xls/Table S7/R12C2",
+              "supp.xls/Table S7/R13C2",
+              "supp.xls/Table S7/R14C2",
+              "supp.xls/Table S7/R18C2",
+              "supp.xls/Table S7/R19C2",
+              "supp.xls/Table S7/R22C2",
+              "supp.xls/Table S7/R24C2"
+            ],
+            "explanation": "13 rows in Table S7 have Regimen=FOLFOX."
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p31"
+            ],
+            "explanation": "Analysis performed on the same cohort of 13 FOLFOX patients."
+          }
+        },
+        "headline": {
+          "metric": "auc",
+          "reported": 0.85,
+          "reported_evidence": [
+            "supp.xls/Table S7"
+          ],
+          "threshold": null,
+          "op": null,
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "P3",
+              "score": {
+                "ref": "supp.xls/Table S7/R3C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R3C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R3C3",
+                "map": {
+                  "PD": 0,
+                  "SD/PR": 1
+                }
+              }
+            },
+            {
+              "id": "P4",
+              "score": {
+                "ref": "supp.xls/Table S7/R4C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R4C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R4C3",
+                "map": {
+                  "PD": 0,
+                  "SD/PR": 1
+                }
+              }
+            },
+            {
+              "id": "P5",
+              "score": {
+                "ref": "supp.xls/Table S7/R5C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R5C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R5C3",
+                "map": {
+                  "PD": 0,
+                  "SD/PR": 1
+                }
+              }
+            },
+            {
+              "id": "P6",
+              "score": {
+                "ref": "supp.xls/Table S7/R6C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R6C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R6C3",
+                "map": {
+                  "PD": 0,
+                  "SD/PR": 1
+                }
+              }
+            },
+            {
+              "id": "P9",
+              "score": {
+                "ref": "supp.xls/Table S7/R9C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R9C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R9C3",
+                "map": {
+                  "PD": 0,
+                  "SD/PR": 1
+                }
+              }
+            },
+            {
+              "id": "P11",
+              "score": {
+                "ref": "supp.xls/Table S7/R11C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R11C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R11C3",
+                "map": {
+                  "PD": 0,
+                  "SD/PR": 1
+                }
+              }
+            },
+            {
+              "id": "P12",
+              "score": {
+                "ref": "supp.xls/Table S7/R12C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R12C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R12C3",
+                "map": {
+                  "PD": 0,
+                  "SD/PR": 1
+                }
+              }
+            },
+            {
+              "id": "P13",
+              "score": {
+                "ref": "supp.xls/Table S7/R13C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R13C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R13C3",
+                "map": {
+                  "PD": 0,
+                  "SD/PR": 1
+                }
+              }
+            },
+            {
+              "id": "P14",
+              "score": {
+                "ref": "supp.xls/Table S7/R14C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R14C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R14C3",
+                "map": {
+                  "PD": 0,
+                  "SD/PR": 1
+                }
+              }
+            },
+            {
+              "id": "P18",
+              "score": {
+                "ref": "supp.xls/Table S7/R18C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R18C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R18C3",
+                "map": {
+                  "PD": 0,
+                  "SD/PR": 1
+                }
+              }
+            },
+            {
+              "id": "P19",
+              "score": {
+                "ref": "supp.xls/Table S7/R19C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R19C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R19C3",
+                "map": {
+                  "PD": 0,
+                  "SD/PR": 1
+                }
+              }
+            },
+            {
+              "id": "P23",
+              "score": {
+                "ref": "supp.xls/Table S7/R22C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R22C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R22C3",
+                "map": {
+                  "PD": 0,
+                  "SD/PR": 1
+                }
+              }
+            },
+            {
+              "id": "P25",
+              "score": {
+                "ref": "supp.xls/Table S7/R24C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R24C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R24C3",
+                "map": {
+                  "PD": 0,
+                  "SD/PR": 1
+                }
+              }
+            }
+          ],
+          "blocked_reason": null
+        },
+        "notes": [
+          "AUC calculated from 13 FOLFOX patients using IC50 scores (negated so higher=sensitive) and binary truth (SD/PR=1, PD=0). Result 0.85 matches reported value.",
+          "Source: Table S7 in supp.xls contains individual patient data for FOLFOX regimen."
+        ]
+      }
+    },
+    "output": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "supp.xls/Table S7/R1C1"
+            ],
+            "explanation": "Each row represents a unique patient receiving FOLFOX chemotherapy."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p1"
+            ],
+            "explanation": "Patient-derived organoids (PDOs) used for chemosensitivity testing."
+          },
+          "readout": {
+            "value": "ic50",
+            "evidence": [
+              "supp.xls/Table S7/R1C4"
+            ],
+            "explanation": "IC50 values used as predictive scores for chemotherapy response."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p31"
+            ],
+            "explanation": "Lower IC50 indicates sensitivity (SD/PR response)."
+          },
+          "threshold_rule": {
+            "value": "roc_optimized",
+            "evidence": [
+              "article:p31"
+            ],
+            "explanation": "ROC curve plotted to indicate predictive efficacy of organoids for FOLFOX treatment response."
+          },
+          "threshold_timing": {
+            "value": "outcome_optimized",
+            "evidence": [
+              "article:p31"
+            ],
+            "explanation": "ROC analysis performed on the same cohort of 13 patients used for evaluation."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "supp.xls/Table S7/R2C1"
+            ],
+            "explanation": "Individual patient IDs mapped to clinical outcomes."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "supp.xls/Table S7/R3C2"
+            ],
+            "explanation": "Regimen column matches clinical FOLFOX treatment."
+          },
+          "n_units": {
+            "value": 13,
+            "evidence": [
+              "supp.xls/Table S7/R3C2",
+              "supp.xls/Table S7/R4C2",
+              "supp.xls/Table S7/R5C2",
+              "supp.xls/Table S7/R6C2",
+              "supp.xls/Table S7/R9C2",
+              "supp.xls/Table S7/R11C2",
+              "supp.xls/Table S7/R12C2",
+              "supp.xls/Table S7/R13C2",
+              "supp.xls/Table S7/R14C2",
+              "supp.xls/Table S7/R18C2",
+              "supp.xls/Table S7/R19C2",
+              "supp.xls/Table S7/R22C2",
+              "supp.xls/Table S7/R24C2"
+            ],
+            "explanation": "13 rows in Table S7 have Regimen=FOLFOX."
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p31"
+            ],
+            "explanation": "Analysis performed on the same cohort of 13 FOLFOX patients."
+          }
+        },
+        "headline": {
+          "metric": "auc",
+          "reported": 0.85,
+          "reported_evidence": [
+            "supp.xls/Table S7"
+          ],
+          "threshold": null,
+          "op": null,
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "P3",
+              "score": {
+                "ref": "supp.xls/Table S7/R3C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R3C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R3C3",
+                "map": {
+                  "PD": 0,
+                  "SD/PR": 1
+                }
+              }
+            },
+            {
+              "id": "P4",
+              "score": {
+                "ref": "supp.xls/Table S7/R4C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R4C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R4C3",
+                "map": {
+                  "PD": 0,
+                  "SD/PR": 1
+                }
+              }
+            },
+            {
+              "id": "P5",
+              "score": {
+                "ref": "supp.xls/Table S7/R5C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R5C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R5C3",
+                "map": {
+                  "PD": 0,
+                  "SD/PR": 1
+                }
+              }
+            },
+            {
+              "id": "P6",
+              "score": {
+                "ref": "supp.xls/Table S7/R6C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R6C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R6C3",
+                "map": {
+                  "PD": 0,
+                  "SD/PR": 1
+                }
+              }
+            },
+            {
+              "id": "P9",
+              "score": {
+                "ref": "supp.xls/Table S7/R9C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R9C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R9C3",
+                "map": {
+                  "PD": 0,
+                  "SD/PR": 1
+                }
+              }
+            },
+            {
+              "id": "P11",
+              "score": {
+                "ref": "supp.xls/Table S7/R11C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R11C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R11C3",
+                "map": {
+                  "PD": 0,
+                  "SD/PR": 1
+                }
+              }
+            },
+            {
+              "id": "P12",
+              "score": {
+                "ref": "supp.xls/Table S7/R12C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R12C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R12C3",
+                "map": {
+                  "PD": 0,
+                  "SD/PR": 1
+                }
+              }
+            },
+            {
+              "id": "P13",
+              "score": {
+                "ref": "supp.xls/Table S7/R13C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R13C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R13C3",
+                "map": {
+                  "PD": 0,
+                  "SD/PR": 1
+                }
+              }
+            },
+            {
+              "id": "P14",
+              "score": {
+                "ref": "supp.xls/Table S7/R14C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R14C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R14C3",
+                "map": {
+                  "PD": 0,
+                  "SD/PR": 1
+                }
+              }
+            },
+            {
+              "id": "P18",
+              "score": {
+                "ref": "supp.xls/Table S7/R18C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R18C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R18C3",
+                "map": {
+                  "PD": 0,
+                  "SD/PR": 1
+                }
+              }
+            },
+            {
+              "id": "P19",
+              "score": {
+                "ref": "supp.xls/Table S7/R19C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R19C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R19C3",
+                "map": {
+                  "PD": 0,
+                  "SD/PR": 1
+                }
+              }
+            },
+            {
+              "id": "P23",
+              "score": {
+                "ref": "supp.xls/Table S7/R22C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R22C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R22C3",
+                "map": {
+                  "PD": 0,
+                  "SD/PR": 1
+                }
+              }
+            },
+            {
+              "id": "P25",
+              "score": {
+                "ref": "supp.xls/Table S7/R24C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R24C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R24C3",
+                "map": {
+                  "PD": 0,
+                  "SD/PR": 1
+                }
+              }
+            }
+          ],
+          "blocked_reason": null
+        },
+        "notes": [
+          "AUC calculated from 13 FOLFOX patients using IC50 scores (negated so higher=sensitive) and binary truth (SD/PR=1, PD=0). Result 0.85 matches reported value.",
+          "Source: Table S7 in supp.xls contains individual patient data for FOLFOX regimen."
+        ]
+      },
+      "execution_feedback": {
+        "matched": true,
+        "metric": "auc",
+        "computed": 0.85,
+        "reported": 0.85,
+        "difference": 0.0,
+        "n": 13,
+        "errors": [],
+        "expected": {
+          "metric": "auc",
+          "value": 0.85,
+          "n": 13
+        }
+      }
+    }
+  }
+]

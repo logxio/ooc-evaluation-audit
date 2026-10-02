@@ -1,0 +1,17 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "PR=[.02,.18,.20,.21,.27,.46,.54,.54,.57,.68]\nSD=[.28,.30,.38,.45,.55,.60,1]\nPD=[.59,.61,.69,.77,.81,.83]\nfor name,N in [('SD+PD',SD+PD),('PD',PD)]:\n print(name,sum((p<n)+.5*(p==n) for p in PR for n in N)/(len(PR)*len(N)))\n# if positive response and score lower, yes"
+    },
+    "output": {
+      "returncode": 0,
+      "stdout": "SD+PD 0.8076923076923077\nPD 0.9666666666666667\n",
+      "stderr": "",
+      "seconds": 1.1472492920001969,
+      "peak_rss_bytes": 29884416,
+      "limit_error": null,
+      "code_sha256": "61de2626bbada5fdaa0c65e6bf62e69e7489fae582de0b664d95cc2747f4fa6d"
+    }
+  }
+]

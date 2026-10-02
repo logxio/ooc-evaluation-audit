@@ -1,0 +1,9 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "import re\n\ndef data(page):\n o=tables['mmc1.pdf'][page]\n return o['rows'],o['geometry']\nrecs=[]\nfor page in ['page18','page19','page20']:\n rows,geom=data(page)\n for ri,(row,g) in enumerate(zip(rows,geom),1):\n  if len(row)>1 and re.fullmatch(r'P-\\d+-[A-Z0-9]+', str(row[1])):\n   cells=g['cells']\n   def near(a,b):\n    return ' '.join(c['text'] for c in cells if a<=c['x0']<=b)\n   recs.append({'page':page,'ri':ri,'case':row[0],'org':row[1],\n                'regimen':near(445,470),'ic':near(525,545),'resp':near(560,580),'cons':near(595,615)})\nprint('n',len(recs))\nfrom collections import Counter\nprint(Counter(r['resp'] for r in recs),Counter(r['cons'] for r in recs))\nfor i,r in enumerate(recs,1): print(i,r)\n"
+    },
+    "output_sha256": "e6c22d08b5fa12a8f3300aa25c934b4a1fd5f7786ab636b3d55c0f6c9fb30c7d"
+  }
+]

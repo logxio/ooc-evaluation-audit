@@ -1,0 +1,20 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "{\n  \"columns\": [\n    \"Patient\",\n    \"Pharmacotyping result\",\n    \"Time to progression (days)\",\n    \"Disease status\"\n  ],\n  \"legend\": {\n    \"orange bar\": \"Progressive Disease\",\n    \"green bar\": \"No Evidence of Progression\",\n    \"blue text\": \"sensitive\",\n    \"grey text\": \"intermediate\",\n    \"red text\": \"resistant\"\n  },\n  \"rows\": [\n    [\"hF31\", \"GEM: intermediate; PAC: sensitive\", \"≈470\", \"No Evidence of Progression\"],\n    [\"hF2\", \"GEM: sensitive; SN38: sensitive; 5FU: intermediate\", \"≈390\", \"Progressive Disease\"],\n    [\"hM1A\", \"SN38: intermediate; 5FU: sensitive; OXA: sensitive\", \"≈365\", \"Progressive Disease\"],\n    [\"hF57\", \"GEM: intermediate; PAC: intermediate\", \"≈310\", \"No Evidence of Progression\"],\n    [\"hF44\", \"SN38: sensitive; 5FU: sensitive; OXA: intermediate\", \"≈235\", \"No Evidence of Progression\"],\n    [\"hF23\", \"GEM: sensitive; PAC: sensitive\", \"≈300\", \"Progressive Disease\"],\n    [\"hF50\", \"5FU: sensitive\", \"≈130\", \"Progressive Disease\"],\n    [\"hF3\", \"5FU: sensitive; OXA: resistant\", \"≈120\", \"Progressive Disease\"],\n    [\"hF28\", \"GEM: intermediate; 5FU: resistant\", \"≈100\", \"Progressive Disease\"]\n  ],\n  \"uncertain\": [\n    [1, 3],\n    [2, 3],\n    [3, 3],\n    [4, 3],\n    [5, 3],\n    [6, 3],\n    [7, 3],\n    [8, 3],\n    [9, 3]\n  ],\n  \"notes\": \"Chart title: 'Progression Free Survival in Advanced Disease'. Values are approximate readings from the horizontal axis. Green bars end in arrowheads, indicating no evidence of progression/continued follow-up.\"\n}"
+  },
+  "reasoning_content": "We need need transcribe chart.  I've clarified the requirements for the chart's JSON column rows, including horizontal bars, colored labels for drugs and sensitivity, row labels from top to bottom, and the need to include TTP days and status. I've also sorted out the specific value data for each bar, and the columns will have titles as requested.\n\nI've confirmed the pharmacotyping color coding rules, corresponding colored label assignments, legend requirements for disease status, and the rule that all green bars use arrow markers.\n\nI've confirmed the two required status labels and three-column layout for the chart, with the axis only labeled \"Time to progression (days)\". All numerical values are approximate, so I will mark all value cells as uncertain. I've calculated the approximate time to progression for several sample patients.\n\nI've completed the TTP value calculation for all remaining sample patients, and confirmed the final output will be pure JSON without any fenced content.\n\nI've decided to output valid JSON within Markdown code blocks, and confirmed a four-column layout with empty headers for patient regimen and status sections, plus pharmacotyping results, TTP days and disease status as the remaining two columns. I've also sorted out the pharmacotyping information for all sample patients.\n\nI've finalized the pharmacotyping information for four more sample patients, confirmed the color-coding legend specifications, decided to mark all numerical value cells as uncertain, and will add a title and explanatory notes to the output. I'm now ready to generate the final content.\n",
+  "finish_reason": "stop",
+  "usage": {
+    "completion_tokens": 1915,
+    "prompt_tokens": 1611,
+    "total_tokens": 3526,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 1389
+    }
+  }
+}

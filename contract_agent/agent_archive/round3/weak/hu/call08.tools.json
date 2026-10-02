@@ -1,0 +1,210 @@
+[
+  {
+    "name": "finish",
+    "arguments": {
+      "contract": {
+        "status": "blocked",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p27"
+            ],
+            "explanation": "Each unit is a patient with evaluable clinical response and matched organoid drug assay"
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p1",
+              "article:p27"
+            ],
+            "explanation": "Assay uses patient-derived lung cancer organoids cultured on InSMAR-chip"
+          },
+          "readout": {
+            "value": "viability",
+            "evidence": [
+              "article:p16"
+            ],
+            "explanation": "Drug sensitivity measured via alamarBlue cell viability assay, reported as binary sensitive/resistant call"
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p20"
+            ],
+            "explanation": "Lower IC50 / higher viability reduction corresponds to treatment sensitivity"
+          },
+          "threshold_rule": {
+            "value": "fixed_numeric",
+            "evidence": [
+              "article:p20"
+            ],
+            "explanation": "Sensitivity threshold based on clinically relevant Cmax/Ctrough concentrations of each drug"
+          },
+          "threshold_timing": {
+            "value": "independent_reference",
+            "evidence": [
+              "article:p20"
+            ],
+            "explanation": "Concentration thresholds are established clinical values, not optimized on this study cohort"
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "article:p27"
+            ],
+            "explanation": "Each organoid line is uniquely matched to one individual patient, as described in the article text"
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p27"
+            ],
+            "explanation": "Drugs tested in the organoid assay exactly match the clinical treatment received by the patient"
+          },
+          "n_units": {
+            "value": 10,
+            "evidence": [
+              "article:p27"
+            ],
+            "explanation": "10 evaluable patients, as explicitly stated in the article text"
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p27"
+            ],
+            "explanation": "All evaluable patients are part of the same prospective study cohort, no held-out test split"
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 1.0,
+          "reported_evidence": [
+            "article:p27",
+            "article:p28"
+          ],
+          "threshold": null,
+          "op": null,
+          "score_direction": "higher",
+          "records": [],
+          "blocked_reason": "Row-level assay sensitivity results for all 10 evaluable patients are not available in the previewed source data; only aggregate accuracy is reported in the article text, with no individual assay score references extractable from the provided data snippets."
+        },
+        "notes": [
+          "The article explicitly reports 100% accuracy (1.0) for 10 evaluable patients, but individual assay sensitivity values for 3 of the 10 patients could not be mapped to valid source references from the available data previews, preventing full row-level record validation."
+        ]
+      }
+    },
+    "output": {
+      "contract": {
+        "status": "blocked",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p27"
+            ],
+            "explanation": "Each unit is a patient with evaluable clinical response and matched organoid drug assay"
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p1",
+              "article:p27"
+            ],
+            "explanation": "Assay uses patient-derived lung cancer organoids cultured on InSMAR-chip"
+          },
+          "readout": {
+            "value": "viability",
+            "evidence": [
+              "article:p16"
+            ],
+            "explanation": "Drug sensitivity measured via alamarBlue cell viability assay, reported as binary sensitive/resistant call"
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p20"
+            ],
+            "explanation": "Lower IC50 / higher viability reduction corresponds to treatment sensitivity"
+          },
+          "threshold_rule": {
+            "value": "fixed_numeric",
+            "evidence": [
+              "article:p20"
+            ],
+            "explanation": "Sensitivity threshold based on clinically relevant Cmax/Ctrough concentrations of each drug"
+          },
+          "threshold_timing": {
+            "value": "independent_reference",
+            "evidence": [
+              "article:p20"
+            ],
+            "explanation": "Concentration thresholds are established clinical values, not optimized on this study cohort"
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "article:p27"
+            ],
+            "explanation": "Each organoid line is uniquely matched to one individual patient, as described in the article text"
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p27"
+            ],
+            "explanation": "Drugs tested in the organoid assay exactly match the clinical treatment received by the patient"
+          },
+          "n_units": {
+            "value": 10,
+            "evidence": [
+              "article:p27"
+            ],
+            "explanation": "10 evaluable patients, as explicitly stated in the article text"
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p27"
+            ],
+            "explanation": "All evaluable patients are part of the same prospective study cohort, no held-out test split"
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 1.0,
+          "reported_evidence": [
+            "article:p27",
+            "article:p28"
+          ],
+          "threshold": null,
+          "op": null,
+          "score_direction": "higher",
+          "records": [],
+          "blocked_reason": "Row-level assay sensitivity results for all 10 evaluable patients are not available in the previewed source data; only aggregate accuracy is reported in the article text, with no individual assay score references extractable from the provided data snippets."
+        },
+        "notes": [
+          "The article explicitly reports 100% accuracy (1.0) for 10 evaluable patients, but individual assay sensitivity values for 3 of the 10 patients could not be mapped to valid source references from the available data previews, preventing full row-level record validation."
+        ]
+      },
+      "execution_feedback": {
+        "matched": false,
+        "metric": "accuracy",
+        "computed": null,
+        "reported": 1.0,
+        "difference": null,
+        "n": 0,
+        "errors": [
+          "No source-bound observations: Row-level assay sensitivity results for all 10 evaluable patients are not available in the previewed source data; only aggregate accuracy is reported in the article text, with no individual assay score references extractable from the provided data snippets.",
+          "Expected 10 analysis units, got 0"
+        ],
+        "expected": {
+          "metric": "accuracy",
+          "value": 1.0,
+          "n": 10
+        }
+      }
+    }
+  }
+]

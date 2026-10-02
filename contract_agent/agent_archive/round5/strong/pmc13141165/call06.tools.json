@@ -1,0 +1,9 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "import numpy as np\nrec=[44,43,41,41,25,23,22,19,18,18,17,13,11,10,6,4,4]\nnon=[71,66,52,50,38,35,27]\ny=[0]*len(rec)+[1]*len(non); s=rec+non\npairs=[(a>b)+0.5*(a==b) for a in non for b in rec]\nprint(len(s), np.mean(pairs))"
+    },
+    "output_sha256": "10b53e41698acffdb920d08889b7b7a38d8b35573f343f13fe4a7544433c0e9f"
+  }
+]

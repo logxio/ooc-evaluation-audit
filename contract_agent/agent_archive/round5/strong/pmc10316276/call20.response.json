@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_8lnc5tkca92o02j2iyv9kv4b",
+        "type": "function",
+        "function": {
+          "name": "python",
+          "arguments": "{\"code\": \"import os\\nfor base in ['.','..','../..','/tmp','/home','/mnt']:\\n try:\\n  print(base, os.listdir(base)[:30])\\n except Exception as e: print(e)\\n\"}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "Need locate workspace. Source path may be inaccessible, check parent dirs.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 101,
+    "prompt_tokens": 67663,
+    "total_tokens": 67764,
+    "prompt_tokens_details": {
+      "cached_tokens": 66360
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 20
+    }
+  }
+}

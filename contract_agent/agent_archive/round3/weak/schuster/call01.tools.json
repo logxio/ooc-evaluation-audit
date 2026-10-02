@@ -1,0 +1,98 @@
+[
+  {
+    "name": "initial_code",
+    "output": {
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "seconds": 0.1390146669873502,
+      "peak_rss_bytes": 44646400,
+      "limit_error": null,
+      "code_sha256": "414514594073f7e30e72e9c124adbd1a8010cf86b0ea46dddfa124515b20b12c",
+      "contract": {
+        "status": "no_headline",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p34",
+              "article.xml/Table 2/R1C1"
+            ],
+            "explanation": "Study evaluates 3 pancreatic cancer patients"
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p2"
+            ],
+            "explanation": "Uses patient-derived pancreatic tumor organoids on a microfluidic platform"
+          },
+          "readout": {
+            "value": "apoptosis_death",
+            "evidence": [
+              "article:p20",
+              "article:p27"
+            ],
+            "explanation": "Drug sensitivity measured via caspase 3/7 (apoptosis) and propidium iodide (cell death)"
+          },
+          "direction": {
+            "value": "higher_sensitive",
+            "evidence": [
+              "article:p25"
+            ],
+            "explanation": "Higher apoptosis indicates greater drug sensitivity"
+          },
+          "threshold_rule": {
+            "value": "no_binary_rule",
+            "evidence": [],
+            "explanation": "No binary classification rule for predicting clinical outcomes is specified"
+          },
+          "threshold_timing": {
+            "value": "not_applicable",
+            "evidence": [],
+            "explanation": "No binary threshold defined for clinical prediction"
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "article.xml/Table 2"
+            ],
+            "explanation": "Organoid results are mapped to individual patients (1, 2, 3)"
+          },
+          "regimen_match": {
+            "value": "partial",
+            "evidence": [
+              "article:p34"
+            ],
+            "explanation": "Some administered regimens matched organoid-sensitive regimens, but timing/sequence limited clinical benefit"
+          },
+          "n_units": {
+            "value": 3,
+            "evidence": [
+              "article.xml/Table 2"
+            ],
+            "explanation": "Total of 3 patients included in the study"
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [],
+            "explanation": "No independent test cohort; retrospective comparison to same 3 patients' clinical courses"
+          }
+        },
+        "headline": {
+          "metric": null,
+          "reported": null,
+          "reported_evidence": [],
+          "threshold": null,
+          "op": null,
+          "score_direction": null,
+          "records": [],
+          "blocked_reason": "No global clinical/toxicity prediction performance headline (e.g., accuracy, sensitivity) is reported in the paper. The study presents retrospective case-level observations of organoid drug sensitivity vs. clinical course, but no quantitative predictive performance metric across the cohort."
+        },
+        "notes": [
+          "The paper demonstrates organoid drug sensitivity testing and temporal treatment effects, but does not report a quantitative global clinical predictive performance endpoint."
+        ]
+      }
+    }
+  }
+]

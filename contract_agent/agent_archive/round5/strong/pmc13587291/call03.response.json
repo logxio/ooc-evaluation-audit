@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_woxnghx0ke94dhicm471hog3",
+        "type": "function",
+        "function": {
+          "name": "python",
+          "arguments": "{\"code\": \"pdf='13048_2026_2178_MOESM1_ESM.pdf'\\nfor page in ['page3','page4','page5']:\\n print('\\\\n###',page)\\n for i,row in enumerate(tables[pdf][page]['rows'],1):\\n  print(i, row)\"}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "Rows are plain lists raw values per prompt,Python tables are not objects, need to inspect cell_ref helper.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 129,
+    "prompt_tokens": 25627,
+    "total_tokens": 25756,
+    "prompt_tokens_details": {
+      "cached_tokens": 24888
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 27
+    }
+  }
+}

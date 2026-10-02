@@ -1,0 +1,1405 @@
+{
+  "turn": 1,
+  "tool_count": 0,
+  "tokens": 24603,
+  "done": true,
+  "stop_reason": "verified",
+  "checkpoints": {
+    "single_pass": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "supp.xls/Table S7/R1C1",
+              "article:p31"
+            ],
+            "explanation": "Each record is one CRLM patient receiving one matched regimen."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p31"
+            ],
+            "explanation": "Drug response was measured in patient-derived CRLM organoids."
+          },
+          "readout": {
+            "value": "ic50",
+            "evidence": [
+              "supp.xls/Table S7/R1C4",
+              "article:p31"
+            ],
+            "explanation": "The predictor is organoid IC50; the article analyzed Log(IC50), which preserves the AUC ranking."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p51"
+            ],
+            "explanation": "Lower IC50 indicates greater organoid chemosensitivity; PD is the positive clinical state and is associated with higher IC50."
+          },
+          "threshold_rule": {
+            "value": "no_binary_rule",
+            "evidence": [
+              "article:p31"
+            ],
+            "explanation": "The reported endpoint is an ROC AUC, not a binary classification at a stated cutoff."
+          },
+          "threshold_timing": {
+            "value": "not_applicable",
+            "evidence": [
+              "article:p31"
+            ],
+            "explanation": "AUC uses continuous IC50 rankings and requires no classification threshold."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "supp.xls/Table S7/R2C1"
+            ],
+            "explanation": "Table S7 links each patient identifier to both organoid IC50 and clinical response."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "supp.xls/Table S7/R1C2",
+              "article:p28"
+            ],
+            "explanation": "Only patients treated with FOLFOX are included, and their organoids received the FOLFOX regimen ex vivo."
+          },
+          "n_units": {
+            "value": 13,
+            "evidence": [
+              "article:p31"
+            ],
+            "explanation": "Thirteen CRLM patients received FOLFOX and had matched organoid and clinical response data."
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p31",
+              "article:p51"
+            ],
+            "explanation": "The ROC was evaluated on the same retrospectively characterized 13-patient FOLFOX cohort."
+          }
+        },
+        "headline": {
+          "metric": "auc",
+          "reported": 0.85,
+          "reported_evidence": [
+            "article:p31"
+          ],
+          "threshold": null,
+          "op": ">",
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "P3",
+              "score": {
+                "ref": "supp.xls/Table S7/R3C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R3C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P4",
+              "score": {
+                "ref": "supp.xls/Table S7/R4C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R4C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P5",
+              "score": {
+                "ref": "supp.xls/Table S7/R5C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R5C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P6",
+              "score": {
+                "ref": "supp.xls/Table S7/R6C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R6C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P9",
+              "score": {
+                "ref": "supp.xls/Table S7/R9C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R9C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P11",
+              "score": {
+                "ref": "supp.xls/Table S7/R11C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R11C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P12",
+              "score": {
+                "ref": "supp.xls/Table S7/R12C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R12C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P13",
+              "score": {
+                "ref": "supp.xls/Table S7/R13C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R13C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P14",
+              "score": {
+                "ref": "supp.xls/Table S7/R14C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R14C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P18",
+              "score": {
+                "ref": "supp.xls/Table S7/R18C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R18C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P19",
+              "score": {
+                "ref": "supp.xls/Table S7/R19C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R19C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P23",
+              "score": {
+                "ref": "supp.xls/Table S7/R22C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R22C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P25",
+              "score": {
+                "ref": "supp.xls/Table S7/R24C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R24C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            }
+          ]
+        },
+        "notes": [
+          "Positive clinical truth is PD (progressive disease); SD/PR is coded 0 and PD is coded 1.",
+          "The source analysis used Log(IC50), but logarithmic transformation is monotonic and does not change ROC AUC.",
+          "Computed AUC from the 13 row-level FOLFOX records should equal the reported 0.850."
+        ]
+      },
+      "evaluation": {
+        "matched": true,
+        "metric": "auc",
+        "computed": 0.85,
+        "reported": 0.85,
+        "difference": 0.0,
+        "n": 13,
+        "errors": [],
+        "rows": [
+          {
+            "id": "P3",
+            "score": 30.83,
+            "truth": 1
+          },
+          {
+            "id": "P4",
+            "score": 1.041,
+            "truth": 0
+          },
+          {
+            "id": "P5",
+            "score": 1.268,
+            "truth": 0
+          },
+          {
+            "id": "P6",
+            "score": 7.465,
+            "truth": 1
+          },
+          {
+            "id": "P9",
+            "score": 12.59,
+            "truth": 1
+          },
+          {
+            "id": "P11",
+            "score": 3.605,
+            "truth": 0
+          },
+          {
+            "id": "P12",
+            "score": 2.441,
+            "truth": 0
+          },
+          {
+            "id": "P13",
+            "score": 0.4895,
+            "truth": 0
+          },
+          {
+            "id": "P14",
+            "score": 2.32,
+            "truth": 0
+          },
+          {
+            "id": "P18",
+            "score": 2.254,
+            "truth": 1
+          },
+          {
+            "id": "P19",
+            "score": 15.4,
+            "truth": 1
+          },
+          {
+            "id": "P23",
+            "score": 6.247,
+            "truth": 0
+          },
+          {
+            "id": "P25",
+            "score": 7.895,
+            "truth": 0
+          }
+        ],
+        "expected": {
+          "metric": "auc",
+          "value": 0.85,
+          "n": 13
+        }
+      },
+      "calls": 1,
+      "tokens": 24603
+    },
+    "one_feedback": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "supp.xls/Table S7/R1C1",
+              "article:p31"
+            ],
+            "explanation": "Each record is one CRLM patient receiving one matched regimen."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p31"
+            ],
+            "explanation": "Drug response was measured in patient-derived CRLM organoids."
+          },
+          "readout": {
+            "value": "ic50",
+            "evidence": [
+              "supp.xls/Table S7/R1C4",
+              "article:p31"
+            ],
+            "explanation": "The predictor is organoid IC50; the article analyzed Log(IC50), which preserves the AUC ranking."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p51"
+            ],
+            "explanation": "Lower IC50 indicates greater organoid chemosensitivity; PD is the positive clinical state and is associated with higher IC50."
+          },
+          "threshold_rule": {
+            "value": "no_binary_rule",
+            "evidence": [
+              "article:p31"
+            ],
+            "explanation": "The reported endpoint is an ROC AUC, not a binary classification at a stated cutoff."
+          },
+          "threshold_timing": {
+            "value": "not_applicable",
+            "evidence": [
+              "article:p31"
+            ],
+            "explanation": "AUC uses continuous IC50 rankings and requires no classification threshold."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "supp.xls/Table S7/R2C1"
+            ],
+            "explanation": "Table S7 links each patient identifier to both organoid IC50 and clinical response."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "supp.xls/Table S7/R1C2",
+              "article:p28"
+            ],
+            "explanation": "Only patients treated with FOLFOX are included, and their organoids received the FOLFOX regimen ex vivo."
+          },
+          "n_units": {
+            "value": 13,
+            "evidence": [
+              "article:p31"
+            ],
+            "explanation": "Thirteen CRLM patients received FOLFOX and had matched organoid and clinical response data."
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p31",
+              "article:p51"
+            ],
+            "explanation": "The ROC was evaluated on the same retrospectively characterized 13-patient FOLFOX cohort."
+          }
+        },
+        "headline": {
+          "metric": "auc",
+          "reported": 0.85,
+          "reported_evidence": [
+            "article:p31"
+          ],
+          "threshold": null,
+          "op": ">",
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "P3",
+              "score": {
+                "ref": "supp.xls/Table S7/R3C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R3C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P4",
+              "score": {
+                "ref": "supp.xls/Table S7/R4C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R4C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P5",
+              "score": {
+                "ref": "supp.xls/Table S7/R5C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R5C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P6",
+              "score": {
+                "ref": "supp.xls/Table S7/R6C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R6C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P9",
+              "score": {
+                "ref": "supp.xls/Table S7/R9C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R9C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P11",
+              "score": {
+                "ref": "supp.xls/Table S7/R11C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R11C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P12",
+              "score": {
+                "ref": "supp.xls/Table S7/R12C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R12C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P13",
+              "score": {
+                "ref": "supp.xls/Table S7/R13C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R13C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P14",
+              "score": {
+                "ref": "supp.xls/Table S7/R14C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R14C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P18",
+              "score": {
+                "ref": "supp.xls/Table S7/R18C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R18C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P19",
+              "score": {
+                "ref": "supp.xls/Table S7/R19C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R19C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P23",
+              "score": {
+                "ref": "supp.xls/Table S7/R22C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R22C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P25",
+              "score": {
+                "ref": "supp.xls/Table S7/R24C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R24C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            }
+          ]
+        },
+        "notes": [
+          "Positive clinical truth is PD (progressive disease); SD/PR is coded 0 and PD is coded 1.",
+          "The source analysis used Log(IC50), but logarithmic transformation is monotonic and does not change ROC AUC.",
+          "Computed AUC from the 13 row-level FOLFOX records should equal the reported 0.850."
+        ]
+      },
+      "evaluation": {
+        "matched": true,
+        "metric": "auc",
+        "computed": 0.85,
+        "reported": 0.85,
+        "difference": 0.0,
+        "n": 13,
+        "errors": [],
+        "rows": [
+          {
+            "id": "P3",
+            "score": 30.83,
+            "truth": 1
+          },
+          {
+            "id": "P4",
+            "score": 1.041,
+            "truth": 0
+          },
+          {
+            "id": "P5",
+            "score": 1.268,
+            "truth": 0
+          },
+          {
+            "id": "P6",
+            "score": 7.465,
+            "truth": 1
+          },
+          {
+            "id": "P9",
+            "score": 12.59,
+            "truth": 1
+          },
+          {
+            "id": "P11",
+            "score": 3.605,
+            "truth": 0
+          },
+          {
+            "id": "P12",
+            "score": 2.441,
+            "truth": 0
+          },
+          {
+            "id": "P13",
+            "score": 0.4895,
+            "truth": 0
+          },
+          {
+            "id": "P14",
+            "score": 2.32,
+            "truth": 0
+          },
+          {
+            "id": "P18",
+            "score": 2.254,
+            "truth": 1
+          },
+          {
+            "id": "P19",
+            "score": 15.4,
+            "truth": 1
+          },
+          {
+            "id": "P23",
+            "score": 6.247,
+            "truth": 0
+          },
+          {
+            "id": "P25",
+            "score": 7.895,
+            "truth": 0
+          }
+        ],
+        "expected": {
+          "metric": "auc",
+          "value": 0.85,
+          "n": 13
+        }
+      },
+      "calls": 1,
+      "tokens": 24603
+    },
+    "tool_loop": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "supp.xls/Table S7/R1C1",
+              "article:p31"
+            ],
+            "explanation": "Each record is one CRLM patient receiving one matched regimen."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p31"
+            ],
+            "explanation": "Drug response was measured in patient-derived CRLM organoids."
+          },
+          "readout": {
+            "value": "ic50",
+            "evidence": [
+              "supp.xls/Table S7/R1C4",
+              "article:p31"
+            ],
+            "explanation": "The predictor is organoid IC50; the article analyzed Log(IC50), which preserves the AUC ranking."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p51"
+            ],
+            "explanation": "Lower IC50 indicates greater organoid chemosensitivity; PD is the positive clinical state and is associated with higher IC50."
+          },
+          "threshold_rule": {
+            "value": "no_binary_rule",
+            "evidence": [
+              "article:p31"
+            ],
+            "explanation": "The reported endpoint is an ROC AUC, not a binary classification at a stated cutoff."
+          },
+          "threshold_timing": {
+            "value": "not_applicable",
+            "evidence": [
+              "article:p31"
+            ],
+            "explanation": "AUC uses continuous IC50 rankings and requires no classification threshold."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "supp.xls/Table S7/R2C1"
+            ],
+            "explanation": "Table S7 links each patient identifier to both organoid IC50 and clinical response."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "supp.xls/Table S7/R1C2",
+              "article:p28"
+            ],
+            "explanation": "Only patients treated with FOLFOX are included, and their organoids received the FOLFOX regimen ex vivo."
+          },
+          "n_units": {
+            "value": 13,
+            "evidence": [
+              "article:p31"
+            ],
+            "explanation": "Thirteen CRLM patients received FOLFOX and had matched organoid and clinical response data."
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p31",
+              "article:p51"
+            ],
+            "explanation": "The ROC was evaluated on the same retrospectively characterized 13-patient FOLFOX cohort."
+          }
+        },
+        "headline": {
+          "metric": "auc",
+          "reported": 0.85,
+          "reported_evidence": [
+            "article:p31"
+          ],
+          "threshold": null,
+          "op": ">",
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "P3",
+              "score": {
+                "ref": "supp.xls/Table S7/R3C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R3C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P4",
+              "score": {
+                "ref": "supp.xls/Table S7/R4C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R4C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P5",
+              "score": {
+                "ref": "supp.xls/Table S7/R5C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R5C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P6",
+              "score": {
+                "ref": "supp.xls/Table S7/R6C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R6C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P9",
+              "score": {
+                "ref": "supp.xls/Table S7/R9C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R9C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P11",
+              "score": {
+                "ref": "supp.xls/Table S7/R11C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R11C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P12",
+              "score": {
+                "ref": "supp.xls/Table S7/R12C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R12C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P13",
+              "score": {
+                "ref": "supp.xls/Table S7/R13C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R13C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P14",
+              "score": {
+                "ref": "supp.xls/Table S7/R14C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R14C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P18",
+              "score": {
+                "ref": "supp.xls/Table S7/R18C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R18C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P19",
+              "score": {
+                "ref": "supp.xls/Table S7/R19C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R19C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P23",
+              "score": {
+                "ref": "supp.xls/Table S7/R22C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R22C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P25",
+              "score": {
+                "ref": "supp.xls/Table S7/R24C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R24C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            }
+          ]
+        },
+        "notes": [
+          "Positive clinical truth is PD (progressive disease); SD/PR is coded 0 and PD is coded 1.",
+          "The source analysis used Log(IC50), but logarithmic transformation is monotonic and does not change ROC AUC.",
+          "Computed AUC from the 13 row-level FOLFOX records should equal the reported 0.850."
+        ]
+      },
+      "evaluation": {
+        "matched": true,
+        "metric": "auc",
+        "computed": 0.85,
+        "reported": 0.85,
+        "difference": 0.0,
+        "n": 13,
+        "errors": [],
+        "rows": [
+          {
+            "id": "P3",
+            "score": 30.83,
+            "truth": 1
+          },
+          {
+            "id": "P4",
+            "score": 1.041,
+            "truth": 0
+          },
+          {
+            "id": "P5",
+            "score": 1.268,
+            "truth": 0
+          },
+          {
+            "id": "P6",
+            "score": 7.465,
+            "truth": 1
+          },
+          {
+            "id": "P9",
+            "score": 12.59,
+            "truth": 1
+          },
+          {
+            "id": "P11",
+            "score": 3.605,
+            "truth": 0
+          },
+          {
+            "id": "P12",
+            "score": 2.441,
+            "truth": 0
+          },
+          {
+            "id": "P13",
+            "score": 0.4895,
+            "truth": 0
+          },
+          {
+            "id": "P14",
+            "score": 2.32,
+            "truth": 0
+          },
+          {
+            "id": "P18",
+            "score": 2.254,
+            "truth": 1
+          },
+          {
+            "id": "P19",
+            "score": 15.4,
+            "truth": 1
+          },
+          {
+            "id": "P23",
+            "score": 6.247,
+            "truth": 0
+          },
+          {
+            "id": "P25",
+            "score": 7.895,
+            "truth": 0
+          }
+        ],
+        "expected": {
+          "metric": "auc",
+          "value": 0.85,
+          "n": 13
+        }
+      },
+      "calls": 1,
+      "tokens": 24603
+    }
+  },
+  "last_contract": {
+    "status": "computed",
+    "fields": {
+      "unit": {
+        "value": "patient",
+        "evidence": [
+          "supp.xls/Table S7/R1C1",
+          "article:p31"
+        ],
+        "explanation": "Each record is one CRLM patient receiving one matched regimen."
+      },
+      "platform": {
+        "value": "organoid",
+        "evidence": [
+          "article:p31"
+        ],
+        "explanation": "Drug response was measured in patient-derived CRLM organoids."
+      },
+      "readout": {
+        "value": "ic50",
+        "evidence": [
+          "supp.xls/Table S7/R1C4",
+          "article:p31"
+        ],
+        "explanation": "The predictor is organoid IC50; the article analyzed Log(IC50), which preserves the AUC ranking."
+      },
+      "direction": {
+        "value": "lower_sensitive",
+        "evidence": [
+          "article:p51"
+        ],
+        "explanation": "Lower IC50 indicates greater organoid chemosensitivity; PD is the positive clinical state and is associated with higher IC50."
+      },
+      "threshold_rule": {
+        "value": "no_binary_rule",
+        "evidence": [
+          "article:p31"
+        ],
+        "explanation": "The reported endpoint is an ROC AUC, not a binary classification at a stated cutoff."
+      },
+      "threshold_timing": {
+        "value": "not_applicable",
+        "evidence": [
+          "article:p31"
+        ],
+        "explanation": "AUC uses continuous IC50 rankings and requires no classification threshold."
+      },
+      "patient_mapping": {
+        "value": "individual_available",
+        "evidence": [
+          "supp.xls/Table S7/R2C1"
+        ],
+        "explanation": "Table S7 links each patient identifier to both organoid IC50 and clinical response."
+      },
+      "regimen_match": {
+        "value": "matched",
+        "evidence": [
+          "supp.xls/Table S7/R1C2",
+          "article:p28"
+        ],
+        "explanation": "Only patients treated with FOLFOX are included, and their organoids received the FOLFOX regimen ex vivo."
+      },
+      "n_units": {
+        "value": 13,
+        "evidence": [
+          "article:p31"
+        ],
+        "explanation": "Thirteen CRLM patients received FOLFOX and had matched organoid and clinical response data."
+      },
+      "split": {
+        "value": "same_cohort",
+        "evidence": [
+          "article:p31",
+          "article:p51"
+        ],
+        "explanation": "The ROC was evaluated on the same retrospectively characterized 13-patient FOLFOX cohort."
+      }
+    },
+    "headline": {
+      "metric": "auc",
+      "reported": 0.85,
+      "reported_evidence": [
+        "article:p31"
+      ],
+      "threshold": null,
+      "op": ">",
+      "score_direction": "higher",
+      "records": [
+        {
+          "id": "P3",
+          "score": {
+            "ref": "supp.xls/Table S7/R3C4"
+          },
+          "truth": {
+            "ref": "supp.xls/Table S7/R3C3",
+            "map": {
+              "SD/PR": 0,
+              "PD": 1
+            }
+          }
+        },
+        {
+          "id": "P4",
+          "score": {
+            "ref": "supp.xls/Table S7/R4C4"
+          },
+          "truth": {
+            "ref": "supp.xls/Table S7/R4C3",
+            "map": {
+              "SD/PR": 0,
+              "PD": 1
+            }
+          }
+        },
+        {
+          "id": "P5",
+          "score": {
+            "ref": "supp.xls/Table S7/R5C4"
+          },
+          "truth": {
+            "ref": "supp.xls/Table S7/R5C3",
+            "map": {
+              "SD/PR": 0,
+              "PD": 1
+            }
+          }
+        },
+        {
+          "id": "P6",
+          "score": {
+            "ref": "supp.xls/Table S7/R6C4"
+          },
+          "truth": {
+            "ref": "supp.xls/Table S7/R6C3",
+            "map": {
+              "SD/PR": 0,
+              "PD": 1
+            }
+          }
+        },
+        {
+          "id": "P9",
+          "score": {
+            "ref": "supp.xls/Table S7/R9C4"
+          },
+          "truth": {
+            "ref": "supp.xls/Table S7/R9C3",
+            "map": {
+              "SD/PR": 0,
+              "PD": 1
+            }
+          }
+        },
+        {
+          "id": "P11",
+          "score": {
+            "ref": "supp.xls/Table S7/R11C4"
+          },
+          "truth": {
+            "ref": "supp.xls/Table S7/R11C3",
+            "map": {
+              "SD/PR": 0,
+              "PD": 1
+            }
+          }
+        },
+        {
+          "id": "P12",
+          "score": {
+            "ref": "supp.xls/Table S7/R12C4"
+          },
+          "truth": {
+            "ref": "supp.xls/Table S7/R12C3",
+            "map": {
+              "SD/PR": 0,
+              "PD": 1
+            }
+          }
+        },
+        {
+          "id": "P13",
+          "score": {
+            "ref": "supp.xls/Table S7/R13C4"
+          },
+          "truth": {
+            "ref": "supp.xls/Table S7/R13C3",
+            "map": {
+              "SD/PR": 0,
+              "PD": 1
+            }
+          }
+        },
+        {
+          "id": "P14",
+          "score": {
+            "ref": "supp.xls/Table S7/R14C4"
+          },
+          "truth": {
+            "ref": "supp.xls/Table S7/R14C3",
+            "map": {
+              "SD/PR": 0,
+              "PD": 1
+            }
+          }
+        },
+        {
+          "id": "P18",
+          "score": {
+            "ref": "supp.xls/Table S7/R18C4"
+          },
+          "truth": {
+            "ref": "supp.xls/Table S7/R18C3",
+            "map": {
+              "SD/PR": 0,
+              "PD": 1
+            }
+          }
+        },
+        {
+          "id": "P19",
+          "score": {
+            "ref": "supp.xls/Table S7/R19C4"
+          },
+          "truth": {
+            "ref": "supp.xls/Table S7/R19C3",
+            "map": {
+              "SD/PR": 0,
+              "PD": 1
+            }
+          }
+        },
+        {
+          "id": "P23",
+          "score": {
+            "ref": "supp.xls/Table S7/R22C4"
+          },
+          "truth": {
+            "ref": "supp.xls/Table S7/R22C3",
+            "map": {
+              "SD/PR": 0,
+              "PD": 1
+            }
+          }
+        },
+        {
+          "id": "P25",
+          "score": {
+            "ref": "supp.xls/Table S7/R24C4"
+          },
+          "truth": {
+            "ref": "supp.xls/Table S7/R24C3",
+            "map": {
+              "SD/PR": 0,
+              "PD": 1
+            }
+          }
+        }
+      ]
+    },
+    "notes": [
+      "Positive clinical truth is PD (progressive disease); SD/PR is coded 0 and PD is coded 1.",
+      "The source analysis used Log(IC50), but logarithmic transformation is monotonic and does not change ROC AUC.",
+      "Computed AUC from the 13 row-level FOLFOX records should equal the reported 0.850."
+    ]
+  },
+  "last_evaluation": {
+    "matched": true,
+    "metric": "auc",
+    "computed": 0.85,
+    "reported": 0.85,
+    "difference": 0.0,
+    "n": 13,
+    "errors": [],
+    "rows": [
+      {
+        "id": "P3",
+        "score": 30.83,
+        "truth": 1
+      },
+      {
+        "id": "P4",
+        "score": 1.041,
+        "truth": 0
+      },
+      {
+        "id": "P5",
+        "score": 1.268,
+        "truth": 0
+      },
+      {
+        "id": "P6",
+        "score": 7.465,
+        "truth": 1
+      },
+      {
+        "id": "P9",
+        "score": 12.59,
+        "truth": 1
+      },
+      {
+        "id": "P11",
+        "score": 3.605,
+        "truth": 0
+      },
+      {
+        "id": "P12",
+        "score": 2.441,
+        "truth": 0
+      },
+      {
+        "id": "P13",
+        "score": 0.4895,
+        "truth": 0
+      },
+      {
+        "id": "P14",
+        "score": 2.32,
+        "truth": 0
+      },
+      {
+        "id": "P18",
+        "score": 2.254,
+        "truth": 1
+      },
+      {
+        "id": "P19",
+        "score": 15.4,
+        "truth": 1
+      },
+      {
+        "id": "P23",
+        "score": 6.247,
+        "truth": 0
+      },
+      {
+        "id": "P25",
+        "score": 7.895,
+        "truth": 0
+      }
+    ],
+    "expected": {
+      "metric": "auc",
+      "value": 0.85,
+      "n": 13
+    }
+  }
+}

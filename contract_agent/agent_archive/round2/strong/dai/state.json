@@ -1,0 +1,448 @@
+{
+  "turn": 12,
+  "tool_count": 10,
+  "tokens": 530243,
+  "done": true,
+  "stop_reason": "budget_exhausted",
+  "reader_calls": 5,
+  "checkpoints": {
+    "single_pass": {
+      "contract": {
+        "status": "blocked",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "Drug-test concordance is reported for 22 patients, pending row-level score/outcome binding."
+          },
+          "platform": {
+            "value": "perfused_chip",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "Vascularized tumoroid-on-a-chip with perfused vessel network."
+          },
+          "readout": {
+            "value": "size_viability",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "Match uses relative vessel density and relative tumoroid diameter after FOLFOX plus bevacizumab."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "Values below the optimized-model cutoffs indicate sensitivity; higher retained values indicate resistance."
+          },
+          "threshold_rule": {
+            "value": "roc_optimized",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "Optimal cutoffs were selected with the Youden index and bootstrap."
+          },
+          "threshold_timing": {
+            "value": "outcome_optimized",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "Cutoffs were optimized against clinical outcomes in the same evaluated 22-patient cohort."
+          },
+          "patient_mapping": {
+            "value": "partial",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "Patient-level mapping is being verified from source workbooks."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "Chip treatment and clinical regimen are FOLFOX plus bevacizumab."
+          },
+          "n_units": {
+            "value": 22,
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "The reported validation cohort contains 22 patients."
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "No independent held-out cohort is described; cutoffs and performance are assessed in these 22 patients."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.8636363636363636,
+          "reported_evidence": [
+            "article:p76"
+          ],
+          "threshold": null,
+          "op": ">=",
+          "score_direction": "higher",
+          "records": [],
+          "blocked_reason": "Row-level optimized-chip vessel-density/tumoroid-diameter measurements and clinical RECIST outcomes for all 22 patients must be identified and bound before computing accuracy."
+        },
+        "notes": [
+          "Diagnostic print issued to inspect Figure 5 source-data sheets and Table S1."
+        ]
+      },
+      "evaluation": {
+        "matched": false,
+        "metric": "accuracy",
+        "computed": null,
+        "reported": 0.8636363636363636,
+        "difference": null,
+        "n": 0,
+        "errors": [
+          "No source-bound observations: Row-level optimized-chip vessel-density/tumoroid-diameter measurements and clinical RECIST outcomes for all 22 patients must be identified and bound before computing accuracy.",
+          "Expected 22 analysis units, got 0"
+        ],
+        "rows": [],
+        "expected": {
+          "metric": "accuracy",
+          "value": 0.8636363636363636,
+          "n": 22
+        }
+      },
+      "calls": 1,
+      "tokens": 22298
+    },
+    "one_feedback": {
+      "contract": {
+        "status": "blocked",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "x"
+          },
+          "platform": {
+            "value": "perfused_chip",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "x"
+          },
+          "readout": {
+            "value": "size_viability",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "x"
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "x"
+          },
+          "threshold_rule": {
+            "value": "roc_optimized",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "x"
+          },
+          "threshold_timing": {
+            "value": "outcome_optimized",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "x"
+          },
+          "patient_mapping": {
+            "value": "partial",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "x"
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "x"
+          },
+          "n_units": {
+            "value": 22,
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "x"
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "x"
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.8636363636363636,
+          "reported_evidence": [
+            "article:p76"
+          ],
+          "threshold": null,
+          "op": ">=",
+          "score_direction": "higher",
+          "records": [],
+          "blocked_reason": "Inspecting source workbooks to bind 22 row-level optimized-chip measurements and clinical outcomes."
+        },
+        "notes": []
+      },
+      "evaluation": {
+        "matched": false,
+        "metric": "accuracy",
+        "computed": null,
+        "reported": 0.8636363636363636,
+        "difference": null,
+        "n": 0,
+        "errors": [
+          "No source-bound observations: Inspecting source workbooks to bind 22 row-level optimized-chip measurements and clinical outcomes.",
+          "Expected 22 analysis units, got 0"
+        ],
+        "rows": [],
+        "expected": {
+          "metric": "accuracy",
+          "value": 0.8636363636363636,
+          "n": 22
+        }
+      },
+      "calls": 2,
+      "tokens": 44953
+    },
+    "tool_loop": {
+      "contract": {
+        "status": "blocked",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "x"
+          },
+          "platform": {
+            "value": "perfused_chip",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "x"
+          },
+          "readout": {
+            "value": "size_viability",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "x"
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "x"
+          },
+          "threshold_rule": {
+            "value": "roc_optimized",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "x"
+          },
+          "threshold_timing": {
+            "value": "outcome_optimized",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "x"
+          },
+          "patient_mapping": {
+            "value": "partial",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "x"
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "x"
+          },
+          "n_units": {
+            "value": 22,
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "x"
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "x"
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.8636363636363636,
+          "reported_evidence": [
+            "article:p76"
+          ],
+          "threshold": null,
+          "op": ">=",
+          "score_direction": "higher",
+          "records": [],
+          "blocked_reason": "Inspecting source workbooks to bind 22 row-level optimized-chip measurements and clinical outcomes."
+        },
+        "notes": []
+      },
+      "evaluation": {
+        "matched": false,
+        "metric": "accuracy",
+        "computed": null,
+        "reported": 0.8636363636363636,
+        "difference": null,
+        "n": 0,
+        "errors": [
+          "No source-bound observations: Inspecting source workbooks to bind 22 row-level optimized-chip measurements and clinical outcomes.",
+          "Expected 22 analysis units, got 0"
+        ],
+        "rows": [],
+        "expected": {
+          "metric": "accuracy",
+          "value": 0.8636363636363636,
+          "n": 22
+        }
+      },
+      "calls": 12,
+      "tokens": 530243
+    }
+  },
+  "last_contract": {
+    "status": "blocked",
+    "fields": {
+      "unit": {
+        "value": "patient",
+        "evidence": [
+          "article:p76"
+        ],
+        "explanation": "x"
+      },
+      "platform": {
+        "value": "perfused_chip",
+        "evidence": [
+          "article:p76"
+        ],
+        "explanation": "x"
+      },
+      "readout": {
+        "value": "size_viability",
+        "evidence": [
+          "article:p76"
+        ],
+        "explanation": "x"
+      },
+      "direction": {
+        "value": "lower_sensitive",
+        "evidence": [
+          "article:p76"
+        ],
+        "explanation": "x"
+      },
+      "threshold_rule": {
+        "value": "roc_optimized",
+        "evidence": [
+          "article:p76"
+        ],
+        "explanation": "x"
+      },
+      "threshold_timing": {
+        "value": "outcome_optimized",
+        "evidence": [
+          "article:p76"
+        ],
+        "explanation": "x"
+      },
+      "patient_mapping": {
+        "value": "partial",
+        "evidence": [
+          "article:p76"
+        ],
+        "explanation": "x"
+      },
+      "regimen_match": {
+        "value": "matched",
+        "evidence": [
+          "article:p76"
+        ],
+        "explanation": "x"
+      },
+      "n_units": {
+        "value": 22,
+        "evidence": [
+          "article:p76"
+        ],
+        "explanation": "x"
+      },
+      "split": {
+        "value": "same_cohort",
+        "evidence": [
+          "article:p76"
+        ],
+        "explanation": "x"
+      }
+    },
+    "headline": {
+      "metric": "accuracy",
+      "reported": 0.8636363636363636,
+      "reported_evidence": [
+        "article:p76"
+      ],
+      "threshold": null,
+      "op": ">=",
+      "score_direction": "higher",
+      "records": [],
+      "blocked_reason": "Inspecting source workbooks to bind 22 row-level optimized-chip measurements and clinical outcomes."
+    },
+    "notes": []
+  },
+  "last_evaluation": {
+    "matched": false,
+    "metric": "accuracy",
+    "computed": null,
+    "reported": 0.8636363636363636,
+    "difference": null,
+    "n": 0,
+    "errors": [
+      "No source-bound observations: Inspecting source workbooks to bind 22 row-level optimized-chip measurements and clinical outcomes.",
+      "Expected 22 analysis units, got 0"
+    ],
+    "rows": [],
+    "expected": {
+      "metric": "accuracy",
+      "value": 0.8636363636363636,
+      "n": 22
+    }
+  }
+}

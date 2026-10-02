@@ -1,0 +1,16 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "import re\nfor p in article:\n    t = p['text']\n    if re.search(r'\\b(PD|PR|SD|CR)\\b', t) or 'RECIST' in t or 'clinical response' in t.lower():\n        print(p['ref'], '::', t[:600])\n        print('---')\n"
+    },
+    "output_sha256": "11dc2e9df98e82f1aa2cf9f9598de9a6e42ed006850d626f0cf0d7a9cf0b582d"
+  },
+  {
+    "name": "python",
+    "arguments": {
+      "code": "for p in article:\n    if p['ref'] in ('article:p70','article:p71','article:p72','article:p73','article:p74'):\n        print(p['ref'], p['text'])\n"
+    },
+    "output_sha256": "0dc0bfec8011e84cbd85b1edeee36fe08b6afe4712c74512fbc615077cabafa2"
+  }
+]

@@ -1,0 +1,503 @@
+[
+  {
+    "name": "finish",
+    "arguments": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient_regimen",
+            "evidence": [
+              "article:p17",
+              "article:p20",
+              "vision/8535cd919013/R45C5"
+            ],
+            "explanation": "Each record is a matched patient treatment line; patient #2 contributes line 2 and the other six records are line 1."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p1",
+              "article:p5"
+            ],
+            "explanation": "Functional testing was performed in organotypic tissue slice cultures."
+          },
+          "readout": {
+            "value": "other",
+            "evidence": [
+              "article:p12",
+              "article:p29"
+            ],
+            "explanation": "The assay result is EVSS, a composite rank score integrating CK7, CC3, and Ki67."
+          },
+          "direction": {
+            "value": "higher_sensitive",
+            "evidence": [
+              "article:p12",
+              "article:p17"
+            ],
+            "explanation": "Higher EVSS indicates greater ex vivo sensitivity."
+          },
+          "threshold_rule": {
+            "value": "fixed_numeric",
+            "evidence": [
+              "article:p17",
+              "article:p48"
+            ],
+            "explanation": "EVSS is dichotomized at 50, with blue indicating >=50 and red indicating <50."
+          },
+          "threshold_timing": {
+            "value": "explicitly_prespecified",
+            "evidence": [
+              "article:p17"
+            ],
+            "explanation": "The article states that the EVSS cutoff of 50 was predefined."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "vision/8535cd919013/R41C5",
+              "grid/48be1cf4aa0b/R1C1",
+              "grid/f2fd97c46dca/R1C1"
+            ],
+            "explanation": "Panel B identifies seven patient columns and separately marks assay and clinical classifications by cell color."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "vision/8535cd919013/R41C5",
+              "vision/8535cd919013/R44C5"
+            ],
+            "explanation": "The ex vivo and clinical regimens match for all seven Panel B observations."
+          },
+          "n_units": {
+            "value": 7,
+            "evidence": [
+              "grid/48be1cf4aa0b/R1C1",
+              "grid/48be1cf4aa0b/R1C2",
+              "grid/48be1cf4aa0b/R1C3",
+              "grid/48be1cf4aa0b/R1C4",
+              "grid/48be1cf4aa0b/R1C5",
+              "grid/48be1cf4aa0b/R1C6",
+              "grid/48be1cf4aa0b/R1C7"
+            ],
+            "explanation": "The sampled Panel B row contains seven independent assay cells."
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p29"
+            ],
+            "explanation": "EVSS derivation and clinical correlation were performed in the same exploratory cohort."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 1,
+          "reported_evidence": [
+            "grid/48be1cf4aa0b/R1C1",
+            "grid/48be1cf4aa0b/R1C2",
+            "grid/48be1cf4aa0b/R1C3",
+            "grid/48be1cf4aa0b/R1C4",
+            "grid/48be1cf4aa0b/R1C5",
+            "grid/48be1cf4aa0b/R1C6",
+            "grid/48be1cf4aa0b/R1C7",
+            "grid/f2fd97c46dca/R1C1",
+            "grid/f2fd97c46dca/R1C2",
+            "grid/f2fd97c46dca/R1C3",
+            "grid/f2fd97c46dca/R1C4",
+            "grid/f2fd97c46dca/R1C5",
+            "grid/f2fd97c46dca/R1C6",
+            "grid/f2fd97c46dca/R1C7"
+          ],
+          "threshold": 50,
+          "op": ">=",
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "patient_8_FFX_line1",
+              "score": {
+                "ref": "grid/48be1cf4aa0b/R1C1",
+                "map": {
+                  "blue": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "grid/f2fd97c46dca/R1C1",
+                "map": {
+                  "blue": 1,
+                  "red": 0
+                }
+              }
+            },
+            {
+              "id": "patient_17_FFX_line1",
+              "score": {
+                "ref": "grid/48be1cf4aa0b/R1C2",
+                "map": {
+                  "blue": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "grid/f2fd97c46dca/R1C2",
+                "map": {
+                  "blue": 1,
+                  "red": 0
+                }
+              }
+            },
+            {
+              "id": "patient_10_FFX_line1",
+              "score": {
+                "ref": "grid/48be1cf4aa0b/R1C3",
+                "map": {
+                  "blue": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "grid/f2fd97c46dca/R1C3",
+                "map": {
+                  "blue": 1,
+                  "red": 0
+                }
+              }
+            },
+            {
+              "id": "patient_7_FFX_line1",
+              "score": {
+                "ref": "grid/48be1cf4aa0b/R1C4",
+                "map": {
+                  "blue": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "grid/f2fd97c46dca/R1C4",
+                "map": {
+                  "blue": 1,
+                  "red": 0
+                }
+              }
+            },
+            {
+              "id": "patient_6_GEM_line1",
+              "score": {
+                "ref": "grid/48be1cf4aa0b/R1C5",
+                "map": {
+                  "blue": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "grid/f2fd97c46dca/R1C5",
+                "map": {
+                  "blue": 1,
+                  "red": 0
+                }
+              }
+            },
+            {
+              "id": "patient_2_GEM_line2",
+              "score": {
+                "ref": "grid/48be1cf4aa0b/R1C6",
+                "map": {
+                  "blue": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "grid/f2fd97c46dca/R1C6",
+                "map": {
+                  "blue": 1,
+                  "red": 0
+                }
+              }
+            },
+            {
+              "id": "patient_12_FFX_line1",
+              "score": {
+                "ref": "grid/48be1cf4aa0b/R1C7",
+                "map": {
+                  "blue": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "grid/f2fd97c46dca/R1C7",
+                "map": {
+                  "blue": 1,
+                  "red": 0
+                }
+              }
+            }
+          ],
+          "blocked_reason": ""
+        },
+        "notes": [
+          "Blue assay cells are EVSS >=50 sensitive; red assay cells are EVSS <50 resistant.",
+          "Blue clinical cells are RECIST DCR (CR or SD); red clinical cells are no DCR (PD).",
+          "Both sampled rows have the same pattern blue-blue-blue-blue-blue-red-red, giving 7/7 = 1.0 accuracy."
+        ]
+      }
+    },
+    "output": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient_regimen",
+            "evidence": [
+              "article:p17",
+              "article:p20",
+              "vision/8535cd919013/R45C5"
+            ],
+            "explanation": "Each record is a matched patient treatment line; patient #2 contributes line 2 and the other six records are line 1."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p1",
+              "article:p5"
+            ],
+            "explanation": "Functional testing was performed in organotypic tissue slice cultures."
+          },
+          "readout": {
+            "value": "other",
+            "evidence": [
+              "article:p12",
+              "article:p29"
+            ],
+            "explanation": "The assay result is EVSS, a composite rank score integrating CK7, CC3, and Ki67."
+          },
+          "direction": {
+            "value": "higher_sensitive",
+            "evidence": [
+              "article:p12",
+              "article:p17"
+            ],
+            "explanation": "Higher EVSS indicates greater ex vivo sensitivity."
+          },
+          "threshold_rule": {
+            "value": "fixed_numeric",
+            "evidence": [
+              "article:p17",
+              "article:p48"
+            ],
+            "explanation": "EVSS is dichotomized at 50, with blue indicating >=50 and red indicating <50."
+          },
+          "threshold_timing": {
+            "value": "explicitly_prespecified",
+            "evidence": [
+              "article:p17"
+            ],
+            "explanation": "The article states that the EVSS cutoff of 50 was predefined."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "vision/8535cd919013/R41C5",
+              "grid/48be1cf4aa0b/R1C1",
+              "grid/f2fd97c46dca/R1C1"
+            ],
+            "explanation": "Panel B identifies seven patient columns and separately marks assay and clinical classifications by cell color."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "vision/8535cd919013/R41C5",
+              "vision/8535cd919013/R44C5"
+            ],
+            "explanation": "The ex vivo and clinical regimens match for all seven Panel B observations."
+          },
+          "n_units": {
+            "value": 7,
+            "evidence": [
+              "grid/48be1cf4aa0b/R1C1",
+              "grid/48be1cf4aa0b/R1C2",
+              "grid/48be1cf4aa0b/R1C3",
+              "grid/48be1cf4aa0b/R1C4",
+              "grid/48be1cf4aa0b/R1C5",
+              "grid/48be1cf4aa0b/R1C6",
+              "grid/48be1cf4aa0b/R1C7"
+            ],
+            "explanation": "The sampled Panel B row contains seven independent assay cells."
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p29"
+            ],
+            "explanation": "EVSS derivation and clinical correlation were performed in the same exploratory cohort."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 1,
+          "reported_evidence": [
+            "grid/48be1cf4aa0b/R1C1",
+            "grid/48be1cf4aa0b/R1C2",
+            "grid/48be1cf4aa0b/R1C3",
+            "grid/48be1cf4aa0b/R1C4",
+            "grid/48be1cf4aa0b/R1C5",
+            "grid/48be1cf4aa0b/R1C6",
+            "grid/48be1cf4aa0b/R1C7",
+            "grid/f2fd97c46dca/R1C1",
+            "grid/f2fd97c46dca/R1C2",
+            "grid/f2fd97c46dca/R1C3",
+            "grid/f2fd97c46dca/R1C4",
+            "grid/f2fd97c46dca/R1C5",
+            "grid/f2fd97c46dca/R1C6",
+            "grid/f2fd97c46dca/R1C7"
+          ],
+          "threshold": 50,
+          "op": ">=",
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "patient_8_FFX_line1",
+              "score": {
+                "ref": "grid/48be1cf4aa0b/R1C1",
+                "map": {
+                  "blue": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "grid/f2fd97c46dca/R1C1",
+                "map": {
+                  "blue": 1,
+                  "red": 0
+                }
+              }
+            },
+            {
+              "id": "patient_17_FFX_line1",
+              "score": {
+                "ref": "grid/48be1cf4aa0b/R1C2",
+                "map": {
+                  "blue": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "grid/f2fd97c46dca/R1C2",
+                "map": {
+                  "blue": 1,
+                  "red": 0
+                }
+              }
+            },
+            {
+              "id": "patient_10_FFX_line1",
+              "score": {
+                "ref": "grid/48be1cf4aa0b/R1C3",
+                "map": {
+                  "blue": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "grid/f2fd97c46dca/R1C3",
+                "map": {
+                  "blue": 1,
+                  "red": 0
+                }
+              }
+            },
+            {
+              "id": "patient_7_FFX_line1",
+              "score": {
+                "ref": "grid/48be1cf4aa0b/R1C4",
+                "map": {
+                  "blue": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "grid/f2fd97c46dca/R1C4",
+                "map": {
+                  "blue": 1,
+                  "red": 0
+                }
+              }
+            },
+            {
+              "id": "patient_6_GEM_line1",
+              "score": {
+                "ref": "grid/48be1cf4aa0b/R1C5",
+                "map": {
+                  "blue": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "grid/f2fd97c46dca/R1C5",
+                "map": {
+                  "blue": 1,
+                  "red": 0
+                }
+              }
+            },
+            {
+              "id": "patient_2_GEM_line2",
+              "score": {
+                "ref": "grid/48be1cf4aa0b/R1C6",
+                "map": {
+                  "blue": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "grid/f2fd97c46dca/R1C6",
+                "map": {
+                  "blue": 1,
+                  "red": 0
+                }
+              }
+            },
+            {
+              "id": "patient_12_FFX_line1",
+              "score": {
+                "ref": "grid/48be1cf4aa0b/R1C7",
+                "map": {
+                  "blue": 1,
+                  "red": 0
+                }
+              },
+              "truth": {
+                "ref": "grid/f2fd97c46dca/R1C7",
+                "map": {
+                  "blue": 1,
+                  "red": 0
+                }
+              }
+            }
+          ],
+          "blocked_reason": ""
+        },
+        "notes": [
+          "Blue assay cells are EVSS >=50 sensitive; red assay cells are EVSS <50 resistant.",
+          "Blue clinical cells are RECIST DCR (CR or SD); red clinical cells are no DCR (PD).",
+          "Both sampled rows have the same pattern blue-blue-blue-blue-blue-red-red, giving 7/7 = 1.0 accuracy."
+        ]
+      },
+      "execution_feedback": {
+        "matched": false,
+        "metric": "accuracy",
+        "computed": 0.2857142857142857,
+        "reported": 1,
+        "difference": -0.7142857142857143,
+        "n": 7,
+        "errors": [],
+        "expected": {
+          "metric": "accuracy",
+          "value": 1.0,
+          "n": 7
+        }
+      }
+    }
+  }
+]

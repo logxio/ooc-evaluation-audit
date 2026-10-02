@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_9bs4mqfgq5rzolzok8i2d9g3",
+        "type": "function",
+        "function": {
+          "name": "python",
+          "arguments": "{\"code\": \"for fn,sheets in tables.items():\\n for sh,o in sheets.items():\\n  rows=o['rows']\\n  for ri,row in enumerate(rows,1):\\n   for ci,v in enumerate(row,1):\\n    if 'AUC' in str(v) or 'auc' in str(v):\\n     print(fn,sh,ri,ci,repr(v))\\n\"}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "Weird prior error perhaps tables variable mutated? Now works. Search.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 127,
+    "prompt_tokens": 27271,
+    "total_tokens": 27398,
+    "prompt_tokens_details": {
+      "cached_tokens": 25912
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 15
+    }
+  }
+}

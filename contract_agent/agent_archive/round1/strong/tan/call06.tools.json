@@ -1,0 +1,655 @@
+[
+  {
+    "name": "finish",
+    "arguments": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient_regimen",
+            "evidence": [
+              "article:p45",
+              "vision/WCB015_FOLFOX_resp"
+            ],
+            "explanation": "29 evaluable treatments across 18 community mCRC patients (Figure 4B); denominator 29 treatments"
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p30"
+            ],
+            "explanation": "PDTO (patient-derived tumor organoid) high-throughput imaging platform"
+          },
+          "readout": {
+            "value": "size_viability",
+            "evidence": [
+              "article:p30"
+            ],
+            "explanation": "Viability quantified by mean PDTO size; AUC for single agents, pan-matrix viability for combinations (Table S4, supp.xlsx/Sheet1)"
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p40"
+            ],
+            "explanation": "AUC/pan-matrix viability below therapy-specific cutoff = predicted sensitive"
+          },
+          "threshold_rule": {
+            "value": "fixed_numeric",
+            "evidence": [
+              "article:p40"
+            ],
+            "explanation": "Therapy-specific cutoffs: 25% 5FU/TAS-102, 20% irinotecan/oxaliplatin/anti-EGFR (RAS WT), 10% regorafenib, 50% FOLFIRI/FOLFOX"
+          },
+          "threshold_timing": {
+            "value": "independent_reference",
+            "evidence": [
+              "article:p40"
+            ],
+            "explanation": "Cutoffs derived from separate treatment-naive community cohort (n=56) plus first-line mCRC trial response rates, not from the 29 evaluated treatments"
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "vision/WCB015_FOLFOX_resp",
+              "supp.xlsx/Sheet1/A2"
+            ],
+            "explanation": "Per-patient/regimen rows in Figure 4B; PDTO IDs in Table S4 (supp.xlsx/Sheet1)"
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p40"
+            ],
+            "explanation": "Each treatment matched to regimen-specific PDTO prediction (FOLFOXIRI scored via FOLFOX+FOLFIRI matrices; chemo+biologic sensitive if either component sensitive)"
+          },
+          "n_units": {
+            "value": 29,
+            "evidence": [
+              "article:p45"
+            ],
+            "explanation": "29 evaluable treatments (18 patients), the exact requested denominator"
+          },
+          "split": {
+            "value": "independent_test",
+            "evidence": [
+              "article:p40",
+              "article:p45"
+            ],
+            "explanation": "Cutoffs developed on treatment-naive cohort; prospective evaluation in independent community mCRC patients receiving palliative treatment"
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.828,
+          "reported_evidence": [
+            "article:p45"
+          ],
+          "threshold": 0.5,
+          "op": ">=",
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "WCB015_FOLFOX",
+              "score": {
+                "ref": "vision/WCB015_FOLFOX_pred",
+                "map": {
+                  "Sensitive": 1,
+                  "Resistant": 0
+                },
+                "threshold": 0.5,
+                "op": ">="
+              },
+              "truth": {
+                "ref": "vision/WCB015_FOLFOX_resp",
+                "map": {
+                  "Good response": 1,
+                  "Poor response": 0
+                }
+              }
+            },
+            {
+              "id": "WCB015_FOLFIRIBev",
+              "score": {
+                "ref": "vision/WCB015_FOLFIRIBev_pred",
+                "map": {
+                  "Sensitive": 1,
+                  "Resistant": 0
+                },
+                "threshold": 0.5,
+                "op": ">="
+              },
+              "truth": {
+                "ref": "vision/WCB015_FOLFIRIBev_resp",
+                "map": {
+                  "Good response": 1,
+                  "Poor response": 0
+                }
+              }
+            },
+            {
+              "id": "WCB015_TAS102",
+              "score": {
+                "ref": "vision/WCB015_TAS102_pred",
+                "map": {
+                  "Sensitive": 1,
+                  "Resistant": 0
+                },
+                "threshold": 0.5,
+                "op": ">="
+              },
+              "truth": {
+                "ref": "vision/WCB015_TAS102_resp",
+                "map": {
+                  "Good response": 1,
+                  "Poor response": 0
+                }
+              }
+            },
+            {
+              "id": "WCB027_Capecitabine",
+              "score": {
+                "ref": "vision/WCB027_Capecitabine_pred",
+                "map": {
+                  "Sensitive": 1,
+                  "Resistant": 0
+                },
+                "threshold": 0.5,
+                "op": ">="
+              },
+              "truth": {
+                "ref": "vision/WCB027_Capecitabine_resp",
+                "map": {
+                  "Good response": 1,
+                  "Poor response": 0
+                }
+              }
+            },
+            {
+              "id": "WCB027_XELOX",
+              "score": {
+                "ref": "vision/WCB027_XELOX_pred",
+                "map": {
+                  "Sensitive": 1,
+                  "Resistant": 0
+                },
+                "threshold": 0.5,
+                "op": ">="
+              },
+              "truth": {
+                "ref": "vision/WCB027_XELOX_resp",
+                "map": {
+                  "Good response": 1,
+                  "Poor response": 0
+                }
+              }
+            },
+            {
+              "id": "WCB041_Capecitabine",
+              "score": {
+                "ref": "vision/WCB041_Capecitabine_pred",
+                "map": {
+                  "Sensitive": 1,
+                  "Resistant": 0
+                },
+                "threshold": 0.5,
+                "op": ">="
+              },
+              "truth": {
+                "ref": "vision/WCB041_Capecitabine_resp",
+                "map": {
+                  "Good response": 1,
+                  "Poor response": 0
+                }
+              }
+            },
+            {
+              "id": "WCB041_FOLFIRIBev",
+              "score": {
+                "ref": "vision/WCB041_FOLFIRIBev_pred",
+                "map": {
+                  "Sensitive": 1,
+                  "Resistant": 0
+                },
+                "threshold": 0.5,
+                "op": ">="
+              },
+              "truth": {
+                "ref": "vision/WCB041_FOLFIRIBev_resp",
+                "map": {
+                  "Good response": 1,
+                  "Poor response": 0
+                }
+              }
+            },
+            {
+              "id": "WCB087_5FU",
+              "score": {
+                "ref": "vision/WCB087_5FU_pred",
+                "map": {
+                  "Sensitive": 1,
+                  "Resistant": 0
+                },
+                "threshold": 0.5,
+                "op": ">="
+              },
+              "truth": {
+                "ref": "vision/WCB087_5FU_resp",
+                "map": {
+                  "Good response": 1,
+                  "Poor response": 0
+                }
+              }
+            },
+            {
+              "id": "WCB091_FOLFOXBev",
+              "score": {
+                "ref": "vision/WCB091_FOLFOXBev_pred",
+                "map": {
+                  "Sensitive": 1,
+                  "Resistant": 0
+                },
+                "threshold": 0.5,
+                "op": ">="
+              },
+              "truth": {
+                "ref": "vision/WCB091_FOLFOXBev_resp",
+                "map": {
+                  "Good response": 1,
+                  "Poor response": 0
+                }
+              }
+            },
+            {
+              "id": "WCB123_FOLFOX",
+              "score": {
+                "ref": "vision/WCB123_FOLFOX_pred",
+                "map": {
+                  "Sensitive": 1,
+                  "Resistant": 0
+                },
+                "threshold": 0.5,
+                "op": ">="
+              },
+              "truth": {
+                "ref": "vision/WCB123_FOLFOX_resp",
+                "map": {
+                  "Good response": 1,
+                  "Poor response": 0
+                }
+              }
+            },
+            {
+              "id": "WCB123_FOLFOXIRI",
+              "score": {
+                "ref": "vision/WCB123_FOLFOXIRI_pred",
+                "map": {
+                  "Sensitive": 1,
+                  "Resistant": 0
+                },
+                "threshold": 0.5,
+                "op": ">="
+              },
+              "truth": {
+                "ref": "vision/WCB123_FOLFOXIRI_resp",
+                "map": {
+                  "Good response": 1,
+                  "Poor response": 0
+                }
+              }
+            },
+            {
+              "id": "WCB139_5FUBev",
+              "score": {
+                "ref": "vision/WCB139_5FUBev_pred",
+                "map": {
+                  "Sensitive": 1,
+                  "Resistant": 0
+                },
+                "threshold": 0.5,
+                "op": ">="
+              },
+              "truth": {
+                "ref": "vision/WCB139_5FUBev_resp",
+                "map": {
+                  "Good response": 1,
+                  "Poor response": 0
+                }
+              }
+            },
+            {
+              "id": "WCB139_TAS102",
+              "score": {
+                "ref": "vision/WCB139_TAS102_pred",
+                "map": {
+                  "Sensitive": 1,
+                  "Resistant": 0
+                },
+                "threshold": 0.5,
+                "op": ">="
+              },
+              "truth": {
+                "ref": "vision/WCB139_TAS102_resp",
+                "map": {
+                  "Good response": 1,
+                  "Poor response": 0
+                }
+              }
+            },
+            {
+              "id": "WCB146_5FUBev",
+              "score": {
+                "ref": "vision/WCB146_5FUBev_pred",
+                "map": {
+                  "Sensitive": 1,
+                  "Resistant": 0
+                },
+                "threshold": 0.5,
+                "op": ">="
+              },
+              "truth": {
+                "ref": "vision/WCB146_5FUBev_resp",
+                "map": {
+                  "Good response": 1,
+                  "Poor response": 0
+                }
+              }
+            },
+            {
+              "id": "WCB150_5FUBev",
+              "score": {
+                "ref": "vision/WCB150_5FUBev_pred",
+                "map": {
+                  "Sensitive": 1,
+                  "Resistant": 0
+                },
+                "threshold": 0.5,
+                "op": ">="
+              },
+              "truth": {
+                "ref": "vision/WCB150_5FUBev_resp",
+                "map": {
+                  "Good response": 1,
+                  "Poor response": 0
+                }
+              }
+            },
+            {
+              "id": "WCB150_FOLFIRI",
+              "score": {
+                "ref": "vision/WCB150_FOLFIRI_pred",
+                "map": {
+                  "Sensitive": 1,
+                  "Resistant": 0
+                },
+                "threshold": 0.5,
+                "op": ">="
+              },
+              "truth": {
+                "ref": "vision/WCB150_FOLFIRI_resp",
+                "map": {
+                  "Good response": 1,
+                  "Poor response": 0
+                }
+              }
+            },
+            {
+              "id": "WCB150_TAS102",
+              "score": {
+                "ref": "vision/WCB150_TAS102_pred",
+                "map": {
+                  "Sensitive": 1,
+                  "Resistant": 0
+                },
+                "threshold": 0.5,
+                "op": ">="
+              },
+              "truth": {
+                "ref": "vision/WCB150_TAS102_resp",
+                "map": {
+                  "Good response": 1,
+                  "Poor response": 0
+                }
+              }
+            },
+            {
+              "id": "WCB203_CapeBev",
+              "score": {
+                "ref": "vision/WCB203_CapeBev_pred",
+                "map": {
+                  "Sensitive": 1,
+                  "Resistant": 0
+                },
+                "threshold": 0.5,
+                "op": ">="
+              },
+              "truth": {
+                "ref": "vision/WCB203_CapeBev_resp",
+                "map": {
+                  "Good response": 1,
+                  "Poor response": 0
+                }
+              }
+            },
+            {
+              "id": "WCB203_Irinotecan",
+              "score": {
+                "ref": "vision/WCB203_Irinotecan_pred",
+                "map": {
+                  "Sensitive": 1,
+                  "Resistant": 0
+                },
+                "threshold": 0.5,
+                "op": ">="
+              },
+              "truth": {
+                "ref": "vision/WCB203_Irinotecan_resp",
+                "map": {
+                  "Good response": 1,
+                  "Poor response": 0
+                }
+              }
+            },
+            {
+              "id": "WCB217_TAS102",
+              "score": {
+                "ref": "vision/WCB217_TAS102_pred",
+                "map": {
+                  "Sensitive": 1,
+                  "Resistant": 0
+                },
+                "threshold": 0.5,
+                "op": ">="
+              },
+              "truth": {
+                "ref": "vision/WCB217_TAS102_resp",
+                "map": {
+                  "Good response": 1,
+                  "Poor response": 0
+                }
+              }
+            },
+            {
+              "id": "WCB221_FOLFOX",
+              "score": {
+                "ref": "vision/WCB221_FOLFOX_pred",
+                "map": {
+                  "Sensitive": 1,
+                  "Resistant": 0
+                },
+                "threshold": 0.5,
+                "op": ">="
+              },
+              "truth": {
+                "ref": "vision/WCB221_FOLFOX_resp",
+                "map": {
+                  "Good response": 1,
+                  "Poor response": 0
+                }
+              }
+            },
+            {
+              "id": "WCB239_FOLFOXBev",
+              "score": {
+                "ref": "vision/WCB239_FOLFOXBev_pred",
+                "map": {
+                  "Sensitive": 1,
+                  "Resistant": 0
+                },
+                "threshold": 0.5,
+                "op": ">="
+              },
+              "truth": {
+                "ref": "vision/WCB239_FOLFOXBev_resp",
+                "map": {
+                  "Good response": 1,
+                  "Poor response": 0
+                }
+              }
+            },
+            {
+              "id": "WCB239_FOLFIRICetux",
+              "score": {
+                "ref": "vision/WCB239_FOLFIRICetux_pred",
+                "map": {
+                  "Sensitive": 1,
+                  "Resistant": 0
+                },
+                "threshold": 0.5,
+                "op": ">="
+              },
+              "truth": {
+                "ref": "vision/WCB239_FOLFIRICetux_resp",
+                "map": {
+                  "Good response": 1,
+                  "Poor response": 0
+                }
+              }
+            },
+            {
+              "id": "WCB242_FOLFIRIPani",
+              "score": {
+                "ref": "vision/WCB242_FOLFIRIPani_pred",
+                "map": {
+                  "Sensitive": 1,
+                  "Resistant": 0
+                },
+                "threshold": 0.5,
+                "op": ">="
+              },
+              "truth": {
+                "ref": "vision/WCB242_FOLFIRIPani_resp",
+                "map": {
+                  "Good response": 1,
+                  "Poor response": 0
+                }
+              }
+            },
+            {
+              "id": "WCB245_FOLFOXCetux",
+              "score": {
+                "ref": "vision/WCB245_FOLFOXCetux_pred",
+                "map": {
+                  "Sensitive": 1,
+                  "Resistant": 0
+                },
+                "threshold": 0.5,
+                "op": ">="
+              },
+              "truth": {
+                "ref": "vision/WCB245_FOLFOXCetux_resp",
+                "map": {
+                  "Good response": 1,
+                  "Poor response": 0
+                }
+              }
+            },
+            {
+              "id": "WCB254_FOLFOXIRI",
+              "score": {
+                "ref": "vision/WCB254_FOLFOXIRI_pred",
+                "map": {
+                  "Sensitive": 1,
+                  "Resistant": 0
+                },
+                "threshold": 0.5,
+                "op": ">="
+              },
+              "truth": {
+                "ref": "vision/WCB254_FOLFOXIRI_resp",
+                "map": {
+                  "Good response": 1,
+                  "Poor response": 0
+                }
+              }
+            },
+            {
+              "id": "WCB254_FOLFOXCetux",
+              "score": {
+                "ref": "vision/WCB254_FOLFOXCetux_pred",
+                "map": {
+                  "Sensitive": 1,
+                  "Resistant": 0
+                },
+                "threshold": 0.5,
+                "op": ">="
+              },
+              "truth": {
+                "ref": "vision/WCB254_FOLFOXCetux_resp",
+                "map": {
+                  "Good response": 1,
+                  "Poor response": 0
+                }
+              }
+            },
+            {
+              "id": "WCB291_5FUBev",
+              "score": {
+                "ref": "vision/WCB291_5FUBev_pred",
+                "map": {
+                  "Sensitive": 1,
+                  "Resistant": 0
+                },
+                "threshold": 0.5,
+                "op": ">="
+              },
+              "truth": {
+                "ref": "vision/WCB291_5FUBev_resp",
+                "map": {
+                  "Good response": 1,
+                  "Poor response": 0
+                }
+              }
+            },
+            {
+              "id": "WCB296_FOLFOXIRI",
+              "score": {
+                "ref": "vision/WCB296_FOLFOXIRI_pred",
+                "map": {
+                  "Sensitive": 1,
+                  "Resistant": 0
+                },
+                "threshold": 0.5,
+                "op": ">="
+              },
+              "truth": {
+                "ref": "vision/WCB296_FOLFOXIRI_resp",
+                "map": {
+                  "Good response": 1,
+                  "Poor response": 0
+                }
+              }
+            }
+          ],
+          "blocked_reason": null
+        },
+        "notes": [
+          "Figure 4B (gr4.jpg) panel colors read visually per patient-regimen row: prediction Sensitive=1/Resistant=0 (score already binarized at 0.5), truth Good response=1 (clinical benefit)/Poor response=0; computed accuracy 24/29 = 0.8275862 matches the requested headline and the published 82.8% (95% CI 64.2-94.2, article:p45).",
+          "Confusion counts reproduce published pies: TP=10, FP=1, FN=4, TN=14 -> sensitivity 71.4%, specificity 93.3%, PPV 90.9%, NPV 77.8%.",
+          "The two initially uncertain rows (WCB203_Irinotecan, WCB239_FOLFIRICetux = good response/sensitive) are uniquely forced by the published aggregates (11 sensitive predictions, 14 clinical-benefit treatments) given all other 27 certain row readings; assay backing for these patients exists in supp.xlsx/Sheet1 (Table S4, Community Evaluable)."
+        ]
+      }
+    },
+    "output_sha256": "cb45684dd8e44184bb40b8c461149a7240244c6877d5d0e9d66df1494c3eea71"
+  }
+]

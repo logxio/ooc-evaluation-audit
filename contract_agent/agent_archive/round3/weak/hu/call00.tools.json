@@ -1,0 +1,198 @@
+[
+  {
+    "name": "initial_code",
+    "output": {
+      "returncode": 0,
+      "stdout": "Reported accuracy: 1.0 (n=10)\nNumber of records found: 10\n",
+      "stderr": "",
+      "seconds": 0.2068011669907719,
+      "peak_rss_bytes": 4063232,
+      "limit_error": null,
+      "code_sha256": "0a1d50228dc5d4e76ba4192767e7106e590a4de2d6c7f93c11ec96fb7d5881bb",
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p27"
+            ],
+            "explanation": "Each unit is a patient with evaluable clinical response and matched organoid assay"
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p27",
+              "article:p1"
+            ],
+            "explanation": "Assay uses patient-derived lung cancer organoids (LCOs) on InSMAR-chip"
+          },
+          "readout": {
+            "value": "viability",
+            "evidence": [
+              "article:p16"
+            ],
+            "explanation": "Drug sensitivity measured via alamarBlue cell viability assay, reported as IC50 or sensitivity call"
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p20"
+            ],
+            "explanation": "Lower IC50 indicates higher sensitivity to the drug"
+          },
+          "threshold_rule": {
+            "value": "fixed_numeric",
+            "evidence": [
+              "article:p20"
+            ],
+            "explanation": "Sensitivity threshold based on clinically relevant drug concentrations (e.g., Cmax, Ctrough)"
+          },
+          "threshold_timing": {
+            "value": "independent_reference",
+            "evidence": [
+              "article:p20"
+            ],
+            "explanation": "Thresholds are established clinical concentrations, not optimized on this cohort"
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "article:p27",
+              "41467_2021_22676_MOESM5_ESM.xlsx/Sheet1"
+            ],
+            "explanation": "Each organoid line is matched to a unique individual patient"
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p27"
+            ],
+            "explanation": "Drugs tested in the organoid assay match the clinical treatment received by the patient"
+          },
+          "n_units": {
+            "value": 10,
+            "evidence": [
+              "article:p27"
+            ],
+            "explanation": "10 evaluable patients with matched assay and clinical outcome"
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p27"
+            ],
+            "explanation": "All 10 patients are part of the same study cohort, no separate training/test split"
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 1.0,
+          "reported_evidence": [
+            "article:p27",
+            "article:p28"
+          ],
+          "threshold": null,
+          "op": null,
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "Sample ID",
+              "score": {
+                "ref": "41467_2021_22676_MOESM5_ESM.xlsx/Sheet1/G3"
+              },
+              "truth": {
+                "ref": "41467_2021_22676_MOESM5_ESM.xlsx/Sheet1/M3"
+              }
+            },
+            {
+              "id": "LC96",
+              "score": {
+                "ref": "41467_2021_22676_MOESM5_ESM.xlsx/Sheet1/G4"
+              },
+              "truth": {
+                "ref": "41467_2021_22676_MOESM5_ESM.xlsx/Sheet1/M4"
+              }
+            },
+            {
+              "id": "LC132",
+              "score": {
+                "ref": "41467_2021_22676_MOESM5_ESM.xlsx/Sheet1/G5"
+              },
+              "truth": {
+                "ref": "41467_2021_22676_MOESM5_ESM.xlsx/Sheet1/M5"
+              }
+            },
+            {
+              "id": "CRC1",
+              "score": {
+                "ref": "41467_2021_22676_MOESM5_ESM.xlsx/Sheet1/G6"
+              },
+              "truth": {
+                "ref": "41467_2021_22676_MOESM5_ESM.xlsx/Sheet1/M6"
+              }
+            },
+            {
+              "id": "LC131",
+              "score": {
+                "ref": "41467_2021_22676_MOESM5_ESM.xlsx/Sheet1/G7"
+              },
+              "truth": {
+                "ref": "41467_2021_22676_MOESM5_ESM.xlsx/Sheet1/M7"
+              }
+            },
+            {
+              "id": "LC133",
+              "score": {
+                "ref": "41467_2021_22676_MOESM5_ESM.xlsx/Sheet1/G8"
+              },
+              "truth": {
+                "ref": "41467_2021_22676_MOESM5_ESM.xlsx/Sheet1/M8"
+              }
+            },
+            {
+              "id": "LC134",
+              "score": {
+                "ref": "41467_2021_22676_MOESM5_ESM.xlsx/Sheet1/G9"
+              },
+              "truth": {
+                "ref": "41467_2021_22676_MOESM5_ESM.xlsx/Sheet1/M9"
+              }
+            },
+            {
+              "id": "LC101",
+              "score": {
+                "ref": "41467_2021_22676_MOESM5_ESM.xlsx/Sheet1/G10"
+              },
+              "truth": {
+                "ref": "41467_2021_22676_MOESM5_ESM.xlsx/Sheet1/M10"
+              }
+            },
+            {
+              "id": "LC127",
+              "score": {
+                "ref": "41467_2021_22676_MOESM5_ESM.xlsx/Sheet1/G11"
+              },
+              "truth": {
+                "ref": "41467_2021_22676_MOESM5_ESM.xlsx/Sheet1/M11"
+              }
+            },
+            {
+              "id": "LC129",
+              "score": {
+                "ref": "41467_2021_22676_MOESM5_ESM.xlsx/Sheet1/G12"
+              },
+              "truth": {
+                "ref": "41467_2021_22676_MOESM5_ESM.xlsx/Sheet1/M12"
+              }
+            }
+          ],
+          "blocked_reason": null
+        },
+        "notes": [
+          "Accuracy is reported as 100% (1.0) for 10 evaluable patient cases where organoid assay results matched clinical outcomes, as stated in the article text. Full per-patient records are available in Supplementary Data 2."
+        ]
+      }
+    }
+  }
+]

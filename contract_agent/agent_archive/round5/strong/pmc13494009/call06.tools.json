@@ -1,0 +1,491 @@
+[
+  {
+    "name": "finish",
+    "arguments": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient_regimen",
+            "evidence": [
+              "article:p17",
+              "article:p20",
+              "vision/8535cd919013/R45C5"
+            ],
+            "explanation": "Panel B evaluates matched patient treatment lines; patient #2 contributes line 2, while the other six records are line 1."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p1",
+              "article:p5"
+            ],
+            "explanation": "Drug sensitivity was profiled in organotypic tissue slice cultures (OTSCs)."
+          },
+          "readout": {
+            "value": "other",
+            "evidence": [
+              "article:p12",
+              "article:p29"
+            ],
+            "explanation": "EVSS is an equally weighted rank-based composite of CK7, CC3, and Ki67 treatment effects rather than viability or IC50."
+          },
+          "direction": {
+            "value": "higher_sensitive",
+            "evidence": [
+              "article:p12",
+              "vision/8535cd919013/R42C6"
+            ],
+            "explanation": "Higher EVSS indicates greater ex vivo sensitivity; EVSS >=50 is sensitive."
+          },
+          "threshold_rule": {
+            "value": "fixed_numeric",
+            "evidence": [
+              "article:p17",
+              "article:p48",
+              "vision/8535cd919013/R42C6"
+            ],
+            "explanation": "The assay prediction is dichotomized at EVSS 50."
+          },
+          "threshold_timing": {
+            "value": "explicitly_prespecified",
+            "evidence": [
+              "article:p17"
+            ],
+            "explanation": "The article states that OTSCs were classified using the predefined EVSS cutoff of 50."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "vision/8535cd919013/R41C5",
+              "vision/8535cd919013/R42C5",
+              "vision/8535cd919013/R43C5"
+            ],
+            "explanation": "Panel B lists patient IDs, EVSS values, RECIST status, clinical regimens, and treatment lines."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "vision/8535cd919013/R41C5",
+              "vision/8535cd919013/R44C5"
+            ],
+            "explanation": "For all seven Panel B records, the tested ex vivo regimen equals the clinical regimen shown."
+          },
+          "n_units": {
+            "value": 7,
+            "evidence": [
+              "vision/8535cd919013/R42C5",
+              "vision/8535cd919013/R43C5"
+            ],
+            "explanation": "Panel B contains seven matched patient-regimen observations with both EVSS and RECIST outcomes."
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p29"
+            ],
+            "explanation": "EVSS derivation and exploratory clinical correlation were performed in the same cohort."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 1.0,
+          "reported_evidence": [
+            "vision/8535cd919013/R42C5",
+            "vision/8535cd919013/R43C5"
+          ],
+          "threshold": 50,
+          "op": ">=",
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "patient_8_FFX_line1",
+              "score": {
+                "ref": "vision/8535cd919013/R42C5",
+                "regex": "8:\\s*([0-9]+(?:\\.[0-9]+)?)",
+                "group": 1
+              },
+              "truth": {
+                "ref": "vision/8535cd919013/R43C5",
+                "regex": "8:\\s*(CR|SD|PD)",
+                "group": 1,
+                "map": {
+                  "CR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "patient_17_FFX_line1",
+              "score": {
+                "ref": "vision/8535cd919013/R42C5",
+                "regex": "17:\\s*([0-9]+(?:\\.[0-9]+)?)",
+                "group": 1
+              },
+              "truth": {
+                "ref": "vision/8535cd919013/R43C5",
+                "regex": "17:\\s*(CR|SD|PD)",
+                "group": 1,
+                "map": {
+                  "CR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "patient_10_FFX_line1",
+              "score": {
+                "ref": "vision/8535cd919013/R42C5",
+                "regex": "10:\\s*([0-9]+(?:\\.[0-9]+)?)",
+                "group": 1
+              },
+              "truth": {
+                "ref": "vision/8535cd919013/R43C5",
+                "regex": "10:\\s*(CR|SD|PD)",
+                "group": 1,
+                "map": {
+                  "CR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "patient_7_FFX_line1",
+              "score": {
+                "ref": "vision/8535cd919013/R42C5",
+                "regex": "7:\\s*([0-9]+(?:\\.[0-9]+)?)",
+                "group": 1
+              },
+              "truth": {
+                "ref": "vision/8535cd919013/R43C5",
+                "regex": "7:\\s*(CR|SD|PD)",
+                "group": 1,
+                "map": {
+                  "CR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "patient_6_GEM_line1",
+              "score": {
+                "ref": "vision/8535cd919013/R42C5",
+                "regex": "6:\\s*([0-9]+(?:\\.[0-9]+)?)",
+                "group": 1
+              },
+              "truth": {
+                "ref": "vision/8535cd919013/R43C5",
+                "regex": "6:\\s*(CR|SD|PD)",
+                "group": 1,
+                "map": {
+                  "CR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "patient_2_GEM_line2",
+              "score": {
+                "ref": "vision/8535cd919013/R42C5",
+                "regex": "2:\\s*([0-9]+(?:\\.[0-9]+)?)",
+                "group": 1
+              },
+              "truth": {
+                "ref": "vision/8535cd919013/R43C5",
+                "regex": "2:\\s*(CR|SD|PD)",
+                "group": 1,
+                "map": {
+                  "CR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "patient_12_FFX_line1",
+              "score": {
+                "ref": "vision/8535cd919013/R42C5",
+                "regex": "12:\\s*([0-9]+(?:\\.[0-9]+)?)",
+                "group": 1
+              },
+              "truth": {
+                "ref": "vision/8535cd919013/R43C5",
+                "regex": "12:\\s*(CR|SD|PD)",
+                "group": 1,
+                "map": {
+                  "CR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            }
+          ],
+          "blocked_reason": ""
+        },
+        "notes": [
+          "Clinical truth is RECIST disease control: CR or SD is 1, PD is 0.",
+          "The five EVSS values >=50 are CR/SD, and the two EVSS values <50 are PD, yielding 7/7 = 1.0 accuracy."
+        ]
+      }
+    },
+    "output": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient_regimen",
+            "evidence": [
+              "article:p17",
+              "article:p20",
+              "vision/8535cd919013/R45C5"
+            ],
+            "explanation": "Panel B evaluates matched patient treatment lines; patient #2 contributes line 2, while the other six records are line 1."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p1",
+              "article:p5"
+            ],
+            "explanation": "Drug sensitivity was profiled in organotypic tissue slice cultures (OTSCs)."
+          },
+          "readout": {
+            "value": "other",
+            "evidence": [
+              "article:p12",
+              "article:p29"
+            ],
+            "explanation": "EVSS is an equally weighted rank-based composite of CK7, CC3, and Ki67 treatment effects rather than viability or IC50."
+          },
+          "direction": {
+            "value": "higher_sensitive",
+            "evidence": [
+              "article:p12",
+              "vision/8535cd919013/R42C6"
+            ],
+            "explanation": "Higher EVSS indicates greater ex vivo sensitivity; EVSS >=50 is sensitive."
+          },
+          "threshold_rule": {
+            "value": "fixed_numeric",
+            "evidence": [
+              "article:p17",
+              "article:p48",
+              "vision/8535cd919013/R42C6"
+            ],
+            "explanation": "The assay prediction is dichotomized at EVSS 50."
+          },
+          "threshold_timing": {
+            "value": "explicitly_prespecified",
+            "evidence": [
+              "article:p17"
+            ],
+            "explanation": "The article states that OTSCs were classified using the predefined EVSS cutoff of 50."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "vision/8535cd919013/R41C5",
+              "vision/8535cd919013/R42C5",
+              "vision/8535cd919013/R43C5"
+            ],
+            "explanation": "Panel B lists patient IDs, EVSS values, RECIST status, clinical regimens, and treatment lines."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "vision/8535cd919013/R41C5",
+              "vision/8535cd919013/R44C5"
+            ],
+            "explanation": "For all seven Panel B records, the tested ex vivo regimen equals the clinical regimen shown."
+          },
+          "n_units": {
+            "value": 7,
+            "evidence": [
+              "vision/8535cd919013/R42C5",
+              "vision/8535cd919013/R43C5"
+            ],
+            "explanation": "Panel B contains seven matched patient-regimen observations with both EVSS and RECIST outcomes."
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p29"
+            ],
+            "explanation": "EVSS derivation and exploratory clinical correlation were performed in the same cohort."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 1.0,
+          "reported_evidence": [
+            "vision/8535cd919013/R42C5",
+            "vision/8535cd919013/R43C5"
+          ],
+          "threshold": 50,
+          "op": ">=",
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "patient_8_FFX_line1",
+              "score": {
+                "ref": "vision/8535cd919013/R42C5",
+                "regex": "8:\\s*([0-9]+(?:\\.[0-9]+)?)",
+                "group": 1
+              },
+              "truth": {
+                "ref": "vision/8535cd919013/R43C5",
+                "regex": "8:\\s*(CR|SD|PD)",
+                "group": 1,
+                "map": {
+                  "CR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "patient_17_FFX_line1",
+              "score": {
+                "ref": "vision/8535cd919013/R42C5",
+                "regex": "17:\\s*([0-9]+(?:\\.[0-9]+)?)",
+                "group": 1
+              },
+              "truth": {
+                "ref": "vision/8535cd919013/R43C5",
+                "regex": "17:\\s*(CR|SD|PD)",
+                "group": 1,
+                "map": {
+                  "CR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "patient_10_FFX_line1",
+              "score": {
+                "ref": "vision/8535cd919013/R42C5",
+                "regex": "10:\\s*([0-9]+(?:\\.[0-9]+)?)",
+                "group": 1
+              },
+              "truth": {
+                "ref": "vision/8535cd919013/R43C5",
+                "regex": "10:\\s*(CR|SD|PD)",
+                "group": 1,
+                "map": {
+                  "CR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "patient_7_FFX_line1",
+              "score": {
+                "ref": "vision/8535cd919013/R42C5",
+                "regex": "7:\\s*([0-9]+(?:\\.[0-9]+)?)",
+                "group": 1
+              },
+              "truth": {
+                "ref": "vision/8535cd919013/R43C5",
+                "regex": "7:\\s*(CR|SD|PD)",
+                "group": 1,
+                "map": {
+                  "CR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "patient_6_GEM_line1",
+              "score": {
+                "ref": "vision/8535cd919013/R42C5",
+                "regex": "6:\\s*([0-9]+(?:\\.[0-9]+)?)",
+                "group": 1
+              },
+              "truth": {
+                "ref": "vision/8535cd919013/R43C5",
+                "regex": "6:\\s*(CR|SD|PD)",
+                "group": 1,
+                "map": {
+                  "CR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "patient_2_GEM_line2",
+              "score": {
+                "ref": "vision/8535cd919013/R42C5",
+                "regex": "2:\\s*([0-9]+(?:\\.[0-9]+)?)",
+                "group": 1
+              },
+              "truth": {
+                "ref": "vision/8535cd919013/R43C5",
+                "regex": "2:\\s*(CR|SD|PD)",
+                "group": 1,
+                "map": {
+                  "CR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "patient_12_FFX_line1",
+              "score": {
+                "ref": "vision/8535cd919013/R42C5",
+                "regex": "12:\\s*([0-9]+(?:\\.[0-9]+)?)",
+                "group": 1
+              },
+              "truth": {
+                "ref": "vision/8535cd919013/R43C5",
+                "regex": "12:\\s*(CR|SD|PD)",
+                "group": 1,
+                "map": {
+                  "CR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            }
+          ],
+          "blocked_reason": ""
+        },
+        "notes": [
+          "Clinical truth is RECIST disease control: CR or SD is 1, PD is 0.",
+          "The five EVSS values >=50 are CR/SD, and the two EVSS values <50 are PD, yielding 7/7 = 1.0 accuracy."
+        ]
+      },
+      "execution_feedback": {
+        "matched": false,
+        "metric": "accuracy",
+        "computed": null,
+        "reported": 1.0,
+        "difference": null,
+        "n": 1,
+        "errors": [
+          "Score of patient_17_FFX_line1 reads exactly the same source cells as patient_8_FFX_line1; each analysis unit needs its own assay evidence, not a shared aggregate",
+          "Score of patient_10_FFX_line1 reads exactly the same source cells as patient_8_FFX_line1; each analysis unit needs its own assay evidence, not a shared aggregate",
+          "Score of patient_7_FFX_line1 reads exactly the same source cells as patient_8_FFX_line1; each analysis unit needs its own assay evidence, not a shared aggregate",
+          "Score of patient_6_GEM_line1 reads exactly the same source cells as patient_8_FFX_line1; each analysis unit needs its own assay evidence, not a shared aggregate",
+          "Score of patient_2_GEM_line2 reads exactly the same source cells as patient_8_FFX_line1; each analysis unit needs its own assay evidence, not a shared aggregate",
+          "Score of patient_12_FFX_line1 reads exactly the same source cells as patient_8_FFX_line1; each analysis unit needs its own assay evidence, not a shared aggregate",
+          "Expected 7 analysis units, got 1"
+        ],
+        "expected": {
+          "metric": "accuracy",
+          "value": 1.0,
+          "n": 7
+        }
+      }
+    }
+  }
+]

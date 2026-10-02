@@ -1,0 +1,2770 @@
+{
+  "turn": 16,
+  "tool_count": 18,
+  "tokens": 887564,
+  "done": true,
+  "stop_reason": "conservative_token_limit",
+  "checkpoints": {
+    "single_pass": {
+      "contract": null,
+      "evaluation": {
+        "matched": false,
+        "errors": [
+          "Python produced no CONTRACT"
+        ],
+        "execution": {
+          "returncode": 1,
+          "stdout": "",
+          "stderr": "Traceback (most recent call last):\n  File \"scratch/python01/worker.py\", line 19, in <module>\n    exec(compile(code,'<agent-code>','exec'))\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<agent-code>\", line 25, in <module>\nAttributeError: 'dict' object has no attribute 'rows'\n",
+          "seconds": 0.17627541700494476,
+          "peak_rss_bytes": 26050560,
+          "limit_error": null,
+          "code_sha256": "cfc60b984a24475a8e5952146c2faef3b1ffba462dc68dd534a76f9f743a54e5"
+        }
+      },
+      "calls": 1,
+      "tokens": 25257
+    },
+    "one_feedback": {
+      "contract": {
+        "status": "blocked",
+        "fields": {
+          "unit": {
+            "value": "organoid_line",
+            "evidence": [
+              "article:p35"
+            ],
+            "explanation": "The 83.3% accuracy denominator is 54 LCOs derived from 36 patients, rather than 54 independent patients."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p35"
+            ],
+            "explanation": "Lung cancer organoid drug sensitivity testing."
+          },
+          "readout": {
+            "value": "viability",
+            "evidence": [
+              "article:p128"
+            ],
+            "explanation": "The predictor is the day-4 ATP luminance ratio of treated to untreated organoids."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p128"
+            ],
+            "explanation": "A lower treated-to-control ATP luminance ratio indicates greater drug sensitivity; the comparison table reports Sensitive versus Resistant calls."
+          },
+          "threshold_rule": {
+            "value": "categorical",
+            "evidence": [
+              "supp.pdf/page4/R5C2",
+              "supp.pdf/page4/R5C3",
+              "supp.pdf/page4/R7C2",
+              "supp.pdf/page4/R7C3"
+            ],
+            "explanation": "The evaluated source predictions are Sensitive versus Resistant calls; no global numeric cutoff is supplied."
+          },
+          "threshold_timing": {
+            "value": "not_reported",
+            "evidence": [
+              "article:p102"
+            ],
+            "explanation": "The paper reports ROC evaluation but states that precise cutoff values were not yet defined."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "article:p35"
+            ],
+            "explanation": "Patient identifiers and matched LCO results are available in the supplemental comparison table."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p35"
+            ],
+            "explanation": "Only cases whose clinical regimens were identical to the LCO-DST regimen were included."
+          },
+          "n_units": {
+            "value": 54,
+            "evidence": [
+              "article:p35",
+              "supp.pdf/page4/R3C3"
+            ],
+            "explanation": "Fifty-four matched LCO treatment comparisons; the published confusion matrix sums to 54."
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p35",
+              "article:p102"
+            ],
+            "explanation": "A real-world observational cohort with no separate held-out validation cohort."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.8333333333333334,
+          "reported_evidence": [
+            "article:p35",
+            "supp.pdf/page4/R3C3"
+          ],
+          "threshold": null,
+          "op": "==",
+          "score_direction": "higher",
+          "records": [],
+          "blocked_reason": "Could not identify 54 row-level source records with independently referenced LCO Sensitive/Resistant predictions and clinical PR/PD outcomes; parsed rows=0 and confusion={'TP': 0, 'FP': 0, 'FN': 0, 'TN': 0}."
+        },
+        "notes": [
+          "Published confusion matrix: Sensitive/PR=21, Sensitive/PD=5, Resistant/PR=4, Resistant/PD=24; accuracy=(21+24)/54=0.8333333.",
+          "Clinical sensitivity and specificity in the article are 84.0% and 82.8%, respectively."
+        ]
+      },
+      "evaluation": {
+        "matched": false,
+        "metric": "accuracy",
+        "computed": null,
+        "reported": 0.8333333333333334,
+        "difference": null,
+        "n": 0,
+        "errors": [
+          "No source-bound observations: Could not identify 54 row-level source records with independently referenced LCO Sensitive/Resistant predictions and clinical PR/PD outcomes; parsed rows=0 and confusion={'TP': 0, 'FP': 0, 'FN': 0, 'TN': 0}.",
+          "Expected 54 analysis units, got 0"
+        ],
+        "rows": [],
+        "expected": {
+          "metric": "accuracy",
+          "value": 0.8333333333333334,
+          "n": 54
+        }
+      },
+      "calls": 2,
+      "tokens": 49546
+    },
+    "tool_loop": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "organoid_line",
+            "evidence": [
+              "article:p35"
+            ],
+            "explanation": "The denominator is 54 LCO drug-test comparisons derived from 36 patients, not 54 independent patients."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p35"
+            ],
+            "explanation": "Lung cancer organoid drug sensitivity testing."
+          },
+          "readout": {
+            "value": "ic50",
+            "evidence": [
+              "mmc1.pdf/page18/R1C1",
+              "mmc1.pdf/page18/R6C7"
+            ],
+            "explanation": "Table S6 reports regimen-specific IC50 in micromolar; the underlying assay is ATP-based viability."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p128"
+            ],
+            "explanation": "Lower IC50 / lower treated-to-control ATP luminance indicates greater sensitivity."
+          },
+          "threshold_rule": {
+            "value": "roc_optimized",
+            "evidence": [
+              "article:p35",
+              "supp.pdf/page4/R5C2",
+              "supp.pdf/page4/R5C3",
+              "supp.pdf/page4/R7C2",
+              "supp.pdf/page4/R7C3"
+            ],
+            "explanation": "Regimen-specific IC50 cut points reproduce the published ROC-derived 21/5/4/24 confusion matrix."
+          },
+          "threshold_timing": {
+            "value": "outcome_optimized",
+            "evidence": [
+              "article:p35",
+              "article:p102"
+            ],
+            "explanation": "No independent or prespecified cutoff is reported; cut points were selected in this evaluated cohort, and the paper states precise cutoff values remain undefined."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "mmc1.pdf/page18/R10C1",
+              "mmc1.pdf/page18/R10C2"
+            ],
+            "explanation": "Each row has a case ID and a specific organoid ID; repeated organoids are separate analysis units."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p35"
+            ],
+            "explanation": "Only cases whose clinical regimens were identical to the tested LCO-DST regimen were included."
+          },
+          "n_units": {
+            "value": 54,
+            "evidence": [
+              "article:p35",
+              "supp.pdf/page4/R3C3"
+            ],
+            "explanation": "Fifty-four matched LCO-regimen comparisons; the confusion matrix sums to 54."
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p35",
+              "article:p102"
+            ],
+            "explanation": "Real-world observational cohort with no separate held-out validation cohort."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.8333333333333334,
+          "reported_evidence": [
+            "article:p35",
+            "supp.pdf/page4/R3C3"
+          ],
+          "threshold": null,
+          "op": "==",
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "P-17|P-17-O2E|osimertinib",
+              "score": {
+                "ref": "mmc1.pdf/page18/R10C15",
+                "threshold": 2.14,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page18/R10C16",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-18|P-18-O1T|osimertinib",
+              "score": {
+                "ref": "mmc1.pdf/page18/R11C14",
+                "threshold": 2.14,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page18/R11C15",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-30|P-30-O2E|osimertinib",
+              "score": {
+                "ref": "mmc1.pdf/page18/R14C12",
+                "threshold": 2.14,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page18/R14C13",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-30|P-30-O3E|osimertinib",
+              "score": {
+                "ref": "mmc1.pdf/page18/R20C13",
+                "threshold": 2.14,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page18/R20C14",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-32|P-32-O1T|osimertinib",
+              "score": {
+                "ref": "mmc1.pdf/page18/R25C14",
+                "threshold": 2.14,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page18/R25C15",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-34|P-34-O1E|osimertinib",
+              "score": {
+                "ref": "mmc1.pdf/page18/R28C14",
+                "threshold": 2.14,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page18/R28C15",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-41|P-41-O1E|osimertinib",
+              "score": {
+                "ref": "mmc1.pdf/page18/R32C15",
+                "threshold": 2.14,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page18/R32C16",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-59|P-59-O1E|osimertinib",
+              "score": {
+                "ref": "mmc1.pdf/page18/R35C14",
+                "threshold": 2.14,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page18/R35C15",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-59|P-59-O5E|osimertinib",
+              "score": {
+                "ref": "mmc1.pdf/page18/R37C14",
+                "threshold": 2.14,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page18/R37C15",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-70|P-70-O1E|osimertinib",
+              "score": {
+                "ref": "mmc1.pdf/page18/R39C14",
+                "threshold": 2.14,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page18/R39C15",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-77|P-77-O2E|osimertinib",
+              "score": {
+                "ref": "mmc1.pdf/page18/R40C14",
+                "threshold": 2.14,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page18/R40C15",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-78|P-78-O2E|osimertinib",
+              "score": {
+                "ref": "mmc1.pdf/page18/R41C14",
+                "threshold": 2.14,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page18/R41C15",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-89|P-89-O2E|osimertinib",
+              "score": {
+                "ref": "mmc1.pdf/page18/R42C15",
+                "threshold": 2.14,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page18/R42C16",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-90|P-90-O1E|osimertinib",
+              "score": {
+                "ref": "mmc1.pdf/page18/R43C15",
+                "threshold": 2.14,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page18/R43C16",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-90|P-90-O2E|osimertinib",
+              "score": {
+                "ref": "mmc1.pdf/page18/R44C15",
+                "threshold": 2.14,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page18/R44C16",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-27|P-27-O1E|other_targeted",
+              "score": {
+                "ref": "mmc1.pdf/page18/R48C14",
+                "threshold": 0.59,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page18/R48C15",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-33|P-33-O1E|other_targeted",
+              "score": {
+                "ref": "mmc1.pdf/page18/R53C12",
+                "threshold": 0.59,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page18/R53C13",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-33|P-33-O2T|other_targeted",
+              "score": {
+                "ref": "mmc1.pdf/page18/R58C12",
+                "threshold": 0.59,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page18/R58C13",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-38|P-38-O1T|other_targeted",
+              "score": {
+                "ref": "mmc1.pdf/page18/R63C11",
+                "threshold": 0.59,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page18/R63C12",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-43|P-43-O1E|other_targeted",
+              "score": {
+                "ref": "mmc1.pdf/page18/R66C17",
+                "threshold": 0.59,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page18/R66C18",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-49|P-49-O1E|other_targeted",
+              "score": {
+                "ref": "mmc1.pdf/page18/R67C13",
+                "threshold": 0.59,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page18/R67C14",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-63|P-63-O3E|other_targeted",
+              "score": {
+                "ref": "mmc1.pdf/page18/R69C12",
+                "threshold": 0.59,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page18/R69C13",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-75|P-75-O1E|other_targeted",
+              "score": {
+                "ref": "mmc1.pdf/page18/R71C14",
+                "threshold": 0.59,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page18/R71C15",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-75|P-75-O2E|other_targeted",
+              "score": {
+                "ref": "mmc1.pdf/page18/R72C14",
+                "threshold": 0.59,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page18/R72C15",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-86|P-86-O1E|other_targeted",
+              "score": {
+                "ref": "mmc1.pdf/page19/R2C15",
+                "threshold": 0.59,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page19/R2C16",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-97|P-97-O1E|other_targeted",
+              "score": {
+                "ref": "mmc1.pdf/page19/R5C14",
+                "threshold": 0.59,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page19/R5C15",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-97|P-97-O2E|other_targeted",
+              "score": {
+                "ref": "mmc1.pdf/page19/R7C14",
+                "threshold": 0.59,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page19/R7C15",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-97|P-97-O3E|other_targeted",
+              "score": {
+                "ref": "mmc1.pdf/page19/R8C14",
+                "threshold": 0.59,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page19/R8C15",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-100|P-100-O1E|other_targeted",
+              "score": {
+                "ref": "mmc1.pdf/page19/R10C11",
+                "threshold": 0.59,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page19/R10C12",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-100|P-100-O2E|other_targeted",
+              "score": {
+                "ref": "mmc1.pdf/page19/R13C11",
+                "threshold": 0.59,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page19/R13C12",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-102|P-102-O1E|other_targeted",
+              "score": {
+                "ref": "mmc1.pdf/page19/R15C13",
+                "threshold": 0.59,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page19/R15C14",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-105|P-105-O1T|other_targeted",
+              "score": {
+                "ref": "mmc1.pdf/page19/R16C14",
+                "threshold": 0.59,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page19/R16C15",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-60|P-60-O1T|dual_targeted",
+              "score": {
+                "ref": "mmc1.pdf/page19/R19C11",
+                "threshold": 1.32,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page19/R19C12",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-60|P-60-O2E|dual_targeted",
+              "score": {
+                "ref": "mmc1.pdf/page19/R22C11",
+                "threshold": 1.32,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page19/R22C12",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-60|P-60-O3E|dual_targeted",
+              "score": {
+                "ref": "mmc1.pdf/page19/R25C11",
+                "threshold": 1.32,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page19/R25C12",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-60|P-60-O4E|dual_targeted",
+              "score": {
+                "ref": "mmc1.pdf/page19/R28C11",
+                "threshold": 1.32,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page19/R28C12",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-61|P-61-O1E|dual_targeted",
+              "score": {
+                "ref": "mmc1.pdf/page19/R32C11",
+                "threshold": 1.32,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page19/R32C12",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-61|P-61-O2E|dual_targeted",
+              "score": {
+                "ref": "mmc1.pdf/page19/R37C11",
+                "threshold": 1.32,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page19/R37C12",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-61|P-61-O3E|dual_targeted",
+              "score": {
+                "ref": "mmc1.pdf/page19/R42C11",
+                "threshold": 1.32,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page19/R42C12",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-61|P-61-O4E|dual_targeted",
+              "score": {
+                "ref": "mmc1.pdf/page19/R47C11",
+                "threshold": 1.32,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page19/R47C12",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-61|P-61-O5E|dual_targeted",
+              "score": {
+                "ref": "mmc1.pdf/page19/R52C11",
+                "threshold": 1.32,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page19/R52C12",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-95|P-95-O2E|dual_targeted",
+              "score": {
+                "ref": "mmc1.pdf/page19/R55C16",
+                "threshold": 1.32,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page19/R55C17",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-3|P-3-O1E|chemotherapy",
+              "score": {
+                "ref": "mmc1.pdf/page19/R59C15",
+                "threshold": 20.9,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page19/R59C16",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-25|P-25-O1E|chemotherapy",
+              "score": {
+                "ref": "mmc1.pdf/page19/R63C12",
+                "threshold": 20.9,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page19/R63C13",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-50|P-50-O1E|chemotherapy",
+              "score": {
+                "ref": "mmc1.pdf/page19/R65C13",
+                "threshold": 20.9,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page19/R65C14",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-51|P-51-O1E|chemotherapy",
+              "score": {
+                "ref": "mmc1.pdf/page19/R67C12",
+                "threshold": 20.9,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page19/R67C13",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-51|P-51-O2E|chemotherapy",
+              "score": {
+                "ref": "mmc1.pdf/page19/R70C12",
+                "threshold": 20.9,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page19/R70C13",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-51|P-51-O3E|chemotherapy",
+              "score": {
+                "ref": "mmc1.pdf/page19/R73C12",
+                "threshold": 20.9,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page19/R73C13",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-65|P-65-O1E|chemotherapy",
+              "score": {
+                "ref": "mmc1.pdf/page20/R1C13",
+                "threshold": 20.9,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page20/R1C14",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-73|P-73-O1T|chemotherapy",
+              "score": {
+                "ref": "mmc1.pdf/page20/R2C13",
+                "threshold": 20.9,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page20/R2C14",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-81|P-81-O1E|chemotherapy",
+              "score": {
+                "ref": "mmc1.pdf/page20/R4C15",
+                "threshold": 20.9,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page20/R4C16",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-83|P-83-O1E|chemotherapy",
+              "score": {
+                "ref": "mmc1.pdf/page20/R6C13",
+                "threshold": 20.9,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page20/R6C14",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-85|P-85-O1E|chemotherapy",
+              "score": {
+                "ref": "mmc1.pdf/page20/R8C15",
+                "threshold": 20.9,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page20/R8C16",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            },
+            {
+              "id": "P-85|P-85-O2E|chemotherapy",
+              "score": {
+                "ref": "mmc1.pdf/page20/R11C15",
+                "threshold": 20.9,
+                "op": "<=",
+                "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+              },
+              "truth": {
+                "ref": "mmc1.pdf/page20/R11C16",
+                "map": {
+                  "PR": 1,
+                  "PD": 0,
+                  "SD": 0
+                }
+              }
+            }
+          ],
+          "blocked_reason": null
+        },
+        "notes": [
+          "Regimen-specific IC50 cut points: osimertinib 2.14 uM, chemotherapy 20.9 uM, dual-targeted therapy 1.32 uM, other targeted therapy 0.59 uM.",
+          "Reconstructed matrix: Sensitive/PR=21, Sensitive/PD-or-SD=5, Resistant/PR=4, Resistant/PD-or-SD=24; accuracy=(21+24)/54=0.8333333.",
+          "SD is treated as non-response in the binary clinical endpoint."
+        ]
+      },
+      "evaluation": {
+        "matched": false,
+        "metric": "accuracy",
+        "computed": null,
+        "reported": 0.8333333333333334,
+        "difference": null,
+        "n": 54,
+        "errors": [
+          "Binary metric requires a threshold"
+        ],
+        "rows": [
+          {
+            "id": "P-17|P-17-O2E|osimertinib",
+            "score": 1,
+            "truth": 0
+          },
+          {
+            "id": "P-18|P-18-O1T|osimertinib",
+            "score": 0,
+            "truth": 0
+          },
+          {
+            "id": "P-30|P-30-O2E|osimertinib",
+            "score": 0,
+            "truth": 0
+          },
+          {
+            "id": "P-30|P-30-O3E|osimertinib",
+            "score": 0,
+            "truth": 0
+          },
+          {
+            "id": "P-32|P-32-O1T|osimertinib",
+            "score": 1,
+            "truth": 1
+          },
+          {
+            "id": "P-34|P-34-O1E|osimertinib",
+            "score": 1,
+            "truth": 1
+          },
+          {
+            "id": "P-41|P-41-O1E|osimertinib",
+            "score": 1,
+            "truth": 1
+          },
+          {
+            "id": "P-59|P-59-O1E|osimertinib",
+            "score": 0,
+            "truth": 0
+          },
+          {
+            "id": "P-59|P-59-O5E|osimertinib",
+            "score": 0,
+            "truth": 0
+          },
+          {
+            "id": "P-70|P-70-O1E|osimertinib",
+            "score": 0,
+            "truth": 0
+          },
+          {
+            "id": "P-77|P-77-O2E|osimertinib",
+            "score": 1,
+            "truth": 1
+          },
+          {
+            "id": "P-78|P-78-O2E|osimertinib",
+            "score": 1,
+            "truth": 1
+          },
+          {
+            "id": "P-89|P-89-O2E|osimertinib",
+            "score": 1,
+            "truth": 1
+          },
+          {
+            "id": "P-90|P-90-O1E|osimertinib",
+            "score": 1,
+            "truth": 0
+          },
+          {
+            "id": "P-90|P-90-O2E|osimertinib",
+            "score": 0,
+            "truth": 0
+          },
+          {
+            "id": "P-27|P-27-O1E|other_targeted",
+            "score": 0,
+            "truth": 0
+          },
+          {
+            "id": "P-33|P-33-O1E|other_targeted",
+            "score": 1,
+            "truth": 1
+          },
+          {
+            "id": "P-33|P-33-O2T|other_targeted",
+            "score": 1,
+            "truth": 1
+          },
+          {
+            "id": "P-38|P-38-O1T|other_targeted",
+            "score": 0,
+            "truth": 0
+          },
+          {
+            "id": "P-43|P-43-O1E|other_targeted",
+            "score": 0,
+            "truth": 0
+          },
+          {
+            "id": "P-49|P-49-O1E|other_targeted",
+            "score": 0,
+            "truth": 0
+          },
+          {
+            "id": "P-63|P-63-O3E|other_targeted",
+            "score": 0,
+            "truth": 0
+          },
+          {
+            "id": "P-75|P-75-O1E|other_targeted",
+            "score": 1,
+            "truth": 1
+          },
+          {
+            "id": "P-75|P-75-O2E|other_targeted",
+            "score": 1,
+            "truth": 1
+          },
+          {
+            "id": "P-86|P-86-O1E|other_targeted",
+            "score": 0,
+            "truth": 0
+          },
+          {
+            "id": "P-97|P-97-O1E|other_targeted",
+            "score": 0,
+            "truth": 1
+          },
+          {
+            "id": "P-97|P-97-O2E|other_targeted",
+            "score": 0,
+            "truth": 1
+          },
+          {
+            "id": "P-97|P-97-O3E|other_targeted",
+            "score": 0,
+            "truth": 1
+          },
+          {
+            "id": "P-100|P-100-O1E|other_targeted",
+            "score": 1,
+            "truth": 0
+          },
+          {
+            "id": "P-100|P-100-O2E|other_targeted",
+            "score": 0,
+            "truth": 0
+          },
+          {
+            "id": "P-102|P-102-O1E|other_targeted",
+            "score": 0,
+            "truth": 1
+          },
+          {
+            "id": "P-105|P-105-O1T|other_targeted",
+            "score": 0,
+            "truth": 0
+          },
+          {
+            "id": "P-60|P-60-O1T|dual_targeted",
+            "score": 1,
+            "truth": 1
+          },
+          {
+            "id": "P-60|P-60-O2E|dual_targeted",
+            "score": 1,
+            "truth": 1
+          },
+          {
+            "id": "P-60|P-60-O3E|dual_targeted",
+            "score": 1,
+            "truth": 1
+          },
+          {
+            "id": "P-60|P-60-O4E|dual_targeted",
+            "score": 1,
+            "truth": 1
+          },
+          {
+            "id": "P-61|P-61-O1E|dual_targeted",
+            "score": 1,
+            "truth": 1
+          },
+          {
+            "id": "P-61|P-61-O2E|dual_targeted",
+            "score": 1,
+            "truth": 1
+          },
+          {
+            "id": "P-61|P-61-O3E|dual_targeted",
+            "score": 1,
+            "truth": 1
+          },
+          {
+            "id": "P-61|P-61-O4E|dual_targeted",
+            "score": 1,
+            "truth": 1
+          },
+          {
+            "id": "P-61|P-61-O5E|dual_targeted",
+            "score": 1,
+            "truth": 1
+          },
+          {
+            "id": "P-95|P-95-O2E|dual_targeted",
+            "score": 0,
+            "truth": 0
+          },
+          {
+            "id": "P-3|P-3-O1E|chemotherapy",
+            "score": 1,
+            "truth": 1
+          },
+          {
+            "id": "P-25|P-25-O1E|chemotherapy",
+            "score": 0,
+            "truth": 0
+          },
+          {
+            "id": "P-50|P-50-O1E|chemotherapy",
+            "score": 0,
+            "truth": 0
+          },
+          {
+            "id": "P-51|P-51-O1E|chemotherapy",
+            "score": 1,
+            "truth": 0
+          },
+          {
+            "id": "P-51|P-51-O2E|chemotherapy",
+            "score": 1,
+            "truth": 0
+          },
+          {
+            "id": "P-51|P-51-O3E|chemotherapy",
+            "score": 0,
+            "truth": 0
+          },
+          {
+            "id": "P-65|P-65-O1E|chemotherapy",
+            "score": 1,
+            "truth": 1
+          },
+          {
+            "id": "P-73|P-73-O1T|chemotherapy",
+            "score": 0,
+            "truth": 0
+          },
+          {
+            "id": "P-81|P-81-O1E|chemotherapy",
+            "score": 0,
+            "truth": 0
+          },
+          {
+            "id": "P-83|P-83-O1E|chemotherapy",
+            "score": 0,
+            "truth": 0
+          },
+          {
+            "id": "P-85|P-85-O1E|chemotherapy",
+            "score": 0,
+            "truth": 0
+          },
+          {
+            "id": "P-85|P-85-O2E|chemotherapy",
+            "score": 0,
+            "truth": 0
+          }
+        ],
+        "expected": {
+          "metric": "accuracy",
+          "value": 0.8333333333333334,
+          "n": 54
+        }
+      },
+      "calls": 16,
+      "tokens": 887564
+    }
+  },
+  "last_contract": {
+    "status": "computed",
+    "fields": {
+      "unit": {
+        "value": "organoid_line",
+        "evidence": [
+          "article:p35"
+        ],
+        "explanation": "The denominator is 54 LCO drug-test comparisons derived from 36 patients, not 54 independent patients."
+      },
+      "platform": {
+        "value": "organoid",
+        "evidence": [
+          "article:p35"
+        ],
+        "explanation": "Lung cancer organoid drug sensitivity testing."
+      },
+      "readout": {
+        "value": "ic50",
+        "evidence": [
+          "mmc1.pdf/page18/R1C1",
+          "mmc1.pdf/page18/R6C7"
+        ],
+        "explanation": "Table S6 reports regimen-specific IC50 in micromolar; the underlying assay is ATP-based viability."
+      },
+      "direction": {
+        "value": "lower_sensitive",
+        "evidence": [
+          "article:p128"
+        ],
+        "explanation": "Lower IC50 / lower treated-to-control ATP luminance indicates greater sensitivity."
+      },
+      "threshold_rule": {
+        "value": "roc_optimized",
+        "evidence": [
+          "article:p35",
+          "supp.pdf/page4/R5C2",
+          "supp.pdf/page4/R5C3",
+          "supp.pdf/page4/R7C2",
+          "supp.pdf/page4/R7C3"
+        ],
+        "explanation": "Regimen-specific IC50 cut points reproduce the published ROC-derived 21/5/4/24 confusion matrix."
+      },
+      "threshold_timing": {
+        "value": "outcome_optimized",
+        "evidence": [
+          "article:p35",
+          "article:p102"
+        ],
+        "explanation": "No independent or prespecified cutoff is reported; cut points were selected in this evaluated cohort, and the paper states precise cutoff values remain undefined."
+      },
+      "patient_mapping": {
+        "value": "individual_available",
+        "evidence": [
+          "mmc1.pdf/page18/R10C1",
+          "mmc1.pdf/page18/R10C2"
+        ],
+        "explanation": "Each row has a case ID and a specific organoid ID; repeated organoids are separate analysis units."
+      },
+      "regimen_match": {
+        "value": "matched",
+        "evidence": [
+          "article:p35"
+        ],
+        "explanation": "Only cases whose clinical regimens were identical to the tested LCO-DST regimen were included."
+      },
+      "n_units": {
+        "value": 54,
+        "evidence": [
+          "article:p35",
+          "supp.pdf/page4/R3C3"
+        ],
+        "explanation": "Fifty-four matched LCO-regimen comparisons; the confusion matrix sums to 54."
+      },
+      "split": {
+        "value": "same_cohort",
+        "evidence": [
+          "article:p35",
+          "article:p102"
+        ],
+        "explanation": "Real-world observational cohort with no separate held-out validation cohort."
+      }
+    },
+    "headline": {
+      "metric": "accuracy",
+      "reported": 0.8333333333333334,
+      "reported_evidence": [
+        "article:p35",
+        "supp.pdf/page4/R3C3"
+      ],
+      "threshold": null,
+      "op": "==",
+      "score_direction": "higher",
+      "records": [
+        {
+          "id": "P-17|P-17-O2E|osimertinib",
+          "score": {
+            "ref": "mmc1.pdf/page18/R10C15",
+            "threshold": 2.14,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page18/R10C16",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-18|P-18-O1T|osimertinib",
+          "score": {
+            "ref": "mmc1.pdf/page18/R11C14",
+            "threshold": 2.14,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page18/R11C15",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-30|P-30-O2E|osimertinib",
+          "score": {
+            "ref": "mmc1.pdf/page18/R14C12",
+            "threshold": 2.14,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page18/R14C13",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-30|P-30-O3E|osimertinib",
+          "score": {
+            "ref": "mmc1.pdf/page18/R20C13",
+            "threshold": 2.14,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page18/R20C14",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-32|P-32-O1T|osimertinib",
+          "score": {
+            "ref": "mmc1.pdf/page18/R25C14",
+            "threshold": 2.14,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page18/R25C15",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-34|P-34-O1E|osimertinib",
+          "score": {
+            "ref": "mmc1.pdf/page18/R28C14",
+            "threshold": 2.14,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page18/R28C15",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-41|P-41-O1E|osimertinib",
+          "score": {
+            "ref": "mmc1.pdf/page18/R32C15",
+            "threshold": 2.14,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page18/R32C16",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-59|P-59-O1E|osimertinib",
+          "score": {
+            "ref": "mmc1.pdf/page18/R35C14",
+            "threshold": 2.14,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page18/R35C15",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-59|P-59-O5E|osimertinib",
+          "score": {
+            "ref": "mmc1.pdf/page18/R37C14",
+            "threshold": 2.14,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page18/R37C15",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-70|P-70-O1E|osimertinib",
+          "score": {
+            "ref": "mmc1.pdf/page18/R39C14",
+            "threshold": 2.14,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page18/R39C15",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-77|P-77-O2E|osimertinib",
+          "score": {
+            "ref": "mmc1.pdf/page18/R40C14",
+            "threshold": 2.14,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page18/R40C15",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-78|P-78-O2E|osimertinib",
+          "score": {
+            "ref": "mmc1.pdf/page18/R41C14",
+            "threshold": 2.14,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page18/R41C15",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-89|P-89-O2E|osimertinib",
+          "score": {
+            "ref": "mmc1.pdf/page18/R42C15",
+            "threshold": 2.14,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page18/R42C16",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-90|P-90-O1E|osimertinib",
+          "score": {
+            "ref": "mmc1.pdf/page18/R43C15",
+            "threshold": 2.14,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page18/R43C16",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-90|P-90-O2E|osimertinib",
+          "score": {
+            "ref": "mmc1.pdf/page18/R44C15",
+            "threshold": 2.14,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page18/R44C16",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-27|P-27-O1E|other_targeted",
+          "score": {
+            "ref": "mmc1.pdf/page18/R48C14",
+            "threshold": 0.59,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page18/R48C15",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-33|P-33-O1E|other_targeted",
+          "score": {
+            "ref": "mmc1.pdf/page18/R53C12",
+            "threshold": 0.59,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page18/R53C13",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-33|P-33-O2T|other_targeted",
+          "score": {
+            "ref": "mmc1.pdf/page18/R58C12",
+            "threshold": 0.59,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page18/R58C13",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-38|P-38-O1T|other_targeted",
+          "score": {
+            "ref": "mmc1.pdf/page18/R63C11",
+            "threshold": 0.59,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page18/R63C12",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-43|P-43-O1E|other_targeted",
+          "score": {
+            "ref": "mmc1.pdf/page18/R66C17",
+            "threshold": 0.59,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page18/R66C18",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-49|P-49-O1E|other_targeted",
+          "score": {
+            "ref": "mmc1.pdf/page18/R67C13",
+            "threshold": 0.59,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page18/R67C14",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-63|P-63-O3E|other_targeted",
+          "score": {
+            "ref": "mmc1.pdf/page18/R69C12",
+            "threshold": 0.59,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page18/R69C13",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-75|P-75-O1E|other_targeted",
+          "score": {
+            "ref": "mmc1.pdf/page18/R71C14",
+            "threshold": 0.59,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page18/R71C15",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-75|P-75-O2E|other_targeted",
+          "score": {
+            "ref": "mmc1.pdf/page18/R72C14",
+            "threshold": 0.59,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page18/R72C15",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-86|P-86-O1E|other_targeted",
+          "score": {
+            "ref": "mmc1.pdf/page19/R2C15",
+            "threshold": 0.59,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page19/R2C16",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-97|P-97-O1E|other_targeted",
+          "score": {
+            "ref": "mmc1.pdf/page19/R5C14",
+            "threshold": 0.59,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page19/R5C15",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-97|P-97-O2E|other_targeted",
+          "score": {
+            "ref": "mmc1.pdf/page19/R7C14",
+            "threshold": 0.59,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page19/R7C15",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-97|P-97-O3E|other_targeted",
+          "score": {
+            "ref": "mmc1.pdf/page19/R8C14",
+            "threshold": 0.59,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page19/R8C15",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-100|P-100-O1E|other_targeted",
+          "score": {
+            "ref": "mmc1.pdf/page19/R10C11",
+            "threshold": 0.59,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page19/R10C12",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-100|P-100-O2E|other_targeted",
+          "score": {
+            "ref": "mmc1.pdf/page19/R13C11",
+            "threshold": 0.59,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page19/R13C12",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-102|P-102-O1E|other_targeted",
+          "score": {
+            "ref": "mmc1.pdf/page19/R15C13",
+            "threshold": 0.59,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page19/R15C14",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-105|P-105-O1T|other_targeted",
+          "score": {
+            "ref": "mmc1.pdf/page19/R16C14",
+            "threshold": 0.59,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page19/R16C15",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-60|P-60-O1T|dual_targeted",
+          "score": {
+            "ref": "mmc1.pdf/page19/R19C11",
+            "threshold": 1.32,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page19/R19C12",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-60|P-60-O2E|dual_targeted",
+          "score": {
+            "ref": "mmc1.pdf/page19/R22C11",
+            "threshold": 1.32,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page19/R22C12",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-60|P-60-O3E|dual_targeted",
+          "score": {
+            "ref": "mmc1.pdf/page19/R25C11",
+            "threshold": 1.32,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page19/R25C12",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-60|P-60-O4E|dual_targeted",
+          "score": {
+            "ref": "mmc1.pdf/page19/R28C11",
+            "threshold": 1.32,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page19/R28C12",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-61|P-61-O1E|dual_targeted",
+          "score": {
+            "ref": "mmc1.pdf/page19/R32C11",
+            "threshold": 1.32,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page19/R32C12",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-61|P-61-O2E|dual_targeted",
+          "score": {
+            "ref": "mmc1.pdf/page19/R37C11",
+            "threshold": 1.32,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page19/R37C12",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-61|P-61-O3E|dual_targeted",
+          "score": {
+            "ref": "mmc1.pdf/page19/R42C11",
+            "threshold": 1.32,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page19/R42C12",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-61|P-61-O4E|dual_targeted",
+          "score": {
+            "ref": "mmc1.pdf/page19/R47C11",
+            "threshold": 1.32,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page19/R47C12",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-61|P-61-O5E|dual_targeted",
+          "score": {
+            "ref": "mmc1.pdf/page19/R52C11",
+            "threshold": 1.32,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page19/R52C12",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-95|P-95-O2E|dual_targeted",
+          "score": {
+            "ref": "mmc1.pdf/page19/R55C16",
+            "threshold": 1.32,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page19/R55C17",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-3|P-3-O1E|chemotherapy",
+          "score": {
+            "ref": "mmc1.pdf/page19/R59C15",
+            "threshold": 20.9,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page19/R59C16",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-25|P-25-O1E|chemotherapy",
+          "score": {
+            "ref": "mmc1.pdf/page19/R63C12",
+            "threshold": 20.9,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page19/R63C13",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-50|P-50-O1E|chemotherapy",
+          "score": {
+            "ref": "mmc1.pdf/page19/R65C13",
+            "threshold": 20.9,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page19/R65C14",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-51|P-51-O1E|chemotherapy",
+          "score": {
+            "ref": "mmc1.pdf/page19/R67C12",
+            "threshold": 20.9,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page19/R67C13",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-51|P-51-O2E|chemotherapy",
+          "score": {
+            "ref": "mmc1.pdf/page19/R70C12",
+            "threshold": 20.9,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page19/R70C13",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-51|P-51-O3E|chemotherapy",
+          "score": {
+            "ref": "mmc1.pdf/page19/R73C12",
+            "threshold": 20.9,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page19/R73C13",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-65|P-65-O1E|chemotherapy",
+          "score": {
+            "ref": "mmc1.pdf/page20/R1C13",
+            "threshold": 20.9,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page20/R1C14",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-73|P-73-O1T|chemotherapy",
+          "score": {
+            "ref": "mmc1.pdf/page20/R2C13",
+            "threshold": 20.9,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page20/R2C14",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-81|P-81-O1E|chemotherapy",
+          "score": {
+            "ref": "mmc1.pdf/page20/R4C15",
+            "threshold": 20.9,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page20/R4C16",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-83|P-83-O1E|chemotherapy",
+          "score": {
+            "ref": "mmc1.pdf/page20/R6C13",
+            "threshold": 20.9,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page20/R6C14",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-85|P-85-O1E|chemotherapy",
+          "score": {
+            "ref": "mmc1.pdf/page20/R8C15",
+            "threshold": 20.9,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page20/R8C16",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        },
+        {
+          "id": "P-85|P-85-O2E|chemotherapy",
+          "score": {
+            "ref": "mmc1.pdf/page20/R11C15",
+            "threshold": 20.9,
+            "op": "<=",
+            "regex": "([0-9.]+(?:E\\+\\d+)?|1000)"
+          },
+          "truth": {
+            "ref": "mmc1.pdf/page20/R11C16",
+            "map": {
+              "PR": 1,
+              "PD": 0,
+              "SD": 0
+            }
+          }
+        }
+      ],
+      "blocked_reason": null
+    },
+    "notes": [
+      "Regimen-specific IC50 cut points: osimertinib 2.14 uM, chemotherapy 20.9 uM, dual-targeted therapy 1.32 uM, other targeted therapy 0.59 uM.",
+      "Reconstructed matrix: Sensitive/PR=21, Sensitive/PD-or-SD=5, Resistant/PR=4, Resistant/PD-or-SD=24; accuracy=(21+24)/54=0.8333333.",
+      "SD is treated as non-response in the binary clinical endpoint."
+    ]
+  },
+  "last_evaluation": {
+    "matched": false,
+    "metric": "accuracy",
+    "computed": null,
+    "reported": 0.8333333333333334,
+    "difference": null,
+    "n": 54,
+    "errors": [
+      "Binary metric requires a threshold"
+    ],
+    "rows": [
+      {
+        "id": "P-17|P-17-O2E|osimertinib",
+        "score": 1,
+        "truth": 0
+      },
+      {
+        "id": "P-18|P-18-O1T|osimertinib",
+        "score": 0,
+        "truth": 0
+      },
+      {
+        "id": "P-30|P-30-O2E|osimertinib",
+        "score": 0,
+        "truth": 0
+      },
+      {
+        "id": "P-30|P-30-O3E|osimertinib",
+        "score": 0,
+        "truth": 0
+      },
+      {
+        "id": "P-32|P-32-O1T|osimertinib",
+        "score": 1,
+        "truth": 1
+      },
+      {
+        "id": "P-34|P-34-O1E|osimertinib",
+        "score": 1,
+        "truth": 1
+      },
+      {
+        "id": "P-41|P-41-O1E|osimertinib",
+        "score": 1,
+        "truth": 1
+      },
+      {
+        "id": "P-59|P-59-O1E|osimertinib",
+        "score": 0,
+        "truth": 0
+      },
+      {
+        "id": "P-59|P-59-O5E|osimertinib",
+        "score": 0,
+        "truth": 0
+      },
+      {
+        "id": "P-70|P-70-O1E|osimertinib",
+        "score": 0,
+        "truth": 0
+      },
+      {
+        "id": "P-77|P-77-O2E|osimertinib",
+        "score": 1,
+        "truth": 1
+      },
+      {
+        "id": "P-78|P-78-O2E|osimertinib",
+        "score": 1,
+        "truth": 1
+      },
+      {
+        "id": "P-89|P-89-O2E|osimertinib",
+        "score": 1,
+        "truth": 1
+      },
+      {
+        "id": "P-90|P-90-O1E|osimertinib",
+        "score": 1,
+        "truth": 0
+      },
+      {
+        "id": "P-90|P-90-O2E|osimertinib",
+        "score": 0,
+        "truth": 0
+      },
+      {
+        "id": "P-27|P-27-O1E|other_targeted",
+        "score": 0,
+        "truth": 0
+      },
+      {
+        "id": "P-33|P-33-O1E|other_targeted",
+        "score": 1,
+        "truth": 1
+      },
+      {
+        "id": "P-33|P-33-O2T|other_targeted",
+        "score": 1,
+        "truth": 1
+      },
+      {
+        "id": "P-38|P-38-O1T|other_targeted",
+        "score": 0,
+        "truth": 0
+      },
+      {
+        "id": "P-43|P-43-O1E|other_targeted",
+        "score": 0,
+        "truth": 0
+      },
+      {
+        "id": "P-49|P-49-O1E|other_targeted",
+        "score": 0,
+        "truth": 0
+      },
+      {
+        "id": "P-63|P-63-O3E|other_targeted",
+        "score": 0,
+        "truth": 0
+      },
+      {
+        "id": "P-75|P-75-O1E|other_targeted",
+        "score": 1,
+        "truth": 1
+      },
+      {
+        "id": "P-75|P-75-O2E|other_targeted",
+        "score": 1,
+        "truth": 1
+      },
+      {
+        "id": "P-86|P-86-O1E|other_targeted",
+        "score": 0,
+        "truth": 0
+      },
+      {
+        "id": "P-97|P-97-O1E|other_targeted",
+        "score": 0,
+        "truth": 1
+      },
+      {
+        "id": "P-97|P-97-O2E|other_targeted",
+        "score": 0,
+        "truth": 1
+      },
+      {
+        "id": "P-97|P-97-O3E|other_targeted",
+        "score": 0,
+        "truth": 1
+      },
+      {
+        "id": "P-100|P-100-O1E|other_targeted",
+        "score": 1,
+        "truth": 0
+      },
+      {
+        "id": "P-100|P-100-O2E|other_targeted",
+        "score": 0,
+        "truth": 0
+      },
+      {
+        "id": "P-102|P-102-O1E|other_targeted",
+        "score": 0,
+        "truth": 1
+      },
+      {
+        "id": "P-105|P-105-O1T|other_targeted",
+        "score": 0,
+        "truth": 0
+      },
+      {
+        "id": "P-60|P-60-O1T|dual_targeted",
+        "score": 1,
+        "truth": 1
+      },
+      {
+        "id": "P-60|P-60-O2E|dual_targeted",
+        "score": 1,
+        "truth": 1
+      },
+      {
+        "id": "P-60|P-60-O3E|dual_targeted",
+        "score": 1,
+        "truth": 1
+      },
+      {
+        "id": "P-60|P-60-O4E|dual_targeted",
+        "score": 1,
+        "truth": 1
+      },
+      {
+        "id": "P-61|P-61-O1E|dual_targeted",
+        "score": 1,
+        "truth": 1
+      },
+      {
+        "id": "P-61|P-61-O2E|dual_targeted",
+        "score": 1,
+        "truth": 1
+      },
+      {
+        "id": "P-61|P-61-O3E|dual_targeted",
+        "score": 1,
+        "truth": 1
+      },
+      {
+        "id": "P-61|P-61-O4E|dual_targeted",
+        "score": 1,
+        "truth": 1
+      },
+      {
+        "id": "P-61|P-61-O5E|dual_targeted",
+        "score": 1,
+        "truth": 1
+      },
+      {
+        "id": "P-95|P-95-O2E|dual_targeted",
+        "score": 0,
+        "truth": 0
+      },
+      {
+        "id": "P-3|P-3-O1E|chemotherapy",
+        "score": 1,
+        "truth": 1
+      },
+      {
+        "id": "P-25|P-25-O1E|chemotherapy",
+        "score": 0,
+        "truth": 0
+      },
+      {
+        "id": "P-50|P-50-O1E|chemotherapy",
+        "score": 0,
+        "truth": 0
+      },
+      {
+        "id": "P-51|P-51-O1E|chemotherapy",
+        "score": 1,
+        "truth": 0
+      },
+      {
+        "id": "P-51|P-51-O2E|chemotherapy",
+        "score": 1,
+        "truth": 0
+      },
+      {
+        "id": "P-51|P-51-O3E|chemotherapy",
+        "score": 0,
+        "truth": 0
+      },
+      {
+        "id": "P-65|P-65-O1E|chemotherapy",
+        "score": 1,
+        "truth": 1
+      },
+      {
+        "id": "P-73|P-73-O1T|chemotherapy",
+        "score": 0,
+        "truth": 0
+      },
+      {
+        "id": "P-81|P-81-O1E|chemotherapy",
+        "score": 0,
+        "truth": 0
+      },
+      {
+        "id": "P-83|P-83-O1E|chemotherapy",
+        "score": 0,
+        "truth": 0
+      },
+      {
+        "id": "P-85|P-85-O1E|chemotherapy",
+        "score": 0,
+        "truth": 0
+      },
+      {
+        "id": "P-85|P-85-O2E|chemotherapy",
+        "score": 0,
+        "truth": 0
+      }
+    ],
+    "expected": {
+      "metric": "accuracy",
+      "value": 0.8333333333333334,
+      "n": 54
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_x3lfhswdekw8yps2wk2sb78x",
+        "type": "function",
+        "function": {
+          "name": "python",
+          "arguments": "{\"code\": \"F='41467_2021_22676_MOESM9_ESM.xlsx'; S='Drug responses of LCOs'\\nrows=get_rows(F,S)\\nfor i,r in enumerate(rows[:40]): print(i+1,r)\"}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "Gray rows 3-10 and 14, Need assay scores, map drugs and inspect sheet.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 137,
+    "prompt_tokens": 35023,
+    "total_tokens": 35160,
+    "prompt_tokens_details": {
+      "cached_tokens": 35023
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 45
+    }
+  }
+}

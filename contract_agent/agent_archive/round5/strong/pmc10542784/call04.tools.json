@@ -1,0 +1,991 @@
+[
+  {
+    "name": "finish",
+    "arguments": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p13",
+              "article:p28"
+            ],
+            "explanation": "Each analysis unit is an individual breast cancer patient with a successful ex vivo tumor-slice test and evaluable in vivo MRI response."
+          },
+          "platform": {
+            "value": "unknown",
+            "evidence": [
+              "article:p26"
+            ],
+            "explanation": "The assay uses fresh ex vivo tumor tissue slices; this is not organoid, perfused chip, microwell, or spheroid."
+          },
+          "readout": {
+            "value": "other",
+            "evidence": [
+              "article.xml/Table 1/R1C1",
+              "article.xml/Table 1/R2C1"
+            ],
+            "explanation": "The final ex vivo result combines HE morphology, EdU proliferation, and TUNEL apoptosis. No resistant cases occurred in the evaluated cohort, so binary agreement is sensitive versus intermediate sensitive."
+          },
+          "direction": {
+            "value": "higher_sensitive",
+            "evidence": [
+              "article.xml/Table 1/R5C1",
+              "article:p12"
+            ],
+            "explanation": "For the observed two response levels, the sensitive category (greater treatment effect) is encoded as 1 and intermediate sensitive as 0."
+          },
+          "threshold_rule": {
+            "value": "categorical",
+            "evidence": [
+              "article:p26",
+              "article.xml/Table 1/R1C1"
+            ],
+            "explanation": "The published endpoint is categorical concordance. Because no resistant tumors were observed, the observed categories reduce to sensitive versus intermediate sensitive for binary scoring without changing agreement count."
+          },
+          "threshold_timing": {
+            "value": "independent_reference",
+            "evidence": [
+              "article:p1",
+              "article:p9"
+            ],
+            "explanation": "Criteria were established on an earlier set of 21 resected tumors before evaluation in the new BREAST biopsy cohort."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "vision/283c18befcd6/R4C1",
+              "vision/283c18befcd6/R5C1"
+            ],
+            "explanation": "Fig. 2b independently identifies 20 tumor samples and gives each sample's final ex vivo result and in vivo MRI result."
+          },
+          "regimen_match": {
+            "value": "partial",
+            "evidence": [
+              "article:p21",
+              "article:p26"
+            ],
+            "explanation": "The ex vivo assay uses FAC, whereas patients received anthracycline-containing neoadjuvant chemotherapy; the paper discusses FAC versus AC as a limitation."
+          },
+          "n_units": {
+            "value": 20,
+            "evidence": [
+              "article:p13",
+              "vision/283c18befcd6/R4C2",
+              "vision/283c18befcd6/R4C21"
+            ],
+            "explanation": "There are 20 evaluable tumor samples in Fig. 2b, matching the published denominator of 20."
+          },
+          "split": {
+            "value": "independent_test",
+            "evidence": [
+              "article:p1",
+              "article:p9"
+            ],
+            "explanation": "Assay cutoffs were developed in 21 earlier surgical specimens and tested in a separate proof-of-concept biopsy cohort."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.75,
+          "reported_evidence": [
+            "article:p13",
+            "article:p14"
+          ],
+          "threshold": null,
+          "op": "==",
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "23",
+              "score": {
+                "ref": "vision/283c18befcd6/R4C2",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/283c18befcd6/R5C2",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              }
+            },
+            {
+              "id": "34",
+              "score": {
+                "ref": "vision/283c18befcd6/R4C3",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/283c18befcd6/R5C3",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              }
+            },
+            {
+              "id": "3",
+              "score": {
+                "ref": "vision/283c18befcd6/R4C4",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/283c18befcd6/R5C4",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              }
+            },
+            {
+              "id": "9",
+              "score": {
+                "ref": "vision/283c18befcd6/R4C5",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/283c18befcd6/R5C5",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              }
+            },
+            {
+              "id": "18",
+              "score": {
+                "ref": "vision/283c18befcd6/R4C6",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/283c18befcd6/R5C6",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              }
+            },
+            {
+              "id": "38",
+              "score": {
+                "ref": "vision/283c18befcd6/R4C7",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/283c18befcd6/R5C7",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              }
+            },
+            {
+              "id": "5",
+              "score": {
+                "ref": "vision/283c18befcd6/R4C8",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/283c18befcd6/R5C8",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              }
+            },
+            {
+              "id": "8",
+              "score": {
+                "ref": "vision/283c18befcd6/R4C9",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/283c18befcd6/R5C9",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              }
+            },
+            {
+              "id": "16",
+              "score": {
+                "ref": "vision/283c18befcd6/R4C10",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/283c18befcd6/R5C10",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              }
+            },
+            {
+              "id": "20",
+              "score": {
+                "ref": "vision/283c18befcd6/R4C11",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/283c18befcd6/R5C11",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              }
+            },
+            {
+              "id": "22",
+              "score": {
+                "ref": "vision/283c18befcd6/R4C12",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/283c18befcd6/R5C12",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              }
+            },
+            {
+              "id": "27",
+              "score": {
+                "ref": "vision/283c18befcd6/R4C13",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/283c18befcd6/R5C13",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              }
+            },
+            {
+              "id": "39",
+              "score": {
+                "ref": "vision/283c18befcd6/R4C14",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/283c18befcd6/R5C14",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              }
+            },
+            {
+              "id": "41",
+              "score": {
+                "ref": "vision/283c18befcd6/R4C15",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/283c18befcd6/R5C15",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              }
+            },
+            {
+              "id": "21",
+              "score": {
+                "ref": "vision/283c18befcd6/R4C16",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/283c18befcd6/R5C16",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              }
+            },
+            {
+              "id": "11",
+              "score": {
+                "ref": "vision/283c18befcd6/R4C17",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/283c18befcd6/R5C17",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              }
+            },
+            {
+              "id": "40",
+              "score": {
+                "ref": "vision/283c18befcd6/R4C18",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/283c18befcd6/R5C18",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              }
+            },
+            {
+              "id": "17",
+              "score": {
+                "ref": "vision/283c18befcd6/R4C19",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/283c18befcd6/R5C19",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              }
+            },
+            {
+              "id": "10",
+              "score": {
+                "ref": "vision/283c18befcd6/R4C20",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/283c18befcd6/R5C20",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              }
+            },
+            {
+              "id": "35",
+              "score": {
+                "ref": "vision/283c18befcd6/R4C21",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/283c18befcd6/R5C21",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              }
+            }
+          ]
+        },
+        "notes": [
+          "Binary mapping preserves the published agreement count: 15 concordant and 5 discordant among 20 patients, giving accuracy 15/20 = 0.75.",
+          "The five discordant samples are 11, 40, and 17 (ex vivo sensitive, in vivo intermediate sensitive) and 10 and 35 (ex vivo intermediate sensitive, in vivo sensitive), consistent with article:p13.",
+          "No resistant tumors were observed in this cohort; the rejected alternative TUNEL cutoff produced 65% (13/20) and is not the primary headline."
+        ]
+      }
+    },
+    "output": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p13",
+              "article:p28"
+            ],
+            "explanation": "Each analysis unit is an individual breast cancer patient with a successful ex vivo tumor-slice test and evaluable in vivo MRI response."
+          },
+          "platform": {
+            "value": "unknown",
+            "evidence": [
+              "article:p26"
+            ],
+            "explanation": "The assay uses fresh ex vivo tumor tissue slices; this is not organoid, perfused chip, microwell, or spheroid."
+          },
+          "readout": {
+            "value": "other",
+            "evidence": [
+              "article.xml/Table 1/R1C1",
+              "article.xml/Table 1/R2C1"
+            ],
+            "explanation": "The final ex vivo result combines HE morphology, EdU proliferation, and TUNEL apoptosis. No resistant cases occurred in the evaluated cohort, so binary agreement is sensitive versus intermediate sensitive."
+          },
+          "direction": {
+            "value": "higher_sensitive",
+            "evidence": [
+              "article.xml/Table 1/R5C1",
+              "article:p12"
+            ],
+            "explanation": "For the observed two response levels, the sensitive category (greater treatment effect) is encoded as 1 and intermediate sensitive as 0."
+          },
+          "threshold_rule": {
+            "value": "categorical",
+            "evidence": [
+              "article:p26",
+              "article.xml/Table 1/R1C1"
+            ],
+            "explanation": "The published endpoint is categorical concordance. Because no resistant tumors were observed, the observed categories reduce to sensitive versus intermediate sensitive for binary scoring without changing agreement count."
+          },
+          "threshold_timing": {
+            "value": "independent_reference",
+            "evidence": [
+              "article:p1",
+              "article:p9"
+            ],
+            "explanation": "Criteria were established on an earlier set of 21 resected tumors before evaluation in the new BREAST biopsy cohort."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "vision/283c18befcd6/R4C1",
+              "vision/283c18befcd6/R5C1"
+            ],
+            "explanation": "Fig. 2b independently identifies 20 tumor samples and gives each sample's final ex vivo result and in vivo MRI result."
+          },
+          "regimen_match": {
+            "value": "partial",
+            "evidence": [
+              "article:p21",
+              "article:p26"
+            ],
+            "explanation": "The ex vivo assay uses FAC, whereas patients received anthracycline-containing neoadjuvant chemotherapy; the paper discusses FAC versus AC as a limitation."
+          },
+          "n_units": {
+            "value": 20,
+            "evidence": [
+              "article:p13",
+              "vision/283c18befcd6/R4C2",
+              "vision/283c18befcd6/R4C21"
+            ],
+            "explanation": "There are 20 evaluable tumor samples in Fig. 2b, matching the published denominator of 20."
+          },
+          "split": {
+            "value": "independent_test",
+            "evidence": [
+              "article:p1",
+              "article:p9"
+            ],
+            "explanation": "Assay cutoffs were developed in 21 earlier surgical specimens and tested in a separate proof-of-concept biopsy cohort."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.75,
+          "reported_evidence": [
+            "article:p13",
+            "article:p14"
+          ],
+          "threshold": null,
+          "op": "==",
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "23",
+              "score": {
+                "ref": "vision/283c18befcd6/R4C2",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/283c18befcd6/R5C2",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              }
+            },
+            {
+              "id": "34",
+              "score": {
+                "ref": "vision/283c18befcd6/R4C3",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/283c18befcd6/R5C3",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              }
+            },
+            {
+              "id": "3",
+              "score": {
+                "ref": "vision/283c18befcd6/R4C4",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/283c18befcd6/R5C4",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              }
+            },
+            {
+              "id": "9",
+              "score": {
+                "ref": "vision/283c18befcd6/R4C5",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/283c18befcd6/R5C5",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              }
+            },
+            {
+              "id": "18",
+              "score": {
+                "ref": "vision/283c18befcd6/R4C6",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/283c18befcd6/R5C6",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              }
+            },
+            {
+              "id": "38",
+              "score": {
+                "ref": "vision/283c18befcd6/R4C7",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/283c18befcd6/R5C7",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              }
+            },
+            {
+              "id": "5",
+              "score": {
+                "ref": "vision/283c18befcd6/R4C8",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/283c18befcd6/R5C8",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              }
+            },
+            {
+              "id": "8",
+              "score": {
+                "ref": "vision/283c18befcd6/R4C9",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/283c18befcd6/R5C9",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              }
+            },
+            {
+              "id": "16",
+              "score": {
+                "ref": "vision/283c18befcd6/R4C10",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/283c18befcd6/R5C10",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              }
+            },
+            {
+              "id": "20",
+              "score": {
+                "ref": "vision/283c18befcd6/R4C11",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/283c18befcd6/R5C11",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              }
+            },
+            {
+              "id": "22",
+              "score": {
+                "ref": "vision/283c18befcd6/R4C12",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/283c18befcd6/R5C12",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              }
+            },
+            {
+              "id": "27",
+              "score": {
+                "ref": "vision/283c18befcd6/R4C13",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/283c18befcd6/R5C13",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              }
+            },
+            {
+              "id": "39",
+              "score": {
+                "ref": "vision/283c18befcd6/R4C14",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/283c18befcd6/R5C14",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              }
+            },
+            {
+              "id": "41",
+              "score": {
+                "ref": "vision/283c18befcd6/R4C15",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/283c18befcd6/R5C15",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              }
+            },
+            {
+              "id": "21",
+              "score": {
+                "ref": "vision/283c18befcd6/R4C16",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/283c18befcd6/R5C16",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              }
+            },
+            {
+              "id": "11",
+              "score": {
+                "ref": "vision/283c18befcd6/R4C17",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/283c18befcd6/R5C17",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              }
+            },
+            {
+              "id": "40",
+              "score": {
+                "ref": "vision/283c18befcd6/R4C18",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/283c18befcd6/R5C18",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              }
+            },
+            {
+              "id": "17",
+              "score": {
+                "ref": "vision/283c18befcd6/R4C19",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/283c18befcd6/R5C19",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              }
+            },
+            {
+              "id": "10",
+              "score": {
+                "ref": "vision/283c18befcd6/R4C20",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/283c18befcd6/R5C20",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              }
+            },
+            {
+              "id": "35",
+              "score": {
+                "ref": "vision/283c18befcd6/R4C21",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/283c18befcd6/R5C21",
+                "map": {
+                  "Resistant": 0,
+                  "Intermediate sensitive": 0,
+                  "Sensitive": 1
+                }
+              }
+            }
+          ]
+        },
+        "notes": [
+          "Binary mapping preserves the published agreement count: 15 concordant and 5 discordant among 20 patients, giving accuracy 15/20 = 0.75.",
+          "The five discordant samples are 11, 40, and 17 (ex vivo sensitive, in vivo intermediate sensitive) and 10 and 35 (ex vivo intermediate sensitive, in vivo sensitive), consistent with article:p13.",
+          "No resistant tumors were observed in this cohort; the rejected alternative TUNEL cutoff produced 65% (13/20) and is not the primary headline."
+        ]
+      },
+      "execution_feedback": {
+        "matched": false,
+        "metric": "accuracy",
+        "computed": null,
+        "reported": 0.75,
+        "difference": null,
+        "n": 20,
+        "errors": [
+          "Binary metric requires a threshold"
+        ],
+        "expected": {
+          "metric": "accuracy",
+          "value": 0.75,
+          "n": 20
+        }
+      }
+    }
+  }
+]

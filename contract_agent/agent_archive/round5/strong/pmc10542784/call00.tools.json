@@ -1,0 +1,115 @@
+[
+  {
+    "name": "initial_code",
+    "output": {
+      "returncode": 0,
+      "stdout": "0.75 Missing independently transcribed row-level evidence from Fig. 2b identifying each of the 20 samples, its final ex vivo sensitivity category, and its in vivo MRI response category; aggregate 15/20 counts alone are insufficient to reconstruct records.\n",
+      "stderr": "",
+      "seconds": 2.501820167002734,
+      "peak_rss_bytes": 29769728,
+      "limit_error": null,
+      "code_sha256": "0fec8c764eb7032f5b9ce377e88c03bacb04541281f3da12ce668aaf8318e157",
+      "contract": {
+        "status": "blocked",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p13",
+              "article:p28"
+            ],
+            "explanation": "The denominator is 20 evaluable patients with both a successful ex vivo test and in vivo MRI response."
+          },
+          "platform": {
+            "value": "unknown",
+            "evidence": [
+              "article:p26"
+            ],
+            "explanation": "The assay uses fresh ex vivo tumor tissue slices; this platform is not one of organoid, perfused chip, microwell, or spheroid."
+          },
+          "readout": {
+            "value": "other",
+            "evidence": [
+              "article.xml/Table 1/R1C1",
+              "article.xml/Table 1/R2C1"
+            ],
+            "explanation": "The final ex vivo result combines morphology (HE), proliferation (EdU), and apoptosis (TUNEL)."
+          },
+          "direction": {
+            "value": "mixed",
+            "evidence": [
+              "article.xml/Table 1/R3C1",
+              "article.xml/Table 1/R4C1",
+              "article.xml/Table 1/R5C1"
+            ],
+            "explanation": "The assay classifies tumors as resistant, intermediate sensitive, or sensitive rather than using a single monotone scalar."
+          },
+          "threshold_rule": {
+            "value": "categorical",
+            "evidence": [
+              "article.xml/Table 1/R1C1",
+              "article:p26"
+            ],
+            "explanation": "Concordance is determined by matching three ordered categorical ex vivo and MRI outcomes."
+          },
+          "threshold_timing": {
+            "value": "independent_reference",
+            "evidence": [
+              "article:p1",
+              "article:p9"
+            ],
+            "explanation": "Cutoffs were established on 21 earlier resected tumors before evaluation in the new BREAST biopsy cohort."
+          },
+          "patient_mapping": {
+            "value": "absent",
+            "evidence": [
+              "41523_2023_583_Fig2_HTML.jpg"
+            ],
+            "explanation": "The source figure contains per-sample results, but no independent read_figure transcription with sample-specific assay and truth values is available in the structured data yet."
+          },
+          "regimen_match": {
+            "value": "partial",
+            "evidence": [
+              "article:p21",
+              "article:p26"
+            ],
+            "explanation": "The ex vivo regimen is FAC, while patients received anthracycline-containing neoadjuvant chemotherapy; the paper discusses FAC versus AC as a limitation."
+          },
+          "n_units": {
+            "value": 20,
+            "evidence": [
+              "article:p13",
+              "article:p14"
+            ],
+            "explanation": "The reported concordance calculation uses exactly 20 evaluable patients, 15 concordant and 5 discordant."
+          },
+          "split": {
+            "value": "independent_test",
+            "evidence": [
+              "article:p1",
+              "article:p9"
+            ],
+            "explanation": "Assay criteria were developed on a separate set of 21 surgical tumors and evaluated in a new proof-of-concept biopsy cohort."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.75,
+          "reported_evidence": [
+            "article:p13",
+            "article:p14"
+          ],
+          "threshold": null,
+          "op": "==",
+          "score_direction": "higher",
+          "records": [],
+          "blocked_reason": "Missing independently transcribed row-level evidence from Fig. 2b identifying each of the 20 samples, its final ex vivo sensitivity category, and its in vivo MRI response category; aggregate 15/20 counts alone are insufficient to reconstruct records."
+        },
+        "notes": [
+          "The published headline is 75% concordance (15/20), not the exploratory alternative TUNEL cutoff result of 65% (13/20).",
+          "Concordance is exact three-category agreement: sensitive with >50% decrease, intermediate with <50% decrease and <20% increase, and resistant with >20% increase."
+        ]
+      }
+    }
+  }
+]

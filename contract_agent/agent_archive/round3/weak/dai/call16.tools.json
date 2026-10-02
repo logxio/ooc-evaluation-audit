@@ -1,0 +1,99 @@
+[
+  {
+    "name": "finish",
+    "arguments": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "Unit is individual patient, 22 total patients evaluated for FOLFOX + bevacizumab response prediction"
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "Platform is optimized vascularized colorectal tumoroid-on-a-chip model"
+          },
+          "readout": {
+            "value": "size_viability",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "Readout combines relative vessel density and relative tumoroid diameter to predict clinical response"
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "Values below the optimal cutoff indicate clinical sensitivity to treatment"
+          },
+          "threshold_rule": {
+            "value": "roc_optimized",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "Optimal cutoffs determined using Youden index (ROC-optimized) with bootstrap sampling"
+          },
+          "threshold_timing": {
+            "value": "outcome_optimized",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "Cutoff values were fitted on the same 22 evaluated patients"
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "Individual patient IDs, clinical responses, and chip model predictions are available for all 22 patients"
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "All patients received FOLFOX + bevacizumab, matching the in vitro drug testing regimen"
+          },
+          "n_units": {
+            "value": 22,
+            "evidence": [
+              "article:p76",
+              "article:p91"
+            ],
+            "explanation": "Total number of patients evaluated in this accuracy calculation is 22"
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "Model was evaluated on the same cohort used to determine optimal cutoff thresholds"
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.8636363636363636,
+          "reported_evidence": [
+            "article:p76"
+          ],
+          "threshold": 0.5,
+          "op": ">=",
+          "score_direction": "higher",
+          "records": [],
+          "blocked_reason": "Row-level source references for individual patient scores and outcomes are not resolvable; aggregate accuracy is directly reported in the article text as 86.36% for 22 patients, which matches the target value 19/22 = 0.8636363636363636."
+        },
+        "notes": [
+          "The reported accuracy of 86.36% (19 correct predictions out of 22 total patients) is explicitly stated in the article, consistent with the provided target value. Sensitivity is 81.82% (9/11 resistant patients correctly identified) and specificity is 90.91% (10/11 sensitive patients correctly identified)."
+        ]
+      }
+    },
+    "output_sha256": "2fbdad4297a50dac4c294fa530b0d0f7a1ba72feb9fa66cb32f9817c1952322f"
+  }
+]

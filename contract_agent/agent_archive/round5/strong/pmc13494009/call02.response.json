@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_1rca4soplon0l2lcsa2k5vys",
+        "type": "function",
+        "function": {
+          "name": "python",
+          "arguments": "{\"code\": \"print(type(tables['41698_2026_1663_MOESM1_ESM.pdf']))\\nprint(tables['41698_2026_1663_MOESM1_ESM.pdf'].keys())\\nfor k,v in tables['41698_2026_1663_MOESM1_ESM.pdf'].items():\\n print(k,type(v), (v.keys() if isinstance(v,dict) else ''))\\n break\\n# dump pages 20-24 rows compact\\nfor p in range(20,25):\\n sh=f'page{p}'\\n meta=tables['41698_2026_1663_MOESM1_ESM.pdf'][sh]\\n print('\\\\n###',sh, type(meta), meta.keys() if isinstance(meta,dict) else '')\\n rows=get_rows('41698_2026_1663_MOESM1_ESM.pdf',sh)\\n for i,row in enumerate(rows,1):\\n  vals=[str(x) for x in row if x not in (None,'')]\\n  if vals: print(i, ' | '.join(vals)[:300])\"}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "Need inspect. Use python tools.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 324,
+    "prompt_tokens": 25042,
+    "total_tokens": 25366,
+    "prompt_tokens_details": {
+      "cached_tokens": 2360
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 14
+    }
+  }
+}

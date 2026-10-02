@@ -1,0 +1,857 @@
+[
+  {
+    "name": "finish",
+    "arguments": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p40",
+              "vision/9019cd608924/R1C1"
+            ],
+            "explanation": "Each row is one ESCC patient represented by a matched patient-derived organoid and followed for clinical treatment response."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p41",
+              "vision/9019cd608924/R1C3"
+            ],
+            "explanation": "Drug sensitivity was measured using patient-derived organoid drug-sensitivity testing."
+          },
+          "readout": {
+            "value": "auc",
+            "evidence": [
+              "article:p41",
+              "vision/9019cd608924/R1C2"
+            ],
+            "explanation": "The assay score is AUCsum, the sum of standardized AUC values for cisplatin and paclitaxel."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p41",
+              "article:p43",
+              "vision/9019cd608924/R1C2"
+            ],
+            "explanation": "AUCsum below 1.134 predicts a good/response outcome; higher AUCsum predicts poor/no response."
+          },
+          "threshold_rule": {
+            "value": "fixed_numeric",
+            "evidence": [
+              "article:p41",
+              "article:p42"
+            ],
+            "explanation": "The reported binary decision rule uses the fixed AUCsum cutoff of 1.134."
+          },
+          "threshold_timing": {
+            "value": "not_reported",
+            "evidence": [
+              "article:p41"
+            ],
+            "explanation": "The article reports the cutoff and ROC performance but does not clearly state whether the cutoff was prespecified or fitted on these patients."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "vision/9019cd608924/R1C1",
+              "vision/9019cd608924/R24C1"
+            ],
+            "explanation": "Figure 3A lists all 24 evaluable patient IDs with individual assay and clinical-response columns."
+          },
+          "regimen_match": {
+            "value": "partial",
+            "evidence": [
+              "CTM2-15-e70534-s003.xls/Sheet1/R4C12",
+              "article:p59"
+            ],
+            "explanation": "The assay scores cisplatin plus paclitaxel, whereas some clinical regimens also included immunotherapy; discordant ESC29 and ESC40 were attributed partly to added immunotherapy."
+          },
+          "n_units": {
+            "value": 24,
+            "evidence": [
+              "article:p40",
+              "article:p41",
+              "vision/9019cd608924/R1C1",
+              "vision/9019cd608924/R24C1"
+            ],
+            "explanation": "Of 26 established organoids, follow-up was missing for ESC11 and ESC28, leaving 24 evaluable patients shown in Figure 3A."
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p41"
+            ],
+            "explanation": "The reported sensitivity, specificity and accuracy are calculated in the same evaluated cohort; no independent held-out cohort is described."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.833,
+          "reported_evidence": [
+            "article:p41",
+            "article:p3"
+          ],
+          "threshold": 1.134,
+          "op": "<",
+          "score_direction": "lower",
+          "records": [
+            {
+              "id": "ESC1",
+              "score": {
+                "ref": "vision/9019cd608924/R1C2"
+              },
+              "truth": {
+                "ref": "vision/9019cd608924/R1C4",
+                "map": {
+                  "Response": 1,
+                  "No response": 0
+                }
+              }
+            },
+            {
+              "id": "ESC3",
+              "score": {
+                "ref": "vision/9019cd608924/R2C2"
+              },
+              "truth": {
+                "ref": "vision/9019cd608924/R2C4",
+                "map": {
+                  "Response": 1,
+                  "No response": 0
+                }
+              }
+            },
+            {
+              "id": "ESC5",
+              "score": {
+                "ref": "vision/9019cd608924/R3C2"
+              },
+              "truth": {
+                "ref": "vision/9019cd608924/R3C4",
+                "map": {
+                  "Response": 1,
+                  "No response": 0
+                }
+              }
+            },
+            {
+              "id": "ESC6",
+              "score": {
+                "ref": "vision/9019cd608924/R4C2"
+              },
+              "truth": {
+                "ref": "vision/9019cd608924/R4C4",
+                "map": {
+                  "Response": 1,
+                  "No response": 0
+                }
+              }
+            },
+            {
+              "id": "ESC21",
+              "score": {
+                "ref": "vision/9019cd608924/R5C2"
+              },
+              "truth": {
+                "ref": "vision/9019cd608924/R5C4",
+                "map": {
+                  "Response": 1,
+                  "No response": 0
+                }
+              }
+            },
+            {
+              "id": "ESC24",
+              "score": {
+                "ref": "vision/9019cd608924/R6C2"
+              },
+              "truth": {
+                "ref": "vision/9019cd608924/R6C4",
+                "map": {
+                  "Response": 1,
+                  "No response": 0
+                }
+              }
+            },
+            {
+              "id": "ESC25",
+              "score": {
+                "ref": "vision/9019cd608924/R7C2"
+              },
+              "truth": {
+                "ref": "vision/9019cd608924/R7C4",
+                "map": {
+                  "Response": 1,
+                  "No response": 0
+                }
+              }
+            },
+            {
+              "id": "ESC29",
+              "score": {
+                "ref": "vision/9019cd608924/R8C2"
+              },
+              "truth": {
+                "ref": "vision/9019cd608924/R8C4",
+                "map": {
+                  "Response": 1,
+                  "No response": 0
+                }
+              }
+            },
+            {
+              "id": "ESC30",
+              "score": {
+                "ref": "vision/9019cd608924/R9C2"
+              },
+              "truth": {
+                "ref": "vision/9019cd608924/R9C4",
+                "map": {
+                  "Response": 1,
+                  "No response": 0
+                }
+              }
+            },
+            {
+              "id": "ESC34",
+              "score": {
+                "ref": "vision/9019cd608924/R10C2"
+              },
+              "truth": {
+                "ref": "vision/9019cd608924/R10C4",
+                "map": {
+                  "Response": 1,
+                  "No response": 0
+                }
+              }
+            },
+            {
+              "id": "ESC36",
+              "score": {
+                "ref": "vision/9019cd608924/R11C2"
+              },
+              "truth": {
+                "ref": "vision/9019cd608924/R11C4",
+                "map": {
+                  "Response": 1,
+                  "No response": 0
+                }
+              }
+            },
+            {
+              "id": "ESC40",
+              "score": {
+                "ref": "vision/9019cd608924/R12C2"
+              },
+              "truth": {
+                "ref": "vision/9019cd608924/R12C4",
+                "map": {
+                  "Response": 1,
+                  "No response": 0
+                }
+              }
+            },
+            {
+              "id": "ESC41",
+              "score": {
+                "ref": "vision/9019cd608924/R13C2"
+              },
+              "truth": {
+                "ref": "vision/9019cd608924/R13C4",
+                "map": {
+                  "Response": 1,
+                  "No response": 0
+                }
+              }
+            },
+            {
+              "id": "ESC42",
+              "score": {
+                "ref": "vision/9019cd608924/R14C2"
+              },
+              "truth": {
+                "ref": "vision/9019cd608924/R14C4",
+                "map": {
+                  "Response": 1,
+                  "No response": 0
+                }
+              }
+            },
+            {
+              "id": "ESC47",
+              "score": {
+                "ref": "vision/9019cd608924/R15C2"
+              },
+              "truth": {
+                "ref": "vision/9019cd608924/R15C4",
+                "map": {
+                  "Response": 1,
+                  "No response": 0
+                }
+              }
+            },
+            {
+              "id": "ESC22",
+              "score": {
+                "ref": "vision/9019cd608924/R16C2"
+              },
+              "truth": {
+                "ref": "vision/9019cd608924/R16C4",
+                "map": {
+                  "Response": 1,
+                  "No response": 0
+                }
+              }
+            },
+            {
+              "id": "ESC23",
+              "score": {
+                "ref": "vision/9019cd608924/R17C2"
+              },
+              "truth": {
+                "ref": "vision/9019cd608924/R17C4",
+                "map": {
+                  "Response": 1,
+                  "No response": 0
+                }
+              }
+            },
+            {
+              "id": "ESC26",
+              "score": {
+                "ref": "vision/9019cd608924/R18C2"
+              },
+              "truth": {
+                "ref": "vision/9019cd608924/R18C4",
+                "map": {
+                  "Response": 1,
+                  "No response": 0
+                }
+              }
+            },
+            {
+              "id": "ESC27",
+              "score": {
+                "ref": "vision/9019cd608924/R19C2"
+              },
+              "truth": {
+                "ref": "vision/9019cd608924/R19C4",
+                "map": {
+                  "Response": 1,
+                  "No response": 0
+                }
+              }
+            },
+            {
+              "id": "ESC31",
+              "score": {
+                "ref": "vision/9019cd608924/R20C2"
+              },
+              "truth": {
+                "ref": "vision/9019cd608924/R20C4",
+                "map": {
+                  "Response": 1,
+                  "No response": 0
+                }
+              }
+            },
+            {
+              "id": "ESC32",
+              "score": {
+                "ref": "vision/9019cd608924/R21C2"
+              },
+              "truth": {
+                "ref": "vision/9019cd608924/R21C4",
+                "map": {
+                  "Response": 1,
+                  "No response": 0
+                }
+              }
+            },
+            {
+              "id": "ESC33",
+              "score": {
+                "ref": "vision/9019cd608924/R22C2"
+              },
+              "truth": {
+                "ref": "vision/9019cd608924/R22C4",
+                "map": {
+                  "Response": 1,
+                  "No response": 0
+                }
+              }
+            },
+            {
+              "id": "ESC35",
+              "score": {
+                "ref": "vision/9019cd608924/R23C2"
+              },
+              "truth": {
+                "ref": "vision/9019cd608924/R23C4",
+                "map": {
+                  "Response": 1,
+                  "No response": 0
+                }
+              }
+            },
+            {
+              "id": "ESC51",
+              "score": {
+                "ref": "vision/9019cd608924/R24C2"
+              },
+              "truth": {
+                "ref": "vision/9019cd608924/R24C4",
+                "map": {
+                  "Response": 1,
+                  "No response": 0
+                }
+              }
+            }
+          ],
+          "blocked_reason": null
+        },
+        "notes": [
+          "The figure marks 20 concordant and 4 discordant patient predictions (ESC5, ESC29, ESC40 and ESC51), giving 20/24 = 0.833 accuracy.",
+          "AUCsum values are figure-transcribed x-axis values and are approximate near the threshold, but the organoid response column and 1.134 decision line independently identify each binary prediction.",
+          "Clinical Response is encoded as Response=1 and No response=0."
+        ]
+      }
+    },
+    "output": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p40",
+              "vision/9019cd608924/R1C1"
+            ],
+            "explanation": "Each row is one ESCC patient represented by a matched patient-derived organoid and followed for clinical treatment response."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p41",
+              "vision/9019cd608924/R1C3"
+            ],
+            "explanation": "Drug sensitivity was measured using patient-derived organoid drug-sensitivity testing."
+          },
+          "readout": {
+            "value": "auc",
+            "evidence": [
+              "article:p41",
+              "vision/9019cd608924/R1C2"
+            ],
+            "explanation": "The assay score is AUCsum, the sum of standardized AUC values for cisplatin and paclitaxel."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p41",
+              "article:p43",
+              "vision/9019cd608924/R1C2"
+            ],
+            "explanation": "AUCsum below 1.134 predicts a good/response outcome; higher AUCsum predicts poor/no response."
+          },
+          "threshold_rule": {
+            "value": "fixed_numeric",
+            "evidence": [
+              "article:p41",
+              "article:p42"
+            ],
+            "explanation": "The reported binary decision rule uses the fixed AUCsum cutoff of 1.134."
+          },
+          "threshold_timing": {
+            "value": "not_reported",
+            "evidence": [
+              "article:p41"
+            ],
+            "explanation": "The article reports the cutoff and ROC performance but does not clearly state whether the cutoff was prespecified or fitted on these patients."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "vision/9019cd608924/R1C1",
+              "vision/9019cd608924/R24C1"
+            ],
+            "explanation": "Figure 3A lists all 24 evaluable patient IDs with individual assay and clinical-response columns."
+          },
+          "regimen_match": {
+            "value": "partial",
+            "evidence": [
+              "CTM2-15-e70534-s003.xls/Sheet1/R4C12",
+              "article:p59"
+            ],
+            "explanation": "The assay scores cisplatin plus paclitaxel, whereas some clinical regimens also included immunotherapy; discordant ESC29 and ESC40 were attributed partly to added immunotherapy."
+          },
+          "n_units": {
+            "value": 24,
+            "evidence": [
+              "article:p40",
+              "article:p41",
+              "vision/9019cd608924/R1C1",
+              "vision/9019cd608924/R24C1"
+            ],
+            "explanation": "Of 26 established organoids, follow-up was missing for ESC11 and ESC28, leaving 24 evaluable patients shown in Figure 3A."
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p41"
+            ],
+            "explanation": "The reported sensitivity, specificity and accuracy are calculated in the same evaluated cohort; no independent held-out cohort is described."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.833,
+          "reported_evidence": [
+            "article:p41",
+            "article:p3"
+          ],
+          "threshold": 1.134,
+          "op": "<",
+          "score_direction": "lower",
+          "records": [
+            {
+              "id": "ESC1",
+              "score": {
+                "ref": "vision/9019cd608924/R1C2"
+              },
+              "truth": {
+                "ref": "vision/9019cd608924/R1C4",
+                "map": {
+                  "Response": 1,
+                  "No response": 0
+                }
+              }
+            },
+            {
+              "id": "ESC3",
+              "score": {
+                "ref": "vision/9019cd608924/R2C2"
+              },
+              "truth": {
+                "ref": "vision/9019cd608924/R2C4",
+                "map": {
+                  "Response": 1,
+                  "No response": 0
+                }
+              }
+            },
+            {
+              "id": "ESC5",
+              "score": {
+                "ref": "vision/9019cd608924/R3C2"
+              },
+              "truth": {
+                "ref": "vision/9019cd608924/R3C4",
+                "map": {
+                  "Response": 1,
+                  "No response": 0
+                }
+              }
+            },
+            {
+              "id": "ESC6",
+              "score": {
+                "ref": "vision/9019cd608924/R4C2"
+              },
+              "truth": {
+                "ref": "vision/9019cd608924/R4C4",
+                "map": {
+                  "Response": 1,
+                  "No response": 0
+                }
+              }
+            },
+            {
+              "id": "ESC21",
+              "score": {
+                "ref": "vision/9019cd608924/R5C2"
+              },
+              "truth": {
+                "ref": "vision/9019cd608924/R5C4",
+                "map": {
+                  "Response": 1,
+                  "No response": 0
+                }
+              }
+            },
+            {
+              "id": "ESC24",
+              "score": {
+                "ref": "vision/9019cd608924/R6C2"
+              },
+              "truth": {
+                "ref": "vision/9019cd608924/R6C4",
+                "map": {
+                  "Response": 1,
+                  "No response": 0
+                }
+              }
+            },
+            {
+              "id": "ESC25",
+              "score": {
+                "ref": "vision/9019cd608924/R7C2"
+              },
+              "truth": {
+                "ref": "vision/9019cd608924/R7C4",
+                "map": {
+                  "Response": 1,
+                  "No response": 0
+                }
+              }
+            },
+            {
+              "id": "ESC29",
+              "score": {
+                "ref": "vision/9019cd608924/R8C2"
+              },
+              "truth": {
+                "ref": "vision/9019cd608924/R8C4",
+                "map": {
+                  "Response": 1,
+                  "No response": 0
+                }
+              }
+            },
+            {
+              "id": "ESC30",
+              "score": {
+                "ref": "vision/9019cd608924/R9C2"
+              },
+              "truth": {
+                "ref": "vision/9019cd608924/R9C4",
+                "map": {
+                  "Response": 1,
+                  "No response": 0
+                }
+              }
+            },
+            {
+              "id": "ESC34",
+              "score": {
+                "ref": "vision/9019cd608924/R10C2"
+              },
+              "truth": {
+                "ref": "vision/9019cd608924/R10C4",
+                "map": {
+                  "Response": 1,
+                  "No response": 0
+                }
+              }
+            },
+            {
+              "id": "ESC36",
+              "score": {
+                "ref": "vision/9019cd608924/R11C2"
+              },
+              "truth": {
+                "ref": "vision/9019cd608924/R11C4",
+                "map": {
+                  "Response": 1,
+                  "No response": 0
+                }
+              }
+            },
+            {
+              "id": "ESC40",
+              "score": {
+                "ref": "vision/9019cd608924/R12C2"
+              },
+              "truth": {
+                "ref": "vision/9019cd608924/R12C4",
+                "map": {
+                  "Response": 1,
+                  "No response": 0
+                }
+              }
+            },
+            {
+              "id": "ESC41",
+              "score": {
+                "ref": "vision/9019cd608924/R13C2"
+              },
+              "truth": {
+                "ref": "vision/9019cd608924/R13C4",
+                "map": {
+                  "Response": 1,
+                  "No response": 0
+                }
+              }
+            },
+            {
+              "id": "ESC42",
+              "score": {
+                "ref": "vision/9019cd608924/R14C2"
+              },
+              "truth": {
+                "ref": "vision/9019cd608924/R14C4",
+                "map": {
+                  "Response": 1,
+                  "No response": 0
+                }
+              }
+            },
+            {
+              "id": "ESC47",
+              "score": {
+                "ref": "vision/9019cd608924/R15C2"
+              },
+              "truth": {
+                "ref": "vision/9019cd608924/R15C4",
+                "map": {
+                  "Response": 1,
+                  "No response": 0
+                }
+              }
+            },
+            {
+              "id": "ESC22",
+              "score": {
+                "ref": "vision/9019cd608924/R16C2"
+              },
+              "truth": {
+                "ref": "vision/9019cd608924/R16C4",
+                "map": {
+                  "Response": 1,
+                  "No response": 0
+                }
+              }
+            },
+            {
+              "id": "ESC23",
+              "score": {
+                "ref": "vision/9019cd608924/R17C2"
+              },
+              "truth": {
+                "ref": "vision/9019cd608924/R17C4",
+                "map": {
+                  "Response": 1,
+                  "No response": 0
+                }
+              }
+            },
+            {
+              "id": "ESC26",
+              "score": {
+                "ref": "vision/9019cd608924/R18C2"
+              },
+              "truth": {
+                "ref": "vision/9019cd608924/R18C4",
+                "map": {
+                  "Response": 1,
+                  "No response": 0
+                }
+              }
+            },
+            {
+              "id": "ESC27",
+              "score": {
+                "ref": "vision/9019cd608924/R19C2"
+              },
+              "truth": {
+                "ref": "vision/9019cd608924/R19C4",
+                "map": {
+                  "Response": 1,
+                  "No response": 0
+                }
+              }
+            },
+            {
+              "id": "ESC31",
+              "score": {
+                "ref": "vision/9019cd608924/R20C2"
+              },
+              "truth": {
+                "ref": "vision/9019cd608924/R20C4",
+                "map": {
+                  "Response": 1,
+                  "No response": 0
+                }
+              }
+            },
+            {
+              "id": "ESC32",
+              "score": {
+                "ref": "vision/9019cd608924/R21C2"
+              },
+              "truth": {
+                "ref": "vision/9019cd608924/R21C4",
+                "map": {
+                  "Response": 1,
+                  "No response": 0
+                }
+              }
+            },
+            {
+              "id": "ESC33",
+              "score": {
+                "ref": "vision/9019cd608924/R22C2"
+              },
+              "truth": {
+                "ref": "vision/9019cd608924/R22C4",
+                "map": {
+                  "Response": 1,
+                  "No response": 0
+                }
+              }
+            },
+            {
+              "id": "ESC35",
+              "score": {
+                "ref": "vision/9019cd608924/R23C2"
+              },
+              "truth": {
+                "ref": "vision/9019cd608924/R23C4",
+                "map": {
+                  "Response": 1,
+                  "No response": 0
+                }
+              }
+            },
+            {
+              "id": "ESC51",
+              "score": {
+                "ref": "vision/9019cd608924/R24C2"
+              },
+              "truth": {
+                "ref": "vision/9019cd608924/R24C4",
+                "map": {
+                  "Response": 1,
+                  "No response": 0
+                }
+              }
+            }
+          ],
+          "blocked_reason": null
+        },
+        "notes": [
+          "The figure marks 20 concordant and 4 discordant patient predictions (ESC5, ESC29, ESC40 and ESC51), giving 20/24 = 0.833 accuracy.",
+          "AUCsum values are figure-transcribed x-axis values and are approximate near the threshold, but the organoid response column and 1.134 decision line independently identify each binary prediction.",
+          "Clinical Response is encoded as Response=1 and No response=0."
+        ]
+      },
+      "execution_feedback": {
+        "matched": true,
+        "metric": "accuracy",
+        "computed": 0.8333333333333334,
+        "reported": 0.833,
+        "difference": 0.00033333333333340764,
+        "n": 24,
+        "errors": [],
+        "expected": {
+          "metric": "accuracy",
+          "value": 0.833,
+          "n": 24
+        }
+      }
+    }
+  }
+]

@@ -1,0 +1,28 @@
+{
+  "model": "qwen3.7-plus",
+  "message": {
+    "role": "assistant",
+    "content": "Now I can see Table 1 has the drug list and Table 4 has MOS values. Let me check Table 4 for the protein-binding-corrected MOS values which would be used for the 18-drug analysis.\n\n",
+    "tool_calls": [
+      {
+        "id": "call_c190983aa3de41168f997428",
+        "type": "function",
+        "function": {
+          "name": "preview_table",
+          "arguments": "{\"file\": \"article.xml\", \"sheet\": \"Table 4\", \"start\": 1, \"rows\": 30}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 112,
+    "prompt_tokens": 105753,
+    "prompt_tokens_details": {
+      "cached_tokens": 102272,
+      "text_tokens": 105753
+    },
+    "total_tokens": 105865
+  }
+}

@@ -1,0 +1,279 @@
+[
+  {
+    "name": "initial_code",
+    "output": {
+      "returncode": 0,
+      "stdout": "FOLFOX patients: 13\nComputed AUC: 0.85\nn = 13\nCONTRACT set successfully\nNumber of records: 13\n",
+      "stderr": "",
+      "seconds": 0.07796012499602512,
+      "peak_rss_bytes": 4046848,
+      "limit_error": null,
+      "code_sha256": "909ea864e709ae1444c60a078836b0d2ae6a27ef49e844c3281c2a410b71b048",
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient_regimen",
+            "evidence": [
+              "article:p31",
+              "supp.xls/Table S7/R1C1"
+            ],
+            "explanation": "Each record is a CRLM patient receiving FOLFOX regimen"
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p1"
+            ],
+            "explanation": "Patient-derived organoids (PDOs)"
+          },
+          "readout": {
+            "value": "ic50",
+            "evidence": [
+              "supp.xls/Table S7/R1C4",
+              "article:p51"
+            ],
+            "explanation": "IC50 values from dose-response curves of LM organoids to FOLFOX"
+          },
+          "direction": {
+            "value": "higher_sensitive",
+            "evidence": [
+              "article:p31",
+              "article:p51"
+            ],
+            "explanation": "Higher IC50 indicates resistance (PD); lower IC50 indicates sensitivity (SD/PR)"
+          },
+          "threshold_rule": {
+            "value": "no_binary_rule",
+            "evidence": [
+              "article:p31"
+            ],
+            "explanation": "AUC computed from continuous IC50 scores; no binary threshold applied"
+          },
+          "threshold_timing": {
+            "value": "not_applicable",
+            "evidence": [
+              "article:p31"
+            ],
+            "explanation": "AUC metric has no classification cutoff"
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "supp.xls/Table S7/R1C1"
+            ],
+            "explanation": "Individual patient IDs listed in Table S7"
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p28",
+              "supp.xls/Table S7/R1C2"
+            ],
+            "explanation": "Organoids treated with same FOLFOX regimen patients received clinically"
+          },
+          "n_units": {
+            "value": 13,
+            "evidence": [
+              "article:p31",
+              "article:p28"
+            ],
+            "explanation": "13 CRLM patients receiving FOLFOX (8 SD/PR + 5 PD)"
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p31"
+            ],
+            "explanation": "ROC computed on the same 13 patients; no separate validation cohort"
+          }
+        },
+        "headline": {
+          "metric": "auc",
+          "reported": 0.85,
+          "reported_evidence": [
+            "article:p31"
+          ],
+          "threshold": null,
+          "op": null,
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "P3",
+              "score": {
+                "ref": "supp.xls/Table S7/R3C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R3C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P4",
+              "score": {
+                "ref": "supp.xls/Table S7/R4C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R4C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P5",
+              "score": {
+                "ref": "supp.xls/Table S7/R5C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R5C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P6",
+              "score": {
+                "ref": "supp.xls/Table S7/R6C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R6C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P9",
+              "score": {
+                "ref": "supp.xls/Table S7/R9C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R9C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P11",
+              "score": {
+                "ref": "supp.xls/Table S7/R11C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R11C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P12",
+              "score": {
+                "ref": "supp.xls/Table S7/R12C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R12C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P13",
+              "score": {
+                "ref": "supp.xls/Table S7/R13C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R13C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P14",
+              "score": {
+                "ref": "supp.xls/Table S7/R14C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R14C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P18",
+              "score": {
+                "ref": "supp.xls/Table S7/R18C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R18C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P19",
+              "score": {
+                "ref": "supp.xls/Table S7/R19C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R19C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P23",
+              "score": {
+                "ref": "supp.xls/Table S7/R22C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R22C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P25",
+              "score": {
+                "ref": "supp.xls/Table S7/R24C4"
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R24C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            }
+          ],
+          "blocked_reason": null
+        },
+        "notes": [
+          "AUC=0.850 reported for FOLFOX ROC in article:p31. Table S7 provides individual IC50 and response for 13 FOLFOX patients. Higher IC50 predicts PD (truth=1). n=13 (8 SD/PR, 5 PD). Computed AUC matches 0.85."
+        ]
+      }
+    }
+  }
+]

@@ -1,0 +1,369 @@
+[
+  {
+    "name": "initial_code",
+    "output": {
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "seconds": 2.7250891249859706,
+      "peak_rss_bytes": 29900800,
+      "limit_error": null,
+      "code_sha256": "03ab09a0b4718b209fefb516e8e3758c2844bb51d5b34d54f723f275d18c815f",
+      "contract": {
+        "status": "blocked",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p2",
+              "article:p9"
+            ],
+            "explanation": "Each validation record is one patient represented by one PDO line."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p8",
+              "article:p14"
+            ],
+            "explanation": "Responses were measured in patient-derived organoids."
+          },
+          "readout": {
+            "value": "auc",
+            "evidence": [
+              "article:p15",
+              "article:p17"
+            ],
+            "explanation": "The assay predictor was AUCrel from the FLOT dose-response curve."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p16"
+            ],
+            "explanation": "Lower AUCrel indicated greater FLOT sensitivity and pathological response."
+          },
+          "threshold_rule": {
+            "value": "fixed_numeric",
+            "evidence": [
+              "article:p17",
+              "article:p15"
+            ],
+            "explanation": "The prespecified validation cutoff was AUCthreshold=0.559."
+          },
+          "threshold_timing": {
+            "value": "independent_reference",
+            "evidence": [
+              "article:p9",
+              "article:p17",
+              "article:p18"
+            ],
+            "explanation": "The threshold was fitted using the first 13 exploratory PDOs and evaluated in the next 13 independent PDOs."
+          },
+          "patient_mapping": {
+            "value": "partial",
+            "evidence": [
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R18C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R19C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R20C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R21C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R22C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R23C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R24C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R25C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R26C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R27C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R28C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R29C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R18C8",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R19C8",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R20C8",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R21C8",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R22C8",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R23C8",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R24C8",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R25C8",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R26C8",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R27C8",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R28C8",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R29C8"
+            ],
+            "explanation": "Validation patient IDs and pathological outcomes are individually available, but row-level assay scores are not present in the structured tables."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p9",
+              "article:p14",
+              "article:p18"
+            ],
+            "explanation": "Assay FLOT exposure was compared with pathological response after clinical neoadjuvant FLOT."
+          },
+          "n_units": {
+            "value": 13,
+            "evidence": [
+              "article:p18",
+              "article:p2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R18C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R19C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R20C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R21C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R22C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R23C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R24C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R25C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R26C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R27C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R28C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R29C2"
+            ],
+            "explanation": "The exact validation denominator was 13 patients/PDO lines."
+          },
+          "split": {
+            "value": "independent_test",
+            "evidence": [
+              "article:p9",
+              "article:p18"
+            ],
+            "explanation": "Threshold derivation and accuracy evaluation used separate exploratory and validation cohorts."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.9230769230769231,
+          "reported_evidence": [
+            "article:p18",
+            "article:p3"
+          ],
+          "threshold": 0.559,
+          "op": "<=",
+          "score_direction": "lower",
+          "records": [
+            {
+              "id": "OO87",
+              "score": null,
+              "truth": {
+                "ref": "12943_2023_1919_MOESM1_ESM.docx/table2/R18C8",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              },
+              "missing_score_ref": "vision/12943_2023_1919_Fig2_HTML.jpg/panelI/validation_1",
+              "evidence": [
+                "12943_2023_1919_MOESM1_ESM.docx/table2/R18C2",
+                "12943_2023_1919_MOESM1_ESM.docx/table2/R18C8"
+              ]
+            },
+            {
+              "id": "OO88",
+              "score": null,
+              "truth": {
+                "ref": "12943_2023_1919_MOESM1_ESM.docx/table2/R19C8",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              },
+              "missing_score_ref": "vision/12943_2023_1919_Fig2_HTML.jpg/panelI/validation_2",
+              "evidence": [
+                "12943_2023_1919_MOESM1_ESM.docx/table2/R19C2",
+                "12943_2023_1919_MOESM1_ESM.docx/table2/R19C8"
+              ]
+            },
+            {
+              "id": "OO90",
+              "score": null,
+              "truth": {
+                "ref": "12943_2023_1919_MOESM1_ESM.docx/table2/R20C8",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              },
+              "missing_score_ref": "vision/12943_2023_1919_Fig2_HTML.jpg/panelI/validation_3",
+              "evidence": [
+                "12943_2023_1919_MOESM1_ESM.docx/table2/R20C2",
+                "12943_2023_1919_MOESM1_ESM.docx/table2/R20C8"
+              ]
+            },
+            {
+              "id": "OO95",
+              "score": null,
+              "truth": {
+                "ref": "12943_2023_1919_MOESM1_ESM.docx/table2/R21C8",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              },
+              "missing_score_ref": "vision/12943_2023_1919_Fig2_HTML.jpg/panelI/validation_4",
+              "evidence": [
+                "12943_2023_1919_MOESM1_ESM.docx/table2/R21C2",
+                "12943_2023_1919_MOESM1_ESM.docx/table2/R21C8"
+              ]
+            },
+            {
+              "id": "OO98",
+              "score": null,
+              "truth": {
+                "ref": "12943_2023_1919_MOESM1_ESM.docx/table2/R22C8",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              },
+              "missing_score_ref": "vision/12943_2023_1919_Fig2_HTML.jpg/panelI/validation_5",
+              "evidence": [
+                "12943_2023_1919_MOESM1_ESM.docx/table2/R22C2",
+                "12943_2023_1919_MOESM1_ESM.docx/table2/R22C8"
+              ]
+            },
+            {
+              "id": "OO99",
+              "score": null,
+              "truth": {
+                "ref": "12943_2023_1919_MOESM1_ESM.docx/table2/R23C8",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              },
+              "missing_score_ref": "vision/12943_2023_1919_Fig2_HTML.jpg/panelI/validation_6",
+              "evidence": [
+                "12943_2023_1919_MOESM1_ESM.docx/table2/R23C2",
+                "12943_2023_1919_MOESM1_ESM.docx/table2/R23C8"
+              ]
+            },
+            {
+              "id": "OO100",
+              "score": null,
+              "truth": {
+                "ref": "12943_2023_1919_MOESM1_ESM.docx/table2/R24C8",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              },
+              "missing_score_ref": "vision/12943_2023_1919_Fig2_HTML.jpg/panelI/validation_7",
+              "evidence": [
+                "12943_2023_1919_MOESM1_ESM.docx/table2/R24C2",
+                "12943_2023_1919_MOESM1_ESM.docx/table2/R24C8"
+              ]
+            },
+            {
+              "id": "OO103",
+              "score": null,
+              "truth": {
+                "ref": "12943_2023_1919_MOESM1_ESM.docx/table2/R25C8",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              },
+              "missing_score_ref": "vision/12943_2023_1919_Fig2_HTML.jpg/panelI/validation_8",
+              "evidence": [
+                "12943_2023_1919_MOESM1_ESM.docx/table2/R25C2",
+                "12943_2023_1919_MOESM1_ESM.docx/table2/R25C8"
+              ]
+            },
+            {
+              "id": "OO106",
+              "score": null,
+              "truth": {
+                "ref": "12943_2023_1919_MOESM1_ESM.docx/table2/R26C8",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              },
+              "missing_score_ref": "vision/12943_2023_1919_Fig2_HTML.jpg/panelI/validation_9",
+              "evidence": [
+                "12943_2023_1919_MOESM1_ESM.docx/table2/R26C2",
+                "12943_2023_1919_MOESM1_ESM.docx/table2/R26C8"
+              ]
+            },
+            {
+              "id": "OO113",
+              "score": null,
+              "truth": {
+                "ref": "12943_2023_1919_MOESM1_ESM.docx/table2/R27C8",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              },
+              "missing_score_ref": "vision/12943_2023_1919_Fig2_HTML.jpg/panelI/validation_10",
+              "evidence": [
+                "12943_2023_1919_MOESM1_ESM.docx/table2/R27C2",
+                "12943_2023_1919_MOESM1_ESM.docx/table2/R27C8"
+              ]
+            },
+            {
+              "id": "OO116",
+              "score": null,
+              "truth": {
+                "ref": "12943_2023_1919_MOESM1_ESM.docx/table2/R28C8",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              },
+              "missing_score_ref": "vision/12943_2023_1919_Fig2_HTML.jpg/panelI/validation_11",
+              "evidence": [
+                "12943_2023_1919_MOESM1_ESM.docx/table2/R28C2",
+                "12943_2023_1919_MOESM1_ESM.docx/table2/R28C8"
+              ]
+            },
+            {
+              "id": "OO118",
+              "score": null,
+              "truth": {
+                "ref": "12943_2023_1919_MOESM1_ESM.docx/table2/R29C8",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              },
+              "missing_score_ref": "vision/12943_2023_1919_Fig2_HTML.jpg/panelI/validation_12",
+              "evidence": [
+                "12943_2023_1919_MOESM1_ESM.docx/table2/R29C2",
+                "12943_2023_1919_MOESM1_ESM.docx/table2/R29C8"
+              ]
+            }
+          ],
+          "blocked_reason": "The source text reports 12/13 correct validations, but the required independently identifiable row-level FLOT AUCrel scores or threshold classifications for the 13 validation patients exist only in Fig. 2I and have not been transcribed through read_figure. Supplementary Table 2 supplies individual outcomes but not assay predictions. Entering a score for any patient would invent the missing assay observation."
+        },
+        "notes": [
+          "The published rounded accuracy is 92%; the exact fraction is 12/13=0.9230769230769231.",
+          "The 39 exploratory ROC observations are three assay replicates for each of 13 exploratory PDOs and are not validation patients.",
+          "Three assay replicates per PDO must not be counted as three patients."
+        ]
+      }
+    }
+  }
+]

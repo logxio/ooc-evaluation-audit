@@ -1,0 +1,20 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "{\n  \"columns\": [\n    \"Best RECIST response\",\n    \"normalized – GRAUC individual points\",\n    \"box plot (min / Q1 / median / Q3 / max)\"\n  ],\n  \"legend\": {},\n  \"rows\": [\n    [\n      \"PR\",\n      \"0.02, 0.18, 0.20, 0.21, 0.27, 0.46, 0.54, 0.54, 0.57, 0.68\",\n      \"0.02 / 0.20 / 0.50 / 0.55 / 0.68\"\n    ],\n    [\n      \"SD\",\n      \"0.28, 0.30, 0.38, 0.45, 0.55, 0.60, 1.00\",\n      \"0.28 / 0.34 / 0.45 / 0.58 / 0.60; separate point at 1.00\"\n    ],\n    [\n      \"PD\",\n      \"0.59, 0.61, 0.69, 0.77, 0.81, 0.83\",\n      \"0.59 / 0.62 / 0.73 / 0.80 / 0.83\"\n    ]\n  ],\n  \"uncertain\": [\n    [1, 1],\n    [1, 2],\n    [2, 1],\n    [2, 2],\n    [3, 1],\n    [3, 2]\n  ],\n  \"notes\": \"Values are approximate readings from the plot. Title: PDO (GR) vs patient response. p = 0.006 is displayed. Black dots are individual observations.\"\n}"
+  },
+  "reasoning_content": "We need need transcribe figure.  I'm currently working on the transcription of a figure titled \"PDO (GR) vs patient response\" with a p-value of 0.006. The y-axis is normalized-GRAUC with ticks at 0, 0.25, 0.5, 0.75, and the x-axis tracks PR, SD, PD. I've sorted out the approximate values of 10 scatter points and preliminary box plot statistics, and will continue to verify the accuracy of the relevant data. I've finished sorting out the scatter point and box plot statistics for the SD category, confirmed the outlier value of 1.00, and locked the corresponding y-axis range of the SD category's box plot.\n\nI've finished sorting out the scatter point and box plot statistics for the PD category, including 6 scatter points, box quartiles and whisker ranges. I also worked out the basic framework for structuring the response and value data columns.\n\nI've finalized the column structure for the required table, and will mark all related values as uncertain due to visual limitations. I've also confirmed that the PR category's scatter points are 10 in total, with box plot statistics of min 0.02, Q1 0.20, median 0.50, Q3 0.55 and max 0.68, and verified that its highest scatter point aligns with the whisker top.\n\nI’ve verified the PR Q1 value is correct, confirmed the structure of the two remaining categories’ box plots, finalized the table’s column framework, set all values as approximate, added relevant notes, and will output the raw JSON directly without extra markdown formatting.\n",
+  "finish_reason": "stop",
+  "usage": {
+    "completion_tokens": 1800,
+    "prompt_tokens": 1607,
+    "total_tokens": 3407,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 1353
+    }
+  }
+}

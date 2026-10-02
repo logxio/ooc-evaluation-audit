@@ -1,0 +1,20 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "{\"columns\":[\"LC131-O\",\"LC101-O\",\"LC127-O\",\"LC128-O\",\"LC129-O\",\"LC100-O\",\"LC124-O\",\"LC126-O\",\"LC133-O\",\"LC132-O\",\"LC130-O\",\"LC95-O\",\"LC96-O\",\"LC137-O\",\"LC134-O\",\"LC97-O\"],\"legend\":{},\"rows\":[[\"red\",\"red\",\"red\",\"light pink\",\"red\",\"light pink\",\"dark blue\",\"pale pink\",\"blue\",\"red\",\"light pink\",\"olive yellow\",\"red\",\"red\",\"red\",\"red\"]],\"uncertain\":[],\"notes\":\"Only a cropped heatmap strip is visible; no colour legend or row labels are visible. Partial header text including 'A' and 'S' and a partial coloured cell appear at the cropped edges.\"}"
+  },
+  "reasoning_content": "We need need transcribe visible. Current image has issues like rotated text and cropped content. I will transcribe visible text and colors without inventing any content. I've sorted out the list of column labels in left-to-right reading order. No legend is visible, so I'll use color names to describe the colored cells. I've confirmed the column labels are horizontal and upright, and I'm adjusting my previous assumption on the label orientation.\n\nI've confirmed the gray block at the far left is a row annotation, the 16 labels above the color blocks are heatmap column identifiers, and I will output the corresponding color information for each column as JSON.\n\nI've finished mapping all 16 valid color blocks to their corresponding identifiers, identified the partial cropped area at the top right and excluded it from the output, and confirmed the JSON will be valid with all uncertain color descriptions clearly marked.\n",
+  "finish_reason": "stop",
+  "usage": {
+    "completion_tokens": 1098,
+    "prompt_tokens": 1559,
+    "total_tokens": 2657,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 903
+    }
+  }
+}

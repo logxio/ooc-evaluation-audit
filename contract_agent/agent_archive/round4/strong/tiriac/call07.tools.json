@@ -1,0 +1,9 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "chemo=get_rows('supp.xlsx','Chemo ')\nfor col,drug in [(2,'gem'),(3,'pac'),(4,'sn38'),(5,'5fu'),(6,'oxa')]:\n    vals=sorted(float(r[col-1]) for r in chemo[2:] if isinstance(r[col-1],(int,float)))\n    print(drug,len(vals),'33 cutoff index22',vals[21],vals[22], '34 high cutoff', vals[-23], vals[-22])\n    for id in ['hF31','hF2','hM1A','hF57','hF44','hF23','hF50','hF3','hF28']:\n        row=next(r for r in chemo if r[0]==id)\n        v=row[col-1]\n        if isinstance(v,(int,float)):\n            rank=sum(x<=v for x in vals)\n            print(id,v,'rank',rank, 'S' if rank<=22 else 'R' if rank>=44 else 'I')\n    print()\n"
+    },
+    "output_sha256": "2abaca2ce21adc8a8b21ee457fe57007938fb2724f57574dd571886400d0fcbb"
+  }
+]

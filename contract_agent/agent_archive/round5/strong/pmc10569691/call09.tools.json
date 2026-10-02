@@ -1,0 +1,232 @@
+[
+  {
+    "name": "finish",
+    "arguments": {
+      "contract": {
+        "status": "blocked",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p34"
+            ],
+            "explanation": "The published analysis correlates one EVOC result with one patient's clinical outcome across 34 patients."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p4",
+              "article:p9"
+            ],
+            "explanation": "The assay is an ex vivo organ culture (EVOC) of tumor slices preserving the tumor microenvironment."
+          },
+          "readout": {
+            "value": "viability",
+            "evidence": [
+              "article:p17"
+            ],
+            "explanation": "The EVOC score combines cancer-cell viability, tissue damage, and Ki67 proliferation; 100 indicates no viable cancer cells."
+          },
+          "direction": {
+            "value": "higher_sensitive",
+            "evidence": [
+              "article:p34",
+              "article:p37"
+            ],
+            "explanation": "Higher EVOC scores predict better clinical response; scores at least 45 are predicted responses."
+          },
+          "threshold_rule": {
+            "value": "fixed_numeric",
+            "evidence": [
+              "article:p17",
+              "article:p37"
+            ],
+            "explanation": "A fixed EVOC score threshold of 45 separates predicted responders from non-responders."
+          },
+          "threshold_timing": {
+            "value": "independent_reference",
+            "evidence": [
+              "article:p17"
+            ],
+            "explanation": "The coefficients and 45 threshold were based on a historical MIBC training set, not fitted on the 34 evaluated patients."
+          },
+          "patient_mapping": {
+            "value": "partial",
+            "evidence": [
+              "article.xml/Table 1/R1C2",
+              "article.xml/Table 2/R1C1",
+              "article:p34"
+            ],
+            "explanation": "Tables 1 and 2 identify 32 patient-level assay/outcome rows, but the published combined analysis contains 34 patients."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article.xml/Table 1/R1C4",
+              "article.xml/Table 2/R1C3",
+              "article:p4"
+            ],
+            "explanation": "The EVOC treatment listed for each patient is the intended therapy subsequently received."
+          },
+          "n_units": {
+            "value": 34,
+            "evidence": [
+              "article:p34",
+              "article:p35"
+            ],
+            "explanation": "The reported combined cohort denominator is 34: 16 MIBC and 18 other-cancer biopsy patients."
+          },
+          "split": {
+            "value": "independent_test",
+            "evidence": [
+              "article:p10",
+              "article:p17"
+            ],
+            "explanation": "The prospective observational cohort was evaluated using a threshold derived from a separate historical training set."
+          }
+        },
+        "headline": {
+          "metric": "specificity",
+          "reported": 0.7777777777777778,
+          "reported_evidence": [
+            "article:p34",
+            "article:p35",
+            "article:p5"
+          ],
+          "threshold": 45,
+          "op": ">=",
+          "score_direction": "higher",
+          "records": [],
+          "blocked_reason": "The exact 34-patient row-level comparison cannot be reconstructed. The article and Figure 4 report 34 patients with 9 clinical non-responders and specificity 7/9, but the available tables contain only 32 identifiable patient rows: 14 rows in article.xml/Table 1 despite the text reporting 16 MIBC patients, and 18 rows in article.xml/Table 2. The two missing MIBC rows have no independently identifiable patient ID, EVOC-score cell, and clinical-outcome cell. Figure 4C shows points but does not identify the two missing patients or their scores, so adding them would require inventing observations."
+        },
+        "notes": [
+          "Published aggregate specificity is 7 true-negative predictions out of 9 clinical non-responders (NR or PD), equal to 0.7777777777777778.",
+          "Clinical response is defined in the source as NR/PD = non-response and SD/PR/CR = response.",
+          "Aggregate confusion-matrix counts alone are insufficient for the required 34 source-bound patient-level records."
+        ]
+      }
+    },
+    "output": {
+      "contract": {
+        "status": "blocked",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p34"
+            ],
+            "explanation": "The published analysis correlates one EVOC result with one patient's clinical outcome across 34 patients."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p4",
+              "article:p9"
+            ],
+            "explanation": "The assay is an ex vivo organ culture (EVOC) of tumor slices preserving the tumor microenvironment."
+          },
+          "readout": {
+            "value": "viability",
+            "evidence": [
+              "article:p17"
+            ],
+            "explanation": "The EVOC score combines cancer-cell viability, tissue damage, and Ki67 proliferation; 100 indicates no viable cancer cells."
+          },
+          "direction": {
+            "value": "higher_sensitive",
+            "evidence": [
+              "article:p34",
+              "article:p37"
+            ],
+            "explanation": "Higher EVOC scores predict better clinical response; scores at least 45 are predicted responses."
+          },
+          "threshold_rule": {
+            "value": "fixed_numeric",
+            "evidence": [
+              "article:p17",
+              "article:p37"
+            ],
+            "explanation": "A fixed EVOC score threshold of 45 separates predicted responders from non-responders."
+          },
+          "threshold_timing": {
+            "value": "independent_reference",
+            "evidence": [
+              "article:p17"
+            ],
+            "explanation": "The coefficients and 45 threshold were based on a historical MIBC training set, not fitted on the 34 evaluated patients."
+          },
+          "patient_mapping": {
+            "value": "partial",
+            "evidence": [
+              "article.xml/Table 1/R1C2",
+              "article.xml/Table 2/R1C1",
+              "article:p34"
+            ],
+            "explanation": "Tables 1 and 2 identify 32 patient-level assay/outcome rows, but the published combined analysis contains 34 patients."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article.xml/Table 1/R1C4",
+              "article.xml/Table 2/R1C3",
+              "article:p4"
+            ],
+            "explanation": "The EVOC treatment listed for each patient is the intended therapy subsequently received."
+          },
+          "n_units": {
+            "value": 34,
+            "evidence": [
+              "article:p34",
+              "article:p35"
+            ],
+            "explanation": "The reported combined cohort denominator is 34: 16 MIBC and 18 other-cancer biopsy patients."
+          },
+          "split": {
+            "value": "independent_test",
+            "evidence": [
+              "article:p10",
+              "article:p17"
+            ],
+            "explanation": "The prospective observational cohort was evaluated using a threshold derived from a separate historical training set."
+          }
+        },
+        "headline": {
+          "metric": "specificity",
+          "reported": 0.7777777777777778,
+          "reported_evidence": [
+            "article:p34",
+            "article:p35",
+            "article:p5"
+          ],
+          "threshold": 45,
+          "op": ">=",
+          "score_direction": "higher",
+          "records": [],
+          "blocked_reason": "The exact 34-patient row-level comparison cannot be reconstructed. The article and Figure 4 report 34 patients with 9 clinical non-responders and specificity 7/9, but the available tables contain only 32 identifiable patient rows: 14 rows in article.xml/Table 1 despite the text reporting 16 MIBC patients, and 18 rows in article.xml/Table 2. The two missing MIBC rows have no independently identifiable patient ID, EVOC-score cell, and clinical-outcome cell. Figure 4C shows points but does not identify the two missing patients or their scores, so adding them would require inventing observations."
+        },
+        "notes": [
+          "Published aggregate specificity is 7 true-negative predictions out of 9 clinical non-responders (NR or PD), equal to 0.7777777777777778.",
+          "Clinical response is defined in the source as NR/PD = non-response and SD/PR/CR = response.",
+          "Aggregate confusion-matrix counts alone are insufficient for the required 34 source-bound patient-level records."
+        ]
+      },
+      "execution_feedback": {
+        "matched": false,
+        "metric": "specificity",
+        "computed": null,
+        "reported": 0.7777777777777778,
+        "difference": null,
+        "n": 0,
+        "errors": [
+          "No source-bound observations: The exact 34-patient row-level comparison cannot be reconstructed. The article and Figure 4 report 34 patients with 9 clinical non-responders and specificity 7/9, but the available tables contain only 32 identifiable patient rows: 14 rows in article.xml/Table 1 despite the text reporting 16 MIBC patients, and 18 rows in article.xml/Table 2. The two missing MIBC rows have no independently identifiable patient ID, EVOC-score cell, and clinical-outcome cell. Figure 4C shows points but does not identify the two missing patients or their scores, so adding them would require inventing observations.",
+          "Expected 34 analysis units, got 0"
+        ],
+        "expected": {
+          "metric": "specificity",
+          "value": 0.7777777777777778,
+          "n": 34
+        }
+      }
+    }
+  }
+]

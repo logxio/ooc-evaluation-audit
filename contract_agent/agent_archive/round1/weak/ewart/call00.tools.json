@@ -1,0 +1,102 @@
+[
+  {
+    "name": "initial_code",
+    "output": {
+      "returncode": 0,
+      "stdout": "Supplementary Data 1 Header: [None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]\nRow 2: [None, 'Supplementary Data 1. Drug information and dosing concentrations', None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]\nRow 3: [None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]\nTable 6: [['Model', 'True positive', 'True negative', 'False positive', 'False negative', 'Sensitivity (%)', 'Specificity (%)'], ['Chip donor 1', '17', '5', '0', '5', '77 [56.1–89.8%]', '100'], ['Chip donor 2', '11', '3', '0', '4', '73 [47.5–89.0%]', '100'], ['Chip both donors', '13', '3', '0', '2', '87 [61.5–96.0%]', '100'], ['Spheroid', '9', '3', '0', '10', '47 [27.0–68.5%]', '100']]\nColumns: [None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]\nTable 4 Header: ['Drug', 'Chip MOS donor 1', 'Chip MOS donor 2', 'Chip MOS both donors', 'Spheroid MOS']\nTable 5 Header: ['Model', 'True positive', 'True negative', 'False positive', 'False negative', 'Sensitivity (%)', 'Specificity (%)']\nHeader lower: ['', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '', '']\nCols: Drug=None, Tox=None, D1=None, D2=None\nTable 1 Header: ['Drug', 'IQ MPS list', 'Tested in spheroid', 'Spheroid false negative', 'Garside DILI rank']\n['Drug', 'IQ MPS list', 'Tested in spheroid', 'Spheroid false negative', 'Garside DILI rank']\n['Ambrisentan', 'Yes, matched with Sitaxsentan', 'Yes', 'No', '5']\n['Asunaprevir', 'Yes, no matched pair', 'No', 'No', '2']\n['Benoxaprofen', 'No', 'Yes', 'Yes', '1']\n['Beta-Estradiol', 'No', 'Yes', 'Yes', '3']\n",
+      "stderr": "",
+      "seconds": 0.24546441601705737,
+      "peak_rss_bytes": 26034176,
+      "limit_error": null,
+      "code_sha256": "bb750aeea7d3d1c1011ea520adaecf93db557d85a250e61b82d2382f84d3026f",
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "drug",
+            "evidence": [
+              "article:p54"
+            ],
+            "explanation": "The headline refers to drug-level prediction performance."
+          },
+          "platform": {
+            "value": "perfused_chip",
+            "evidence": [
+              "article:p10"
+            ],
+            "explanation": "Liver-Chip is a perfused microphysiological system."
+          },
+          "readout": {
+            "value": "toxicity_margin",
+            "evidence": [
+              "article:p52"
+            ],
+            "explanation": "MOS-like figure based on albumin, ALT, and morphology."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p52"
+            ],
+            "explanation": "Lower MOS indicates toxicity."
+          },
+          "threshold_rule": {
+            "value": "roc_optimized",
+            "evidence": [
+              "article:p54"
+            ],
+            "explanation": "Threshold selected to maximize sensitivity while avoiding false positives."
+          },
+          "threshold_timing": {
+            "value": "outcome_optimized",
+            "evidence": [
+              "article:p54"
+            ],
+            "explanation": "Threshold selected on the same cohort to maximize sensitivity."
+          },
+          "patient_mapping": {
+            "value": "not_applicable",
+            "evidence": [],
+            "explanation": "Preclinical drug study, no patients."
+          },
+          "regimen_match": {
+            "value": "not_applicable",
+            "evidence": [],
+            "explanation": "In vitro drug testing."
+          },
+          "n_units": {
+            "value": 18,
+            "evidence": [
+              "article:p54",
+              "article.xml/Table 6/R4C1"
+            ],
+            "explanation": "18 drugs tested in both donors."
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p54"
+            ],
+            "explanation": "Threshold optimized on the same 18-drug set."
+          }
+        },
+        "headline": {
+          "metric": "sensitivity",
+          "reported": 0.8666666666666667,
+          "reported_evidence": [
+            "article:p54"
+          ],
+          "threshold": null,
+          "op": ">=",
+          "score_direction": "higher",
+          "records": [],
+          "blocked_reason": null
+        },
+        "notes": [
+          "Need to populate records with 18 drugs. Checking Supplementary Data 1 for individual drug outcomes.",
+          "Inspecting Table 1 and SD1 for drug list and outcomes."
+        ]
+      }
+    }
+  }
+]

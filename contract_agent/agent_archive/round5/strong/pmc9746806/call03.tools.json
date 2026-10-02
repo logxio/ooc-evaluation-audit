@@ -1,0 +1,705 @@
+[
+  {
+    "name": "finish",
+    "arguments": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p23",
+              "vision/a16269a12853/R1C1"
+            ],
+            "explanation": "The denominator consists of 11 donor-patient/PDO correlation cases, each identified by a unique HO organoid ID."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p23",
+              "article:p41"
+            ],
+            "explanation": "Drug sensitivity was measured in patient-derived gastrointestinal cancer organoids."
+          },
+          "readout": {
+            "value": "auc",
+            "evidence": [
+              "article:p41",
+              "vision/a16269a12853/R1C6"
+            ],
+            "explanation": "Most PDO responses were classified from normalized AUC using Jenks Natural Breaks; HO17 and HO42 were classified relative to published IC50 data."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p41"
+            ],
+            "explanation": "Lower AUC or IC50 indicated greater drug sensitivity."
+          },
+          "threshold_rule": {
+            "value": "cohort_quantile",
+            "evidence": [
+              "article:p41"
+            ],
+            "explanation": "Jenks Natural Breaks divided PDOs into sensitive, intermediate, or resistant categories within the compared drug group."
+          },
+          "threshold_timing": {
+            "value": "outcome_optimized",
+            "evidence": [
+              "article:p41"
+            ],
+            "explanation": "The Jenks categories were derived from the PDO AUC values under evaluation rather than from an independent cohort."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "vision/a16269a12853/R1C1",
+              "vision/a16269a12853/R1C4",
+              "vision/a16269a12853/R1C6"
+            ],
+            "explanation": "Table 1 provides each patient/PDO identifier, RECIST outcome, tested organoid treatment, and organoid response category."
+          },
+          "regimen_match": {
+            "value": "partial",
+            "evidence": [
+              "article:p41",
+              "vision/a16269a12853/R3C3",
+              "vision/a16269a12853/R3C5",
+              "vision/a16269a12853/R6C3",
+              "vision/a16269a12853/R6C5"
+            ],
+            "explanation": "PDOs generally received the patient's therapy, but the article documents unavailable-drug substitutions and the exceptional HO20 treatment sequence."
+          },
+          "n_units": {
+            "value": 11,
+            "evidence": [
+              "article:p23",
+              "vision/a16269a12853/R1C1",
+              "vision/a16269a12853/R17C1"
+            ],
+            "explanation": "There were 11 evaluable paired patient/PDO cases."
+          },
+          "split": {
+            "value": "none",
+            "evidence": [
+              "article:p23",
+              "article:p41"
+            ],
+            "explanation": "This was a retrospective paired agreement analysis, not a held-out cohort or cross-validated predictive-model test."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.8181818181818182,
+          "reported_evidence": [
+            "article:p23",
+            "article:p24",
+            "article:p28"
+          ],
+          "explanation": "The article states that 9 of 11 PDO responses were consistent with donor-patient RECIST responses; the two mismatches were HO42 and HO140.",
+          "threshold": null,
+          "op": "==",
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "HO17",
+              "score": {
+                "refs": [
+                  "vision/a16269a12853/R1C6",
+                  "vision/a16269a12853/R2C6"
+                ],
+                "aggregate": "min",
+                "map": {
+                  "Sensitive": 0,
+                  "Intermediate": 1,
+                  "Resistant": 2
+                }
+              },
+              "truth": {
+                "ref": "vision/a16269a12853/R1C4",
+                "map": {
+                  "PR": 0,
+                  "SD": 1,
+                  "PD": 2
+                }
+              }
+            },
+            {
+              "id": "HO42",
+              "score": {
+                "ref": "vision/a16269a12853/R3C6",
+                "map": {
+                  "Sensitive": 0,
+                  "Intermediate": 1,
+                  "Resistant": 2
+                }
+              },
+              "truth": {
+                "ref": "vision/a16269a12853/R3C4",
+                "map": {
+                  "PR": 0,
+                  "SD": 1,
+                  "PD": 2
+                }
+              }
+            },
+            {
+              "id": "HO107",
+              "score": {
+                "refs": [
+                  "vision/a16269a12853/R4C6",
+                  "vision/a16269a12853/R5C6"
+                ],
+                "aggregate": "min",
+                "map": {
+                  "Sensitive": 0,
+                  "Intermediate": 1,
+                  "Resistant": 2
+                }
+              },
+              "truth": {
+                "ref": "vision/a16269a12853/R4C4",
+                "map": {
+                  "PR": 0,
+                  "SD": 1,
+                  "PD": 2
+                }
+              }
+            },
+            {
+              "id": "HO20",
+              "score": {
+                "refs": [
+                  "vision/a16269a12853/R6C6",
+                  "vision/a16269a12853/R7C6"
+                ],
+                "aggregate": "min",
+                "map": {
+                  "Sensitive": 0,
+                  "Intermediate": 1,
+                  "Resistant": 2
+                }
+              },
+              "truth": {
+                "ref": "vision/a16269a12853/R6C4",
+                "map": {
+                  "PR": 0,
+                  "SD": 1,
+                  "PD": 2
+                }
+              }
+            },
+            {
+              "id": "HO46",
+              "score": {
+                "ref": "vision/a16269a12853/R8C6",
+                "map": {
+                  "Sensitive": 0,
+                  "Intermediate": 1,
+                  "Resistant": 2
+                }
+              },
+              "truth": {
+                "ref": "vision/a16269a12853/R8C4",
+                "map": {
+                  "PR": 0,
+                  "SD": 1,
+                  "PD": 2
+                }
+              }
+            },
+            {
+              "id": "HO98",
+              "score": {
+                "ref": "vision/a16269a12853/R9C6",
+                "map": {
+                  "Sensitive": 0,
+                  "Intermediate": 1,
+                  "Resistant": 2
+                }
+              },
+              "truth": {
+                "ref": "vision/a16269a12853/R9C4",
+                "map": {
+                  "PR": 0,
+                  "SD": 1,
+                  "PD": 2
+                }
+              }
+            },
+            {
+              "id": "HO90",
+              "score": {
+                "ref": "vision/a16269a12853/R10C6",
+                "map": {
+                  "Sensitive": 0,
+                  "Intermediate": 1,
+                  "Resistant": 2
+                }
+              },
+              "truth": {
+                "ref": "vision/a16269a12853/R10C4",
+                "map": {
+                  "PR": 0,
+                  "SD": 1,
+                  "PD": 2
+                }
+              }
+            },
+            {
+              "id": "HO123",
+              "score": {
+                "ref": "vision/a16269a12853/R11C6",
+                "map": {
+                  "Sensitive": 0,
+                  "Intermediate": 1,
+                  "Resistant": 2
+                }
+              },
+              "truth": {
+                "ref": "vision/a16269a12853/R11C4",
+                "map": {
+                  "PR": 0,
+                  "SD": 1,
+                  "PD": 2
+                }
+              }
+            },
+            {
+              "id": "HO127",
+              "score": {
+                "refs": [
+                  "vision/a16269a12853/R12C6",
+                  "vision/a16269a12853/R13C6"
+                ],
+                "aggregate": "min",
+                "map": {
+                  "Sensitive": 0,
+                  "Intermediate": 1,
+                  "Resistant": 2
+                }
+              },
+              "truth": {
+                "ref": "vision/a16269a12853/R12C4",
+                "map": {
+                  "PR": 0,
+                  "SD": 1,
+                  "PD": 2
+                }
+              }
+            },
+            {
+              "id": "HO140",
+              "score": {
+                "refs": [
+                  "vision/a16269a12853/R14C6",
+                  "vision/a16269a12853/R15C6",
+                  "vision/a16269a12853/R16C6"
+                ],
+                "aggregate": "min",
+                "map": {
+                  "Sensitive": 0,
+                  "Intermediate": 1,
+                  "Resistant": 2
+                }
+              },
+              "truth": {
+                "ref": "vision/a16269a12853/R14C4",
+                "map": {
+                  "PR": 0,
+                  "SD": 1,
+                  "PD": 2
+                }
+              }
+            },
+            {
+              "id": "HO106",
+              "score": {
+                "ref": "vision/a16269a12853/R17C6",
+                "map": {
+                  "Sensitive": 0,
+                  "Intermediate": 1,
+                  "Resistant": 2
+                }
+              },
+              "truth": {
+                "ref": "vision/a16269a12853/R17C4",
+                "map": {
+                  "PR": 0,
+                  "SD": 1,
+                  "PD": 2
+                }
+              }
+            }
+          ]
+        },
+        "notes": [
+          "The numeric ordinal encoding preserves source order (Sensitive/PR=0, Intermediate/SD=1, Resistant/PD=2), but the published accuracy is not simple three-class equality. Article p41 specifies the agreement rule: PR requires sensitive; SD requires sensitive or intermediate; PD requires intermediate or resistant; with multiple drugs, sensitivity to any tested drug determines a match.",
+          "Applying the published rule gives matches for HO17, HO107, HO20, HO46, HO98, HO90, HO123, HO127, and HO106, and mismatches for HO42 and HO140: 9/11 = 0.8181818181818182."
+        ]
+      }
+    },
+    "output": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p23",
+              "vision/a16269a12853/R1C1"
+            ],
+            "explanation": "The denominator consists of 11 donor-patient/PDO correlation cases, each identified by a unique HO organoid ID."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p23",
+              "article:p41"
+            ],
+            "explanation": "Drug sensitivity was measured in patient-derived gastrointestinal cancer organoids."
+          },
+          "readout": {
+            "value": "auc",
+            "evidence": [
+              "article:p41",
+              "vision/a16269a12853/R1C6"
+            ],
+            "explanation": "Most PDO responses were classified from normalized AUC using Jenks Natural Breaks; HO17 and HO42 were classified relative to published IC50 data."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p41"
+            ],
+            "explanation": "Lower AUC or IC50 indicated greater drug sensitivity."
+          },
+          "threshold_rule": {
+            "value": "cohort_quantile",
+            "evidence": [
+              "article:p41"
+            ],
+            "explanation": "Jenks Natural Breaks divided PDOs into sensitive, intermediate, or resistant categories within the compared drug group."
+          },
+          "threshold_timing": {
+            "value": "outcome_optimized",
+            "evidence": [
+              "article:p41"
+            ],
+            "explanation": "The Jenks categories were derived from the PDO AUC values under evaluation rather than from an independent cohort."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "vision/a16269a12853/R1C1",
+              "vision/a16269a12853/R1C4",
+              "vision/a16269a12853/R1C6"
+            ],
+            "explanation": "Table 1 provides each patient/PDO identifier, RECIST outcome, tested organoid treatment, and organoid response category."
+          },
+          "regimen_match": {
+            "value": "partial",
+            "evidence": [
+              "article:p41",
+              "vision/a16269a12853/R3C3",
+              "vision/a16269a12853/R3C5",
+              "vision/a16269a12853/R6C3",
+              "vision/a16269a12853/R6C5"
+            ],
+            "explanation": "PDOs generally received the patient's therapy, but the article documents unavailable-drug substitutions and the exceptional HO20 treatment sequence."
+          },
+          "n_units": {
+            "value": 11,
+            "evidence": [
+              "article:p23",
+              "vision/a16269a12853/R1C1",
+              "vision/a16269a12853/R17C1"
+            ],
+            "explanation": "There were 11 evaluable paired patient/PDO cases."
+          },
+          "split": {
+            "value": "none",
+            "evidence": [
+              "article:p23",
+              "article:p41"
+            ],
+            "explanation": "This was a retrospective paired agreement analysis, not a held-out cohort or cross-validated predictive-model test."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.8181818181818182,
+          "reported_evidence": [
+            "article:p23",
+            "article:p24",
+            "article:p28"
+          ],
+          "explanation": "The article states that 9 of 11 PDO responses were consistent with donor-patient RECIST responses; the two mismatches were HO42 and HO140.",
+          "threshold": null,
+          "op": "==",
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "HO17",
+              "score": {
+                "refs": [
+                  "vision/a16269a12853/R1C6",
+                  "vision/a16269a12853/R2C6"
+                ],
+                "aggregate": "min",
+                "map": {
+                  "Sensitive": 0,
+                  "Intermediate": 1,
+                  "Resistant": 2
+                }
+              },
+              "truth": {
+                "ref": "vision/a16269a12853/R1C4",
+                "map": {
+                  "PR": 0,
+                  "SD": 1,
+                  "PD": 2
+                }
+              }
+            },
+            {
+              "id": "HO42",
+              "score": {
+                "ref": "vision/a16269a12853/R3C6",
+                "map": {
+                  "Sensitive": 0,
+                  "Intermediate": 1,
+                  "Resistant": 2
+                }
+              },
+              "truth": {
+                "ref": "vision/a16269a12853/R3C4",
+                "map": {
+                  "PR": 0,
+                  "SD": 1,
+                  "PD": 2
+                }
+              }
+            },
+            {
+              "id": "HO107",
+              "score": {
+                "refs": [
+                  "vision/a16269a12853/R4C6",
+                  "vision/a16269a12853/R5C6"
+                ],
+                "aggregate": "min",
+                "map": {
+                  "Sensitive": 0,
+                  "Intermediate": 1,
+                  "Resistant": 2
+                }
+              },
+              "truth": {
+                "ref": "vision/a16269a12853/R4C4",
+                "map": {
+                  "PR": 0,
+                  "SD": 1,
+                  "PD": 2
+                }
+              }
+            },
+            {
+              "id": "HO20",
+              "score": {
+                "refs": [
+                  "vision/a16269a12853/R6C6",
+                  "vision/a16269a12853/R7C6"
+                ],
+                "aggregate": "min",
+                "map": {
+                  "Sensitive": 0,
+                  "Intermediate": 1,
+                  "Resistant": 2
+                }
+              },
+              "truth": {
+                "ref": "vision/a16269a12853/R6C4",
+                "map": {
+                  "PR": 0,
+                  "SD": 1,
+                  "PD": 2
+                }
+              }
+            },
+            {
+              "id": "HO46",
+              "score": {
+                "ref": "vision/a16269a12853/R8C6",
+                "map": {
+                  "Sensitive": 0,
+                  "Intermediate": 1,
+                  "Resistant": 2
+                }
+              },
+              "truth": {
+                "ref": "vision/a16269a12853/R8C4",
+                "map": {
+                  "PR": 0,
+                  "SD": 1,
+                  "PD": 2
+                }
+              }
+            },
+            {
+              "id": "HO98",
+              "score": {
+                "ref": "vision/a16269a12853/R9C6",
+                "map": {
+                  "Sensitive": 0,
+                  "Intermediate": 1,
+                  "Resistant": 2
+                }
+              },
+              "truth": {
+                "ref": "vision/a16269a12853/R9C4",
+                "map": {
+                  "PR": 0,
+                  "SD": 1,
+                  "PD": 2
+                }
+              }
+            },
+            {
+              "id": "HO90",
+              "score": {
+                "ref": "vision/a16269a12853/R10C6",
+                "map": {
+                  "Sensitive": 0,
+                  "Intermediate": 1,
+                  "Resistant": 2
+                }
+              },
+              "truth": {
+                "ref": "vision/a16269a12853/R10C4",
+                "map": {
+                  "PR": 0,
+                  "SD": 1,
+                  "PD": 2
+                }
+              }
+            },
+            {
+              "id": "HO123",
+              "score": {
+                "ref": "vision/a16269a12853/R11C6",
+                "map": {
+                  "Sensitive": 0,
+                  "Intermediate": 1,
+                  "Resistant": 2
+                }
+              },
+              "truth": {
+                "ref": "vision/a16269a12853/R11C4",
+                "map": {
+                  "PR": 0,
+                  "SD": 1,
+                  "PD": 2
+                }
+              }
+            },
+            {
+              "id": "HO127",
+              "score": {
+                "refs": [
+                  "vision/a16269a12853/R12C6",
+                  "vision/a16269a12853/R13C6"
+                ],
+                "aggregate": "min",
+                "map": {
+                  "Sensitive": 0,
+                  "Intermediate": 1,
+                  "Resistant": 2
+                }
+              },
+              "truth": {
+                "ref": "vision/a16269a12853/R12C4",
+                "map": {
+                  "PR": 0,
+                  "SD": 1,
+                  "PD": 2
+                }
+              }
+            },
+            {
+              "id": "HO140",
+              "score": {
+                "refs": [
+                  "vision/a16269a12853/R14C6",
+                  "vision/a16269a12853/R15C6",
+                  "vision/a16269a12853/R16C6"
+                ],
+                "aggregate": "min",
+                "map": {
+                  "Sensitive": 0,
+                  "Intermediate": 1,
+                  "Resistant": 2
+                }
+              },
+              "truth": {
+                "ref": "vision/a16269a12853/R14C4",
+                "map": {
+                  "PR": 0,
+                  "SD": 1,
+                  "PD": 2
+                }
+              }
+            },
+            {
+              "id": "HO106",
+              "score": {
+                "ref": "vision/a16269a12853/R17C6",
+                "map": {
+                  "Sensitive": 0,
+                  "Intermediate": 1,
+                  "Resistant": 2
+                }
+              },
+              "truth": {
+                "ref": "vision/a16269a12853/R17C4",
+                "map": {
+                  "PR": 0,
+                  "SD": 1,
+                  "PD": 2
+                }
+              }
+            }
+          ]
+        },
+        "notes": [
+          "The numeric ordinal encoding preserves source order (Sensitive/PR=0, Intermediate/SD=1, Resistant/PD=2), but the published accuracy is not simple three-class equality. Article p41 specifies the agreement rule: PR requires sensitive; SD requires sensitive or intermediate; PD requires intermediate or resistant; with multiple drugs, sensitivity to any tested drug determines a match.",
+          "Applying the published rule gives matches for HO17, HO107, HO20, HO46, HO98, HO90, HO123, HO127, and HO106, and mismatches for HO42 and HO140: 9/11 = 0.8181818181818182."
+        ]
+      },
+      "execution_feedback": {
+        "matched": false,
+        "metric": "accuracy",
+        "computed": null,
+        "reported": 0.8181818181818182,
+        "difference": null,
+        "n": 3,
+        "errors": [
+          "Nonbinary truth for HO17: 2.0",
+          "Nonbinary truth for HO42: 2.0",
+          "Nonbinary truth for HO107: 2.0",
+          "Nonbinary truth for HO46: 2.0",
+          "Nonbinary truth for HO98: 2.0",
+          "Nonbinary truth for HO123: 2.0",
+          "Nonbinary truth for HO106: 2.0",
+          "Expected 11 analysis units, got 3"
+        ],
+        "expected": {
+          "metric": "accuracy",
+          "value": 0.8181818181818182,
+          "n": 11
+        },
+        "error_count": 9
+      }
+    }
+  }
+]

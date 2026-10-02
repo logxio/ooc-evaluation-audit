@@ -1,0 +1,46 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_tyt46gz7nyrpzq1i8m2a3r7p",
+        "type": "function",
+        "function": {
+          "name": "preview_table",
+          "arguments": "{\"file\": \"pone.0339416.s002.pdf\", \"sheet\": \"page4\", \"start\": 1, \"rows\": 25}"
+        }
+      },
+      {
+        "id": "call_sbnfs4t7dwjymvvnkmbqha6y",
+        "type": "function",
+        "function": {
+          "name": "preview_table",
+          "arguments": "{\"file\": \"pone.0339416.s001.xlsx\", \"sheet\": \"Fig 5C\", \"start\": 1, \"rows\": 20}"
+        }
+      },
+      {
+        "id": "call_qi5glxf7gyuax9kq44pclni2",
+        "type": "function",
+        "function": {
+          "name": "read_article",
+          "arguments": "{\"query\": \"S4 Table clinical response GC-021 GC-023 GC-025 GC-026 GC-012 GC-014 GC-008\", \"limit\": 10}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "We need inspect full S4 page rows beyond preview.  Potential issues with refs support have been found, and all rows on page 4 will be listed/previewed.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 311,
+    "prompt_tokens": 27510,
+    "total_tokens": 27821,
+    "prompt_tokens_details": {
+      "cached_tokens": 2360
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 72
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "{\"columns\":[\"primary visible column\",\"cropped right column\"],\"legend\":{},\"rows\":[[\"8\",\"\"],[\"FFX\",\"\"],[\"97.9\",\"blue filled area, text not visible\"],[\"CR\",\"blue filled area, text not visible\"],[\"FFX\",\"\"],[\"1\",\"\"]],\"uncertain\":[[3,1],[3,2],[4,2]],\"notes\":\"The image is heavily cropped on the left and right. Partial labels are cut off at the left edge, and a second blue column is cut off at the right edge. All visible filled cells/bars are blue; no legend is shown.\"}"
+  },
+  "reasoning_content": "We need need transcribe visible cropped image. \n\nIt has been confirmed that the target image is a partially cropped chart or table, with output requirements of only JSON and one row per data element group. The vertical structure of the image has also been sorted out, and inspection of the target area will be carried out next.\n\nAfter further analysis, I've confirmed the left margin has partially visible vertical axis tick labels, the cropped content includes both blue bar annotations and internal labels, and the structure is likely a partially obscured confusion matrix or heatmap.\n\nFurther analysis shows that the blue blocks are horizontal bars with unreadable inner content, and I've confirmed left margin fragments are illegible y-axis labels that can't be used. Next, I'll set columns and rows for output, filling unreadable row labels with empty strings and retaining central visible content.\n\nIt has been confirmed that there is no printed legend or column titles, with all required data points identifiable except for some right-side partial cells. This may be a vertical crop of a horizontal bar chart, and the column arrangement will be adjusted to fit visible positions.\n\nI've sorted out the suspected characters on the left, tentatively judging that they are the cropped end of y-axis tick labels, and the 8 and 1 in the central area may be y-axis numeric tick labels.\n\nI’ve ruled out the Sankey diagram hypothesis, tentatively judging the structure as a transition matrix heatmap, with top label 8, bottom label 1, left partial labels, two blue cells containing 97.9 and CR respectively.\n\nI've ruled out the Sankey diagram and stacked bar chart hypotheses, confirmed the content is a valid transition matrix heatmap with no printed legend. I've drafted the JSON output scheme, with positional content as columns and two rows, and will adjust columns and rows to fit visible content and handle partial blocks next.\n\nI've confirmed there is no printed legend, marked uncertain cells in the right column due to cropping and blurriness, and will output the valid JSON result next.\n",
+  "finish_reason": "stop",
+  "usage": {
+    "completion_tokens": 1757,
+    "prompt_tokens": 1601,
+    "total_tokens": 3358,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 1625
+    }
+  }
+}

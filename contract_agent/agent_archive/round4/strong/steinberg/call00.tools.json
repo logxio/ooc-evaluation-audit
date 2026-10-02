@@ -1,0 +1,117 @@
+[
+  {
+    "name": "initial_code",
+    "output": {
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "seconds": 0.4209629999822937,
+      "peak_rss_bytes": 40845312,
+      "limit_error": null,
+      "code_sha256": "57b367e4b5b741509456d60081dbe7dc2a82a654f5fb29d61e4054f93599b3be",
+      "contract": {
+        "status": "no_headline",
+        "fields": {
+          "unit": {
+            "value": "patient_regimen",
+            "evidence": [
+              "article.xml/Table 1/R1C1",
+              "article.xml/Table 1/R1C7",
+              "article.xml/Table 1/R1C8",
+              "supp.xlsx/Fig. 5/B2"
+            ],
+            "explanation": "Ten patient specimens were each linked to drug-specific spheroid responses and one or more clinical treatment responses."
+          },
+          "platform": {
+            "value": "spheroid",
+            "evidence": [
+              "article:p21",
+              "article:p48"
+            ],
+            "explanation": "The assay used patient-derived 3D multicellular tumor spheroids treated with chemotherapy drugs."
+          },
+          "readout": {
+            "value": "size_viability",
+            "evidence": [
+              "article:p22",
+              "article:p23",
+              "supp.xlsx/Fig. 5/A2"
+            ],
+            "explanation": "Clinical correlations were presented qualitatively using both WST1 viability reduction and spheroid area change."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p23",
+              "article:p30"
+            ],
+            "explanation": "Reduced viability or spheroid area was interpreted as a direct trend with clinical responsiveness."
+          },
+          "threshold_rule": {
+            "value": "categorical",
+            "evidence": [
+              "article:p23",
+              "article:p22"
+            ],
+            "explanation": "The paper color-coded direct, reverse, or nonsignificant trends rather than reporting a numeric prediction cutoff or global performance metric."
+          },
+          "threshold_timing": {
+            "value": "not_reported",
+            "evidence": [
+              "article:p23",
+              "article:p30"
+            ],
+            "explanation": "No prespecified or outcome-optimized binary threshold for calculating clinical predictive accuracy was reported."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "article.xml/Table 1/R1C1",
+              "supp.xlsx/Fig. 5/C2",
+              "article:p30"
+            ],
+            "explanation": "Patients T1-T10 are identifiable in Table 1, and assay results are organized by tissue number."
+          },
+          "regimen_match": {
+            "value": "partial",
+            "evidence": [
+              "article:p21",
+              "article:p48",
+              "article.xml/Table 1/R2C8"
+            ],
+            "explanation": "Some tested drugs or combinations overlapped clinical regimens, but the authors note difficulty correlating patient regimens with ex vivo experiments and several clinical drugs were not represented."
+          },
+          "n_units": {
+            "value": 48,
+            "evidence": [
+              "article:p23"
+            ],
+            "explanation": "The clinical-correlation heat map was stated to contain n=48 comparisons, but no aggregate accuracy, sensitivity, specificity, or AUC was calculated from them."
+          },
+          "split": {
+            "value": "none",
+            "evidence": [
+              "article:p21",
+              "article:p30"
+            ],
+            "explanation": "This was a small feasibility correlation study in ten sampled patients; no training/validation split or held-out test cohort was described."
+          }
+        },
+        "headline": {
+          "metric": null,
+          "reported": null,
+          "reported_evidence": [],
+          "threshold": null,
+          "op": null,
+          "score_direction": null,
+          "records": [],
+          "blocked_reason": "No global clinical or toxicity performance headline is reported; the article describes qualitative color-coded trends and selected patient examples rather than an accuracy, sensitivity, specificity, AUC, or other aggregate predictive score."
+        },
+        "notes": [
+          "Positive correlations were described for T1, T6, and T10, with additional examples in T4 and T5, but these are not a global quantitative headline.",
+          "Table 1 supplies clinical responses, while Supplementary Data Fig. 5 supplies tissue-by-drug viability/area values; the source does not provide a prespecified binary scoring rule or row-level aggregate performance calculation."
+        ]
+      }
+    }
+  }
+]

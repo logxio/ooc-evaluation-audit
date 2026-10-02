@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_o8vogv4k05jenwvopudwjyfe",
+        "type": "function",
+        "function": {
+          "name": "python",
+          "arguments": "{\"code\": \"xs=[[-48,.02],[-47,.28],[-47,.57],[-42,.54],[-38,.20],[-37,.20],[-36,.55],[-35,.68],[-33,.45],[-32,.54],[-31,.46],[-28,.33],[-25,.40],[-23,.55],[-22,.39],[5,.61],[18,.28],[22,.67],[23,.82],[24,.56],[25,.75],[38,.62],[39,.77]]\\nP=[s for x,s in xs if x<0]; N=[s for x,s in xs if x>=0]\\nprint(len(P),len(N),sum((p<n)+.5*(p==n) for p in P for n in N)/(len(P)*len(N)))\"}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "Now use full row 4 list. Compute AUC threshold 0.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 261,
+    "prompt_tokens": 71052,
+    "total_tokens": 71313,
+    "prompt_tokens_details": {
+      "cached_tokens": 51512
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 15
+    }
+  }
+}

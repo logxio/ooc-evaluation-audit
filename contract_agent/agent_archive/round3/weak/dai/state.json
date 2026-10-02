@@ -1,0 +1,1601 @@
+{
+  "turn": 19,
+  "tool_count": 17,
+  "tokens": 868178,
+  "done": true,
+  "stop_reason": "conservative_token_limit",
+  "reader_calls": 1,
+  "checkpoints": {
+    "single_pass": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "The unit is individual patients, with 22 total patients evaluated for drug response prediction"
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "The platform is an optimized vascularized colorectal tumoroid-on-a-chip (organoid-on-a-chip) model"
+          },
+          "readout": {
+            "value": "size_viability",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "The readout combines relative vessel density and relative tumoroid diameter to determine prediction of clinical response"
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "Lower values of relative vessel density and tumoroid diameter below the optimal cutoff indicate clinical sensitivity to the treatment"
+          },
+          "threshold_rule": {
+            "value": "roc_optimized",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "Optimal cutoff values were determined using the Youden index (ROC-optimized) and bootstrap sampling"
+          },
+          "threshold_timing": {
+            "value": "outcome_optimized",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "Cutoff values were fitted on the same 22 evaluated patients to optimize classification performance"
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "article:p75",
+              "article:p76",
+              "article:p72"
+            ],
+            "explanation": "Individual patient data including ID, clinical response, and chip model readouts are available for all 22 patients"
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "All patients received the FOLFOX + bevacizumab regimen, matching the in vitro drug testing regimen on the chip model"
+          },
+          "n_units": {
+            "value": 22,
+            "evidence": [
+              "article:p76",
+              "article:p91"
+            ],
+            "explanation": "The total number of patients evaluated in this accuracy calculation is 22"
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "The model was evaluated on the same cohort used to determine optimal cutoff thresholds, with no independent held-out test set"
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.8636,
+          "reported_evidence": [
+            "article:p76"
+          ],
+          "threshold": 0.5,
+          "op": ">=",
+          "score_direction": "higher",
+          "records": [],
+          "blocked_reason": "Row-level individual patient score and truth pairs are not provided in the available parsed tables; aggregate accuracy value is reported directly in the article text"
+        },
+        "notes": [
+          "19 of 22 predictions were correct (19/22 = 0.8636) to achieve the reported accuracy. Sensitivity was 81.82% (9/11 resistant patients correctly identified) and specificity was 90.91% (10/11 sensitive patients correctly identified)."
+        ]
+      },
+      "evaluation": {
+        "matched": false,
+        "metric": "accuracy",
+        "computed": null,
+        "reported": 0.8636,
+        "difference": null,
+        "n": 0,
+        "errors": [
+          "No source-bound observations: Row-level individual patient score and truth pairs are not provided in the available parsed tables; aggregate accuracy value is reported directly in the article text",
+          "Expected 22 analysis units, got 0"
+        ],
+        "rows": [],
+        "expected": {
+          "metric": "accuracy",
+          "value": 0.8636363636363636,
+          "n": 22
+        }
+      },
+      "calls": 1,
+      "tokens": 21822
+    },
+    "one_feedback": {
+      "contract": {
+        "status": "blocked",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "Unit is individual patient"
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "Platform is optimized vascularized colorectal tumoroid-on-a-chip"
+          },
+          "readout": {
+            "value": "size_viability",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "Readout combines relative vessel density and relative tumoroid diameter"
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "Lower values below cutoff indicate sensitivity"
+          },
+          "threshold_rule": {
+            "value": "roc_optimized",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "Cutoffs determined via Youden index (ROC optimized)"
+          },
+          "threshold_timing": {
+            "value": "outcome_optimized",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "Cutoffs fitted on the same 22 patients"
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "mmc2.xlsx/Sheet1/A3:A24"
+            ],
+            "explanation": "Patient IDs are available for 22 patients"
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "All patients received FOLFOX + bevacizumab matching in vitro testing"
+          },
+          "n_units": {
+            "value": 22,
+            "evidence": [
+              "article:p76",
+              "article:p91"
+            ],
+            "explanation": "22 patients evaluated"
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "No independent test set, cutoffs derived on evaluation cohort"
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.8636363636363636,
+          "reported_evidence": [
+            "article:p76"
+          ],
+          "threshold": 0.5,
+          "op": ">=",
+          "score_direction": "higher",
+          "records": [],
+          "blocked_reason": "Row-level per-patient optimized model relative vessel density, relative tumoroid diameter, and corresponding clinical RECIST response values are not present in the currently parsed tables. Source data figure 5.xlsx is expected to contain these per-patient records but was not available in the parsed table previews."
+        },
+        "notes": [
+          "Reported accuracy is 19 correct predictions out of 22 total patients: 9 correctly identified resistant patients (sensitivity 81.82%) and 10 correctly identified sensitive patients (specificity 90.91%)."
+        ]
+      },
+      "evaluation": {
+        "matched": false,
+        "metric": "accuracy",
+        "computed": null,
+        "reported": 0.8636363636363636,
+        "difference": null,
+        "n": 0,
+        "errors": [
+          "patient_mapping: missing evidence mmc2.xlsx/Sheet1/A3:A24",
+          "No source-bound observations: Row-level per-patient optimized model relative vessel density, relative tumoroid diameter, and corresponding clinical RECIST response values are not present in the currently parsed tables. Source data figure 5.xlsx is expected to contain these per-patient records but was not available in the parsed table previews.",
+          "Expected 22 analysis units, got 0"
+        ],
+        "rows": [],
+        "expected": {
+          "metric": "accuracy",
+          "value": 0.8636363636363636,
+          "n": 22
+        }
+      },
+      "calls": 2,
+      "tokens": 45104
+    },
+    "tool_loop": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "Individual patient"
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "Vascularized tumoroid-on-a-chip"
+          },
+          "readout": {
+            "value": "size_viability",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "Relative vessel density and tumoroid diameter"
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "Lower values indicate sensitivity"
+          },
+          "threshold_rule": {
+            "value": "roc_optimized",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "Youden index optimized cutoffs"
+          },
+          "threshold_timing": {
+            "value": "outcome_optimized",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "Cutoffs derived on evaluation cohort"
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "All 22 patient records available"
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "FOLFOX + bevacizumab in clinic and in vitro"
+          },
+          "n_units": {
+            "value": 22,
+            "evidence": [
+              "article:p76",
+              "article:p91"
+            ],
+            "explanation": "22 patients evaluated"
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "No independent test set"
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.8636363636363636,
+          "reported_evidence": [
+            "article:p76",
+            "vision/3c10374ffe09/R25C5"
+          ],
+          "threshold": 0.5,
+          "op": "==",
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "P01",
+              "score": {
+                "refs": [
+                  "vision/3c10374ffe09/R1C2",
+                  "vision/3c10374ffe09/R1C3"
+                ],
+                "aggregate": "max",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/3c10374ffe09/R1C4",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P02",
+              "score": {
+                "refs": [
+                  "vision/3c10374ffe09/R2C2",
+                  "vision/3c10374ffe09/R2C3"
+                ],
+                "aggregate": "max",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/3c10374ffe09/R2C4",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P03",
+              "score": {
+                "refs": [
+                  "vision/3c10374ffe09/R3C2",
+                  "vision/3c10374ffe09/R3C3"
+                ],
+                "aggregate": "max",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/3c10374ffe09/R3C4",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P05",
+              "score": {
+                "refs": [
+                  "vision/3c10374ffe09/R4C2",
+                  "vision/3c10374ffe09/R4C3"
+                ],
+                "aggregate": "max",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/3c10374ffe09/R4C4",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P06",
+              "score": {
+                "refs": [
+                  "vision/3c10374ffe09/R5C2",
+                  "vision/3c10374ffe09/R5C3"
+                ],
+                "aggregate": "max",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/3c10374ffe09/R5C4",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P10",
+              "score": {
+                "refs": [
+                  "vision/3c10374ffe09/R6C2",
+                  "vision/3c10374ffe09/R6C3"
+                ],
+                "aggregate": "max",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/3c10374ffe09/R6C4",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P11",
+              "score": {
+                "refs": [
+                  "vision/3c10374ffe09/R7C2",
+                  "vision/3c10374ffe09/R7C3"
+                ],
+                "aggregate": "max",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/3c10374ffe09/R7C4",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P12",
+              "score": {
+                "refs": [
+                  "vision/3c10374ffe09/R8C2",
+                  "vision/3c10374ffe09/R8C3"
+                ],
+                "aggregate": "max",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/3c10374ffe09/R8C4",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P13",
+              "score": {
+                "refs": [
+                  "vision/3c10374ffe09/R9C2",
+                  "vision/3c10374ffe09/R9C3"
+                ],
+                "aggregate": "max",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/3c10374ffe09/R9C4",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P14",
+              "score": {
+                "refs": [
+                  "vision/3c10374ffe09/R10C2",
+                  "vision/3c10374ffe09/R10C3"
+                ],
+                "aggregate": "max",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/3c10374ffe09/R10C4",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P32",
+              "score": {
+                "refs": [
+                  "vision/3c10374ffe09/R11C2",
+                  "vision/3c10374ffe09/R11C3"
+                ],
+                "aggregate": "max",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/3c10374ffe09/R11C4",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P33",
+              "score": {
+                "refs": [
+                  "vision/3c10374ffe09/R12C2",
+                  "vision/3c10374ffe09/R12C3"
+                ],
+                "aggregate": "max",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/3c10374ffe09/R12C4",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P34",
+              "score": {
+                "refs": [
+                  "vision/3c10374ffe09/R13C2",
+                  "vision/3c10374ffe09/R13C3"
+                ],
+                "aggregate": "max",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/3c10374ffe09/R13C4",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P35",
+              "score": {
+                "refs": [
+                  "vision/3c10374ffe09/R14C2",
+                  "vision/3c10374ffe09/R14C3"
+                ],
+                "aggregate": "max",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/3c10374ffe09/R14C4",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P36",
+              "score": {
+                "refs": [
+                  "vision/3c10374ffe09/R15C2",
+                  "vision/3c10374ffe09/R15C3"
+                ],
+                "aggregate": "max",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/3c10374ffe09/R15C4",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P37",
+              "score": {
+                "refs": [
+                  "vision/3c10374ffe09/R16C2",
+                  "vision/3c10374ffe09/R16C3"
+                ],
+                "aggregate": "max",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/3c10374ffe09/R16C4",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P38",
+              "score": {
+                "refs": [
+                  "vision/3c10374ffe09/R17C2",
+                  "vision/3c10374ffe09/R17C3"
+                ],
+                "aggregate": "max",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/3c10374ffe09/R17C4",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P39",
+              "score": {
+                "refs": [
+                  "vision/3c10374ffe09/R18C2",
+                  "vision/3c10374ffe09/R18C3"
+                ],
+                "aggregate": "max",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/3c10374ffe09/R18C4",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P40",
+              "score": {
+                "refs": [
+                  "vision/3c10374ffe09/R19C2",
+                  "vision/3c10374ffe09/R19C3"
+                ],
+                "aggregate": "max",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/3c10374ffe09/R19C4",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P41",
+              "score": {
+                "refs": [
+                  "vision/3c10374ffe09/R20C2",
+                  "vision/3c10374ffe09/R20C3"
+                ],
+                "aggregate": "max",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/3c10374ffe09/R20C4",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P42",
+              "score": {
+                "refs": [
+                  "vision/3c10374ffe09/R21C2",
+                  "vision/3c10374ffe09/R21C3"
+                ],
+                "aggregate": "max",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/3c10374ffe09/R21C4",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P43",
+              "score": {
+                "refs": [
+                  "vision/3c10374ffe09/R22C2",
+                  "vision/3c10374ffe09/R22C3"
+                ],
+                "aggregate": "max",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/3c10374ffe09/R22C4",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            }
+          ],
+          "blocked_reason": null
+        },
+        "notes": [
+          "19 correct predictions out of 22 total patients, accuracy = 19/22 = 0.8636363636363636"
+        ]
+      },
+      "evaluation": {
+        "matched": false,
+        "metric": "accuracy",
+        "computed": null,
+        "reported": 0.8636363636363636,
+        "difference": null,
+        "n": 21,
+        "errors": [
+          "Unknown source reference: ['vision/3c10374ffe09/R1C4']",
+          "Expected 22 analysis units, got 21"
+        ],
+        "rows": [
+          {
+            "id": "P02",
+            "score": 0.0,
+            "truth": 0
+          },
+          {
+            "id": "P03",
+            "score": 0.0,
+            "truth": 0
+          },
+          {
+            "id": "P05",
+            "score": 1.0,
+            "truth": 1
+          },
+          {
+            "id": "P06",
+            "score": 0.0,
+            "truth": 0
+          },
+          {
+            "id": "P10",
+            "score": 0.0,
+            "truth": 0
+          },
+          {
+            "id": "P11",
+            "score": 1.0,
+            "truth": 1
+          },
+          {
+            "id": "P12",
+            "score": 1.0,
+            "truth": 1
+          },
+          {
+            "id": "P13",
+            "score": 1.0,
+            "truth": 1
+          },
+          {
+            "id": "P14",
+            "score": 1.0,
+            "truth": 1
+          },
+          {
+            "id": "P32",
+            "score": 0.0,
+            "truth": 0
+          },
+          {
+            "id": "P33",
+            "score": 0.0,
+            "truth": 0
+          },
+          {
+            "id": "P34",
+            "score": 1.0,
+            "truth": 1
+          },
+          {
+            "id": "P35",
+            "score": 1.0,
+            "truth": 1
+          },
+          {
+            "id": "P36",
+            "score": 0.0,
+            "truth": 1
+          },
+          {
+            "id": "P37",
+            "score": 1.0,
+            "truth": 1
+          },
+          {
+            "id": "P38",
+            "score": 1.0,
+            "truth": 1
+          },
+          {
+            "id": "P39",
+            "score": 1.0,
+            "truth": 1
+          },
+          {
+            "id": "P40",
+            "score": 0.0,
+            "truth": 0
+          },
+          {
+            "id": "P41",
+            "score": 0.0,
+            "truth": 0
+          },
+          {
+            "id": "P42",
+            "score": 0.0,
+            "truth": 0
+          },
+          {
+            "id": "P43",
+            "score": 0.0,
+            "truth": 0
+          }
+        ],
+        "expected": {
+          "metric": "accuracy",
+          "value": 0.8636363636363636,
+          "n": 22
+        }
+      },
+      "calls": 19,
+      "tokens": 868178
+    }
+  },
+  "last_contract": {
+    "status": "computed",
+    "fields": {
+      "unit": {
+        "value": "patient",
+        "evidence": [
+          "article:p76"
+        ],
+        "explanation": "Individual patient"
+      },
+      "platform": {
+        "value": "organoid",
+        "evidence": [
+          "article:p76"
+        ],
+        "explanation": "Vascularized tumoroid-on-a-chip"
+      },
+      "readout": {
+        "value": "size_viability",
+        "evidence": [
+          "article:p76"
+        ],
+        "explanation": "Relative vessel density and tumoroid diameter"
+      },
+      "direction": {
+        "value": "lower_sensitive",
+        "evidence": [
+          "article:p76"
+        ],
+        "explanation": "Lower values indicate sensitivity"
+      },
+      "threshold_rule": {
+        "value": "roc_optimized",
+        "evidence": [
+          "article:p76"
+        ],
+        "explanation": "Youden index optimized cutoffs"
+      },
+      "threshold_timing": {
+        "value": "outcome_optimized",
+        "evidence": [
+          "article:p76"
+        ],
+        "explanation": "Cutoffs derived on evaluation cohort"
+      },
+      "patient_mapping": {
+        "value": "individual_available",
+        "evidence": [
+          "article:p76"
+        ],
+        "explanation": "All 22 patient records available"
+      },
+      "regimen_match": {
+        "value": "matched",
+        "evidence": [
+          "article:p76"
+        ],
+        "explanation": "FOLFOX + bevacizumab in clinic and in vitro"
+      },
+      "n_units": {
+        "value": 22,
+        "evidence": [
+          "article:p76",
+          "article:p91"
+        ],
+        "explanation": "22 patients evaluated"
+      },
+      "split": {
+        "value": "same_cohort",
+        "evidence": [
+          "article:p76"
+        ],
+        "explanation": "No independent test set"
+      }
+    },
+    "headline": {
+      "metric": "accuracy",
+      "reported": 0.8636363636363636,
+      "reported_evidence": [
+        "article:p76",
+        "vision/3c10374ffe09/R25C5"
+      ],
+      "threshold": 0.5,
+      "op": "==",
+      "score_direction": "higher",
+      "records": [
+        {
+          "id": "P01",
+          "score": {
+            "refs": [
+              "vision/3c10374ffe09/R1C2",
+              "vision/3c10374ffe09/R1C3"
+            ],
+            "aggregate": "max",
+            "map": {
+              "Sensitive": 0,
+              "Resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "vision/3c10374ffe09/R1C4",
+            "map": {
+              "Good response": 0,
+              "Poor response": 1
+            }
+          }
+        },
+        {
+          "id": "P02",
+          "score": {
+            "refs": [
+              "vision/3c10374ffe09/R2C2",
+              "vision/3c10374ffe09/R2C3"
+            ],
+            "aggregate": "max",
+            "map": {
+              "Sensitive": 0,
+              "Resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "vision/3c10374ffe09/R2C4",
+            "map": {
+              "Good response": 0,
+              "Poor response": 1
+            }
+          }
+        },
+        {
+          "id": "P03",
+          "score": {
+            "refs": [
+              "vision/3c10374ffe09/R3C2",
+              "vision/3c10374ffe09/R3C3"
+            ],
+            "aggregate": "max",
+            "map": {
+              "Sensitive": 0,
+              "Resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "vision/3c10374ffe09/R3C4",
+            "map": {
+              "Good response": 0,
+              "Poor response": 1
+            }
+          }
+        },
+        {
+          "id": "P05",
+          "score": {
+            "refs": [
+              "vision/3c10374ffe09/R4C2",
+              "vision/3c10374ffe09/R4C3"
+            ],
+            "aggregate": "max",
+            "map": {
+              "Sensitive": 0,
+              "Resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "vision/3c10374ffe09/R4C4",
+            "map": {
+              "Good response": 0,
+              "Poor response": 1
+            }
+          }
+        },
+        {
+          "id": "P06",
+          "score": {
+            "refs": [
+              "vision/3c10374ffe09/R5C2",
+              "vision/3c10374ffe09/R5C3"
+            ],
+            "aggregate": "max",
+            "map": {
+              "Sensitive": 0,
+              "Resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "vision/3c10374ffe09/R5C4",
+            "map": {
+              "Good response": 0,
+              "Poor response": 1
+            }
+          }
+        },
+        {
+          "id": "P10",
+          "score": {
+            "refs": [
+              "vision/3c10374ffe09/R6C2",
+              "vision/3c10374ffe09/R6C3"
+            ],
+            "aggregate": "max",
+            "map": {
+              "Sensitive": 0,
+              "Resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "vision/3c10374ffe09/R6C4",
+            "map": {
+              "Good response": 0,
+              "Poor response": 1
+            }
+          }
+        },
+        {
+          "id": "P11",
+          "score": {
+            "refs": [
+              "vision/3c10374ffe09/R7C2",
+              "vision/3c10374ffe09/R7C3"
+            ],
+            "aggregate": "max",
+            "map": {
+              "Sensitive": 0,
+              "Resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "vision/3c10374ffe09/R7C4",
+            "map": {
+              "Good response": 0,
+              "Poor response": 1
+            }
+          }
+        },
+        {
+          "id": "P12",
+          "score": {
+            "refs": [
+              "vision/3c10374ffe09/R8C2",
+              "vision/3c10374ffe09/R8C3"
+            ],
+            "aggregate": "max",
+            "map": {
+              "Sensitive": 0,
+              "Resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "vision/3c10374ffe09/R8C4",
+            "map": {
+              "Good response": 0,
+              "Poor response": 1
+            }
+          }
+        },
+        {
+          "id": "P13",
+          "score": {
+            "refs": [
+              "vision/3c10374ffe09/R9C2",
+              "vision/3c10374ffe09/R9C3"
+            ],
+            "aggregate": "max",
+            "map": {
+              "Sensitive": 0,
+              "Resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "vision/3c10374ffe09/R9C4",
+            "map": {
+              "Good response": 0,
+              "Poor response": 1
+            }
+          }
+        },
+        {
+          "id": "P14",
+          "score": {
+            "refs": [
+              "vision/3c10374ffe09/R10C2",
+              "vision/3c10374ffe09/R10C3"
+            ],
+            "aggregate": "max",
+            "map": {
+              "Sensitive": 0,
+              "Resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "vision/3c10374ffe09/R10C4",
+            "map": {
+              "Good response": 0,
+              "Poor response": 1
+            }
+          }
+        },
+        {
+          "id": "P32",
+          "score": {
+            "refs": [
+              "vision/3c10374ffe09/R11C2",
+              "vision/3c10374ffe09/R11C3"
+            ],
+            "aggregate": "max",
+            "map": {
+              "Sensitive": 0,
+              "Resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "vision/3c10374ffe09/R11C4",
+            "map": {
+              "Good response": 0,
+              "Poor response": 1
+            }
+          }
+        },
+        {
+          "id": "P33",
+          "score": {
+            "refs": [
+              "vision/3c10374ffe09/R12C2",
+              "vision/3c10374ffe09/R12C3"
+            ],
+            "aggregate": "max",
+            "map": {
+              "Sensitive": 0,
+              "Resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "vision/3c10374ffe09/R12C4",
+            "map": {
+              "Good response": 0,
+              "Poor response": 1
+            }
+          }
+        },
+        {
+          "id": "P34",
+          "score": {
+            "refs": [
+              "vision/3c10374ffe09/R13C2",
+              "vision/3c10374ffe09/R13C3"
+            ],
+            "aggregate": "max",
+            "map": {
+              "Sensitive": 0,
+              "Resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "vision/3c10374ffe09/R13C4",
+            "map": {
+              "Good response": 0,
+              "Poor response": 1
+            }
+          }
+        },
+        {
+          "id": "P35",
+          "score": {
+            "refs": [
+              "vision/3c10374ffe09/R14C2",
+              "vision/3c10374ffe09/R14C3"
+            ],
+            "aggregate": "max",
+            "map": {
+              "Sensitive": 0,
+              "Resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "vision/3c10374ffe09/R14C4",
+            "map": {
+              "Good response": 0,
+              "Poor response": 1
+            }
+          }
+        },
+        {
+          "id": "P36",
+          "score": {
+            "refs": [
+              "vision/3c10374ffe09/R15C2",
+              "vision/3c10374ffe09/R15C3"
+            ],
+            "aggregate": "max",
+            "map": {
+              "Sensitive": 0,
+              "Resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "vision/3c10374ffe09/R15C4",
+            "map": {
+              "Good response": 0,
+              "Poor response": 1
+            }
+          }
+        },
+        {
+          "id": "P37",
+          "score": {
+            "refs": [
+              "vision/3c10374ffe09/R16C2",
+              "vision/3c10374ffe09/R16C3"
+            ],
+            "aggregate": "max",
+            "map": {
+              "Sensitive": 0,
+              "Resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "vision/3c10374ffe09/R16C4",
+            "map": {
+              "Good response": 0,
+              "Poor response": 1
+            }
+          }
+        },
+        {
+          "id": "P38",
+          "score": {
+            "refs": [
+              "vision/3c10374ffe09/R17C2",
+              "vision/3c10374ffe09/R17C3"
+            ],
+            "aggregate": "max",
+            "map": {
+              "Sensitive": 0,
+              "Resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "vision/3c10374ffe09/R17C4",
+            "map": {
+              "Good response": 0,
+              "Poor response": 1
+            }
+          }
+        },
+        {
+          "id": "P39",
+          "score": {
+            "refs": [
+              "vision/3c10374ffe09/R18C2",
+              "vision/3c10374ffe09/R18C3"
+            ],
+            "aggregate": "max",
+            "map": {
+              "Sensitive": 0,
+              "Resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "vision/3c10374ffe09/R18C4",
+            "map": {
+              "Good response": 0,
+              "Poor response": 1
+            }
+          }
+        },
+        {
+          "id": "P40",
+          "score": {
+            "refs": [
+              "vision/3c10374ffe09/R19C2",
+              "vision/3c10374ffe09/R19C3"
+            ],
+            "aggregate": "max",
+            "map": {
+              "Sensitive": 0,
+              "Resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "vision/3c10374ffe09/R19C4",
+            "map": {
+              "Good response": 0,
+              "Poor response": 1
+            }
+          }
+        },
+        {
+          "id": "P41",
+          "score": {
+            "refs": [
+              "vision/3c10374ffe09/R20C2",
+              "vision/3c10374ffe09/R20C3"
+            ],
+            "aggregate": "max",
+            "map": {
+              "Sensitive": 0,
+              "Resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "vision/3c10374ffe09/R20C4",
+            "map": {
+              "Good response": 0,
+              "Poor response": 1
+            }
+          }
+        },
+        {
+          "id": "P42",
+          "score": {
+            "refs": [
+              "vision/3c10374ffe09/R21C2",
+              "vision/3c10374ffe09/R21C3"
+            ],
+            "aggregate": "max",
+            "map": {
+              "Sensitive": 0,
+              "Resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "vision/3c10374ffe09/R21C4",
+            "map": {
+              "Good response": 0,
+              "Poor response": 1
+            }
+          }
+        },
+        {
+          "id": "P43",
+          "score": {
+            "refs": [
+              "vision/3c10374ffe09/R22C2",
+              "vision/3c10374ffe09/R22C3"
+            ],
+            "aggregate": "max",
+            "map": {
+              "Sensitive": 0,
+              "Resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "vision/3c10374ffe09/R22C4",
+            "map": {
+              "Good response": 0,
+              "Poor response": 1
+            }
+          }
+        }
+      ],
+      "blocked_reason": null
+    },
+    "notes": [
+      "19 correct predictions out of 22 total patients, accuracy = 19/22 = 0.8636363636363636"
+    ]
+  },
+  "last_evaluation": {
+    "matched": false,
+    "metric": "accuracy",
+    "computed": null,
+    "reported": 0.8636363636363636,
+    "difference": null,
+    "n": 21,
+    "errors": [
+      "Unknown source reference: ['vision/3c10374ffe09/R1C4']",
+      "Expected 22 analysis units, got 21"
+    ],
+    "rows": [
+      {
+        "id": "P02",
+        "score": 0.0,
+        "truth": 0
+      },
+      {
+        "id": "P03",
+        "score": 0.0,
+        "truth": 0
+      },
+      {
+        "id": "P05",
+        "score": 1.0,
+        "truth": 1
+      },
+      {
+        "id": "P06",
+        "score": 0.0,
+        "truth": 0
+      },
+      {
+        "id": "P10",
+        "score": 0.0,
+        "truth": 0
+      },
+      {
+        "id": "P11",
+        "score": 1.0,
+        "truth": 1
+      },
+      {
+        "id": "P12",
+        "score": 1.0,
+        "truth": 1
+      },
+      {
+        "id": "P13",
+        "score": 1.0,
+        "truth": 1
+      },
+      {
+        "id": "P14",
+        "score": 1.0,
+        "truth": 1
+      },
+      {
+        "id": "P32",
+        "score": 0.0,
+        "truth": 0
+      },
+      {
+        "id": "P33",
+        "score": 0.0,
+        "truth": 0
+      },
+      {
+        "id": "P34",
+        "score": 1.0,
+        "truth": 1
+      },
+      {
+        "id": "P35",
+        "score": 1.0,
+        "truth": 1
+      },
+      {
+        "id": "P36",
+        "score": 0.0,
+        "truth": 1
+      },
+      {
+        "id": "P37",
+        "score": 1.0,
+        "truth": 1
+      },
+      {
+        "id": "P38",
+        "score": 1.0,
+        "truth": 1
+      },
+      {
+        "id": "P39",
+        "score": 1.0,
+        "truth": 1
+      },
+      {
+        "id": "P40",
+        "score": 0.0,
+        "truth": 0
+      },
+      {
+        "id": "P41",
+        "score": 0.0,
+        "truth": 0
+      },
+      {
+        "id": "P42",
+        "score": 0.0,
+        "truth": 0
+      },
+      {
+        "id": "P43",
+        "score": 0.0,
+        "truth": 0
+      }
+    ],
+    "expected": {
+      "metric": "accuracy",
+      "value": 0.8636363636363636,
+      "n": 22
+    }
+  }
+}

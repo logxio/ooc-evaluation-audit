@@ -1,0 +1,2439 @@
+{
+  "turn": 9,
+  "tool_count": 7,
+  "tokens": 269423,
+  "done": true,
+  "stop_reason": "verified",
+  "checkpoints": {
+    "single_pass": {
+      "contract": {
+        "status": "blocked",
+        "fields": {
+          "unit": {
+            "value": "organoid_line",
+            "evidence": [
+              "article:p34"
+            ],
+            "explanation": "Twenty organoid drug-screening results were compared with clinical TC responses."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p34",
+              "article:p35"
+            ],
+            "explanation": "Patient-derived ovarian cancer organoids were used for drug screening."
+          },
+          "readout": {
+            "value": "ic50",
+            "evidence": [
+              "article:p34"
+            ],
+            "explanation": "Sensitivity was based on IC50 relative to drug-specific Cmax; AUC was a fallback when IC50 could not be calculated."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p34",
+              "article:p35"
+            ],
+            "explanation": "IC50 below Cmax indicates sensitivity; lower IC50 means greater sensitivity."
+          },
+          "threshold_rule": {
+            "value": "fixed_numeric",
+            "evidence": [
+              "article:p34"
+            ],
+            "explanation": "Fixed Cmax thresholds were 87 µM for carboplatin and 4.1 µM for paclitaxel; a regimen prediction was positive when either IC50/Cmax ratio was below 1."
+          },
+          "threshold_timing": {
+            "value": "independent_reference",
+            "evidence": [
+              "article:p34"
+            ],
+            "explanation": "Cmax thresholds were external pharmacokinetic references, not optimized on these outcomes."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "article:p37",
+              "article:p34"
+            ],
+            "explanation": "Each screened organoid was linked to an individually identified patient and clinical response."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p34",
+              "article:p37"
+            ],
+            "explanation": "Assay sensitivity to paclitaxel or carboplatin was compared with clinical response to the paclitaxel-carboplatin regimen."
+          },
+          "n_units": {
+            "value": 0,
+            "evidence": [
+              "article:p34",
+              "article:p37"
+            ],
+            "explanation": "The exact comparison comprised 20 organoid screening results."
+          },
+          "split": {
+            "value": "none",
+            "evidence": [
+              "article:p34",
+              "article:p37"
+            ],
+            "explanation": "No model fitting or held-out split was used; fixed Cmax rules were applied to the screened organoids."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.8,
+          "reported_evidence": [
+            "article:p37",
+            "article:p3"
+          ],
+          "threshold": 1,
+          "op": "<",
+          "score_direction": "lower",
+          "records": [],
+          "blocked_reason": "Could not identify 20 row-level paired IC50 and prospective clinical-response records."
+        },
+        "notes": [
+          "Four mismatches were Org-124, Org-137, Org-222, and Org-225, giving 16/20 = 80%."
+        ]
+      },
+      "evaluation": {
+        "matched": false,
+        "metric": "accuracy",
+        "computed": null,
+        "reported": 0.8,
+        "difference": null,
+        "n": 0,
+        "errors": [
+          "No source-bound observations: Could not identify 20 row-level paired IC50 and prospective clinical-response records.",
+          "Expected 20 analysis units, got 0"
+        ],
+        "rows": [],
+        "expected": {
+          "metric": "accuracy",
+          "value": 0.8,
+          "n": 20
+        }
+      },
+      "calls": 1,
+      "tokens": 29263
+    },
+    "one_feedback": {
+      "contract": {
+        "status": "blocked",
+        "fields": {
+          "unit": {
+            "value": "organoid_line",
+            "evidence": [
+              "article:p34"
+            ],
+            "explanation": "Twenty organoid drug-screening results were compared with clinical responses to paclitaxel-carboplatin therapy."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p34",
+              "article:p35"
+            ],
+            "explanation": "The predictions came from patient-derived ovarian tumour organoids."
+          },
+          "readout": {
+            "value": "ic50",
+            "evidence": [
+              "article:p34"
+            ],
+            "explanation": "IC50 was the primary drug-response readout, with AUC used only as an assisting measure."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p34",
+              "article:p35"
+            ],
+            "explanation": "IC50 below the drug-specific Cmax denotes sensitivity, so lower values indicate greater sensitivity."
+          },
+          "threshold_rule": {
+            "value": "fixed_numeric",
+            "evidence": [
+              "article:p34"
+            ],
+            "explanation": "External Cmax thresholds were 87 µM for carboplatin and 4.1 µM for paclitaxel; sensitivity to either drug predicted TC efficacy."
+          },
+          "threshold_timing": {
+            "value": "independent_reference",
+            "evidence": [
+              "article:p34"
+            ],
+            "explanation": "The Cmax cutoffs were external pharmacokinetic references rather than thresholds fitted to these patients."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "article:p37",
+              "article:p34"
+            ],
+            "explanation": "Each organoid record was linked to an individually identified patient and clinical response."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p34",
+              "article:p37"
+            ],
+            "explanation": "Paclitaxel/carboplatin assay sensitivity was compared with clinical response to the TC regimen."
+          },
+          "n_units": {
+            "value": 20,
+            "evidence": [
+              "article:p34",
+              "article:p37"
+            ],
+            "explanation": "The exact prospective comparison contained 20 screened organoid records."
+          },
+          "split": {
+            "value": "none",
+            "evidence": [
+              "article:p34",
+              "article:p37"
+            ],
+            "explanation": "No cohort-specific model fitting or held-out split was used; fixed external Cmax rules were applied."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.8,
+          "reported_evidence": [
+            "article:p3",
+            "article:p37"
+          ],
+          "threshold": 1,
+          "op": "<",
+          "score_direction": "lower",
+          "records": [
+            {
+              "id": "Org-93-P1",
+              "score": {
+                "refs": [
+                  {
+                    "calc": "divide",
+                    "args": [
+                      {
+                        "ref": "13048_2026_2178_MOESM1_ESM.pdf/page3/R7C3"
+                      },
+                      87
+                    ]
+                  },
+                  {
+                    "calc": "divide",
+                    "args": [
+                      {
+                        "ref": "13048_2026_2178_MOESM1_ESM.pdf/page3/R9C3"
+                      },
+                      4.1
+                    ]
+                  }
+                ],
+                "aggregate": "min"
+              },
+              "truth": {
+                "ref": "13048_2026_2178_MOESM1_ESM.pdf/page3/R8C4",
+                "map": {
+                  "sensitive": 1,
+                  "Sensitive": 1,
+                  "resistant": 0,
+                  "Resistant": 0
+                }
+              }
+            },
+            {
+              "id": "Org-103-P1",
+              "score": {
+                "refs": [
+                  {
+                    "calc": "divide",
+                    "args": [
+                      {
+                        "ref": "13048_2026_2178_MOESM1_ESM.pdf/page3/R10C3"
+                      },
+                      87
+                    ]
+                  },
+                  {
+                    "calc": "divide",
+                    "args": [
+                      {
+                        "ref": "13048_2026_2178_MOESM1_ESM.pdf/page3/R9C3"
+                      },
+                      4.1
+                    ]
+                  }
+                ],
+                "aggregate": "min"
+              },
+              "truth": {
+                "ref": "13048_2026_2178_MOESM1_ESM.pdf/page3/R11C4",
+                "map": {
+                  "sensitive": 1,
+                  "Sensitive": 1,
+                  "resistant": 0,
+                  "Resistant": 0
+                }
+              }
+            },
+            {
+              "id": "Org-124-P1",
+              "score": {
+                "refs": [
+                  {
+                    "calc": "divide",
+                    "args": [
+                      {
+                        "ref": "13048_2026_2178_MOESM1_ESM.pdf/page3/R13C3"
+                      },
+                      87
+                    ]
+                  },
+                  {
+                    "calc": "divide",
+                    "args": [
+                      {
+                        "ref": "13048_2026_2178_MOESM1_ESM.pdf/page3/R12C3"
+                      },
+                      4.1
+                    ]
+                  }
+                ],
+                "aggregate": "min"
+              },
+              "truth": {
+                "ref": "13048_2026_2178_MOESM1_ESM.pdf/page3/R14C4",
+                "map": {
+                  "sensitive": 1,
+                  "Sensitive": 1,
+                  "resistant": 0,
+                  "Resistant": 0
+                }
+              }
+            },
+            {
+              "id": "Org-137-P1",
+              "score": {
+                "refs": [
+                  {
+                    "calc": "divide",
+                    "args": [
+                      {
+                        "ref": "13048_2026_2178_MOESM1_ESM.pdf/page3/R16C3"
+                      },
+                      87
+                    ]
+                  },
+                  {
+                    "calc": "divide",
+                    "args": [
+                      {
+                        "ref": "13048_2026_2178_MOESM1_ESM.pdf/page3/R15C3"
+                      },
+                      4.1
+                    ]
+                  }
+                ],
+                "aggregate": "min"
+              },
+              "truth": {
+                "ref": "13048_2026_2178_MOESM1_ESM.pdf/page3/R17C4",
+                "map": {
+                  "sensitive": 1,
+                  "Sensitive": 1,
+                  "resistant": 0,
+                  "Resistant": 0
+                }
+              }
+            },
+            {
+              "id": "Org-144-P1",
+              "score": {
+                "refs": [
+                  {
+                    "calc": "divide",
+                    "args": [
+                      {
+                        "ref": "13048_2026_2178_MOESM1_ESM.pdf/page3/R19C3"
+                      },
+                      87
+                    ]
+                  },
+                  {
+                    "calc": "divide",
+                    "args": [
+                      {
+                        "ref": "13048_2026_2178_MOESM1_ESM.pdf/page3/R18C3"
+                      },
+                      4.1
+                    ]
+                  }
+                ],
+                "aggregate": "min"
+              },
+              "truth": {
+                "ref": "13048_2026_2178_MOESM1_ESM.pdf/page3/R20C4",
+                "map": {
+                  "sensitive": 1,
+                  "Sensitive": 1,
+                  "resistant": 0,
+                  "Resistant": 0
+                }
+              }
+            },
+            {
+              "id": "Org-174-P13",
+              "score": {
+                "refs": [
+                  {
+                    "calc": "divide",
+                    "args": [
+                      {
+                        "ref": "13048_2026_2178_MOESM1_ESM.pdf/page3/R22C3"
+                      },
+                      87
+                    ]
+                  },
+                  {
+                    "calc": "divide",
+                    "args": [
+                      {
+                        "ref": "13048_2026_2178_MOESM1_ESM.pdf/page3/R21C3"
+                      },
+                      4.1
+                    ]
+                  }
+                ],
+                "aggregate": "min"
+              },
+              "truth": {
+                "ref": "13048_2026_2178_MOESM1_ESM.pdf/page3/R23C4",
+                "map": {
+                  "sensitive": 1,
+                  "Sensitive": 1,
+                  "resistant": 0,
+                  "Resistant": 0
+                }
+              }
+            },
+            {
+              "id": "Org-181-P12",
+              "score": {
+                "refs": [
+                  {
+                    "calc": "divide",
+                    "args": [
+                      {
+                        "ref": "13048_2026_2178_MOESM1_ESM.pdf/page3/R25C3"
+                      },
+                      87
+                    ]
+                  },
+                  {
+                    "calc": "divide",
+                    "args": [
+                      {
+                        "ref": "13048_2026_2178_MOESM1_ESM.pdf/page3/R24C3"
+                      },
+                      4.1
+                    ]
+                  }
+                ],
+                "aggregate": "min"
+              },
+              "truth": {
+                "ref": "13048_2026_2178_MOESM1_ESM.pdf/page3/R26C4",
+                "map": {
+                  "sensitive": 1,
+                  "Sensitive": 1,
+                  "resistant": 0,
+                  "Resistant": 0
+                }
+              }
+            },
+            {
+              "id": "Org-240-P1",
+              "score": {
+                "refs": [
+                  {
+                    "calc": "divide",
+                    "args": [
+                      {
+                        "ref": "13048_2026_2178_MOESM1_ESM.pdf/page3/R28C3"
+                      },
+                      87
+                    ]
+                  },
+                  {
+                    "calc": "divide",
+                    "args": [
+                      {
+                        "ref": "13048_2026_2178_MOESM1_ESM.pdf/page3/R27C3"
+                      },
+                      4.1
+                    ]
+                  }
+                ],
+                "aggregate": "min"
+              },
+              "truth": {
+                "ref": "13048_2026_2178_MOESM1_ESM.pdf/page3/R29C4",
+                "map": {
+                  "sensitive": 1,
+                  "Sensitive": 1,
+                  "resistant": 0,
+                  "Resistant": 0
+                }
+              }
+            },
+            {
+              "id": "Org-242-P9",
+              "score": {
+                "refs": [
+                  {
+                    "calc": "divide",
+                    "args": [
+                      {
+                        "ref": "13048_2026_2178_MOESM1_ESM.pdf/page3/R31C3"
+                      },
+                      87
+                    ]
+                  },
+                  {
+                    "calc": "divide",
+                    "args": [
+                      {
+                        "ref": "13048_2026_2178_MOESM1_ESM.pdf/page3/R30C3"
+                      },
+                      4.1
+                    ]
+                  }
+                ],
+                "aggregate": "min"
+              },
+              "truth": {
+                "ref": "13048_2026_2178_MOESM1_ESM.pdf/page3/R32C4",
+                "map": {
+                  "sensitive": 1,
+                  "Sensitive": 1,
+                  "resistant": 0,
+                  "Resistant": 0
+                }
+              }
+            },
+            {
+              "id": "Org-248-",
+              "score": {
+                "refs": [
+                  {
+                    "calc": "divide",
+                    "args": [
+                      {
+                        "ref": "13048_2026_2178_MOESM1_ESM.pdf/page4/R7C5"
+                      },
+                      87
+                    ]
+                  },
+                  {
+                    "calc": "divide",
+                    "args": [
+                      {
+                        "ref": "13048_2026_2178_MOESM1_ESM.pdf/page4/R9C5"
+                      },
+                      4.1
+                    ]
+                  }
+                ],
+                "aggregate": "min"
+              },
+              "truth": {
+                "ref": "13048_2026_2178_MOESM1_ESM.pdf/page4/R8C2",
+                "map": {
+                  "sensitive": 1,
+                  "Sensitive": 1,
+                  "resistant": 0,
+                  "Resistant": 0
+                }
+              }
+            },
+            {
+              "id": "Org-263-",
+              "score": {
+                "refs": [
+                  {
+                    "calc": "divide",
+                    "args": [
+                      {
+                        "ref": "13048_2026_2178_MOESM1_ESM.pdf/page4/R10C5"
+                      },
+                      87
+                    ]
+                  },
+                  {
+                    "calc": "divide",
+                    "args": [
+                      {
+                        "ref": "13048_2026_2178_MOESM1_ESM.pdf/page4/R9C5"
+                      },
+                      4.1
+                    ]
+                  }
+                ],
+                "aggregate": "min"
+              },
+              "truth": {
+                "ref": "13048_2026_2178_MOESM1_ESM.pdf/page4/R11C2",
+                "map": {
+                  "sensitive": 1,
+                  "Sensitive": 1,
+                  "resistant": 0,
+                  "Resistant": 0
+                }
+              }
+            },
+            {
+              "id": "Org-264-",
+              "score": {
+                "refs": [
+                  {
+                    "calc": "divide",
+                    "args": [
+                      {
+                        "ref": "13048_2026_2178_MOESM1_ESM.pdf/page4/R13C5"
+                      },
+                      87
+                    ]
+                  },
+                  {
+                    "calc": "divide",
+                    "args": [
+                      {
+                        "ref": "13048_2026_2178_MOESM1_ESM.pdf/page4/R12C5"
+                      },
+                      4.1
+                    ]
+                  }
+                ],
+                "aggregate": "min"
+              },
+              "truth": {
+                "ref": "13048_2026_2178_MOESM1_ESM.pdf/page4/R14C2",
+                "map": {
+                  "sensitive": 1,
+                  "Sensitive": 1,
+                  "resistant": 0,
+                  "Resistant": 0
+                }
+              }
+            },
+            {
+              "id": "Org-128-P1",
+              "score": {
+                "refs": [
+                  {
+                    "calc": "divide",
+                    "args": [
+                      {
+                        "ref": "13048_2026_2178_MOESM1_ESM.pdf/page5/R7C3"
+                      },
+                      87
+                    ]
+                  },
+                  {
+                    "calc": "divide",
+                    "args": [
+                      {
+                        "ref": "13048_2026_2178_MOESM1_ESM.pdf/page5/R9C3"
+                      },
+                      4.1
+                    ]
+                  }
+                ],
+                "aggregate": "min"
+              },
+              "truth": {
+                "ref": "13048_2026_2178_MOESM1_ESM.pdf/page5/R8C4",
+                "map": {
+                  "sensitive": 1,
+                  "Sensitive": 1,
+                  "resistant": 0,
+                  "Resistant": 0
+                }
+              }
+            },
+            {
+              "id": "Org-131-P1",
+              "score": {
+                "refs": [
+                  {
+                    "calc": "divide",
+                    "args": [
+                      {
+                        "ref": "13048_2026_2178_MOESM1_ESM.pdf/page5/R11C8"
+                      },
+                      87
+                    ]
+                  },
+                  {
+                    "calc": "divide",
+                    "args": [
+                      {
+                        "ref": "13048_2026_2178_MOESM1_ESM.pdf/page5/R9C3"
+                      },
+                      4.1
+                    ]
+                  }
+                ],
+                "aggregate": "min"
+              },
+              "truth": {
+                "ref": "13048_2026_2178_MOESM1_ESM.pdf/page5/R12C3",
+                "map": {
+                  "sensitive": 1,
+                  "Sensitive": 1,
+                  "resistant": 0,
+                  "Resistant": 0
+                }
+              }
+            },
+            {
+              "id": "Org-183-P13",
+              "score": {
+                "refs": [
+                  {
+                    "calc": "divide",
+                    "args": [
+                      {
+                        "ref": "13048_2026_2178_MOESM1_ESM.pdf/page5/R13C3"
+                      },
+                      87
+                    ]
+                  },
+                  {
+                    "calc": "divide",
+                    "args": [
+                      {
+                        "ref": "13048_2026_2178_MOESM1_ESM.pdf/page5/R15C2"
+                      },
+                      4.1
+                    ]
+                  }
+                ],
+                "aggregate": "min"
+              },
+              "truth": {
+                "ref": "13048_2026_2178_MOESM1_ESM.pdf/page5/R14C4",
+                "map": {
+                  "sensitive": 1,
+                  "Sensitive": 1,
+                  "resistant": 0,
+                  "Resistant": 0
+                }
+              }
+            },
+            {
+              "id": "Org-222-P1",
+              "score": {
+                "refs": [
+                  {
+                    "calc": "divide",
+                    "args": [
+                      {
+                        "ref": "13048_2026_2178_MOESM1_ESM.pdf/page5/R16C3"
+                      },
+                      87
+                    ]
+                  },
+                  {
+                    "calc": "divide",
+                    "args": [
+                      {
+                        "ref": "13048_2026_2178_MOESM1_ESM.pdf/page5/R15C2"
+                      },
+                      4.1
+                    ]
+                  }
+                ],
+                "aggregate": "min"
+              },
+              "truth": {
+                "ref": "13048_2026_2178_MOESM1_ESM.pdf/page5/R17C4",
+                "map": {
+                  "sensitive": 1,
+                  "Sensitive": 1,
+                  "resistant": 0,
+                  "Resistant": 0
+                }
+              }
+            },
+            {
+              "id": "Org-225-P1",
+              "score": {
+                "refs": [
+                  {
+                    "calc": "divide",
+                    "args": [
+                      {
+                        "ref": "13048_2026_2178_MOESM1_ESM.pdf/page5/R19C3"
+                      },
+                      87
+                    ]
+                  },
+                  {
+                    "calc": "divide",
+                    "args": [
+                      {
+                        "ref": "13048_2026_2178_MOESM1_ESM.pdf/page5/R18C3"
+                      },
+                      4.1
+                    ]
+                  }
+                ],
+                "aggregate": "min"
+              },
+              "truth": {
+                "ref": "13048_2026_2178_MOESM1_ESM.pdf/page5/R20C4",
+                "map": {
+                  "sensitive": 1,
+                  "Sensitive": 1,
+                  "resistant": 0,
+                  "Resistant": 0
+                }
+              }
+            },
+            {
+              "id": "Org-258-P4",
+              "score": {
+                "refs": [
+                  {
+                    "calc": "divide",
+                    "args": [
+                      {
+                        "ref": "13048_2026_2178_MOESM1_ESM.pdf/page5/R22C3"
+                      },
+                      87
+                    ]
+                  },
+                  {
+                    "calc": "divide",
+                    "args": [
+                      {
+                        "ref": "13048_2026_2178_MOESM1_ESM.pdf/page5/R21C3"
+                      },
+                      4.1
+                    ]
+                  }
+                ],
+                "aggregate": "min"
+              },
+              "truth": {
+                "ref": "13048_2026_2178_MOESM1_ESM.pdf/page5/R23C4",
+                "map": {
+                  "sensitive": 1,
+                  "Sensitive": 1,
+                  "resistant": 0,
+                  "Resistant": 0
+                }
+              }
+            },
+            {
+              "id": "Org-259-P1",
+              "score": {
+                "refs": [
+                  {
+                    "calc": "divide",
+                    "args": [
+                      {
+                        "ref": "13048_2026_2178_MOESM1_ESM.pdf/page5/R25C3"
+                      },
+                      87
+                    ]
+                  },
+                  {
+                    "calc": "divide",
+                    "args": [
+                      {
+                        "ref": "13048_2026_2178_MOESM1_ESM.pdf/page5/R24C3"
+                      },
+                      4.1
+                    ]
+                  }
+                ],
+                "aggregate": "min"
+              },
+              "truth": {
+                "ref": "13048_2026_2178_MOESM1_ESM.pdf/page5/R26C4",
+                "map": {
+                  "sensitive": 1,
+                  "Sensitive": 1,
+                  "resistant": 0,
+                  "Resistant": 0
+                }
+              }
+            },
+            {
+              "id": "Org-259-P6",
+              "score": {
+                "refs": [
+                  {
+                    "calc": "divide",
+                    "args": [
+                      {
+                        "ref": "13048_2026_2178_MOESM1_ESM.pdf/page5/R28C3"
+                      },
+                      87
+                    ]
+                  },
+                  {
+                    "calc": "divide",
+                    "args": [
+                      {
+                        "ref": "13048_2026_2178_MOESM1_ESM.pdf/page5/R27C3"
+                      },
+                      4.1
+                    ]
+                  }
+                ],
+                "aggregate": "min"
+              },
+              "truth": {
+                "ref": "13048_2026_2178_MOESM1_ESM.pdf/page5/R29C4",
+                "map": {
+                  "sensitive": 1,
+                  "Sensitive": 1,
+                  "resistant": 0,
+                  "Resistant": 0
+                }
+              }
+            }
+          ],
+          "blocked_reason": "Could not reconstruct 20 row-level paired organoid IC50 and prospective clinical-response records."
+        },
+        "notes": [
+          "The article names four mismatches (Org-124, Org-137, Org-222, and Org-225), yielding 16/20 = 80%."
+        ]
+      },
+      "evaluation": {
+        "matched": false,
+        "metric": "accuracy",
+        "computed": null,
+        "reported": 0.8,
+        "difference": null,
+        "n": 0,
+        "errors": [
+          "unhashable type: 'dict'",
+          "unhashable type: 'dict'",
+          "unhashable type: 'dict'",
+          "unhashable type: 'dict'",
+          "unhashable type: 'dict'",
+          "unhashable type: 'dict'",
+          "unhashable type: 'dict'",
+          "unhashable type: 'dict'",
+          "unhashable type: 'dict'",
+          "unhashable type: 'dict'",
+          "unhashable type: 'dict'",
+          "unhashable type: 'dict'",
+          "unhashable type: 'dict'",
+          "unhashable type: 'dict'",
+          "unhashable type: 'dict'",
+          "unhashable type: 'dict'",
+          "unhashable type: 'dict'",
+          "unhashable type: 'dict'",
+          "unhashable type: 'dict'",
+          "unhashable type: 'dict'",
+          "Expected 20 analysis units, got 0"
+        ],
+        "rows": [],
+        "expected": {
+          "metric": "accuracy",
+          "value": 0.8,
+          "n": 20
+        }
+      },
+      "calls": 2,
+      "tokens": 55844
+    },
+    "tool_loop": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "organoid_line",
+            "evidence": [
+              "article:p34"
+            ],
+            "explanation": "Twenty organoid drug-screening records were compared with matched clinical responses."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p34",
+              "article:p35"
+            ],
+            "explanation": "Patient-derived ovarian cancer organoids were screened against paclitaxel and carboplatin."
+          },
+          "readout": {
+            "value": "ic50",
+            "evidence": [
+              "article:p34"
+            ],
+            "explanation": "The table Result labels encode whether each IC50 was below the drug Cmax; AUC assisted only when IC50 could not be calculated."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p34",
+              "article:p35"
+            ],
+            "explanation": "IC50 below Cmax is labeled Sensitive and indicates greater drug sensitivity."
+          },
+          "threshold_rule": {
+            "value": "fixed_numeric",
+            "evidence": [
+              "article:p34"
+            ],
+            "explanation": "Fixed Cmax thresholds were 87 µM for carboplatin and 4.1 µM for paclitaxel; sensitivity to either drug predicted TC efficacy."
+          },
+          "threshold_timing": {
+            "value": "independent_reference",
+            "evidence": [
+              "article:p34"
+            ],
+            "explanation": "The Cmax cutoffs were external pharmacokinetic references, not optimized on these outcomes."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "article:p37",
+              "article:p34"
+            ],
+            "explanation": "Each organoid is individually labeled and linked in Tables S3-S5 to the corresponding patient response."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p34",
+              "article:p37"
+            ],
+            "explanation": "The assay evaluated the two drugs in the clinical paclitaxel-carboplatin regimen and used an OR rule for combination efficacy."
+          },
+          "n_units": {
+            "value": 20,
+            "evidence": [
+              "article:p34",
+              "article:p37"
+            ],
+            "explanation": "The exact comparison comprised 20 screened organoid records from 19 patients, with two lines from one recurrent patient."
+          },
+          "split": {
+            "value": "none",
+            "evidence": [
+              "article:p34",
+              "article:p37"
+            ],
+            "explanation": "No model was fitted or threshold optimized on this cohort; fixed Cmax rules were applied directly."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.8,
+          "reported_evidence": [
+            "article:p3",
+            "article:p37"
+          ],
+          "threshold": 1,
+          "op": "<",
+          "score_direction": "lower",
+          "records": [
+            {
+              "id": "Org-93-P1",
+              "score": {
+                "refs": [
+                  "13048_2026_2178_MOESM1_ESM.pdf/page3/R7C4",
+                  "13048_2026_2178_MOESM1_ESM.pdf/page3/R9C4"
+                ],
+                "aggregate": "min",
+                "map": {
+                  "Sensitive": 0,
+                  "sensitive": 0,
+                  "Resistant": 1,
+                  "resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "13048_2026_2178_MOESM1_ESM.pdf/page3/R8C4",
+                "map": {
+                  "sensitive": 1,
+                  "Sensitive": 1,
+                  "resistant": 0,
+                  "Resistant": 0
+                }
+              }
+            },
+            {
+              "id": "Org-103-P1",
+              "score": {
+                "refs": [
+                  "13048_2026_2178_MOESM1_ESM.pdf/page3/R10C4",
+                  "13048_2026_2178_MOESM1_ESM.pdf/page3/R12C4"
+                ],
+                "aggregate": "min",
+                "map": {
+                  "Sensitive": 0,
+                  "sensitive": 0,
+                  "Resistant": 1,
+                  "resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "13048_2026_2178_MOESM1_ESM.pdf/page3/R11C4",
+                "map": {
+                  "sensitive": 1,
+                  "Sensitive": 1,
+                  "resistant": 0,
+                  "Resistant": 0
+                }
+              }
+            },
+            {
+              "id": "Org-124-P1",
+              "score": {
+                "refs": [
+                  "13048_2026_2178_MOESM1_ESM.pdf/page3/R13C4",
+                  "13048_2026_2178_MOESM1_ESM.pdf/page3/R15C4"
+                ],
+                "aggregate": "min",
+                "map": {
+                  "Sensitive": 0,
+                  "sensitive": 0,
+                  "Resistant": 1,
+                  "resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "13048_2026_2178_MOESM1_ESM.pdf/page3/R14C4",
+                "map": {
+                  "sensitive": 1,
+                  "Sensitive": 1,
+                  "resistant": 0,
+                  "Resistant": 0
+                }
+              }
+            },
+            {
+              "id": "Org-137-P1",
+              "score": {
+                "refs": [
+                  "13048_2026_2178_MOESM1_ESM.pdf/page3/R16C4",
+                  "13048_2026_2178_MOESM1_ESM.pdf/page3/R18C4"
+                ],
+                "aggregate": "min",
+                "map": {
+                  "Sensitive": 0,
+                  "sensitive": 0,
+                  "Resistant": 1,
+                  "resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "13048_2026_2178_MOESM1_ESM.pdf/page3/R17C4",
+                "map": {
+                  "sensitive": 1,
+                  "Sensitive": 1,
+                  "resistant": 0,
+                  "Resistant": 0
+                }
+              }
+            },
+            {
+              "id": "Org-144-P1",
+              "score": {
+                "refs": [
+                  "13048_2026_2178_MOESM1_ESM.pdf/page3/R19C4",
+                  "13048_2026_2178_MOESM1_ESM.pdf/page3/R21C4"
+                ],
+                "aggregate": "min",
+                "map": {
+                  "Sensitive": 0,
+                  "sensitive": 0,
+                  "Resistant": 1,
+                  "resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "13048_2026_2178_MOESM1_ESM.pdf/page3/R20C4",
+                "map": {
+                  "sensitive": 1,
+                  "Sensitive": 1,
+                  "resistant": 0,
+                  "Resistant": 0
+                }
+              }
+            },
+            {
+              "id": "Org-174-P13",
+              "score": {
+                "refs": [
+                  "13048_2026_2178_MOESM1_ESM.pdf/page3/R22C4",
+                  "13048_2026_2178_MOESM1_ESM.pdf/page3/R24C4"
+                ],
+                "aggregate": "min",
+                "map": {
+                  "Sensitive": 0,
+                  "sensitive": 0,
+                  "Resistant": 1,
+                  "resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "13048_2026_2178_MOESM1_ESM.pdf/page3/R23C4",
+                "map": {
+                  "sensitive": 1,
+                  "Sensitive": 1,
+                  "resistant": 0,
+                  "Resistant": 0
+                }
+              }
+            },
+            {
+              "id": "Org-181-P12",
+              "score": {
+                "refs": [
+                  "13048_2026_2178_MOESM1_ESM.pdf/page3/R25C4",
+                  "13048_2026_2178_MOESM1_ESM.pdf/page3/R27C4"
+                ],
+                "aggregate": "min",
+                "map": {
+                  "Sensitive": 0,
+                  "sensitive": 0,
+                  "Resistant": 1,
+                  "resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "13048_2026_2178_MOESM1_ESM.pdf/page3/R26C4",
+                "map": {
+                  "sensitive": 1,
+                  "Sensitive": 1,
+                  "resistant": 0,
+                  "Resistant": 0
+                }
+              }
+            },
+            {
+              "id": "Org-240-P1",
+              "score": {
+                "refs": [
+                  "13048_2026_2178_MOESM1_ESM.pdf/page3/R28C4",
+                  "13048_2026_2178_MOESM1_ESM.pdf/page3/R30C4"
+                ],
+                "aggregate": "min",
+                "map": {
+                  "Sensitive": 0,
+                  "sensitive": 0,
+                  "Resistant": 1,
+                  "resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "13048_2026_2178_MOESM1_ESM.pdf/page3/R29C4",
+                "map": {
+                  "sensitive": 1,
+                  "Sensitive": 1,
+                  "resistant": 0,
+                  "Resistant": 0
+                }
+              }
+            },
+            {
+              "id": "Org-242-P9",
+              "score": {
+                "refs": [
+                  "13048_2026_2178_MOESM1_ESM.pdf/page3/R31C4",
+                  "13048_2026_2178_MOESM1_ESM.pdf/page3/R33C4"
+                ],
+                "aggregate": "min",
+                "map": {
+                  "Sensitive": 0,
+                  "sensitive": 0,
+                  "Resistant": 1,
+                  "resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "13048_2026_2178_MOESM1_ESM.pdf/page3/R32C4",
+                "map": {
+                  "sensitive": 1,
+                  "Sensitive": 1,
+                  "resistant": 0,
+                  "Resistant": 0
+                }
+              }
+            },
+            {
+              "id": "Org-248-P1",
+              "score": {
+                "refs": [
+                  "13048_2026_2178_MOESM1_ESM.pdf/page4/R7C6",
+                  "13048_2026_2178_MOESM1_ESM.pdf/page4/R9C6"
+                ],
+                "aggregate": "min",
+                "map": {
+                  "Sensitive": 0,
+                  "sensitive": 0,
+                  "Resistant": 1,
+                  "resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "13048_2026_2178_MOESM1_ESM.pdf/page4/R8C2",
+                "map": {
+                  "sensitive": 1,
+                  "Sensitive": 1,
+                  "resistant": 0,
+                  "Resistant": 0
+                }
+              }
+            },
+            {
+              "id": "Org-263-P3",
+              "score": {
+                "refs": [
+                  "13048_2026_2178_MOESM1_ESM.pdf/page4/R10C6",
+                  "13048_2026_2178_MOESM1_ESM.pdf/page4/R12C6"
+                ],
+                "aggregate": "min",
+                "map": {
+                  "Sensitive": 0,
+                  "sensitive": 0,
+                  "Resistant": 1,
+                  "resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "13048_2026_2178_MOESM1_ESM.pdf/page4/R11C2",
+                "map": {
+                  "sensitive": 1,
+                  "Sensitive": 1,
+                  "resistant": 0,
+                  "Resistant": 0
+                }
+              }
+            },
+            {
+              "id": "Org-264-P1",
+              "score": {
+                "refs": [
+                  "13048_2026_2178_MOESM1_ESM.pdf/page4/R13C6",
+                  "13048_2026_2178_MOESM1_ESM.pdf/page4/R15C6"
+                ],
+                "aggregate": "min",
+                "map": {
+                  "Sensitive": 0,
+                  "sensitive": 0,
+                  "Resistant": 1,
+                  "resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "13048_2026_2178_MOESM1_ESM.pdf/page4/R14C2",
+                "map": {
+                  "sensitive": 1,
+                  "Sensitive": 1,
+                  "resistant": 0,
+                  "Resistant": 0
+                }
+              }
+            },
+            {
+              "id": "Org-128-P1",
+              "score": {
+                "refs": [
+                  "13048_2026_2178_MOESM1_ESM.pdf/page5/R7C4",
+                  "13048_2026_2178_MOESM1_ESM.pdf/page5/R9C4"
+                ],
+                "aggregate": "min",
+                "map": {
+                  "Sensitive": 0,
+                  "sensitive": 0,
+                  "Resistant": 1,
+                  "resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "13048_2026_2178_MOESM1_ESM.pdf/page5/R8C4",
+                "map": {
+                  "sensitive": 1,
+                  "Sensitive": 1,
+                  "resistant": 0,
+                  "Resistant": 0
+                }
+              }
+            },
+            {
+              "id": "Org-131-P1",
+              "score": {
+                "refs": [
+                  "13048_2026_2178_MOESM1_ESM.pdf/page5/R10C3",
+                  "13048_2026_2178_MOESM1_ESM.pdf/page5/R12C3"
+                ],
+                "aggregate": "min",
+                "map": {
+                  "Sensitive": 0,
+                  "sensitive": 0,
+                  "Resistant": 1,
+                  "resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "13048_2026_2178_MOESM1_ESM.pdf/page5/R11C5",
+                "map": {
+                  "sensitive": 1,
+                  "Sensitive": 1,
+                  "resistant": 0,
+                  "Resistant": 0
+                }
+              }
+            },
+            {
+              "id": "Org-183-P13",
+              "score": {
+                "refs": [
+                  "13048_2026_2178_MOESM1_ESM.pdf/page5/R13C4"
+                ],
+                "aggregate": "min",
+                "map": {
+                  "Sensitive": 0,
+                  "sensitive": 0,
+                  "Resistant": 1,
+                  "resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "13048_2026_2178_MOESM1_ESM.pdf/page5/R14C4",
+                "map": {
+                  "sensitive": 1,
+                  "Sensitive": 1,
+                  "resistant": 0,
+                  "Resistant": 0
+                }
+              }
+            },
+            {
+              "id": "Org-222-P1",
+              "score": {
+                "refs": [
+                  "13048_2026_2178_MOESM1_ESM.pdf/page5/R16C4",
+                  "13048_2026_2178_MOESM1_ESM.pdf/page5/R18C4"
+                ],
+                "aggregate": "min",
+                "map": {
+                  "Sensitive": 0,
+                  "sensitive": 0,
+                  "Resistant": 1,
+                  "resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "13048_2026_2178_MOESM1_ESM.pdf/page5/R17C4",
+                "map": {
+                  "sensitive": 1,
+                  "Sensitive": 1,
+                  "resistant": 0,
+                  "Resistant": 0
+                }
+              }
+            },
+            {
+              "id": "Org-225-P1",
+              "score": {
+                "refs": [
+                  "13048_2026_2178_MOESM1_ESM.pdf/page5/R19C4",
+                  "13048_2026_2178_MOESM1_ESM.pdf/page5/R21C4"
+                ],
+                "aggregate": "min",
+                "map": {
+                  "Sensitive": 0,
+                  "sensitive": 0,
+                  "Resistant": 1,
+                  "resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "13048_2026_2178_MOESM1_ESM.pdf/page5/R20C4",
+                "map": {
+                  "sensitive": 1,
+                  "Sensitive": 1,
+                  "resistant": 0,
+                  "Resistant": 0
+                }
+              }
+            },
+            {
+              "id": "Org-258-P4",
+              "score": {
+                "refs": [
+                  "13048_2026_2178_MOESM1_ESM.pdf/page5/R22C4",
+                  "13048_2026_2178_MOESM1_ESM.pdf/page5/R24C4"
+                ],
+                "aggregate": "min",
+                "map": {
+                  "Sensitive": 0,
+                  "sensitive": 0,
+                  "Resistant": 1,
+                  "resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "13048_2026_2178_MOESM1_ESM.pdf/page5/R23C4",
+                "map": {
+                  "sensitive": 1,
+                  "Sensitive": 1,
+                  "resistant": 0,
+                  "Resistant": 0
+                }
+              }
+            },
+            {
+              "id": "Org-259-P4",
+              "score": {
+                "refs": [
+                  "13048_2026_2178_MOESM1_ESM.pdf/page5/R25C4",
+                  "13048_2026_2178_MOESM1_ESM.pdf/page5/R27C4"
+                ],
+                "aggregate": "min",
+                "map": {
+                  "Sensitive": 0,
+                  "sensitive": 0,
+                  "Resistant": 1,
+                  "resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "13048_2026_2178_MOESM1_ESM.pdf/page5/R26C4",
+                "map": {
+                  "sensitive": 1,
+                  "Sensitive": 1,
+                  "resistant": 0,
+                  "Resistant": 0
+                }
+              }
+            },
+            {
+              "id": "Org-259-P6",
+              "score": {
+                "refs": [
+                  "13048_2026_2178_MOESM1_ESM.pdf/page5/R28C4",
+                  "13048_2026_2178_MOESM1_ESM.pdf/page5/R30C4"
+                ],
+                "aggregate": "min",
+                "map": {
+                  "Sensitive": 0,
+                  "sensitive": 0,
+                  "Resistant": 1,
+                  "resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "13048_2026_2178_MOESM1_ESM.pdf/page5/R29C4",
+                "map": {
+                  "sensitive": 1,
+                  "Sensitive": 1,
+                  "resistant": 0,
+                  "Resistant": 0
+                }
+              }
+            }
+          ],
+          "blocked_reason": null
+        },
+        "notes": [
+          "Assay Sensitive is encoded as 0 and Resistant as 1. The minimum across carboplatin and paclitaxel is below 1 when the organoid is sensitive to either drug, matching the stated TC combination rule.",
+          "The four discordant records are Org-124-P1, Org-137-P1, Org-222-P1, and Org-225-P1, giving 16/20 = 80%."
+        ]
+      },
+      "evaluation": {
+        "matched": true,
+        "metric": "accuracy",
+        "computed": 0.8,
+        "reported": 0.8,
+        "difference": 0.0,
+        "n": 20,
+        "errors": [],
+        "rows": [
+          {
+            "id": "Org-93-P1",
+            "score": 0.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "Org-103-P1",
+            "score": 0.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "Org-124-P1",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 1
+          },
+          {
+            "id": "Org-137-P1",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 1
+          },
+          {
+            "id": "Org-144-P1",
+            "score": 0.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "Org-174-P13",
+            "score": 0.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "Org-181-P12",
+            "score": 0.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "Org-240-P1",
+            "score": 0.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "Org-242-P9",
+            "score": 1.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "Org-248-P1",
+            "score": 0.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "Org-263-P3",
+            "score": 0.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "Org-264-P1",
+            "score": 0.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "Org-128-P1",
+            "score": 0.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "Org-131-P1",
+            "score": 0.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "Org-183-P13",
+            "score": 0.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "Org-222-P1",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 0
+          },
+          {
+            "id": "Org-225-P1",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 1
+          },
+          {
+            "id": "Org-258-P4",
+            "score": 0.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "Org-259-P4",
+            "score": 0.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "Org-259-P6",
+            "score": 0.0,
+            "truth": 1,
+            "prediction": 1
+          }
+        ],
+        "expected": {
+          "metric": "accuracy",
+          "value": 0.8,
+          "n": 20
+        }
+      },
+      "calls": 9,
+      "tokens": 269423
+    }
+  },
+  "last_contract": {
+    "status": "computed",
+    "fields": {
+      "unit": {
+        "value": "organoid_line",
+        "evidence": [
+          "article:p34"
+        ],
+        "explanation": "Twenty organoid drug-screening records were compared with matched clinical responses."
+      },
+      "platform": {
+        "value": "organoid",
+        "evidence": [
+          "article:p34",
+          "article:p35"
+        ],
+        "explanation": "Patient-derived ovarian cancer organoids were screened against paclitaxel and carboplatin."
+      },
+      "readout": {
+        "value": "ic50",
+        "evidence": [
+          "article:p34"
+        ],
+        "explanation": "The table Result labels encode whether each IC50 was below the drug Cmax; AUC assisted only when IC50 could not be calculated."
+      },
+      "direction": {
+        "value": "lower_sensitive",
+        "evidence": [
+          "article:p34",
+          "article:p35"
+        ],
+        "explanation": "IC50 below Cmax is labeled Sensitive and indicates greater drug sensitivity."
+      },
+      "threshold_rule": {
+        "value": "fixed_numeric",
+        "evidence": [
+          "article:p34"
+        ],
+        "explanation": "Fixed Cmax thresholds were 87 µM for carboplatin and 4.1 µM for paclitaxel; sensitivity to either drug predicted TC efficacy."
+      },
+      "threshold_timing": {
+        "value": "independent_reference",
+        "evidence": [
+          "article:p34"
+        ],
+        "explanation": "The Cmax cutoffs were external pharmacokinetic references, not optimized on these outcomes."
+      },
+      "patient_mapping": {
+        "value": "individual_available",
+        "evidence": [
+          "article:p37",
+          "article:p34"
+        ],
+        "explanation": "Each organoid is individually labeled and linked in Tables S3-S5 to the corresponding patient response."
+      },
+      "regimen_match": {
+        "value": "matched",
+        "evidence": [
+          "article:p34",
+          "article:p37"
+        ],
+        "explanation": "The assay evaluated the two drugs in the clinical paclitaxel-carboplatin regimen and used an OR rule for combination efficacy."
+      },
+      "n_units": {
+        "value": 20,
+        "evidence": [
+          "article:p34",
+          "article:p37"
+        ],
+        "explanation": "The exact comparison comprised 20 screened organoid records from 19 patients, with two lines from one recurrent patient."
+      },
+      "split": {
+        "value": "none",
+        "evidence": [
+          "article:p34",
+          "article:p37"
+        ],
+        "explanation": "No model was fitted or threshold optimized on this cohort; fixed Cmax rules were applied directly."
+      }
+    },
+    "headline": {
+      "metric": "accuracy",
+      "reported": 0.8,
+      "reported_evidence": [
+        "article:p3",
+        "article:p37"
+      ],
+      "threshold": 1,
+      "op": "<",
+      "score_direction": "lower",
+      "records": [
+        {
+          "id": "Org-93-P1",
+          "score": {
+            "refs": [
+              "13048_2026_2178_MOESM1_ESM.pdf/page3/R7C4",
+              "13048_2026_2178_MOESM1_ESM.pdf/page3/R9C4"
+            ],
+            "aggregate": "min",
+            "map": {
+              "Sensitive": 0,
+              "sensitive": 0,
+              "Resistant": 1,
+              "resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "13048_2026_2178_MOESM1_ESM.pdf/page3/R8C4",
+            "map": {
+              "sensitive": 1,
+              "Sensitive": 1,
+              "resistant": 0,
+              "Resistant": 0
+            }
+          }
+        },
+        {
+          "id": "Org-103-P1",
+          "score": {
+            "refs": [
+              "13048_2026_2178_MOESM1_ESM.pdf/page3/R10C4",
+              "13048_2026_2178_MOESM1_ESM.pdf/page3/R12C4"
+            ],
+            "aggregate": "min",
+            "map": {
+              "Sensitive": 0,
+              "sensitive": 0,
+              "Resistant": 1,
+              "resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "13048_2026_2178_MOESM1_ESM.pdf/page3/R11C4",
+            "map": {
+              "sensitive": 1,
+              "Sensitive": 1,
+              "resistant": 0,
+              "Resistant": 0
+            }
+          }
+        },
+        {
+          "id": "Org-124-P1",
+          "score": {
+            "refs": [
+              "13048_2026_2178_MOESM1_ESM.pdf/page3/R13C4",
+              "13048_2026_2178_MOESM1_ESM.pdf/page3/R15C4"
+            ],
+            "aggregate": "min",
+            "map": {
+              "Sensitive": 0,
+              "sensitive": 0,
+              "Resistant": 1,
+              "resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "13048_2026_2178_MOESM1_ESM.pdf/page3/R14C4",
+            "map": {
+              "sensitive": 1,
+              "Sensitive": 1,
+              "resistant": 0,
+              "Resistant": 0
+            }
+          }
+        },
+        {
+          "id": "Org-137-P1",
+          "score": {
+            "refs": [
+              "13048_2026_2178_MOESM1_ESM.pdf/page3/R16C4",
+              "13048_2026_2178_MOESM1_ESM.pdf/page3/R18C4"
+            ],
+            "aggregate": "min",
+            "map": {
+              "Sensitive": 0,
+              "sensitive": 0,
+              "Resistant": 1,
+              "resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "13048_2026_2178_MOESM1_ESM.pdf/page3/R17C4",
+            "map": {
+              "sensitive": 1,
+              "Sensitive": 1,
+              "resistant": 0,
+              "Resistant": 0
+            }
+          }
+        },
+        {
+          "id": "Org-144-P1",
+          "score": {
+            "refs": [
+              "13048_2026_2178_MOESM1_ESM.pdf/page3/R19C4",
+              "13048_2026_2178_MOESM1_ESM.pdf/page3/R21C4"
+            ],
+            "aggregate": "min",
+            "map": {
+              "Sensitive": 0,
+              "sensitive": 0,
+              "Resistant": 1,
+              "resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "13048_2026_2178_MOESM1_ESM.pdf/page3/R20C4",
+            "map": {
+              "sensitive": 1,
+              "Sensitive": 1,
+              "resistant": 0,
+              "Resistant": 0
+            }
+          }
+        },
+        {
+          "id": "Org-174-P13",
+          "score": {
+            "refs": [
+              "13048_2026_2178_MOESM1_ESM.pdf/page3/R22C4",
+              "13048_2026_2178_MOESM1_ESM.pdf/page3/R24C4"
+            ],
+            "aggregate": "min",
+            "map": {
+              "Sensitive": 0,
+              "sensitive": 0,
+              "Resistant": 1,
+              "resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "13048_2026_2178_MOESM1_ESM.pdf/page3/R23C4",
+            "map": {
+              "sensitive": 1,
+              "Sensitive": 1,
+              "resistant": 0,
+              "Resistant": 0
+            }
+          }
+        },
+        {
+          "id": "Org-181-P12",
+          "score": {
+            "refs": [
+              "13048_2026_2178_MOESM1_ESM.pdf/page3/R25C4",
+              "13048_2026_2178_MOESM1_ESM.pdf/page3/R27C4"
+            ],
+            "aggregate": "min",
+            "map": {
+              "Sensitive": 0,
+              "sensitive": 0,
+              "Resistant": 1,
+              "resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "13048_2026_2178_MOESM1_ESM.pdf/page3/R26C4",
+            "map": {
+              "sensitive": 1,
+              "Sensitive": 1,
+              "resistant": 0,
+              "Resistant": 0
+            }
+          }
+        },
+        {
+          "id": "Org-240-P1",
+          "score": {
+            "refs": [
+              "13048_2026_2178_MOESM1_ESM.pdf/page3/R28C4",
+              "13048_2026_2178_MOESM1_ESM.pdf/page3/R30C4"
+            ],
+            "aggregate": "min",
+            "map": {
+              "Sensitive": 0,
+              "sensitive": 0,
+              "Resistant": 1,
+              "resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "13048_2026_2178_MOESM1_ESM.pdf/page3/R29C4",
+            "map": {
+              "sensitive": 1,
+              "Sensitive": 1,
+              "resistant": 0,
+              "Resistant": 0
+            }
+          }
+        },
+        {
+          "id": "Org-242-P9",
+          "score": {
+            "refs": [
+              "13048_2026_2178_MOESM1_ESM.pdf/page3/R31C4",
+              "13048_2026_2178_MOESM1_ESM.pdf/page3/R33C4"
+            ],
+            "aggregate": "min",
+            "map": {
+              "Sensitive": 0,
+              "sensitive": 0,
+              "Resistant": 1,
+              "resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "13048_2026_2178_MOESM1_ESM.pdf/page3/R32C4",
+            "map": {
+              "sensitive": 1,
+              "Sensitive": 1,
+              "resistant": 0,
+              "Resistant": 0
+            }
+          }
+        },
+        {
+          "id": "Org-248-P1",
+          "score": {
+            "refs": [
+              "13048_2026_2178_MOESM1_ESM.pdf/page4/R7C6",
+              "13048_2026_2178_MOESM1_ESM.pdf/page4/R9C6"
+            ],
+            "aggregate": "min",
+            "map": {
+              "Sensitive": 0,
+              "sensitive": 0,
+              "Resistant": 1,
+              "resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "13048_2026_2178_MOESM1_ESM.pdf/page4/R8C2",
+            "map": {
+              "sensitive": 1,
+              "Sensitive": 1,
+              "resistant": 0,
+              "Resistant": 0
+            }
+          }
+        },
+        {
+          "id": "Org-263-P3",
+          "score": {
+            "refs": [
+              "13048_2026_2178_MOESM1_ESM.pdf/page4/R10C6",
+              "13048_2026_2178_MOESM1_ESM.pdf/page4/R12C6"
+            ],
+            "aggregate": "min",
+            "map": {
+              "Sensitive": 0,
+              "sensitive": 0,
+              "Resistant": 1,
+              "resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "13048_2026_2178_MOESM1_ESM.pdf/page4/R11C2",
+            "map": {
+              "sensitive": 1,
+              "Sensitive": 1,
+              "resistant": 0,
+              "Resistant": 0
+            }
+          }
+        },
+        {
+          "id": "Org-264-P1",
+          "score": {
+            "refs": [
+              "13048_2026_2178_MOESM1_ESM.pdf/page4/R13C6",
+              "13048_2026_2178_MOESM1_ESM.pdf/page4/R15C6"
+            ],
+            "aggregate": "min",
+            "map": {
+              "Sensitive": 0,
+              "sensitive": 0,
+              "Resistant": 1,
+              "resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "13048_2026_2178_MOESM1_ESM.pdf/page4/R14C2",
+            "map": {
+              "sensitive": 1,
+              "Sensitive": 1,
+              "resistant": 0,
+              "Resistant": 0
+            }
+          }
+        },
+        {
+          "id": "Org-128-P1",
+          "score": {
+            "refs": [
+              "13048_2026_2178_MOESM1_ESM.pdf/page5/R7C4",
+              "13048_2026_2178_MOESM1_ESM.pdf/page5/R9C4"
+            ],
+            "aggregate": "min",
+            "map": {
+              "Sensitive": 0,
+              "sensitive": 0,
+              "Resistant": 1,
+              "resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "13048_2026_2178_MOESM1_ESM.pdf/page5/R8C4",
+            "map": {
+              "sensitive": 1,
+              "Sensitive": 1,
+              "resistant": 0,
+              "Resistant": 0
+            }
+          }
+        },
+        {
+          "id": "Org-131-P1",
+          "score": {
+            "refs": [
+              "13048_2026_2178_MOESM1_ESM.pdf/page5/R10C3",
+              "13048_2026_2178_MOESM1_ESM.pdf/page5/R12C3"
+            ],
+            "aggregate": "min",
+            "map": {
+              "Sensitive": 0,
+              "sensitive": 0,
+              "Resistant": 1,
+              "resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "13048_2026_2178_MOESM1_ESM.pdf/page5/R11C5",
+            "map": {
+              "sensitive": 1,
+              "Sensitive": 1,
+              "resistant": 0,
+              "Resistant": 0
+            }
+          }
+        },
+        {
+          "id": "Org-183-P13",
+          "score": {
+            "refs": [
+              "13048_2026_2178_MOESM1_ESM.pdf/page5/R13C4"
+            ],
+            "aggregate": "min",
+            "map": {
+              "Sensitive": 0,
+              "sensitive": 0,
+              "Resistant": 1,
+              "resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "13048_2026_2178_MOESM1_ESM.pdf/page5/R14C4",
+            "map": {
+              "sensitive": 1,
+              "Sensitive": 1,
+              "resistant": 0,
+              "Resistant": 0
+            }
+          }
+        },
+        {
+          "id": "Org-222-P1",
+          "score": {
+            "refs": [
+              "13048_2026_2178_MOESM1_ESM.pdf/page5/R16C4",
+              "13048_2026_2178_MOESM1_ESM.pdf/page5/R18C4"
+            ],
+            "aggregate": "min",
+            "map": {
+              "Sensitive": 0,
+              "sensitive": 0,
+              "Resistant": 1,
+              "resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "13048_2026_2178_MOESM1_ESM.pdf/page5/R17C4",
+            "map": {
+              "sensitive": 1,
+              "Sensitive": 1,
+              "resistant": 0,
+              "Resistant": 0
+            }
+          }
+        },
+        {
+          "id": "Org-225-P1",
+          "score": {
+            "refs": [
+              "13048_2026_2178_MOESM1_ESM.pdf/page5/R19C4",
+              "13048_2026_2178_MOESM1_ESM.pdf/page5/R21C4"
+            ],
+            "aggregate": "min",
+            "map": {
+              "Sensitive": 0,
+              "sensitive": 0,
+              "Resistant": 1,
+              "resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "13048_2026_2178_MOESM1_ESM.pdf/page5/R20C4",
+            "map": {
+              "sensitive": 1,
+              "Sensitive": 1,
+              "resistant": 0,
+              "Resistant": 0
+            }
+          }
+        },
+        {
+          "id": "Org-258-P4",
+          "score": {
+            "refs": [
+              "13048_2026_2178_MOESM1_ESM.pdf/page5/R22C4",
+              "13048_2026_2178_MOESM1_ESM.pdf/page5/R24C4"
+            ],
+            "aggregate": "min",
+            "map": {
+              "Sensitive": 0,
+              "sensitive": 0,
+              "Resistant": 1,
+              "resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "13048_2026_2178_MOESM1_ESM.pdf/page5/R23C4",
+            "map": {
+              "sensitive": 1,
+              "Sensitive": 1,
+              "resistant": 0,
+              "Resistant": 0
+            }
+          }
+        },
+        {
+          "id": "Org-259-P4",
+          "score": {
+            "refs": [
+              "13048_2026_2178_MOESM1_ESM.pdf/page5/R25C4",
+              "13048_2026_2178_MOESM1_ESM.pdf/page5/R27C4"
+            ],
+            "aggregate": "min",
+            "map": {
+              "Sensitive": 0,
+              "sensitive": 0,
+              "Resistant": 1,
+              "resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "13048_2026_2178_MOESM1_ESM.pdf/page5/R26C4",
+            "map": {
+              "sensitive": 1,
+              "Sensitive": 1,
+              "resistant": 0,
+              "Resistant": 0
+            }
+          }
+        },
+        {
+          "id": "Org-259-P6",
+          "score": {
+            "refs": [
+              "13048_2026_2178_MOESM1_ESM.pdf/page5/R28C4",
+              "13048_2026_2178_MOESM1_ESM.pdf/page5/R30C4"
+            ],
+            "aggregate": "min",
+            "map": {
+              "Sensitive": 0,
+              "sensitive": 0,
+              "Resistant": 1,
+              "resistant": 1
+            }
+          },
+          "truth": {
+            "ref": "13048_2026_2178_MOESM1_ESM.pdf/page5/R29C4",
+            "map": {
+              "sensitive": 1,
+              "Sensitive": 1,
+              "resistant": 0,
+              "Resistant": 0
+            }
+          }
+        }
+      ],
+      "blocked_reason": null
+    },
+    "notes": [
+      "Assay Sensitive is encoded as 0 and Resistant as 1. The minimum across carboplatin and paclitaxel is below 1 when the organoid is sensitive to either drug, matching the stated TC combination rule.",
+      "The four discordant records are Org-124-P1, Org-137-P1, Org-222-P1, and Org-225-P1, giving 16/20 = 80%."
+    ]
+  },
+  "last_evaluation": {
+    "matched": true,
+    "metric": "accuracy",
+    "computed": 0.8,
+    "reported": 0.8,
+    "difference": 0.0,
+    "n": 20,
+    "errors": [],
+    "rows": [
+      {
+        "id": "Org-93-P1",
+        "score": 0.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "Org-103-P1",
+        "score": 0.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "Org-124-P1",
+        "score": 0.0,
+        "truth": 0,
+        "prediction": 1
+      },
+      {
+        "id": "Org-137-P1",
+        "score": 0.0,
+        "truth": 0,
+        "prediction": 1
+      },
+      {
+        "id": "Org-144-P1",
+        "score": 0.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "Org-174-P13",
+        "score": 0.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "Org-181-P12",
+        "score": 0.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "Org-240-P1",
+        "score": 0.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "Org-242-P9",
+        "score": 1.0,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "Org-248-P1",
+        "score": 0.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "Org-263-P3",
+        "score": 0.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "Org-264-P1",
+        "score": 0.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "Org-128-P1",
+        "score": 0.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "Org-131-P1",
+        "score": 0.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "Org-183-P13",
+        "score": 0.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "Org-222-P1",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 0
+      },
+      {
+        "id": "Org-225-P1",
+        "score": 0.0,
+        "truth": 0,
+        "prediction": 1
+      },
+      {
+        "id": "Org-258-P4",
+        "score": 0.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "Org-259-P4",
+        "score": 0.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "Org-259-P6",
+        "score": 0.0,
+        "truth": 1,
+        "prediction": 1
+      }
+    ],
+    "expected": {
+      "metric": "accuracy",
+      "value": 0.8,
+      "n": 20
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_ip6gsr4ni4osfe0n166g9ckq",
+        "type": "function",
+        "function": {
+          "name": "python",
+          "arguments": "{\"code\": \"PDF='2022_281692_KUUSANMAKI_SUPPL.pdf'\\nfor sh in ['page17','page21','page22']:\\n print('\\\\n---',sh,'---')\\n for r,gr in enumerate(tables[PDF][sh]['geometry']):\\n  vals=[]\\n  for c in gr['cells']:\\n   vals.append(f\\\"{c.get('text')}@{c.get('x0'):.0f}\\\")\\n  print(r+1, ' | '.join(vals))\\n\"}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "Need row-level likely Figure 3A only image. read_figure may not transcribe coordinates, I'll check supplementary materials and relevant pages for raw data.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 229,
+    "prompt_tokens": 39088,
+    "total_tokens": 39317,
+    "prompt_tokens_details": {
+      "cached_tokens": 30520
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 76
+    }
+  }
+}

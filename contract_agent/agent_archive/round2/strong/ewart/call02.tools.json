@@ -1,0 +1,17 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "print(type(files), files[:1] if isinstance(files,list) else list(files)[:3])\nprint(type(tables))\nfor k,v in list(tables.items())[:2]:\n print(k,type(v), v.keys() if isinstance(v,dict) else '')\n if isinstance(v,dict):\n  for sk,sv in list(v.items())[:1]: print(' sheet',sk,type(sv), dir(sv)[:10])\n"
+    },
+    "output": {
+      "returncode": 0,
+      "stdout": "<class 'list'> [{'url': 'https://www.ebi.ac.uk/europepmc/webservices/rest/PMC9727064/fullTextXML', 'file': 'article.xml', 'sha256': '48addc159dc30ffb628c4adc4f71dd170f8f3b0b5f4b2f71b5d8fdc7f5719468', 'status': 'local', 'bytes': 185780, 'sheets': [{'name': 'Table 1', 'nrows': 28, 'ncols': 5}, {'name': 'Table 2', 'nrows': 16, 'ncols': 13}, {'name': 'Table 3', 'nrows': 15, 'ncols': 9}, {'name': 'Table 4', 'nrows': 28, 'ncols': 5}, {'name': 'Table 5', 'nrows': 5, 'ncols': 7}, {'name': 'Table 6', 'nrows': 5, 'ncols': 7}]}]\n<class 'dict'>\narticle.xml <class 'dict'> dict_keys(['Table 1', 'Table 2', 'Table 3', 'Table 4', 'Table 5', 'Table 6'])\n sheet Table 1 <class 'dict'> ['__class__', '__class_getitem__', '__contains__', '__delattr__', '__delitem__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__']\n43856_2022_209_MOESM1_ESM.xlsx <class 'dict'> dict_keys(['Sheet1'])\n sheet Sheet1 <class 'dict'> ['__class__', '__class_getitem__', '__contains__', '__delattr__', '__delitem__', '__dir__', '__doc__', '__eq__', '__format__', '__ge__']\n",
+      "stderr": "",
+      "seconds": 0.7998590839852113,
+      "peak_rss_bytes": 47382528,
+      "limit_error": null,
+      "code_sha256": "8aae86152e0cd76cf9e519beade2defe574d278891c365d386c81e3c0ca6a83e"
+    }
+  }
+]

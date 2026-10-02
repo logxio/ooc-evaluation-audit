@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_7crajqwvygy29viht3q2uhdw",
+        "type": "function",
+        "function": {
+          "name": "python",
+          "arguments": "{\"code\": \"rows=get_rows('article.xml','Table 1')\\nfor i,r in enumerate(rows[:10],1): print(i,r)\\n\"}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "Error max(drug_col,Check Table1 headers.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 80,
+    "prompt_tokens": 24355,
+    "total_tokens": 24435,
+    "prompt_tokens_details": {
+      "cached_tokens": 1848
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 19
+    }
+  }
+}

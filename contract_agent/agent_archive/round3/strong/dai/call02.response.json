@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_7gud1quuvpi4pw0j72wrupbs",
+        "type": "function",
+        "function": {
+          "name": "python",
+          "arguments": "{\"code\": \"for f,shs in [('Source data figure 5.xlsx',['5l','5m','5n','5o']),('mmc2.xlsx',['Sheet1'])]:\\n print('\\\\nFILE',f)\\n for sh in shs:\\n  rows=get_rows(f,sh)\\n  print('\\\\nSHEET',sh,len(rows),'x',max(map(len,rows)))\\n  for i,r in enumerate(rows,1):\\n   print(i,repr(r))\"}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "We need inspect. Call tool and print code.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 160,
+    "prompt_tokens": 23564,
+    "total_tokens": 23724,
+    "prompt_tokens_details": {
+      "cached_tokens": 2360
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 21
+    }
+  }
+}

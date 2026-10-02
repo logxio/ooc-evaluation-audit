@@ -1,0 +1,17 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "for f in tables:\n if f.endswith('.xlsx'):\n  print('\\nFILE',f)\n  for sh in tables[f]:\n   rows=get_rows(f,sh)\n   print(' ',sh,len(rows),len(rows[0]) if rows else 0, rows[0][:8] if rows else '')\n"
+    },
+    "output": {
+      "returncode": 0,
+      "stdout": "\nFILE 43856_2022_209_MOESM1_ESM.xlsx\n  Sheet1 250 20 [None, None, None, None, None, None, None, None]\n\nFILE 43856_2022_209_MOESM2_ESM.xlsx\n  Read me 43 14 [None, None, None, None, None, None, None, None]\n  1. Analytic deriv. of base case 41 27 [None, None, 'Analytic derivation of clinical development parameters for the base case', None, None, None, None, None]\n  2. Attrition parameter details 44 11 [None, 'Partitioning development failure into safety, efficacy, and other causes ', None, None, None, None, None, None]\n  3. Model core 290 21 [None, None, 'Working portfolio model: Vary parameters, particular the preclinical tox FNR(false negative rate) versus the base case', None, None, None, None, None]\n  4. DILI tox sensitivity 220 35 [None, None, 'DILI-related sensitivity analyses', None, None, None, None, None]\n  5. NPV to annualized value 36 45 [None, 'Mapping from project lifecycle eNPV estimates to run-rate financial value', None, None, None, None, None, None]\n  6. References 9 2 [None, None]\n  7. Supplementary Method details 81 13 [None, None, None, None, None, None, None, None]\n  8. Supplementary Results figure 25 20 [None, None, None, None, None, None, None, None]\n  9. Discussion broad potential 38 31 [None, None, None, None, None, None, None, None]\n\nFILE 43856_2022_209_MOESM3_ESM.xlsx\n  Donor 1 48 4 [None, 'Albumin Levels (µg/106 hepatocytes/day)', None, None]\n  Donor 2 48 4 [None, 'Albumin Levels (µg/106 hepatocytes/day)', None, None]\n  Donor 3 41 4 [None, 'Albumin Levels (µg/106 hepatocytes/day)', None, None]\n\nFILE 43856_2022_209_MOESM4_ESM.xlsx\n  Donor 1 14 4 [None, 'Urea Levels (µg/106 hepatocytes/day)', None, None]\n  Donor 2 25 4 [None, 'Urea Levels (µg/106 hepatocytes/day)', None, None]\n  Donor 3 20 4 [None, 'Urea Levels (µg/106 hepatocytes/day)', None, None]\n\nFILE 43856_2022_209_MOESM5_ESM.xlsx\n  Sheet1 25 4 ['Statistical significance/Albumin and Urea/ \\nSame donor across different days', None, None, None]\n\nFILE 43856_2022_209_MOESM6_ESM.xlsx\n  Sheet 1 19 3 ['Day3 vs Day7 --- paired t-test', None, None]\n\nFILE 43856_2022_209_MOESM7_ESM.xlsx\n  Sheet 1 38 14 ['Donor 2', None, None, None, None, None, None, None]\n\nFILE 43856_2022_209_MOESM8_ESM.xlsx\n  ALBUMIN 71 3 ['Compound_Name', 'Concentration_Day3', 'Normalized_Albumin_Levels']\n  ALT 71 3 ['Compound_Name', 'Concentration_Day3', 'ALT_levels']\n  Morphology 71 3 ['Compound_Name', 'Concentration_Day3', 'Score']\n",
+      "stderr": "",
+      "seconds": 0.8038723750214558,
+      "peak_rss_bytes": 50069504,
+      "limit_error": null,
+      "code_sha256": "24552a018c44409280adbc3dc53dd3071a1b42fbee4192c1b46cacd780cefae0"
+    }
+  }
+]

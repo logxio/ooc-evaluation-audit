@@ -1,0 +1,17 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "xs=[[-48,.02],[-47,.28],[-47,.57],[-42,.54],[-38,.20],[-37,.20],[-36,.55],[-35,.68],[-33,.45],[-32,.54],[-31,.46],[-28,.33],[-25,.40],[-23,.55],[-22,.39],[5,.61],[18,.28],[22,.67],[23,.82],[24,.56],[25,.75],[38,.62],[39,.77]]\nP=[s for x,s in xs if x<0]; N=[s for x,s in xs if x>=0]\nprint(len(P),len(N),sum((p<n)+.5*(p==n) for p in P for n in N)/(len(P)*len(N)))"
+    },
+    "output": {
+      "returncode": 0,
+      "stdout": "15 8 0.8625\n",
+      "stderr": "",
+      "seconds": 0.7044092079740949,
+      "peak_rss_bytes": 25509888,
+      "limit_error": null,
+      "code_sha256": "ede790a5c4edd8ab80722df7ef7aab4c1e7d4dff47124c7234f7766f1abeec10"
+    }
+  }
+]

@@ -1,0 +1,9 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "PDF='2022_281692_KUUSANMAKI_SUPPL.pdf'\nfor sh in tables[PDF]:\n geo=tables[PDF][sh].get('geometry',[])\n alltext=[]\n for r,gr in enumerate(geo):\n  for c in gr.get('cells',[]):\n   t=str(c.get('text',''))\n   if re.search(r'(?i)(0\\.82|10\\.7|AUROC|AUC|Table S5|response|DSS)',t): alltext.append((r,t,c.get('x0')))\n if alltext:\n  print('\\n',sh)\n  for x in alltext[:100]: print(x)\n"
+    },
+    "output_sha256": "46ebee95318f5df898473cf1997c84a64709b599acfd67b632c277088f9074a2"
+  }
+]

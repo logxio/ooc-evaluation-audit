@@ -1,0 +1,9 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "import re, math\n# parse rows including combined C1 pattern\nrecs=[]\nfor page in ['page18','page19','page20']:\n o=tables['mmc1.pdf'][page]; rows=o['rows']; geom=o['geometry']\n for ri,(row,g) in enumerate(zip(rows,geom),1):\n  c1=str(row[0]) if row else ''\n  c2=str(row[1]) if len(row)>1 else ''\n  m=re.fullmatch(r'(P-\\d+)(P-\\d+-[A-Z0-9]+)', c1)\n  org=None; case=None\n  if m: case,org=m.groups()\n  elif re.fullmatch(r'P-\\d+-[A-Z0-9]+', c2): case,org=c1,c2\n  if org:\n   cells=g['cells']\n   def near(a,b): return ' '.join(c['text'] for c in cells if a<=c['x0']<=b)\n   recs.append((page,ri,case,org,near(445,470),near(525,545),near(560,580),near(595,615)))\nprint(len(recs))\nfrom collections import Counter\nprint(Center if False else Counter(r[6] for r in recs),Counter(r[7] for r in recs))\nfor i,r in enumerate(recs,1):\n if i>50: print(i,r)\n# convert ic50: >1000 censor; weird scientific parse, NA\ndef num(s):\n s=s.replace('(cid:893)','')\n if not s or s=='NA': return None\n try: return float(s)\n except: return None\ntruth=[1 if r[6]=='PR' else 0 for r in recs]\nprint('truth pos',sum(truth))\nfor th in [0.5,1,1.5,2,3,4,5,10,20,30,50,100,1000]:\n tp=fp=fn=tn=0\n for r,t in zip(recs,truth):\n  x=num(r[5])\n  if x is None: continue\n  p=1 if x<=th else 0\n  if p and t:tp+=1\n  elif p and not t:fp+=1\n  elif not p and t:fn+=1\n  else:tn+=1\n if tp+fp+fn+tn==54: print(th,tp,fp,fn,tn,(tp+tn)/54)\n"
+    },
+    "output_sha256": "b88dc5c435255a6c11e88c2c6da551fd87ca46707c28daed9f5f2b72148767a4"
+  }
+]

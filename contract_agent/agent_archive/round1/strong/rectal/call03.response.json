@@ -1,0 +1,40 @@
+{
+  "model": "qwen3.8-max",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_ed4a51cc70a54c7c9fa1a914",
+        "type": "function",
+        "function": {
+          "name": "preview_table",
+          "arguments": "{\"file\": \"supp.pdf\", \"sheet\": \"page12\", \"rows\": 12}"
+        }
+      },
+      {
+        "id": "call_a7b6a6050b1e4fc79165c1f4",
+        "type": "function",
+        "function": {
+          "name": "preview_table",
+          "arguments": "{\"file\": \"supp.pdf\", \"sheet\": \"page15\", \"rows\": 33}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "Table S2 spans pages 12, 13, 14. Columns: Patients number, Irradiation, 5-Fu, CPT-11, Combined treatments. The header layout is scrambled. Let's look at page12 geometry to determine column x positions.\n\nAlso need Table S5 (validation cohort diagnostic test) — page 16 is Table S6. Let's check pages 15 and 16 fully.\n\nLet me view page12 image and geometry.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 218,
+    "completion_tokens_details": {
+      "reasoning_tokens": 106,
+      "text_tokens": 218
+    },
+    "prompt_tokens": 27201,
+    "prompt_tokens_details": {
+      "cached_tokens": 24960,
+      "text_tokens": 27201
+    },
+    "total_tokens": 27419
+  }
+}

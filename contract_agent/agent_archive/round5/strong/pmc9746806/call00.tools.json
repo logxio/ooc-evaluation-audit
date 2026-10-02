@@ -1,0 +1,108 @@
+[
+  {
+    "name": "initial_code",
+    "output": {
+      "returncode": 0,
+      "stdout": "POTENTIAL ROW-LEVEL MATCHES: 19\n\n jciinsight-7-158060-s064.pdf page6 row 57 :: Wilcoxon | Rank | Sum | test | between | the | AUCs | of | the | most | sensitive | (HO44) | and | resistant | (HO107) | PDO. | (C) | Gene | sets | enriched | in\n\n jciinsight-7-158060-s064.pdf page16 row 37 :: HO160 | Sensitive\n\n jciinsight-7-158060-s064.pdf page16 row 38 :: HO161 | Intermediate\n\n jciinsight-7-158060-s064.pdf page16 row 39 :: 30 | HO163 | 0 | Resistant\n\n jciinsight-7-158060-s064.pdf page16 row 50 :: of | donor | patient | for | PDO | HO145 | pre- | and | post-treatment | with | PD | showing | the | lesion | increased | from | 35.5 | mm | to | 96.8\n\n jciinsight-7-158060-s064.pdf page17 row 42 :: HO20 | Intermediate\n\n jciinsight-7-158060-s064.pdf page17 row 44 :: HO90 | Resistant\n\n jciinsight-7-158060-s064.pdf page17 row 58 :: HO140 | Sensitive\n\n jciinsight-7-158060-s064.pdf page17 row 59 :: 25 | HO20 | Intermediate\n\n jciinsight-7-158060-s064.pdf page17 row 60 :: HO46 | 0 | Resistant\n\n jciinsight-7-158060-s064.pdf page17 row 83 :: HO46 | 0 | Resistant | HO140* | 0\n\n jciinsight-7-158060-s064.pdf page18 row 10 :: % | HO140* | Sensitive\n\n jciinsight-7-158060-s064.pdf page18 row 14 :: HO90 | 0 | Resistant\n\n jciinsight-7-158060-s064.pdf page18 row 38 :: donor | patient | pre- | and | post-treatment | showing | PD | (HO17). | (B, | C) | Percent | cell | viability | for | HO17 | in | response | to | (B)\n\n jciinsight-7-158060-s064.pdf page18 row 41 :: showing | PD | (HO46). | (G) | Percent | cell | viability | and | relative | AUC | values | in | response | to | eft-508 | for | 7 | CRC | PDOs, | including\n\n jciinsight-7-158060-s064.pdf page18 row 42 :: HO46. | (H) | CT | scans | of | donor | patient | pre- | and | post-treatment | showing | PD | (HO98). | (I) | Percent | cell | viability | and | relative | AUC\n\n jciinsight-7-158060-s064.pdf page18 row 44 :: showing | PD | (HO127). | (K, | L) | Percent | cell | viability | and | relative | AUC | values | in | response | to | (K) | Oxaliplatin | and | (L) | 5-FU | for | 7\n\n jciinsight-7-158060-s064.pdf page18 row 45 :: CRC | PDOs, | including | HO127. | (M) | CT | scans | of | donor | patient | pre- | and | post-treatment | showing | PR | (HO140). | (N, | K, | L).\n\n jciinsight-7-158060-s064.pdf page18 row 47 :: PDOs, | including | HO140. | (O) | CT | scans | of | donor | patient | pre- | and | post-treatment | showing | PD | (HO106). | (P) | Percent | cell\n",
+      "stderr": "",
+      "seconds": 5.030538916995283,
+      "peak_rss_bytes": 68648960,
+      "limit_error": null,
+      "code_sha256": "4218d71fb63f066c2e49bb28305dcd879e5792ef3eb7d2fe53a735738aba84d0",
+      "contract": {
+        "status": "blocked",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p23"
+            ],
+            "explanation": "Each evaluated case pairs one donor patient with the corresponding PDO."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p23",
+              "article:p41"
+            ],
+            "explanation": "Assays were performed in patient-derived organoids (PDOs)."
+          },
+          "readout": {
+            "value": "auc",
+            "evidence": [
+              "article:p41"
+            ],
+            "explanation": "Most PDO responses were categorized from normalized AUC; two CCA cases used published IC50 thresholds."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p41"
+            ],
+            "explanation": "Lower AUC or IC50 indicates greater drug sensitivity."
+          },
+          "threshold_rule": {
+            "value": "cohort_quantile",
+            "evidence": [
+              "article:p41"
+            ],
+            "explanation": "PDO responses were grouped into sensitive/intermediate/resistant by Jenks Natural Breaks, except two IC50-based cases."
+          },
+          "threshold_timing": {
+            "value": "outcome_optimized",
+            "evidence": [
+              "article:p41"
+            ],
+            "explanation": "Jenks categories were derived from the compared PDO AUC values rather than an independent prespecified cutoff."
+          },
+          "patient_mapping": {
+            "value": "partial",
+            "evidence": [
+              "article:p23",
+              "article:p41"
+            ],
+            "explanation": "Patient IDs and aggregate agreement are reported, but machine-readable row-level assay and outcome pairs are not available in the parsed text."
+          },
+          "regimen_match": {
+            "value": "partial",
+            "evidence": [
+              "article:p41"
+            ],
+            "explanation": "PDOs generally received the patient therapy, with exceptions for unavailable drugs and the HO20 treatment sequence."
+          },
+          "n_units": {
+            "value": 11,
+            "evidence": [
+              "article:p23"
+            ],
+            "explanation": "The clinical-correlation denominator was 11 patient/PDO cases."
+          },
+          "split": {
+            "value": "none",
+            "evidence": [
+              "article:p23",
+              "article:p41"
+            ],
+            "explanation": "This was a retrospective paired agreement analysis, not a held-out predictive-model validation."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.8181818181818182,
+          "reported_evidence": [
+            "article:p23"
+          ],
+          "threshold": null,
+          "op": "==",
+          "score_direction": "higher",
+          "records": [],
+          "blocked_reason": "Row-level Table 1 evidence is missing from parsed structured data: Table 1 is the image jciinsight-7-158060-g063.jpg and article.xml/Table 1 has zero rows. An independent figure transcription is needed for all 11 patient IDs, clinical RECIST outcomes, PDO response categories, and match flags; the aggregate statement \"9 of 11\" alone cannot reconstruct row-level accuracy."
+        },
+        "notes": [
+          "Article reports 9 of 11 (82%) concordant PDO/patient responses.",
+          "Mismatches identified in text are HO42 and HO140."
+        ]
+      }
+    }
+  }
+]

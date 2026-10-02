@@ -1,0 +1,108 @@
+[
+  {
+    "name": "initial_code",
+    "output": {
+      "returncode": 0,
+      "stdout": "S003 IDs/outcomes:\n\n--- page18 ---\n1 [\"'list' object has no attribute 'get'\"]\n\n--- page19 ---\n1 [\"'list' object has no attribute 'get'\"]\n\n--- page20 ---\n1 [\"'list' object has no attribute 'get'\"]\n\n--- page21 ---\n1 [\"'list' object has no attribute 'get'\"]\n\n--- page22 ---\n1 [\"'list' object has no attribute 'get'\"]\n\n--- page23 ---\n1 [\"'list' object has no attribute 'get'\"]\n",
+      "stderr": "",
+      "seconds": 2.451521667011548,
+      "peak_rss_bytes": 33800192,
+      "limit_error": null,
+      "code_sha256": "a8d48e7c7bb37e827f8f2c632423fb50535bab37c6a98c1723bc52457318b194",
+      "contract": {
+        "status": "blocked",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p40"
+            ],
+            "explanation": "Predictions are made for individual ESCC patients from corresponding PDO drug-sensitivity tests."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p41"
+            ],
+            "explanation": "Patient-derived organoid drug-sensitivity testing."
+          },
+          "readout": {
+            "value": "auc",
+            "evidence": [
+              "article:p41"
+            ],
+            "explanation": "Standardized AUC values for cisplatin and paclitaxel are summed as AUCsum."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p41",
+              "article:p43"
+            ],
+            "explanation": "AUCsum below 1.134 indicates sensitivity; higher values indicate resistance."
+          },
+          "threshold_rule": {
+            "value": "fixed_numeric",
+            "evidence": [
+              "article:p41"
+            ],
+            "explanation": "A fixed AUCsum cutoff of 1.134 is reported."
+          },
+          "threshold_timing": {
+            "value": "not_reported",
+            "evidence": [
+              "article:p41"
+            ],
+            "explanation": "The source does not clearly state whether the cutoff was prespecified or optimized independently of the evaluated patients."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "CTM2-15-e70534-s003.xls/Sheet1/R2C1"
+            ],
+            "explanation": "Patient-level clinical information is present, but the individual AUCsum cells are being located."
+          },
+          "regimen_match": {
+            "value": "partial",
+            "evidence": [
+              "CTM2-15-e70534-s003.xls/Sheet1/R2C10",
+              "article:p59"
+            ],
+            "explanation": "Assay scores cisplatin plus paclitaxel; some clinical regimens also include immunotherapy."
+          },
+          "n_units": {
+            "value": 24,
+            "evidence": [
+              "article:p41",
+              "article:p40"
+            ],
+            "explanation": "26 organoids were established and two patients lacked follow-up, leaving 24 evaluable patients."
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p41"
+            ],
+            "explanation": "Performance is reported on the same evaluated patient cohort."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.833,
+          "reported_evidence": [
+            "article:p41",
+            "article:p3"
+          ],
+          "threshold": 1.134,
+          "op": "<",
+          "score_direction": "higher",
+          "records": [],
+          "blocked_reason": "Need independently identifiable per-patient AUCsum score cells for the 24 evaluable patients; aggregate accuracy and clinical outcomes alone are insufficient row-level evidence."
+        },
+        "notes": [
+          "Diagnostic scan locates the supplementary AUC table before building row-bound records."
+        ]
+      }
+    }
+  }
+]

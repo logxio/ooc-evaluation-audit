@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_tp1of8y2ahfsf8n3i4c10krz",
+        "type": "function",
+        "function": {
+          "name": "python",
+          "arguments": "{\"code\": \"import os, glob\\nprint(glob.glob('*'))\\ntry:\\n import PyPDF2; print('PyPDF2 yes')\\nexcept Exception as e: print('no PyPDF2',e)\\ntry:\\n import pdfplumber; print('pdfplumber yes')\\nexcept Exception as e: print('no pdfplumber',e)\\n\"}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "We need decide blocked likely because corrected scores absent. \n\nWe can't derive corrected MOS currently, so I'll access relevant materials and search for details.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 182,
+    "prompt_tokens": 68494,
+    "total_tokens": 68676,
+    "prompt_tokens_details": {
+      "cached_tokens": 65336
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 76
+    }
+  }
+}

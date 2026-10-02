@@ -1,0 +1,287 @@
+[
+  {
+    "name": "initial_code",
+    "output": {
+      "returncode": 0,
+      "stdout": "Found 13 FOLFOX patients\nScores: [-30.83, -1.041, -1.268, -7.465, -12.59, -3.605, -2.441, -0.4895, -2.32, -2.254, -15.4, -6.247, -7.895]\nTruths: [0, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1]\nPositives (SD/PR): 8, Negatives (PD): 5\nCalculated AUC: 0.85\n",
+      "stderr": "",
+      "seconds": 0.2717171249969397,
+      "peak_rss_bytes": 25952256,
+      "limit_error": null,
+      "code_sha256": "1184d565988024403ba243868e87423ba395b2d4302463f2d1693b63bb2cf44f",
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "supp.xls/Table S7/R1C1"
+            ],
+            "explanation": "Each row represents a unique patient."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p1"
+            ],
+            "explanation": "Patient-derived organoids (PDOs) used for chemosensitivity testing."
+          },
+          "readout": {
+            "value": "ic50",
+            "evidence": [
+              "supp.xls/Table S7/R1C4"
+            ],
+            "explanation": "IC50 values used as predictive scores."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p31"
+            ],
+            "explanation": "Lower IC50 indicates sensitivity (SD/PR)."
+          },
+          "threshold_rule": {
+            "value": "roc_optimized",
+            "evidence": [
+              "article:p31"
+            ],
+            "explanation": "ROC curve plotted to indicate predictive efficacy."
+          },
+          "threshold_timing": {
+            "value": "outcome_optimized",
+            "evidence": [
+              "article:p31"
+            ],
+            "explanation": "ROC analysis performed on the same cohort used for evaluation."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "supp.xls/Table S7/R2C1"
+            ],
+            "explanation": "Individual patient IDs mapped to outcomes."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "supp.xls/Table S7/R3C2"
+            ],
+            "explanation": "Regimen column matches clinical treatment (FOLFOX)."
+          },
+          "n_units": {
+            "value": 13,
+            "evidence": [
+              "supp.xls/Table S7"
+            ],
+            "explanation": "Count of FOLFOX patients in Table S7."
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p31"
+            ],
+            "explanation": "Analysis performed on the same cohort of 13 patients."
+          }
+        },
+        "headline": {
+          "metric": "auc",
+          "reported": 0.85,
+          "reported_evidence": [
+            "supp.xls/Table S7"
+          ],
+          "threshold": null,
+          "op": null,
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "P3",
+              "score": {
+                "ref": "supp.xls/Table S7/R3C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R3C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": 0
+            },
+            {
+              "id": "P4",
+              "score": {
+                "ref": "supp.xls/Table S7/R4C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R4C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": 1
+            },
+            {
+              "id": "P5",
+              "score": {
+                "ref": "supp.xls/Table S7/R5C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R5C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": 1
+            },
+            {
+              "id": "P6",
+              "score": {
+                "ref": "supp.xls/Table S7/R6C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R6C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": 0
+            },
+            {
+              "id": "P9",
+              "score": {
+                "ref": "supp.xls/Table S7/R9C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R9C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": 0
+            },
+            {
+              "id": "P11",
+              "score": {
+                "ref": "supp.xls/Table S7/R11C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R11C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": 1
+            },
+            {
+              "id": "P12",
+              "score": {
+                "ref": "supp.xls/Table S7/R12C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R12C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": 1
+            },
+            {
+              "id": "P13",
+              "score": {
+                "ref": "supp.xls/Table S7/R13C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R13C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": 1
+            },
+            {
+              "id": "P14",
+              "score": {
+                "ref": "supp.xls/Table S7/R14C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R14C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": 1
+            },
+            {
+              "id": "P18",
+              "score": {
+                "ref": "supp.xls/Table S7/R18C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R18C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": 0
+            },
+            {
+              "id": "P19",
+              "score": {
+                "ref": "supp.xls/Table S7/R19C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R19C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": 0
+            },
+            {
+              "id": "P23",
+              "score": {
+                "ref": "supp.xls/Table S7/R22C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R22C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": 1
+            },
+            {
+              "id": "P25",
+              "score": {
+                "ref": "supp.xls/Table S7/R24C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R24C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": 1
+            }
+          ],
+          "blocked_reason": null
+        },
+        "notes": [
+          "Calculated AUC 0.85 matches reported 0.85 within tolerance."
+        ]
+      }
+    }
+  }
+]

@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_cnxstwm1il3golzh5zp7m0xx",
+        "type": "function",
+        "function": {
+          "name": "read_grid",
+          "arguments": "{\"file\": \"supp.pdf\", \"page\": 6, \"box\": [0.142, 0.03, 0.151, 0.185], \"rows\": 9, \"cols\": 1, \"snap\": false}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "We need solve evaluator weird: uncertain labels ignored?\n\nPreliminary evaluation statistics have been calculated, and it has been found that uncertain truth labels may be ignored, leading to an accuracy of 3/9. Truth annotation rules based on disease status from chart reading and article aggregated data are being used, but threshold line alignment has been identified as a current problem that needs fixing to support more accurate truth annotation.\n\nThe correct threshold alignment scheme has been finalized, confirming the corresponding value range for the target area and clarifying the required grid sampling specification.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 627,
+    "prompt_tokens": 48777,
+    "total_tokens": 49404,
+    "prompt_tokens_details": {
+      "cached_tokens": 39736
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 503
+    }
+  }
+}

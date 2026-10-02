@@ -1,0 +1,20 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "{\"columns\":[\"left red cell\",\"right red cell (cropped)\"],\"legend\":{},\"rows\":[[\"47.9\",\"\"],[\"PD\",\"\"]],\"uncertain\":[[1,2],[2,2]],\"notes\":\"The text \\\"2\\\" above \\\"GEM\\\" is centered above the table, and \\\"GEM\\\" above \\\"2\\\" is centered below the table. Narrow blue vertical strips at the far left are cropped. The red cells in the right column contain no visible text in this crop.\"}"
+  },
+  "reasoning_content": "We need need transcribe visible. \n\nThe image has abnormal cropping, with partial content of red grid areas and left-side blue vertical strips cut off. I've confirmed each labelled row corresponds to one row per requirement, and will generate output in JSON format only.\n\nAfter analysis, I infer there are 2 red columns and left blue strips may be the first column of the table. No clear column titles are found, and the two lines of \"2\" and \"GEM\" above the first red column are its header labels. I will transcribe only the visible content.\n\nI've confirmed the blue strips are likely row label cells, and I've sorted out the naming ideas for table components, which will be clearly marked in the final output.\n\nI've sorted out the specific content of the first two table rows, confirmed no column titles exist, and decided to use an empty array for the legend field. I will record the external labels and cropped content in the notes section, and will not use rows to store printed text lines to avoid losing the original table structure.\n\n47.9 and PD values are confirmed, blue strips are uncertain due to cropping, I'll generate strict JSON.\n",
+  "finish_reason": "stop",
+  "usage": {
+    "completion_tokens": 957,
+    "prompt_tokens": 1601,
+    "total_tokens": 2558,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 848
+    }
+  }
+}

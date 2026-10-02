@@ -1,0 +1,2189 @@
+{
+  "turn": 1,
+  "tool_count": 0,
+  "tokens": 16769,
+  "done": true,
+  "stop_reason": "verified",
+  "checkpoints": {
+    "single_pass": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient_schedule",
+            "evidence": [
+              "article:p18",
+              "article:p20",
+              "TCA-14-2591-s001.xlsx/工作表1/M1"
+            ],
+            "explanation": "Each record is one evaluable retrospective or prospective treatment comparison for a patient liquid biopsy."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p15",
+              "article:p22"
+            ],
+            "explanation": "Drug tests were performed on CTC-derived organoids."
+          },
+          "readout": {
+            "value": "viability",
+            "evidence": [
+              "article:p15"
+            ],
+            "explanation": "ATP-based relative cell viability was measured after drug exposure."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p15"
+            ],
+            "explanation": "Lower relative cell viability indicated greater drug sensitivity."
+          },
+          "threshold_rule": {
+            "value": "fixed_numeric",
+            "evidence": [
+              "article:p15"
+            ],
+            "explanation": "RCV below 50% defined sensitivity for most drugs; gemcitabine used a 15% cutoff."
+          },
+          "threshold_timing": {
+            "value": "explicitly_prespecified",
+            "evidence": [
+              "article:p15"
+            ],
+            "explanation": "The fixed RCV cutoffs were stated before comparing E status with clinical benefit."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "TCA-14-2591-s001.xlsx/工作表1/B1",
+              "TCA-14-2591-s001.xlsx/工作表1/M1"
+            ],
+            "explanation": "Patient, blood-draw, treatment and comparison identifiers are present row by row in Table S1."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p17",
+              "article:p18",
+              "TCA-14-2591-s001.xlsx/工作表1/H1",
+              "TCA-14-2591-s001.xlsx/工作表1/I1"
+            ],
+            "explanation": "Only treatments received for at least 6 weeks with corresponding drug-test information were included; unmatched cases were excluded."
+          },
+          "n_units": {
+            "value": 14,
+            "evidence": [
+              "article.xml/TABLE 2/R2C2",
+              "article.xml/TABLE 2/R2C3",
+              "article.xml/TABLE 2/R3C2",
+              "article.xml/TABLE 2/R3C3",
+              "article:p24"
+            ],
+            "explanation": "The pooled retrospective/prospective analysis contains 14 evaluable comparisons: 9 C+ and 5 C-."
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p10",
+              "article:p18"
+            ],
+            "explanation": "This observational pilot cohort was evaluated directly; no separate training or held-out validation cohort was used."
+          }
+        },
+        "headline": {
+          "metric": "sensitivity",
+          "reported": 1.0,
+          "reported_evidence": [
+            "article:p24",
+            "article.xml/TABLE 2/R2C2",
+            "article.xml/TABLE 2/R2C3"
+          ],
+          "threshold": 0.5,
+          "op": ">",
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "P2_draw1_retrospective",
+              "score": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/M3",
+                "map": {
+                  "E+C+": 1,
+                  "E+C-": 1,
+                  "E-C+": 0,
+                  "E-C-": 0,
+                  "E+C−": 1,
+                  "E−C+": 0,
+                  "E−C−": 0
+                }
+              },
+              "truth": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/K3",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "P2_draw1_prospective",
+              "score": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/N3",
+                "map": {
+                  "E+C+": 1,
+                  "E+C-": 1,
+                  "E-C+": 0,
+                  "E-C-": 0,
+                  "E+C−": 1,
+                  "E−C+": 0,
+                  "E−C−": 0
+                }
+              },
+              "truth": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/L3",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "P5_draw1_retrospective",
+              "score": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/M7",
+                "map": {
+                  "E+C+": 1,
+                  "E+C-": 1,
+                  "E-C+": 0,
+                  "E-C-": 0,
+                  "E+C−": 1,
+                  "E−C+": 0,
+                  "E−C−": 0
+                }
+              },
+              "truth": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/K7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "P5_draw1_prospective",
+              "score": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/N7",
+                "map": {
+                  "E+C+": 1,
+                  "E+C-": 1,
+                  "E-C+": 0,
+                  "E-C-": 0,
+                  "E+C−": 1,
+                  "E−C+": 0,
+                  "E−C−": 0
+                }
+              },
+              "truth": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/L7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "P5_draw2_retrospective",
+              "score": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/M8",
+                "map": {
+                  "E+C+": 1,
+                  "E+C-": 1,
+                  "E-C+": 0,
+                  "E-C-": 0,
+                  "E+C−": 1,
+                  "E−C+": 0,
+                  "E−C−": 0
+                }
+              },
+              "truth": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/K8",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "P5_draw2_prospective",
+              "score": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/N8",
+                "map": {
+                  "E+C+": 1,
+                  "E+C-": 1,
+                  "E-C+": 0,
+                  "E-C-": 0,
+                  "E+C−": 1,
+                  "E−C+": 0,
+                  "E−C−": 0
+                }
+              },
+              "truth": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/L8",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "P6_draw1_retrospective",
+              "score": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/M9",
+                "map": {
+                  "E+C+": 1,
+                  "E+C-": 1,
+                  "E-C+": 0,
+                  "E-C-": 0,
+                  "E+C−": 1,
+                  "E−C+": 0,
+                  "E−C−": 0
+                }
+              },
+              "truth": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/K9",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "P6_draw3_prospective",
+              "score": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/N11",
+                "map": {
+                  "E+C+": 1,
+                  "E+C-": 1,
+                  "E-C+": 0,
+                  "E-C-": 0,
+                  "E+C−": 1,
+                  "E−C+": 0,
+                  "E−C−": 0
+                }
+              },
+              "truth": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/L11",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "P8_draw1_retrospective",
+              "score": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/M13",
+                "map": {
+                  "E+C+": 1,
+                  "E+C-": 1,
+                  "E-C+": 0,
+                  "E-C-": 0,
+                  "E+C−": 1,
+                  "E−C+": 0,
+                  "E−C−": 0
+                }
+              },
+              "truth": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/K13",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "P8_draw1_prospective",
+              "score": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/N13",
+                "map": {
+                  "E+C+": 1,
+                  "E+C-": 1,
+                  "E-C+": 0,
+                  "E-C-": 0,
+                  "E+C−": 1,
+                  "E−C+": 0,
+                  "E−C−": 0
+                }
+              },
+              "truth": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/L13",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "P10_draw2_prospective",
+              "score": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/N16",
+                "map": {
+                  "E+C+": 1,
+                  "E+C-": 1,
+                  "E-C+": 0,
+                  "E-C-": 0,
+                  "E+C−": 1,
+                  "E−C+": 0,
+                  "E−C−": 0
+                }
+              },
+              "truth": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/L16",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "P10_draw4_prospective",
+              "score": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/N18",
+                "map": {
+                  "E+C+": 1,
+                  "E+C-": 1,
+                  "E-C+": 0,
+                  "E-C-": 0,
+                  "E+C−": 1,
+                  "E−C+": 0,
+                  "E−C−": 0
+                }
+              },
+              "truth": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/L18",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "P10_draw6_retrospective",
+              "score": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/M20",
+                "map": {
+                  "E+C+": 1,
+                  "E+C-": 1,
+                  "E-C+": 0,
+                  "E-C-": 0,
+                  "E+C−": 1,
+                  "E−C+": 0,
+                  "E−C−": 0
+                }
+              },
+              "truth": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/K20",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "P12_draw1_prospective",
+              "score": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/N22",
+                "map": {
+                  "E+C+": 1,
+                  "E+C-": 1,
+                  "E-C+": 0,
+                  "E-C-": 0,
+                  "E+C−": 1,
+                  "E−C+": 0,
+                  "E−C−": 0
+                }
+              },
+              "truth": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/L22",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            }
+          ],
+          "blocked_reason": null
+        },
+        "notes": [
+          "Published sensitivity is 9/9 = 1.0; specificity is 3/5 = 0.6.",
+          "The 14 records are the pooled evaluable retrospective/prospective comparisons, not 14 unique patients."
+        ]
+      },
+      "evaluation": {
+        "matched": true,
+        "metric": "sensitivity",
+        "computed": 1.0,
+        "reported": 1.0,
+        "difference": 0.0,
+        "n": 14,
+        "errors": [],
+        "rows": [
+          {
+            "id": "P2_draw1_retrospective",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "P2_draw1_prospective",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "P5_draw1_retrospective",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "P5_draw1_prospective",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "P5_draw2_retrospective",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "P5_draw2_prospective",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "P6_draw1_retrospective",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "P6_draw3_prospective",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "P8_draw1_retrospective",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "P8_draw1_prospective",
+            "score": 1.0,
+            "truth": 0,
+            "prediction": 1
+          },
+          {
+            "id": "P10_draw2_prospective",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "P10_draw4_prospective",
+            "score": 1.0,
+            "truth": 0,
+            "prediction": 1
+          },
+          {
+            "id": "P10_draw6_retrospective",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "P12_draw1_prospective",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          }
+        ],
+        "expected": {
+          "metric": "sensitivity",
+          "value": 1.0,
+          "n": 14
+        }
+      },
+      "calls": 1,
+      "tokens": 16769
+    },
+    "one_feedback": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient_schedule",
+            "evidence": [
+              "article:p18",
+              "article:p20",
+              "TCA-14-2591-s001.xlsx/工作表1/M1"
+            ],
+            "explanation": "Each record is one evaluable retrospective or prospective treatment comparison for a patient liquid biopsy."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p15",
+              "article:p22"
+            ],
+            "explanation": "Drug tests were performed on CTC-derived organoids."
+          },
+          "readout": {
+            "value": "viability",
+            "evidence": [
+              "article:p15"
+            ],
+            "explanation": "ATP-based relative cell viability was measured after drug exposure."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p15"
+            ],
+            "explanation": "Lower relative cell viability indicated greater drug sensitivity."
+          },
+          "threshold_rule": {
+            "value": "fixed_numeric",
+            "evidence": [
+              "article:p15"
+            ],
+            "explanation": "RCV below 50% defined sensitivity for most drugs; gemcitabine used a 15% cutoff."
+          },
+          "threshold_timing": {
+            "value": "explicitly_prespecified",
+            "evidence": [
+              "article:p15"
+            ],
+            "explanation": "The fixed RCV cutoffs were stated before comparing E status with clinical benefit."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "TCA-14-2591-s001.xlsx/工作表1/B1",
+              "TCA-14-2591-s001.xlsx/工作表1/M1"
+            ],
+            "explanation": "Patient, blood-draw, treatment and comparison identifiers are present row by row in Table S1."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p17",
+              "article:p18",
+              "TCA-14-2591-s001.xlsx/工作表1/H1",
+              "TCA-14-2591-s001.xlsx/工作表1/I1"
+            ],
+            "explanation": "Only treatments received for at least 6 weeks with corresponding drug-test information were included; unmatched cases were excluded."
+          },
+          "n_units": {
+            "value": 14,
+            "evidence": [
+              "article.xml/TABLE 2/R2C2",
+              "article.xml/TABLE 2/R2C3",
+              "article.xml/TABLE 2/R3C2",
+              "article.xml/TABLE 2/R3C3",
+              "article:p24"
+            ],
+            "explanation": "The pooled retrospective/prospective analysis contains 14 evaluable comparisons: 9 C+ and 5 C-."
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p10",
+              "article:p18"
+            ],
+            "explanation": "This observational pilot cohort was evaluated directly; no separate training or held-out validation cohort was used."
+          }
+        },
+        "headline": {
+          "metric": "sensitivity",
+          "reported": 1.0,
+          "reported_evidence": [
+            "article:p24",
+            "article.xml/TABLE 2/R2C2",
+            "article.xml/TABLE 2/R2C3"
+          ],
+          "threshold": 0.5,
+          "op": ">",
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "P2_draw1_retrospective",
+              "score": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/M3",
+                "map": {
+                  "E+C+": 1,
+                  "E+C-": 1,
+                  "E-C+": 0,
+                  "E-C-": 0,
+                  "E+C−": 1,
+                  "E−C+": 0,
+                  "E−C−": 0
+                }
+              },
+              "truth": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/K3",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "P2_draw1_prospective",
+              "score": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/N3",
+                "map": {
+                  "E+C+": 1,
+                  "E+C-": 1,
+                  "E-C+": 0,
+                  "E-C-": 0,
+                  "E+C−": 1,
+                  "E−C+": 0,
+                  "E−C−": 0
+                }
+              },
+              "truth": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/L3",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "P5_draw1_retrospective",
+              "score": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/M7",
+                "map": {
+                  "E+C+": 1,
+                  "E+C-": 1,
+                  "E-C+": 0,
+                  "E-C-": 0,
+                  "E+C−": 1,
+                  "E−C+": 0,
+                  "E−C−": 0
+                }
+              },
+              "truth": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/K7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "P5_draw1_prospective",
+              "score": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/N7",
+                "map": {
+                  "E+C+": 1,
+                  "E+C-": 1,
+                  "E-C+": 0,
+                  "E-C-": 0,
+                  "E+C−": 1,
+                  "E−C+": 0,
+                  "E−C−": 0
+                }
+              },
+              "truth": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/L7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "P5_draw2_retrospective",
+              "score": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/M8",
+                "map": {
+                  "E+C+": 1,
+                  "E+C-": 1,
+                  "E-C+": 0,
+                  "E-C-": 0,
+                  "E+C−": 1,
+                  "E−C+": 0,
+                  "E−C−": 0
+                }
+              },
+              "truth": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/K8",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "P5_draw2_prospective",
+              "score": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/N8",
+                "map": {
+                  "E+C+": 1,
+                  "E+C-": 1,
+                  "E-C+": 0,
+                  "E-C-": 0,
+                  "E+C−": 1,
+                  "E−C+": 0,
+                  "E−C−": 0
+                }
+              },
+              "truth": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/L8",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "P6_draw1_retrospective",
+              "score": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/M9",
+                "map": {
+                  "E+C+": 1,
+                  "E+C-": 1,
+                  "E-C+": 0,
+                  "E-C-": 0,
+                  "E+C−": 1,
+                  "E−C+": 0,
+                  "E−C−": 0
+                }
+              },
+              "truth": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/K9",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "P6_draw3_prospective",
+              "score": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/N11",
+                "map": {
+                  "E+C+": 1,
+                  "E+C-": 1,
+                  "E-C+": 0,
+                  "E-C-": 0,
+                  "E+C−": 1,
+                  "E−C+": 0,
+                  "E−C−": 0
+                }
+              },
+              "truth": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/L11",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "P8_draw1_retrospective",
+              "score": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/M13",
+                "map": {
+                  "E+C+": 1,
+                  "E+C-": 1,
+                  "E-C+": 0,
+                  "E-C-": 0,
+                  "E+C−": 1,
+                  "E−C+": 0,
+                  "E−C−": 0
+                }
+              },
+              "truth": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/K13",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "P8_draw1_prospective",
+              "score": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/N13",
+                "map": {
+                  "E+C+": 1,
+                  "E+C-": 1,
+                  "E-C+": 0,
+                  "E-C-": 0,
+                  "E+C−": 1,
+                  "E−C+": 0,
+                  "E−C−": 0
+                }
+              },
+              "truth": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/L13",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "P10_draw2_prospective",
+              "score": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/N16",
+                "map": {
+                  "E+C+": 1,
+                  "E+C-": 1,
+                  "E-C+": 0,
+                  "E-C-": 0,
+                  "E+C−": 1,
+                  "E−C+": 0,
+                  "E−C−": 0
+                }
+              },
+              "truth": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/L16",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "P10_draw4_prospective",
+              "score": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/N18",
+                "map": {
+                  "E+C+": 1,
+                  "E+C-": 1,
+                  "E-C+": 0,
+                  "E-C-": 0,
+                  "E+C−": 1,
+                  "E−C+": 0,
+                  "E−C−": 0
+                }
+              },
+              "truth": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/L18",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "P10_draw6_retrospective",
+              "score": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/M20",
+                "map": {
+                  "E+C+": 1,
+                  "E+C-": 1,
+                  "E-C+": 0,
+                  "E-C-": 0,
+                  "E+C−": 1,
+                  "E−C+": 0,
+                  "E−C−": 0
+                }
+              },
+              "truth": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/K20",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "P12_draw1_prospective",
+              "score": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/N22",
+                "map": {
+                  "E+C+": 1,
+                  "E+C-": 1,
+                  "E-C+": 0,
+                  "E-C-": 0,
+                  "E+C−": 1,
+                  "E−C+": 0,
+                  "E−C−": 0
+                }
+              },
+              "truth": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/L22",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            }
+          ],
+          "blocked_reason": null
+        },
+        "notes": [
+          "Published sensitivity is 9/9 = 1.0; specificity is 3/5 = 0.6.",
+          "The 14 records are the pooled evaluable retrospective/prospective comparisons, not 14 unique patients."
+        ]
+      },
+      "evaluation": {
+        "matched": true,
+        "metric": "sensitivity",
+        "computed": 1.0,
+        "reported": 1.0,
+        "difference": 0.0,
+        "n": 14,
+        "errors": [],
+        "rows": [
+          {
+            "id": "P2_draw1_retrospective",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "P2_draw1_prospective",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "P5_draw1_retrospective",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "P5_draw1_prospective",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "P5_draw2_retrospective",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "P5_draw2_prospective",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "P6_draw1_retrospective",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "P6_draw3_prospective",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "P8_draw1_retrospective",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "P8_draw1_prospective",
+            "score": 1.0,
+            "truth": 0,
+            "prediction": 1
+          },
+          {
+            "id": "P10_draw2_prospective",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "P10_draw4_prospective",
+            "score": 1.0,
+            "truth": 0,
+            "prediction": 1
+          },
+          {
+            "id": "P10_draw6_retrospective",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "P12_draw1_prospective",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          }
+        ],
+        "expected": {
+          "metric": "sensitivity",
+          "value": 1.0,
+          "n": 14
+        }
+      },
+      "calls": 1,
+      "tokens": 16769
+    },
+    "tool_loop": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient_schedule",
+            "evidence": [
+              "article:p18",
+              "article:p20",
+              "TCA-14-2591-s001.xlsx/工作表1/M1"
+            ],
+            "explanation": "Each record is one evaluable retrospective or prospective treatment comparison for a patient liquid biopsy."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p15",
+              "article:p22"
+            ],
+            "explanation": "Drug tests were performed on CTC-derived organoids."
+          },
+          "readout": {
+            "value": "viability",
+            "evidence": [
+              "article:p15"
+            ],
+            "explanation": "ATP-based relative cell viability was measured after drug exposure."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p15"
+            ],
+            "explanation": "Lower relative cell viability indicated greater drug sensitivity."
+          },
+          "threshold_rule": {
+            "value": "fixed_numeric",
+            "evidence": [
+              "article:p15"
+            ],
+            "explanation": "RCV below 50% defined sensitivity for most drugs; gemcitabine used a 15% cutoff."
+          },
+          "threshold_timing": {
+            "value": "explicitly_prespecified",
+            "evidence": [
+              "article:p15"
+            ],
+            "explanation": "The fixed RCV cutoffs were stated before comparing E status with clinical benefit."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "TCA-14-2591-s001.xlsx/工作表1/B1",
+              "TCA-14-2591-s001.xlsx/工作表1/M1"
+            ],
+            "explanation": "Patient, blood-draw, treatment and comparison identifiers are present row by row in Table S1."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p17",
+              "article:p18",
+              "TCA-14-2591-s001.xlsx/工作表1/H1",
+              "TCA-14-2591-s001.xlsx/工作表1/I1"
+            ],
+            "explanation": "Only treatments received for at least 6 weeks with corresponding drug-test information were included; unmatched cases were excluded."
+          },
+          "n_units": {
+            "value": 14,
+            "evidence": [
+              "article.xml/TABLE 2/R2C2",
+              "article.xml/TABLE 2/R2C3",
+              "article.xml/TABLE 2/R3C2",
+              "article.xml/TABLE 2/R3C3",
+              "article:p24"
+            ],
+            "explanation": "The pooled retrospective/prospective analysis contains 14 evaluable comparisons: 9 C+ and 5 C-."
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p10",
+              "article:p18"
+            ],
+            "explanation": "This observational pilot cohort was evaluated directly; no separate training or held-out validation cohort was used."
+          }
+        },
+        "headline": {
+          "metric": "sensitivity",
+          "reported": 1.0,
+          "reported_evidence": [
+            "article:p24",
+            "article.xml/TABLE 2/R2C2",
+            "article.xml/TABLE 2/R2C3"
+          ],
+          "threshold": 0.5,
+          "op": ">",
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "P2_draw1_retrospective",
+              "score": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/M3",
+                "map": {
+                  "E+C+": 1,
+                  "E+C-": 1,
+                  "E-C+": 0,
+                  "E-C-": 0,
+                  "E+C−": 1,
+                  "E−C+": 0,
+                  "E−C−": 0
+                }
+              },
+              "truth": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/K3",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "P2_draw1_prospective",
+              "score": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/N3",
+                "map": {
+                  "E+C+": 1,
+                  "E+C-": 1,
+                  "E-C+": 0,
+                  "E-C-": 0,
+                  "E+C−": 1,
+                  "E−C+": 0,
+                  "E−C−": 0
+                }
+              },
+              "truth": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/L3",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "P5_draw1_retrospective",
+              "score": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/M7",
+                "map": {
+                  "E+C+": 1,
+                  "E+C-": 1,
+                  "E-C+": 0,
+                  "E-C-": 0,
+                  "E+C−": 1,
+                  "E−C+": 0,
+                  "E−C−": 0
+                }
+              },
+              "truth": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/K7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "P5_draw1_prospective",
+              "score": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/N7",
+                "map": {
+                  "E+C+": 1,
+                  "E+C-": 1,
+                  "E-C+": 0,
+                  "E-C-": 0,
+                  "E+C−": 1,
+                  "E−C+": 0,
+                  "E−C−": 0
+                }
+              },
+              "truth": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/L7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "P5_draw2_retrospective",
+              "score": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/M8",
+                "map": {
+                  "E+C+": 1,
+                  "E+C-": 1,
+                  "E-C+": 0,
+                  "E-C-": 0,
+                  "E+C−": 1,
+                  "E−C+": 0,
+                  "E−C−": 0
+                }
+              },
+              "truth": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/K8",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "P5_draw2_prospective",
+              "score": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/N8",
+                "map": {
+                  "E+C+": 1,
+                  "E+C-": 1,
+                  "E-C+": 0,
+                  "E-C-": 0,
+                  "E+C−": 1,
+                  "E−C+": 0,
+                  "E−C−": 0
+                }
+              },
+              "truth": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/L8",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "P6_draw1_retrospective",
+              "score": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/M9",
+                "map": {
+                  "E+C+": 1,
+                  "E+C-": 1,
+                  "E-C+": 0,
+                  "E-C-": 0,
+                  "E+C−": 1,
+                  "E−C+": 0,
+                  "E−C−": 0
+                }
+              },
+              "truth": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/K9",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "P6_draw3_prospective",
+              "score": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/N11",
+                "map": {
+                  "E+C+": 1,
+                  "E+C-": 1,
+                  "E-C+": 0,
+                  "E-C-": 0,
+                  "E+C−": 1,
+                  "E−C+": 0,
+                  "E−C−": 0
+                }
+              },
+              "truth": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/L11",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "P8_draw1_retrospective",
+              "score": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/M13",
+                "map": {
+                  "E+C+": 1,
+                  "E+C-": 1,
+                  "E-C+": 0,
+                  "E-C-": 0,
+                  "E+C−": 1,
+                  "E−C+": 0,
+                  "E−C−": 0
+                }
+              },
+              "truth": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/K13",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "P8_draw1_prospective",
+              "score": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/N13",
+                "map": {
+                  "E+C+": 1,
+                  "E+C-": 1,
+                  "E-C+": 0,
+                  "E-C-": 0,
+                  "E+C−": 1,
+                  "E−C+": 0,
+                  "E−C−": 0
+                }
+              },
+              "truth": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/L13",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "P10_draw2_prospective",
+              "score": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/N16",
+                "map": {
+                  "E+C+": 1,
+                  "E+C-": 1,
+                  "E-C+": 0,
+                  "E-C-": 0,
+                  "E+C−": 1,
+                  "E−C+": 0,
+                  "E−C−": 0
+                }
+              },
+              "truth": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/L16",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "P10_draw4_prospective",
+              "score": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/N18",
+                "map": {
+                  "E+C+": 1,
+                  "E+C-": 1,
+                  "E-C+": 0,
+                  "E-C-": 0,
+                  "E+C−": 1,
+                  "E−C+": 0,
+                  "E−C−": 0
+                }
+              },
+              "truth": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/L18",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "P10_draw6_retrospective",
+              "score": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/M20",
+                "map": {
+                  "E+C+": 1,
+                  "E+C-": 1,
+                  "E-C+": 0,
+                  "E-C-": 0,
+                  "E+C−": 1,
+                  "E−C+": 0,
+                  "E−C−": 0
+                }
+              },
+              "truth": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/K20",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "P12_draw1_prospective",
+              "score": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/N22",
+                "map": {
+                  "E+C+": 1,
+                  "E+C-": 1,
+                  "E-C+": 0,
+                  "E-C-": 0,
+                  "E+C−": 1,
+                  "E−C+": 0,
+                  "E−C−": 0
+                }
+              },
+              "truth": {
+                "ref": "TCA-14-2591-s001.xlsx/工作表1/L22",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            }
+          ],
+          "blocked_reason": null
+        },
+        "notes": [
+          "Published sensitivity is 9/9 = 1.0; specificity is 3/5 = 0.6.",
+          "The 14 records are the pooled evaluable retrospective/prospective comparisons, not 14 unique patients."
+        ]
+      },
+      "evaluation": {
+        "matched": true,
+        "metric": "sensitivity",
+        "computed": 1.0,
+        "reported": 1.0,
+        "difference": 0.0,
+        "n": 14,
+        "errors": [],
+        "rows": [
+          {
+            "id": "P2_draw1_retrospective",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "P2_draw1_prospective",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "P5_draw1_retrospective",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "P5_draw1_prospective",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "P5_draw2_retrospective",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "P5_draw2_prospective",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "P6_draw1_retrospective",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "P6_draw3_prospective",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "P8_draw1_retrospective",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "P8_draw1_prospective",
+            "score": 1.0,
+            "truth": 0,
+            "prediction": 1
+          },
+          {
+            "id": "P10_draw2_prospective",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "P10_draw4_prospective",
+            "score": 1.0,
+            "truth": 0,
+            "prediction": 1
+          },
+          {
+            "id": "P10_draw6_retrospective",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "P12_draw1_prospective",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          }
+        ],
+        "expected": {
+          "metric": "sensitivity",
+          "value": 1.0,
+          "n": 14
+        }
+      },
+      "calls": 1,
+      "tokens": 16769
+    }
+  },
+  "last_contract": {
+    "status": "computed",
+    "fields": {
+      "unit": {
+        "value": "patient_schedule",
+        "evidence": [
+          "article:p18",
+          "article:p20",
+          "TCA-14-2591-s001.xlsx/工作表1/M1"
+        ],
+        "explanation": "Each record is one evaluable retrospective or prospective treatment comparison for a patient liquid biopsy."
+      },
+      "platform": {
+        "value": "organoid",
+        "evidence": [
+          "article:p15",
+          "article:p22"
+        ],
+        "explanation": "Drug tests were performed on CTC-derived organoids."
+      },
+      "readout": {
+        "value": "viability",
+        "evidence": [
+          "article:p15"
+        ],
+        "explanation": "ATP-based relative cell viability was measured after drug exposure."
+      },
+      "direction": {
+        "value": "lower_sensitive",
+        "evidence": [
+          "article:p15"
+        ],
+        "explanation": "Lower relative cell viability indicated greater drug sensitivity."
+      },
+      "threshold_rule": {
+        "value": "fixed_numeric",
+        "evidence": [
+          "article:p15"
+        ],
+        "explanation": "RCV below 50% defined sensitivity for most drugs; gemcitabine used a 15% cutoff."
+      },
+      "threshold_timing": {
+        "value": "explicitly_prespecified",
+        "evidence": [
+          "article:p15"
+        ],
+        "explanation": "The fixed RCV cutoffs were stated before comparing E status with clinical benefit."
+      },
+      "patient_mapping": {
+        "value": "individual_available",
+        "evidence": [
+          "TCA-14-2591-s001.xlsx/工作表1/B1",
+          "TCA-14-2591-s001.xlsx/工作表1/M1"
+        ],
+        "explanation": "Patient, blood-draw, treatment and comparison identifiers are present row by row in Table S1."
+      },
+      "regimen_match": {
+        "value": "matched",
+        "evidence": [
+          "article:p17",
+          "article:p18",
+          "TCA-14-2591-s001.xlsx/工作表1/H1",
+          "TCA-14-2591-s001.xlsx/工作表1/I1"
+        ],
+        "explanation": "Only treatments received for at least 6 weeks with corresponding drug-test information were included; unmatched cases were excluded."
+      },
+      "n_units": {
+        "value": 14,
+        "evidence": [
+          "article.xml/TABLE 2/R2C2",
+          "article.xml/TABLE 2/R2C3",
+          "article.xml/TABLE 2/R3C2",
+          "article.xml/TABLE 2/R3C3",
+          "article:p24"
+        ],
+        "explanation": "The pooled retrospective/prospective analysis contains 14 evaluable comparisons: 9 C+ and 5 C-."
+      },
+      "split": {
+        "value": "same_cohort",
+        "evidence": [
+          "article:p10",
+          "article:p18"
+        ],
+        "explanation": "This observational pilot cohort was evaluated directly; no separate training or held-out validation cohort was used."
+      }
+    },
+    "headline": {
+      "metric": "sensitivity",
+      "reported": 1.0,
+      "reported_evidence": [
+        "article:p24",
+        "article.xml/TABLE 2/R2C2",
+        "article.xml/TABLE 2/R2C3"
+      ],
+      "threshold": 0.5,
+      "op": ">",
+      "score_direction": "higher",
+      "records": [
+        {
+          "id": "P2_draw1_retrospective",
+          "score": {
+            "ref": "TCA-14-2591-s001.xlsx/工作表1/M3",
+            "map": {
+              "E+C+": 1,
+              "E+C-": 1,
+              "E-C+": 0,
+              "E-C-": 0,
+              "E+C−": 1,
+              "E−C+": 0,
+              "E−C−": 0
+            }
+          },
+          "truth": {
+            "ref": "TCA-14-2591-s001.xlsx/工作表1/K3",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "P2_draw1_prospective",
+          "score": {
+            "ref": "TCA-14-2591-s001.xlsx/工作表1/N3",
+            "map": {
+              "E+C+": 1,
+              "E+C-": 1,
+              "E-C+": 0,
+              "E-C-": 0,
+              "E+C−": 1,
+              "E−C+": 0,
+              "E−C−": 0
+            }
+          },
+          "truth": {
+            "ref": "TCA-14-2591-s001.xlsx/工作表1/L3",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "P5_draw1_retrospective",
+          "score": {
+            "ref": "TCA-14-2591-s001.xlsx/工作表1/M7",
+            "map": {
+              "E+C+": 1,
+              "E+C-": 1,
+              "E-C+": 0,
+              "E-C-": 0,
+              "E+C−": 1,
+              "E−C+": 0,
+              "E−C−": 0
+            }
+          },
+          "truth": {
+            "ref": "TCA-14-2591-s001.xlsx/工作表1/K7",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "P5_draw1_prospective",
+          "score": {
+            "ref": "TCA-14-2591-s001.xlsx/工作表1/N7",
+            "map": {
+              "E+C+": 1,
+              "E+C-": 1,
+              "E-C+": 0,
+              "E-C-": 0,
+              "E+C−": 1,
+              "E−C+": 0,
+              "E−C−": 0
+            }
+          },
+          "truth": {
+            "ref": "TCA-14-2591-s001.xlsx/工作表1/L7",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "P5_draw2_retrospective",
+          "score": {
+            "ref": "TCA-14-2591-s001.xlsx/工作表1/M8",
+            "map": {
+              "E+C+": 1,
+              "E+C-": 1,
+              "E-C+": 0,
+              "E-C-": 0,
+              "E+C−": 1,
+              "E−C+": 0,
+              "E−C−": 0
+            }
+          },
+          "truth": {
+            "ref": "TCA-14-2591-s001.xlsx/工作表1/K8",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "P5_draw2_prospective",
+          "score": {
+            "ref": "TCA-14-2591-s001.xlsx/工作表1/N8",
+            "map": {
+              "E+C+": 1,
+              "E+C-": 1,
+              "E-C+": 0,
+              "E-C-": 0,
+              "E+C−": 1,
+              "E−C+": 0,
+              "E−C−": 0
+            }
+          },
+          "truth": {
+            "ref": "TCA-14-2591-s001.xlsx/工作表1/L8",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "P6_draw1_retrospective",
+          "score": {
+            "ref": "TCA-14-2591-s001.xlsx/工作表1/M9",
+            "map": {
+              "E+C+": 1,
+              "E+C-": 1,
+              "E-C+": 0,
+              "E-C-": 0,
+              "E+C−": 1,
+              "E−C+": 0,
+              "E−C−": 0
+            }
+          },
+          "truth": {
+            "ref": "TCA-14-2591-s001.xlsx/工作表1/K9",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "P6_draw3_prospective",
+          "score": {
+            "ref": "TCA-14-2591-s001.xlsx/工作表1/N11",
+            "map": {
+              "E+C+": 1,
+              "E+C-": 1,
+              "E-C+": 0,
+              "E-C-": 0,
+              "E+C−": 1,
+              "E−C+": 0,
+              "E−C−": 0
+            }
+          },
+          "truth": {
+            "ref": "TCA-14-2591-s001.xlsx/工作表1/L11",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "P8_draw1_retrospective",
+          "score": {
+            "ref": "TCA-14-2591-s001.xlsx/工作表1/M13",
+            "map": {
+              "E+C+": 1,
+              "E+C-": 1,
+              "E-C+": 0,
+              "E-C-": 0,
+              "E+C−": 1,
+              "E−C+": 0,
+              "E−C−": 0
+            }
+          },
+          "truth": {
+            "ref": "TCA-14-2591-s001.xlsx/工作表1/K13",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "P8_draw1_prospective",
+          "score": {
+            "ref": "TCA-14-2591-s001.xlsx/工作表1/N13",
+            "map": {
+              "E+C+": 1,
+              "E+C-": 1,
+              "E-C+": 0,
+              "E-C-": 0,
+              "E+C−": 1,
+              "E−C+": 0,
+              "E−C−": 0
+            }
+          },
+          "truth": {
+            "ref": "TCA-14-2591-s001.xlsx/工作表1/L13",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "P10_draw2_prospective",
+          "score": {
+            "ref": "TCA-14-2591-s001.xlsx/工作表1/N16",
+            "map": {
+              "E+C+": 1,
+              "E+C-": 1,
+              "E-C+": 0,
+              "E-C-": 0,
+              "E+C−": 1,
+              "E−C+": 0,
+              "E−C−": 0
+            }
+          },
+          "truth": {
+            "ref": "TCA-14-2591-s001.xlsx/工作表1/L16",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "P10_draw4_prospective",
+          "score": {
+            "ref": "TCA-14-2591-s001.xlsx/工作表1/N18",
+            "map": {
+              "E+C+": 1,
+              "E+C-": 1,
+              "E-C+": 0,
+              "E-C-": 0,
+              "E+C−": 1,
+              "E−C+": 0,
+              "E−C−": 0
+            }
+          },
+          "truth": {
+            "ref": "TCA-14-2591-s001.xlsx/工作表1/L18",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "P10_draw6_retrospective",
+          "score": {
+            "ref": "TCA-14-2591-s001.xlsx/工作表1/M20",
+            "map": {
+              "E+C+": 1,
+              "E+C-": 1,
+              "E-C+": 0,
+              "E-C-": 0,
+              "E+C−": 1,
+              "E−C+": 0,
+              "E−C−": 0
+            }
+          },
+          "truth": {
+            "ref": "TCA-14-2591-s001.xlsx/工作表1/K20",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "P12_draw1_prospective",
+          "score": {
+            "ref": "TCA-14-2591-s001.xlsx/工作表1/N22",
+            "map": {
+              "E+C+": 1,
+              "E+C-": 1,
+              "E-C+": 0,
+              "E-C-": 0,
+              "E+C−": 1,
+              "E−C+": 0,
+              "E−C−": 0
+            }
+          },
+          "truth": {
+            "ref": "TCA-14-2591-s001.xlsx/工作表1/L22",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        }
+      ],
+      "blocked_reason": null
+    },
+    "notes": [
+      "Published sensitivity is 9/9 = 1.0; specificity is 3/5 = 0.6.",
+      "The 14 records are the pooled evaluable retrospective/prospective comparisons, not 14 unique patients."
+    ]
+  },
+  "last_evaluation": {
+    "matched": true,
+    "metric": "sensitivity",
+    "computed": 1.0,
+    "reported": 1.0,
+    "difference": 0.0,
+    "n": 14,
+    "errors": [],
+    "rows": [
+      {
+        "id": "P2_draw1_retrospective",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "P2_draw1_prospective",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "P5_draw1_retrospective",
+        "score": 0.0,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "P5_draw1_prospective",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "P5_draw2_retrospective",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "P5_draw2_prospective",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "P6_draw1_retrospective",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "P6_draw3_prospective",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "P8_draw1_retrospective",
+        "score": 0.0,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "P8_draw1_prospective",
+        "score": 1.0,
+        "truth": 0,
+        "prediction": 1
+      },
+      {
+        "id": "P10_draw2_prospective",
+        "score": 0.0,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "P10_draw4_prospective",
+        "score": 1.0,
+        "truth": 0,
+        "prediction": 1
+      },
+      {
+        "id": "P10_draw6_retrospective",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "P12_draw1_prospective",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      }
+    ],
+    "expected": {
+      "metric": "sensitivity",
+      "value": 1.0,
+      "n": 14
+    }
+  }
+}

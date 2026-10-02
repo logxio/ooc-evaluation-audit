@@ -1,0 +1,117 @@
+[
+  {
+    "name": "initial_code",
+    "output": {
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "seconds": 2.97539333300665,
+      "peak_rss_bytes": 28590080,
+      "limit_error": null,
+      "code_sha256": "069c53619199fc17c8c3d047dd589255e385e42a9d94f28b280bf25c312b630b",
+      "contract": {
+        "status": "no_headline",
+        "fields": {
+          "unit": {
+            "value": "organoid_line",
+            "evidence": [
+              "article:p23",
+              "article:p33"
+            ],
+            "explanation": "Seven patient-derived NSCLC organoid lines were established and used for drug screening."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p1",
+              "article:p23"
+            ],
+            "explanation": "The experimental platform was three-dimensional patient-derived tumor organoids."
+          },
+          "readout": {
+            "value": "ic50",
+            "evidence": [
+              "article:p2",
+              "article:p33"
+            ],
+            "explanation": "Drug response was measured by Cell Titer Glo viability and summarized using IC50 values, dose-response curves, and log-transformed IC50 heat maps."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p33",
+              "article:p39"
+            ],
+            "explanation": "Lower IC50 values were interpreted as greater drug sensitivity."
+          },
+          "threshold_rule": {
+            "value": "no_binary_rule",
+            "evidence": [
+              "article:p33",
+              "article:p38"
+            ],
+            "explanation": "The study reports qualitative drug sensitivities and mutation correlations but no binary assay cutoff validated against clinical outcomes."
+          },
+          "threshold_timing": {
+            "value": "not_applicable",
+            "evidence": [
+              "article:p33",
+              "article:p38"
+            ],
+            "explanation": "No clinical-outcome classification threshold was fitted or prespecified."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "article:p26",
+              "article:p34"
+            ],
+            "explanation": "Organoid lines were individually labeled by patient identifiers such as P1, P6, P9, and P11."
+          },
+          "regimen_match": {
+            "value": "absent",
+            "evidence": [
+              "article:p33",
+              "article:p38",
+              "article:p39"
+            ],
+            "explanation": "Although organoids were treated with drugs, matched patient treatment regimens and observed clinical responses were not provided for a predictive comparison."
+          },
+          "n_units": {
+            "value": 7,
+            "evidence": [
+              "article:p23",
+              "article:p33"
+            ],
+            "explanation": "Seven paired surgical tumors and PDOs from seven enrolled patients were analyzed and screened."
+          },
+          "split": {
+            "value": "none",
+            "evidence": [
+              "article:p38"
+            ],
+            "explanation": "The small cohort was used descriptively; no training/test split or validation cohort was reported for a clinical prediction headline."
+          }
+        },
+        "headline": {
+          "metric": null,
+          "reported": null,
+          "reported_evidence": [
+            "article:p33",
+            "article:p38",
+            "article:p39"
+          ],
+          "threshold": null,
+          "op": null,
+          "score_direction": null,
+          "records": [],
+          "blocked_reason": "No global clinical or toxicity prediction headline can be reconstructed: the paper reports organoid IC50 drug screens and mutation correlations, but does not provide matched patient treatment outcomes or row-level clinical response truth for the tested drugs."
+        },
+        "notes": [
+          "The abstract states a future predictive aim and claims credibility for prospective prediction, but the presented analysis does not contain a validated assay-versus-clinical-outcome performance measure.",
+          "Examples such as PDO-11 sensitivity to osimertinib are organoid assay observations linked to mutation expectations, not observed patient outcomes."
+        ]
+      }
+    }
+  }
+]

@@ -1,0 +1,120 @@
+[
+  {
+    "name": "initial_code",
+    "output": {
+      "returncode": 0,
+      "stdout": "no_headline\n",
+      "stderr": "",
+      "seconds": 0.12685604201396927,
+      "peak_rss_bytes": 4046848,
+      "limit_error": null,
+      "code_sha256": "a72e7100ddf3c3e622b7255455f684f7543309af6e4c1187fa6c20119fae6ce0",
+      "contract": {
+        "status": "no_headline",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article.xml/Table 2/R2C1",
+              "article.xml/Table 2/R3C1",
+              "article.xml/Table 2/R4C1"
+            ],
+            "explanation": "The clinical comparison is organized around three individual patients."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p2",
+              "article:p19"
+            ],
+            "explanation": "The study uses an automated microfluidic system for patient-derived 3D pancreatic tumor organoid culture and drug testing."
+          },
+          "readout": {
+            "value": "apoptosis_death",
+            "evidence": [
+              "article:p20",
+              "article:p27"
+            ],
+            "explanation": "Drug response was assessed by caspase 3/7 apoptosis and propidium iodide death signals, with organoid imaging."
+          },
+          "direction": {
+            "value": "higher_sensitive",
+            "evidence": [
+              "article:p25"
+            ],
+            "explanation": "Greater apoptosis was described as greater drug sensitivity."
+          },
+          "threshold_rule": {
+            "value": "no_binary_rule",
+            "evidence": [
+              "article.xml/Table 2/R2C3",
+              "article.xml/Table 2/R3C3",
+              "article.xml/Table 2/R4C3",
+              "article:p34"
+            ],
+            "explanation": "Organoid findings are reported qualitatively as most-sensitive treatments, without a numeric assay cutoff or binary prediction rule."
+          },
+          "threshold_timing": {
+            "value": "not_applicable",
+            "evidence": [
+              "article:p34"
+            ],
+            "explanation": "No classification threshold was fitted or prespecified."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "article.xml/Table 2/R2C1",
+              "article.xml/Table 2/R3C1",
+              "article.xml/Table 2/R4C1"
+            ],
+            "explanation": "Clinical courses and organoid results are presented separately for Patients 1, 2, and 3."
+          },
+          "regimen_match": {
+            "value": "partial",
+            "evidence": [
+              "article.xml/Table 2/R2C2",
+              "article.xml/Table 2/R2C3",
+              "article.xml/Table 2/R3C2",
+              "article.xml/Table 2/R3C3",
+              "article.xml/Table 2/R4C2",
+              "article.xml/Table 2/R4C3",
+              "article:p22"
+            ],
+            "explanation": "The organoid regimens included drugs used clinically and were designed to mirror treatment courses, but the retrospective clinical outcomes were not a controlled regimen-matched endpoint."
+          },
+          "n_units": {
+            "value": 3,
+            "evidence": [
+              "article.xml/Table 2/R2C1",
+              "article.xml/Table 2/R3C1",
+              "article.xml/Table 2/R4C1"
+            ],
+            "explanation": "Three patients had paired qualitative clinical and organoid summaries."
+          },
+          "split": {
+            "value": "none",
+            "evidence": [
+              "article:p34"
+            ],
+            "explanation": "The paper presents retrospective case comparisons, not a training/held-out predictive validation."
+          }
+        },
+        "headline": {
+          "metric": null,
+          "reported": null,
+          "reported_evidence": [],
+          "threshold": null,
+          "op": null,
+          "score_direction": "higher",
+          "records": [],
+          "blocked_reason": "No global clinical or toxicity performance headline is reported: the article provides only qualitative retrospective comparisons of most-sensitive organoid treatments with clinical courses for three patients and gives no accuracy, sensitivity, specificity, AUC, prespecified cutoff, or row-level prediction-vs-outcome dataset."
+        },
+        "notes": [
+          "Table 2 summarizes clinical and organoid results narratively rather than as binary assay predictions and outcomes.",
+          "The discussion explicitly notes that rapid disease progression and uncontrolled retrospective treatment timing make direct clinical comparison difficult."
+        ]
+      }
+    }
+  }
+]

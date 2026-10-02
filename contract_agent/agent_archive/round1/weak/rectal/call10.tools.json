@@ -1,0 +1,17 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "# Check page13 for P81-P84\nrows_page13 = tables['supp.pdf']['page13']['rows']\nprint(\"Page13 rows around P81-P84:\")\nfor i, row in enumerate(rows_page13):\n    if len(row) < 1:\n        continue\n    cell = row[0]\n    if isinstance(cell, dict):\n        val = str(cell.get('value', ''))\n    else:\n        val = str(cell)\n    if 'Patient8' in val or 'Patient81' in val or 'Patient82' in val or 'Patient83' in val or 'Patient84' in val:\n        print(f\"  Row {i+1}: {row[:5]}\")\n\n# Also check how many rows are in page13\nprint(f\"\\nTotal rows in page13: {len(rows_page13)}\")\n# Show last few rows\nprint(\"Last few rows of page13:\")\nfor i in range(max(0, len(rows_page13)-5), len(rows_page13)):\n    print(f\"  Row {i+1}: {rows_page13[i][:5]}\")"
+    },
+    "output": {
+      "returncode": 0,
+      "stdout": "Page13 rows around P81-P84:\n  Row 40: ['Patient80', '2.5331', '0.613', '0.909', '0.5916']\n  Row 41: ['Patient81', '0.2354', '0.3641', '0.2227', '0.1352']\n  Row 42: ['Patient82', '2.2886', '0.5901', '0.1026', '0.0972']\n  Row 43: ['Patient83', '1.0349', '1.0459', '0.517', '0.7846']\n  Row 44: ['Patient84', '9.1641', '0.0696', '0.0469', '0.0373']\n\nTotal rows in page13: 44\nLast few rows of page13:\n  Row 40: ['Patient80', '2.5331', '0.613', '0.909', '0.5916']\n  Row 41: ['Patient81', '0.2354', '0.3641', '0.2227', '0.1352']\n  Row 42: ['Patient82', '2.2886', '0.5901', '0.1026', '0.0972']\n  Row 43: ['Patient83', '1.0349', '1.0459', '0.517', '0.7846']\n  Row 44: ['Patient84', '9.1641', '0.0696', '0.0469', '0.0373']\n",
+      "stderr": "",
+      "seconds": 0.20777604202157818,
+      "peak_rss_bytes": 4145152,
+      "limit_error": null,
+      "code_sha256": "071cd0925c13b2ae32986bdd03b7d01037d5ca0df5a4d62bf85e402298d0596f"
+    }
+  }
+]

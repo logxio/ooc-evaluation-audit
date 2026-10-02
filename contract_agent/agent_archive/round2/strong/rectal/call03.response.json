@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_z6e7cxiqtrg3tgbxg279biyo",
+        "type": "function",
+        "function": {
+          "name": "preview_table",
+          "arguments": "{\"file\": \"supp.pdf\", \"sheet\": \"page10\", \"start\": 1, \"rows\": 44}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "We need construct records. \n\nThe column information of Table2 has been clarified, with the C5 column confirmed as the target score column. It has also been confirmed that relevant content is distributed on pages 9 to 11, and all pages will be parsed and references mapped as planned.\n\nThe patient ID parsing issue has been troubleshot, and the full extraction scope of 48 records from P81 to P128 has been confirmed, along with their corresponding row positions and relevant truth distribution details. Preview target page.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 483,
+    "prompt_tokens": 63585,
+    "total_tokens": 64068,
+    "prompt_tokens_details": {
+      "cached_tokens": 24376
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 408
+    }
+  }
+}

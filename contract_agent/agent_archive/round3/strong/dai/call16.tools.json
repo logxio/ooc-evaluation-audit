@@ -1,0 +1,9 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "vn=get_rows('Source data figure 5.xlsx','5n'); vo=get_rows('Source data figure 5.xlsx','5o')\nlabels=['Good','Good','Good','Poor','Good','Good','Poor','Poor','Poor','Poor','Good','Good','Poor','Poor','Poor','Poor','Poor','Poor','Good','Good','Good','Good']\ntruth=[0 if x=='Good' else 1 for x in labels]\ncor=[]\nfor idx,er in enumerate(range(3,25)):\n row=vo[er-1]\n import statistics as st\n score=st.median(row[4:7])\n pred=score>50.47\n ok=pred==truth[idx]\n cor.append(ok)\n print(row[0], score, pred, truth[idx], ok)\nprint(sum(cor),len(cor),sum(cor)/len(cor))"
+    },
+    "output_sha256": "a4d8c4e6c094bf2b79d8d8abf22ab47bdc5ec9d29fcba53293157b1f277f8e92"
+  }
+]

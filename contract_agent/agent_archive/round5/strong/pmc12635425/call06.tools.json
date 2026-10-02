@@ -1,0 +1,17 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "for pg in range(18,24):\n sh='page'+str(pg); o=tables['CTM2-15-e70534-s002.pdf'][sh]\n print('\\n---',pg,'---')\n for ri,row in enumerate(o.rows,1):\n  print(ri, row)\n"
+    },
+    "output": {
+      "returncode": 1,
+      "stdout": "\n--- 18 ---\n",
+      "stderr": "Traceback (most recent call last):\n  File \"scratch/python07/worker.py\", line 19, in <module>\n    exec(compile(code,'<agent-code>','exec'))\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<agent-code>\", line 4, in <module>\nAttributeError: 'dict' object has no attribute 'rows'\n",
+      "seconds": 0.12977279198821634,
+      "peak_rss_bytes": 4046848,
+      "limit_error": null,
+      "code_sha256": "606eaeb2f7e768b073b4ee454431c255f14fd48e69be4a9b6107c9d37c8d62a6"
+    }
+  }
+]

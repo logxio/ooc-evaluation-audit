@@ -1,0 +1,9 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "import re\nrecs=[]\nfor page in ['page18','page19','page20']:\n o=tables['mmc1.pdf'][page]\n for ri,(row,g) in enumerate(zip(o['rows'],o['geometry']),1):\n  c1=str(row[0]) if row else ''; c2=str(row[1]) if len(row)>1 else ''\n  m=re.fullmatch(r'(P-\\d+)(P-\\d+-[A-Z0-9]+)',c1)\n  if m: case,org=m.groups()\n  elif re.fullmatch(r'P-\\d+-[A-Z0-9]+',c2): case,org=c1,c2\n  else: continue\n  def near(a,b): return ' '.join(c['text'] for c in g['cells'] if a<=c['x0']<=b)\n  recs.append(dict(page=page,ri=ri,case=case,org=org,reg=near(445,470),ic=near(525,545),resp=near(560,580),cons=near(595,615)))\ndef parse(s):\n if '(cid:893)' in s:return ('censor',1000)\n try:return ('exact',float(s))\n except:return ('na',None)\nfor tval in ['PR','other']:\n arr=[]\n for r in recs:\n  if (r['resp']=='PR')==(tval=='PR'):\n   arr.append((parse(r['ic']),r['resp'],r['case'],r['org'],r['reg']))\n print('\\n',tval,len(arr))\n for x in sorted(arr,key=lambda z:(z[0][0]!='exact',z[0][1] if z[0][1] is not None else 9e99)): print(x)\n"
+    },
+    "output_sha256": "ff0bea13e2dd8138686346ef9aef2905c6ac09092de746f33d81c8038842f982"
+  }
+]

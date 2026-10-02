@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_wz5ey43ngsamlkidbp6w18hw",
+        "type": "function",
+        "function": {
+          "name": "python",
+          "arguments": "{\"code\": \"for sh in ['Table 1','Table 2']:\\n rows=get_rows('article.xml',sh)\\n print(sh,len(rows))\\n for i,r in enumerate(rows,1): print(i,repr(r))\\n print()\"}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "Need inspect.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 85,
+    "prompt_tokens": 16709,
+    "total_tokens": 16794,
+    "prompt_tokens_details": {
+      "cached_tokens": 2360
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 4
+    }
+  }
+}

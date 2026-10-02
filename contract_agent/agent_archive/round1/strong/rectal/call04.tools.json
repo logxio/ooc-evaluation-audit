@@ -1,0 +1,17 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "\nimport re\n# Build maps of cell refs for Table S1 (TRG) and Table S2 (combined ratio)\ntrg_refs = {}\nfor pg in ['page9','page10','page11','page12']:\n    rows = tables['supp.pdf'][pg]['rows']\n    for i, r in enumerate(rows, start=1):\n        name = str(r[0]).strip() if r[0] else ''\n        m = re.match(r'Patient[- ]?(\\d+)$', name)\n        if m and len(r) > 7 and r[7] is not None:\n            pid = int(m.group(1))\n            trg_refs[pid] = (f'supp.pdf/{pg}/R{i}C8', str(r[7]).strip())\n\nratio_refs = {}\nfor pg in ['page12','page13','page14']:\n    rows = tables['supp.pdf'][pg]['rows']\n    for i, r in enumerate(rows, start=1):\n        name = str(r[0]).strip() if r[0] else ''\n        m = re.match(r'Patient[- ]?(\\d+)$', name)\n        if m and len(r) > 4 and r[4] is not None:\n            pid = int(m.group(1))\n            try:\n                v = float(r[4])\n            except:\n                continue\n            ratio_refs[pid] = (f'supp.pdf/{pg}/R{i}C5', v)\n\nprint('TRG entries:', len(trg_refs), 'ratio entries:', len(ratio_refs))\nmissing = [p for p in range(81,129) if p not in trg_refs or p not in ratio_refs]\nprint('missing in validation:', missing)\n\nCUT = 0.3487\ntp=fp=tn=fn=0\nrecs=[]\nfor pid in range(81,129):\n    rref, ratio = ratio_refs[pid]\n    tref, trg = trg_refs[pid]\n    sens = 1 if ratio <= CUT else 0\n    good = 1 if trg.lower() in ('0','1','ccr') else 0\n    recs.append((pid, ratio, sens, trg, good, rref, tref))\n    if sens and good: tp+=1\n    elif sens and not good: fn+=1\n    elif not sens and good: fp+=1\n    else: tn+=1\nprint('sens&good',tp,'sens&poor',fn,'res&good',fp,'res&poor',tn, 'total', tp+fn+fp+tn)\nprint('accuracy', (tp+tn)/48)\nprint('sens(poor detection)', tn/(tn+fp), 'spec', tp/(tp+fn))\nfor r in recs[:6]: print(r)\n# discordant\nprint('discordant:', [r for r in recs if r[2]!=r[4]])\n"
+    },
+    "output": {
+      "returncode": 0,
+      "stdout": "TRG entries: 128 ratio entries: 128\nmissing in validation: []\nsens&good 19 sens&poor 1 res&good 2 res&poor 26 total 48\naccuracy 0.9375\nsens(poor detection) 0.9285714285714286 spec 0.95\n(81, 0.1352, 1, '0', 1, 'supp.pdf/page13/R41C5', 'supp.pdf/page10/R39C8')\n(82, 0.0972, 1, '0', 1, 'supp.pdf/page13/R42C5', 'supp.pdf/page10/R40C8')\n(83, 0.7846, 0, '2', 0, 'supp.pdf/page13/R43C5', 'supp.pdf/page10/R41C8')\n(84, 0.0373, 1, '0', 1, 'supp.pdf/page13/R44C5', 'supp.pdf/page10/R42C8')\n(85, 0.5723, 0, '2', 0, 'supp.pdf/page14/R1C5', 'supp.pdf/page10/R43C8')\n(86, 0.032, 1, 'ccr', 1, 'supp.pdf/page14/R2C5', 'supp.pdf/page10/R44C8')\ndiscordant: [(104, 0.3454, 1, '2', 0, 'supp.pdf/page14/R20C5', 'supp.pdf/page11/R18C8'), (105, 0.6035, 0, 'ccr', 1, 'supp.pdf/page14/R21C5', 'supp.pdf/page11/R19C8'), (124, 0.4641, 0, '0', 1, 'supp.pdf/page14/R40C5', 'supp.pdf/page11/R38C8')]\n",
+      "stderr": "",
+      "seconds": 0.10340829199412838,
+      "peak_rss_bytes": 4046848,
+      "limit_error": null,
+      "code_sha256": "cb39d77685fe364b1f51097056b143cedf01587ccdb69453464bb0bf4342e170"
+    }
+  }
+]

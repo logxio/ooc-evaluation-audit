@@ -1,0 +1,297 @@
+[
+  {
+    "name": "initial_code",
+    "output": {
+      "returncode": 0,
+      "stdout": "GC-007 clinical text: 'NO recurrence' class: 1 refs: ['pone.0339416.s002.pdf/page4/R5C10', 'pone.0339416.s002.pdf/page4/R5C11']\nGC-010 clinical text: 'NO recurrence' class: 1 refs: ['pone.0339416.s002.pdf/page4/R6C10', 'pone.0339416.s002.pdf/page4/R6C11']\nGC-011 clinical text: 'NO recurrence' class: 1 refs: ['pone.0339416.s002.pdf/page4/R7C10', 'pone.0339416.s002.pdf/page4/R7C11']\nGC-019 clinical text: 'NO recurrence' class: 1 refs: ['pone.0339416.s002.pdf/page4/R8C10', 'pone.0339416.s002.pdf/page4/R8C11']\nGC-021 clinical text: 'NO recurrence' class: 1 refs: ['pone.0339416.s002.pdf/page4/R9C10', 'pone.0339416.s002.pdf/page4/R9C11']\nGC-023 clinical text: 'NO recurrence' class: 1 refs: ['pone.0339416.s002.pdf/page4/R10C10', 'pone.0339416.s002.pdf/page4/R10C11']\nGC-025 clinical text: 'Recurrence' class: 0 refs: ['pone.0339416.s002.pdf/page4/R11C9']\nGC-026 clinical text: 'Recurrence' class: 0 refs: ['pone.0339416.s002.pdf/page4/R13C10']\nGC-012 clinical text: 'Recurrence' class: 0 refs: ['pone.0339416.s002.pdf/page4/R14C12']\nGC-014 clinical text: 'Progressive disease' class: None refs: ['pone.0339416.s002.pdf/page4/R15C12', 'pone.0339416.s002.pdf/page4/R15C13']\nGC-008 clinical text: 'Progressive disease' class: None refs: ['pone.0339416.s002.pdf/page4/R17C12', 'pone.0339416.s002.pdf/page4/R17C13']\nrecords 9 ['GC-007', 'GC-010', 'GC-011', 'GC-012', 'GC-019', 'GC-021', 'GC-023', 'GC-025', 'GC-026']\n",
+      "stderr": "",
+      "seconds": 0.7287881659867708,
+      "peak_rss_bytes": 28606464,
+      "limit_error": null,
+      "code_sha256": "dd841e6a5de3c603e4416a58a029407b7a51bbb6ae55bda5f9cfe089fb6f595f",
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p26"
+            ],
+            "explanation": "Concordance is evaluated at the level of individual GC patients with matched PDOs."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p26",
+              "article:p27"
+            ],
+            "explanation": "Assay responses were measured in patient-derived gastric cancer organoids."
+          },
+          "readout": {
+            "value": "viability",
+            "evidence": [
+              "article:p13",
+              "article:p15"
+            ],
+            "explanation": "MTS viability was converted to tumor inhibition rate for drug-response classification."
+          },
+          "direction": {
+            "value": "mixed",
+            "evidence": [
+              "article:p15"
+            ],
+            "explanation": "Sensitivity combined higher inhibition rate with a lower IC50-to-steady-state-concentration ranking."
+          },
+          "threshold_rule": {
+            "value": "fixed_numeric",
+            "evidence": [
+              "article:p15"
+            ],
+            "explanation": "An inhibition rate of at least 50% was considered sensitive, combined with the published ranking rule."
+          },
+          "threshold_timing": {
+            "value": "explicitly_prespecified",
+            "evidence": [
+              "article:p15"
+            ],
+            "explanation": "The IR >= 50% criterion is stated in the Methods."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "pone.0339416.s001.xlsx/Fig 5C",
+              "pone.0339416.s002.pdf/page4"
+            ],
+            "explanation": "Patient IDs link assay IR values and clinical outcomes row by row."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p26",
+              "article:p27"
+            ],
+            "explanation": "PDO responses to regimen components were compared with outcomes after the corresponding clinical chemotherapy."
+          },
+          "n_units": {
+            "value": 11,
+            "evidence": [
+              "article:p26"
+            ],
+            "explanation": "The published concordance analysis uses 11 treated, evaluable matched patient cases."
+          },
+          "split": {
+            "value": "none",
+            "evidence": [
+              "article:p26"
+            ],
+            "explanation": "This is a direct same-cohort concordance evaluation rather than a held-out prediction model."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.909,
+          "reported_evidence": [
+            "article:p26",
+            "article:p2",
+            "article:p32"
+          ],
+          "threshold": 50,
+          "op": ">=",
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "GC-007",
+              "score": {
+                "refs": [
+                  "pone.0339416.s001.xlsx/Fig 5C/R4C2",
+                  "pone.0339416.s001.xlsx/Fig 5C/R4C3"
+                ],
+                "aggregate": "max",
+                "threshold": 50,
+                "op": ">="
+              },
+              "truth": {
+                "refs": [
+                  "pone.0339416.s002.pdf/page4/R5C10",
+                  "pone.0339416.s002.pdf/page4/R5C11"
+                ],
+                "map": {
+                  "NO recurrence": 1
+                }
+              }
+            },
+            {
+              "id": "GC-010",
+              "score": {
+                "refs": [
+                  "pone.0339416.s001.xlsx/Fig 5C/R5C2",
+                  "pone.0339416.s001.xlsx/Fig 5C/R5C3"
+                ],
+                "aggregate": "max",
+                "threshold": 50,
+                "op": ">="
+              },
+              "truth": {
+                "refs": [
+                  "pone.0339416.s002.pdf/page4/R6C10",
+                  "pone.0339416.s002.pdf/page4/R6C11"
+                ],
+                "map": {
+                  "NO recurrence": 1
+                }
+              }
+            },
+            {
+              "id": "GC-011",
+              "score": {
+                "refs": [
+                  "pone.0339416.s001.xlsx/Fig 5C/R6C2",
+                  "pone.0339416.s001.xlsx/Fig 5C/R6C3"
+                ],
+                "aggregate": "max",
+                "threshold": 50,
+                "op": ">="
+              },
+              "truth": {
+                "refs": [
+                  "pone.0339416.s002.pdf/page4/R7C10",
+                  "pone.0339416.s002.pdf/page4/R7C11"
+                ],
+                "map": {
+                  "NO recurrence": 1
+                }
+              }
+            },
+            {
+              "id": "GC-012",
+              "score": {
+                "refs": [
+                  "pone.0339416.s001.xlsx/Fig 5C/R12C2",
+                  "pone.0339416.s001.xlsx/Fig 5C/R12C3"
+                ],
+                "aggregate": "max",
+                "threshold": 50,
+                "op": ">="
+              },
+              "truth": {
+                "refs": [
+                  "pone.0339416.s002.pdf/page4/R14C12"
+                ],
+                "map": {
+                  "Recurrence": 0
+                }
+              }
+            },
+            {
+              "id": "GC-019",
+              "score": {
+                "refs": [
+                  "pone.0339416.s001.xlsx/Fig 5C/R7C2",
+                  "pone.0339416.s001.xlsx/Fig 5C/R7C3"
+                ],
+                "aggregate": "max",
+                "threshold": 50,
+                "op": ">="
+              },
+              "truth": {
+                "refs": [
+                  "pone.0339416.s002.pdf/page4/R8C10",
+                  "pone.0339416.s002.pdf/page4/R8C11"
+                ],
+                "map": {
+                  "NO recurrence": 1
+                }
+              }
+            },
+            {
+              "id": "GC-021",
+              "score": {
+                "refs": [
+                  "pone.0339416.s001.xlsx/Fig 5C/R8C2",
+                  "pone.0339416.s001.xlsx/Fig 5C/R8C3"
+                ],
+                "aggregate": "max",
+                "threshold": 50,
+                "op": ">="
+              },
+              "truth": {
+                "refs": [
+                  "pone.0339416.s002.pdf/page4/R9C10",
+                  "pone.0339416.s002.pdf/page4/R9C11"
+                ],
+                "map": {
+                  "NO recurrence": 1
+                }
+              }
+            },
+            {
+              "id": "GC-023",
+              "score": {
+                "refs": [
+                  "pone.0339416.s001.xlsx/Fig 5C/R9C2",
+                  "pone.0339416.s001.xlsx/Fig 5C/R9C3"
+                ],
+                "aggregate": "max",
+                "threshold": 50,
+                "op": ">="
+              },
+              "truth": {
+                "refs": [
+                  "pone.0339416.s002.pdf/page4/R10C10",
+                  "pone.0339416.s002.pdf/page4/R10C11"
+                ],
+                "map": {
+                  "NO recurrence": 1
+                }
+              }
+            },
+            {
+              "id": "GC-025",
+              "score": {
+                "refs": [
+                  "pone.0339416.s001.xlsx/Fig 5C/R10C2",
+                  "pone.0339416.s001.xlsx/Fig 5C/R10C3"
+                ],
+                "aggregate": "max",
+                "threshold": 50,
+                "op": ">="
+              },
+              "truth": {
+                "refs": [
+                  "pone.0339416.s002.pdf/page4/R11C9"
+                ],
+                "map": {
+                  "Recurrence": 0
+                }
+              }
+            },
+            {
+              "id": "GC-026",
+              "score": {
+                "refs": [
+                  "pone.0339416.s001.xlsx/Fig 5C/R11C2",
+                  "pone.0339416.s001.xlsx/Fig 5C/R11C3"
+                ],
+                "aggregate": "max",
+                "threshold": 50,
+                "op": ">="
+              },
+              "truth": {
+                "refs": [
+                  "pone.0339416.s002.pdf/page4/R13C10"
+                ],
+                "map": {
+                  "Recurrence": 0
+                }
+              }
+            }
+          ],
+          "blocked_reason": null
+        },
+        "notes": [
+          "GC-001 and GC-004 are excluded because S4 Table records no postoperative therapy; the published accuracy denominator is 11."
+        ]
+      }
+    }
+  }
+]

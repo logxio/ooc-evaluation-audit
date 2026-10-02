@@ -1,0 +1,110 @@
+[
+  {
+    "name": "initial_code",
+    "output": {
+      "contract": {
+        "status": "blocked",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p13",
+              "article:p28"
+            ],
+            "explanation": "The concordance endpoint is calculated for 20 evaluable patients with successful ex vivo tests and evaluable in vivo MRI responses."
+          },
+          "platform": {
+            "value": "unknown",
+            "evidence": [
+              "article:p26"
+            ],
+            "explanation": "The assay uses fresh ex vivo tumor tissue slices, which is not organoid, perfused chip, microwell, or spheroid."
+          },
+          "readout": {
+            "value": "other",
+            "evidence": [
+              "article.xml/Table 1/R1C1",
+              "article.xml/Table 1/R2C1"
+            ],
+            "explanation": "The final ex vivo result integrates HE morphology, EdU proliferation, and TUNEL apoptosis."
+          },
+          "direction": {
+            "value": "mixed",
+            "evidence": [
+              "article.xml/Table 1/R3C1",
+              "article.xml/Table 1/R4C1",
+              "article.xml/Table 1/R5C1"
+            ],
+            "explanation": "Results are classified as resistant, intermediate sensitive, or sensitive rather than as one monotone numeric score."
+          },
+          "threshold_rule": {
+            "value": "categorical",
+            "evidence": [
+              "article:p26",
+              "article.xml/Table 1/R1C1"
+            ],
+            "explanation": "Concordance requires matching sensitive, intermediate sensitive, or resistant ex vivo and MRI categories."
+          },
+          "threshold_timing": {
+            "value": "independent_reference",
+            "evidence": [
+              "article:p1",
+              "article:p9"
+            ],
+            "explanation": "Assay cutoffs were established on an earlier set of 21 resected tumors before the BREAST biopsy cohort was evaluated."
+          },
+          "patient_mapping": {
+            "value": "partial",
+            "evidence": [
+              "article:p12",
+              "article:p13"
+            ],
+            "explanation": "Aggregate response counts and the directions of the five discordant pairs are reported, but the 20 sample-specific ex vivo and MRI categories are only presented in Fig. 2b and require independent figure transcription."
+          },
+          "regimen_match": {
+            "value": "partial",
+            "evidence": [
+              "article:p21",
+              "article:p26"
+            ],
+            "explanation": "The ex vivo assay uses FAC while patients receive anthracycline-containing neoadjuvant chemotherapy; the paper discusses FAC versus AC as a limitation."
+          },
+          "n_units": {
+            "value": 20,
+            "evidence": [
+              "article:p13",
+              "article:p14"
+            ],
+            "explanation": "The primary reported concordance denominator is 20 patients."
+          },
+          "split": {
+            "value": "independent_test",
+            "evidence": [
+              "article:p1",
+              "article:p9"
+            ],
+            "explanation": "The criteria were developed in 21 earlier surgical specimens and tested in a new proof-of-concept biopsy cohort."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.75,
+          "reported_evidence": [
+            "article:p13",
+            "article:p14"
+          ],
+          "threshold": null,
+          "op": "==",
+          "score_direction": "higher",
+          "records": [],
+          "blocked_reason": "Fig. 2b has not been independently transcribed into read_figure/read_grid observations. The source provides aggregate 15/20 concordance and discordance directions, but not machine-readable sample-specific ex vivo and in vivo category pairs for all 20 patients; those pairs are required and cannot be invented from the aggregate counts."
+        },
+        "notes": [
+          "The requested primary headline is 75% concordance, reported as 15/20 in article:p13.",
+          "The alternative 20% relative TUNEL threshold produced 65% (13/20) and was rejected; it is not the requested primary result.",
+          "No row-level records are supplied until Fig. 2b is independently read and mapped to sample identifiers."
+        ]
+      }
+    }
+  }
+]

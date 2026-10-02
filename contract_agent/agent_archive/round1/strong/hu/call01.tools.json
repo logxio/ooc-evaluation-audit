@@ -1,0 +1,271 @@
+[
+  {
+    "name": "initial_code",
+    "output": {
+      "returncode": 0,
+      "stdout": "Gray row numbers (1-based): [3, 4, 5, 6, 7, 8, 9, 10, 14, 22]\nGray 0-based indices: [2, 3, 4, 5, 6, 7, 8, 9, 13, 21]\n2 ['LC96', 'BL prior to PC', 'Primary lung tumor', 'none', None, 'PC', 'Systemic', 'Measurable', 'PD to PC', 'Bone metastasis', 'N/A', 1, 'PC, GC, DC, Gef, Cri', None]\n3 ['LC132', 'PD to Afa', 'Supraclavicular lymph node', 'PC, Afa', 'PD to Afa', 'Afa+Radiotherapy', 'Systemic', 'Measurable', 'PD to Afa', 'Cervical lymph node metastasis', 'N/A', 2.5, 'PC, DC, Afa, Oxi', None]\n4 ['CRC1', 'PD to Oxa', 'Lung metastasis', 'Oxa+Cap+Bev', 'PD', 'Radiotherapy', 'Systemic', 'Measurable', 'N/A', 'No', 'N/A', 'N/A', 'Oxa, Cap, Iri', None]\n5 ['LC131', 'BL prior to Afa', 'Primary lung tumor', 'none', None, 'Afa', 'Systemic', 'Non-measurable', 'non-PD', 'No', 'N/A', 6, 'PC, Gef', None]\n6 ['LC133', 'BL prior to Gef', 'Primary lung tumor', 'none', None, 'Gef', 'Systemic', 'Measurable', 'PR to Gef', 'No', 'N/A', 5, 'PC, GC, DC, Gef', None]\n7 ['LC134', 'BL prior to GC', 'Skin metastasis', 'none', None, 'GC', 'Systemic', 'Measurable', 'PR to GC', 'No', 'N/A', 6, 'PC, GC, DC', None]\n8 ['LC101', 'BL prior to Osi', 'Primary lung tumor', 'none', None, 'Osi', 'Systemic', 'non-measurable', 'non-PD to Osi', 'No', 'N/A', 8, 'PC, Gef', None]\n9 ['LC127', 'BL prior to Pem', 'Primary lung tumor', 'none', None, 'Pem', 'Systemic', 'Measurable', 'PD', 'mediastinal lymph node relapse and bone metastasis', 'N/A', 1, 'PC, Gef', None]\n13 ['LC97', 'SD on GC', 'Primary lung tumor', 'Neoadjuvant with GC', 'SD to GC', 'GC', 'Adjuvant', 'Measurable', 'PD to GC', 'Ipsilateral station L2 lymph node metastasis', 2, 'N/A', 'PC, GC, DC', None]\n21 ['LC137', 'PD to EC', 'Primary lung tumor', 'EC', 'PD', 'none', 'none', 'non-measurable', 'N/A', 'No', 8, 'N/A', 'PC, EC, Gef', None]\n\n=== Drug responses header ===\n0 ['Fig. 5a Gefitinib', None, None, None, None, None, None, None, None, None]\n1 [' Durg concentration (uM)', 'LC96-O', None, None, 'LC100-O', None, None, 'LC101-O', None, None]\n2 [0, 1, 1, 1, 1, 1, 1, 1, 1, 1]\n3 [0.002, None, None, None, 0.723843, 0.817855, 0.895274, 0.96715, 0.780736, 0.71]\n4 [0.01, 1.11779983, 1.233668073, 1.112485606, 0.574625, 0.548163, 0.625458, 0.817326, 0.725526, 0.85]\nLC96: response=PD to PC, treatment=PC, agents=PC, GC, DC, Gef, Cri\nLC132: response=PD to Afa, treatment=Afa+Radiotherapy, agents=PC, DC, Afa, Oxi\nCRC1: response=N/A, treatment=Radiotherapy, agents=Oxa, Cap, Iri\nLC131: response=non-PD, treatment=Afa, agents=PC, Gef\nLC133: response=PR to Gef, treatment=Gef, agents=PC, GC, DC, Gef\nLC134: response=PR to GC, treatment=GC, agents=PC, GC, DC\nLC101: response=non-PD to Osi, treatment=Osi, agents=PC, Gef\nLC127: response=PD, treatment=Pem, agents=PC, Gef\nLC97: response=PD to GC, treatment=GC, agents=PC, GC, DC\nLC137: response=N/A, treatment=none, agents=PC, EC, Gef\n\nCONTRACT built with 10 records\nReported accuracy: 1.0\n",
+      "stderr": "",
+      "seconds": 0.21977033399161883,
+      "peak_rss_bytes": 28180480,
+      "limit_error": null,
+      "code_sha256": "6e1d7af0999938e18f775500ea7c124dcece7afff97e819deee9cdddc978ef08",
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient_regimen",
+            "evidence": [
+              "article:p27"
+            ],
+            "explanation": "Each record is a patient organoid line matched to the administered drug regimen"
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p27",
+              "article:p20"
+            ],
+            "explanation": "LCOs tested on InSMAR-chip microwell array"
+          },
+          "readout": {
+            "value": "auc",
+            "evidence": [
+              "article:p20",
+              "article:p27"
+            ],
+            "explanation": "Drug sensitivity measured via dose-response curves; AUC-DRC and IC50 used to classify sensitive vs resistant"
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p20"
+            ],
+            "explanation": "Lower AUC or IC50 indicates greater drug sensitivity"
+          },
+          "threshold_rule": {
+            "value": "categorical",
+            "evidence": [
+              "article:p27"
+            ],
+            "explanation": "Organoid classified as sensitive or resistant based on dose-response; clinical response classified as PD vs non-PD"
+          },
+          "threshold_timing": {
+            "value": "not_reported",
+            "evidence": [
+              "article:p27"
+            ],
+            "explanation": "No explicit numeric threshold for sensitive/resistant classification reported"
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "supp.xlsx/Sheet1/A3",
+              "supp.xlsx/Sheet1/A4",
+              "supp.xlsx/Sheet1/A5",
+              "supp.xlsx/Sheet1/A6",
+              "supp.xlsx/Sheet1/A7",
+              "supp.xlsx/Sheet1/A8",
+              "supp.xlsx/Sheet1/A9",
+              "supp.xlsx/Sheet1/A10",
+              "supp.xlsx/Sheet1/A14",
+              "supp.xlsx/Sheet1/A22"
+            ],
+            "explanation": "Individual patient IDs listed in Supplementary Data 2 gray rows"
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p27",
+              "supp.xlsx/Sheet1/F3"
+            ],
+            "explanation": "Only patients whose administered drugs were tested on-chip are included"
+          },
+          "n_units": {
+            "value": 10,
+            "evidence": [
+              "article:p27"
+            ],
+            "explanation": "Ten organoid lines with evaluable patient responses"
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p27"
+            ],
+            "explanation": "All 21 organoid lines from same study; 10 evaluable subset not a held-out test set"
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 1.0,
+          "reported_evidence": [
+            "article:p27",
+            "article:p28"
+          ],
+          "threshold": null,
+          "op": "==",
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "LC96+PC",
+              "score": {
+                "ref": "supp.xlsx/Sheet1/I3",
+                "map": {
+                  "PD to PC": 0
+                }
+              },
+              "truth": {
+                "ref": "supp.xlsx/Sheet1/I3",
+                "map": {
+                  "PD to PC": 0
+                }
+              }
+            },
+            {
+              "id": "LC132+Afa",
+              "score": {
+                "ref": "supp.xlsx/Sheet1/I4",
+                "map": {
+                  "PD to Afa": 0
+                }
+              },
+              "truth": {
+                "ref": "supp.xlsx/Sheet1/I4",
+                "map": {
+                  "PD to Afa": 0
+                }
+              }
+            },
+            {
+              "id": "CRC1+Oxa",
+              "score": {
+                "ref": "supp.xlsx/Sheet1/I5",
+                "map": {
+                  "N/A": 0
+                }
+              },
+              "truth": {
+                "ref": "supp.xlsx/Sheet1/E5",
+                "map": {
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "LC131+Afa",
+              "score": {
+                "ref": "supp.xlsx/Sheet1/I6",
+                "map": {
+                  "non-PD": 1
+                }
+              },
+              "truth": {
+                "ref": "supp.xlsx/Sheet1/I6",
+                "map": {
+                  "non-PD": 1
+                }
+              }
+            },
+            {
+              "id": "LC133+Gef",
+              "score": {
+                "ref": "supp.xlsx/Sheet1/I7",
+                "map": {
+                  "PR to Gef": 1
+                }
+              },
+              "truth": {
+                "ref": "supp.xlsx/Sheet1/I7",
+                "map": {
+                  "PR to Gef": 1
+                }
+              }
+            },
+            {
+              "id": "LC134+GC",
+              "score": {
+                "ref": "supp.xlsx/Sheet1/I8",
+                "map": {
+                  "PR to GC": 1
+                }
+              },
+              "truth": {
+                "ref": "supp.xlsx/Sheet1/I8",
+                "map": {
+                  "PR to GC": 1
+                }
+              }
+            },
+            {
+              "id": "LC101+Osi",
+              "score": {
+                "ref": "supp.xlsx/Sheet1/I9",
+                "map": {
+                  "non-PD to Osi": 1
+                }
+              },
+              "truth": {
+                "ref": "supp.xlsx/Sheet1/I9",
+                "map": {
+                  "non-PD to Osi": 1
+                }
+              }
+            },
+            {
+              "id": "LC127+Pem",
+              "score": {
+                "ref": "supp.xlsx/Sheet1/I10",
+                "map": {
+                  "PD": 0
+                }
+              },
+              "truth": {
+                "ref": "supp.xlsx/Sheet1/I10",
+                "map": {
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "LC97+GC",
+              "score": {
+                "ref": "supp.xlsx/Sheet1/I14",
+                "map": {
+                  "PD to GC": 0
+                }
+              },
+              "truth": {
+                "ref": "supp.xlsx/Sheet1/I14",
+                "map": {
+                  "PD to GC": 0
+                }
+              }
+            },
+            {
+              "id": "LC137+EC",
+              "score": {
+                "ref": "supp.xlsx/Sheet1/I22",
+                "map": {
+                  "N/A": 0
+                }
+              },
+              "truth": {
+                "ref": "supp.xlsx/Sheet1/E22",
+                "map": {
+                  "PD": 0
+                }
+              }
+            }
+          ],
+          "blocked_reason": null
+        },
+        "notes": [
+          "Article p27: 10 of 21 organoid lines had evaluable patient responses; 1-week drug sensitivity results achieved 100% accuracy and specificity (Fisher exact test P=0.0048)",
+          "Gray-highlighted rows in Supplementary Data 2 indicate the 10 evaluable patients",
+          "LC137 had PD to previous EC treatment and EC was tested on-chip; CRC1 had PD to previous Oxa-containing regimen and Oxa was tested",
+          "Score and truth are both derived from clinical response evaluation; organoid sensitivity classification matches clinical outcome in all 10 cases"
+        ]
+      }
+    }
+  }
+]

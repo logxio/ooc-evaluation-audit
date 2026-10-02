@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-0-pro-260215",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_ep5auj18kylu23kahk5e6213",
+        "type": "function",
+        "function": {
+          "name": "python",
+          "arguments": "{\"code\": \"\\n# Identify the 10 evaluable (gray) rows from Supplementary Data 2\\nsd2_rows = get_rows('41467_2021_22676_MOESM5_ESM.xlsx', 'Sheet1')\\ngray_row_indices = [i for i, row in enumerate(sd2_rows) if len(row) > 0 and str(row[0]) in ['LC96', 'LC132', 'CRC1', 'LC131', 'LC133', 'LC134', 'LC101', 'LC127', 'LC97', 'LC130']]\\nevaluable_rows = [sd2_rows[i] for i in gray_row_indices]\\nprint(f\\\"Found {len(evaluable_rows)} evaluable rows: {[r[0] for r in evaluable_rows]}\\\")\\n\\n# Map clinical response to binary (1=response, 0=no response)\\nclinical_map = {'PR': 1, 'CR': 1, 'non-PD': 1, 'PD': 0, 'SD': 0}\\n# Map assay sensitivity: for each patient, get the IC50 of the matched clinical drug, < Cmax = sensitive (1)\\ndrug_cmax = {'PC': 5, 'GC': 10, 'Gef': 0.5, 'Afa': 0.3, 'Osi': 0.2, 'Cri': 0.2, 'Oxi': 5, 'Pem': 1}\\n\\nrecords = []\\nfor row in evaluable_rows:\\n    patient_id = str(row[0]).strip()\\n    clinical_treatment = str(row[5]).strip()\\n    # Extract clinical response (column I, index 8)\\n    clinical_resp = str(row[8]).strip().split(' ')[0]\\n    truth = {'ref': cell_ref('41467_2021_22676_MOESM5_ESM.xlsx', 'Sheet1', gray_row_indices[evaluable_rows.index(row)] + 1, 9), 'map': clinical_map}\\n    \\n    # Get assay IC50 for the matched drug from Source Data 9\\n    drug_resp_rows = get_rows('41467_2021_22676_MOESM9_ESM.xlsx', 'Drug responses of LCOs')\\n    # Find IC50 for patient_id + clinical_treatment\\n    ic50 = None\\n    for dr_row in drug_resp_rows:\\n        if len(dr_row) > 0 and patient_id in str(dr_row[0]):\\n            ic50 = float(dr_row[1])\\n            break\\n    if not ic50:\\n        # Use viability at Cmax to call sensitivity (viability < 0.5 = sensitive)\\n        cmax = drug_cmax.get(clinical_treatment.split('+')[0], 1)\\n        # Find concentration closest to Cmax\\n        conc_col = 0\\n        viab_col = None\\n        for i, val in enumerate(drug_resp_rows[1]):\\n            if patient_id + '-O' in str(val):\\n                viab_col = i\\n                break\\n        if viab_col:\\n            for r in range(2, 12):\\n                conc = float(drug_resp_rows[r][conc_col])\\n                if abs(conc - cmax) < 1e-3:\\n                    viab = float(drug_resp_rows[r][viab_col])\\n                    score = {'ref': cell_ref('41467_2021_22676_MOESM9_ESM.xlsx', 'Drug responses of LCOs', r+1, viab_col+1), 'threshold': 0.5, 'op': '<'}\\n                    break\\n    else:\\n        score = {'ref': cell_ref('41467_2021_22676_MOESM9_ESM.xlsx', 'Drug responses of LCOs', dr_row_idx+1, 2), 'threshold': drug_cmax.get(clinical_treatment.split('+')[0], 1), 'op': '<'}\\n    \\n    records.append({'id': patient_id, 'score': score, 'truth': truth})\\n\\nCONTRACT = {\\n    'status': 'computed',\\n    'fields': {\\n        'unit': {'value': 'patient', 'evidence': ['article:p27'], 'explanation': 'Each unit is a patient with evaluable clinical response and matched organoid drug assay'},\\n        'platform': {'value': 'organoid', 'evidence': ['article:p1', 'article:p27'], 'explanation': 'Assay uses patient-derived lung cancer organoids on InSMAR-chip'},\\n        'readout': {'value': 'viability', 'evidence': ['article:p16'], 'explanation': 'Drug sensitivity measured via alamarBlue viability assay, reported as IC50 or relative viability'},\\n        'direction': {'value': 'lower_sensitive', 'evidence': ['article:p20'], 'explanation': 'Lower IC50/viability indicates higher sensitivity to treatment'},\\n        'threshold_rule': {'value': 'fixed_numeric', 'evidence': ['article:p20'], 'explanation': 'Sensitivity threshold based on clinically relevant Cmax concentrations'},\\n        'threshold_timing': {'value': 'independent_reference', 'evidence': ['article:p20'], 'explanation': 'Cmax thresholds are established clinical values, not optimized on this cohort'},\\n        'patient_mapping': {'value': 'individual_available', 'evidence': ['article:p27', '41467_2021_22676_MOESM5_ESM.xlsx/Sheet1'], 'explanation': 'Each organoid line is uniquely matched to one patient'},\\n        'regimen_match': {'value': 'matched', 'evidence': ['article:p27'], 'explanation': 'Drugs tested in the organoid assay match the clinical treatment received by the patient'},\\n        'n_units': {'value': 10, 'evidence': ['article:p27'], 'explanation': '10 evaluable patients as stated in the article text'},\\n        'split': {'value': 'same_cohort', 'evidence': ['article:p27'], 'explanation': 'All patients are part of the same prospective study cohort'}\\n    },\\n    'headline': {\\n        'metric': 'accuracy',\\n        'reported': 1.0,\\n        'reported_evidence': ['article:p27', 'article:p28'],\\n        'threshold': None,\\n        'op': None,\\n        'score_direction': 'higher',\\n        'records': records,\\n        'blocked_reason': None\\n    },\\n    'notes': ['100% accuracy (1.0) is reported for 10 evaluable patients where organoid assay results perfectly matched clinical outcomes. Sensitivity calls are based on IC50 < clinical Cmax or viability < 50% at Cmax.']\\n}\\n\\nprint(f\\\"Contract built with {len(records)} records, accuracy = {CONTRACT['headline']['reported']}\\\")\\n\"}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 1636,
+    "prompt_tokens": 62225,
+    "total_tokens": 63861,
+    "prompt_tokens_details": {
+      "cached_tokens": 1848
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  }
+}

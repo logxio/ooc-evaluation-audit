@@ -1,0 +1,1426 @@
+{
+  "turn": 5,
+  "tool_count": 3,
+  "tokens": 127671,
+  "done": true,
+  "stop_reason": "verified",
+  "checkpoints": {
+    "single_pass": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p11"
+            ],
+            "explanation": "The retrospective analysis used 28 patient-derived primary GBM specimens linked to individual patient survival."
+          },
+          "platform": {
+            "value": "unknown",
+            "evidence": [
+              "article:p8"
+            ],
+            "explanation": "MAqCI is a custom Y-channel microfluidic migration/proliferation device; the controlled vocabulary does not include a non-perfused microfluidic-chip category."
+          },
+          "readout": {
+            "value": "other",
+            "evidence": [
+              "article:p30",
+              "article.xml/Table 1 |/R1C7"
+            ],
+            "explanation": "Composite MAqCI score combines percentages of highly motile cells, narrow entry, and highly motile Ki-67-positive cells."
+          },
+          "direction": {
+            "value": "higher_sensitive",
+            "evidence": [
+              "article:p14",
+              "article:p46"
+            ],
+            "explanation": "Higher composite scores predict short-term survival; values at or above the threshold classify patients as short-term survivors."
+          },
+          "threshold_rule": {
+            "value": "roc_optimized",
+            "evidence": [
+              "article:p14",
+              "article:p46"
+            ],
+            "explanation": "Thresholds were varied on the retrospective cohort and selected to optimize classification performance."
+          },
+          "threshold_timing": {
+            "value": "outcome_optimized",
+            "evidence": [
+              "article:p14",
+              "article:p46"
+            ],
+            "explanation": "The cutoff was selected using outcomes from the same 28 evaluated retrospective patients."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3"
+            ],
+            "explanation": "Each assay score and clinical outcome can be linked to an individual patient identifier."
+          },
+          "regimen_match": {
+            "value": "not_applicable",
+            "evidence": [
+              "article:p24"
+            ],
+            "explanation": "The assay predicts intrinsic survival outcome from therapy-naive resected cells rather than response to a selected regimen."
+          },
+          "n_units": {
+            "value": 28,
+            "evidence": [
+              "article:p4",
+              "article:p11"
+            ],
+            "explanation": "Exact denominator for the retrospective binary survival classification."
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p11",
+              "article:p14"
+            ],
+            "explanation": "Performance was evaluated in the retrospective cohort used to fit the logistic composite and optimize its cutoff."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.86,
+          "reported_evidence": [
+            "article:p4",
+            "article.xml/Table 1 |/R15C7"
+          ],
+          "threshold": 0.65,
+          "op": ">=",
+          "score_direction": "higher",
+          "records": [],
+          "blocked_reason": null
+        },
+        "notes": [
+          "Truth is short-term survival (<14.6 months) coded as 1 and long-term survival (>=14.6 months) as 0, following the Stupp median-survival threshold described in the source.",
+          "The abstract reports the rounded retrospective accuracy as 86%; 24 of 28 correct classifications equals 0.8571."
+        ]
+      },
+      "evaluation": {
+        "matched": false,
+        "metric": "accuracy",
+        "computed": null,
+        "reported": 0.86,
+        "difference": null,
+        "n": 0,
+        "errors": [
+          "patient_mapping: missing evidence NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3",
+          "No source-bound observations: None",
+          "Expected 28 analysis units, got 0"
+        ],
+        "rows": [],
+        "expected": {
+          "metric": "accuracy",
+          "value": 0.86,
+          "n": 28
+        }
+      },
+      "calls": 1,
+      "tokens": 24276
+    },
+    "one_feedback": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p11"
+            ],
+            "explanation": "The retrospective analysis used 28 patient-derived primary GBM specimens linked to individual patient survival."
+          },
+          "platform": {
+            "value": "unknown",
+            "evidence": [
+              "article:p8"
+            ],
+            "explanation": "MAqCI is a custom Y-channel microfluidic migration/proliferation device; the controlled vocabulary does not include a non-perfused microfluidic-chip category."
+          },
+          "readout": {
+            "value": "other",
+            "evidence": [
+              "article:p30",
+              "article.xml/Table 1 |/R1C7"
+            ],
+            "explanation": "Composite MAqCI score combines percentages of highly motile cells, narrow entry, and highly motile Ki-67-positive cells."
+          },
+          "direction": {
+            "value": "higher_sensitive",
+            "evidence": [
+              "article:p14",
+              "article:p46"
+            ],
+            "explanation": "Higher composite scores predict short-term survival; values at or above the threshold classify patients as short-term survivors."
+          },
+          "threshold_rule": {
+            "value": "roc_optimized",
+            "evidence": [
+              "article:p14",
+              "article:p46"
+            ],
+            "explanation": "Thresholds were varied on the retrospective cohort and selected to optimize classification performance."
+          },
+          "threshold_timing": {
+            "value": "outcome_optimized",
+            "evidence": [
+              "article:p14",
+              "article:p46"
+            ],
+            "explanation": "The cutoff was selected using outcomes from the same 28 evaluated retrospective patients."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3"
+            ],
+            "explanation": "Each assay score and clinical outcome can be linked to an individual patient identifier."
+          },
+          "regimen_match": {
+            "value": "not_applicable",
+            "evidence": [
+              "article:p24"
+            ],
+            "explanation": "The assay predicts intrinsic survival outcome from therapy-naive resected cells rather than response to a selected regimen."
+          },
+          "n_units": {
+            "value": 28,
+            "evidence": [
+              "article:p4",
+              "article:p11"
+            ],
+            "explanation": "Exact denominator for the retrospective binary survival classification."
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p11",
+              "article:p14"
+            ],
+            "explanation": "Performance was evaluated in the retrospective cohort used to fit the logistic composite and optimize its cutoff."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.86,
+          "reported_evidence": [
+            "article:p4",
+            "article.xml/Table 1 |/R15C7"
+          ],
+          "threshold": 0.65,
+          "op": ">=",
+          "score_direction": "higher",
+          "records": [],
+          "blocked_reason": null
+        },
+        "notes": [
+          "Truth is short-term survival (<14.6 months) coded as 1 and long-term survival (>=14.6 months) as 0, following the Stupp median-survival threshold described in the source.",
+          "The abstract reports the rounded retrospective accuracy as 86%; 24 of 28 correct classifications equals 0.8571."
+        ]
+      },
+      "evaluation": {
+        "matched": false,
+        "errors": [
+          "JSONDecodeError: Invalid \\escape: line 1 column 4637 (char 4636)"
+        ]
+      },
+      "calls": 2,
+      "tokens": 48658
+    },
+    "tool_loop": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p11"
+            ],
+            "explanation": "The retrospective panel consists of 28 patient-derived primary GBM specimens with complete clinical outcomes."
+          },
+          "platform": {
+            "value": "unknown",
+            "evidence": [
+              "article:p8"
+            ],
+            "explanation": "MAqCI is a custom Y-shaped microfluidic migration and proliferation device, not one of the named controlled-vocabulary platforms."
+          },
+          "readout": {
+            "value": "other",
+            "evidence": [
+              "article:p30"
+            ],
+            "explanation": "The predictor is a logistic-regression composite of highly motile cells, narrow entry, and highly motile Ki-67-positive cells."
+          },
+          "direction": {
+            "value": "higher_sensitive",
+            "evidence": [
+              "article:p14",
+              "article:p46"
+            ],
+            "explanation": "A higher composite score indicates greater aggressiveness and predicts short-term rather than long-term survival."
+          },
+          "threshold_rule": {
+            "value": "roc_optimized",
+            "evidence": [
+              "article:p14",
+              "article:p46"
+            ],
+            "explanation": "The cutoff was selected by varying thresholds and optimizing classification performance."
+          },
+          "threshold_timing": {
+            "value": "outcome_optimized",
+            "evidence": [
+              "article:p14",
+              "article:p46"
+            ],
+            "explanation": "Threshold optimization used outcomes from the same retrospective cohort being evaluated."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/A2",
+              "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/A29",
+              "article:p11"
+            ],
+            "explanation": "Individual patient identifiers link each assay score to that patient survival time."
+          },
+          "regimen_match": {
+            "value": "not_applicable",
+            "evidence": [
+              "article:p24"
+            ],
+            "explanation": "The assay uses therapy-naive cells and predicts intrinsic survival outcome, not response to a matched treatment regimen."
+          },
+          "n_units": {
+            "value": 28,
+            "evidence": [
+              "article:p4",
+              "article:p11"
+            ],
+            "explanation": "The exact retrospective denominator is 28 patients."
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p11",
+              "article:p14"
+            ],
+            "explanation": "The logistic composite and cutoff were assessed in the same retrospective cohort used for optimization."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.86,
+          "reported_evidence": [
+            "article:p4",
+            "article.xml/Table 1 |/R15C7"
+          ],
+          "threshold": 0.7,
+          "op": ">=",
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "GBM963",
+              "score": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F2"
+              },
+              "truth": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B2",
+                "threshold": 14.6,
+                "op": "<"
+              }
+            },
+            {
+              "id": "GBM582",
+              "score": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F3"
+              },
+              "truth": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B3",
+                "threshold": 14.6,
+                "op": "<"
+              }
+            },
+            {
+              "id": "GBM965",
+              "score": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F4"
+              },
+              "truth": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B4",
+                "threshold": 14.6,
+                "op": "<"
+              }
+            },
+            {
+              "id": "GBM120",
+              "score": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F5"
+              },
+              "truth": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B5",
+                "threshold": 14.6,
+                "op": "<"
+              }
+            },
+            {
+              "id": "GBM960",
+              "score": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F6"
+              },
+              "truth": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B6",
+                "threshold": 14.6,
+                "op": "<"
+              }
+            },
+            {
+              "id": "GBM549",
+              "score": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F7"
+              },
+              "truth": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B7",
+                "threshold": 14.6,
+                "op": "<"
+              }
+            },
+            {
+              "id": "GBM1298",
+              "score": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F8"
+              },
+              "truth": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B8",
+                "threshold": 14.6,
+                "op": "<"
+              }
+            },
+            {
+              "id": "GBM496",
+              "score": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F9"
+              },
+              "truth": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B9",
+                "threshold": 14.6,
+                "op": "<"
+              }
+            },
+            {
+              "id": "GBM108",
+              "score": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F10"
+              },
+              "truth": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B10",
+                "threshold": 14.6,
+                "op": "<"
+              }
+            },
+            {
+              "id": "GBM609",
+              "score": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F11"
+              },
+              "truth": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B11",
+                "threshold": 14.6,
+                "op": "<"
+              }
+            },
+            {
+              "id": "GBM847",
+              "score": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F12"
+              },
+              "truth": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B12",
+                "threshold": 14.6,
+                "op": "<"
+              }
+            },
+            {
+              "id": "GBM724",
+              "score": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F13"
+              },
+              "truth": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B13",
+                "threshold": 14.6,
+                "op": "<"
+              }
+            },
+            {
+              "id": "GBM714",
+              "score": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F14"
+              },
+              "truth": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B14",
+                "threshold": 14.6,
+                "op": "<"
+              }
+            },
+            {
+              "id": "GBM651",
+              "score": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F15"
+              },
+              "truth": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B15",
+                "threshold": 14.6,
+                "op": "<"
+              }
+            },
+            {
+              "id": "GBM653",
+              "score": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F16"
+              },
+              "truth": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B16",
+                "threshold": 14.6,
+                "op": "<"
+              }
+            },
+            {
+              "id": "GBM318",
+              "score": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F17"
+              },
+              "truth": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B17",
+                "threshold": 14.6,
+                "op": "<"
+              }
+            },
+            {
+              "id": "GBM897",
+              "score": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F18"
+              },
+              "truth": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B18",
+                "threshold": 14.6,
+                "op": "<"
+              }
+            },
+            {
+              "id": "GBM276",
+              "score": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F19"
+              },
+              "truth": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B19",
+                "threshold": 14.6,
+                "op": "<"
+              }
+            },
+            {
+              "id": "GBM626",
+              "score": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F20"
+              },
+              "truth": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B20",
+                "threshold": 14.6,
+                "op": "<"
+              }
+            },
+            {
+              "id": "GBM692",
+              "score": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F21"
+              },
+              "truth": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B21",
+                "threshold": 14.6,
+                "op": "<"
+              }
+            },
+            {
+              "id": "GBM501",
+              "score": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F22"
+              },
+              "truth": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B22",
+                "threshold": 14.6,
+                "op": "<"
+              }
+            },
+            {
+              "id": "GBM832",
+              "score": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F23"
+              },
+              "truth": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B23",
+                "threshold": 14.6,
+                "op": "<"
+              }
+            },
+            {
+              "id": "GBM612",
+              "score": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F24"
+              },
+              "truth": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B24",
+                "threshold": 14.6,
+                "op": "<"
+              }
+            },
+            {
+              "id": "GBM731",
+              "score": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F25"
+              },
+              "truth": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B25",
+                "threshold": 14.6,
+                "op": "<"
+              }
+            },
+            {
+              "id": "GBM499",
+              "score": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F26"
+              },
+              "truth": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B26",
+                "threshold": 14.6,
+                "op": "<"
+              }
+            },
+            {
+              "id": "GBM1049",
+              "score": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F27"
+              },
+              "truth": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B27",
+                "threshold": 14.6,
+                "op": "<"
+              }
+            },
+            {
+              "id": "GBM153",
+              "score": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F28"
+              },
+              "truth": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B28",
+                "threshold": 14.6,
+                "op": "<"
+              }
+            },
+            {
+              "id": "GBM940",
+              "score": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F29"
+              },
+              "truth": {
+                "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B29",
+                "threshold": 14.6,
+                "op": "<"
+              }
+            }
+          ],
+          "blocked_reason": null
+        },
+        "notes": [
+          "Truth is binarized from source survival months: short-term survival (<14.6 months) is 1 and long-term survival (>=14.6 months) is 0.",
+          "At the 0.7 cutoff, 24 of 28 patients are correctly classified; 24/28 = 0.857, reported as 85.7% in Table 1 and 86% in the abstract."
+        ]
+      },
+      "evaluation": {
+        "matched": true,
+        "metric": "accuracy",
+        "computed": 0.8571428571428571,
+        "reported": 0.86,
+        "difference": -0.0028571428571428914,
+        "n": 28,
+        "errors": [],
+        "rows": [
+          {
+            "id": "GBM963",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "GBM582",
+            "score": 0.9,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "GBM965",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "GBM120",
+            "score": 0.8,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "GBM960",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "GBM549",
+            "score": 0.7,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "GBM1298",
+            "score": 0.4,
+            "truth": 1,
+            "prediction": 0
+          },
+          {
+            "id": "GBM496",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "GBM108",
+            "score": 0.9,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "GBM609",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "GBM847",
+            "score": 0.4,
+            "truth": 1,
+            "prediction": 0
+          },
+          {
+            "id": "GBM724",
+            "score": 0.7,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "GBM714",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "GBM651",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "GBM653",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "GBM318",
+            "score": 0.4,
+            "truth": 1,
+            "prediction": 0
+          },
+          {
+            "id": "GBM897",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "GBM276",
+            "score": 0.9,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "GBM626",
+            "score": 0.9,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "GBM692",
+            "score": 0.3,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "GBM501",
+            "score": 0.6,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "GBM832",
+            "score": 0.5,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "GBM612",
+            "score": 0.4,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "GBM731",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "GBM499",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "GBM1049",
+            "score": 0.9,
+            "truth": 0,
+            "prediction": 1
+          },
+          {
+            "id": "GBM153",
+            "score": 0.5,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "GBM940",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          }
+        ],
+        "expected": {
+          "metric": "accuracy",
+          "value": 0.86,
+          "n": 28
+        }
+      },
+      "calls": 5,
+      "tokens": 127671
+    }
+  },
+  "last_contract": {
+    "status": "computed",
+    "fields": {
+      "unit": {
+        "value": "patient",
+        "evidence": [
+          "article:p11"
+        ],
+        "explanation": "The retrospective panel consists of 28 patient-derived primary GBM specimens with complete clinical outcomes."
+      },
+      "platform": {
+        "value": "unknown",
+        "evidence": [
+          "article:p8"
+        ],
+        "explanation": "MAqCI is a custom Y-shaped microfluidic migration and proliferation device, not one of the named controlled-vocabulary platforms."
+      },
+      "readout": {
+        "value": "other",
+        "evidence": [
+          "article:p30"
+        ],
+        "explanation": "The predictor is a logistic-regression composite of highly motile cells, narrow entry, and highly motile Ki-67-positive cells."
+      },
+      "direction": {
+        "value": "higher_sensitive",
+        "evidence": [
+          "article:p14",
+          "article:p46"
+        ],
+        "explanation": "A higher composite score indicates greater aggressiveness and predicts short-term rather than long-term survival."
+      },
+      "threshold_rule": {
+        "value": "roc_optimized",
+        "evidence": [
+          "article:p14",
+          "article:p46"
+        ],
+        "explanation": "The cutoff was selected by varying thresholds and optimizing classification performance."
+      },
+      "threshold_timing": {
+        "value": "outcome_optimized",
+        "evidence": [
+          "article:p14",
+          "article:p46"
+        ],
+        "explanation": "Threshold optimization used outcomes from the same retrospective cohort being evaluated."
+      },
+      "patient_mapping": {
+        "value": "individual_available",
+        "evidence": [
+          "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/A2",
+          "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/A29",
+          "article:p11"
+        ],
+        "explanation": "Individual patient identifiers link each assay score to that patient survival time."
+      },
+      "regimen_match": {
+        "value": "not_applicable",
+        "evidence": [
+          "article:p24"
+        ],
+        "explanation": "The assay uses therapy-naive cells and predicts intrinsic survival outcome, not response to a matched treatment regimen."
+      },
+      "n_units": {
+        "value": 28,
+        "evidence": [
+          "article:p4",
+          "article:p11"
+        ],
+        "explanation": "The exact retrospective denominator is 28 patients."
+      },
+      "split": {
+        "value": "same_cohort",
+        "evidence": [
+          "article:p11",
+          "article:p14"
+        ],
+        "explanation": "The logistic composite and cutoff were assessed in the same retrospective cohort used for optimization."
+      }
+    },
+    "headline": {
+      "metric": "accuracy",
+      "reported": 0.86,
+      "reported_evidence": [
+        "article:p4",
+        "article.xml/Table 1 |/R15C7"
+      ],
+      "threshold": 0.7,
+      "op": ">=",
+      "score_direction": "higher",
+      "records": [
+        {
+          "id": "GBM963",
+          "score": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F2"
+          },
+          "truth": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B2",
+            "threshold": 14.6,
+            "op": "<"
+          }
+        },
+        {
+          "id": "GBM582",
+          "score": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F3"
+          },
+          "truth": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B3",
+            "threshold": 14.6,
+            "op": "<"
+          }
+        },
+        {
+          "id": "GBM965",
+          "score": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F4"
+          },
+          "truth": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B4",
+            "threshold": 14.6,
+            "op": "<"
+          }
+        },
+        {
+          "id": "GBM120",
+          "score": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F5"
+          },
+          "truth": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B5",
+            "threshold": 14.6,
+            "op": "<"
+          }
+        },
+        {
+          "id": "GBM960",
+          "score": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F6"
+          },
+          "truth": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B6",
+            "threshold": 14.6,
+            "op": "<"
+          }
+        },
+        {
+          "id": "GBM549",
+          "score": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F7"
+          },
+          "truth": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B7",
+            "threshold": 14.6,
+            "op": "<"
+          }
+        },
+        {
+          "id": "GBM1298",
+          "score": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F8"
+          },
+          "truth": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B8",
+            "threshold": 14.6,
+            "op": "<"
+          }
+        },
+        {
+          "id": "GBM496",
+          "score": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F9"
+          },
+          "truth": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B9",
+            "threshold": 14.6,
+            "op": "<"
+          }
+        },
+        {
+          "id": "GBM108",
+          "score": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F10"
+          },
+          "truth": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B10",
+            "threshold": 14.6,
+            "op": "<"
+          }
+        },
+        {
+          "id": "GBM609",
+          "score": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F11"
+          },
+          "truth": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B11",
+            "threshold": 14.6,
+            "op": "<"
+          }
+        },
+        {
+          "id": "GBM847",
+          "score": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F12"
+          },
+          "truth": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B12",
+            "threshold": 14.6,
+            "op": "<"
+          }
+        },
+        {
+          "id": "GBM724",
+          "score": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F13"
+          },
+          "truth": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B13",
+            "threshold": 14.6,
+            "op": "<"
+          }
+        },
+        {
+          "id": "GBM714",
+          "score": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F14"
+          },
+          "truth": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B14",
+            "threshold": 14.6,
+            "op": "<"
+          }
+        },
+        {
+          "id": "GBM651",
+          "score": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F15"
+          },
+          "truth": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B15",
+            "threshold": 14.6,
+            "op": "<"
+          }
+        },
+        {
+          "id": "GBM653",
+          "score": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F16"
+          },
+          "truth": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B16",
+            "threshold": 14.6,
+            "op": "<"
+          }
+        },
+        {
+          "id": "GBM318",
+          "score": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F17"
+          },
+          "truth": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B17",
+            "threshold": 14.6,
+            "op": "<"
+          }
+        },
+        {
+          "id": "GBM897",
+          "score": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F18"
+          },
+          "truth": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B18",
+            "threshold": 14.6,
+            "op": "<"
+          }
+        },
+        {
+          "id": "GBM276",
+          "score": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F19"
+          },
+          "truth": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B19",
+            "threshold": 14.6,
+            "op": "<"
+          }
+        },
+        {
+          "id": "GBM626",
+          "score": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F20"
+          },
+          "truth": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B20",
+            "threshold": 14.6,
+            "op": "<"
+          }
+        },
+        {
+          "id": "GBM692",
+          "score": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F21"
+          },
+          "truth": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B21",
+            "threshold": 14.6,
+            "op": "<"
+          }
+        },
+        {
+          "id": "GBM501",
+          "score": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F22"
+          },
+          "truth": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B22",
+            "threshold": 14.6,
+            "op": "<"
+          }
+        },
+        {
+          "id": "GBM832",
+          "score": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F23"
+          },
+          "truth": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B23",
+            "threshold": 14.6,
+            "op": "<"
+          }
+        },
+        {
+          "id": "GBM612",
+          "score": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F24"
+          },
+          "truth": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B24",
+            "threshold": 14.6,
+            "op": "<"
+          }
+        },
+        {
+          "id": "GBM731",
+          "score": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F25"
+          },
+          "truth": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B25",
+            "threshold": 14.6,
+            "op": "<"
+          }
+        },
+        {
+          "id": "GBM499",
+          "score": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F26"
+          },
+          "truth": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B26",
+            "threshold": 14.6,
+            "op": "<"
+          }
+        },
+        {
+          "id": "GBM1049",
+          "score": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F27"
+          },
+          "truth": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B27",
+            "threshold": 14.6,
+            "op": "<"
+          }
+        },
+        {
+          "id": "GBM153",
+          "score": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F28"
+          },
+          "truth": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B28",
+            "threshold": 14.6,
+            "op": "<"
+          }
+        },
+        {
+          "id": "GBM940",
+          "score": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/F29"
+          },
+          "truth": {
+            "ref": "NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx/Supplementary Table 3/B29",
+            "threshold": 14.6,
+            "op": "<"
+          }
+        }
+      ],
+      "blocked_reason": null
+    },
+    "notes": [
+      "Truth is binarized from source survival months: short-term survival (<14.6 months) is 1 and long-term survival (>=14.6 months) is 0.",
+      "At the 0.7 cutoff, 24 of 28 patients are correctly classified; 24/28 = 0.857, reported as 85.7% in Table 1 and 86% in the abstract."
+    ]
+  },
+  "last_evaluation": {
+    "matched": true,
+    "metric": "accuracy",
+    "computed": 0.8571428571428571,
+    "reported": 0.86,
+    "difference": -0.0028571428571428914,
+    "n": 28,
+    "errors": [],
+    "rows": [
+      {
+        "id": "GBM963",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "GBM582",
+        "score": 0.9,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "GBM965",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "GBM120",
+        "score": 0.8,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "GBM960",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "GBM549",
+        "score": 0.7,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "GBM1298",
+        "score": 0.4,
+        "truth": 1,
+        "prediction": 0
+      },
+      {
+        "id": "GBM496",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "GBM108",
+        "score": 0.9,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "GBM609",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "GBM847",
+        "score": 0.4,
+        "truth": 1,
+        "prediction": 0
+      },
+      {
+        "id": "GBM724",
+        "score": 0.7,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "GBM714",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "GBM651",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "GBM653",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "GBM318",
+        "score": 0.4,
+        "truth": 1,
+        "prediction": 0
+      },
+      {
+        "id": "GBM897",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "GBM276",
+        "score": 0.9,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "GBM626",
+        "score": 0.9,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "GBM692",
+        "score": 0.3,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "GBM501",
+        "score": 0.6,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "GBM832",
+        "score": 0.5,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "GBM612",
+        "score": 0.4,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "GBM731",
+        "score": 0.0,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "GBM499",
+        "score": 0.0,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "GBM1049",
+        "score": 0.9,
+        "truth": 0,
+        "prediction": 1
+      },
+      {
+        "id": "GBM153",
+        "score": 0.5,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "GBM940",
+        "score": 0.0,
+        "truth": 0,
+        "prediction": 0
+      }
+    ],
+    "expected": {
+      "metric": "accuracy",
+      "value": 0.86,
+      "n": 28
+    }
+  }
+}

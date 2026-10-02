@@ -1,0 +1,9 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "# Search all PDF pages for \"Table S5\" text\nfor fname in [\"mmc1.pdf\", \"mmc6.pdf\", \"supp.pdf\"]:\n    if fname in tables:\n        for sname, t in tables[fname].items():\n            for r_idx, row in enumerate(t[\"rows\"]):\n                row_text = \" \".join([str(c) for c in row if c]).lower()\n                if \"table s5\" in row_text or \"table s5.\" in row_text:\n                    print(f\"Found 'Table S5' in {fname}/{sname} at row {r_idx}\")\n                    # Print surrounding rows\n                    for i in range(max(0, r_idx-2), min(r_idx+15, t[\"nrows\"])):\n                        print(f\"  Row {i}: {t['rows'][i][:8]}\")\n                    break"
+    },
+    "output_sha256": "4efd2fc5752aa0f80ebca3f35fc2b2e0fb18343084a665766ed5b86072302aac"
+  }
+]

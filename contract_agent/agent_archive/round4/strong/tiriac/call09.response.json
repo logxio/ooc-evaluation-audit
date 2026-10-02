@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_guh56cxoerpeuxbla22nh754",
+        "type": "function",
+        "function": {
+          "name": "read_figure",
+          "arguments": "{\"file\": \"supp.pdf\", \"page\": 6, \"crop\": [0.0, 0.12, 0.55, 0.22]}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "Need truth refs numeric extract maybe vision values with ≈ fail. \n\nIt has been confirmed that the correct PFS threshold for favorable prognosis is >180. Current label reading tools can only provide approximate values, and there is a mismatch between color-coded status in the figure and PFS criterion results, so directly reading the figure status is not feasible. Next steps involve exploring solutions to obtain accurate PFS data.\n\nPlans for accurate PFS data acquisition have been further refined: regex extraction will be added to truth specifications, and the lower part of the figure will be cropped to transcribe exact approximate values, as uncertain labels are still rejected.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 400,
+    "prompt_tokens": 40517,
+    "total_tokens": 40917,
+    "prompt_tokens_details": {
+      "cached_tokens": 35640
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 320
+    }
+  }
+}

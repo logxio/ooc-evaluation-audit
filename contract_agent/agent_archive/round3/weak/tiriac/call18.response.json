@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-0-pro-260215",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_tpaon7nvrpm939prn1h9mlap",
+        "type": "function",
+        "function": {
+          "name": "finish",
+          "arguments": "{\"contract\": {\"status\": \"computed\", \"fields\": {\"unit\": {\"value\": \"patient\", \"evidence\": [\"article:p13\"], \"explanation\": \"9 advanced PDAC patients with matched PDO and clinical outcome data\"}, \"platform\": {\"value\": \"organoid\", \"evidence\": [\"article:p2\"], \"explanation\": \"Patient-derived organoids used for pharmacotyping\"}, \"readout\": {\"value\": \"auc\", \"evidence\": [\"supp.xlsx/Key/A2\"], \"explanation\": \"AUC from dose-response curves\"}, \"direction\": {\"value\": \"lower_sensitive\", \"evidence\": [\"supp.xlsx/Key/A6\"], \"explanation\": \"Lower AUC = sensitive\"}, \"threshold_rule\": {\"value\": \"cohort_quantile\", \"evidence\": [\"article:p13\"], \"explanation\": \"33rd percentile sensitivity threshold\"}, \"threshold_timing\": {\"value\": \"independent_reference\", \"evidence\": [\"article:p13\"], \"explanation\": \"Thresholds defined on full 66-PDO cohort\"}, \"patient_mapping\": {\"value\": \"individual_available\", \"evidence\": [\"article:p13\"], \"explanation\": \"Each patient has matched PDO\"}, \"regimen_match\": {\"value\": \"matched\", \"evidence\": [\"article:p13\"], \"explanation\": \"PDO tested on patient's treatment drugs\"}, \"n_units\": {\"value\": 9, \"evidence\": [\"article:p13\"], \"explanation\": \"9 patients in analysis\"}, \"split\": {\"value\": \"same_cohort\", \"evidence\": [\"article:p13\"], \"explanation\": \"Patients are subset of 66-PDO cohort\"}}, \"headline\": {\"metric\": \"accuracy\", \"reported\": 0.8888888888888888, \"reported_evidence\": [\"article:p13\"], \"threshold\": null, \"op\": null, \"score_direction\": \"higher\", \"records\": [{\"id\": \"1\", \"score\": {\"ref\": \"supp.xlsx/Chemo /B3\"}, \"truth\": {\"ref\": \"article:p13\"}}, {\"id\": \"2\", \"score\": {\"ref\": \"supp.xlsx/Chemo /B4\"}, \"truth\": {\"ref\": \"article:p13\"}}, {\"id\": \"3\", \"score\": {\"ref\": \"supp.xlsx/Chemo /B5\"}, \"truth\": {\"ref\": \"article:p13\"}}, {\"id\": \"4\", \"score\": {\"ref\": \"supp.xlsx/Chemo /B6\"}, \"truth\": {\"ref\": \"article:p13\"}}, {\"id\": \"5\", \"score\": {\"ref\": \"supp.xlsx/Chemo /B7\"}, \"truth\": {\"ref\": \"article:p13\"}}, {\"id\": \"6\", \"score\": {\"ref\": \"supp.xlsx/Chemo /B8\"}, \"truth\": {\"ref\": \"article:p13\"}}, {\"id\": \"7\", \"score\": {\"ref\": \"supp.xlsx/Chemo /B9\"}, \"truth\": {\"ref\": \"article:p13\"}}, {\"id\": \"8\", \"score\": {\"ref\": \"supp.xlsx/Chemo /B10\"}, \"truth\": {\"ref\": \"article:p13\"}}, {\"id\": \"9\", \"score\": {\"ref\": \"supp.xlsx/Chemo /B15\"}, \"truth\": {\"ref\": \"article:p13\"}}], \"blocked_reason\": null}, \"notes\": [\"Accuracy is explicitly reported as 8/9 = 0.8888888888888888 in article:p13, matching the target value. All 9 patients have source-bound PDO AUC measurements in the supp.xlsx Chemo sheet, and outcome counts are verified in the article text.\"]}}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 861,
+    "prompt_tokens": 59332,
+    "total_tokens": 60193,
+    "prompt_tokens_details": {
+      "cached_tokens": 52536
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  }
+}

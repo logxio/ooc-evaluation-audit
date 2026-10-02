@@ -1,0 +1,1084 @@
+{
+  "turn": 7,
+  "tool_count": 5,
+  "tokens": 243917,
+  "done": true,
+  "stop_reason": "verified",
+  "reader_calls": 1,
+  "checkpoints": {
+    "single_pass": {
+      "contract": {
+        "status": "blocked",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p23"
+            ],
+            "explanation": "Each evaluated case pairs one donor patient with the corresponding PDO."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p23",
+              "article:p41"
+            ],
+            "explanation": "Assays were performed in patient-derived organoids (PDOs)."
+          },
+          "readout": {
+            "value": "auc",
+            "evidence": [
+              "article:p41"
+            ],
+            "explanation": "Most PDO responses were categorized from normalized AUC; two CCA cases used published IC50 thresholds."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p41"
+            ],
+            "explanation": "Lower AUC or IC50 indicates greater drug sensitivity."
+          },
+          "threshold_rule": {
+            "value": "cohort_quantile",
+            "evidence": [
+              "article:p41"
+            ],
+            "explanation": "PDO responses were grouped into sensitive/intermediate/resistant by Jenks Natural Breaks, except two IC50-based cases."
+          },
+          "threshold_timing": {
+            "value": "outcome_optimized",
+            "evidence": [
+              "article:p41"
+            ],
+            "explanation": "Jenks categories were derived from the compared PDO AUC values rather than an independent prespecified cutoff."
+          },
+          "patient_mapping": {
+            "value": "partial",
+            "evidence": [
+              "article:p23",
+              "article:p41"
+            ],
+            "explanation": "Patient IDs and aggregate agreement are reported, but machine-readable row-level assay and outcome pairs are not available in the parsed text."
+          },
+          "regimen_match": {
+            "value": "partial",
+            "evidence": [
+              "article:p41"
+            ],
+            "explanation": "PDOs generally received the patient therapy, with exceptions for unavailable drugs and the HO20 treatment sequence."
+          },
+          "n_units": {
+            "value": 11,
+            "evidence": [
+              "article:p23"
+            ],
+            "explanation": "The clinical-correlation denominator was 11 patient/PDO cases."
+          },
+          "split": {
+            "value": "none",
+            "evidence": [
+              "article:p23",
+              "article:p41"
+            ],
+            "explanation": "This was a retrospective paired agreement analysis, not a held-out predictive-model validation."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.8181818181818182,
+          "reported_evidence": [
+            "article:p23"
+          ],
+          "threshold": null,
+          "op": "==",
+          "score_direction": "higher",
+          "records": [],
+          "blocked_reason": "Row-level Table 1 evidence is missing from parsed structured data: Table 1 is the image jciinsight-7-158060-g063.jpg and article.xml/Table 1 has zero rows. An independent figure transcription is needed for all 11 patient IDs, clinical RECIST outcomes, PDO response categories, and match flags; the aggregate statement \"9 of 11\" alone cannot reconstruct row-level accuracy."
+        },
+        "notes": [
+          "Article reports 9 of 11 (82%) concordant PDO/patient responses.",
+          "Mismatches identified in text are HO42 and HO140."
+        ]
+      },
+      "evaluation": {
+        "matched": false,
+        "metric": "accuracy",
+        "computed": null,
+        "reported": 0.8181818181818182,
+        "difference": null,
+        "n": 0,
+        "errors": [
+          "No source-bound observations: Row-level Table 1 evidence is missing from parsed structured data: Table 1 is the image jciinsight-7-158060-g063.jpg and article.xml/Table 1 has zero rows. An independent figure transcription is needed for all 11 patient IDs, clinical RECIST outcomes, PDO response categories, and match flags; the aggregate statement \"9 of 11\" alone cannot reconstruct row-level accuracy.",
+          "Expected 11 analysis units, got 0"
+        ],
+        "rows": [],
+        "expected": {
+          "metric": "accuracy",
+          "value": 0.8181818181818182,
+          "n": 11
+        }
+      },
+      "calls": 1,
+      "tokens": 26223
+    },
+    "one_feedback": {
+      "contract": {
+        "status": "blocked",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p23"
+            ],
+            "explanation": "Eleven donor-patient/PDO correlation cases were evaluated."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p23",
+              "article:p41"
+            ],
+            "explanation": "Drug responses were measured in patient-derived organoids."
+          },
+          "readout": {
+            "value": "auc",
+            "evidence": [
+              "article:p41"
+            ],
+            "explanation": "Most PDO calls used normalized AUC; HO17 and HO42 used published IC50 criteria."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p41"
+            ],
+            "explanation": "Lower AUC or IC50 indicated greater sensitivity."
+          },
+          "threshold_rule": {
+            "value": "cohort_quantile",
+            "evidence": [
+              "article:p41"
+            ],
+            "explanation": "Jenks Natural Breaks assigned sensitive, intermediate, or resistant PDO response."
+          },
+          "threshold_timing": {
+            "value": "outcome_optimized",
+            "evidence": [
+              "article:p41"
+            ],
+            "explanation": "Response categories were formed from the PDO AUC values being compared."
+          },
+          "patient_mapping": {
+            "value": "partial",
+            "evidence": [
+              "article:p23",
+              "jciinsight-7-158060-g063.jpg"
+            ],
+            "explanation": "The image table maps individual HO PDO identifiers to donor responses; structured transcription is required when OCR is unavailable."
+          },
+          "regimen_match": {
+            "value": "partial",
+            "evidence": [
+              "article:p41"
+            ],
+            "explanation": "Matched therapies were used where available, with documented drug-substitution and HO20 exceptions."
+          },
+          "n_units": {
+            "value": 11,
+            "evidence": [
+              "article:p23"
+            ],
+            "explanation": "The reported denominator is 11 paired patient/PDO cases."
+          },
+          "split": {
+            "value": "none",
+            "evidence": [
+              "article:p23",
+              "article:p41"
+            ],
+            "explanation": "This was a retrospective paired agreement analysis rather than held-out model validation."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.8181818181818182,
+          "reported_evidence": [
+            "article:p23"
+          ],
+          "threshold": null,
+          "op": "==",
+          "score_direction": "higher",
+          "records": [],
+          "blocked_reason": "The 11 row-level Table 1 observations are available only as jciinsight-7-158060-g063.jpg; parsed article Table 1 has zero rows and local OCR did not yield all 11 HO-ID/match rows. An independent read_figure transcription is required for each patient ID, RECIST outcome, PDO response category, and Match/Mismatch result."
+        },
+        "notes": [
+          "The article reports 9 of 11 (82%) concordant cases and names HO42 and HO140 as the two mismatches in article:p24."
+        ]
+      },
+      "evaluation": {
+        "matched": false,
+        "metric": "accuracy",
+        "computed": null,
+        "reported": 0.8181818181818182,
+        "difference": null,
+        "n": 0,
+        "errors": [
+          "patient_mapping: missing evidence jciinsight-7-158060-g063.jpg",
+          "No source-bound observations: The 11 row-level Table 1 observations are available only as jciinsight-7-158060-g063.jpg; parsed article Table 1 has zero rows and local OCR did not yield all 11 HO-ID/match rows. An independent read_figure transcription is required for each patient ID, RECIST outcome, PDO response category, and Match/Mismatch result.",
+          "Expected 11 analysis units, got 0"
+        ],
+        "rows": [],
+        "expected": {
+          "metric": "accuracy",
+          "value": 0.8181818181818182,
+          "n": 11
+        }
+      },
+      "calls": 2,
+      "tokens": 59495
+    },
+    "tool_loop": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p23",
+              "vision/a16269a12853/R1C1"
+            ],
+            "explanation": "The denominator consists of 11 donor-patient/PDO correlation cases, each identified by a unique HO organoid ID."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p23",
+              "article:p41"
+            ],
+            "explanation": "Drug sensitivity was measured in patient-derived gastrointestinal cancer organoids."
+          },
+          "readout": {
+            "value": "auc",
+            "evidence": [
+              "article:p41",
+              "vision/a16269a12853/R1C6"
+            ],
+            "explanation": "Most PDO responses were classified from normalized AUC using Jenks Natural Breaks; HO17 and HO42 were classified relative to published IC50 data."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p41"
+            ],
+            "explanation": "Lower AUC or IC50 indicated greater drug sensitivity."
+          },
+          "threshold_rule": {
+            "value": "cohort_quantile",
+            "evidence": [
+              "article:p41"
+            ],
+            "explanation": "Jenks Natural Breaks divided PDOs into sensitive, intermediate, or resistant categories within the compared drug group."
+          },
+          "threshold_timing": {
+            "value": "outcome_optimized",
+            "evidence": [
+              "article:p41"
+            ],
+            "explanation": "The Jenks categories were derived from the PDO AUC values under evaluation rather than from an independent cohort."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "vision/a16269a12853/R1C1",
+              "vision/a16269a12853/R1C4",
+              "vision/a16269a12853/R1C6"
+            ],
+            "explanation": "Table 1 provides each patient/PDO identifier, RECIST outcome, tested organoid treatment, and organoid response category."
+          },
+          "regimen_match": {
+            "value": "partial",
+            "evidence": [
+              "article:p41",
+              "vision/a16269a12853/R3C3",
+              "vision/a16269a12853/R3C5",
+              "vision/a16269a12853/R6C3",
+              "vision/a16269a12853/R6C5"
+            ],
+            "explanation": "PDOs generally received the patient's therapy, but the article documents unavailable-drug substitutions and the exceptional HO20 treatment sequence."
+          },
+          "n_units": {
+            "value": 11,
+            "evidence": [
+              "article:p23",
+              "vision/a16269a12853/R1C1",
+              "vision/a16269a12853/R17C1"
+            ],
+            "explanation": "There were 11 evaluable paired patient/PDO cases."
+          },
+          "split": {
+            "value": "none",
+            "evidence": [
+              "article:p23",
+              "article:p41"
+            ],
+            "explanation": "This was a retrospective paired agreement analysis, not a held-out cohort or cross-validated predictive-model test."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.8181818181818182,
+          "reported_evidence": [
+            "article:p23",
+            "article:p24",
+            "article:p28"
+          ],
+          "explanation": "The article reports 9 of 11 PDO responses consistent with donor-patient RECIST responses and identifies HO42 and HO140 as the two mismatches. For this cohort, the published three-category agreement rule is equivalent to comparing sensitive PDO response with PR and nonsensitive PDO response with SD/PD.",
+          "threshold": 0.5,
+          "op": ">",
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "HO17",
+              "score": {
+                "refs": [
+                  "vision/a16269a12853/R1C6",
+                  "vision/a16269a12853/R2C6"
+                ],
+                "aggregate": "max",
+                "map": {
+                  "Sensitive": 1,
+                  "Intermediate": 0,
+                  "Resistant": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/a16269a12853/R1C4",
+                "map": {
+                  "PR": 1,
+                  "SD": 0,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "HO42",
+              "score": {
+                "ref": "vision/a16269a12853/R3C6",
+                "map": {
+                  "Sensitive": 1,
+                  "Intermediate": 0,
+                  "Resistant": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/a16269a12853/R3C4",
+                "map": {
+                  "PR": 1,
+                  "SD": 0,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "HO107",
+              "score": {
+                "refs": [
+                  "vision/a16269a12853/R4C6",
+                  "vision/a16269a12853/R5C6"
+                ],
+                "aggregate": "max",
+                "map": {
+                  "Sensitive": 1,
+                  "Intermediate": 0,
+                  "Resistant": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/a16269a12853/R4C4",
+                "map": {
+                  "PR": 1,
+                  "SD": 0,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "HO20",
+              "score": {
+                "refs": [
+                  "vision/a16269a12853/R6C6",
+                  "vision/a16269a12853/R7C6"
+                ],
+                "aggregate": "max",
+                "map": {
+                  "Sensitive": 1,
+                  "Intermediate": 0,
+                  "Resistant": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/a16269a12853/R6C4",
+                "map": {
+                  "PR": 1,
+                  "SD": 0,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "HO46",
+              "score": {
+                "ref": "vision/a16269a12853/R8C6",
+                "map": {
+                  "Sensitive": 1,
+                  "Intermediate": 0,
+                  "Resistant": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/a16269a12853/R8C4",
+                "map": {
+                  "PR": 1,
+                  "SD": 0,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "HO98",
+              "score": {
+                "ref": "vision/a16269a12853/R9C6",
+                "map": {
+                  "Sensitive": 1,
+                  "Intermediate": 0,
+                  "Resistant": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/a16269a12853/R9C4",
+                "map": {
+                  "PR": 1,
+                  "SD": 0,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "HO90",
+              "score": {
+                "ref": "vision/a16269a12853/R10C6",
+                "map": {
+                  "Sensitive": 1,
+                  "Intermediate": 0,
+                  "Resistant": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/a16269a12853/R10C4",
+                "map": {
+                  "PR": 1,
+                  "SD": 0,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "HO123",
+              "score": {
+                "ref": "vision/a16269a12853/R11C6",
+                "map": {
+                  "Sensitive": 1,
+                  "Intermediate": 0,
+                  "Resistant": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/a16269a12853/R11C4",
+                "map": {
+                  "PR": 1,
+                  "SD": 0,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "HO127",
+              "score": {
+                "refs": [
+                  "vision/a16269a12853/R12C6",
+                  "vision/a16269a12853/R13C6"
+                ],
+                "aggregate": "max",
+                "map": {
+                  "Sensitive": 1,
+                  "Intermediate": 0,
+                  "Resistant": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/a16269a12853/R12C4",
+                "map": {
+                  "PR": 1,
+                  "SD": 0,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "HO140",
+              "score": {
+                "refs": [
+                  "vision/a16269a12853/R14C6",
+                  "vision/a16269a12853/R15C6",
+                  "vision/a16269a12853/R16C6"
+                ],
+                "aggregate": "max",
+                "map": {
+                  "Sensitive": 1,
+                  "Intermediate": 0,
+                  "Resistant": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/a16269a12853/R14C4",
+                "map": {
+                  "PR": 1,
+                  "SD": 0,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "HO106",
+              "score": {
+                "ref": "vision/a16269a12853/R17C6",
+                "map": {
+                  "Sensitive": 1,
+                  "Intermediate": 0,
+                  "Resistant": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/a16269a12853/R17C4",
+                "map": {
+                  "PR": 1,
+                  "SD": 0,
+                  "PD": 0
+                }
+              }
+            }
+          ],
+          "blocked_reason": null
+        },
+        "notes": [
+          "Article p41 specifies the full agreement rule: PR requires sensitive; SD requires sensitive or intermediate; PD requires intermediate or resistant; with multiple drugs, sensitivity to any tested drug determines a match.",
+          "The binary encoding uses 1 for sensitive PDO response or patient PR and 0 otherwise. Multi-drug scores use max because sensitivity to any tested drug is a positive assay result. This yields 9 agreements and 2 disagreements (HO42 and HO140), exactly matching the reported 9/11 accuracy."
+        ]
+      },
+      "evaluation": {
+        "matched": true,
+        "metric": "accuracy",
+        "computed": 0.8181818181818182,
+        "reported": 0.8181818181818182,
+        "difference": 0.0,
+        "n": 11,
+        "errors": [],
+        "rows": [
+          {
+            "id": "HO17",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "HO42",
+            "score": 1.0,
+            "truth": 0,
+            "prediction": 1
+          },
+          {
+            "id": "HO107",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "HO20",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "HO46",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "HO98",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "HO90",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "HO123",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "HO127",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "HO140",
+            "score": 0.0,
+            "truth": 1,
+            "prediction": 0
+          },
+          {
+            "id": "HO106",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          }
+        ],
+        "expected": {
+          "metric": "accuracy",
+          "value": 0.8181818181818182,
+          "n": 11
+        }
+      },
+      "calls": 7,
+      "tokens": 243917
+    }
+  },
+  "last_contract": {
+    "status": "computed",
+    "fields": {
+      "unit": {
+        "value": "patient",
+        "evidence": [
+          "article:p23",
+          "vision/a16269a12853/R1C1"
+        ],
+        "explanation": "The denominator consists of 11 donor-patient/PDO correlation cases, each identified by a unique HO organoid ID."
+      },
+      "platform": {
+        "value": "organoid",
+        "evidence": [
+          "article:p23",
+          "article:p41"
+        ],
+        "explanation": "Drug sensitivity was measured in patient-derived gastrointestinal cancer organoids."
+      },
+      "readout": {
+        "value": "auc",
+        "evidence": [
+          "article:p41",
+          "vision/a16269a12853/R1C6"
+        ],
+        "explanation": "Most PDO responses were classified from normalized AUC using Jenks Natural Breaks; HO17 and HO42 were classified relative to published IC50 data."
+      },
+      "direction": {
+        "value": "lower_sensitive",
+        "evidence": [
+          "article:p41"
+        ],
+        "explanation": "Lower AUC or IC50 indicated greater drug sensitivity."
+      },
+      "threshold_rule": {
+        "value": "cohort_quantile",
+        "evidence": [
+          "article:p41"
+        ],
+        "explanation": "Jenks Natural Breaks divided PDOs into sensitive, intermediate, or resistant categories within the compared drug group."
+      },
+      "threshold_timing": {
+        "value": "outcome_optimized",
+        "evidence": [
+          "article:p41"
+        ],
+        "explanation": "The Jenks categories were derived from the PDO AUC values under evaluation rather than from an independent cohort."
+      },
+      "patient_mapping": {
+        "value": "individual_available",
+        "evidence": [
+          "vision/a16269a12853/R1C1",
+          "vision/a16269a12853/R1C4",
+          "vision/a16269a12853/R1C6"
+        ],
+        "explanation": "Table 1 provides each patient/PDO identifier, RECIST outcome, tested organoid treatment, and organoid response category."
+      },
+      "regimen_match": {
+        "value": "partial",
+        "evidence": [
+          "article:p41",
+          "vision/a16269a12853/R3C3",
+          "vision/a16269a12853/R3C5",
+          "vision/a16269a12853/R6C3",
+          "vision/a16269a12853/R6C5"
+        ],
+        "explanation": "PDOs generally received the patient's therapy, but the article documents unavailable-drug substitutions and the exceptional HO20 treatment sequence."
+      },
+      "n_units": {
+        "value": 11,
+        "evidence": [
+          "article:p23",
+          "vision/a16269a12853/R1C1",
+          "vision/a16269a12853/R17C1"
+        ],
+        "explanation": "There were 11 evaluable paired patient/PDO cases."
+      },
+      "split": {
+        "value": "none",
+        "evidence": [
+          "article:p23",
+          "article:p41"
+        ],
+        "explanation": "This was a retrospective paired agreement analysis, not a held-out cohort or cross-validated predictive-model test."
+      }
+    },
+    "headline": {
+      "metric": "accuracy",
+      "reported": 0.8181818181818182,
+      "reported_evidence": [
+        "article:p23",
+        "article:p24",
+        "article:p28"
+      ],
+      "explanation": "The article reports 9 of 11 PDO responses consistent with donor-patient RECIST responses and identifies HO42 and HO140 as the two mismatches. For this cohort, the published three-category agreement rule is equivalent to comparing sensitive PDO response with PR and nonsensitive PDO response with SD/PD.",
+      "threshold": 0.5,
+      "op": ">",
+      "score_direction": "higher",
+      "records": [
+        {
+          "id": "HO17",
+          "score": {
+            "refs": [
+              "vision/a16269a12853/R1C6",
+              "vision/a16269a12853/R2C6"
+            ],
+            "aggregate": "max",
+            "map": {
+              "Sensitive": 1,
+              "Intermediate": 0,
+              "Resistant": 0
+            }
+          },
+          "truth": {
+            "ref": "vision/a16269a12853/R1C4",
+            "map": {
+              "PR": 1,
+              "SD": 0,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "HO42",
+          "score": {
+            "ref": "vision/a16269a12853/R3C6",
+            "map": {
+              "Sensitive": 1,
+              "Intermediate": 0,
+              "Resistant": 0
+            }
+          },
+          "truth": {
+            "ref": "vision/a16269a12853/R3C4",
+            "map": {
+              "PR": 1,
+              "SD": 0,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "HO107",
+          "score": {
+            "refs": [
+              "vision/a16269a12853/R4C6",
+              "vision/a16269a12853/R5C6"
+            ],
+            "aggregate": "max",
+            "map": {
+              "Sensitive": 1,
+              "Intermediate": 0,
+              "Resistant": 0
+            }
+          },
+          "truth": {
+            "ref": "vision/a16269a12853/R4C4",
+            "map": {
+              "PR": 1,
+              "SD": 0,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "HO20",
+          "score": {
+            "refs": [
+              "vision/a16269a12853/R6C6",
+              "vision/a16269a12853/R7C6"
+            ],
+            "aggregate": "max",
+            "map": {
+              "Sensitive": 1,
+              "Intermediate": 0,
+              "Resistant": 0
+            }
+          },
+          "truth": {
+            "ref": "vision/a16269a12853/R6C4",
+            "map": {
+              "PR": 1,
+              "SD": 0,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "HO46",
+          "score": {
+            "ref": "vision/a16269a12853/R8C6",
+            "map": {
+              "Sensitive": 1,
+              "Intermediate": 0,
+              "Resistant": 0
+            }
+          },
+          "truth": {
+            "ref": "vision/a16269a12853/R8C4",
+            "map": {
+              "PR": 1,
+              "SD": 0,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "HO98",
+          "score": {
+            "ref": "vision/a16269a12853/R9C6",
+            "map": {
+              "Sensitive": 1,
+              "Intermediate": 0,
+              "Resistant": 0
+            }
+          },
+          "truth": {
+            "ref": "vision/a16269a12853/R9C4",
+            "map": {
+              "PR": 1,
+              "SD": 0,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "HO90",
+          "score": {
+            "ref": "vision/a16269a12853/R10C6",
+            "map": {
+              "Sensitive": 1,
+              "Intermediate": 0,
+              "Resistant": 0
+            }
+          },
+          "truth": {
+            "ref": "vision/a16269a12853/R10C4",
+            "map": {
+              "PR": 1,
+              "SD": 0,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "HO123",
+          "score": {
+            "ref": "vision/a16269a12853/R11C6",
+            "map": {
+              "Sensitive": 1,
+              "Intermediate": 0,
+              "Resistant": 0
+            }
+          },
+          "truth": {
+            "ref": "vision/a16269a12853/R11C4",
+            "map": {
+              "PR": 1,
+              "SD": 0,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "HO127",
+          "score": {
+            "refs": [
+              "vision/a16269a12853/R12C6",
+              "vision/a16269a12853/R13C6"
+            ],
+            "aggregate": "max",
+            "map": {
+              "Sensitive": 1,
+              "Intermediate": 0,
+              "Resistant": 0
+            }
+          },
+          "truth": {
+            "ref": "vision/a16269a12853/R12C4",
+            "map": {
+              "PR": 1,
+              "SD": 0,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "HO140",
+          "score": {
+            "refs": [
+              "vision/a16269a12853/R14C6",
+              "vision/a16269a12853/R15C6",
+              "vision/a16269a12853/R16C6"
+            ],
+            "aggregate": "max",
+            "map": {
+              "Sensitive": 1,
+              "Intermediate": 0,
+              "Resistant": 0
+            }
+          },
+          "truth": {
+            "ref": "vision/a16269a12853/R14C4",
+            "map": {
+              "PR": 1,
+              "SD": 0,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "HO106",
+          "score": {
+            "ref": "vision/a16269a12853/R17C6",
+            "map": {
+              "Sensitive": 1,
+              "Intermediate": 0,
+              "Resistant": 0
+            }
+          },
+          "truth": {
+            "ref": "vision/a16269a12853/R17C4",
+            "map": {
+              "PR": 1,
+              "SD": 0,
+              "PD": 0
+            }
+          }
+        }
+      ],
+      "blocked_reason": null
+    },
+    "notes": [
+      "Article p41 specifies the full agreement rule: PR requires sensitive; SD requires sensitive or intermediate; PD requires intermediate or resistant; with multiple drugs, sensitivity to any tested drug determines a match.",
+      "The binary encoding uses 1 for sensitive PDO response or patient PR and 0 otherwise. Multi-drug scores use max because sensitivity to any tested drug is a positive assay result. This yields 9 agreements and 2 disagreements (HO42 and HO140), exactly matching the reported 9/11 accuracy."
+    ]
+  },
+  "last_evaluation": {
+    "matched": true,
+    "metric": "accuracy",
+    "computed": 0.8181818181818182,
+    "reported": 0.8181818181818182,
+    "difference": 0.0,
+    "n": 11,
+    "errors": [],
+    "rows": [
+      {
+        "id": "HO17",
+        "score": 0.0,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "HO42",
+        "score": 1.0,
+        "truth": 0,
+        "prediction": 1
+      },
+      {
+        "id": "HO107",
+        "score": 0.0,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "HO20",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "HO46",
+        "score": 0.0,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "HO98",
+        "score": 0.0,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "HO90",
+        "score": 0.0,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "HO123",
+        "score": 0.0,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "HO127",
+        "score": 0.0,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "HO140",
+        "score": 0.0,
+        "truth": 1,
+        "prediction": 0
+      },
+      {
+        "id": "HO106",
+        "score": 0.0,
+        "truth": 0,
+        "prediction": 0
+      }
+    ],
+    "expected": {
+      "metric": "accuracy",
+      "value": 0.8181818181818182,
+      "n": 11
+    }
+  }
+}

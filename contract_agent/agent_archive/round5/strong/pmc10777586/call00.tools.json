@@ -1,0 +1,151 @@
+[
+  {
+    "name": "initial_code",
+    "output": {
+      "returncode": 0,
+      "stdout": "validation rows: [{'row': 18, 'id': 'OO87', 'truth_ref': '12943_2023_1919_MOESM1_ESM.docx/table2/R18C8', 'id_ref': '12943_2023_1919_MOESM1_ESM.docx/table2/R18C2'}, {'row': 19, 'id': 'OO88', 'truth_ref': '12943_2023_1919_MOESM1_ESM.docx/table2/R19C8', 'id_ref': '12943_2023_1919_MOESM1_ESM.docx/table2/R19C2'}, {'row': 20, 'id': 'OO90', 'truth_ref': '12943_2023_1919_MOESM1_ESM.docx/table2/R20C8', 'id_ref': '12943_2023_1919_MOESM1_ESM.docx/table2/R20C2'}, {'row': 21, 'id': 'OO95', 'truth_ref': '12943_2023_1919_MOESM1_ESM.docx/table2/R21C8', 'id_ref': '12943_2023_1919_MOESM1_ESM.docx/table2/R21C2'}, {'row': 22, 'id': 'OO98', 'truth_ref': '12943_2023_1919_MOESM1_ESM.docx/table2/R22C8', 'id_ref': '12943_2023_1919_MOESM1_ESM.docx/table2/R22C2'}, {'row': 23, 'id': 'OO99', 'truth_ref': '12943_2023_1919_MOESM1_ESM.docx/table2/R23C8', 'id_ref': '12943_2023_1919_MOESM1_ESM.docx/table2/R23C2'}, {'row': 24, 'id': 'OO100', 'truth_ref': '12943_2023_1919_MOESM1_ESM.docx/table2/R24C8', 'id_ref': '12943_2023_1919_MOESM1_ESM.docx/table2/R24C2'}, {'row': 25, 'id': 'OO103', 'truth_ref': '12943_2023_1919_MOESM1_ESM.docx/table2/R25C8', 'id_ref': '12943_2023_1919_MOESM1_ESM.docx/table2/R25C2'}, {'row': 26, 'id': 'OO106', 'truth_ref': '12943_2023_1919_MOESM1_ESM.docx/table2/R26C8', 'id_ref': '12943_2023_1919_MOESM1_ESM.docx/table2/R26C2'}, {'row': 27, 'id': 'OO113', 'truth_ref': '12943_2023_1919_MOESM1_ESM.docx/table2/R27C8', 'id_ref': '12943_2023_1919_MOESM1_ESM.docx/table2/R27C2'}, {'row': 28, 'id': 'OO116', 'truth_ref': '12943_2023_1919_MOESM1_ESM.docx/table2/R28C8', 'id_ref': '12943_2023_1919_MOESM1_ESM.docx/table2/R28C2'}, {'row': 29, 'id': 'OO118', 'truth_ref': '12943_2023_1919_MOESM1_ESM.docx/table2/R29C8', 'id_ref': '12943_2023_1919_MOESM1_ESM.docx/table2/R29C2'}]\n",
+      "stderr": "",
+      "seconds": 0.130267916014418,
+      "peak_rss_bytes": 4046848,
+      "limit_error": null,
+      "code_sha256": "958e54daf032f795a952d43df8d5a803bb70c1eef72870be3e2661dd437e8ac0",
+      "contract": {
+        "status": "blocked",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p2",
+              "article:p9"
+            ],
+            "explanation": "One PDO line represented each evaluated patient; the validation cohort contained 13 patients."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p8",
+              "article:p14"
+            ],
+            "explanation": "Drug responses were measured in patient-derived 3D organoid (PDO) cultures."
+          },
+          "readout": {
+            "value": "auc",
+            "evidence": [
+              "article:p15",
+              "article:p17"
+            ],
+            "explanation": "The predictor was relative area under the FLOT dose-response curve, AUCrel(FLOT), not individual viability wells."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p16"
+            ],
+            "explanation": "Responders had significantly lower AUCrel than non-responders."
+          },
+          "threshold_rule": {
+            "value": "fixed_numeric",
+            "evidence": [
+              "article:p17",
+              "article:p15"
+            ],
+            "explanation": "A fixed AUCthreshold of 0.559 was derived in the exploratory cohort and applied to the validation cohort."
+          },
+          "threshold_timing": {
+            "value": "independent_reference",
+            "evidence": [
+              "article:p9",
+              "article:p17",
+              "article:p18"
+            ],
+            "explanation": "The threshold was established on the chronologically first 13 PDOs and tested on the separate following 13 PDOs."
+          },
+          "patient_mapping": {
+            "value": "partial",
+            "evidence": [
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R18C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R19C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R20C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R21C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R22C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R23C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R24C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R25C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R26C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R27C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R28C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R29C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R18C8",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R19C8",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R20C8",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R21C8",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R22C8",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R23C8",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R24C8",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R25C8",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R26C8",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R27C8",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R28C8",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R29C8"
+            ],
+            "explanation": "Supplementary Table 2 individually maps validation organoid IDs to Becker grades, but structured row-level FLOT AUCrel scores are absent; Fig. 2I requires independent figure transcription."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p9",
+              "article:p14",
+              "article:p18"
+            ],
+            "explanation": "Only patients who received neoadjuvant FLOT were used for the FLOT assay comparison."
+          },
+          "n_units": {
+            "value": 13,
+            "evidence": [
+              "article:p18",
+              "article:p2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R18C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R19C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R20C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R21C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R22C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R23C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R24C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R25C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R26C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R27C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R28C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R29C2"
+            ],
+            "explanation": "The independent validation denominator was 13 patients/PDOs."
+          },
+          "split": {
+            "value": "independent_test",
+            "evidence": [
+              "article:p9",
+              "article:p18"
+            ],
+            "explanation": "The 12/13 accuracy was achieved in the independent validation cohort after threshold discovery in a separate exploratory cohort."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.9230769230769231,
+          "reported_evidence": [
+            "article:p18",
+            "article:p3"
+          ],
+          "threshold": 0.559,
+          "op": "<=",
+          "score_direction": "lower",
+          "records": [],
+          "blocked_reason": "Missing independently transcribed row-level FLOT AUCrel scores or threshold classifications for the 13 validation patients. Supplementary Table 2 provides individual Becker outcomes, while Fig. 2I is described as showing the individual FLOT test results and classifications but has not been supplied through read_figure. The 39 exploratory ROC measurements are assay replicates from 13 PDOs and cannot substitute for validation-patient records."
+        },
+        "notes": [
+          "Published text states 12 of 13 validation patients were correctly classified, giving sensitivity 90%, specificity 100%, and accuracy 92% (exact fraction 12/13).",
+          "Three replicates per PDO are assay replicates, not additional patients, and are not used to inflate the n=13 denominator."
+        ]
+      }
+    }
+  }
+]

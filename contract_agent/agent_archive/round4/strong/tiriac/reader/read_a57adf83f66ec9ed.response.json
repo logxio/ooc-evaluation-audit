@@ -1,0 +1,20 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "{\"columns\":[\"Case (treatment)\",\"Time to progression (days)\",\"Pharmacotyping result\"],\"legend\":{\"orange filled bar\":\"Time to progression\",\"blue text\":\"sensitive\",\"gray text\":\"intermediate\",\"red text\":\"resistant\"},\"rows\":[[\"hF23 (GEM PAC)\",\"≈295 days\",\"GEM: sensitive; PAC: sensitive\"],[\"hF50 (5FU)\",\"≈125 days\",\"5FU: sensitive\"],[\"hF3 (5FU OXA)\",\"≈120 days\",\"5FU: sensitive; OXA: resistant\"],[\"hF28 (GEM 5FU)\",\"≈95 days\",\"GEM: intermediate; 5FU: resistant\"]],\"uncertain\":[[1,2],[2,2],[3,2],[4,2]],\"notes\":\"Horizontal axis is 'Time to progression (days)' with ticks at 0, 200, 400, and 600. A dotted vertical line appears at approximately 180 days. Bar lengths are approximate.\"}"
+  },
+  "reasoning_content": "We need need transcribe. \n\nI have clarified the core requirements for the transcribe task: it covers all necessary fields for the target chart, including patient treatment information, time to progression, pharmacotyping results, and treatment-related annotations. The chart uses color coding for different treatment groups and pharmacotyping sensitivity levels, with orange bars representing time to progression. I will only mark approximate values and sensitive information, ensure the final output is valid JSON and include supplementary notes if required.\n\nI’ve finished estimating the time to progression values for all treatment groups, which are approximately 295, 125, 120 and 95 days respectively.\n\nI’ve confirmed the column structure for the transcribe task, and will put pharmacotyping results in a separate column to clearly map each color-coded category.\n\nI’ve organized the four rows of transcribe data, confirmed the chart’s legend and visual features, and confirmed that all uncertain values need corresponding marks, with the final output required to be valid JSON without any markdown fences.\n",
+  "finish_reason": "stop",
+  "usage": {
+    "completion_tokens": 1197,
+    "prompt_tokens": 1586,
+    "total_tokens": 2783,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 968
+    }
+  }
+}

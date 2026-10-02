@@ -1,0 +1,284 @@
+[
+  {
+    "name": "finish",
+    "arguments": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p13"
+            ],
+            "explanation": "9 advanced PDAC patients with matched PDOs and clinical outcome data"
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p2",
+              "article:p6"
+            ],
+            "explanation": "Patient-derived pancreatic cancer organoids used for pharmacotyping"
+          },
+          "readout": {
+            "value": "auc",
+            "evidence": [
+              "supp.xlsx/Key/A2",
+              "article:p13"
+            ],
+            "explanation": "Drug response measured via AUC of dose-response curves; lower AUC = higher sensitivity"
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "supp.xlsx/Key/A4",
+              "supp.xlsx/Key/A6",
+              "article:p13"
+            ],
+            "explanation": "Lower AUC (blue fill) = sensitive, higher AUC (red fill) = resistant"
+          },
+          "threshold_rule": {
+            "value": "cohort_quantile",
+            "evidence": [
+              "article:p13"
+            ],
+            "explanation": "Sensitive = lowest 33% AUC of 66 PDO cohort; Resistant = highest 34% AUC"
+          },
+          "threshold_timing": {
+            "value": "independent_reference",
+            "evidence": [
+              "article:p13"
+            ],
+            "explanation": "Thresholds defined on full 66-PDO cohort prior to evaluating the 9 patients"
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "article:p13",
+              "article:p14"
+            ],
+            "explanation": "Each patient has a uniquely matched PDO"
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p13"
+            ],
+            "explanation": "PDO sensitivity evaluated for the same chemotherapies the patient received"
+          },
+          "n_units": {
+            "value": 9,
+            "evidence": [
+              "article:p13"
+            ],
+            "explanation": "9 patients in the retrospective concordance analysis"
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p13"
+            ],
+            "explanation": "9 patients are a subset of the 66-PDO cohort; no independent held-out split"
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.8888888888888888,
+          "reported_evidence": [
+            "article:p13"
+          ],
+          "threshold": null,
+          "op": null,
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "hF2",
+              "score": {
+                "refs": [
+                  "supp.xlsx/Chemo /B3",
+                  "supp.xlsx/Chemo /C3",
+                  "supp.xlsx/Chemo /D3",
+                  "supp.xlsx/Chemo /E3",
+                  "supp.xlsx/Chemo /F3"
+                ],
+                "aggregate": "min"
+              },
+              "truth": {
+                "ref": "article:p13",
+                "map": {
+                  "good_responder": 1,
+                  "poor_responder": 0
+                }
+              }
+            },
+            {
+              "id": "hF23",
+              "score": {
+                "refs": [
+                  "supp.xlsx/Chemo /B4",
+                  "supp.xlsx/Chemo /C4",
+                  "supp.xlsx/Chemo /D4",
+                  "supp.xlsx/Chemo /E4",
+                  "supp.xlsx/Chemo /F4"
+                ],
+                "aggregate": "min"
+              },
+              "truth": {
+                "ref": "article:p13",
+                "map": {
+                  "good_responder": 1,
+                  "poor_responder": 0
+                }
+              }
+            },
+            {
+              "id": "hF24",
+              "score": {
+                "refs": [
+                  "supp.xlsx/Chemo /B5",
+                  "supp.xlsx/Chemo /C5",
+                  "supp.xlsx/Chemo /D5",
+                  "supp.xlsx/Chemo /E5",
+                  "supp.xlsx/Chemo /F5"
+                ],
+                "aggregate": "min"
+              },
+              "truth": {
+                "ref": "article:p13",
+                "map": {
+                  "good_responder": 1,
+                  "poor_responder": 0
+                }
+              }
+            },
+            {
+              "id": "hF3",
+              "score": {
+                "refs": [
+                  "supp.xlsx/Chemo /B8",
+                  "supp.xlsx/Chemo /C8",
+                  "supp.xlsx/Chemo /D8",
+                  "supp.xlsx/Chemo /E8",
+                  "supp.xlsx/Chemo /F8"
+                ],
+                "aggregate": "min"
+              },
+              "truth": {
+                "ref": "article:p13",
+                "map": {
+                  "good_responder": 1,
+                  "poor_responder": 0
+                }
+              }
+            },
+            {
+              "id": "hF31",
+              "score": {
+                "refs": [
+                  "supp.xlsx/Chemo /B9",
+                  "supp.xlsx/Chemo /C9",
+                  "supp.xlsx/Chemo /D9",
+                  "supp.xlsx/Chemo /E9",
+                  "supp.xlsx/Chemo /F9"
+                ],
+                "aggregate": "min"
+              },
+              "truth": {
+                "ref": "article:p13",
+                "map": {
+                  "good_responder": 1,
+                  "poor_responder": 0
+                }
+              }
+            },
+            {
+              "id": "hF32",
+              "score": {
+                "refs": [
+                  "supp.xlsx/Chemo /B10",
+                  "supp.xlsx/Chemo /C10",
+                  "supp.xlsx/Chemo /D10",
+                  "supp.xlsx/Chemo /E10",
+                  "supp.xlsx/Chemo /F10"
+                ],
+                "aggregate": "min"
+              },
+              "truth": {
+                "ref": "article:p13",
+                "map": {
+                  "good_responder": 1,
+                  "poor_responder": 0
+                }
+              }
+            },
+            {
+              "id": "hF43",
+              "score": {
+                "refs": [
+                  "supp.xlsx/Chemo /B12",
+                  "supp.xlsx/Chemo /C12",
+                  "supp.xlsx/Chemo /D12",
+                  "supp.xlsx/Chemo /E12",
+                  "supp.xlsx/Chemo /F12"
+                ],
+                "aggregate": "min"
+              },
+              "truth": {
+                "ref": "article:p13",
+                "map": {
+                  "good_responder": 1,
+                  "poor_responder": 0
+                }
+              }
+            },
+            {
+              "id": "hF44",
+              "score": {
+                "refs": [
+                  "supp.xlsx/Chemo /B13",
+                  "supp.xlsx/Chemo /C13",
+                  "supp.xlsx/Chemo /D13",
+                  "supp.xlsx/Chemo /E13",
+                  "supp.xlsx/Chemo /F13"
+                ],
+                "aggregate": "min"
+              },
+              "truth": {
+                "ref": "article:p13",
+                "map": {
+                  "good_responder": 1,
+                  "poor_responder": 0
+                }
+              }
+            },
+            {
+              "id": "hF50",
+              "score": {
+                "refs": [
+                  "supp.xlsx/Chemo /B15",
+                  "supp.xlsx/Chemo /C15",
+                  "supp.xlsx/Chemo /D15",
+                  "supp.xlsx/Chemo /E15",
+                  "supp.xlsx/Chemo /F15"
+                ],
+                "aggregate": "min"
+              },
+              "truth": {
+                "ref": "article:p13",
+                "map": {
+                  "good_responder": 1,
+                  "poor_responder": 0
+                }
+              }
+            }
+          ],
+          "blocked_reason": null
+        },
+        "notes": [
+          "Accuracy = 8/9 = 0.8888888888888888 as explicitly reported in article:p13: 5 of 6 good responders were correctly predicted (treated with ≥1 drug where PDO had low AUC, no drug where PDO had high AUC), 2 of 3 poor responders were correctly predicted (treated with ≥1 drug where PDO had high AUC), 1 patient (hF50) was inconsistent. All 9 patients have source-bound PDO AUC measurements in the Chemo sheet, and outcomes are reported in the article."
+        ]
+      }
+    },
+    "output_sha256": "2551b3bf9d16167444568215e94a88b85abaaa9d0f4d53554cbe0995492d6829"
+  }
+]

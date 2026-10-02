@@ -1,0 +1,244 @@
+[
+  {
+    "name": "finish",
+    "arguments": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p13",
+              "vision/f03506364208/R1C1"
+            ],
+            "explanation": "Nine advanced PDAC patients are individually listed in Figure S6A and compared with their matched PDO pharmacotyping result."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p13"
+            ],
+            "explanation": "Predictions came from pharmacotyping of matched patient-derived organoids."
+          },
+          "readout": {
+            "value": "auc",
+            "evidence": [
+              "article:p13",
+              "supp.xlsx/Key/A2"
+            ],
+            "explanation": "Organoid drug response was quantified by normalized AUC and categorized as sensitive, intermediate, or resistant."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p13",
+              "article:p18"
+            ],
+            "explanation": "Lower AUC indicated greater drug sensitivity; the lowest 33% were sensitive and highest 34% resistant."
+          },
+          "threshold_rule": {
+            "value": "categorical",
+            "evidence": [
+              "vision/f03506364208/R1C2",
+              "vision/f03506364208/R8C2",
+              "vision/f03506364208/R9C2"
+            ],
+            "explanation": "The assay prediction was favorable when the administered regimen included no drug classified as resistant; regimens containing a resistant drug were predicted unfavorable."
+          },
+          "threshold_timing": {
+            "value": "independent_reference",
+            "evidence": [
+              "article:p13"
+            ],
+            "explanation": "Clinical favorable outcome was PFS longer than the previously published median PFS of 180 days rather than a cutoff fitted to these nine patients."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "vision/f03506364208/R1C1",
+              "vision/f03506364208/R9C1"
+            ],
+            "explanation": "All nine patient identifiers, regimen-specific assay classes, and PFS values are individually visible in Figure S6A."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p13",
+              "vision/f03506364208/R1C2"
+            ],
+            "explanation": "Only drugs administered to each patient are listed with the corresponding matched PDO pharmacotyping class."
+          },
+          "n_units": {
+            "value": 9,
+            "evidence": [
+              "article:p13",
+              "vision/f03506364208/R9C1"
+            ],
+            "explanation": "The figure and article both describe the same nine-patient retrospective comparison."
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p13"
+            ],
+            "explanation": "This was a retrospective matched case series using PDOs from the evaluated patients, not a held-out clinical cohort."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.8888888888888888,
+          "reported_evidence": [
+            "article:p13",
+            "vision/f03506364208/R1C1",
+            "vision/f03506364208/R9C3"
+          ],
+          "threshold": 180,
+          "op": ">",
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "hF31",
+              "score": {
+                "ref": "vision/f03506364208/R1C2",
+                "map": {
+                  "GEM: intermediate; PAC: sensitive": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/f03506364208/R1C3",
+                "regex": "([0-9]+)",
+                "threshold": 180,
+                "op": ">"
+              }
+            },
+            {
+              "id": "hF2",
+              "score": {
+                "ref": "vision/f03506364208/R2C2",
+                "map": {
+                  "GEM: sensitive; SN38: sensitive; 5FU: intermediate": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/f03506364208/R2C3",
+                "regex": "([0-9]+)",
+                "threshold": 180,
+                "op": ">"
+              }
+            },
+            {
+              "id": "hM1A",
+              "score": {
+                "ref": "vision/f03506364208/R3C2",
+                "map": {
+                  "SN38: intermediate; 5FU: sensitive; OXA: sensitive": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/f03506364208/R3C3",
+                "regex": "([0-9]+)",
+                "threshold": 180,
+                "op": ">"
+              }
+            },
+            {
+              "id": "hF57",
+              "score": {
+                "ref": "vision/f03506364208/R4C2",
+                "map": {
+                  "GEM: intermediate; PAC: intermediate": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/f03506364208/R4C3",
+                "regex": "([0-9]+)",
+                "threshold": 180,
+                "op": ">"
+              }
+            },
+            {
+              "id": "hF44",
+              "score": {
+                "ref": "vision/f03506364208/R5C2",
+                "map": {
+                  "SN38: sensitive; 5FU: sensitive; OXA: intermediate": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/f03506364208/R5C3",
+                "regex": "([0-9]+)",
+                "threshold": 180,
+                "op": ">"
+              }
+            },
+            {
+              "id": "hF23",
+              "score": {
+                "ref": "vision/f03506364208/R6C2",
+                "map": {
+                  "GEM: sensitive; PAC: sensitive": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/f03506364208/R6C3",
+                "regex": "([0-9]+)",
+                "threshold": 180,
+                "op": ">"
+              }
+            },
+            {
+              "id": "hF50",
+              "score": {
+                "ref": "vision/f03506364208/R7C2",
+                "map": {
+                  "5FU: sensitive": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/f03506364208/R7C3",
+                "regex": "([0-9]+)",
+                "threshold": 180,
+                "op": ">"
+              }
+            },
+            {
+              "id": "hF3",
+              "score": {
+                "ref": "vision/f03506364208/R8C2",
+                "map": {
+                  "5FU: sensitive; OXA: resistant": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/f03506364208/R8C3",
+                "regex": "([0-9]+)",
+                "threshold": 180,
+                "op": ">"
+              }
+            },
+            {
+              "id": "hF28",
+              "score": {
+                "ref": "vision/f03506364208/R9C2",
+                "map": {
+                  "GEM: intermediate; 5FU: resistant": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/f03506364208/R9C3",
+                "regex": "([0-9]+)",
+                "threshold": 180,
+                "op": ">"
+              }
+            }
+          ]
+        },
+        "notes": [
+          "Figure S6A reports approximate PFS values from the horizontal axis; all are clearly either above or below the 180-day published median, so tie handling is irrelevant.",
+          "The article explicitly identifies hF50 as the one inconsistent outcome, corroborating 8 concordant records out of 9."
+        ]
+      }
+    },
+    "output_sha256": "5cf701c38d1aee61904a825359268343af13f4fdbd574d080631c2be2dc23b44"
+  }
+]

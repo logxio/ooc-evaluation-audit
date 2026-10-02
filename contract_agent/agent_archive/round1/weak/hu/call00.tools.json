@@ -1,0 +1,104 @@
+[
+  {
+    "name": "initial_code",
+    "output": {
+      "returncode": 0,
+      "stdout": "Headers: ['Supplementary Data 2. Clinical characteristics of patient samples used in the on-chip drug sensitivity tests', None, None, None, None, None, None, None, None, None, None, None, None, None]\nRow 1: ['Sample ID', 'Time of collection ', 'Site of biopsy', 'Previous treatments', 'Patient response to previous treatments', 'Treatments after organoids established', 'Adjuvant/ Systemic treatment', 'Measurable/ non-measurable disease', 'Response evaluation*', 'New metastasis or progression ', 'DFS (months)', 'PFS (months)', 'Agent(s) tested with the LCOs', 'Reasons for no comparison']\nRow 2: ['LC96', 'BL prior to PC', 'Primary lung tumor', 'none', None, 'PC', 'Systemic', 'Measurable', 'PD to PC', 'Bone metastasis', 'N/A', 1, 'PC, GC, DC, Gef, Cri', None]\nRow 0: ['Supplementary Data 2. Clinical characteristics of patient samples used in the on-chip drug sensitivity tests', None, None, None, None, None, None, None, None, None, None, None, None, None]\nRow 1: ['Sample ID', 'Time of collection ', 'Site of biopsy', 'Previous treatments', 'Patient response to previous treatments', 'Treatments after organoids established', 'Adjuvant/ Systemic treatment', 'Measurable/ non-measurable disease', 'Response evaluation*', 'New metastasis or progression ', 'DFS (months)', 'PFS (months)', 'Agent(s) tested with the LCOs', 'Reasons for no comparison']\nRow 2: ['LC96', 'BL prior to PC', 'Primary lung tumor', 'none', None, 'PC', 'Systemic', 'Measurable', 'PD to PC', 'Bone metastasis', 'N/A', 1, 'PC, GC, DC, Gef, Cri', None]\nRow 3: ['LC132', 'PD to Afa', 'Supraclavicular lymph node', 'PC, Afa', 'PD to Afa', 'Afa+Radiotherapy', 'Systemic', 'Measurable', 'PD to Afa', 'Cervical lymph node metastasis', 'N/A', 2.5, 'PC, DC, Afa, Oxi', None]\nRow 4: ['CRC1', 'PD to Oxa', 'Lung metastasis', 'Oxa+Cap+Bev', 'PD', 'Radiotherapy', 'Systemic', 'Measurable', 'N/A', 'No', 'N/A', 'N/A', 'Oxa, Cap, Iri', None]\n",
+      "stderr": "",
+      "seconds": 0.2644452079839539,
+      "peak_rss_bytes": 45826048,
+      "limit_error": null,
+      "code_sha256": "a5ce13374a83bbba8b47a9c27e8d7e6db69dff73ebcd284cfd12c6d6a6f36b4d",
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient_regimen",
+            "evidence": [
+              "article:p27"
+            ],
+            "explanation": "Comparison of organoid drug sensitivity to patient clinical response for specific regimens."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p1"
+            ],
+            "explanation": "Lung cancer organoids (LCOs) used."
+          },
+          "readout": {
+            "value": "viability",
+            "evidence": [
+              "article:p16"
+            ],
+            "explanation": "Cell viability measured by alamarBlue."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p20"
+            ],
+            "explanation": "Lower viability/AUC indicates sensitivity."
+          },
+          "threshold_rule": {
+            "value": "categorical",
+            "evidence": [
+              "article:p27"
+            ],
+            "explanation": "Agreement defined as match between organoid sensitivity and clinical response."
+          },
+          "threshold_timing": {
+            "value": "independent_reference",
+            "evidence": [
+              "article:p35"
+            ],
+            "explanation": "Clinical outcomes evaluated independently."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "article:p27"
+            ],
+            "explanation": "10 specific patient-organoid pairs with evaluable clinical outcomes."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p27"
+            ],
+            "explanation": "Drugs tested on organoids matched those administered to patients."
+          },
+          "n_units": {
+            "value": 10,
+            "evidence": [
+              "article:p27"
+            ],
+            "explanation": "Ten organoid lines with evaluable clinical responses."
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p27"
+            ],
+            "explanation": "Evaluation on the same cohort used for establishing the assay performance."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 1.0,
+          "reported_evidence": [
+            "article:p27"
+          ],
+          "threshold": null,
+          "op": "==",
+          "score_direction": "higher",
+          "records": [],
+          "blocked_reason": null
+        },
+        "notes": [
+          "Records not individually extracted due to lack of clear column mapping in preview; headline value derived from explicit statement in article:p27."
+        ]
+      }
+    }
+  }
+]

@@ -1,0 +1,463 @@
+{
+  "method": "Every contract the judge passed was checked record by record: each table binding against the source cell, each figure-derived label against the rendered source image and the article text. The judge verifies arithmetic and source binding; it cannot verify a label the agent recorded itself.",
+  "round1": {
+    "strong": {
+      "crlm": {
+        "audited": "pass",
+        "note": "AUC 0.850 over 13 FOLFOX patients: IC50 and treatment response from Table S7 (supp.xls), the paper's own method; PD coded as the positive class with higher IC50."
+      },
+      "rectal": {
+        "audited": "pass",
+        "note": "Day-24/day-0 size ratio of the combined-treatment column (Supplementary Table 2, supp.pdf pages 13-14, column 5) at the published 0.3487 cutoff against TRG/cCR (supp.pdf page 10); P104 is the false positive and P105, P124 the false negatives, exactly as article:p28 states."
+      },
+      "hu": {
+        "audited": "pass",
+        "note": "Mean viability of the matched organoid at the highest tested concentration (Source Data, Drug responses of LCOs) below 0.5 for 9 patient-regimens, plus one heat-map label (LC137-O etoposide+cisplatin cell is red in Supplementary Fig. 11a, matching the source image); clinical response from Supplementary Data 2. The 0.5 viability rule is the agent's operationalisation, not the paper's IC50 rule; its 4 sensitive / 6 non-sensitive calls agree with the heat map and with the 4/0/0/6 table in Supplementary Fig. 11d. The final step replaced columns B-D (organoid LC96-O) by T-V (LC131-O) for LC131+gefitinib, a correction to the right organoid."
+      },
+      "tiriac": {
+        "audited": "fail",
+        "errors": [
+          {
+            "ref": "vision/hF57_pred",
+            "recorded": "predict_benefit; evidence 'regimen GEM, PAC in blue'",
+            "source": "Supplementary Figure S6A prints hF57 (GEM PAC) in grey, the intermediate category; article:p13 says 5 of the 6 long-PFS patients had at least one sensitive drug, so exactly one, hF57, had none."
+          }
+        ],
+        "effect": "With the source colour, the contract's own rule (at least one sensitive drug and no resistant drug) predicts no benefit for hF57 and gives 7/9; the published 8/9 corresponds to 'no resistant drug'. The misread label and the stricter rule cancel."
+      },
+      "tan": {
+        "audited": "fail",
+        "errors": [
+          {
+            "ref": "vision/WCB123_FOLFOXIRI_pred",
+            "recorded": "Resistant",
+            "source": "Figure 4B row 11 (WCB123 FOLFOXIRI): PDTO prediction square is green = Sensitive, Match = Yes."
+          },
+          {
+            "ref": "vision/WCB203_Irinotecan_pred",
+            "recorded": "Sensitive; evidence 'uniquely forced ... article:p45 states 11 sensitive predictions'",
+            "source": "Figure 4B row 19 (WCB203 Irinotecan): PDTO prediction square is red = Resistant, Match = No."
+          }
+        ],
+        "effect": "The two misread records cancel, so the contract still computes 24/29; the source labels also give 24/29, with WCB203 irinotecan rather than WCB123 FOLFOXIRI as the fifth mismatch. The second label was filled from the paper's aggregate counts after the judge rejected it as uncertain."
+      }
+    },
+    "weak": {
+      "crlm": {
+        "audited": "pass",
+        "note": "Same Table S7 cells as the strong lane; IC50 multiplied by -1 so that higher scores mean response; truth SD/PR=1, PD=0."
+      },
+      "hu": {
+        "audited": "fail",
+        "errors": [
+          {
+            "ref": "41467_2021_22676_MOESM5_ESM.xlsx/Sheet1/I3 and nine more",
+            "recorded": "score and truth bound to the same clinical-response cell",
+            "source": "the prediction equals the outcome by construction"
+          }
+        ],
+        "effect": "Passed the original judge at 1.0; the judge now rejects shared score/truth cells, the pass was withdrawn and the chain continued to a blocked conclusion."
+      }
+    }
+  },
+  "blind_reader_probe": {
+    "purpose": "Before round 2, the round-1 misread figures were sent to each lane's model in a fresh conversation with reader_prompt.txt only, never seeing the task or target.",
+    "tan_figure_4B": {
+      "qwen3.8-max": "29 of 29 rows identical to the manual reading for response, prediction and match; its labels give 24/29",
+      "qwen3.7-plus": "10 cells differ (8 match cells shifted on rows without targeted therapy, 2 predictions misread); its labels give 24/29 by cancellation"
+    },
+    "tiriac_figure_S6A": {
+      "qwen3.8-max": "hF57 read as 'GEM: intermediate; PAC: intermediate', every drug colour separated",
+      "qwen3.7-plus": "bar lengths only, drug colours not separated"
+    },
+    "cost_cny_estimate": 0.73,
+    "doubao_tan_figure_4B": {
+      "doubao-seed-2-0-pro-260215": "29 of 29 rows identical to the manual reading for response, prediction and match (round 2, weak lane, cropped figure)",
+      "doubao-seed-2-1-pro-260915": "29 of 29 rows identical (round 2, strong lane, full figure)"
+    }
+  },
+  "round2": {
+    "note": "Doubao model set; figure values come only from the independent reader. Same method as round 1: every judged pass checked record by record against the source cells and, for figure cells, the rendered source image.",
+    "strong": {
+      "crlm": {
+        "audited": "pass",
+        "note": "13 FOLFOX patients, IC50 (Table S7 column 4) against response (column 3), PD as positive class; AUC 0.850, the paper's method. Passed at the single-pass checkpoint."
+      },
+      "rectal": {
+        "audited": "pass",
+        "note": "48 validation patients P81-P128; combined-treatment ratio (Supplementary Table 2, supp.pdf pages 13-14, column 5) at 0.3487 against TRG/cCR; mismatches P104, P105, P124 exactly as article:p28."
+      },
+      "tan": {
+        "audited": "pass",
+        "note": "All 29 records cite the independent reader's transcription of Figure 4B (column 7 PDTO prediction, column 4 patient response); every one of the 29 rows matches the manual reading, and the five mismatches are the five rows marked No in the figure. Round 1 reached the same number through two misread labels."
+      },
+      "hu": {
+        "audited": "fail",
+        "errors": [
+          {
+            "ref": "vision/9a1c82b0877e/R1C14",
+            "recorded": "olive (untested) for LC96-O pemetrexed+cisplatin",
+            "source": "Supplementary Fig. 11a: the LC96-O pemetrexed+cisplatin cell is red; the reader also read LC132-O red as olive and shifted the gefitinib row by one column between LC95-O and LC137-O"
+          }
+        ],
+        "effect": "The judge failed it anyway: the headline applied threshold 0.5 with op == to scores that were already 0/1, so every prediction was 0 (6/10). The heat map's 21 narrow columns are where the independent reader misreads cells."
+      }
+    },
+    "weak": {
+      "crlm": {
+        "audited": "pass",
+        "note": "Same Table S7 bindings as the strong lane; AUC 0.850."
+      },
+      "wang": {
+        "audited": "fail",
+        "errors": [
+          {
+            "ref": "supp.pdf/page4/R5C2 and three more count cells",
+            "recorded": "54 records built from the four cells of the published 2x2 table (21, 5, 4, 24) and its PR/PD headers",
+            "source": "aggregate counts, not per-patient evidence"
+          }
+        ],
+        "effect": "Passed the judge at 45/54; the judge now rejects records whose scores read identical source cells, the pass was withdrawn and the chain ran out of calls on a row-level table with shifted PDF columns."
+      }
+    },
+    "classification": {
+      "scheme": "the four categories requested by the controller, one per failed chain; root cause in brackets",
+      "strong": {
+        "wang": "table not found [no independent prediction column; the headline equals the share of consistency=YES]",
+        "ewart": "table not found [protein-binding-corrected MOS has to be derived from Supplementary Data 1]",
+        "hu": "formula wrong [threshold 0.5 with == on binary scores]",
+        "dai": "table not found [clinical groups only in Figure 5; five crop reads, out of calls while computing]",
+        "tiriac": "numbers misread [bar lengths read as uncertain; 32-tool cap after 30 reader calls]"
+      },
+      "weak": {
+        "tan": "numbers misread [24/29 computed from correct reader labels, field evidence cited the file name gr4.jpg; out of calls]",
+        "rectal": "formula wrong [threshold applied twice, 42 of 48 patients]",
+        "hu": "numbers misread [cited cells that do not exist]",
+        "wang": "numbers misread [aggregate counts withdrawn, then shifted PDF columns]",
+        "ewart": "table not found [aggregate Table 6 rejected; corrected MOS not derived]",
+        "dai": "table not found [clinical groups only in Figure 5; read at the last call]",
+        "tiriac": "formula wrong [at-least-one-sensitive-and-none-resistant rule not encoded; literal truths]"
+      }
+    }
+  },
+  "round3": {
+    "note": "Round 3 continues each unfinished round-2 chain under a 24-call, 64-tool budget (1,000,000-token cap unchanged); chains that passed in round 2 carry over. Dai and Tiriac (strong) were interrupted by a provider arrears error and resumed from their checkpoints after the account was topped up.",
+    "strong": {
+      "crlm": {
+        "audited": "pass",
+        "note": "Carried over from round 2 unchanged; see the round-2 entry."
+      },
+      "rectal": {
+        "audited": "pass",
+        "note": "Carried over from round 2 unchanged; see the round-2 entry."
+      },
+      "tan": {
+        "audited": "pass",
+        "note": "Carried over from round 2 unchanged; see the round-2 entry."
+      },
+      "hu": {
+        "audited": "fail",
+        "errors": [
+          {
+            "ref": "vision/9a1c82b0877e/R1C14",
+            "recorded": "olive (untested), mapped to 0",
+            "source": "Supplementary Fig. 11a: LC96-O x pemetrexed+cisplatin is red (resistant)"
+          },
+          {
+            "ref": "vision/9a1c82b0877e/R2C17",
+            "recorded": "olive (untested), mapped to 0",
+            "source": "LC97-O x gemcitabine+cisplatin is red"
+          },
+          {
+            "ref": "vision/9a1c82b0877e/R5C15",
+            "recorded": "olive (untested), mapped to 0",
+            "source": "LC137-O x etoposide+cisplatin is red"
+          }
+        ],
+        "effect": "Round 3 fixed the headline formula (threshold 0.5, op >) and the judge passed 10/10. Seven records hold: six heat-map cells read correctly and the LC133 gefitinib viabilities (Source Data rows 37-46, Fig. 5d, 156.25 uM). Three predictions cite cells the independent reader misread as untested, and the contract maps untested to non-sensitive; those three organoids are in fact resistant, so the 10/10 holds only by that coincidence. The misreads come from the blind reader, not the agent."
+      },
+      "tiriac": {
+        "audited": "fail",
+        "errors": [
+          {
+            "ref": "article:p13 (records hM1A, hF23)",
+            "recorded": "truth = 1 from the regex \"(5) were treated with at least one drug\" thresholded at > 4",
+            "source": "a count over six patients in the article text, not either patient's outcome"
+          },
+          {
+            "ref": "vision/f03506364208/R9C2 (hF28)",
+            "recorded": "truth = 0 from \"Progressive Disease\"",
+            "source": "the label does not say whether progression came before the 180-day median; three other progressed patients had long PFS"
+          }
+        ],
+        "effect": "The judge passed 8/9 at call 14 and now withdraws it: the shared-count rule (two records extracting the same number from the same cells) was added after this contract. The strip crops that read \"extends past / ends left of the dotted line\" carry the needed evidence and were used for hF2, hF50 and hF3 only. Drug colours are read correctly for all nine patients."
+      },
+      "dai": {
+        "audited": "fail",
+        "errors": [
+          {
+            "ref": "vision/93f4ee0f115e/R3C8-C11 and others",
+            "recorded": "unmapped \"yellow\"; two crops transcribed the same row as \"Good/Poor response\" and as \"dark blue / golden yellow / yellow\"",
+            "source": "Figure 5P patient-response row (blue = good, yellow = poor)"
+          }
+        ],
+        "effect": "Stopped at the 1,000,000-token cap at call 17 with 15 of 22 records evaluable; scores (optimised tumoroid diameter, Source Data 5o columns E-G) bind correctly."
+      }
+    },
+    "weak": {
+      "tan": {
+        "audited": "pass",
+        "note": "Rescued at call 13 by citing article paragraphs instead of the file name as field evidence. Scores cite the reader's PDTO-chemotherapy column (column 5) rather than the PDTO-prediction column (column 7); in Figure 4B the two columns agree on all 29 rows, and every cited cell matches the manual reading, so each record and the 24/29 headline hold."
+      },
+      "crlm": {
+        "audited": "pass",
+        "note": "Carried over from round 2 unchanged; see the round-2 entry."
+      }
+    },
+    "classification": {
+      "scheme": "final state, one category per failed chain; root cause in brackets",
+      "strong": {
+        "hu": "numbers misread [blind reader read three red heat-map cells as untested]",
+        "dai": "numbers misread [crop transcriptions used different colour words; \"yellow\" unmapped]",
+        "tiriac": "numbers misread [bar lengths uncertain; truth filled from an aggregate sentence and a label]",
+        "ewart": "table not found [corrected MOS must be derived]",
+        "wang": "table not found [no independent prediction column]"
+      },
+      "weak": {
+        "rectal": "formula wrong [threshold applied twice, 42 of 48]",
+        "tiriac": "formula wrong [rule not encoded]",
+        "hu": "numbers misread [cited cells that do not exist]",
+        "wang": "numbers misread [shifted PDF columns]",
+        "ewart": "table not found [corrected MOS]",
+        "dai": "table not found [outcome only in Figure 5]"
+      },
+      "counts": {
+        "numbers misread": 5,
+        "table not found": 4,
+        "formula wrong": 2,
+        "unit or denominator": 0
+      }
+    }
+  },
+  "grid_sampler": {
+    "purpose": "a model-free reading of coloured grids and heat maps (grid_colors.py): locate the coloured rows, sample each cell centre, name the colour; every cell carries its pixel coordinates",
+    "hu_supplementary_fig_11a": "13 x 21 heat map at 4x render (cells 47.7 x 40.8 px): the red / blue / untested class agrees with the manual reading on all 273 cells, including LC96 pemetrexed+cisplatin, LC97 gemcitabine+cisplatin and LC137 etoposide+cisplatin, which the model reader read as untested",
+    "dai_figure_5P": "22 x 4 grid at 12.4 x 19.5 px per cell: all 88 cells read; tumoroid response against patient response gives 19/22 with mismatches P01, P12, P36, exactly the cells marked No and the published 86.36%",
+    "cost": "no model call; under one second per figure",
+    "agent_tool": "read_grid in the agent loop: the agent names the file, page, grid box, rows and columns; every cell becomes a grid/<reading>/R<row>C<col> reference with its colour name, RGB and pixel position, and the agent receives an image marking each sample point. Values are written only by the tool; the sandboxed Python cannot write them."
+  },
+  "round4": {
+    "note": "Round 4 adds read_grid, a deterministic pixel reader for coloured grids, heat maps and bar strips, and reruns the three figure papers (hu, Dai, Tiriac) and the two controls from the first call on the strong lane with round-3 limits. Crlm, rectal, Tan, Ewart and Wang keep their round-3 strong results. The hu and Tiriac chains were stopped once at calls 3 and 8 when their dispatching session ended; the interrupted requests are kept with an error file and settled at a streamed-token estimate, and both chains resumed from their saved state under a managed job.",
+    "strong": {
+      "tiriac": {
+        "audited": "pass",
+        "note": "Judged 8/9 at call 19. Scores: the independent reader's per-drug colour reading of Figure S6A (blue sensitive, grey intermediate, red resistant), matching the figure for all nine patients; a regimen with a resistant drug predicts early progression. Outcomes: read_grid strip across the nine bars (exact 9 x 1 grid), green or orange where the bar reaches the strip, white where it does not; six long and three short, as the figure shows. The single disagreement is hF50, the patient the article names as inconsistent. The strip sits at about 149 days rather than on the 180-day line; no bar ends between 149 and 180 days, so every outcome equals the figure's 180-day reading.",
+        "cells": {
+          "grid/7227b1703bc9/R1C1-R9C1": "green, orange, orange, green, green, orange, white, white, white at x = 337 px of the 4x page render; RGB (0,248,1), (255,148,0) and (255,255,255)"
+        }
+      },
+      "hu": {
+        "audited": "fail",
+        "errors": [
+          {
+            "ref": "grid readings at calls 9, 14 and 15",
+            "recorded": "an 11-row snapped box that cut the heat map at the right and bottom, then two exact 13 x 21 boxes whose right edge sat 1.1 points too far right and 5.1 points too far left, both 0.9 points too low",
+            "source": "Supplementary Fig. 11a sits at [0.322, 0.151, 0.744, 0.309] of page 13; a snapped read of that box reproduces all 273 cells"
+          }
+        ],
+        "effect": "Stopped at the 1,000,000-token cap after call 17 with no records: three full-page PDF views, three grid overlays and repeated workbook dumps used the budget before the agent bound the ten patients. The round-3 chain had found the right construction (ten patients, seven heat-map cells plus LC133 gefitinib viabilities)."
+      },
+      "schuster": {
+        "audited": "correct refusal",
+        "note": "no_headline at the first call"
+      },
+      "steinberg": {
+        "audited": "correct refusal",
+        "note": "no_headline at the first call"
+      },
+      "dai": {
+        "audited": "pass",
+        "note": "Judged 19/22 at call 10 (356,656 tokens). Scores and outcomes come from one independent-reader transcription of Figure 5P: row \"Tumoroid response\" (Sensitive / Resistant, the optimised chip's call) as the prediction and row \"Patients response\" (Good / Poor) as the outcome, two different cells per patient. All 44 cited labels agree with the pixel reading of the same 22 x 4 grid (grid_colors.py, 88 cells), and the three disagreements are P01, P12 and P36, the cells the figure's Match row marks No. The agent used read_figure here, not read_grid; one earlier reader request ended with RemoteDisconnected before any response and was settled at zero.",
+        "cells": {
+          "vision/bb368cdd72f5/R2C2-R2C23": "Resistant at P01, P05, P11, P13, P14, P34, P35, P37, P38, P39; Sensitive at the other twelve",
+          "vision/bb368cdd72f5/R3C2-R3C23": "Poor response at P05, P11, P12, P13, P14 and P34-P39; Good response at the other eleven"
+        }
+      }
+    },
+    "classification": {
+      "scheme": "final strong state after round 4: round-4 chains for hu, Dai and Tiriac, round-3 chains for the other five; one category per failed chain, root cause in brackets",
+      "audited_passes": [
+        "crlm",
+        "rectal",
+        "tan",
+        "tiriac",
+        "dai"
+      ],
+      "strong": {
+        "hu": "numbers misread [read_grid box placed off the heat map three times; the 1,000,000-token cap ended the chain before any records]",
+        "ewart": "table not found [corrected MOS must be derived from free fractions; no table lists it]",
+        "wang": "table not found [no independent prediction column; the headline is the share of a consistency flag]"
+      },
+      "counts": {
+        "numbers misread": 1,
+        "table not found": 2,
+        "formula wrong": 0,
+        "unit or denominator": 0
+      }
+    }
+  },
+  "round5": {
+    "note": "Round 5 runs the round-4 strong agent unchanged on the external cohort frozen in experiment_v2.json (external). Every judged pass is checked record by record against a reference recomputation made before any model call (score cell, truth cell, threshold, denominator), and every figure-derived label against the rendered figure. Unpassed chains are classified with the same four categories as rounds 1-4: wrong number (a misread or miscopied value), table not found (the evidence was never located or bound), wrong formula (rule, threshold, aggregation or denominator), unit or definition.",
+    "strong": {
+      "pmc11664105": {
+        "audited": "pass",
+        "note": "Judged at call 1 (single pass, 19,227 tokens). All 98 records bind one drug's own row of Supplementary table 1: score column M (C2C, ATP IC50 over total Cmax), truth column K (DILIrank vMost 1, vNo 0), threshold 176 with op <; the 54 vLess drugs stay out. Every record agrees with the reference recomputation (38/53 sensitivity)."
+      },
+      "pmc7396373": {
+        "audited": "correct refusal",
+        "note": "no_headline at call 1 (10,148 tokens): the agent names the paper's content (organoid IC50 screens and mutation concordance) and the missing piece (matched patient treatment outcomes), which matches the screening finding."
+      },
+      "pmc13268954": {
+        "audited": "correct refusal",
+        "note": "no_headline at call 1 (8,568 tokens): single-patient concordance stated as proof of concept, as in the screening."
+      },
+      "pmc5974779": {
+        "audited": "pass",
+        "note": "Judged at call 3 (51,388 tokens), 48/70 = 0.686 within 0.69 +/- 0.005. All 123 records bind one drug's own row of File004 Sheet1: score column G (chemically defined spheroids at 20x Cmax, Positive/Negative) and truth column B (DILI in vivo, POS/NEG), one shared map each; every record agrees with the reference recomputation."
+      },
+      "pmc13429446": {
+        "audited": "pass",
+        "note": "Judged at call 4 (62,946 tokens), 17/20. Score: Table 2 column 10, each map value follows the printed category in brackets (sensitive, intermediate or highly sensitive 1; resistant 0; Pat10 'None detected' 0); truth: column 12 RECIST, CR/PR/SD 1, PD 0, one shared map. All 20 records agree with the reference."
+      },
+      "pmc9887672": {
+        "audited": "fail",
+        "note": "Judged 11/12 at call 3, audited fail. Scores bind the MID-concentration cell of each drug (arrow up 1, down or level 0), which is right. Truths bind each drug's name cell with a per-drug map ('Sotalol': 1, 'Mexiletine': 0, ...): the cited cell does not carry the class, the map does. The class is printed in the group headers of Table 2 (R3C1 'QT up and TdP on FDA label', R9C1 'QT up, but NO TdP', R11C1 'NO QT up and NO TdP'), which no record cites. The values happen to equal the headers, but the contract hides the outcome as literals, the pattern of hole 4.",
+        "category": "table not found",
+        "cells": {
+          "article.xml/Table 2./R4C2..R17C2": "drug names used as truth cells",
+          "article.xml/Table 2./R3C1, R9C1, R11C1": "class headers never bound"
+        }
+      },
+      "pmc7855796": {
+        "audited": "pass",
+        "note": "Judged at call 5 (127,671 tokens), 24/28. Score: Supplementary Table 3 column F (composite MAqCI score, raw value) with threshold 0.7 and op ≥, which equals the paper's 0.65 cut on scores printed to one decimal; truth: column B survival months below 14.6 as short-term. All 28 records sit on each patient's own row and agree with the reference."
+      },
+      "pmc10481139": {
+        "audited": "pass",
+        "note": "Judged at call 1 (16,769 tokens), sensitivity 9/9 on 14 comparisons. Score: Table S1 columns M/N, one shared map that reads only the organoid part of the label (E+ 1, E- 0); truth: columns K/L RECIST (CR/PR/SD 1, PD 0) in different cells. All 14 records agree with the reference, which re-derived the E part from the drug-test viabilities."
+      },
+      "pmc9378866": {
+        "audited": "correct refusal",
+        "note": "no_headline at call 1 (9,333 tokens): one patient's qualitative organoid-clinical concordance and no aggregate metric, as in the screening."
+      },
+      "pmc8196829": {
+        "audited": "pass",
+        "note": "Judged 10/11 at call 8 (339,980 tokens). Both sides come from one independent-reader transcription of Figure 3B in different rows: prediction score row (03 3.0, 07 2.7, 14 2.0, 17 2.0, 16 1.7, 25 2.0, 21 1.5, 02 1.0, 28 2.5, 05 2.0, 54 1.0, score at most 2.0 predicts tumour control, the paper's rule) and the response row (tumour control or progression). All 11 scores equal the reference reading and all 11 outcomes equal Supplementary Table S2 staging (7 control, 4 progression)."
+      },
+      "pmc12635425": {
+        "audited": "pass",
+        "note": "Judged 20/24 at call 13 (404,667 tokens). Score and outcome are two columns of one independent-reader transcription of Figure 3A (AUCsum against the 1.134 cut, response label). The agent takes good response as the positive class and the reference poor response; with that single flip every one of the 24 predictions and outcomes equals the reference's pixel reading, including the dots near the cut (ESC29, ESC35 at 1.14)."
+      },
+      "pmc12817525": {
+        "audited": "pass",
+        "note": "Judged 15/18 at call 6 (129,436 tokens). Table 3 exists only as an image: the agent binds the reader's chemotherapy-sensitivity grades and the RECIST colour column of the same transcription in different cells, threshold on the grade. Up to the positive-class flip, all 18 predictions and outcomes equal the reference reading of the image."
+      },
+      "pmc10777586": {
+        "audited": "pass",
+        "note": "Judged 12/13 at call 5 (123,017 tokens). Prediction: the reader's per-patient FLOT value from Figure 2I against the paper's 0.559 threshold; outcome: tumour regression grade from the same transcription (1a/1b responder). Up to the positive-class flip, all 13 records equal the reference, whose outcomes come from the supplementary docx table."
+      },
+      "pmc12797791": {
+        "audited": "pass",
+        "note": "Judged 11/12 at call 6 (195,900 tokens). Prediction row (carboplatin S/R) and outcome row (good/poor) of one reader transcription of Figure 4D, different cells. All 12 labels equal the reference's pixel reading, including hgsEOC-8 marked poor, where the text says all biopsied cases did well."
+      },
+      "pmc12598366": {
+        "audited": "pass",
+        "note": "Judged 12/14 at call 2 (49,598 tokens). Table 2 'Overall evaluation' (sensitive/resistant) against 'Clinical response' with SD as good response, the paper's preferred reading; all 14 rows agree with the reference."
+      },
+      "pmc11685586": {
+        "audited": "pass",
+        "note": "Judged 11/19 at call 2 (26,195 tokens). Table 2: the viability percentage inside each drug-test result cell (response below 70 percent) against the clinical outcome column (SD/PR benefit, PD none), 19 drug-test reports for 17 patients including the shifted row R5; all 19 rows agree with the reference."
+      },
+      "pmc13486321": {
+        "audited": "fail",
+        "note": "Judged 7/8 sensitivity at call 6 (149,002 tokens), audited fail. The headline is the multi-parameter CODRP index (sensitivity 87.5 percent, specificity 100 percent). The agent binds Table 2 column 14, organoid growth rate alone, with its own cut at 160; that single parameter also reaches 7 of 8 good responders, but its specificity under this cut is 7/10 and the paper's model is a different formula (Equation 2: Z-scores of cTNM, growth rate and GI-AUC). Outcomes (pathological response score 0 as good) are right.",
+        "category": "wrong formula"
+      },
+      "pmc6671958": {
+        "audited": "fail",
+        "note": "Judged 39/44 at call 8 (215,659 tokens), audited fail. Predictions are right: the reader's drug-response colour per patient from Figures 3 and 7A (green sensitive, red resistant). Outcomes bind each patient's ID cell of the reader transcription with a per-patient map ('OVA42': 1, 'OVC68': 0, ...): the cited cell does not carry the outcome, the map does. The figure prints the outcome as group labels (True Positive, True Negative, False Negative) and RECIST categories that no record cites. The values equal the reference, but the outcomes are literals, the pattern of hole 4.",
+        "category": "table not found"
+      },
+      "pmc12970873": {
+        "audited": "pass",
+        "note": "Judged 10/11 at call 9 (361,062 tokens). Prediction: S4 Table's printed organoid call (Sensitivity/Resistance) per patient; outcome: the same table's clinical words (NO recurrence 1, Recurrence 0, Progressive 0) and, for GC-012, the article paragraph describing that patient's excellent pathological response (TRG 1), which the paper counts as a responder although S4 prints Recurrence after 24 months. One meaning per label, all 11 outcomes equal the reference."
+      },
+      "pmc11293329": {
+        "audited": "pass",
+        "note": "Judged 11/12 at call 9 (265,627 tokens). Prediction: Table S4 organoid AUC below 50 (PDF pages 14-15, each patient's own row); outcome: the reader's Clinical response row of Figure 6K (Good/Poor). All 12 agree with the reference, including G39T as the one poor responder."
+      },
+      "pmc10542784": {
+        "audited": "pass",
+        "note": "Judged 15/20 at call 6 (163,863 tokens). Ex vivo row against In vivo (MRI) row of one reader transcription of Figure 2b, Sensitive 1 and Intermediate or Resistant 0 on both sides; all 20 samples agree with the reference's pixel reading of the colour grid."
+      },
+      "pmc13386773": {
+        "audited": "pass",
+        "note": "Judged 11/16 at call 4 (62,320 tokens). Prediction: the Organoids-block cells of the drugs each patient received in Figure 6A (mean over a multi-drug regimen, Sensitive 1, Resistance 0); outcome: the Clinical_response row (PR/SD 1, PD 0). All 16 agree with the reference's pixel reading, including IHCC-182 and IHCC-184."
+      },
+      "pmc13092483": {
+        "audited": "correct refusal",
+        "note": "no_headline at call 2 (37,372 tokens): the 90.7 percent is a pooled value from four external studies, with no patient-level assay and outcome in this paper, as in the screening."
+      },
+      "pmc13587291": {
+        "audited": "pass",
+        "note": "Judged 16/20 at call 9 (269,423 tokens). Tables S3-S5 (supplementary PDF pages 3-5): prediction is the paper's rule, either paclitaxel or carboplatin sensitive predicts the TC regimen sensitive (minimum over the two drug cells), outcome the clinical response cell of the same PDO. Counted per PDO (20), not per patient; all 20 agree with the reference, misses Org-124, Org-137, Org-222, Org-225."
+      },
+      "pmc9746806": {
+        "audited": "pass",
+        "note": "Judged 9/11 at call 7 (243,917 tokens). Table 1 exists only as an image: the reader's per-drug organoid response for the drugs each patient received (Sensitive 1, Intermediate or Resistant 0, most sensitive drug counts) against the RECIST column of the same transcription (PR 1, SD/PD 0). All 11 predictions and outcomes equal the reference, which read the rotated Supplemental Table 6."
+      },
+      "pmc13494009": {
+        "audited": "pass",
+        "note": "Judged 7/7 at call 14 (809,760 tokens). Prediction: Table S2 EVSS of each treatment line (supplementary PDF page 9, the reference's exact cells), at least 50 predicts disease control; outcome: read_grid colours on the RECIST row of Figure 5B (blue CR/SD, red PD) in the figure's patient order 8, 17, 10, 7, 6, 2, 12, which matches the reference's pixel reading."
+      },
+      "pmc10569691": {
+        "audited": "fail",
+        "note": "Stopped at the 1,000,000-token cap after call 18 (854,750 tokens) with status blocked. The first call already found the 32 patients in Tables 1 and 2 and the published specificity 7/9; the two further responders (Count 11 and 12) appear only as points in Figure 2C, which the agent never bound, so every later contract had 32 of the 34 records.",
+        "category": "table not found"
+      },
+      "pmc10316276": {
+        "audited": "fail",
+        "note": "Stopped at the token cap after call 21 (923,577 tokens) with status blocked. Per-patient venetoclax sensitivity lives in the Figure 3A dot plot and, as exact values, in the vector Supplementary Figure S12A; the reader returned each response group as one uncertain cell without patient identities, and the agent never located S12A.",
+        "category": "table not found"
+      },
+      "pmc12666313": {
+        "audited": "fail",
+        "note": "Stopped at the token cap after call 19 (857,272 tokens). It located the unlabeled scatter of Supplementary Figure S7B (docx image9), transcribed all 23 points through the independent reader (each value within 0.01 of the reference digitisation, all 15 responders and 8 non-responders right) and computed AUC 0.879, inside the published 0.88. The judge withheld the pass because the reader marked the three-point cluster at -39 percent uncertain; the agent never obtained a confident reading of it before the cap. A pair 0.009 apart (0.547 responder, 0.556 non-responder) was read as a tie at 0.55, giving 105.5/120 instead of 106/120.",
+        "category": "wrong number"
+      },
+      "pmc13141165": {
+        "audited": "fail",
+        "note": "Stopped at the token cap after call 19 (886,532 tokens) with status blocked. Per-patient organoid killing index exists only as 24 dots in Figure 5E (17 recurrence, 7 no recurrence). The agent cut the panel into strips for the independent reader (12 strips were 12 pixels tall and the provider rejected them as too small), then ran read_grid over the heat map; no per-dot values with distinct references were ever bound.",
+        "category": "table not found"
+      }
+    },
+    "classification": {
+      "unpassed": 7,
+      "wrong number": [
+        "pmc12666313"
+      ],
+      "table not found": [
+        "pmc9887672",
+        "pmc6671958",
+        "pmc10569691",
+        "pmc10316276",
+        "pmc13141165"
+      ],
+      "wrong formula": [
+        "pmc13486321"
+      ],
+      "unit or definition": [],
+      "note": "Three judged passes fail the audit: two bind each unit's outcome to its name or ID cell with a per-record map while the outcome is printed in group headers or labels that no record cites (hole-4 pattern, counted under table not found because the outcome evidence was never bound); one reaches the published sensitivity with a single parameter instead of the paper's combined index. Four chains stop at the 1,000,000-token cap on figure-only evidence: two dot plots never transcribed per point, one scatter transcribed within reading precision but with reader cells marked uncertain, and two figure-only patients missing from a 34-patient denominator."
+    }
+  }
+}

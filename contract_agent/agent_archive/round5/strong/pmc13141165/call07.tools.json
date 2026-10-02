@@ -1,0 +1,423 @@
+[
+  {
+    "name": "finish",
+    "arguments": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p68",
+              "article:p69"
+            ],
+            "explanation": "Cohort 3 contains 24 HCC patients, each with one PDOTS OKI measurement and recurrence outcome."
+          },
+          "platform": {
+            "value": "perfused_chip",
+            "evidence": [
+              "article:p50",
+              "article:p68"
+            ],
+            "explanation": "PDOTS were cultured in a three-dimensional microfluidic chip with lateral channels for medium or drug perfusion."
+          },
+          "readout": {
+            "value": "viability",
+            "evidence": [
+              "article:p28",
+              "article:p69"
+            ],
+            "explanation": "AO/PI viability was used to derive the Organoid Killing Index."
+          },
+          "direction": {
+            "value": "higher_sensitive",
+            "evidence": [
+              "article:p69",
+              "vision/2cce52c86a32/R43C2"
+            ],
+            "explanation": "Higher OKI indicates greater treatment-induced killing and the no-recurrence group has higher OKI values."
+          },
+          "threshold_rule": {
+            "value": "no_binary_rule",
+            "evidence": [
+              "vision/2cce52c86a32/R53C3",
+              "vision/2cce52c86a32/R53C5"
+            ],
+            "explanation": "The requested endpoint is an ROC AUC using continuous OKI scores; it has no classification cutoff."
+          },
+          "threshold_timing": {
+            "value": "not_applicable",
+            "evidence": [
+              "vision/2cce52c86a32/R53C3"
+            ],
+            "explanation": "AUC does not use a binary threshold."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "vision/8825fce84cdb2bc7eb53de9be89356a486d128b473853822f449257f5f664cc0/R1C4",
+              "vision/8825fce84cdb2bc7eb53de9be89356a486d128b473853822f449257f5f664cc0/R2C4"
+            ],
+            "explanation": "Figure 5E transcribes 17 recurrence and 7 no-recurrence individual OKI points, totaling 24 patients."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p68",
+              "article:p69"
+            ],
+            "explanation": "Patients received adjuvant anti-PD-1 antibody plus apatinib, matching the ex vivo apatinib plus anti-PD-1 PDOTS treatment."
+          },
+          "n_units": {
+            "value": 24,
+            "evidence": [
+              "article:p68",
+              "article:p69",
+              "article.xml/Table 1/R1C4"
+            ],
+            "explanation": "The exact ROC comparison includes 24 patients."
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p68",
+              "article:p69"
+            ],
+            "explanation": "OKI was measured and recurrence was evaluated in the same 24-patient cohort."
+          }
+        },
+        "headline": {
+          "metric": "auc",
+          "reported": 0.899,
+          "reported_evidence": [
+            "vision/2cce52c86a32/R53C5"
+          ],
+          "threshold": null,
+          "op": ">",
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "recurrence_patient_01",
+              "score": {
+                "ref": "vision/8825fce84cdb2bc7eb53de9be89356a486d128b473853822f449257f5f664cc0/R1C4",
+                "index": 0
+              },
+              "truth": {
+                "ref": "vision/8825fce84cdb2bc7eb53de9be89356a486d128b473853822f449257f5f664cc0/R1C1",
+                "map": {
+                  "Recurrence": 0
+                }
+              }
+            },
+            {
+              "id": "recurrence_patient_02",
+              "score": {
+                "ref": "vision/8825fce84cdb2bc7eb53de9be89356a486d128b473853822f449257f5f664cc0/R1C4",
+                "index": 1
+              },
+              "truth": {
+                "ref": "vision/8825fce84cdb2bc7eb53de9be89356a486d128b473853822f449257f5f664cc0/R1C1",
+                "map": {
+                  "Recurrence": 0
+                }
+              }
+            },
+            {
+              "id": "recurrence_patient_03",
+              "score": {
+                "ref": "vision/8825fce84cdb2bc7eb53de9be89356a486d128b473853822f449257f5f664cc0/R1C4",
+                "index": 2
+              },
+              "truth": {
+                "ref": "vision/8825fce84cdb2bc7eb53de9be89356a486d128b473853822f449257f5f664cc0/R1C1",
+                "map": {
+                  "Recurrence": 0
+                }
+              }
+            },
+            {
+              "id": "recurrence_patient_04",
+              "score": {
+                "ref": "vision/8825fce84cdb2bc7eb53de9be89356a486d128b473853822f449257f5f664cc0/R1C4",
+                "index": 3
+              },
+              "truth": {
+                "ref": "vision/8825fce84cdb2bc7eb53de9be89356a486d128b473853822f449257f5f664cc0/R1C1",
+                "map": {
+                  "Recurrence": 0
+                }
+              }
+            },
+            {
+              "id": "recurrence_patient_05",
+              "score": {
+                "ref": "vision/8825fce84cdb2bc7eb53de9be89356a486d128b473853822f449257f5f664cc0/R1C4",
+                "index": 4
+              },
+              "truth": {
+                "ref": "vision/8825fce84cdb2bc7eb53de9be89356a486d128b473853822f449257f5f664cc0/R1C1",
+                "map": {
+                  "Recurrence": 0
+                }
+              }
+            },
+            {
+              "id": "recurrence_patient_06",
+              "score": {
+                "ref": "vision/8825fce84cdb2bc7eb53de9be89356a486d128b473853822f449257f5f664cc0/R1C4",
+                "index": 5
+              },
+              "truth": {
+                "ref": "vision/8825fce84cdb2bc7eb53de9be89356a486d128b473853822f449257f5f664cc0/R1C1",
+                "map": {
+                  "Recurrence": 0
+                }
+              }
+            },
+            {
+              "id": "recurrence_patient_07",
+              "score": {
+                "ref": "vision/8825fce84cdb2bc7eb53de9be89356a486d128b473853822f449257f5f664cc0/R1C4",
+                "index": 6
+              },
+              "truth": {
+                "ref": "vision/8825fce84cdb2bc7eb53de9be89356a486d128b473853822f449257f5f664cc0/R1C1",
+                "map": {
+                  "Recurrence": 0
+                }
+              }
+            },
+            {
+              "id": "recurrence_patient_08",
+              "score": {
+                "ref": "vision/8825fce84cdb2bc7eb53de9be89356a486d128b473853822f449257f5f664cc0/R1C4",
+                "index": 7
+              },
+              "truth": {
+                "ref": "vision/8825fce84cdb2bc7eb53de9be89356a486d128b473853822f449257f5f664cc0/R1C1",
+                "map": {
+                  "Recurrence": 0
+                }
+              }
+            },
+            {
+              "id": "recurrence_patient_09",
+              "score": {
+                "ref": "vision/8825fce84cdb2bc7eb53de9be89356a486d128b473853822f449257f5f664cc0/R1C4",
+                "index": 8
+              },
+              "truth": {
+                "ref": "vision/8825fce84cdb2bc7eb53de9be89356a486d128b473853822f449257f5f664cc0/R1C1",
+                "map": {
+                  "Recurrence": 0
+                }
+              }
+            },
+            {
+              "id": "recurrence_patient_10",
+              "score": {
+                "ref": "vision/8825fce84cdb2bc7eb53de9be89356a486d128b473853822f449257f5f664cc0/R1C4",
+                "index": 9
+              },
+              "truth": {
+                "ref": "vision/8825fce84cdb2bc7eb53de9be89356a486d128b473853822f449257f5f664cc0/R1C1",
+                "map": {
+                  "Recurrence": 0
+                }
+              }
+            },
+            {
+              "id": "recurrence_patient_11",
+              "score": {
+                "ref": "vision/8825fce84cdb2bc7eb53de9be89356a486d128b473853822f449257f5f664cc0/R1C4",
+                "index": 10
+              },
+              "truth": {
+                "ref": "vision/8825fce84cdb2bc7eb53de9be89356a486d128b473853822f449257f5f664cc0/R1C1",
+                "map": {
+                  "Recurrence": 0
+                }
+              }
+            },
+            {
+              "id": "recurrence_patient_12",
+              "score": {
+                "ref": "vision/8825fce84cdb2bc7eb53de9be89356a486d128b473853822f449257f5f664cc0/R1C4",
+                "index": 11
+              },
+              "truth": {
+                "ref": "vision/8825fce84cdb2bc7eb53de9be89356a486d128b473853822f449257f5f664cc0/R1C1",
+                "map": {
+                  "Recurrence": 0
+                }
+              }
+            },
+            {
+              "id": "recurrence_patient_13",
+              "score": {
+                "ref": "vision/8825fce84cdb2bc7eb53de9be89356a486d128b473853822f449257f5f664cc0/R1C4",
+                "index": 12
+              },
+              "truth": {
+                "ref": "vision/8825fce84cdb2bc7eb53de9be89356a486d128b473853822f449257f5f664cc0/R1C1",
+                "map": {
+                  "Recurrence": 0
+                }
+              }
+            },
+            {
+              "id": "recurrence_patient_14",
+              "score": {
+                "ref": "vision/8825fce84cdb2bc7eb53de9be89356a486d128b473853822f449257f5f664cc0/R1C4",
+                "index": 13
+              },
+              "truth": {
+                "ref": "vision/8825fce84cdb2bc7eb53de9be89356a486d128b473853822f449257f5f664cc0/R1C1",
+                "map": {
+                  "Recurrence": 0
+                }
+              }
+            },
+            {
+              "id": "recurrence_patient_15",
+              "score": {
+                "ref": "vision/8825fce84cdb2bc7eb53de9be89356a486d128b473853822f449257f5f664cc0/R1C4",
+                "index": 14
+              },
+              "truth": {
+                "ref": "vision/8825fce84cdb2bc7eb53de9be89356a486d128b473853822f449257f5f664cc0/R1C1",
+                "map": {
+                  "Recurrence": 0
+                }
+              }
+            },
+            {
+              "id": "recurrence_patient_16",
+              "score": {
+                "ref": "vision/8825fce84cdb2bc7eb53de9be89356a486d128b473853822f449257f5f664cc0/R1C4",
+                "index": 15
+              },
+              "truth": {
+                "ref": "vision/8825fce84cdb2bc7eb53de9be89356a486d128b473853822f449257f5f664cc0/R1C1",
+                "map": {
+                  "Recurrence": 0
+                }
+              }
+            },
+            {
+              "id": "recurrence_patient_17",
+              "score": {
+                "ref": "vision/8825fce84cdb2bc7eb53de9be89356a486d128b473853822f449257f5f664cc0/R1C4",
+                "index": 16
+              },
+              "truth": {
+                "ref": "vision/8825fce84cdb2bc7eb53de9be89356a486d128b473853822f449257f5f664cc0/R1C1",
+                "map": {
+                  "Recurrence": 0
+                }
+              }
+            },
+            {
+              "id": "no_recurrence_patient_01",
+              "score": {
+                "ref": "vision/8825fce84cdb2bc7eb53de9be89356a486d128b473853822f449257f5f664cc0/R2C4",
+                "index": 0
+              },
+              "truth": {
+                "ref": "vision/2cce52c86a32/R43C2",
+                "map": {
+                  "No Recurrence": 1
+                }
+              }
+            },
+            {
+              "id": "no_recurrence_patient_02",
+              "score": {
+                "ref": "vision/8825fce84cdb2bc7eb53de9be89356a486d128b473853822f449257f5f664cc0/R2C4",
+                "index": 1
+              },
+              "truth": {
+                "ref": "vision/2cce52c86a32/R43C2",
+                "map": {
+                  "No Recurrence": 1
+                }
+              }
+            },
+            {
+              "id": "no_recurrence_patient_03",
+              "score": {
+                "ref": "vision/8825fce84cdb2bc7eb53de9be89356a486d128b473853822f449257f5f664cc0/R2C4",
+                "index": 2
+              },
+              "truth": {
+                "ref": "vision/2cce52c86a32/R43C2",
+                "map": {
+                  "No Recurrence": 1
+                }
+              }
+            },
+            {
+              "id": "no_recurrence_patient_04",
+              "score": {
+                "ref": "vision/8825fce84cdb2bc7eb53de9be89356a486d128b473853822f449257f5f664cc0/R2C4",
+                "index": 3
+              },
+              "truth": {
+                "ref": "vision/2cce52c86a32/R43C2",
+                "map": {
+                  "No Recurrence": 1
+                }
+              }
+            },
+            {
+              "id": "no_recurrence_patient_05",
+              "score": {
+                "ref": "vision/8825fce84cdb2bc7eb53de9be89356a486d128b473853822f449257f5f664cc0/R2C4",
+                "index": 4
+              },
+              "truth": {
+                "ref": "vision/2cce52c86a32/R43C2",
+                "map": {
+                  "No Recurrence": 1
+                }
+              }
+            },
+            {
+              "id": "no_recurrence_patient_06",
+              "score": {
+                "ref": "vision/8825fce84cdb2bc7eb53de9be89356a486d128b473853822f449257f5f664cc0/R2C4",
+                "index": 5
+              },
+              "truth": {
+                "ref": "vision/2cce52c86a32/R43C2",
+                "map": {
+                  "No Recurrence": 1
+                }
+              }
+            },
+            {
+              "id": "no_recurrence_patient_07",
+              "score": {
+                "ref": "vision/8825fce84cdb2bc7eb53de9be89356a486d128b473853822f449257f5f664cc0/R2C4",
+                "index": 6
+              },
+              "truth": {
+                "ref": "vision/2cce52c86a32/R43C2",
+                "map": {
+                  "No Recurrence": 1
+                }
+              }
+            }
+          ],
+          "blocked_reason": null
+        },
+        "notes": [
+          "Figure 5E values are approximate axis readings from the independent figure transcription.",
+          "Using the transcribed scores, the Mann-Whitney AUC is 107/119 = 0.89915966, which rounds to the published 0.899.",
+          "Truth is coded 1 for no recurrence and 0 for recurrence so higher OKI produces a higher AUC."
+        ]
+      }
+    },
+    "output_sha256": "430b28c784d6b65a7c60bc985401e19797aed30013ac947b009281993b21a0ed"
+  }
+]

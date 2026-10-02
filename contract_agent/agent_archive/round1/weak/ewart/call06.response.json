@@ -1,0 +1,28 @@
+{
+  "model": "qwen3.7-plus",
+  "message": {
+    "role": "assistant",
+    "content": "Let me check the PDF pages for tables with drug results.\n\n",
+    "tool_calls": [
+      {
+        "id": "call_37e09834350c4554895e04da",
+        "type": "function",
+        "function": {
+          "name": "preview_table",
+          "arguments": "{\"file\": \"43856_2022_209_MOESM9_ESM.pdf\", \"sheet\": \"page4\", \"start\": 1, \"rows\": 50}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 95,
+    "prompt_tokens": 47047,
+    "prompt_tokens_details": {
+      "cached_tokens": 45696,
+      "text_tokens": 47047
+    },
+    "total_tokens": 47142
+  }
+}

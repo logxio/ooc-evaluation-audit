@@ -1,0 +1,503 @@
+{
+  "ewart": {
+    "fields": {
+      "unit": [
+        "drug"
+      ],
+      "platform": [
+        "perfused_chip"
+      ],
+      "readout": [
+        "toxicity_margin"
+      ],
+      "direction": [
+        "lower_sensitive"
+      ],
+      "threshold_rule": [
+        "roc_optimized",
+        "fixed_numeric"
+      ],
+      "threshold_timing": [
+        "outcome_optimized"
+      ],
+      "patient_mapping": [
+        "not_applicable"
+      ],
+      "regimen_match": [
+        "not_applicable"
+      ],
+      "n_units": [
+        18
+      ],
+      "split": [
+        "same_cohort"
+      ]
+    },
+    "target": {
+      "metric": "sensitivity",
+      "reported": 0.87,
+      "n": 18,
+      "tolerance": 0.005
+    },
+    "evidence": [
+      "article:p64",
+      "article/Table 6/R4C6"
+    ],
+    "review_note": "The 87% headline is the 18-drug two-donor subset, with protein-binding correction. Table 4 is explicitly uncorrected; a matching aggregate alone cannot validate applying 375 to those values.",
+    "semantic_exclusions": [
+      {
+        "threshold": 375,
+        "source_prefix": "article/Table 4/",
+        "reason": "Table 4 uses uncorrected MOS; the 375 threshold and 87% headline require protein-binding-corrected MOS (article:p64). A numeric match does not establish that transformation."
+      }
+    ]
+  },
+  "hu": {
+    "fields": {
+      "unit": [
+        "patient",
+        "organoid_line"
+      ],
+      "platform": [
+        "microwell"
+      ],
+      "readout": [
+        "viability",
+        "auc",
+        "ic50"
+      ],
+      "direction": [
+        "lower_sensitive"
+      ],
+      "threshold_rule": [
+        "categorical",
+        "unknown"
+      ],
+      "threshold_timing": [
+        "not_reported"
+      ],
+      "patient_mapping": [
+        "partial",
+        "individual_available"
+      ],
+      "regimen_match": [
+        "partial",
+        "matched"
+      ],
+      "n_units": [
+        10
+      ],
+      "split": [
+        "same_cohort"
+      ]
+    },
+    "target": {
+      "metric": "accuracy",
+      "reported": 1.0,
+      "n": 10,
+      "tolerance": 1e-06
+    },
+    "evidence": [
+      "article:p27"
+    ],
+    "review_note": "21 tested lines; 10 clinically comparable, including retrospective treatment comparisons; numeric assay calls are not present in the clinical mapping supplement."
+  },
+  "schuster": {
+    "fields": {
+      "unit": [
+        "patient_schedule",
+        "patient"
+      ],
+      "platform": [
+        "perfused_chip"
+      ],
+      "readout": [
+        "apoptosis_death"
+      ],
+      "direction": [
+        "higher_sensitive"
+      ],
+      "threshold_rule": [
+        "no_binary_rule"
+      ],
+      "threshold_timing": [
+        "not_applicable"
+      ],
+      "patient_mapping": [
+        "individual_available",
+        "partial"
+      ],
+      "regimen_match": [
+        "partial"
+      ],
+      "n_units": [
+        3
+      ],
+      "split": [
+        "none"
+      ]
+    },
+    "evidence": [
+      "article:p26",
+      "article:p30"
+    ],
+    "review_note": "Three clinical histories, 48 reconstructed temporal contrasts; the paper does not report a clinical accuracy/AUC headline."
+  },
+  "steinberg": {
+    "fields": {
+      "unit": [
+        "patient",
+        "patient_regimen"
+      ],
+      "platform": [
+        "spheroid",
+        "mixed"
+      ],
+      "readout": [
+        "size_viability",
+        "viability"
+      ],
+      "direction": [
+        "lower_sensitive"
+      ],
+      "threshold_rule": [
+        "no_binary_rule"
+      ],
+      "threshold_timing": [
+        "not_applicable",
+        "not_reported"
+      ],
+      "patient_mapping": [
+        "individual_available",
+        "partial"
+      ],
+      "regimen_match": [
+        "partial"
+      ],
+      "n_units": [
+        10
+      ],
+      "split": [
+        "none",
+        "same_cohort"
+      ]
+    },
+    "evidence": [
+      "article:p21",
+      "article:p59"
+    ],
+    "review_note": "Ten case descriptions and per-patient/drug readouts; 14/49 is our assay discordance audit, not a published clinical accuracy headline."
+  },
+  "dai": {
+    "fields": {
+      "unit": [
+        "patient"
+      ],
+      "platform": [
+        "perfused_chip"
+      ],
+      "readout": [
+        "vessel_size"
+      ],
+      "direction": [
+        "lower_sensitive"
+      ],
+      "threshold_rule": [
+        "roc_optimized"
+      ],
+      "threshold_timing": [
+        "outcome_optimized"
+      ],
+      "patient_mapping": [
+        "individual_available"
+      ],
+      "regimen_match": [
+        "matched"
+      ],
+      "n_units": [
+        22
+      ],
+      "split": [
+        "same_cohort"
+      ]
+    },
+    "evidence": [
+      "article:p76"
+    ],
+    "target": {
+      "metric": "accuracy",
+      "reported": 0.8636,
+      "n": 22,
+      "tolerance": 0.0001
+    }
+  },
+  "rectal": {
+    "fields": {
+      "unit": [
+        "patient",
+        "organoid_line"
+      ],
+      "platform": [
+        "organoid"
+      ],
+      "readout": [
+        "other",
+        "viability",
+        "size_viability"
+      ],
+      "direction": [
+        "lower_sensitive"
+      ],
+      "threshold_rule": [
+        "roc_optimized",
+        "fixed_numeric"
+      ],
+      "threshold_timing": [
+        "independent_reference"
+      ],
+      "patient_mapping": [
+        "individual_available"
+      ],
+      "regimen_match": [
+        "partial"
+      ],
+      "n_units": [
+        48
+      ],
+      "split": [
+        "independent_test"
+      ]
+    },
+    "evidence": [
+      "article:p16",
+      "article:p28"
+    ],
+    "target": {
+      "metric": "accuracy",
+      "reported": 0.9375,
+      "n": 48,
+      "tolerance": 1e-06
+    },
+    "review_note": "The published validation is 48 patients after 80 discovery patients, threshold .3487. The 85-patient subset in our prior blind replay is not the paper validation cohort."
+  },
+  "crlm": {
+    "fields": {
+      "unit": [
+        "patient"
+      ],
+      "platform": [
+        "organoid"
+      ],
+      "readout": [
+        "ic50"
+      ],
+      "direction": [
+        "lower_sensitive"
+      ],
+      "threshold_rule": [
+        "no_binary_rule",
+        "roc_optimized"
+      ],
+      "threshold_timing": [
+        "not_applicable",
+        "outcome_optimized"
+      ],
+      "patient_mapping": [
+        "individual_available"
+      ],
+      "regimen_match": [
+        "matched"
+      ],
+      "n_units": [
+        13,
+        10,
+        23
+      ],
+      "split": [
+        "same_cohort"
+      ]
+    },
+    "evidence": [
+      "article:p28",
+      "article:p30",
+      "article:p51"
+    ],
+    "targets": [
+      {
+        "metric": "auc",
+        "reported": 0.85,
+        "n": 13,
+        "tolerance": 1e-06
+      },
+      {
+        "metric": "auc",
+        "reported": 0.92,
+        "n": 10,
+        "tolerance": 1e-06
+      }
+    ]
+  },
+  "tan": {
+    "fields": {
+      "unit": [
+        "patient_regimen"
+      ],
+      "platform": [
+        "organoid"
+      ],
+      "readout": [
+        "viability",
+        "auc"
+      ],
+      "direction": [
+        "lower_sensitive"
+      ],
+      "threshold_rule": [
+        "cohort_quantile"
+      ],
+      "threshold_timing": [
+        "independent_reference"
+      ],
+      "patient_mapping": [
+        "individual_available"
+      ],
+      "regimen_match": [
+        "partial"
+      ],
+      "n_units": [
+        29,
+        39,
+        10
+      ],
+      "split": [
+        "independent_test"
+      ]
+    },
+    "evidence": [
+      "article:p45",
+      "article:p56",
+      "article:p79"
+    ],
+    "review_note": "29 community treatments/18 patients; 10 FORECAST treatments/9 patients; combined 39/27. Prespecified equivalent headline cohorts accepted for denominator scoring.",
+    "targets": [
+      {
+        "metric": "accuracy",
+        "reported": 0.828,
+        "n": 29,
+        "tolerance": 0.005
+      },
+      {
+        "metric": "accuracy",
+        "reported": 0.846,
+        "n": 39,
+        "tolerance": 0.005
+      },
+      {
+        "metric": "accuracy",
+        "reported": 0.9,
+        "n": 10,
+        "tolerance": 1e-06
+      },
+      {
+        "metric": "accuracy",
+        "reported": 0.83,
+        "n": 29,
+        "tolerance": 0.005
+      },
+      {
+        "metric": "accuracy",
+        "reported": 0.85,
+        "n": 39,
+        "tolerance": 0.005
+      }
+    ]
+  },
+  "tiriac": {
+    "fields": {
+      "unit": [
+        "patient"
+      ],
+      "platform": [
+        "organoid"
+      ],
+      "readout": [
+        "auc"
+      ],
+      "direction": [
+        "lower_sensitive"
+      ],
+      "threshold_rule": [
+        "cohort_quantile"
+      ],
+      "threshold_timing": [
+        "not_reported"
+      ],
+      "patient_mapping": [
+        "individual_available",
+        "partial"
+      ],
+      "regimen_match": [
+        "partial"
+      ],
+      "n_units": [
+        9
+      ],
+      "split": [
+        "same_cohort"
+      ]
+    },
+    "evidence": [
+      "article:p13",
+      "article:p14"
+    ],
+    "review_note": "The 9-patient comparison is qualitative; 8/9 is derivable from the narrative but a fully specified binary classifier is not published. Clinical PFS data are plotted in S6, not a numerical patient table. Tertiles use the study PDO bank; the later 50-patient reference and 7-patient analysis belong to our reanalysis."
+  },
+  "wang": {
+    "fields": {
+      "unit": [
+        "patient_regimen",
+        "organoid_line"
+      ],
+      "platform": [
+        "organoid"
+      ],
+      "readout": [
+        "ic50",
+        "viability"
+      ],
+      "direction": [
+        "lower_sensitive"
+      ],
+      "threshold_rule": [
+        "unknown",
+        "roc_optimized"
+      ],
+      "threshold_timing": [
+        "not_reported",
+        "outcome_optimized"
+      ],
+      "patient_mapping": [
+        "individual_available"
+      ],
+      "regimen_match": [
+        "matched"
+      ],
+      "n_units": [
+        54
+      ],
+      "split": [
+        "same_cohort"
+      ]
+    },
+    "evidence": [
+      "article:p35",
+      "article:p102"
+    ],
+    "target": {
+      "metric": "accuracy",
+      "reported": 0.833,
+      "n": 54,
+      "tolerance": 0.0005
+    }
+  }
+}

@@ -1,0 +1,3012 @@
+{
+  "turn": 6,
+  "tool_count": 4,
+  "tokens": 129436,
+  "done": true,
+  "stop_reason": "verified",
+  "reader_calls": 1,
+  "checkpoints": {
+    "single_pass": {
+      "contract": {
+        "status": "blocked",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p66"
+            ],
+            "explanation": "The comparison is made for paired cases, each representing one patient with a pre-NAT organoid and post-NAT radiologic assessment."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p60",
+              "article:p66"
+            ],
+            "explanation": "Predictions came from patient-derived osteosarcoma organoid drug-response testing."
+          },
+          "readout": {
+            "value": "viability",
+            "evidence": [
+              "article:p60"
+            ],
+            "explanation": "Drug response was measured by the standard cell inhibition rate, a viability/inhibition readout, and aggregated into CIWS."
+          },
+          "direction": {
+            "value": "higher_sensitive",
+            "evidence": [
+              "article:p60",
+              "article:p66"
+            ],
+            "explanation": "CIWS >= 5+ was classified as sensitive/predicted SD, while CIWS < 5+ was resistant/predicted PD."
+          },
+          "threshold_rule": {
+            "value": "fixed_numeric",
+            "evidence": [
+              "article:p60",
+              "article:p66"
+            ],
+            "explanation": "A fixed CIWS cutoff of 5+ was used to binarize predictions."
+          },
+          "threshold_timing": {
+            "value": "explicitly_prespecified",
+            "evidence": [
+              "article:p42",
+              "article:p66"
+            ],
+            "explanation": "The methods explicitly define the CIWS >= 5+ rule before comparing predictions with RECIST outcomes."
+          },
+          "patient_mapping": {
+            "value": "absent",
+            "evidence": [
+              "13046_2025_3541_Tab3_HTML.jpg",
+              "article:p66"
+            ],
+            "explanation": "The parsed XML tables contain no rows, and the required 18 patient-level assay/outcome pairs are available only as an untranscribed table image in the current evidence."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p60",
+              "article:p66"
+            ],
+            "explanation": "CIWS aggregates sensitivity to the clinically administered MAPI regimen: methotrexate, doxorubicin, cisplatin, and ifosfamide."
+          },
+          "n_units": {
+            "value": 18,
+            "evidence": [
+              "article:p66"
+            ],
+            "explanation": "The reported denominator is 18 paired cases with pre-NAT organoid predictions and post-NAT radiologic assessments."
+          },
+          "split": {
+            "value": "none",
+            "evidence": [
+              "article:p42",
+              "article:p66"
+            ],
+            "explanation": "The report describes direct concordance in the evaluated patient cohort rather than a held-out test or cross-validated model."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.8333333333333334,
+          "reported_evidence": [
+            "article:p66"
+          ],
+          "threshold": 5,
+          "op": ">=",
+          "score_direction": "higher",
+          "records": [],
+          "blocked_reason": "Missing independently transcribed patient-level evidence for all 18 cases: each patient ID, pre-NAT CIWS score or binarized CIWS prediction at the >=5 threshold, and paired post-NAT RECIST 1.1 outcome (CR/PR/SD versus PD). Table 3 is supplied only as an image and has not been transcribed through read_figure; aggregate 15/18 counts alone are insufficient for row-level reconstruction."
+        },
+        "notes": [
+          "The article reports 15/18 correct classifications, accuracy 83.3%, sensitivity 4/5 for PD, and specificity 11/13 for SD.",
+          "A figure/table transcription is required before records can bind assay scores and clinical truths to source cell references."
+        ]
+      },
+      "evaluation": {
+        "matched": false,
+        "metric": "accuracy",
+        "computed": null,
+        "reported": 0.8333333333333334,
+        "difference": null,
+        "n": 0,
+        "errors": [
+          "patient_mapping: missing evidence 13046_2025_3541_Tab3_HTML.jpg",
+          "No source-bound observations: Missing independently transcribed patient-level evidence for all 18 cases: each patient ID, pre-NAT CIWS score or binarized CIWS prediction at the >=5 threshold, and paired post-NAT RECIST 1.1 outcome (CR/PR/SD versus PD). Table 3 is supplied only as an image and has not been transcribed through read_figure; aggregate 15/18 counts alone are insufficient for row-level reconstruction.",
+          "Expected 18 analysis units, got 0"
+        ],
+        "rows": [],
+        "expected": {
+          "metric": "accuracy",
+          "value": 0.8333333333333334,
+          "n": 18
+        }
+      },
+      "calls": 1,
+      "tokens": 12013
+    },
+    "one_feedback": {
+      "contract": {
+        "status": "blocked",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p66"
+            ],
+            "explanation": "Each analysis unit is one paired patient with a pre-NAT organoid prediction and post-NAT radiologic assessment."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p60",
+              "article:p66"
+            ],
+            "explanation": "Predictions were generated from patient-derived osteosarcoma organoids."
+          },
+          "readout": {
+            "value": "viability",
+            "evidence": [
+              "article:p60"
+            ],
+            "explanation": "Drug effects were measured as standard cell inhibition rates and aggregated into CIWS."
+          },
+          "direction": {
+            "value": "higher_sensitive",
+            "evidence": [
+              "article:p60",
+              "article:p66"
+            ],
+            "explanation": "Higher CIWS indicates greater sensitivity; CIWS >= 5 predicts SD/response."
+          },
+          "threshold_rule": {
+            "value": "fixed_numeric",
+            "evidence": [
+              "article:p60",
+              "article:p66"
+            ],
+            "explanation": "The fixed binary cutoff was CIWS 5+."
+          },
+          "threshold_timing": {
+            "value": "explicitly_prespecified",
+            "evidence": [
+              "article:p42",
+              "article:p66"
+            ],
+            "explanation": "The CIWS >= 5+ rule was explicitly defined before comparison with RECIST outcomes."
+          },
+          "patient_mapping": {
+            "value": "absent",
+            "evidence": [
+              "article:p66"
+            ],
+            "explanation": "Patient-level CIWS and RECIST values are linked by patient identifier in the source rows."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p60",
+              "article:p66"
+            ],
+            "explanation": "CIWS represents sensitivity to the MAPI regimen evaluated clinically."
+          },
+          "n_units": {
+            "value": 18,
+            "evidence": [
+              "article:p66"
+            ],
+            "explanation": "The published comparison includes 18 paired cases."
+          },
+          "split": {
+            "value": "none",
+            "evidence": [
+              "article:p42",
+              "article:p66"
+            ],
+            "explanation": "This was direct concordance evaluation in the reported cohort."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.8333333333333334,
+          "reported_evidence": [
+            "article:p66"
+          ],
+          "threshold": 5,
+          "op": ">=",
+          "score_direction": "higher",
+          "records": [],
+          "blocked_reason": "Could not identify 18 source-bound patient rows containing both CIWS and post-NAT RECIST labels."
+        },
+        "notes": [
+          "Responder truth is CR/PR/SD=1 and PD=0, as defined in the article.",
+          "The article reports 15 correct classifications among 18 patients."
+        ]
+      },
+      "evaluation": {
+        "matched": false,
+        "metric": "accuracy",
+        "computed": null,
+        "reported": 0.8333333333333334,
+        "difference": null,
+        "n": 0,
+        "errors": [
+          "No source-bound observations: Could not identify 18 source-bound patient rows containing both CIWS and post-NAT RECIST labels.",
+          "Expected 18 analysis units, got 0"
+        ],
+        "rows": [],
+        "expected": {
+          "metric": "accuracy",
+          "value": 0.8333333333333334,
+          "n": 18
+        }
+      },
+      "calls": 2,
+      "tokens": 27110
+    },
+    "tool_loop": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p66",
+              "vision/7a0cc314fe78/R2C1"
+            ],
+            "explanation": "Each row is one patient with a pre-NAT organoid prediction and post-NAT RECIST assessment."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p60",
+              "article:p66"
+            ],
+            "explanation": "Predictions were generated from patient-derived osteosarcoma organoids."
+          },
+          "readout": {
+            "value": "viability",
+            "evidence": [
+              "article:p60"
+            ],
+            "explanation": "Drug effects were measured as standard cell inhibition-rate tiers and aggregated into CIWS."
+          },
+          "direction": {
+            "value": "higher_sensitive",
+            "evidence": [
+              "article:p60",
+              "article:p66"
+            ],
+            "explanation": "Higher CIWS indicates greater sensitivity; CIWS at least 5 predicts SD/response."
+          },
+          "threshold_rule": {
+            "value": "fixed_numeric",
+            "evidence": [
+              "article:p60",
+              "article:p66"
+            ],
+            "explanation": "The fixed binary cutoff was CIWS 5+."
+          },
+          "threshold_timing": {
+            "value": "explicitly_prespecified",
+            "evidence": [
+              "article:p42",
+              "article:p66"
+            ],
+            "explanation": "The CIWS cutoff and RECIST dichotomization were explicitly defined before calculating concordance."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "vision/7a0cc314fe78/R2C1",
+              "vision/7a0cc314fe78/R20C1"
+            ],
+            "explanation": "Table 3 provides individual patient IDs linked to component drug sensitivities, CIWS prediction, and RECIST NAT."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p60",
+              "article:p66"
+            ],
+            "explanation": "CIWS aggregates sensitivity to MAPI: methotrexate, doxorubicin, cisplatin, and ifosfamide."
+          },
+          "n_units": {
+            "value": 18,
+            "evidence": [
+              "article:p66",
+              "vision/7a0cc314fe78/R2C1",
+              "vision/7a0cc314fe78/R20C1"
+            ],
+            "explanation": "There are 18 paired pre-NAT prediction and post-NAT radiologic assessment rows."
+          },
+          "split": {
+            "value": "none",
+            "evidence": [
+              "article:p42",
+              "article:p66"
+            ],
+            "explanation": "The study directly evaluated concordance in this cohort; no held-out split or cross-validation was used."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.8333333333333334,
+          "reported_evidence": [
+            "article:p66"
+          ],
+          "threshold": 5,
+          "op": ">=",
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "OS-01-1",
+              "score": {
+                "calc": "add",
+                "args": [
+                  {
+                    "calc": "add",
+                    "args": [
+                      {
+                        "ref": "vision/7a0cc314fe78/R2C3",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      },
+                      {
+                        "ref": "vision/7a0cc314fe78/R2C4",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "calc": "add",
+                    "args": [
+                      {
+                        "ref": "vision/7a0cc314fe78/R2C5",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      },
+                      {
+                        "ref": "vision/7a0cc314fe78/R2C6",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "truth": {
+                "ref": "vision/7a0cc314fe78/R2C9",
+                "regex": "(CR|PR|SD|PD)",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "OS-02",
+              "score": {
+                "calc": "add",
+                "args": [
+                  {
+                    "calc": "add",
+                    "args": [
+                      {
+                        "ref": "vision/7a0cc314fe78/R3C3",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      },
+                      {
+                        "ref": "vision/7a0cc314fe78/R3C4",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "calc": "add",
+                    "args": [
+                      {
+                        "ref": "vision/7a0cc314fe78/R3C5",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      },
+                      {
+                        "ref": "vision/7a0cc314fe78/R3C6",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "truth": {
+                "ref": "vision/7a0cc314fe78/R3C9",
+                "regex": "(CR|PR|SD|PD)",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "OS-03",
+              "score": {
+                "calc": "add",
+                "args": [
+                  {
+                    "calc": "add",
+                    "args": [
+                      {
+                        "ref": "vision/7a0cc314fe78/R4C3",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      },
+                      {
+                        "ref": "vision/7a0cc314fe78/R4C4",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "calc": "add",
+                    "args": [
+                      {
+                        "ref": "vision/7a0cc314fe78/R4C5",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      },
+                      {
+                        "ref": "vision/7a0cc314fe78/R4C6",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "truth": {
+                "ref": "vision/7a0cc314fe78/R4C9",
+                "regex": "(CR|PR|SD|PD)",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "OS-05",
+              "score": {
+                "calc": "add",
+                "args": [
+                  {
+                    "calc": "add",
+                    "args": [
+                      {
+                        "ref": "vision/7a0cc314fe78/R5C3",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      },
+                      {
+                        "ref": "vision/7a0cc314fe78/R5C4",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "calc": "add",
+                    "args": [
+                      {
+                        "ref": "vision/7a0cc314fe78/R5C5",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      },
+                      {
+                        "ref": "vision/7a0cc314fe78/R5C6",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "truth": {
+                "ref": "vision/7a0cc314fe78/R5C9",
+                "regex": "(CR|PR|SD|PD)",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "OS-07-1",
+              "score": {
+                "calc": "add",
+                "args": [
+                  {
+                    "calc": "add",
+                    "args": [
+                      {
+                        "ref": "vision/7a0cc314fe78/R6C3",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      },
+                      {
+                        "ref": "vision/7a0cc314fe78/R6C4",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "calc": "add",
+                    "args": [
+                      {
+                        "ref": "vision/7a0cc314fe78/R6C5",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      },
+                      {
+                        "ref": "vision/7a0cc314fe78/R6C6",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "truth": {
+                "ref": "vision/7a0cc314fe78/R6C9",
+                "regex": "(CR|PR|SD|PD)",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "OS-08-1",
+              "score": {
+                "calc": "add",
+                "args": [
+                  {
+                    "calc": "add",
+                    "args": [
+                      {
+                        "ref": "vision/7a0cc314fe78/R7C3",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      },
+                      {
+                        "ref": "vision/7a0cc314fe78/R7C4",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "calc": "add",
+                    "args": [
+                      {
+                        "ref": "vision/7a0cc314fe78/R7C5",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      },
+                      {
+                        "ref": "vision/7a0cc314fe78/R7C6",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "truth": {
+                "ref": "vision/7a0cc314fe78/R7C9",
+                "regex": "(CR|PR|SD|PD)",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "OS-09",
+              "score": {
+                "calc": "add",
+                "args": [
+                  {
+                    "calc": "add",
+                    "args": [
+                      {
+                        "ref": "vision/7a0cc314fe78/R8C3",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      },
+                      {
+                        "ref": "vision/7a0cc314fe78/R8C4",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "calc": "add",
+                    "args": [
+                      {
+                        "ref": "vision/7a0cc314fe78/R8C5",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      },
+                      {
+                        "ref": "vision/7a0cc314fe78/R8C6",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "truth": {
+                "ref": "vision/7a0cc314fe78/R8C9",
+                "regex": "(CR|PR|SD|PD)",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "OS-10",
+              "score": {
+                "calc": "add",
+                "args": [
+                  {
+                    "calc": "add",
+                    "args": [
+                      {
+                        "ref": "vision/7a0cc314fe78/R9C3",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      },
+                      {
+                        "ref": "vision/7a0cc314fe78/R9C4",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "calc": "add",
+                    "args": [
+                      {
+                        "ref": "vision/7a0cc314fe78/R9C5",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      },
+                      {
+                        "ref": "vision/7a0cc314fe78/R9C6",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "truth": {
+                "ref": "vision/7a0cc314fe78/R9C9",
+                "regex": "(CR|PR|SD|PD)",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "OS-12-1",
+              "score": {
+                "calc": "add",
+                "args": [
+                  {
+                    "calc": "add",
+                    "args": [
+                      {
+                        "ref": "vision/7a0cc314fe78/R10C3",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      },
+                      {
+                        "ref": "vision/7a0cc314fe78/R10C4",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "calc": "add",
+                    "args": [
+                      {
+                        "ref": "vision/7a0cc314fe78/R10C5",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      },
+                      {
+                        "ref": "vision/7a0cc314fe78/R10C6",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "truth": {
+                "ref": "vision/7a0cc314fe78/R10C9",
+                "regex": "(CR|PR|SD|PD)",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "OS-13-1",
+              "score": {
+                "calc": "add",
+                "args": [
+                  {
+                    "calc": "add",
+                    "args": [
+                      {
+                        "ref": "vision/7a0cc314fe78/R11C3",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      },
+                      {
+                        "ref": "vision/7a0cc314fe78/R11C4",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "calc": "add",
+                    "args": [
+                      {
+                        "ref": "vision/7a0cc314fe78/R11C5",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      },
+                      {
+                        "ref": "vision/7a0cc314fe78/R11C6",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "truth": {
+                "ref": "vision/7a0cc314fe78/R11C9",
+                "regex": "(CR|PR|SD|PD)",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "OS-15",
+              "score": {
+                "calc": "add",
+                "args": [
+                  {
+                    "calc": "add",
+                    "args": [
+                      {
+                        "ref": "vision/7a0cc314fe78/R12C3",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      },
+                      {
+                        "ref": "vision/7a0cc314fe78/R12C4",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "calc": "add",
+                    "args": [
+                      {
+                        "ref": "vision/7a0cc314fe78/R12C5",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      },
+                      {
+                        "ref": "vision/7a0cc314fe78/R12C6",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "truth": {
+                "ref": "vision/7a0cc314fe78/R12C9",
+                "regex": "(CR|PR|SD|PD)",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "OS-16-1",
+              "score": {
+                "calc": "add",
+                "args": [
+                  {
+                    "calc": "add",
+                    "args": [
+                      {
+                        "ref": "vision/7a0cc314fe78/R13C3",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      },
+                      {
+                        "ref": "vision/7a0cc314fe78/R13C4",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "calc": "add",
+                    "args": [
+                      {
+                        "ref": "vision/7a0cc314fe78/R13C5",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      },
+                      {
+                        "ref": "vision/7a0cc314fe78/R13C6",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "truth": {
+                "ref": "vision/7a0cc314fe78/R13C9",
+                "regex": "(CR|PR|SD|PD)",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "OS-17",
+              "score": {
+                "calc": "add",
+                "args": [
+                  {
+                    "calc": "add",
+                    "args": [
+                      {
+                        "ref": "vision/7a0cc314fe78/R14C3",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      },
+                      {
+                        "ref": "vision/7a0cc314fe78/R14C4",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "calc": "add",
+                    "args": [
+                      {
+                        "ref": "vision/7a0cc314fe78/R14C5",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      },
+                      {
+                        "ref": "vision/7a0cc314fe78/R14C6",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "truth": {
+                "ref": "vision/7a0cc314fe78/R14C9",
+                "regex": "(CR|PR|SD|PD)",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "OS-18",
+              "score": {
+                "calc": "add",
+                "args": [
+                  {
+                    "calc": "add",
+                    "args": [
+                      {
+                        "ref": "vision/7a0cc314fe78/R15C3",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      },
+                      {
+                        "ref": "vision/7a0cc314fe78/R15C4",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "calc": "add",
+                    "args": [
+                      {
+                        "ref": "vision/7a0cc314fe78/R15C5",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      },
+                      {
+                        "ref": "vision/7a0cc314fe78/R15C6",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "truth": {
+                "ref": "vision/7a0cc314fe78/R15C9",
+                "regex": "(CR|PR|SD|PD)",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "OS-19",
+              "score": {
+                "calc": "add",
+                "args": [
+                  {
+                    "calc": "add",
+                    "args": [
+                      {
+                        "ref": "vision/7a0cc314fe78/R16C3",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      },
+                      {
+                        "ref": "vision/7a0cc314fe78/R16C4",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "calc": "add",
+                    "args": [
+                      {
+                        "ref": "vision/7a0cc314fe78/R16C5",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      },
+                      {
+                        "ref": "vision/7a0cc314fe78/R16C6",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "truth": {
+                "ref": "vision/7a0cc314fe78/R16C9",
+                "regex": "(CR|PR|SD|PD)",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "OS-20-1",
+              "score": {
+                "calc": "add",
+                "args": [
+                  {
+                    "calc": "add",
+                    "args": [
+                      {
+                        "ref": "vision/7a0cc314fe78/R17C3",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      },
+                      {
+                        "ref": "vision/7a0cc314fe78/R17C4",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "calc": "add",
+                    "args": [
+                      {
+                        "ref": "vision/7a0cc314fe78/R17C5",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      },
+                      {
+                        "ref": "vision/7a0cc314fe78/R17C6",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "truth": {
+                "ref": "vision/7a0cc314fe78/R17C9",
+                "regex": "(CR|PR|SD|PD)",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "OS-21-1",
+              "score": {
+                "calc": "add",
+                "args": [
+                  {
+                    "calc": "add",
+                    "args": [
+                      {
+                        "ref": "vision/7a0cc314fe78/R19C3",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      },
+                      {
+                        "ref": "vision/7a0cc314fe78/R19C4",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "calc": "add",
+                    "args": [
+                      {
+                        "ref": "vision/7a0cc314fe78/R19C5",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      },
+                      {
+                        "ref": "vision/7a0cc314fe78/R19C6",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "truth": {
+                "ref": "vision/7a0cc314fe78/R19C9",
+                "regex": "(CR|PR|SD|PD)",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "OS-22",
+              "score": {
+                "calc": "add",
+                "args": [
+                  {
+                    "calc": "add",
+                    "args": [
+                      {
+                        "ref": "vision/7a0cc314fe78/R20C3",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      },
+                      {
+                        "ref": "vision/7a0cc314fe78/R20C4",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      }
+                    ]
+                  },
+                  {
+                    "calc": "add",
+                    "args": [
+                      {
+                        "ref": "vision/7a0cc314fe78/R20C5",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      },
+                      {
+                        "ref": "vision/7a0cc314fe78/R20C6",
+                        "map": {
+                          "-": 0,
+                          "+": 1,
+                          "++": 2,
+                          "+++": 3
+                        }
+                      }
+                    ]
+                  }
+                ]
+              },
+              "truth": {
+                "ref": "vision/7a0cc314fe78/R20C9",
+                "regex": "(CR|PR|SD|PD)",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            }
+          ],
+          "blocked_reason": null
+        },
+        "notes": [
+          "CIWS is reconstructed from the four MAPI component tiers, excluding investigational carboplatin: -=0, +=1, ++=2, and +++=3.",
+          "RECIST NAT truth is responder CR/PR/SD=1 and nonresponder PD=0.",
+          "The 18 rows contain 15 agreements and 3 disagreements, reproducing 15/18 = 0.8333333333333334."
+        ]
+      },
+      "evaluation": {
+        "matched": true,
+        "metric": "accuracy",
+        "computed": 0.8333333333333334,
+        "reported": 0.8333333333333334,
+        "difference": 0.0,
+        "n": 18,
+        "errors": [],
+        "rows": [
+          {
+            "id": "OS-01-1",
+            "score": 5.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "OS-02",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "OS-03",
+            "score": 6.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "OS-05",
+            "score": 5.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "OS-07-1",
+            "score": 0.0,
+            "truth": 1,
+            "prediction": 0
+          },
+          {
+            "id": "OS-08-1",
+            "score": 8.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "OS-09",
+            "score": 5.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "OS-10",
+            "score": 3.0,
+            "truth": 1,
+            "prediction": 0
+          },
+          {
+            "id": "OS-12-1",
+            "score": 1.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "OS-13-1",
+            "score": 7.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "OS-15",
+            "score": 5.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "OS-16-1",
+            "score": 7.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "OS-17",
+            "score": 2.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "OS-18",
+            "score": 7.0,
+            "truth": 0,
+            "prediction": 1
+          },
+          {
+            "id": "OS-19",
+            "score": 5.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "OS-20-1",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "OS-21-1",
+            "score": 7.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "OS-22",
+            "score": 5.0,
+            "truth": 1,
+            "prediction": 1
+          }
+        ],
+        "expected": {
+          "metric": "accuracy",
+          "value": 0.8333333333333334,
+          "n": 18
+        }
+      },
+      "calls": 6,
+      "tokens": 129436
+    }
+  },
+  "last_contract": {
+    "status": "computed",
+    "fields": {
+      "unit": {
+        "value": "patient",
+        "evidence": [
+          "article:p66",
+          "vision/7a0cc314fe78/R2C1"
+        ],
+        "explanation": "Each row is one patient with a pre-NAT organoid prediction and post-NAT RECIST assessment."
+      },
+      "platform": {
+        "value": "organoid",
+        "evidence": [
+          "article:p60",
+          "article:p66"
+        ],
+        "explanation": "Predictions were generated from patient-derived osteosarcoma organoids."
+      },
+      "readout": {
+        "value": "viability",
+        "evidence": [
+          "article:p60"
+        ],
+        "explanation": "Drug effects were measured as standard cell inhibition-rate tiers and aggregated into CIWS."
+      },
+      "direction": {
+        "value": "higher_sensitive",
+        "evidence": [
+          "article:p60",
+          "article:p66"
+        ],
+        "explanation": "Higher CIWS indicates greater sensitivity; CIWS at least 5 predicts SD/response."
+      },
+      "threshold_rule": {
+        "value": "fixed_numeric",
+        "evidence": [
+          "article:p60",
+          "article:p66"
+        ],
+        "explanation": "The fixed binary cutoff was CIWS 5+."
+      },
+      "threshold_timing": {
+        "value": "explicitly_prespecified",
+        "evidence": [
+          "article:p42",
+          "article:p66"
+        ],
+        "explanation": "The CIWS cutoff and RECIST dichotomization were explicitly defined before calculating concordance."
+      },
+      "patient_mapping": {
+        "value": "individual_available",
+        "evidence": [
+          "vision/7a0cc314fe78/R2C1",
+          "vision/7a0cc314fe78/R20C1"
+        ],
+        "explanation": "Table 3 provides individual patient IDs linked to component drug sensitivities, CIWS prediction, and RECIST NAT."
+      },
+      "regimen_match": {
+        "value": "matched",
+        "evidence": [
+          "article:p60",
+          "article:p66"
+        ],
+        "explanation": "CIWS aggregates sensitivity to MAPI: methotrexate, doxorubicin, cisplatin, and ifosfamide."
+      },
+      "n_units": {
+        "value": 18,
+        "evidence": [
+          "article:p66",
+          "vision/7a0cc314fe78/R2C1",
+          "vision/7a0cc314fe78/R20C1"
+        ],
+        "explanation": "There are 18 paired pre-NAT prediction and post-NAT radiologic assessment rows."
+      },
+      "split": {
+        "value": "none",
+        "evidence": [
+          "article:p42",
+          "article:p66"
+        ],
+        "explanation": "The study directly evaluated concordance in this cohort; no held-out split or cross-validation was used."
+      }
+    },
+    "headline": {
+      "metric": "accuracy",
+      "reported": 0.8333333333333334,
+      "reported_evidence": [
+        "article:p66"
+      ],
+      "threshold": 5,
+      "op": ">=",
+      "score_direction": "higher",
+      "records": [
+        {
+          "id": "OS-01-1",
+          "score": {
+            "calc": "add",
+            "args": [
+              {
+                "calc": "add",
+                "args": [
+                  {
+                    "ref": "vision/7a0cc314fe78/R2C3",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  },
+                  {
+                    "ref": "vision/7a0cc314fe78/R2C4",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  }
+                ]
+              },
+              {
+                "calc": "add",
+                "args": [
+                  {
+                    "ref": "vision/7a0cc314fe78/R2C5",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  },
+                  {
+                    "ref": "vision/7a0cc314fe78/R2C6",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "truth": {
+            "ref": "vision/7a0cc314fe78/R2C9",
+            "regex": "(CR|PR|SD|PD)",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "OS-02",
+          "score": {
+            "calc": "add",
+            "args": [
+              {
+                "calc": "add",
+                "args": [
+                  {
+                    "ref": "vision/7a0cc314fe78/R3C3",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  },
+                  {
+                    "ref": "vision/7a0cc314fe78/R3C4",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  }
+                ]
+              },
+              {
+                "calc": "add",
+                "args": [
+                  {
+                    "ref": "vision/7a0cc314fe78/R3C5",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  },
+                  {
+                    "ref": "vision/7a0cc314fe78/R3C6",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "truth": {
+            "ref": "vision/7a0cc314fe78/R3C9",
+            "regex": "(CR|PR|SD|PD)",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "OS-03",
+          "score": {
+            "calc": "add",
+            "args": [
+              {
+                "calc": "add",
+                "args": [
+                  {
+                    "ref": "vision/7a0cc314fe78/R4C3",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  },
+                  {
+                    "ref": "vision/7a0cc314fe78/R4C4",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  }
+                ]
+              },
+              {
+                "calc": "add",
+                "args": [
+                  {
+                    "ref": "vision/7a0cc314fe78/R4C5",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  },
+                  {
+                    "ref": "vision/7a0cc314fe78/R4C6",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "truth": {
+            "ref": "vision/7a0cc314fe78/R4C9",
+            "regex": "(CR|PR|SD|PD)",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "OS-05",
+          "score": {
+            "calc": "add",
+            "args": [
+              {
+                "calc": "add",
+                "args": [
+                  {
+                    "ref": "vision/7a0cc314fe78/R5C3",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  },
+                  {
+                    "ref": "vision/7a0cc314fe78/R5C4",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  }
+                ]
+              },
+              {
+                "calc": "add",
+                "args": [
+                  {
+                    "ref": "vision/7a0cc314fe78/R5C5",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  },
+                  {
+                    "ref": "vision/7a0cc314fe78/R5C6",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "truth": {
+            "ref": "vision/7a0cc314fe78/R5C9",
+            "regex": "(CR|PR|SD|PD)",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "OS-07-1",
+          "score": {
+            "calc": "add",
+            "args": [
+              {
+                "calc": "add",
+                "args": [
+                  {
+                    "ref": "vision/7a0cc314fe78/R6C3",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  },
+                  {
+                    "ref": "vision/7a0cc314fe78/R6C4",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  }
+                ]
+              },
+              {
+                "calc": "add",
+                "args": [
+                  {
+                    "ref": "vision/7a0cc314fe78/R6C5",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  },
+                  {
+                    "ref": "vision/7a0cc314fe78/R6C6",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "truth": {
+            "ref": "vision/7a0cc314fe78/R6C9",
+            "regex": "(CR|PR|SD|PD)",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "OS-08-1",
+          "score": {
+            "calc": "add",
+            "args": [
+              {
+                "calc": "add",
+                "args": [
+                  {
+                    "ref": "vision/7a0cc314fe78/R7C3",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  },
+                  {
+                    "ref": "vision/7a0cc314fe78/R7C4",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  }
+                ]
+              },
+              {
+                "calc": "add",
+                "args": [
+                  {
+                    "ref": "vision/7a0cc314fe78/R7C5",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  },
+                  {
+                    "ref": "vision/7a0cc314fe78/R7C6",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "truth": {
+            "ref": "vision/7a0cc314fe78/R7C9",
+            "regex": "(CR|PR|SD|PD)",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "OS-09",
+          "score": {
+            "calc": "add",
+            "args": [
+              {
+                "calc": "add",
+                "args": [
+                  {
+                    "ref": "vision/7a0cc314fe78/R8C3",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  },
+                  {
+                    "ref": "vision/7a0cc314fe78/R8C4",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  }
+                ]
+              },
+              {
+                "calc": "add",
+                "args": [
+                  {
+                    "ref": "vision/7a0cc314fe78/R8C5",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  },
+                  {
+                    "ref": "vision/7a0cc314fe78/R8C6",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "truth": {
+            "ref": "vision/7a0cc314fe78/R8C9",
+            "regex": "(CR|PR|SD|PD)",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "OS-10",
+          "score": {
+            "calc": "add",
+            "args": [
+              {
+                "calc": "add",
+                "args": [
+                  {
+                    "ref": "vision/7a0cc314fe78/R9C3",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  },
+                  {
+                    "ref": "vision/7a0cc314fe78/R9C4",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  }
+                ]
+              },
+              {
+                "calc": "add",
+                "args": [
+                  {
+                    "ref": "vision/7a0cc314fe78/R9C5",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  },
+                  {
+                    "ref": "vision/7a0cc314fe78/R9C6",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "truth": {
+            "ref": "vision/7a0cc314fe78/R9C9",
+            "regex": "(CR|PR|SD|PD)",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "OS-12-1",
+          "score": {
+            "calc": "add",
+            "args": [
+              {
+                "calc": "add",
+                "args": [
+                  {
+                    "ref": "vision/7a0cc314fe78/R10C3",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  },
+                  {
+                    "ref": "vision/7a0cc314fe78/R10C4",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  }
+                ]
+              },
+              {
+                "calc": "add",
+                "args": [
+                  {
+                    "ref": "vision/7a0cc314fe78/R10C5",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  },
+                  {
+                    "ref": "vision/7a0cc314fe78/R10C6",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "truth": {
+            "ref": "vision/7a0cc314fe78/R10C9",
+            "regex": "(CR|PR|SD|PD)",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "OS-13-1",
+          "score": {
+            "calc": "add",
+            "args": [
+              {
+                "calc": "add",
+                "args": [
+                  {
+                    "ref": "vision/7a0cc314fe78/R11C3",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  },
+                  {
+                    "ref": "vision/7a0cc314fe78/R11C4",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  }
+                ]
+              },
+              {
+                "calc": "add",
+                "args": [
+                  {
+                    "ref": "vision/7a0cc314fe78/R11C5",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  },
+                  {
+                    "ref": "vision/7a0cc314fe78/R11C6",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "truth": {
+            "ref": "vision/7a0cc314fe78/R11C9",
+            "regex": "(CR|PR|SD|PD)",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "OS-15",
+          "score": {
+            "calc": "add",
+            "args": [
+              {
+                "calc": "add",
+                "args": [
+                  {
+                    "ref": "vision/7a0cc314fe78/R12C3",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  },
+                  {
+                    "ref": "vision/7a0cc314fe78/R12C4",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  }
+                ]
+              },
+              {
+                "calc": "add",
+                "args": [
+                  {
+                    "ref": "vision/7a0cc314fe78/R12C5",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  },
+                  {
+                    "ref": "vision/7a0cc314fe78/R12C6",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "truth": {
+            "ref": "vision/7a0cc314fe78/R12C9",
+            "regex": "(CR|PR|SD|PD)",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "OS-16-1",
+          "score": {
+            "calc": "add",
+            "args": [
+              {
+                "calc": "add",
+                "args": [
+                  {
+                    "ref": "vision/7a0cc314fe78/R13C3",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  },
+                  {
+                    "ref": "vision/7a0cc314fe78/R13C4",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  }
+                ]
+              },
+              {
+                "calc": "add",
+                "args": [
+                  {
+                    "ref": "vision/7a0cc314fe78/R13C5",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  },
+                  {
+                    "ref": "vision/7a0cc314fe78/R13C6",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "truth": {
+            "ref": "vision/7a0cc314fe78/R13C9",
+            "regex": "(CR|PR|SD|PD)",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "OS-17",
+          "score": {
+            "calc": "add",
+            "args": [
+              {
+                "calc": "add",
+                "args": [
+                  {
+                    "ref": "vision/7a0cc314fe78/R14C3",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  },
+                  {
+                    "ref": "vision/7a0cc314fe78/R14C4",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  }
+                ]
+              },
+              {
+                "calc": "add",
+                "args": [
+                  {
+                    "ref": "vision/7a0cc314fe78/R14C5",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  },
+                  {
+                    "ref": "vision/7a0cc314fe78/R14C6",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "truth": {
+            "ref": "vision/7a0cc314fe78/R14C9",
+            "regex": "(CR|PR|SD|PD)",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "OS-18",
+          "score": {
+            "calc": "add",
+            "args": [
+              {
+                "calc": "add",
+                "args": [
+                  {
+                    "ref": "vision/7a0cc314fe78/R15C3",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  },
+                  {
+                    "ref": "vision/7a0cc314fe78/R15C4",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  }
+                ]
+              },
+              {
+                "calc": "add",
+                "args": [
+                  {
+                    "ref": "vision/7a0cc314fe78/R15C5",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  },
+                  {
+                    "ref": "vision/7a0cc314fe78/R15C6",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "truth": {
+            "ref": "vision/7a0cc314fe78/R15C9",
+            "regex": "(CR|PR|SD|PD)",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "OS-19",
+          "score": {
+            "calc": "add",
+            "args": [
+              {
+                "calc": "add",
+                "args": [
+                  {
+                    "ref": "vision/7a0cc314fe78/R16C3",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  },
+                  {
+                    "ref": "vision/7a0cc314fe78/R16C4",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  }
+                ]
+              },
+              {
+                "calc": "add",
+                "args": [
+                  {
+                    "ref": "vision/7a0cc314fe78/R16C5",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  },
+                  {
+                    "ref": "vision/7a0cc314fe78/R16C6",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "truth": {
+            "ref": "vision/7a0cc314fe78/R16C9",
+            "regex": "(CR|PR|SD|PD)",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "OS-20-1",
+          "score": {
+            "calc": "add",
+            "args": [
+              {
+                "calc": "add",
+                "args": [
+                  {
+                    "ref": "vision/7a0cc314fe78/R17C3",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  },
+                  {
+                    "ref": "vision/7a0cc314fe78/R17C4",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  }
+                ]
+              },
+              {
+                "calc": "add",
+                "args": [
+                  {
+                    "ref": "vision/7a0cc314fe78/R17C5",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  },
+                  {
+                    "ref": "vision/7a0cc314fe78/R17C6",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "truth": {
+            "ref": "vision/7a0cc314fe78/R17C9",
+            "regex": "(CR|PR|SD|PD)",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "OS-21-1",
+          "score": {
+            "calc": "add",
+            "args": [
+              {
+                "calc": "add",
+                "args": [
+                  {
+                    "ref": "vision/7a0cc314fe78/R19C3",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  },
+                  {
+                    "ref": "vision/7a0cc314fe78/R19C4",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  }
+                ]
+              },
+              {
+                "calc": "add",
+                "args": [
+                  {
+                    "ref": "vision/7a0cc314fe78/R19C5",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  },
+                  {
+                    "ref": "vision/7a0cc314fe78/R19C6",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "truth": {
+            "ref": "vision/7a0cc314fe78/R19C9",
+            "regex": "(CR|PR|SD|PD)",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "OS-22",
+          "score": {
+            "calc": "add",
+            "args": [
+              {
+                "calc": "add",
+                "args": [
+                  {
+                    "ref": "vision/7a0cc314fe78/R20C3",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  },
+                  {
+                    "ref": "vision/7a0cc314fe78/R20C4",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  }
+                ]
+              },
+              {
+                "calc": "add",
+                "args": [
+                  {
+                    "ref": "vision/7a0cc314fe78/R20C5",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  },
+                  {
+                    "ref": "vision/7a0cc314fe78/R20C6",
+                    "map": {
+                      "-": 0,
+                      "+": 1,
+                      "++": 2,
+                      "+++": 3
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "truth": {
+            "ref": "vision/7a0cc314fe78/R20C9",
+            "regex": "(CR|PR|SD|PD)",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        }
+      ],
+      "blocked_reason": null
+    },
+    "notes": [
+      "CIWS is reconstructed from the four MAPI component tiers, excluding investigational carboplatin: -=0, +=1, ++=2, and +++=3.",
+      "RECIST NAT truth is responder CR/PR/SD=1 and nonresponder PD=0.",
+      "The 18 rows contain 15 agreements and 3 disagreements, reproducing 15/18 = 0.8333333333333334."
+    ]
+  },
+  "last_evaluation": {
+    "matched": true,
+    "metric": "accuracy",
+    "computed": 0.8333333333333334,
+    "reported": 0.8333333333333334,
+    "difference": 0.0,
+    "n": 18,
+    "errors": [],
+    "rows": [
+      {
+        "id": "OS-01-1",
+        "score": 5.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "OS-02",
+        "score": 0.0,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "OS-03",
+        "score": 6.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "OS-05",
+        "score": 5.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "OS-07-1",
+        "score": 0.0,
+        "truth": 1,
+        "prediction": 0
+      },
+      {
+        "id": "OS-08-1",
+        "score": 8.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "OS-09",
+        "score": 5.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "OS-10",
+        "score": 3.0,
+        "truth": 1,
+        "prediction": 0
+      },
+      {
+        "id": "OS-12-1",
+        "score": 1.0,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "OS-13-1",
+        "score": 7.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "OS-15",
+        "score": 5.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "OS-16-1",
+        "score": 7.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "OS-17",
+        "score": 2.0,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "OS-18",
+        "score": 7.0,
+        "truth": 0,
+        "prediction": 1
+      },
+      {
+        "id": "OS-19",
+        "score": 5.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "OS-20-1",
+        "score": 0.0,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "OS-21-1",
+        "score": 7.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "OS-22",
+        "score": 5.0,
+        "truth": 1,
+        "prediction": 1
+      }
+    ],
+    "expected": {
+      "metric": "accuracy",
+      "value": 0.8333333333333334,
+      "n": 18
+    }
+  }
+}

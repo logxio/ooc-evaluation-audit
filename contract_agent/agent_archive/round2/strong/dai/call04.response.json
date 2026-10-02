@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_gffu4xhwrjznbk3oxmfx7hp4",
+        "type": "function",
+        "function": {
+          "name": "python",
+          "arguments": "{\"code\": \"rows=get_rows('article.xml','Table 1')\\nfor i,r in enumerate(rows,1): print(i,repr(r))\"}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "Need clinical outcomes. Search article for relevant table.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 87,
+    "prompt_tokens": 35019,
+    "total_tokens": 35106,
+    "prompt_tokens_details": {
+      "cached_tokens": 23352
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 28
+    }
+  }
+}

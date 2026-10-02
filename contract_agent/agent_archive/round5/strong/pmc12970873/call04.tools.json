@@ -1,0 +1,558 @@
+[
+  {
+    "name": "finish",
+    "arguments": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p26"
+            ],
+            "explanation": "Concordance is evaluated for individual GC patients with matched PDOs."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p26",
+              "article:p27"
+            ],
+            "explanation": "Drug responses were measured in patient-derived gastric cancer organoids."
+          },
+          "readout": {
+            "value": "viability",
+            "evidence": [
+              "article:p13",
+              "article:p15"
+            ],
+            "explanation": "MTS viability was used to calculate tumor inhibition rate and classify drug sensitivity."
+          },
+          "direction": {
+            "value": "mixed",
+            "evidence": [
+              "article:p15"
+            ],
+            "explanation": "Sensitivity combined higher inhibition rate with a lower IC50-to-steady-state-concentration ranking."
+          },
+          "threshold_rule": {
+            "value": "categorical",
+            "evidence": [
+              "article:p15",
+              "article:p26"
+            ],
+            "explanation": "The published concordance analysis uses PDO sensitivity/resistance calls rather than a newly fitted binary score."
+          },
+          "threshold_timing": {
+            "value": "explicitly_prespecified",
+            "evidence": [
+              "article:p15"
+            ],
+            "explanation": "The IR >= 50% criterion, combined with the sensitivity-ranking rule, is stated in Methods."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "pone.0339416.s001.xlsx/Fig 5C/A4",
+              "pone.0339416.s002.pdf/page4/R5C1"
+            ],
+            "explanation": "Patient IDs link individual PDO assay results to individual clinical outcomes."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p26",
+              "article:p27"
+            ],
+            "explanation": "PDO responses to regimen components were compared with outcomes after the corresponding clinical chemotherapy."
+          },
+          "n_units": {
+            "value": 11,
+            "evidence": [
+              "article:p26"
+            ],
+            "explanation": "The published concordance analysis includes 11 treated, evaluable matched patient cases."
+          },
+          "split": {
+            "value": "none",
+            "evidence": [
+              "article:p26"
+            ],
+            "explanation": "This is a direct same-cohort concordance evaluation, not a trained or held-out prediction model."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.909,
+          "reported_evidence": [
+            "article:p26",
+            "article:p2",
+            "article:p32"
+          ],
+          "threshold": null,
+          "op": "==",
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "GC-007",
+              "score": {
+                "ref": "pone.0339416.s002.pdf/page4/R5C8",
+                "map": {
+                  "Resistance": 0
+                }
+              },
+              "truth": {
+                "ref": "pone.0339416.s002.pdf/page4/R5C10",
+                "map": {
+                  "NO": 1
+                }
+              }
+            },
+            {
+              "id": "GC-010",
+              "score": {
+                "ref": "pone.0339416.s002.pdf/page4/R6C8",
+                "map": {
+                  "Sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "pone.0339416.s002.pdf/page4/R6C10",
+                "map": {
+                  "NO": 1
+                }
+              }
+            },
+            {
+              "id": "GC-011",
+              "score": {
+                "ref": "pone.0339416.s002.pdf/page4/R7C8",
+                "map": {
+                  "Sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "pone.0339416.s002.pdf/page4/R7C10",
+                "map": {
+                  "NO": 1
+                }
+              }
+            },
+            {
+              "id": "GC-019",
+              "score": {
+                "ref": "pone.0339416.s002.pdf/page4/R8C8",
+                "map": {
+                  "Sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "pone.0339416.s002.pdf/page4/R8C10",
+                "map": {
+                  "NO": 1
+                }
+              }
+            },
+            {
+              "id": "GC-021",
+              "score": {
+                "ref": "pone.0339416.s002.pdf/page4/R9C8",
+                "map": {
+                  "Sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "pone.0339416.s002.pdf/page4/R9C10",
+                "map": {
+                  "NO": 1
+                }
+              }
+            },
+            {
+              "id": "GC-023",
+              "score": {
+                "ref": "pone.0339416.s002.pdf/page4/R10C8",
+                "map": {
+                  "Sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "pone.0339416.s002.pdf/page4/R10C10",
+                "map": {
+                  "NO": 1
+                }
+              }
+            },
+            {
+              "id": "GC-025",
+              "score": {
+                "ref": "pone.0339416.s002.pdf/page4/R11C7",
+                "map": {
+                  "Resistance": 0
+                }
+              },
+              "truth": {
+                "ref": "pone.0339416.s002.pdf/page4/R11C9",
+                "map": {
+                  "Recurrence": 0
+                }
+              }
+            },
+            {
+              "id": "GC-026",
+              "score": {
+                "ref": "pone.0339416.s002.pdf/page4/R13C8",
+                "map": {
+                  "Resistance": 0
+                }
+              },
+              "truth": {
+                "ref": "pone.0339416.s002.pdf/page4/R13C10",
+                "map": {
+                  "Recurrence": 0
+                }
+              }
+            },
+            {
+              "id": "GC-012",
+              "score": {
+                "ref": "pone.0339416.s002.pdf/page4/R14C10",
+                "map": {
+                  "Sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "article:p29",
+                "regex": "responded well clinically",
+                "map": {
+                  "responded well clinically": 1
+                }
+              }
+            },
+            {
+              "id": "GC-014",
+              "score": {
+                "ref": "pone.0339416.s002.pdf/page4/R15C10",
+                "map": {
+                  "Resistance": 0
+                }
+              },
+              "truth": {
+                "ref": "pone.0339416.s002.pdf/page4/R15C12",
+                "map": {
+                  "Progressive": 0
+                }
+              }
+            },
+            {
+              "id": "GC-008",
+              "score": {
+                "ref": "pone.0339416.s002.pdf/page4/R17C10",
+                "map": {
+                  "Resistance": 0
+                }
+              },
+              "truth": {
+                "ref": "pone.0339416.s002.pdf/page4/R17C12",
+                "map": {
+                  "Progressive": 0
+                }
+              }
+            }
+          ],
+          "blocked_reason": null
+        },
+        "notes": [
+          "GC-001 and GC-004 are excluded because S4 Table records no postoperative therapy; the published accuracy denominator is 11.",
+          "GC-012 had later recurrence at 24 months, but article:p29 explicitly states that the patient responded well clinically and achieved a 24-month PFS; that response statement is used as the truth label for the published concordance endpoint.",
+          "The 11 records give 10 agreements and 1 disagreement (GC-007), reproducing 10/11 = 0.909 accuracy."
+        ]
+      }
+    },
+    "output": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p26"
+            ],
+            "explanation": "Concordance is evaluated for individual GC patients with matched PDOs."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p26",
+              "article:p27"
+            ],
+            "explanation": "Drug responses were measured in patient-derived gastric cancer organoids."
+          },
+          "readout": {
+            "value": "viability",
+            "evidence": [
+              "article:p13",
+              "article:p15"
+            ],
+            "explanation": "MTS viability was used to calculate tumor inhibition rate and classify drug sensitivity."
+          },
+          "direction": {
+            "value": "mixed",
+            "evidence": [
+              "article:p15"
+            ],
+            "explanation": "Sensitivity combined higher inhibition rate with a lower IC50-to-steady-state-concentration ranking."
+          },
+          "threshold_rule": {
+            "value": "categorical",
+            "evidence": [
+              "article:p15",
+              "article:p26"
+            ],
+            "explanation": "The published concordance analysis uses PDO sensitivity/resistance calls rather than a newly fitted binary score."
+          },
+          "threshold_timing": {
+            "value": "explicitly_prespecified",
+            "evidence": [
+              "article:p15"
+            ],
+            "explanation": "The IR >= 50% criterion, combined with the sensitivity-ranking rule, is stated in Methods."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "pone.0339416.s001.xlsx/Fig 5C/A4",
+              "pone.0339416.s002.pdf/page4/R5C1"
+            ],
+            "explanation": "Patient IDs link individual PDO assay results to individual clinical outcomes."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p26",
+              "article:p27"
+            ],
+            "explanation": "PDO responses to regimen components were compared with outcomes after the corresponding clinical chemotherapy."
+          },
+          "n_units": {
+            "value": 11,
+            "evidence": [
+              "article:p26"
+            ],
+            "explanation": "The published concordance analysis includes 11 treated, evaluable matched patient cases."
+          },
+          "split": {
+            "value": "none",
+            "evidence": [
+              "article:p26"
+            ],
+            "explanation": "This is a direct same-cohort concordance evaluation, not a trained or held-out prediction model."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.909,
+          "reported_evidence": [
+            "article:p26",
+            "article:p2",
+            "article:p32"
+          ],
+          "threshold": null,
+          "op": "==",
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "GC-007",
+              "score": {
+                "ref": "pone.0339416.s002.pdf/page4/R5C8",
+                "map": {
+                  "Resistance": 0
+                }
+              },
+              "truth": {
+                "ref": "pone.0339416.s002.pdf/page4/R5C10",
+                "map": {
+                  "NO": 1
+                }
+              }
+            },
+            {
+              "id": "GC-010",
+              "score": {
+                "ref": "pone.0339416.s002.pdf/page4/R6C8",
+                "map": {
+                  "Sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "pone.0339416.s002.pdf/page4/R6C10",
+                "map": {
+                  "NO": 1
+                }
+              }
+            },
+            {
+              "id": "GC-011",
+              "score": {
+                "ref": "pone.0339416.s002.pdf/page4/R7C8",
+                "map": {
+                  "Sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "pone.0339416.s002.pdf/page4/R7C10",
+                "map": {
+                  "NO": 1
+                }
+              }
+            },
+            {
+              "id": "GC-019",
+              "score": {
+                "ref": "pone.0339416.s002.pdf/page4/R8C8",
+                "map": {
+                  "Sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "pone.0339416.s002.pdf/page4/R8C10",
+                "map": {
+                  "NO": 1
+                }
+              }
+            },
+            {
+              "id": "GC-021",
+              "score": {
+                "ref": "pone.0339416.s002.pdf/page4/R9C8",
+                "map": {
+                  "Sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "pone.0339416.s002.pdf/page4/R9C10",
+                "map": {
+                  "NO": 1
+                }
+              }
+            },
+            {
+              "id": "GC-023",
+              "score": {
+                "ref": "pone.0339416.s002.pdf/page4/R10C8",
+                "map": {
+                  "Sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "pone.0339416.s002.pdf/page4/R10C10",
+                "map": {
+                  "NO": 1
+                }
+              }
+            },
+            {
+              "id": "GC-025",
+              "score": {
+                "ref": "pone.0339416.s002.pdf/page4/R11C7",
+                "map": {
+                  "Resistance": 0
+                }
+              },
+              "truth": {
+                "ref": "pone.0339416.s002.pdf/page4/R11C9",
+                "map": {
+                  "Recurrence": 0
+                }
+              }
+            },
+            {
+              "id": "GC-026",
+              "score": {
+                "ref": "pone.0339416.s002.pdf/page4/R13C8",
+                "map": {
+                  "Resistance": 0
+                }
+              },
+              "truth": {
+                "ref": "pone.0339416.s002.pdf/page4/R13C10",
+                "map": {
+                  "Recurrence": 0
+                }
+              }
+            },
+            {
+              "id": "GC-012",
+              "score": {
+                "ref": "pone.0339416.s002.pdf/page4/R14C10",
+                "map": {
+                  "Sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "article:p29",
+                "regex": "responded well clinically",
+                "map": {
+                  "responded well clinically": 1
+                }
+              }
+            },
+            {
+              "id": "GC-014",
+              "score": {
+                "ref": "pone.0339416.s002.pdf/page4/R15C10",
+                "map": {
+                  "Resistance": 0
+                }
+              },
+              "truth": {
+                "ref": "pone.0339416.s002.pdf/page4/R15C12",
+                "map": {
+                  "Progressive": 0
+                }
+              }
+            },
+            {
+              "id": "GC-008",
+              "score": {
+                "ref": "pone.0339416.s002.pdf/page4/R17C10",
+                "map": {
+                  "Resistance": 0
+                }
+              },
+              "truth": {
+                "ref": "pone.0339416.s002.pdf/page4/R17C12",
+                "map": {
+                  "Progressive": 0
+                }
+              }
+            }
+          ],
+          "blocked_reason": null
+        },
+        "notes": [
+          "GC-001 and GC-004 are excluded because S4 Table records no postoperative therapy; the published accuracy denominator is 11.",
+          "GC-012 had later recurrence at 24 months, but article:p29 explicitly states that the patient responded well clinically and achieved a 24-month PFS; that response statement is used as the truth label for the published concordance endpoint.",
+          "The 11 records give 10 agreements and 1 disagreement (GC-007), reproducing 10/11 = 0.909 accuracy."
+        ]
+      },
+      "execution_feedback": {
+        "matched": false,
+        "metric": "accuracy",
+        "computed": null,
+        "reported": 0.909,
+        "difference": null,
+        "n": 10,
+        "errors": [
+          "Pattern 'responded well clinically' did not match article:p29: 'Among the stage IV patients, GC-012 was diagnosed with GC and right ovarian metastasis and received neoadjuvant SOX combined with sintilimab, followed by total gastrectomy and right adnexectomy. According to the Mandard’s classification system (tumor regression grade, TRG), the pathological response to neoadjuvant therapy was excellent (TRG 1), indicating only microscopic residual disease (tumor foci <0.1 cm in diameter). Postoperatively, the patient received an additional 14 cycles of treatment and achieved a PFS of 24 months, after which recurrence was detected in the left adnexa. Consistent with the clinical efficiency, the matched PDOs were sensitive to both 5-FU (IR = 50.99%), and oxaliplatin (IR = 53.09%) (Figs 5E, 5F, 5K and 5L and S4 Table in S1 File). Patient GC-008, diagnosed with advanced GC, received three cycles of neoadjuvant therapy with SOX and camrelizumab followed by radical surgery, but subsequently developed liver metastases (PFS1: 123 days). Subsequent treatments included paclitaxel and capecitabine, followed by irinotecan combined with apatinib and tislelizumab, each yielding short PFS (PFS2: 130 days, PFS3: 80 days). Liver metastases were biopsied and corresponding PDOs were established for drug screening. Consistent with the clinical course, PDOs-based in vitro drug sensitivity testing showed complete resistance to 5-FU (IR = 29.26%), oxaliplatin (IR = 31.33%), SN-38 (IR = 28.26%), and paclitaxel (IR = 28.39%) (S8A Fig in S2 File and S4 Table in S1 File). Additionally, patient GC-014, who received SOX combined with sintilimab as first-line treatment, achieved a PFS of only 62 days. Corresponding PDOs demonstrated resistance to 5-FU (IR = 19.97%), oxaliplatin (IR = 25.80%) (S8B Fig in S2 File and S4 Table in S1 File).'",
+          "Expected 11 analysis units, got 10"
+        ],
+        "expected": {
+          "metric": "accuracy",
+          "value": 0.909,
+          "n": 11
+        }
+      }
+    }
+  }
+]

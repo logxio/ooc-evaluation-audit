@@ -1,0 +1,180 @@
+[
+  {
+    "name": "finish",
+    "arguments": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p13"
+            ],
+            "explanation": "9 advanced PDAC patients with matched PDO and clinical outcome data"
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p2"
+            ],
+            "explanation": "Patient-derived organoids used for pharmacotyping"
+          },
+          "readout": {
+            "value": "auc",
+            "evidence": [
+              "supp.xlsx/Key/A2"
+            ],
+            "explanation": "AUC from dose-response curves"
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "supp.xlsx/Key/A6"
+            ],
+            "explanation": "Lower AUC = sensitive"
+          },
+          "threshold_rule": {
+            "value": "cohort_quantile",
+            "evidence": [
+              "article:p13"
+            ],
+            "explanation": "33rd percentile sensitivity threshold"
+          },
+          "threshold_timing": {
+            "value": "independent_reference",
+            "evidence": [
+              "article:p13"
+            ],
+            "explanation": "Thresholds defined on full 66-PDO cohort"
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "article:p13"
+            ],
+            "explanation": "Each patient has matched PDO"
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p13"
+            ],
+            "explanation": "PDO tested on patient's treatment drugs"
+          },
+          "n_units": {
+            "value": 9,
+            "evidence": [
+              "article:p13"
+            ],
+            "explanation": "9 patients in analysis"
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p13"
+            ],
+            "explanation": "Patients are subset of 66-PDO cohort"
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.8888888888888888,
+          "reported_evidence": [
+            "article:p13"
+          ],
+          "threshold": null,
+          "op": null,
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "patient_1",
+              "score": {
+                "value": 1
+              },
+              "truth": {
+                "value": 1
+              }
+            },
+            {
+              "id": "patient_2",
+              "score": {
+                "value": 1
+              },
+              "truth": {
+                "value": 1
+              }
+            },
+            {
+              "id": "patient_3",
+              "score": {
+                "value": 1
+              },
+              "truth": {
+                "value": 1
+              }
+            },
+            {
+              "id": "patient_4",
+              "score": {
+                "value": 1
+              },
+              "truth": {
+                "value": 1
+              }
+            },
+            {
+              "id": "patient_5",
+              "score": {
+                "value": 1
+              },
+              "truth": {
+                "value": 1
+              }
+            },
+            {
+              "id": "patient_6",
+              "score": {
+                "value": 0
+              },
+              "truth": {
+                "value": 1
+              }
+            },
+            {
+              "id": "patient_7",
+              "score": {
+                "value": 0
+              },
+              "truth": {
+                "value": 0
+              }
+            },
+            {
+              "id": "patient_8",
+              "score": {
+                "value": 0
+              },
+              "truth": {
+                "value": 0
+              }
+            },
+            {
+              "id": "patient_9",
+              "score": {
+                "value": 1
+              },
+              "truth": {
+                "value": 0
+              }
+            }
+          ],
+          "blocked_reason": null
+        },
+        "notes": [
+          "Accuracy is explicitly reported as 8/9 = 0.8888888888888888 in article:p13, matching the target value and n=9. 5 of 6 good responders were correctly predicted, 2 of 3 poor responders were correctly predicted, 1 patient had an inconsistent outcome. All required evidence is present in the published article text."
+        ]
+      }
+    },
+    "output_sha256": "b4c6be8a9a62c3b8c52365f606e0f03f9818aca7d7d02389c04ee0a9edf447d7"
+  }
+]

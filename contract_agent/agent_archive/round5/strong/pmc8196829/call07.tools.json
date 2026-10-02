@@ -1,0 +1,721 @@
+[
+  {
+    "name": "finish",
+    "arguments": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient_regimen",
+            "evidence": [
+              "article:p20",
+              "vision/1613b3429c81/R6C1"
+            ],
+            "explanation": "Each observation is a treatment-naive patient's first-line regimen response compared with the PDO-based regimen prediction."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p20",
+              "article:p45"
+            ],
+            "explanation": "Predictions were generated from patient-derived pancreatic cancer organoid pharmacotyping."
+          },
+          "readout": {
+            "value": "auc",
+            "evidence": [
+              "article:p18",
+              "article:p45"
+            ],
+            "explanation": "Single-agent viability dose-response AUCs were classified by Jenks Natural Breaks and combined into a regimen prediction score."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p18",
+              "vision/1613b3429c81/R7C1"
+            ],
+            "explanation": "Lower AUC indicated greater drug sensitivity; in Figure 3, high responder scores 1, intermediate 2, and low responder 3."
+          },
+          "threshold_rule": {
+            "value": "fixed_numeric",
+            "evidence": [
+              "vision/1613b3429c81/R7C1"
+            ],
+            "explanation": "The figure's prediction rule treats scores <=2 as predicted response/tumor control and scores >2 as no response/progression."
+          },
+          "threshold_timing": {
+            "value": "explicitly_prespecified",
+            "evidence": [
+              "article:p18",
+              "article:p45",
+              "vision/1613b3429c81/R7C1"
+            ],
+            "explanation": "The Jenks responder categories and resulting prediction-score rule were defined before comparing the predictions with patient responses."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "vision/1613b3429c81/R6C2",
+              "vision/1613b3429c81/R7C2",
+              "vision/1613b3429c81/R8C2"
+            ],
+            "explanation": "Figure 3B provides individual PDO identifiers, prediction scores, clinical responses, and correctness flags."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p20",
+              "vision/1613b3429c81/R1C2",
+              "vision/1613b3429c81/R3C2"
+            ],
+            "explanation": "The assay prediction was compared with the response to the regimen actually administered: FOLFIRINOX or gemcitabine/nab-paclitaxel first-line therapy."
+          },
+          "n_units": {
+            "value": 11,
+            "evidence": [
+              "article:p20",
+              "vision/1613b3429c81/R6C2"
+            ],
+            "explanation": "There are 11 treatment-naive first-line patient-regimen observations in Figure 3B columns PDO 03, 07, 14, 17, 16, 25, 21, 02, 28, 05, and 54."
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p20",
+              "article:p29"
+            ],
+            "explanation": "The reported 10/11 accuracy is the clinical correlation of the simplified PDO prediction score within the treatment-naive cohort, not a held-out test result."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.9090909090909091,
+          "reported_evidence": [
+            "article:p20",
+            "vision/1613b3429c81/R8C2"
+          ],
+          "threshold": 0.5,
+          "op": ">=",
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "PDO 03 first-line FOLFIRINOX",
+              "score": {
+                "ref": "vision/1613b3429c81/R7C2",
+                "map": {
+                  "1.0": 1,
+                  "1.5": 1,
+                  "1.7": 1,
+                  "2.0": 1,
+                  "2.5": 0,
+                  "2.7": 0,
+                  "3.0": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/1613b3429c81/R6C2",
+                "map": {
+                  "tumor control": 1,
+                  "progression": 0
+                }
+              }
+            },
+            {
+              "id": "PDO 07 first-line FOLFIRINOX",
+              "score": {
+                "ref": "vision/1613b3429c81/R7C3",
+                "map": {
+                  "1.0": 1,
+                  "1.5": 1,
+                  "1.7": 1,
+                  "2.0": 1,
+                  "2.5": 0,
+                  "2.7": 0,
+                  "3.0": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/1613b3429c81/R6C3",
+                "map": {
+                  "tumor control": 1,
+                  "progression": 0
+                }
+              }
+            },
+            {
+              "id": "PDO 14 first-line FOLFIRINOX",
+              "score": {
+                "ref": "vision/1613b3429c81/R7C4",
+                "map": {
+                  "1.0": 1,
+                  "1.5": 1,
+                  "1.7": 1,
+                  "2.0": 1,
+                  "2.5": 0,
+                  "2.7": 0,
+                  "3.0": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/1613b3429c81/R6C4",
+                "map": {
+                  "tumor control": 1,
+                  "progression": 0
+                }
+              }
+            },
+            {
+              "id": "PDO 17 first-line gem/nab-p",
+              "score": {
+                "ref": "vision/1613b3429c81/R7C5",
+                "map": {
+                  "1.0": 1,
+                  "1.5": 1,
+                  "1.7": 1,
+                  "2.0": 1,
+                  "2.5": 0,
+                  "2.7": 0,
+                  "3.0": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/1613b3429c81/R6C5",
+                "map": {
+                  "tumor control": 1,
+                  "progression": 0
+                }
+              }
+            },
+            {
+              "id": "PDO 16 first-line gem/nab-p",
+              "score": {
+                "ref": "vision/1613b3429c81/R7C6",
+                "map": {
+                  "1.0": 1,
+                  "1.5": 1,
+                  "1.7": 1,
+                  "2.0": 1,
+                  "2.5": 0,
+                  "2.7": 0,
+                  "3.0": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/1613b3429c81/R6C6",
+                "map": {
+                  "tumor control": 1,
+                  "progression": 0
+                }
+              }
+            },
+            {
+              "id": "PDO 25 first-line gem/nab-p",
+              "score": {
+                "ref": "vision/1613b3429c81/R7C7",
+                "map": {
+                  "1.0": 1,
+                  "1.5": 1,
+                  "1.7": 1,
+                  "2.0": 1,
+                  "2.5": 0,
+                  "2.7": 0,
+                  "3.0": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/1613b3429c81/R6C7",
+                "map": {
+                  "tumor control": 1,
+                  "progression": 0
+                }
+              }
+            },
+            {
+              "id": "PDO 21 first-line gem/nab-p",
+              "score": {
+                "ref": "vision/1613b3429c81/R7C8",
+                "map": {
+                  "1.0": 1,
+                  "1.5": 1,
+                  "1.7": 1,
+                  "2.0": 1,
+                  "2.5": 0,
+                  "2.7": 0,
+                  "3.0": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/1613b3429c81/R6C8",
+                "map": {
+                  "tumor control": 1,
+                  "progression": 0
+                }
+              }
+            },
+            {
+              "id": "PDO 02 first-line gem/nab-p",
+              "score": {
+                "ref": "vision/1613b3429c81/R7C9",
+                "map": {
+                  "1.0": 1,
+                  "1.5": 1,
+                  "1.7": 1,
+                  "2.0": 1,
+                  "2.5": 0,
+                  "2.7": 0,
+                  "3.0": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/1613b3429c81/R6C9",
+                "map": {
+                  "tumor control": 1,
+                  "progression": 0
+                }
+              }
+            },
+            {
+              "id": "PDO 28 first-line gem/nab-p",
+              "score": {
+                "ref": "vision/1613b3429c81/R7C10",
+                "map": {
+                  "1.0": 1,
+                  "1.5": 1,
+                  "1.7": 1,
+                  "2.0": 1,
+                  "2.5": 0,
+                  "2.7": 0,
+                  "3.0": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/1613b3429c81/R6C10",
+                "map": {
+                  "tumor control": 1,
+                  "progression": 0
+                }
+              }
+            },
+            {
+              "id": "PDO 05 first-line FOLFIRINOX",
+              "score": {
+                "ref": "vision/1613b3429c81/R7C11",
+                "map": {
+                  "1.0": 1,
+                  "1.5": 1,
+                  "1.7": 1,
+                  "2.0": 1,
+                  "2.5": 0,
+                  "2.7": 0,
+                  "3.0": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/1613b3429c81/R6C11",
+                "map": {
+                  "tumor control": 1,
+                  "progression": 0
+                }
+              }
+            },
+            {
+              "id": "PDO 54 first-line gem/nab-p",
+              "score": {
+                "ref": "vision/1613b3429c81/R7C12",
+                "map": {
+                  "1.0": 1,
+                  "1.5": 1,
+                  "1.7": 1,
+                  "2.0": 1,
+                  "2.5": 0,
+                  "2.7": 0,
+                  "3.0": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/1613b3429c81/R6C12",
+                "map": {
+                  "tumor control": 1,
+                  "progression": 0
+                }
+              }
+            }
+          ],
+          "blocked_reason": null
+        },
+        "notes": [
+          "The score map explicitly implements the Figure 3 rule stated by the independent reader: scores 1.0, 1.5, 1.7, and 2.0 predict response; scores 2.5, 2.7, and 3.0 predict no response.",
+          "Ten of eleven correctness flags are YES and one (PDO 54) is NO, so accuracy is 10/11 = 0.9090909091.",
+          "The article text prints 91.1%, but its explicit count 10 out of 11 corresponds to 90.909...% and the requested numeric target.",
+          "RECIST CR, PR, and SD were designated tumor control; PD was progression."
+        ]
+      }
+    },
+    "output": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient_regimen",
+            "evidence": [
+              "article:p20",
+              "vision/1613b3429c81/R6C1"
+            ],
+            "explanation": "Each observation is a treatment-naive patient's first-line regimen response compared with the PDO-based regimen prediction."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p20",
+              "article:p45"
+            ],
+            "explanation": "Predictions were generated from patient-derived pancreatic cancer organoid pharmacotyping."
+          },
+          "readout": {
+            "value": "auc",
+            "evidence": [
+              "article:p18",
+              "article:p45"
+            ],
+            "explanation": "Single-agent viability dose-response AUCs were classified by Jenks Natural Breaks and combined into a regimen prediction score."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p18",
+              "vision/1613b3429c81/R7C1"
+            ],
+            "explanation": "Lower AUC indicated greater drug sensitivity; in Figure 3, high responder scores 1, intermediate 2, and low responder 3."
+          },
+          "threshold_rule": {
+            "value": "fixed_numeric",
+            "evidence": [
+              "vision/1613b3429c81/R7C1"
+            ],
+            "explanation": "The figure's prediction rule treats scores <=2 as predicted response/tumor control and scores >2 as no response/progression."
+          },
+          "threshold_timing": {
+            "value": "explicitly_prespecified",
+            "evidence": [
+              "article:p18",
+              "article:p45",
+              "vision/1613b3429c81/R7C1"
+            ],
+            "explanation": "The Jenks responder categories and resulting prediction-score rule were defined before comparing the predictions with patient responses."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "vision/1613b3429c81/R6C2",
+              "vision/1613b3429c81/R7C2",
+              "vision/1613b3429c81/R8C2"
+            ],
+            "explanation": "Figure 3B provides individual PDO identifiers, prediction scores, clinical responses, and correctness flags."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p20",
+              "vision/1613b3429c81/R1C2",
+              "vision/1613b3429c81/R3C2"
+            ],
+            "explanation": "The assay prediction was compared with the response to the regimen actually administered: FOLFIRINOX or gemcitabine/nab-paclitaxel first-line therapy."
+          },
+          "n_units": {
+            "value": 11,
+            "evidence": [
+              "article:p20",
+              "vision/1613b3429c81/R6C2"
+            ],
+            "explanation": "There are 11 treatment-naive first-line patient-regimen observations in Figure 3B columns PDO 03, 07, 14, 17, 16, 25, 21, 02, 28, 05, and 54."
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p20",
+              "article:p29"
+            ],
+            "explanation": "The reported 10/11 accuracy is the clinical correlation of the simplified PDO prediction score within the treatment-naive cohort, not a held-out test result."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.9090909090909091,
+          "reported_evidence": [
+            "article:p20",
+            "vision/1613b3429c81/R8C2"
+          ],
+          "threshold": 0.5,
+          "op": ">=",
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "PDO 03 first-line FOLFIRINOX",
+              "score": {
+                "ref": "vision/1613b3429c81/R7C2",
+                "map": {
+                  "1.0": 1,
+                  "1.5": 1,
+                  "1.7": 1,
+                  "2.0": 1,
+                  "2.5": 0,
+                  "2.7": 0,
+                  "3.0": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/1613b3429c81/R6C2",
+                "map": {
+                  "tumor control": 1,
+                  "progression": 0
+                }
+              }
+            },
+            {
+              "id": "PDO 07 first-line FOLFIRINOX",
+              "score": {
+                "ref": "vision/1613b3429c81/R7C3",
+                "map": {
+                  "1.0": 1,
+                  "1.5": 1,
+                  "1.7": 1,
+                  "2.0": 1,
+                  "2.5": 0,
+                  "2.7": 0,
+                  "3.0": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/1613b3429c81/R6C3",
+                "map": {
+                  "tumor control": 1,
+                  "progression": 0
+                }
+              }
+            },
+            {
+              "id": "PDO 14 first-line FOLFIRINOX",
+              "score": {
+                "ref": "vision/1613b3429c81/R7C4",
+                "map": {
+                  "1.0": 1,
+                  "1.5": 1,
+                  "1.7": 1,
+                  "2.0": 1,
+                  "2.5": 0,
+                  "2.7": 0,
+                  "3.0": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/1613b3429c81/R6C4",
+                "map": {
+                  "tumor control": 1,
+                  "progression": 0
+                }
+              }
+            },
+            {
+              "id": "PDO 17 first-line gem/nab-p",
+              "score": {
+                "ref": "vision/1613b3429c81/R7C5",
+                "map": {
+                  "1.0": 1,
+                  "1.5": 1,
+                  "1.7": 1,
+                  "2.0": 1,
+                  "2.5": 0,
+                  "2.7": 0,
+                  "3.0": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/1613b3429c81/R6C5",
+                "map": {
+                  "tumor control": 1,
+                  "progression": 0
+                }
+              }
+            },
+            {
+              "id": "PDO 16 first-line gem/nab-p",
+              "score": {
+                "ref": "vision/1613b3429c81/R7C6",
+                "map": {
+                  "1.0": 1,
+                  "1.5": 1,
+                  "1.7": 1,
+                  "2.0": 1,
+                  "2.5": 0,
+                  "2.7": 0,
+                  "3.0": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/1613b3429c81/R6C6",
+                "map": {
+                  "tumor control": 1,
+                  "progression": 0
+                }
+              }
+            },
+            {
+              "id": "PDO 25 first-line gem/nab-p",
+              "score": {
+                "ref": "vision/1613b3429c81/R7C7",
+                "map": {
+                  "1.0": 1,
+                  "1.5": 1,
+                  "1.7": 1,
+                  "2.0": 1,
+                  "2.5": 0,
+                  "2.7": 0,
+                  "3.0": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/1613b3429c81/R6C7",
+                "map": {
+                  "tumor control": 1,
+                  "progression": 0
+                }
+              }
+            },
+            {
+              "id": "PDO 21 first-line gem/nab-p",
+              "score": {
+                "ref": "vision/1613b3429c81/R7C8",
+                "map": {
+                  "1.0": 1,
+                  "1.5": 1,
+                  "1.7": 1,
+                  "2.0": 1,
+                  "2.5": 0,
+                  "2.7": 0,
+                  "3.0": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/1613b3429c81/R6C8",
+                "map": {
+                  "tumor control": 1,
+                  "progression": 0
+                }
+              }
+            },
+            {
+              "id": "PDO 02 first-line gem/nab-p",
+              "score": {
+                "ref": "vision/1613b3429c81/R7C9",
+                "map": {
+                  "1.0": 1,
+                  "1.5": 1,
+                  "1.7": 1,
+                  "2.0": 1,
+                  "2.5": 0,
+                  "2.7": 0,
+                  "3.0": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/1613b3429c81/R6C9",
+                "map": {
+                  "tumor control": 1,
+                  "progression": 0
+                }
+              }
+            },
+            {
+              "id": "PDO 28 first-line gem/nab-p",
+              "score": {
+                "ref": "vision/1613b3429c81/R7C10",
+                "map": {
+                  "1.0": 1,
+                  "1.5": 1,
+                  "1.7": 1,
+                  "2.0": 1,
+                  "2.5": 0,
+                  "2.7": 0,
+                  "3.0": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/1613b3429c81/R6C10",
+                "map": {
+                  "tumor control": 1,
+                  "progression": 0
+                }
+              }
+            },
+            {
+              "id": "PDO 05 first-line FOLFIRINOX",
+              "score": {
+                "ref": "vision/1613b3429c81/R7C11",
+                "map": {
+                  "1.0": 1,
+                  "1.5": 1,
+                  "1.7": 1,
+                  "2.0": 1,
+                  "2.5": 0,
+                  "2.7": 0,
+                  "3.0": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/1613b3429c81/R6C11",
+                "map": {
+                  "tumor control": 1,
+                  "progression": 0
+                }
+              }
+            },
+            {
+              "id": "PDO 54 first-line gem/nab-p",
+              "score": {
+                "ref": "vision/1613b3429c81/R7C12",
+                "map": {
+                  "1.0": 1,
+                  "1.5": 1,
+                  "1.7": 1,
+                  "2.0": 1,
+                  "2.5": 0,
+                  "2.7": 0,
+                  "3.0": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/1613b3429c81/R6C12",
+                "map": {
+                  "tumor control": 1,
+                  "progression": 0
+                }
+              }
+            }
+          ],
+          "blocked_reason": null
+        },
+        "notes": [
+          "The score map explicitly implements the Figure 3 rule stated by the independent reader: scores 1.0, 1.5, 1.7, and 2.0 predict response; scores 2.5, 2.7, and 3.0 predict no response.",
+          "Ten of eleven correctness flags are YES and one (PDO 54) is NO, so accuracy is 10/11 = 0.9090909091.",
+          "The article text prints 91.1%, but its explicit count 10 out of 11 corresponds to 90.909...% and the requested numeric target.",
+          "RECIST CR, PR, and SD were designated tumor control; PD was progression."
+        ]
+      },
+      "execution_feedback": {
+        "matched": true,
+        "metric": "accuracy",
+        "computed": 0.9090909090909091,
+        "reported": 0.9090909090909091,
+        "difference": 0.0,
+        "n": 11,
+        "errors": [],
+        "expected": {
+          "metric": "accuracy",
+          "value": 0.9090909090909091,
+          "n": 11
+        }
+      }
+    }
+  }
+]

@@ -1,0 +1,20 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "{\"columns\":[\"Response category\",\"Individual EVOC Score values\",\"Summary bar (EVOC Score)\"],\"legend\":{},\"rows\":[[\"NR/PD\",\"0, 8, 18, 85\",\"8\"],[\"SD\",\"45, 74\",\"54\"],[\"PR\",\"77, 83, 85, 88, 100 (multiple overlapping points)\",\"100\"],[\"CR\",\"100\",\"100\"]],\"uncertain\":[[1,2],[1,3],[3,2],[3,3]],\"notes\":\"Y-axis is EVOC Score from 0 to 100. Blue circles are individual data points; dark horizontal bars indicate group summary values. A stepped significance bracket marked ** is drawn above the groups, with its exact paired endpoints visually ambiguous. Overlapping points at PR=100 prevent an exact point count.\"}"
+  },
+  "reasoning_content": "We need need transcribe plot.  I'm handling JSON data related to plot transcription, focusing on columns including categories (x) and scores (y), as well as points, bars, significance brackets and related line structures, and will verify the relevant details. I've confirmed the target JSON will include columns for category, EVOC score points and median/mean bar, and identified 4 points for the NR/PD group and 2 for the SD group.\n\nFor the PR and CR groups, I've identified their relevant clustered points and median bars. No legend is printed in the original figure, so I'll use an empty placeholder as no legend category is provided. I'll structure the table with row labels for each point group and fixed columns. I've finalized the three-column structure for the table as \"Response category\", \"Individual EVOC Score values\" and \"Summary bar (EVOC Score)\". I've also clarified the x-axis positions of each group and the composition of the significance bracket.\n\nIt has been confirmed that the figure has two independent significance brackets: the upper one marks the ** significance comparison between NR/PD and PR, and the lower one marks the unmarked comparison between SD and CR. I will output valid JSON containing relevant notes as required.\n\nI've confirmed the table's row layout will group each point, bar and related line structures into separate rows, with column titles adjusted to \"Category\", \"EVOC Score (individual points)\" and \"Summary bar\". I've sorted out the data values for each group, and will not fabricate the number of overlapping points at the target position.\n\nI've finalized the cell value descriptions for overlapping points and uncertain positions, and will include relevant notes in the JSON. Markdown fences are not required as the output should be pure JSON.\n",
+  "finish_reason": "stop",
+  "usage": {
+    "completion_tokens": 1531,
+    "prompt_tokens": 1576,
+    "total_tokens": 3107,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 1337
+    }
+  }
+}

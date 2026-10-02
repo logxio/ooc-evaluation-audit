@@ -1,0 +1,114 @@
+[
+  {
+    "name": "initial_code",
+    "output": {
+      "returncode": 0,
+      "stdout": "0.8863636363636364 Missing complete row-level evidence for all 44 patients: each patient needs an independently referenced assay prediction and matched clinical truth. The parsed article provides only aggregate counts (39/44) and selected patient examples; the patient-level grids remain in Figures 3 and 7 and require independent figure transcription before records can be bound.\n",
+      "stderr": "",
+      "seconds": 0.13258854098967277,
+      "peak_rss_bytes": 229376,
+      "limit_error": null,
+      "code_sha256": "fc1e4d7094c9fee8ee9d9186a5d42fdd187f8b51657abeccbadfa8b73c08af71",
+      "contract": {
+        "status": "blocked",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p1",
+              "article:p22"
+            ],
+            "explanation": "The 44-subject denominator counts newly diagnosed ovarian cancer patients, each contributing one first-line treatment response prediction."
+          },
+          "platform": {
+            "value": "spheroid",
+            "evidence": [
+              "article:p1",
+              "article:p14"
+            ],
+            "explanation": "Primary patient tissue was cultured as 3D spheroids for drug-response testing."
+          },
+          "readout": {
+            "value": "ic50",
+            "evidence": [
+              "article:p33"
+            ],
+            "explanation": "Drug-response curves yielded IC50 values, which were converted into Responder, Moderate Responder, or Non-Responder categories."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p33"
+            ],
+            "explanation": "Predicted Responders had IC50 values below the lower drug-specific threshold; high IC50 values indicated Non-Responders."
+          },
+          "threshold_rule": {
+            "value": "categorical",
+            "evidence": [
+              "article:p33",
+              "article:p34"
+            ],
+            "explanation": "Drug-specific IC50 categories were combined into a regimen-level prediction: response to at least one received and tested drug defined a test-predicted Responder."
+          },
+          "threshold_timing": {
+            "value": "not_reported",
+            "evidence": [
+              "article:p33"
+            ],
+            "explanation": "The article reports ROC confirmation for carboplatin and experimental quartile-informed thresholds for other drugs, but does not provide a single prespecified global cutoff or enough timing detail for the combined 44-patient rule."
+          },
+          "patient_mapping": {
+            "value": "partial",
+            "evidence": [
+              "article:p14",
+              "article:p18",
+              "article:p22"
+            ],
+            "explanation": "The article gives individual examples and aggregate contingency counts, but the parsed text does not supply a complete row-level table linking each of the 44 assay predictions to its clinical outcome."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p34"
+            ],
+            "explanation": "Predictions were evaluated against drugs the patient actually received and that were tested in the assay."
+          },
+          "n_units": {
+            "value": 44,
+            "evidence": [
+              "article:p1",
+              "article:p22"
+            ],
+            "explanation": "The combined newly diagnosed adjuvant and neoadjuvant analysis included 44 patients with assay and clinical response data."
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p1",
+              "article:p18",
+              "article:p22"
+            ],
+            "explanation": "The reported prospective validation evaluated the same enrolled cohort used to summarize predictive accuracy; no independent held-out test cohort is reported for this headline."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.8863636363636364,
+          "reported_evidence": [
+            "article:p1",
+            "article:p22"
+          ],
+          "threshold": null,
+          "op": "==",
+          "score_direction": "higher",
+          "records": [],
+          "blocked_reason": "Missing complete row-level evidence for all 44 patients: each patient needs an independently referenced assay prediction and matched clinical truth. The parsed article provides only aggregate counts (39/44) and selected patient examples; the patient-level grids remain in Figures 3 and 7 and require independent figure transcription before records can be bound."
+        },
+        "notes": [
+          "The published aggregate headline is 89% accuracy, reported as 39 of 44, which equals 0.8863636363636364.",
+          "Aggregate contingency counts alone are insufficient because the contract requires independently identifiable score and truth evidence for each evaluated patient."
+        ]
+      }
+    }
+  }
+]

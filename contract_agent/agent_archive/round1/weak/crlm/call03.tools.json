@@ -1,0 +1,17 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "# FOLFOX patients from Table S7\n# Row indices are 1-based in the preview\nfolfox_data = [\n    (\"P3\", 30.83, \"PD\"),      # Row 3\n    (\"P4\", 1.041, \"SD/PR\"),   # Row 4\n    (\"P5\", 1.268, \"SD/PR\"),   # Row 5\n    (\"P6\", 7.465, \"PD\"),      # Row 6\n    (\"P9\", 12.59, \"PD\"),      # Row 9\n    (\"P11\", 3.605, \"SD/PR\"),  # Row 11\n    (\"P12\", 2.441, \"SD/PR\"),  # Row 12\n    (\"P13\", 0.4895, \"SD/PR\"), # Row 13\n    (\"P14\", 2.32, \"SD/PR\"),   # Row 14\n    (\"P18\", 2.254, \"PD\"),     # Row 18\n    (\"P19\", 15.4, \"PD\"),      # Row 19\n    (\"P23\", 6.247, \"SD/PR\"),  # Row 22\n    (\"P25\", 7.895, \"SD/PR\"),  # Row 24\n]\n\nprint(f\"Number of FOLFOX patients: {len(folfox_data)}\")\n\n# Map to scores and truths\n# Score = -IC50 (higher score = more sensitive)\n# Truth: SD/PR = 1, PD = 0\nscores = []\ntruths = []\nfor patient, ic50, response in folfox_data:\n    truth = 1 if response == \"SD/PR\" else 0\n    score = -ic50\n    scores.append(score)\n    truths.append(truth)\n    print(f\"{patient}: IC50={ic50}, Score={score}, Truth={truth}\")\n\nn_pos = sum(truths)\nn_neg = len(truths) - n_pos\nprint(f\"\\nPositives (SD/PR): {n_pos}\")\nprint(f\"Negatives (PD): {n_neg}\")\n\n# Calculate AUC using Mann-Whitney U statistic\nconcordant = 0\ntied = 0\nfor i in range(len(scores)):\n    for j in range(len(scores)):\n        if truths[i] == 1 and truths[j] == 0:\n            if scores[i] > scores[j]:\n                concordant += 1\n            elif scores[i] == scores[j]:\n                tied += 1\n\nauc = (concordant + 0.5 * tied) / (n_pos * n_neg)\nprint(f\"\\nConcordant pairs: {concordant}\")\nprint(f\"Tied pairs: {tied}\")\nprint(f\"AUC = ({concordant} + 0.5*{tied}) / ({n_pos}*{n_neg}) = {auc}\")\nprint(f\"Rounded AUC: {round(auc, 3)}\")"
+    },
+    "output": {
+      "returncode": 0,
+      "stdout": "Number of FOLFOX patients: 13\nP3: IC50=30.83, Score=-30.83, Truth=0\nP4: IC50=1.041, Score=-1.041, Truth=1\nP5: IC50=1.268, Score=-1.268, Truth=1\nP6: IC50=7.465, Score=-7.465, Truth=0\nP9: IC50=12.59, Score=-12.59, Truth=0\nP11: IC50=3.605, Score=-3.605, Truth=1\nP12: IC50=2.441, Score=-2.441, Truth=1\nP13: IC50=0.4895, Score=-0.4895, Truth=1\nP14: IC50=2.32, Score=-2.32, Truth=1\nP18: IC50=2.254, Score=-2.254, Truth=0\nP19: IC50=15.4, Score=-15.4, Truth=0\nP23: IC50=6.247, Score=-6.247, Truth=1\nP25: IC50=7.895, Score=-7.895, Truth=1\n\nPositives (SD/PR): 8\nNegatives (PD): 5\n\nConcordant pairs: 34\nTied pairs: 0\nAUC = (34 + 0.5*0) / (8*5) = 0.85\nRounded AUC: 0.85\n",
+      "stderr": "",
+      "seconds": 0.13008329199510626,
+      "peak_rss_bytes": 3997696,
+      "limit_error": null,
+      "code_sha256": "1dbae10e04b7305b30cd55f662b34b238f6e41701a32a25b91e60c11fb166856"
+    }
+  }
+]

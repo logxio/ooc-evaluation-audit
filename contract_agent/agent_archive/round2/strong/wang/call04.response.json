@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_ys0n959du3q37o1wkzrr0rqz",
+        "type": "function",
+        "function": {
+          "name": "python",
+          "arguments": "{\"code\": \"o=tables['mmc1.pdf']['page18']\\nprint(type(o), o.keys() if isinstance(o,dict) else '')\\nrows=o['rows'] if isinstance(o,dict) else o.rows\\nprint(type(rows[9]), len(rows[9]), rows[9][:5])\\nprint(o.get('geometry',[])[:2] if isinstance(o,dict) else 'no')\\nprint(cell_ref('mmc1.pdf','page18',10,2))\\n\"}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "Rows plain values per prompt,Inspection of types will be conducted to verify row value and related object requirements.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 177,
+    "prompt_tokens": 47704,
+    "total_tokens": 47881,
+    "prompt_tokens_details": {
+      "cached_tokens": 46904
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 40
+    }
+  }
+}

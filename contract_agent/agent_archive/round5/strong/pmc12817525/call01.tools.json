@@ -1,0 +1,111 @@
+[
+  {
+    "name": "initial_code",
+    "output": {
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "seconds": 3.827591790992301,
+      "peak_rss_bytes": 30244864,
+      "limit_error": null,
+      "code_sha256": "7e72aa3d52bfe03d7395a2398f664d398ced6c27eee6dc25e0bf0cfecf625815",
+      "contract": {
+        "status": "blocked",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p66"
+            ],
+            "explanation": "Each analysis unit is one paired patient with a pre-NAT organoid prediction and post-NAT radiologic assessment."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p60",
+              "article:p66"
+            ],
+            "explanation": "Predictions were generated from patient-derived osteosarcoma organoids."
+          },
+          "readout": {
+            "value": "viability",
+            "evidence": [
+              "article:p60"
+            ],
+            "explanation": "Drug effects were measured as standard cell inhibition rates and aggregated into CIWS."
+          },
+          "direction": {
+            "value": "higher_sensitive",
+            "evidence": [
+              "article:p60",
+              "article:p66"
+            ],
+            "explanation": "Higher CIWS indicates greater sensitivity; CIWS >= 5 predicts SD/response."
+          },
+          "threshold_rule": {
+            "value": "fixed_numeric",
+            "evidence": [
+              "article:p60",
+              "article:p66"
+            ],
+            "explanation": "The fixed binary cutoff was CIWS 5+."
+          },
+          "threshold_timing": {
+            "value": "explicitly_prespecified",
+            "evidence": [
+              "article:p42",
+              "article:p66"
+            ],
+            "explanation": "The CIWS >= 5+ rule was explicitly defined before comparison with RECIST outcomes."
+          },
+          "patient_mapping": {
+            "value": "absent",
+            "evidence": [
+              "article:p66"
+            ],
+            "explanation": "Patient-level CIWS and RECIST values are linked by patient identifier in the source rows."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p60",
+              "article:p66"
+            ],
+            "explanation": "CIWS represents sensitivity to the MAPI regimen evaluated clinically."
+          },
+          "n_units": {
+            "value": 18,
+            "evidence": [
+              "article:p66"
+            ],
+            "explanation": "The published comparison includes 18 paired cases."
+          },
+          "split": {
+            "value": "none",
+            "evidence": [
+              "article:p42",
+              "article:p66"
+            ],
+            "explanation": "This was direct concordance evaluation in the reported cohort."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.8333333333333334,
+          "reported_evidence": [
+            "article:p66"
+          ],
+          "threshold": 5,
+          "op": ">=",
+          "score_direction": "higher",
+          "records": [],
+          "blocked_reason": "Could not identify 18 source-bound patient rows containing both CIWS and post-NAT RECIST labels."
+        },
+        "notes": [
+          "Responder truth is CR/PR/SD=1 and PD=0, as defined in the article.",
+          "The article reports 15 correct classifications among 18 patients."
+        ]
+      }
+    }
+  }
+]

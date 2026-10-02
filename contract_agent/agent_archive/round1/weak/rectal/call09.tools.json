@@ -1,0 +1,17 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "# Check supp.pdf/page10 which had Patient-43+ (clinical data continuation from page9)\nrows_page10 = tables['supp.pdf']['page10']['rows']\nprint(\"Page10 first few rows:\")\nfor i in range(min(10, len(rows_page10))):\n    print(f\"  Row {i+1}: {rows_page10[i][:5]}\")\n\n# Check if page10 has P81-P86\nhas_81_86 = False\nfor row in rows_page10:\n    for cell in row:\n        if isinstance(cell, dict):\n            val = str(cell.get('value', ''))\n        else:\n            val = str(cell)\n        if 'Patient-8' in val or 'Patient-81' in val or 'Patient-82' in val:\n            print(f\"Found: {val}\")\n            has_81_86 = True\n\n# Also check page13 which had Patient41+ (organoid data continuation)\nrows_page13 = tables['supp.pdf']['page13']['rows']\nprint(\"\\nPage13 first few rows:\")\nfor i in range(min(10, len(rows_page13))):\n    print(f\"  Row {i+1}: {rows_page13[i][:5]}\")"
+    },
+    "output": {
+      "returncode": 0,
+      "stdout": "Page10 first few rows:\n  Row 1: ['Patient-43', 'male', '57', 'T3a', 'N2a']\n  Row 2: ['Patient-44', 'male', '73', 'T3b', 'N2b']\n  Row 3: ['Patient-45', 'female', '53', 'T3b', 'N1b']\n  Row 4: ['Patient-46', 'male', '58', 'T4', 'N2a']\n  Row 5: ['Patient-47', 'female', '67', 'T2', 'N0']\n  Row 6: ['Patient-48', 'male', '53', 'T3', 'N+']\n  Row 7: ['Patient-49', 'female', '52', 'T3a', 'N0']\n  Row 8: ['Patient-50', 'female', '54', 'T3b', 'N2']\n  Row 9: ['Patient-51', 'male', '57', 'T3b', 'N2a']\n  Row 10: ['Patient-52', 'male', '38', 'T3a', 'N1a']\nFound: Patient-80\nFound: Patient-81\nFound: Patient-82\nFound: Patient-83\nFound: Patient-84\nFound: Patient-85\nFound: Patient-86\n\nPage13 first few rows:\n  Row 1: ['Patient41', '8.9479', '1.5382', '3.0217', '0.9244']\n  Row 2: ['Patient42', '1.8199', '0.1501', '0.0666', '0.0541']\n  Row 3: ['Patient43', '0.0964', '0.0417', '0.0275', '0.041']\n  Row 4: ['Patient44', '10.7701', '0.1794', '2.9778', '0.1885']\n  Row 5: ['Patient45', '1.3001', '0.6362', '0.6196', '0.0196']\n  Row 6: ['Patient46', '0.5568', '1.0107', '0.5072', '0.7091']\n  Row 7: ['Patient47', '1.5233', '0.7623', '0.0781', '0.6767']\n  Row 8: ['Patient48', '2.9192', '0.5027', '3.0001', '0.4926']\n  Row 9: ['Patient49', '7.943', '1.3261', '0.107', '0.1197']\n  Row 10: ['Patient50', '3.7136', '0.101', '0.0824', '0.0451']\n",
+      "stderr": "",
+      "seconds": 11.645686375006335,
+      "peak_rss_bytes": 50888704,
+      "limit_error": null,
+      "code_sha256": "f037fbfc0bcb6fa38646ab09440aeb154f2c1d9ed46975f1490ab9c38c19ebec"
+    }
+  }
+]

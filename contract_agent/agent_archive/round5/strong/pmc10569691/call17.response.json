@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_ocg4dihbug94m8jm1x273urb",
+        "type": "function",
+        "function": {
+          "name": "python",
+          "arguments": "{\"code\": \"import os\\nprint(os.getcwd()); print(os.listdir('.')[:30]); print(os.listdir('/tmp')[:10])\"}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "Need cwd?List workspace files via os.listdir.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 77,
+    "prompt_tokens": 72373,
+    "total_tokens": 72450,
+    "prompt_tokens_details": {
+      "cached_tokens": 71480
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 16
+    }
+  }
+}

@@ -1,0 +1,115 @@
+[
+  {
+    "name": "initial_code",
+    "output": {
+      "returncode": 0,
+      "stdout": "n records: 32 negatives: 9 TN: 7 specificity: 0.7777777777777778\n",
+      "stderr": "",
+      "seconds": 0.25670537500991486,
+      "peak_rss_bytes": 30343168,
+      "limit_error": null,
+      "code_sha256": "dc8d20b54e5e88a43a867ee503140af73a2243214a462a841520ed2ec6a812c0",
+      "contract": {
+        "status": "blocked",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p34"
+            ],
+            "explanation": "EVOC results were correlated with clinical data in 34 individual patients."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p4",
+              "article:p9"
+            ],
+            "explanation": "Ex vivo organ culture slices preserving the tumor microenvironment."
+          },
+          "readout": {
+            "value": "viability",
+            "evidence": [
+              "article:p17"
+            ],
+            "explanation": "EVOC score combines cancer-cell viability, tissue damage, and Ki67 proliferation; higher scores indicate more treatment-induced cell death."
+          },
+          "direction": {
+            "value": "higher_sensitive",
+            "evidence": [
+              "article:p34",
+              "article:p37"
+            ],
+            "explanation": "Higher EVOC scores correspond to better clinical response, with responders at scores >=45."
+          },
+          "threshold_rule": {
+            "value": "fixed_numeric",
+            "evidence": [
+              "article:p17",
+              "article:p37"
+            ],
+            "explanation": "A fixed EVOC score threshold of 45 separates responders from non-responders."
+          },
+          "threshold_timing": {
+            "value": "independent_reference",
+            "evidence": [
+              "article:p17"
+            ],
+            "explanation": "The threshold and coefficients were established on a historical MIBC training set before application to the evaluated cohort."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "article.xml/Table 1/R1C2",
+              "article.xml/Table 2/R1C1"
+            ],
+            "explanation": "Patient-level EVOC scores and clinical outcomes are listed in Tables 1 and 2."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article.xml/Table 1/R1C4",
+              "article.xml/Table 2/R1C3",
+              "article:p4"
+            ],
+            "explanation": "Each assay-treated regimen corresponds to the intended therapy the patient subsequently received."
+          },
+          "n_units": {
+            "value": 34,
+            "evidence": [
+              "article:p34",
+              "article:p35"
+            ],
+            "explanation": "The combined evaluated cohort contained 16 MIBC resected samples and 18 biopsy samples from other cancers."
+          },
+          "split": {
+            "value": "independent_test",
+            "evidence": [
+              "article:p10",
+              "article:p17"
+            ],
+            "explanation": "The prospective observational cohort was evaluated using a threshold derived from a historical training set."
+          }
+        },
+        "headline": {
+          "metric": "specificity",
+          "reported": null,
+          "reported_evidence": [
+            "article:p34",
+            "article:p35",
+            "article:p5"
+          ],
+          "threshold": 45,
+          "op": ">=",
+          "score_direction": "higher",
+          "records": [],
+          "blocked_reason": "Expected 34 row-level records and 9 negatives, but found 32 records and 9 negatives."
+        },
+        "notes": [
+          "Specificity is TN/(TN+FP) among clinical non-responders (PD or NR); the published count is 7/9 = 77.7%.",
+          "Clinical truth is mapped from NR/PD to 0 and SD/PR/CR to 1, as defined in the article."
+        ]
+      }
+    }
+  }
+]

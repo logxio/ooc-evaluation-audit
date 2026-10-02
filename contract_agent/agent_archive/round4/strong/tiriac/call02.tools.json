@@ -1,0 +1,9 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "chemo=get_rows('supp.xlsx','Chemo ')\nprint('dims',len(chemo), max(map(len,chemo)))\nfor i,r in enumerate(chemo[:70],1):\n    vals=[]\n    for j,v in enumerate(r,1):\n        if v not in (None,''):\n            vals.append((j,repr(v)))\n    if vals: print(i, vals)\n"
+    },
+    "output_sha256": "400a8ee00d5267451eafb98000f07c205dc707b48f14e776628fc1abd3d9e357"
+  }
+]

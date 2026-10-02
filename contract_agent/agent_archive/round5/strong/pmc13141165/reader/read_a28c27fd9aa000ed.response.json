@@ -1,0 +1,20 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "{\"columns\":[\"element\",\"visible label\"],\"legend\":{},\"rows\":[[\"vertical axis label\",\"ratio\"],[\"axis tick label\",\"20\"]],\"uncertain\":[[1,2]],\"notes\":\"The vertical axis label is blurred and partially cropped. Black circular markers and a blue plot region are partially visible at the right edge.\"}"
+  },
+  "reasoning_content": "We need need transcribe visible.  The current task requires transcribing visible content from a rotated image. I've confirmed the image is rotated 90 degrees clockwise, with upright tick mark \"20\" and vertically arranged text \"ratio\" (only the letter \"o\" is clearly identifiable in the current crop). Next, I will continue analyzing the remaining visible characters to confirm the complete text, and finally output the required JSON result with columns [\"axis label\", \"tick label\"] and sample data [[\"ratio\", \"20\"]].\n\nAfter mentally rotating the image, I found the previously inferred text \"ratio\" does not match the visible glyph sequence. I'm now identifying each visible character from top to bottom: the topmost partial shape may be the top of the letter \"t\", the part with a left dot and right horizontal line is the rotated \"i\", the circular one is the clearly identifiable \"o\", and the remaining visible shape is similar to \"r\". I'm still verifying the complete correspondence of these glyphs to confirm the exact text content.\n\nI've ruled out all wrong inferences about the glyph sequence, confirmed the axis label is \"ratio\" and the tick mark is \"20\", and the axis title is partially cropped with no available markers on the right. I'll output the transcription result with the column set to [\"visible text\"].\n\nI've confirmed the optimal column setting for the transcription is [\"label\", \"value\"], decided to output raw valid JSON without extra formatting, and the currently identified content is sufficiently reliable with only minor uncertainty in some positions.\n\nI've finalized the required JSON output, confirmed all content including the legend object and tick mark format is correct, and only the vertical axis label is partially blurred.\n",
+  "finish_reason": "stop",
+  "usage": {
+    "completion_tokens": 1717,
+    "prompt_tokens": 1591,
+    "total_tokens": 3308,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 1647
+    }
+  }
+}

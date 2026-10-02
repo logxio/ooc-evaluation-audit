@@ -1,0 +1,17 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "\nimport re\n# treatments for validation cohort (col 7 in Table S1)\ntreat = {}\nfor pg in ['page9','page10','page11','page12']:\n    rows = tables['supp.pdf'][pg]['rows']\n    for i, r in enumerate(rows, start=1):\n        name = str(r[0]).strip() if r[0] else ''\n        m = re.match(r'Patient[- ]?(\\d+)$', name)\n        if m and len(r) > 6:\n            pid = int(m.group(1))\n            treat[pid] = (str(r[6]).strip(), f'supp.pdf/{pg}/R{i}C7')\nfrom collections import Counter\nprint(Counter(v[0] for k,v in treat.items() if 81<=k<=128))\nprint([ (k, treat[k]) for k in range(81,90)])\n"
+    },
+    "output": {
+      "returncode": 0,
+      "stdout": "Counter({'radiation/irinotecan/Capecitabine': 39, 'radiation/Capecitabine': 8, 'irinotecan/Capecitabine': 1})\n[(81, ('radiation/irinotecan/Capecitabine', 'supp.pdf/page10/R39C7')), (82, ('radiation/irinotecan/Capecitabine', 'supp.pdf/page10/R40C7')), (83, ('radiation/Capecitabine', 'supp.pdf/page10/R41C7')), (84, ('radiation/irinotecan/Capecitabine', 'supp.pdf/page10/R42C7')), (85, ('radiation/irinotecan/Capecitabine', 'supp.pdf/page10/R43C7')), (86, ('radiation/Capecitabine', 'supp.pdf/page10/R44C7')), (87, ('radiation/irinotecan/Capecitabine', 'supp.pdf/page11/R1C7')), (88, ('radiation/Capecitabine', 'supp.pdf/page11/R2C7')), (89, ('radiation/irinotecan/Capecitabine', 'supp.pdf/page11/R3C7'))]\n",
+      "stderr": "",
+      "seconds": 0.20806641699164174,
+      "peak_rss_bytes": 23035904,
+      "limit_error": null,
+      "code_sha256": "f07211400ce313abbbb3706ad2f1830f32e4b3f69f769ef0d008ca6ad4ac547e"
+    }
+  }
+]

@@ -1,0 +1,1022 @@
+{
+  "turn": 6,
+  "tool_count": 6,
+  "tokens": 195900,
+  "done": true,
+  "stop_reason": "verified",
+  "reader_calls": 2,
+  "checkpoints": {
+    "single_pass": {
+      "contract": {
+        "status": "blocked",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p35"
+            ],
+            "explanation": "Performance is calculated for 12 evaluable patients, each represented by a matched organoid drug-sensitivity result."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p2",
+              "article:p33"
+            ],
+            "explanation": "Assay predictions came from patient-derived epithelial ovarian cancer organoids."
+          },
+          "readout": {
+            "value": "ic50",
+            "evidence": [
+              "article:p33",
+              "article:p35"
+            ],
+            "explanation": "Organoid chemosensitivity was assessed from dose-response testing using IC50 values."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p33",
+              "article:p36"
+            ],
+            "explanation": "Lower carboplatin/paclitaxel IC50 values indicated greater sensitivity; a high IC50 identified resistance."
+          },
+          "threshold_rule": {
+            "value": "fixed_numeric",
+            "evidence": [
+              "article:p33"
+            ],
+            "explanation": "IC50 values were compared with recommended cut-off levels based on plasma carboplatin/paclitaxel concentrations, but the numeric cut-offs are not present in the parsed text."
+          },
+          "threshold_timing": {
+            "value": "independent_reference",
+            "evidence": [
+              "article:p33"
+            ],
+            "explanation": "The cut-off was based on recommended in vivo plasma concentrations rather than being optimized on the 12 evaluated cases; its exact numeric value is missing from the parsed source."
+          },
+          "patient_mapping": {
+            "value": "absent",
+            "evidence": [
+              "article:p35",
+              "article:p38"
+            ],
+            "explanation": "The available parsed text and patient table do not provide all 12 patient-linked assay sensitivity classifications and clinical truth labels needed for row-level reconstruction."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p33",
+              "article:p35"
+            ],
+            "explanation": "The evaluated assay result was for first-line carboplatin/paclitaxel, the regimen received clinically."
+          },
+          "n_units": {
+            "value": 12,
+            "evidence": [
+              "article:p35",
+              "article:p38"
+            ],
+            "explanation": "The reported accuracy was based on 12 evaluable cases."
+          },
+          "split": {
+            "value": "none",
+            "evidence": [
+              "article:p38"
+            ],
+            "explanation": "The article describes a direct prospective comparison using fixed sensitivity cut-offs, with no separate training cohort or cross-validation reported."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.9167,
+          "reported_evidence": [
+            "article:p38",
+            "article:p3"
+          ],
+          "threshold": null,
+          "op": "==",
+          "score_direction": "higher",
+          "records": [],
+          "blocked_reason": "Figure 4D must be independently transcribed to obtain the 12 patient-linked organoid sensitivity predictions and clinical response labels; parsed text and tables provide only aggregate performance statistics."
+        },
+        "notes": [
+          "Aggregate reported metrics are sensitivity 100%, specificity 66.67%, accuracy 91.67%, AUC 0.95, and Cohen kappa 0.75.",
+          "Row-level evidence is required before computing accuracy from records rather than merely copying the aggregate headline."
+        ]
+      },
+      "evaluation": {
+        "matched": false,
+        "metric": "accuracy",
+        "computed": null,
+        "reported": 0.9167,
+        "difference": null,
+        "n": 0,
+        "errors": [
+          "No source-bound observations: Figure 4D must be independently transcribed to obtain the 12 patient-linked organoid sensitivity predictions and clinical response labels; parsed text and tables provide only aggregate performance statistics.",
+          "Expected 12 analysis units, got 0"
+        ],
+        "rows": [],
+        "expected": {
+          "metric": "accuracy",
+          "value": 0.9167,
+          "n": 12
+        }
+      },
+      "calls": 1,
+      "tokens": 21139
+    },
+    "one_feedback": {
+      "contract": {
+        "status": "blocked",
+        "fields": {},
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.9167,
+          "reported_evidence": [
+            "article:p38"
+          ],
+          "threshold": null,
+          "op": "==",
+          "score_direction": "higher",
+          "records": [],
+          "blocked_reason": "diagnostic pass"
+        }
+      },
+      "evaluation": {
+        "matched": false,
+        "metric": "accuracy",
+        "computed": null,
+        "reported": 0.9167,
+        "difference": null,
+        "n": 0,
+        "errors": [
+          "Invalid field unit: None",
+          "Invalid field platform: None",
+          "Invalid field readout: None",
+          "Invalid field direction: None",
+          "Invalid field threshold_rule: None",
+          "Invalid field threshold_timing: None",
+          "Invalid field patient_mapping: None",
+          "Invalid field regimen_match: None",
+          "Invalid field n_units: None",
+          "Invalid field split: None",
+          "No source-bound observations: diagnostic pass",
+          "Expected 12 analysis units, got 0"
+        ],
+        "rows": [],
+        "expected": {
+          "metric": "accuracy",
+          "value": 0.9167,
+          "n": 12
+        }
+      },
+      "calls": 2,
+      "tokens": 41787
+    },
+    "tool_loop": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p35",
+              "article:p38"
+            ],
+            "explanation": "Twelve evaluable patients were each represented by one matched organoid assay and one clinical response."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p2",
+              "article:p33"
+            ],
+            "explanation": "Predictions were generated with patient-derived epithelial ovarian cancer organoids."
+          },
+          "readout": {
+            "value": "ic50",
+            "evidence": [
+              "article:p33",
+              "article:p35"
+            ],
+            "explanation": "Dose-response testing classified organoids as sensitive or resistant using IC50 values relative to recommended cut-off levels."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p33",
+              "article:p36"
+            ],
+            "explanation": "Lower carboplatin/paclitaxel IC50 values indicated sensitivity; a high IC50 indicated resistance."
+          },
+          "threshold_rule": {
+            "value": "fixed_numeric",
+            "evidence": [
+              "article:p33",
+              "vision/edbf0d5ab44d/R1C1"
+            ],
+            "explanation": "The article states IC50 values were compared with recommended cut-off levels based on in vivo plasma drug concentrations; Figure 4D reports the resulting binary S/R calls."
+          },
+          "threshold_timing": {
+            "value": "independent_reference",
+            "evidence": [
+              "article:p33"
+            ],
+            "explanation": "The cut-off levels were recommended reference concentrations rather than thresholds optimized on these 12 outcomes."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "vision/edbf0d5ab44d/R1C2",
+              "vision/edbf0d5ab44d/R3C2"
+            ],
+            "explanation": "Figure 4D independently identifies each patient column and gives both assay response and clinical response."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p33",
+              "article:p38"
+            ],
+            "explanation": "Assay and clinical outcomes were compared for first-line carboplatin/paclitaxel treatment."
+          },
+          "n_units": {
+            "value": 12,
+            "evidence": [
+              "article:p35",
+              "article:p38",
+              "vision/edbf0d5ab44d/R6C1"
+            ],
+            "explanation": "The exact comparison included 12 evaluable cases."
+          },
+          "split": {
+            "value": "none",
+            "evidence": [
+              "article:p38"
+            ],
+            "explanation": "No separate training cohort, held-out validation, or cross-validation was used for this 12-case comparison."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.9167,
+          "reported_evidence": [
+            "article:p38",
+            "article:p3",
+            "vision/edbf0d5ab44d/R6C2"
+          ],
+          "threshold": 0.5,
+          "op": ">=",
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "hgsEOC-1",
+              "score": {
+                "ref": "vision/edbf0d5ab44d/R1C2",
+                "map": {
+                  "S": 1,
+                  "R": 0
+                },
+                "threshold": 0.5,
+                "op": ">="
+              },
+              "truth": {
+                "ref": "vision/edbf0d5ab44d/R3C2",
+                "map": {
+                  "good": 1,
+                  "poor": 0
+                }
+              }
+            },
+            {
+              "id": "hgsEOC-2",
+              "score": {
+                "ref": "vision/edbf0d5ab44d/R1C3",
+                "map": {
+                  "S": 1,
+                  "R": 0
+                },
+                "threshold": 0.5,
+                "op": ">="
+              },
+              "truth": {
+                "ref": "vision/edbf0d5ab44d/R3C3",
+                "map": {
+                  "good": 1,
+                  "poor": 0
+                }
+              }
+            },
+            {
+              "id": "hgsEOC-5",
+              "score": {
+                "ref": "vision/edbf0d5ab44d/R1C4",
+                "map": {
+                  "S": 1,
+                  "R": 0
+                },
+                "threshold": 0.5,
+                "op": ">="
+              },
+              "truth": {
+                "ref": "vision/edbf0d5ab44d/R3C4",
+                "map": {
+                  "good": 1,
+                  "poor": 0
+                }
+              }
+            },
+            {
+              "id": "hgsEOC-6",
+              "score": {
+                "ref": "vision/edbf0d5ab44d/R1C5",
+                "map": {
+                  "S": 1,
+                  "R": 0
+                },
+                "threshold": 0.5,
+                "op": ">="
+              },
+              "truth": {
+                "ref": "vision/edbf0d5ab44d/R3C5",
+                "map": {
+                  "good": 1,
+                  "poor": 0
+                }
+              }
+            },
+            {
+              "id": "hgsEOC-8",
+              "score": {
+                "ref": "vision/edbf0d5ab44d/R1C6",
+                "map": {
+                  "S": 1,
+                  "R": 0
+                },
+                "threshold": 0.5,
+                "op": ">="
+              },
+              "truth": {
+                "ref": "vision/edbf0d5ab44d/R3C6",
+                "map": {
+                  "good": 1,
+                  "poor": 0
+                }
+              }
+            },
+            {
+              "id": "hgsEOC-10",
+              "score": {
+                "ref": "vision/edbf0d5ab44d/R1C7",
+                "map": {
+                  "S": 1,
+                  "R": 0
+                },
+                "threshold": 0.5,
+                "op": ">="
+              },
+              "truth": {
+                "ref": "vision/edbf0d5ab44d/R3C7",
+                "map": {
+                  "good": 1,
+                  "poor": 0
+                }
+              }
+            },
+            {
+              "id": "hgsEOC-11",
+              "score": {
+                "ref": "vision/edbf0d5ab44d/R1C8",
+                "map": {
+                  "S": 1,
+                  "R": 0
+                },
+                "threshold": 0.5,
+                "op": ">="
+              },
+              "truth": {
+                "ref": "vision/edbf0d5ab44d/R3C8",
+                "map": {
+                  "good": 1,
+                  "poor": 0
+                }
+              }
+            },
+            {
+              "id": "hgsEOC-12",
+              "score": {
+                "ref": "vision/edbf0d5ab44d/R1C9",
+                "map": {
+                  "S": 1,
+                  "R": 0
+                },
+                "threshold": 0.5,
+                "op": ">="
+              },
+              "truth": {
+                "ref": "vision/edbf0d5ab44d/R3C9",
+                "map": {
+                  "good": 1,
+                  "poor": 0
+                }
+              }
+            },
+            {
+              "id": "hgsEOC-15",
+              "score": {
+                "ref": "vision/edbf0d5ab44d/R1C10",
+                "map": {
+                  "S": 1,
+                  "R": 0
+                },
+                "threshold": 0.5,
+                "op": ">="
+              },
+              "truth": {
+                "ref": "vision/edbf0d5ab44d/R3C10",
+                "map": {
+                  "good": 1,
+                  "poor": 0
+                }
+              }
+            },
+            {
+              "id": "hgsEOC-22",
+              "score": {
+                "ref": "vision/edbf0d5ab44d/R1C11",
+                "map": {
+                  "S": 1,
+                  "R": 0
+                },
+                "threshold": 0.5,
+                "op": ">="
+              },
+              "truth": {
+                "ref": "vision/edbf0d5ab44d/R3C11",
+                "map": {
+                  "good": 1,
+                  "poor": 0
+                }
+              }
+            },
+            {
+              "id": "lgsEOC-1",
+              "score": {
+                "ref": "vision/edbf0d5ab44d/R1C12",
+                "map": {
+                  "S": 1,
+                  "R": 0
+                },
+                "threshold": 0.5,
+                "op": ">="
+              },
+              "truth": {
+                "ref": "vision/edbf0d5ab44d/R3C12",
+                "map": {
+                  "good": 1,
+                  "poor": 0
+                }
+              }
+            },
+            {
+              "id": "lgsEOC-2",
+              "score": {
+                "ref": "vision/edbf0d5ab44d/R1C13",
+                "map": {
+                  "S": 1,
+                  "R": 0
+                },
+                "threshold": 0.5,
+                "op": ">="
+              },
+              "truth": {
+                "ref": "vision/edbf0d5ab44d/R3C13",
+                "map": {
+                  "good": 1,
+                  "poor": 0
+                }
+              }
+            }
+          ],
+          "blocked_reason": null
+        },
+        "notes": [
+          "Figure 4D shows 10 good and 2 poor clinical responses among 12 patients.",
+          "The carboplatin S/R row predicts all 10 good responses and 2 of 3 poor responses; hgsEOC-8 is the sole mismatch, yielding 11/12 = 0.9166667.",
+          "The independent reader transcribed low-grade labels as igsEOC in the image; IDs are normalized to lgsEOC consistent with Supplementary Table 3 and the article."
+        ]
+      },
+      "evaluation": {
+        "matched": true,
+        "metric": "accuracy",
+        "computed": 0.9166666666666666,
+        "reported": 0.9167,
+        "difference": -3.333333333332966e-05,
+        "n": 12,
+        "errors": [],
+        "rows": [
+          {
+            "id": "hgsEOC-1",
+            "score": 1,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "hgsEOC-2",
+            "score": 1,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "hgsEOC-5",
+            "score": 1,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "hgsEOC-6",
+            "score": 1,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "hgsEOC-8",
+            "score": 1,
+            "truth": 0,
+            "prediction": 1
+          },
+          {
+            "id": "hgsEOC-10",
+            "score": 1,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "hgsEOC-11",
+            "score": 1,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "hgsEOC-12",
+            "score": 1,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "hgsEOC-15",
+            "score": 1,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "hgsEOC-22",
+            "score": 0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "lgsEOC-1",
+            "score": 0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "lgsEOC-2",
+            "score": 1,
+            "truth": 1,
+            "prediction": 1
+          }
+        ],
+        "expected": {
+          "metric": "accuracy",
+          "value": 0.9167,
+          "n": 12
+        }
+      },
+      "calls": 6,
+      "tokens": 195900
+    }
+  },
+  "last_contract": {
+    "status": "computed",
+    "fields": {
+      "unit": {
+        "value": "patient",
+        "evidence": [
+          "article:p35",
+          "article:p38"
+        ],
+        "explanation": "Twelve evaluable patients were each represented by one matched organoid assay and one clinical response."
+      },
+      "platform": {
+        "value": "organoid",
+        "evidence": [
+          "article:p2",
+          "article:p33"
+        ],
+        "explanation": "Predictions were generated with patient-derived epithelial ovarian cancer organoids."
+      },
+      "readout": {
+        "value": "ic50",
+        "evidence": [
+          "article:p33",
+          "article:p35"
+        ],
+        "explanation": "Dose-response testing classified organoids as sensitive or resistant using IC50 values relative to recommended cut-off levels."
+      },
+      "direction": {
+        "value": "lower_sensitive",
+        "evidence": [
+          "article:p33",
+          "article:p36"
+        ],
+        "explanation": "Lower carboplatin/paclitaxel IC50 values indicated sensitivity; a high IC50 indicated resistance."
+      },
+      "threshold_rule": {
+        "value": "fixed_numeric",
+        "evidence": [
+          "article:p33",
+          "vision/edbf0d5ab44d/R1C1"
+        ],
+        "explanation": "The article states IC50 values were compared with recommended cut-off levels based on in vivo plasma drug concentrations; Figure 4D reports the resulting binary S/R calls."
+      },
+      "threshold_timing": {
+        "value": "independent_reference",
+        "evidence": [
+          "article:p33"
+        ],
+        "explanation": "The cut-off levels were recommended reference concentrations rather than thresholds optimized on these 12 outcomes."
+      },
+      "patient_mapping": {
+        "value": "individual_available",
+        "evidence": [
+          "vision/edbf0d5ab44d/R1C2",
+          "vision/edbf0d5ab44d/R3C2"
+        ],
+        "explanation": "Figure 4D independently identifies each patient column and gives both assay response and clinical response."
+      },
+      "regimen_match": {
+        "value": "matched",
+        "evidence": [
+          "article:p33",
+          "article:p38"
+        ],
+        "explanation": "Assay and clinical outcomes were compared for first-line carboplatin/paclitaxel treatment."
+      },
+      "n_units": {
+        "value": 12,
+        "evidence": [
+          "article:p35",
+          "article:p38",
+          "vision/edbf0d5ab44d/R6C1"
+        ],
+        "explanation": "The exact comparison included 12 evaluable cases."
+      },
+      "split": {
+        "value": "none",
+        "evidence": [
+          "article:p38"
+        ],
+        "explanation": "No separate training cohort, held-out validation, or cross-validation was used for this 12-case comparison."
+      }
+    },
+    "headline": {
+      "metric": "accuracy",
+      "reported": 0.9167,
+      "reported_evidence": [
+        "article:p38",
+        "article:p3",
+        "vision/edbf0d5ab44d/R6C2"
+      ],
+      "threshold": 0.5,
+      "op": ">=",
+      "score_direction": "higher",
+      "records": [
+        {
+          "id": "hgsEOC-1",
+          "score": {
+            "ref": "vision/edbf0d5ab44d/R1C2",
+            "map": {
+              "S": 1,
+              "R": 0
+            },
+            "threshold": 0.5,
+            "op": ">="
+          },
+          "truth": {
+            "ref": "vision/edbf0d5ab44d/R3C2",
+            "map": {
+              "good": 1,
+              "poor": 0
+            }
+          }
+        },
+        {
+          "id": "hgsEOC-2",
+          "score": {
+            "ref": "vision/edbf0d5ab44d/R1C3",
+            "map": {
+              "S": 1,
+              "R": 0
+            },
+            "threshold": 0.5,
+            "op": ">="
+          },
+          "truth": {
+            "ref": "vision/edbf0d5ab44d/R3C3",
+            "map": {
+              "good": 1,
+              "poor": 0
+            }
+          }
+        },
+        {
+          "id": "hgsEOC-5",
+          "score": {
+            "ref": "vision/edbf0d5ab44d/R1C4",
+            "map": {
+              "S": 1,
+              "R": 0
+            },
+            "threshold": 0.5,
+            "op": ">="
+          },
+          "truth": {
+            "ref": "vision/edbf0d5ab44d/R3C4",
+            "map": {
+              "good": 1,
+              "poor": 0
+            }
+          }
+        },
+        {
+          "id": "hgsEOC-6",
+          "score": {
+            "ref": "vision/edbf0d5ab44d/R1C5",
+            "map": {
+              "S": 1,
+              "R": 0
+            },
+            "threshold": 0.5,
+            "op": ">="
+          },
+          "truth": {
+            "ref": "vision/edbf0d5ab44d/R3C5",
+            "map": {
+              "good": 1,
+              "poor": 0
+            }
+          }
+        },
+        {
+          "id": "hgsEOC-8",
+          "score": {
+            "ref": "vision/edbf0d5ab44d/R1C6",
+            "map": {
+              "S": 1,
+              "R": 0
+            },
+            "threshold": 0.5,
+            "op": ">="
+          },
+          "truth": {
+            "ref": "vision/edbf0d5ab44d/R3C6",
+            "map": {
+              "good": 1,
+              "poor": 0
+            }
+          }
+        },
+        {
+          "id": "hgsEOC-10",
+          "score": {
+            "ref": "vision/edbf0d5ab44d/R1C7",
+            "map": {
+              "S": 1,
+              "R": 0
+            },
+            "threshold": 0.5,
+            "op": ">="
+          },
+          "truth": {
+            "ref": "vision/edbf0d5ab44d/R3C7",
+            "map": {
+              "good": 1,
+              "poor": 0
+            }
+          }
+        },
+        {
+          "id": "hgsEOC-11",
+          "score": {
+            "ref": "vision/edbf0d5ab44d/R1C8",
+            "map": {
+              "S": 1,
+              "R": 0
+            },
+            "threshold": 0.5,
+            "op": ">="
+          },
+          "truth": {
+            "ref": "vision/edbf0d5ab44d/R3C8",
+            "map": {
+              "good": 1,
+              "poor": 0
+            }
+          }
+        },
+        {
+          "id": "hgsEOC-12",
+          "score": {
+            "ref": "vision/edbf0d5ab44d/R1C9",
+            "map": {
+              "S": 1,
+              "R": 0
+            },
+            "threshold": 0.5,
+            "op": ">="
+          },
+          "truth": {
+            "ref": "vision/edbf0d5ab44d/R3C9",
+            "map": {
+              "good": 1,
+              "poor": 0
+            }
+          }
+        },
+        {
+          "id": "hgsEOC-15",
+          "score": {
+            "ref": "vision/edbf0d5ab44d/R1C10",
+            "map": {
+              "S": 1,
+              "R": 0
+            },
+            "threshold": 0.5,
+            "op": ">="
+          },
+          "truth": {
+            "ref": "vision/edbf0d5ab44d/R3C10",
+            "map": {
+              "good": 1,
+              "poor": 0
+            }
+          }
+        },
+        {
+          "id": "hgsEOC-22",
+          "score": {
+            "ref": "vision/edbf0d5ab44d/R1C11",
+            "map": {
+              "S": 1,
+              "R": 0
+            },
+            "threshold": 0.5,
+            "op": ">="
+          },
+          "truth": {
+            "ref": "vision/edbf0d5ab44d/R3C11",
+            "map": {
+              "good": 1,
+              "poor": 0
+            }
+          }
+        },
+        {
+          "id": "lgsEOC-1",
+          "score": {
+            "ref": "vision/edbf0d5ab44d/R1C12",
+            "map": {
+              "S": 1,
+              "R": 0
+            },
+            "threshold": 0.5,
+            "op": ">="
+          },
+          "truth": {
+            "ref": "vision/edbf0d5ab44d/R3C12",
+            "map": {
+              "good": 1,
+              "poor": 0
+            }
+          }
+        },
+        {
+          "id": "lgsEOC-2",
+          "score": {
+            "ref": "vision/edbf0d5ab44d/R1C13",
+            "map": {
+              "S": 1,
+              "R": 0
+            },
+            "threshold": 0.5,
+            "op": ">="
+          },
+          "truth": {
+            "ref": "vision/edbf0d5ab44d/R3C13",
+            "map": {
+              "good": 1,
+              "poor": 0
+            }
+          }
+        }
+      ],
+      "blocked_reason": null
+    },
+    "notes": [
+      "Figure 4D shows 10 good and 2 poor clinical responses among 12 patients.",
+      "The carboplatin S/R row predicts all 10 good responses and 2 of 3 poor responses; hgsEOC-8 is the sole mismatch, yielding 11/12 = 0.9166667.",
+      "The independent reader transcribed low-grade labels as igsEOC in the image; IDs are normalized to lgsEOC consistent with Supplementary Table 3 and the article."
+    ]
+  },
+  "last_evaluation": {
+    "matched": true,
+    "metric": "accuracy",
+    "computed": 0.9166666666666666,
+    "reported": 0.9167,
+    "difference": -3.333333333332966e-05,
+    "n": 12,
+    "errors": [],
+    "rows": [
+      {
+        "id": "hgsEOC-1",
+        "score": 1,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "hgsEOC-2",
+        "score": 1,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "hgsEOC-5",
+        "score": 1,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "hgsEOC-6",
+        "score": 1,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "hgsEOC-8",
+        "score": 1,
+        "truth": 0,
+        "prediction": 1
+      },
+      {
+        "id": "hgsEOC-10",
+        "score": 1,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "hgsEOC-11",
+        "score": 1,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "hgsEOC-12",
+        "score": 1,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "hgsEOC-15",
+        "score": 1,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "hgsEOC-22",
+        "score": 0,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "lgsEOC-1",
+        "score": 0,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "lgsEOC-2",
+        "score": 1,
+        "truth": 1,
+        "prediction": 1
+      }
+    ],
+    "expected": {
+      "metric": "accuracy",
+      "value": 0.9167,
+      "n": 12
+    }
+  }
+}

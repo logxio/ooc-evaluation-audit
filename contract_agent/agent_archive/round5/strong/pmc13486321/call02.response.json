@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_vq7yp6lpzkw62wrb1myb9zw2",
+        "type": "function",
+        "function": {
+          "name": "python",
+          "arguments": "{\"code\": \"rows=get_rows('article.xml','Table 2')\\nfor i,r in enumerate(rows,1):\\n    print(i, len(r), r[:15])\"}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "We need inspect full table rows and understand scores. To inspect rows, I will use relevant tools.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 108,
+    "prompt_tokens": 22483,
+    "total_tokens": 22591,
+    "prompt_tokens_details": {
+      "cached_tokens": 1848
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 42
+    }
+  }
+}

@@ -1,0 +1,287 @@
+[
+  {
+    "name": "initial_code",
+    "output": {
+      "returncode": 0,
+      "stdout": "Total rows in Table S7: 24\nRow 0: ['Patient', 'Regimen', 'Treatment Response', 'IC50 (FOLFOX or FOLFIRI, uM)', 'PFS (mon)', 'Status']\nRow 1: ['P2', 'FOLFIRI', 'SD/PR', 1.181, 15.6, 'Progression']\nRow 2: ['P3', 'FOLFOX', 'PD', 30.83, 3.1, 'Progression']\nRow 3: ['P4', 'FOLFOX', 'SD/PR', 1.041, 11.3, 'Progression']\nRow 4: ['P5', 'FOLFOX', 'SD/PR', 1.268, 30.2, 'No Progression']\nRow 5: ['P6', 'FOLFOX', 'PD', 7.465, 6.5, 'Progression']\nRow 6: ['P7', 'FOLFIRI', 'PD', 33.91, 3.0, 'Progression']\nRow 7: ['P8', 'FOLFIRI', 'SD/PR', 15.92, 7.5, 'No Progression']\nRow 8: ['P9', 'FOLFOX', 'PD', 12.59, 4.6, 'Progression']\nRow 9: ['P10', 'FOLFIRI', 'PD', 64.1, 3.3, 'Progression']\nRow 10: ['P11', 'FOLFOX', 'SD/PR', 3.605, 13.7, 'Progression']\nRow 11: ['P12', 'FOLFOX', 'SD/PR', 2.441, 27.6, 'No Progression']\nRow 12: ['P13', 'FOLFOX', 'SD/PR', 0.4895, 23.7, 'No Progression']\nRow 13: ['P14', 'FOLFOX', 'SD/PR', 2.32, 24.2, 'No Progression']\nRow 14: ['P15', 'FOLFIRI', 'SD/PR', 3.048, 22.0, 'No Progression']\nRow 15: ['P16', 'FOLFIRI', 'SD/PR', 3.055, 18.6, 'No Progression']\nRow 16: ['P17', 'FOLFIRI', 'PD', 30.89, 2.6, 'Progression']\nRow 17: ['P18', 'FOLFOX', 'PD', 2.254, 7.1, 'Progression']\nRow 18: ['P19', 'FOLFOX', 'PD', 15.4, 5.2, 'Progression']\nRow 19: ['P21', 'FOLFIRI', 'PD', 14.98, 3.4, 'Progression']\nRow 20: ['P22', 'FOLFIRI', 'PD', 9.312, 4.2, 'Progression']\nRow 21: ['P23', 'FOLFOX', 'SD/PR', 6.247, 22.5, 'No Progression']\nRow 22: ['P24', 'FOLFIRI', 'SD/PR', 8.1, 10.3, 'No Progression']\nRow 23: ['P25', 'FOLFOX', 'SD/PR', 7.895, 15.8, 'No Progression']\nFOLFOX patient row indices (1-based): [3, 4, 5, 6, 9, 11, 12, 13, 14, 18, 19, 22, 24]\nCount: 13\nScores: [-30.83, -1.041, -1.268, -7.465, -12.59, -3.605, -2.441, -0.4895, -2.32, -2.254, -15.4, -6.247, -7.895]\nTruths: [0, 1, 1, 0, 0, 1, 1, 1, 1, 0, 0, 1, 1]\nPositives: 8, Negatives: 5\nCalculated AUC: 0.85\n",
+      "stderr": "",
+      "seconds": 0.2695518329855986,
+      "peak_rss_bytes": 21266432,
+      "limit_error": null,
+      "code_sha256": "deed98724c374cf4f6191e298daf7b2abf98df540914aef46ca654158868d50c",
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "supp.xls/Table S7/R1C1"
+            ],
+            "explanation": "Each row represents a unique patient."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p1"
+            ],
+            "explanation": "Patient-derived organoids (PDOs) used for chemosensitivity testing."
+          },
+          "readout": {
+            "value": "ic50",
+            "evidence": [
+              "supp.xls/Table S7/R1C4"
+            ],
+            "explanation": "IC50 values used as predictive scores."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p31"
+            ],
+            "explanation": "Lower IC50 indicates sensitivity (SD/PR)."
+          },
+          "threshold_rule": {
+            "value": "roc_optimized",
+            "evidence": [
+              "article:p31"
+            ],
+            "explanation": "ROC curve plotted to indicate predictive efficacy."
+          },
+          "threshold_timing": {
+            "value": "outcome_optimized",
+            "evidence": [
+              "article:p31"
+            ],
+            "explanation": "ROC analysis performed on the same cohort used for evaluation."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "supp.xls/Table S7/R2C1"
+            ],
+            "explanation": "Individual patient IDs mapped to outcomes."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "supp.xls/Table S7/R3C2"
+            ],
+            "explanation": "Regimen column matches clinical treatment (FOLFOX)."
+          },
+          "n_units": {
+            "value": 13,
+            "evidence": [
+              "supp.xls/Table S7"
+            ],
+            "explanation": "Count of FOLFOX patients in Table S7."
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p31"
+            ],
+            "explanation": "Analysis performed on the same cohort of 13 patients."
+          }
+        },
+        "headline": {
+          "metric": "auc",
+          "reported": 0.85,
+          "reported_evidence": [
+            "supp.xls/Table S7"
+          ],
+          "threshold": null,
+          "op": null,
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "P3",
+              "score": {
+                "ref": "supp.xls/Table S7/R3C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R3C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": 0
+            },
+            {
+              "id": "P4",
+              "score": {
+                "ref": "supp.xls/Table S7/R4C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R4C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": 1
+            },
+            {
+              "id": "P5",
+              "score": {
+                "ref": "supp.xls/Table S7/R5C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R5C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": 1
+            },
+            {
+              "id": "P6",
+              "score": {
+                "ref": "supp.xls/Table S7/R6C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R6C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": 0
+            },
+            {
+              "id": "P9",
+              "score": {
+                "ref": "supp.xls/Table S7/R9C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R9C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": 0
+            },
+            {
+              "id": "P11",
+              "score": {
+                "ref": "supp.xls/Table S7/R11C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R11C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": 1
+            },
+            {
+              "id": "P12",
+              "score": {
+                "ref": "supp.xls/Table S7/R12C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R12C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": 1
+            },
+            {
+              "id": "P13",
+              "score": {
+                "ref": "supp.xls/Table S7/R13C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R13C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": 1
+            },
+            {
+              "id": "P14",
+              "score": {
+                "ref": "supp.xls/Table S7/R14C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R14C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": 1
+            },
+            {
+              "id": "P18",
+              "score": {
+                "ref": "supp.xls/Table S7/R18C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R18C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": 0
+            },
+            {
+              "id": "P19",
+              "score": {
+                "ref": "supp.xls/Table S7/R19C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R19C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": 0
+            },
+            {
+              "id": "P23",
+              "score": {
+                "ref": "supp.xls/Table S7/R22C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R22C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": 1
+            },
+            {
+              "id": "P25",
+              "score": {
+                "ref": "supp.xls/Table S7/R24C4",
+                "calc": "multiply",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R24C4"
+                  },
+                  -1
+                ]
+              },
+              "truth": 1
+            }
+          ],
+          "blocked_reason": null
+        },
+        "notes": [
+          "Calculated AUC 0.85 from 13 FOLFOX patients."
+        ]
+      }
+    }
+  }
+]

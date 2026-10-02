@@ -1,0 +1,234 @@
+[
+  {
+    "name": "finish",
+    "arguments": {
+      "contract": {
+        "status": "blocked",
+        "fields": {
+          "unit": {
+            "value": "patient_regimen",
+            "evidence": [
+              "article:p27",
+              "41467_2021_22676_MOESM5_ESM.xlsx/Sheet1/A24"
+            ],
+            "explanation": "Patient-organoid pairs with matched drug regimens as indicated by gray rows in Supplementary Data 2."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p1"
+            ],
+            "explanation": "Lung cancer organoids (LCOs) cultured on InSMAR-chip."
+          },
+          "readout": {
+            "value": "viability",
+            "evidence": [
+              "article:p16"
+            ],
+            "explanation": "Cell viability measured by alamarBlue assay before and after drug treatment."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p20"
+            ],
+            "explanation": "Lower viability/AUC indicates drug sensitivity."
+          },
+          "threshold_rule": {
+            "value": "categorical",
+            "evidence": [
+              "article:p27"
+            ],
+            "explanation": "Binary classification of sensitive vs resistant based on agreement between organoid response and clinical outcome."
+          },
+          "threshold_timing": {
+            "value": "independent_reference",
+            "evidence": [
+              "article:p35"
+            ],
+            "explanation": "Clinical outcomes evaluated independently of organoid assay."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "41467_2021_22676_MOESM5_ESM.xlsx/Sheet1/A3",
+              "41467_2021_22676_MOESM5_ESM.xlsx/Sheet1/A4",
+              "41467_2021_22676_MOESM5_ESM.xlsx/Sheet1/A5",
+              "41467_2021_22676_MOESM5_ESM.xlsx/Sheet1/A6",
+              "41467_2021_22676_MOESM5_ESM.xlsx/Sheet1/A7",
+              "41467_2021_22676_MOESM5_ESM.xlsx/Sheet1/A8",
+              "41467_2021_22676_MOESM5_ESM.xlsx/Sheet1/A9",
+              "41467_2021_22676_MOESM5_ESM.xlsx/Sheet1/A10",
+              "41467_2021_22676_MOESM5_ESM.xlsx/Sheet1/A14",
+              "41467_2021_22676_MOESM5_ESM.xlsx/Sheet1/A22"
+            ],
+            "explanation": "Individual patient IDs available in Supplementary Data 2 gray rows."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p27"
+            ],
+            "explanation": "Drugs tested on organoids matched those administered to patients."
+          },
+          "n_units": {
+            "value": 10,
+            "evidence": [
+              "article:p27",
+              "41467_2021_22676_MOESM5_ESM.xlsx/Sheet1/A24"
+            ],
+            "explanation": "Ten organoid lines with evaluable clinical responses (gray rows in Supplementary Data 2)."
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p27"
+            ],
+            "explanation": "Evaluation on the same cohort used for establishing assay performance."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 1.0,
+          "reported_evidence": [
+            "article:p27"
+          ],
+          "threshold": null,
+          "op": "==",
+          "score_direction": "higher",
+          "records": [],
+          "blocked_reason": "Independent organoid prediction (score) evidence not available in source-bound format. Clinical outcomes (truth) are in MOESM5 Sheet1 columns E/I, but organoid binary predictions are derived from dose-response curves in MOESM9 without explicit per-patient binary classification stored in a table. Cannot construct records with independent score and truth references."
+        },
+        "notes": [
+          "Article:p27 states 100% accuracy for 10 evaluable patient-organoid pairs.",
+          "Clinical outcomes available in 41467_2021_22676_MOESM5_ESM.xlsx/Sheet1 (gray rows).",
+          "Organoid drug response data in 41467_2021_22676_MOESM9_ESM.xlsx contains raw viability curves, not pre-computed binary predictions.",
+          "Reproducing accuracy requires independent score (prediction) and truth (outcome) evidence per record, which is not available in tabular form."
+        ]
+      }
+    },
+    "output": {
+      "contract": {
+        "status": "blocked",
+        "fields": {
+          "unit": {
+            "value": "patient_regimen",
+            "evidence": [
+              "article:p27",
+              "41467_2021_22676_MOESM5_ESM.xlsx/Sheet1/A24"
+            ],
+            "explanation": "Patient-organoid pairs with matched drug regimens as indicated by gray rows in Supplementary Data 2."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p1"
+            ],
+            "explanation": "Lung cancer organoids (LCOs) cultured on InSMAR-chip."
+          },
+          "readout": {
+            "value": "viability",
+            "evidence": [
+              "article:p16"
+            ],
+            "explanation": "Cell viability measured by alamarBlue assay before and after drug treatment."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p20"
+            ],
+            "explanation": "Lower viability/AUC indicates drug sensitivity."
+          },
+          "threshold_rule": {
+            "value": "categorical",
+            "evidence": [
+              "article:p27"
+            ],
+            "explanation": "Binary classification of sensitive vs resistant based on agreement between organoid response and clinical outcome."
+          },
+          "threshold_timing": {
+            "value": "independent_reference",
+            "evidence": [
+              "article:p35"
+            ],
+            "explanation": "Clinical outcomes evaluated independently of organoid assay."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "41467_2021_22676_MOESM5_ESM.xlsx/Sheet1/A3",
+              "41467_2021_22676_MOESM5_ESM.xlsx/Sheet1/A4",
+              "41467_2021_22676_MOESM5_ESM.xlsx/Sheet1/A5",
+              "41467_2021_22676_MOESM5_ESM.xlsx/Sheet1/A6",
+              "41467_2021_22676_MOESM5_ESM.xlsx/Sheet1/A7",
+              "41467_2021_22676_MOESM5_ESM.xlsx/Sheet1/A8",
+              "41467_2021_22676_MOESM5_ESM.xlsx/Sheet1/A9",
+              "41467_2021_22676_MOESM5_ESM.xlsx/Sheet1/A10",
+              "41467_2021_22676_MOESM5_ESM.xlsx/Sheet1/A14",
+              "41467_2021_22676_MOESM5_ESM.xlsx/Sheet1/A22"
+            ],
+            "explanation": "Individual patient IDs available in Supplementary Data 2 gray rows."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p27"
+            ],
+            "explanation": "Drugs tested on organoids matched those administered to patients."
+          },
+          "n_units": {
+            "value": 10,
+            "evidence": [
+              "article:p27",
+              "41467_2021_22676_MOESM5_ESM.xlsx/Sheet1/A24"
+            ],
+            "explanation": "Ten organoid lines with evaluable clinical responses (gray rows in Supplementary Data 2)."
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p27"
+            ],
+            "explanation": "Evaluation on the same cohort used for establishing assay performance."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 1.0,
+          "reported_evidence": [
+            "article:p27"
+          ],
+          "threshold": null,
+          "op": "==",
+          "score_direction": "higher",
+          "records": [],
+          "blocked_reason": "Independent organoid prediction (score) evidence not available in source-bound format. Clinical outcomes (truth) are in MOESM5 Sheet1 columns E/I, but organoid binary predictions are derived from dose-response curves in MOESM9 without explicit per-patient binary classification stored in a table. Cannot construct records with independent score and truth references."
+        },
+        "notes": [
+          "Article:p27 states 100% accuracy for 10 evaluable patient-organoid pairs.",
+          "Clinical outcomes available in 41467_2021_22676_MOESM5_ESM.xlsx/Sheet1 (gray rows).",
+          "Organoid drug response data in 41467_2021_22676_MOESM9_ESM.xlsx contains raw viability curves, not pre-computed binary predictions.",
+          "Reproducing accuracy requires independent score (prediction) and truth (outcome) evidence per record, which is not available in tabular form."
+        ]
+      },
+      "execution_feedback": {
+        "matched": false,
+        "metric": "accuracy",
+        "computed": null,
+        "reported": 1.0,
+        "difference": null,
+        "n": 0,
+        "errors": [
+          "No source-bound observations: Independent organoid prediction (score) evidence not available in source-bound format. Clinical outcomes (truth) are in MOESM5 Sheet1 columns E/I, but organoid binary predictions are derived from dose-response curves in MOESM9 without explicit per-patient binary classification stored in a table. Cannot construct records with independent score and truth references.",
+          "Expected 10 analysis units, got 0"
+        ],
+        "expected": {
+          "metric": "accuracy",
+          "value": 1.0,
+          "n": 10
+        }
+      }
+    }
+  }
+]

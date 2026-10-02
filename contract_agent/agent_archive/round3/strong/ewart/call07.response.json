@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_exyynjwhpe6llp5hu47f6wre",
+        "type": "function",
+        "function": {
+          "name": "python",
+          "arguments": "{\"code\": \"f='43856_2022_209_MOESM7_ESM.xlsx'; sh='Sheet 1'\\nrows=get_rows(f,sh)\\nfor i,r in enumerate(rows,1):\\n vals=[f'{j+1}:{v}' for j,v in enumerate(r) if v not in (None,'')]\\n if vals: print(i,' | '.join(vals))\\n\"}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "Need find corrected MOS perhaps in MOESM7? Inspect.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 136,
+    "prompt_tokens": 31131,
+    "total_tokens": 31267,
+    "prompt_tokens_details": {
+      "cached_tokens": 27448
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 13
+    }
+  }
+}

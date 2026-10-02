@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-0-pro-260215",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_j26e40133l3zz3ftsmgh83hn",
+        "type": "function",
+        "function": {
+          "name": "finish",
+          "arguments": "{\"contract\": {\"status\": \"computed\", \"fields\": {\"unit\": {\"value\": \"patient\", \"evidence\": [\"article:p13\", \"vision/0f381b0287a2/R1C1\"], \"explanation\": \"9 advanced PDAC patients with matched PDO pharmacotyping and clinical PFS outcomes\"}, \"platform\": {\"value\": \"organoid\", \"evidence\": [\"article:p2\", \"article:p6\"], \"explanation\": \"Patient-derived pancreatic cancer organoids were used for in vitro pharmacotyping\"}, \"readout\": {\"value\": \"auc\", \"evidence\": [\"supp.xlsx/Key/A2\", \"article:p13\"], \"explanation\": \"Drug response measured via area under the dose-response curve; lower AUC indicates higher PDO sensitivity\"}, \"direction\": {\"value\": \"lower_sensitive\", \"evidence\": [\"supp.xlsx/Key/A4\", \"supp.xlsx/Key/A6\", \"article:p13\"], \"explanation\": \"Sensitive = lowest 33% AUC (blue text in figure, blue fill in table), Resistant = highest 34% AUC (red text in figure, red fill in table)\"}, \"threshold_rule\": {\"value\": \"cohort_quantile\", \"evidence\": [\"article:p13\"], \"explanation\": \"Sensitivity threshold = 33rd percentile of 66-PDO AUC distribution; resistance threshold = 66th percentile\"}, \"threshold_timing\": {\"value\": \"independent_reference\", \"evidence\": [\"article:p13\"], \"explanation\": \"AUC thresholds defined on full 66-PDO cohort prior to evaluating the 9 retrospective patients\"}, \"patient_mapping\": {\"value\": \"individual_available\", \"evidence\": [\"article:p13\", \"vision/0f381b0287a2/R1C1\"], \"explanation\": \"Each patient has a uniquely matched PDO with pharmacotyping results\"}, \"regimen_match\": {\"value\": \"matched\", \"evidence\": [\"article:p13\", \"vision/0f381b0287a2/R1C1\"], \"explanation\": \"PDO sensitivity was assessed for the exact chemotherapeutic agents each patient received (listed in parenthesis next to patient ID in Figure S6A)\"}, \"n_units\": {\"value\": 9, \"evidence\": [\"article:p13\", \"vision/0f381b0287a2/R9C1\"], \"explanation\": \"9 patients included in the retrospective concordance analysis, as listed in Figure S6A of the supplement\"}, \"split\": {\"value\": \"same_cohort\", \"evidence\": [\"article:p13\"], \"explanation\": \"The 9 patients are a subset of the full 66-PDO cohort; no separate held-out test cohort was used for this small retrospective analysis\"}}, \"headline\": {\"metric\": \"accuracy\", \"reported\": 0.8888888888888888, \"reported_evidence\": [\"article:p13\"], \"threshold\": 180, \"op\": \">\", \"score_direction\": \"higher\", \"records\": [{\"id\": \"hF31\", \"score\": {\"ref\": \"vision/0f381b0287a2/R1C1\", \"map\": {\"sensitive\": 1, \"intermediate\": 1, \"resistant\": 0}}, \"truth\": {\"ref\": \"vision/0f381b0287a2/R1C2\", \"op\": \">\", \"threshold\": 180, \"map\": {\">=180\": 1, \"<180\": 0}}}, {\"id\": \"hF2\", \"score\": {\"ref\": \"vision/0f381b0287a2/R2C1\", \"map\": {\"sensitive\": 1, \"intermediate\": 1, \"resistant\": 0}}, \"truth\": {\"ref\": \"vision/0f381b0287a2/R2C2\", \"op\": \">\", \"threshold\": 180, \"map\": {\">=180\": 1, \"<180\": 0}}}, {\"id\": \"hM1A\", \"score\": {\"ref\": \"vision/0f381b0287a2/R3C1\", \"map\": {\"sensitive\": 1, \"intermediate\": 1, \"resistant\": 0}}, \"truth\": {\"ref\": \"vision/0f381b0287a2/R3C2\", \"op\": \">\", \"threshold\": 180, \"map\": {\">=180\": 1, \"<180\": 0}}}, {\"id\": \"hF57\", \"score\": {\"ref\": \"vision/0f381b0287a2/R4C1\", \"map\": {\"sensitive\": 1, \"intermediate\": 1, \"resistant\": 0}}, \"truth\": {\"ref\": \"vision/0f381b0287a2/R4C2\", \"op\": \">\", \"threshold\": 180, \"map\": {\">=180\": 1, \"<180\": 0}}}, {\"id\": \"hF44\", \"score\": {\"ref\": \"vision/0f381b0287a2/R5C1\", \"map\": {\"sensitive\": 1, \"intermediate\": 1, \"resistant\": 0}}, \"truth\": {\"ref\": \"vision/0f381b0287a2/R5C2\", \"op\": \">\", \"threshold\": 180, \"map\": {\">=180\": 1, \"<180\": 0}}}, {\"id\": \"hF23\", \"score\": {\"ref\": \"vision/0f381b0287a2/R6C1\", \"map\": {\"sensitive\": 1, \"intermediate\": 1, \"resistant\": 0}}, \"truth\": {\"ref\": \"vision/0f381b0287a2/R6C2\", \"op\": \">\", \"threshold\": 180, \"map\": {\">=180\": 1, \"<180\": 0}}}, {\"id\": \"hF50\", \"score\": {\"ref\": \"vision/0f381b0287a2/R7C1\", \"map\": {\"sensitive\": 1, \"intermediate\": 1, \"resistant\": 0}}, \"truth\": {\"ref\": \"vision/0f381b0287a2/R7C2\", \"op\": \">\", \"threshold\": 180, \"map\": {\">=180\": 1, \"<180\": 0}}}, {\"id\": \"hF3\", \"score\": {\"ref\": \"vision/0f381b0287a2/R8C1\", \"map\": {\"sensitive\": 1, \"intermediate\": 1, \"resistant\": 0}}, \"truth\": {\"ref\": \"vision/0f381b0287a2/R8C2\", \"op\": \">\", \"threshold\": 180, \"map\": {\">=180\": 1, \"<180\": 0}}}, {\"id\": \"hF28\", \"score\": {\"ref\": \"vision/0f381b0287a2/R9C1\", \"map\": {\"sensitive\": 1, \"intermediate\": 1, \"resistant\": 0}}, \"truth\": {\"ref\": \"vision/0f381b0287a2/R9C2\", \"op\": \">\", \"threshold\": 180, \"map\": {\">=180\": 1, \"<180\": 0}}}], \"blocked_reason\": null}, \"notes\": [\"Accuracy = 8/9 = 0.8888888888888888, matching the target value: 5 of 6 good responders (PFS > 180d median) were correctly predicted (treated with ≥1 PDO-sensitive drug, no PDO-resistant drugs), 2 of 3 poor responders (PFS < 180d) were correctly predicted (treated with ≥1 PDO-resistant drug), 1 patient (hF50) had an inconsistent outcome as reported in article:p13. All 9 patients have source-bound PDO pharmacotyping results and PFS values from Figure S6A (supp.pdf page 6).\"]}}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 1940,
+    "prompt_tokens": 49212,
+    "total_tokens": 51152,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  }
+}

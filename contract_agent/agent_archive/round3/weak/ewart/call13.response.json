@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-0-pro-260215",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_9zf85e9rnbw1ppcpkn8ax6qw",
+        "type": "function",
+        "function": {
+          "name": "preview_table",
+          "arguments": "{\"file\": \"43856_2022_209_MOESM1_ESM.xlsx\", \"sheet\": \"Sheet1\", \"start\"><parameter name=\"contract\": {\"status\": \"blocked\", \"fields\": {\"unit\": {\"value\": \"drug\", \"evidence\": [\"article:p54\"], \"explanation\": \"Analysis unit is drug.\"}, \"platform\": {\"value\": \"perfused_chip\", \"evidence\": [\"article:p10\"], \"explanation\": \"Liver-Chip platform.\"}, \"readout\": {\"value\": \"toxicity_margin\", \"evidence\": [\"article:p54\"], \"explanation\": \"Protein-binding corrected MOS readout.\"}, \"direction\": {\"value\": \"lower_sensitive\", \"evidence\": [\"article:p54\"], \"explanation\": \"Lower MOS = higher toxicity.\"}, \"threshold_rule\": {\"value\": \"roc_optimized\", \"evidence\": [\"article:p54\"], \"explanation\": \"Threshold 375 optimized for 100% specificity.\"}, \"threshold_timing\": {\"value\": \"outcome_optimized\", \"evidence\": [\"article:p54\"], \"explanation\": \"Threshold optimized on study cohort.\"}, \"patient_mapping\": {\"value\": \"not_applicable\", \"evidence\": [\"article:p54\"], \"explanation\": \"Drug-level analysis.\"}, \"regimen_match\": {\"value\": \"not_applicable\", \"evidence\": [\"article:p54\"], \"explanation\": \"No patient regimen matching.\"}, \"n_units\": {\"value\": 18, \"evidence\": [\"article:p54\"], \"explanation\": \"18 drugs tested in both donors.\"}, \"split\": {\"value\": \"same_cohort\", \"evidence\": [\"article:p54\"], \"explanation\": \"Same cohort used for threshold and performance.\"}}, \"headline\": {\"metric\": \"sensitivity\", \"reported\": 0.8666666666666667, \"reported_evidence\": [\"article:p54\", \"article.xml/Table 6/R4C6\"], \"threshold\": 375, \"op\": \"<\", \"score_direction\": \"higher\", \"records\": [], \"blocked_reason\": \"Protein-binding corrected MOS values are not available in parsed tables; Table 4 contains uncorrected MOS values which cannot be used with the 375 threshold. Individual drug-level protein-binding corrected scores are required to populate records with independent assay and clinical evidence.\"}, \"notes\": [\"Reported sensitivity 87% (13/15) matches target 0.8666666666666667, but individual protein-binding corrected assay scores are not accessible in available source materials to build fully referenced records.\"]}}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 644,
+    "prompt_tokens": 72950,
+    "total_tokens": 73594,
+    "prompt_tokens_details": {
+      "cached_tokens": 1848
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  }
+}

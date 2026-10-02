@@ -1,0 +1,17 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "for fn,sheets in tables.items():\n for sh,o in sheets.items():\n  rows=o['rows']\n  for ri,row in enumerate(rows,1):\n   for ci,v in enumerate(row,1):\n    if 'AUC' in str(v) or 'auc' in str(v):\n     print(fn,sh,ri,ci,repr(v))\n"
+    },
+    "output": {
+      "returncode": 0,
+      "stdout": "CTM2-15-e70534-s002.pdf page10 4 12 '(AUC)'\nCTM2-15-e70534-s002.pdf page10 6 7 'AUC'\nCTM2-15-e70534-s002.pdf page11 4 12 '(AUC)'\nCTM2-15-e70534-s002.pdf page11 6 7 'AUC'\nCTM2-15-e70534-s002.pdf page12 3 5 'AUCsum.'\n",
+      "stderr": "",
+      "seconds": 0.12981449998915195,
+      "peak_rss_bytes": 4063232,
+      "limit_error": null,
+      "code_sha256": "602e145c5725a4e575d7ba2be888e220ebdc066fbe74d6343ed3fe4c6d3d1120"
+    }
+  }
+]

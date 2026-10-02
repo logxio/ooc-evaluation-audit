@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_vv86rnxpw7mutzex5e9jtntm",
+        "type": "function",
+        "function": {
+          "name": "python",
+          "arguments": "{\"code\": \"rows=get_rows('43856_2022_209_MOESM1_ESM.xlsx','Sheet1')\\nfor i in range(1,250):\\n r=rows[i-1]\\n if any(v not in (None,'') for v in r):\\n  print(i, [(j+1,v) for j,v in enumerate(r) if v not in (None,'')])\\n\"}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "Could derive corrected MOS from uncorrected and protein fractions. The exact formula for corrected MOS is still being verified. I will first check the relevant data columns for the required parameters.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 234,
+    "prompt_tokens": 49869,
+    "total_tokens": 50103,
+    "prompt_tokens_details": {
+      "cached_tokens": 43832
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 110
+    }
+  }
+}

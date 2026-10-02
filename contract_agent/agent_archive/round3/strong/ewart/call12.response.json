@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_tq1w7pw2qhutv2kq5w6pd9u0",
+        "type": "function",
+        "function": {
+          "name": "python",
+          "arguments": "{\"code\": \"for f in tables:\\n if f.endswith('.pdf'):\\n  for sh in tables[f]:\\n   rows=get_rows(f,sh)\\n   txt=' '.join(str(x) for r in rows for x in r if x)\\n   if '375' in txt or 'protein binding' in txt.lower() or 'free fraction' in txt.lower():\\n    print(f,sh,txt[:1000])\\n\"}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "Need build records perhaps derive corrected MOS from raw endpoint concentrations and protein binding formula. Need to search for the formula.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 153,
+    "prompt_tokens": 40324,
+    "total_tokens": 40477,
+    "prompt_tokens_details": {
+      "cached_tokens": 38712
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 28
+    }
+  }
+}

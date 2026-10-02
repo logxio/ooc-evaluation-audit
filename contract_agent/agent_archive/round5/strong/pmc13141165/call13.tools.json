@@ -1,0 +1,110 @@
+[
+  {
+    "name": "finish",
+    "arguments": {
+      "contract": {
+        "status": "blocked",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p68",
+              "article:p69"
+            ],
+            "explanation": "Cohort 3 consists of 24 HCC patients, each contributing one PDOTS OKI result and one recurrence outcome."
+          },
+          "platform": {
+            "value": "perfused_chip",
+            "evidence": [
+              "article:p50",
+              "article:p68"
+            ],
+            "explanation": "PDOTS were cultured in a three-dimensional microfluidic chip with lateral channels for medium or drug perfusion."
+          },
+          "readout": {
+            "value": "viability",
+            "evidence": [
+              "article:p28",
+              "article:p69"
+            ],
+            "explanation": "The OKI is derived from AO/PI viability after apatinib plus anti-PD-1 treatment."
+          },
+          "direction": {
+            "value": "higher_sensitive",
+            "evidence": [
+              "article:p69",
+              "vision/2cce52c86a32/R43C5",
+              "vision/2cce52c86a32/R44C5"
+            ],
+            "explanation": "Higher OKI indicates greater organoid killing; the no-recurrence group has the higher OKI distribution."
+          },
+          "threshold_rule": {
+            "value": "no_binary_rule",
+            "evidence": [
+              "vision/2cce52c86a32/R53C3",
+              "vision/2cce52c86a32/R53C5"
+            ],
+            "explanation": "The requested endpoint is a continuous-score ROC AUC, so no classification cutoff is used."
+          },
+          "threshold_timing": {
+            "value": "not_applicable",
+            "evidence": [
+              "vision/2cce52c86a32/R53C3"
+            ],
+            "explanation": "AUC has no binary threshold."
+          },
+          "patient_mapping": {
+            "value": "partial",
+            "evidence": [
+              "vision/2cce52c86a32/R43C5",
+              "vision/2cce52c86a32/R44C5"
+            ],
+            "explanation": "Figure 5E displays individual points within recurrence and no-recurrence groups, but the available transcription gives group-level lists rather than 24 independently addressable score cells."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p68",
+              "article:p69"
+            ],
+            "explanation": "Patients received adjuvant anti-PD-1 antibody plus apatinib, matching the ex vivo apatinib plus anti-PD-1 treatment."
+          },
+          "n_units": {
+            "value": 24,
+            "evidence": [
+              "article:p68",
+              "article:p69",
+              "article.xml/Table 1/R1C4"
+            ],
+            "explanation": "The published ROC analysis denominator is 24 patients."
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p68",
+              "article:p69"
+            ],
+            "explanation": "OKI and recurrence were assessed in the same 24-patient cohort."
+          }
+        },
+        "headline": {
+          "metric": "auc",
+          "reported": 0.899,
+          "reported_evidence": [
+            "vision/2cce52c86a32/R53C5"
+          ],
+          "threshold": null,
+          "op": ">",
+          "score_direction": "higher",
+          "records": [],
+          "blocked_reason": "Cannot construct 24 source-bound records because the individual scatter points do not have 24 distinct, independently addressable numeric source references. The parsed supplementary table is aggregate, and the figure transcription returns group-level lists of approximate point values rather than separate per-patient score cells."
+        },
+        "notes": [
+          "A zoomed transcription of Figure 5E returned 17 recurrence values and 7 no-recurrence values, confirming n=24, but as shared list cells rather than distinct per-patient references.",
+          "Using those approximate transcribed values gives 107/119=0.89915966, matching the rounded published AUC, but this does not satisfy the requirement for independently identifiable row-level assay evidence."
+        ]
+      }
+    },
+    "output_sha256": "865ab5b927cb89663726e6d7b126c5d933d337f470fb395e3ac1959b34f81abc"
+  }
+]

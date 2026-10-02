@@ -1,0 +1,118 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_tl60mt9bzu5m9grp4qgxcllk",
+        "type": "function",
+        "function": {
+          "name": "read_figure",
+          "arguments": "{\"file\": \"jitc-14-5-g005.jpg\", \"crop\": [0.59, 0.605, 0.625, 0.625]}"
+        }
+      },
+      {
+        "id": "call_vnzz800irt0qytlr6xhnwbsa",
+        "type": "function",
+        "function": {
+          "name": "read_figure",
+          "arguments": "{\"file\": \"jitc-14-5-g005.jpg\", \"crop\": [0.61, 0.607, 0.645, 0.627]}"
+        }
+      },
+      {
+        "id": "call_mj50fo6n7kamytu4clv6dziq",
+        "type": "function",
+        "function": {
+          "name": "read_figure",
+          "arguments": "{\"file\": \"jitc-14-5-g005.jpg\", \"crop\": [0.59, 0.611, 0.625, 0.631]}"
+        }
+      },
+      {
+        "id": "call_wcfnhgz0wut12w8a055a84fh",
+        "type": "function",
+        "function": {
+          "name": "read_figure",
+          "arguments": "{\"file\": \"jitc-14-5-g005.jpg\", \"crop\": [0.62, 0.611, 0.655, 0.631]}"
+        }
+      },
+      {
+        "id": "call_0l4fa7sdyb8n3njzk2biqskv",
+        "type": "function",
+        "function": {
+          "name": "read_figure",
+          "arguments": "{\"file\": \"jitc-14-5-g005.jpg\", \"crop\": [0.59, 0.644, 0.625, 0.664]}"
+        }
+      },
+      {
+        "id": "call_kgjpbmoi0vvl6ert0o6ly3k7",
+        "type": "function",
+        "function": {
+          "name": "read_figure",
+          "arguments": "{\"file\": \"jitc-14-5-g005.jpg\", \"crop\": [0.62, 0.648, 0.655, 0.668]}"
+        }
+      },
+      {
+        "id": "call_mximwarv8x33jbzuamadpys1",
+        "type": "function",
+        "function": {
+          "name": "read_figure",
+          "arguments": "{\"file\": \"jitc-14-5-g005.jpg\", \"crop\": [0.59, 0.65, 0.625, 0.67]}"
+        }
+      },
+      {
+        "id": "call_7rl53dolsitclajz0id86ds6",
+        "type": "function",
+        "function": {
+          "name": "read_figure",
+          "arguments": "{\"file\": \"jitc-14-5-g005.jpg\", \"crop\": [0.62, 0.656, 0.655, 0.676]}"
+        }
+      },
+      {
+        "id": "call_z72t43qxo0gcugdlh2578pm8",
+        "type": "function",
+        "function": {
+          "name": "read_figure",
+          "arguments": "{\"file\": \"jitc-14-5-g005.jpg\", \"crop\": [0.59, 0.658, 0.625, 0.678]}"
+        }
+      },
+      {
+        "id": "call_hsz1m4yyhyu3flygr5ep4esi",
+        "type": "function",
+        "function": {
+          "name": "read_figure",
+          "arguments": "{\"file\": \"jitc-14-5-g005.jpg\", \"crop\": [0.62, 0.658, 0.655, 0.678]}"
+        }
+      },
+      {
+        "id": "call_g56yxw47awozd0rfff8sy6pu",
+        "type": "function",
+        "function": {
+          "name": "read_figure",
+          "arguments": "{\"file\": \"jitc-14-5-g005.jpg\", \"crop\": [0.59, 0.66, 0.625, 0.68]}"
+        }
+      },
+      {
+        "id": "call_2m7drjml0ftonduv7n3t4ysa",
+        "type": "function",
+        "function": {
+          "name": "read_figure",
+          "arguments": "{\"file\": \"jitc-14-5-g005.jpg\", \"crop\": [0.62, 0.668, 0.655, 0.688]}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "Need contract accepted. \n\nI've confirmed the current method for extracting scores from mixed text is invalid, and the existing reading tools cannot meet the requirements. I plan to use the figure reading tool to extract data point values individually, transcribe each point as a separate cell, and record unique references to complete the score extraction.\n\nI've verified the feasibility of parallel batch calls to the figure reading tool for extracting values of 24 target points, and confirmed the applicable range of the target reading panel.\n\nI've decided to process 12 target points in each parallel batch, and confirmed the panel's Y-axis scale and X-axis distribution characteristics.\n\nI've confirmed the applicable cropping range for target points, finalized the size of the local cropping area, and decided to parallelize all 24 target point value extraction tasks at once, which will generate relatively long output.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 1609,
+    "prompt_tokens": 43786,
+    "total_tokens": 45395,
+    "prompt_tokens_details": {
+      "cached_tokens": 38712
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 762
+    }
+  }
+}

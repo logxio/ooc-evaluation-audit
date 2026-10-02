@@ -1,0 +1,9 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "# Search for tables containing \"18 patients\" or \"29 treatments\" or prediction/outcome columns\n# Also look for Table S6 which might contain the community cohort data\nfor fname in [\"mmc1.pdf\", \"mmc6.pdf\", \"supp.pdf\"]:\n    if fname in tables:\n        for sname, t in tables[fname].items():\n            for r_idx, row in enumerate(t[\"rows\"]):\n                row_text = \" \".join([str(c) for c in row if c]).lower()\n                if \"table s6\" in row_text:\n                    print(f\"Found 'Table S6' in {fname}/{sname} at row {r_idx}\")\n                    for i in range(max(0, r_idx-1), min(r_idx+20, t[\"nrows\"])):\n                        print(f\"  Row {i}: {t['rows'][i][:10]}\")\n                    break"
+    },
+    "output_sha256": "638ad4b669b549da36ec95b67ae9998148bfe6f21b618d972288f4cb8503c09b"
+  }
+]

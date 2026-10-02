@@ -1,0 +1,9 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "PDF='2022_281692_KUUSANMAKI_SUPPL.pdf'\nprint(type(tables), tables.keys())\nprint(type(tables[PDF]), tables[PDF].keys())\nfor sh in list(tables[PDF].keys())[:3]:\n o=tables[PDF][sh]\n print(sh,type(o), dir(o)[:20], getattr(o,'nrows',None), getattr(o,'ncols',None))\n print(type(get_rows(PDF,sh)), len(get_rows(PDF,sh)))\n print(get_rows(PDF,sh)[0][:3])\n"
+    },
+    "output_sha256": "36d44702e8b3d632c8d44cd835fd8bd965f8ee110a5cb0e80c2d9bcc88794407"
+  }
+]

@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_odr9bwosdf8nsrfpqhot7ldn",
+        "type": "function",
+        "function": {
+          "name": "python",
+          "arguments": "{\"code\": \"FILE='41467_2021_22676_MOESM5_ESM.xlsx'; SHEET='Sheet1'\\nrows=get_rows(FILE,SHEET)\\nfor i,r in enumerate(rows):\\n print(i+1, r)\\nprint('styles sample')\\nfor i in range(1,26):\\n vals=[]\\n for j in range(1,15):\\n  st=styles.get(cell_ref(FILE,SHEET,i,j))\\n  if st: vals.append((j,st))\\n print(i, vals[:5])\"}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "We need inspect workbook. Check rows/styles, preview.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 174,
+    "prompt_tokens": 29761,
+    "total_tokens": 29935,
+    "prompt_tokens_details": {
+      "cached_tokens": 2360
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 15
+    }
+  }
+}

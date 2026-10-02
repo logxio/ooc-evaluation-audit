@@ -1,0 +1,315 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "F='41467_2021_22676_MOESM9_ESM.xlsx/Drug responses of LCOs/'\ndef trip(col,row): return [F+c+str(row) for c in col]\nS=lambda refs: {\"refs\":refs,\"aggregate\":\"mean\",\"threshold\":0.5,\"op\":\"<\"}\nrecs=[\n (\"LC96+PC\",   S(trip(['B','C','D'],58)),  {\"ref\":\"supp.xlsx/Sheet1/I3\",\"map\":{\"PD to PC\":0}}),\n (\"LC132+Afa\", S(trip(['B','C','D'],33)),  {\"ref\":\"supp.xlsx/Sheet1/I4\",\"map\":{\"PD to Afa\":0}}),\n (\"CRC1+Oxa\",  S(trip(['B','C','D'],153)), {\"ref\":\"supp.xlsx/Sheet1/E5\",\"map\":{\"PD\":0}}),\n (\"LC131+Gef\", S(trip(['T','U','V'],11)),  {\"ref\":\"supp.xlsx/Sheet1/I6\",\"map\":{\"non-PD\":1}}),\n (\"LC133+Gef\", S(trip(['W','X','Y'],11)),  {\"ref\":\"supp.xlsx/Sheet1/I7\",\"map\":{\"PR to Gef\":1}}),\n (\"LC134+GC\",  S(trip(['E','F','G'],82)),  {\"ref\":\"supp.xlsx/Sheet1/I8\",\"map\":{\"PR to GC\":1}}),\n (\"LC101+Gef\", S(trip(['H','I','J'],11)),  {\"ref\":\"supp.xlsx/Sheet1/I9\",\"map\":{\"non-PD to Osi\":1}}),\n (\"LC127+PC\",  S(trip(['Q','R','S'],58)),  {\"ref\":\"supp.xlsx/Sheet1/I10\",\"map\":{\"PD\":0}}),\n (\"LC97+GC\",   S(trip(['B','C','D'],82)),  {\"ref\":\"supp.xlsx/Sheet1/I14\",\"map\":{\"PD to GC\":0}}),\n (\"LC137+EC\",  {\"ref\":\"vision/LC137_EC_onchip_resistant\"}, {\"ref\":\"supp.xlsx/Sheet1/E22\",\"map\":{\"PD\":0}}),\n]\nrecords=[{\"id\":i,\"score\":s,\"truth\":t} for i,s,t in recs]\nmeans={\"LC96+PC\":0.6150,\"LC132+Afa\":0.6249,\"CRC1+Oxa\":0.6672,\"LC131+Gef\":0.0447,\"LC133+Gef\":0.2411,\n       \"LC134+GC\":0.2630,\"LC101+Gef\":0.2043,\"LC127+PC\":1.0097,\"LC97+GC\":1.0806,\"LC137+EC\":0.0}\ntruths={\"LC96+PC\":0,\"LC132+Afa\":0,\"CRC1+Oxa\":0,\"LC131+Gef\":1,\"LC133+Gef\":1,\"LC134+GC\":1,\"LC101+Gef\":1,\"LC127+PC\":0,\"LC97+GC\":0,\"LC137+EC\":0}\nacc=sum(1 for k in means if (means[k]<0.5)==(truths[k]==1))/10\nprint(\"computed accuracy:\",acc)\nCONTRACT={\"status\":\"computed\",\n \"fields\":{\n  \"unit\":{\"value\":\"patient_regimen\",\"evidence\":[\"article:p27\",\"supp.xlsx/Sheet1/A3\"],\"explanation\":\"One record per patient organoid line paired with the specific regimen the patient received and that was tested on-chip\"},\n  \"platform\":{\"value\":\"microwell\",\"evidence\":[\"article:p16\",\"article:p27\"],\"explanation\":\"1-week drug sensitivity tests run on the InSMAR superhydrophobic microwell array chip\"},\n  \"readout\":{\"value\":\"ic50\",\"evidence\":[\"41467_2021_22676_MOESM1_ESM.pdf/page13/R3C6\",\"article:p20\"],\"explanation\":\"On-chip calls derive from fitted dose-response curves (IC50 / AUC-DRC; Supp Fig 11a log10(IC50) heat map); reconstructed from mean replicate viability at the top tested concentration\"},\n  \"direction\":{\"value\":\"lower_sensitive\",\"evidence\":[\"article:p20\"],\"explanation\":\"Lower IC50 / lower residual viability indicates sensitivity\"},\n  \"threshold_rule\":{\"value\":\"categorical\",\"evidence\":[\"41467_2021_22676_MOESM1_ESM.pdf/page13/R8C12\"],\"explanation\":\"Published comparison is categorical on-chip sensitive/non-sensitive vs patient responder/non-responder (Supp Fig 11d); no numeric cutoff published\"},\n  \"threshold_timing\":{\"value\":\"not_reported\",\"evidence\":[\"article:p27\"],\"explanation\":\"No cutoff fitting described\"},\n  \"patient_mapping\":{\"value\":\"individual_available\",\"evidence\":[\"supp.xlsx/Sheet1/A3\",\"supp.xlsx/Sheet1/A22\"],\"explanation\":\"Grey rows of Supplementary Data 2 give each evaluable patient ID, regimen and response evaluation\"},\n  \"regimen_match\":{\"value\":\"partial\",\"evidence\":[\"supp.xlsx/Sheet1/M3\",\"supp.xlsx/Sheet1/F9\"],\"explanation\":\"9/10 exact regimen matches; LC101 compared on-chip gefitinib with clinical osimertinib (same EGFR-TKI class)\"},\n  \"n_units\":{\"value\":10,\"evidence\":[\"article:p27\"],\"explanation\":\"Ten organoid lines with evaluable and comparable patient responses\"},\n  \"split\":{\"value\":\"none\",\"evidence\":[\"article:p27\"],\"explanation\":\"No discovery/training cohort; the 10 pairs are the entire comparison\"},\n },\n \"headline\":{\"metric\":\"accuracy\",\"reported\":1.0,\n  \"reported_evidence\":[\"article:p27\",\"article:p28\",\"vision/contingency_sensitive_responder\",\"vision/contingency_nonsensitive_nonresponder\"],\n  \"threshold\":0.5,\"op\":\">\",\"score_direction\":\"higher\",\"records\":records,\"blocked_reason\":None},\n \"notes\":[\n  \"article:p27: 1-week on-chip results agreed with clinical data in 10/10 evaluable lines = 100% accuracy and specificity (Fisher P=0.0048); Supp Fig 11d contingency 4/0/0/6 confirms (4+6)/10.\",\n  \"Score = mean replicate viability at the highest tested concentration (Source Data 'Drug responses of LCOs'); <0.5 = on-chip sensitive. LC137+EC on-chip call from Supp Fig 11a heat map (red = resistant) since no numeric etoposide+cisplatin curve is provided.\",\n  \"Truth = patient response from Supplementary Data 2 grey rows: responder (PR/CR/non-PD)=1, non-responder (PD)=0; CRC1 and LC137 truth from response to the previous regimen of the same agent class.\",\n ]}\nprint(\"records:\",len(records))\n"
+    },
+    "output": {
+      "returncode": 0,
+      "stdout": "computed accuracy: 0.9\nrecords: 10\n",
+      "stderr": "",
+      "seconds": 0.556192457996076,
+      "peak_rss_bytes": 26247168,
+      "limit_error": null,
+      "code_sha256": "e53197180249e1ec84ab2682683ca60ec2e4e46615b4cebb5e8d72921dfcda0c",
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient_regimen",
+            "evidence": [
+              "article:p27",
+              "supp.xlsx/Sheet1/A3"
+            ],
+            "explanation": "One record per patient organoid line paired with the specific regimen the patient received and that was tested on-chip"
+          },
+          "platform": {
+            "value": "microwell",
+            "evidence": [
+              "article:p16",
+              "article:p27"
+            ],
+            "explanation": "1-week drug sensitivity tests run on the InSMAR superhydrophobic microwell array chip"
+          },
+          "readout": {
+            "value": "ic50",
+            "evidence": [
+              "41467_2021_22676_MOESM1_ESM.pdf/page13/R3C6",
+              "article:p20"
+            ],
+            "explanation": "On-chip calls derive from fitted dose-response curves (IC50 / AUC-DRC; Supp Fig 11a log10(IC50) heat map); reconstructed from mean replicate viability at the top tested concentration"
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p20"
+            ],
+            "explanation": "Lower IC50 / lower residual viability indicates sensitivity"
+          },
+          "threshold_rule": {
+            "value": "categorical",
+            "evidence": [
+              "41467_2021_22676_MOESM1_ESM.pdf/page13/R8C12"
+            ],
+            "explanation": "Published comparison is categorical on-chip sensitive/non-sensitive vs patient responder/non-responder (Supp Fig 11d); no numeric cutoff published"
+          },
+          "threshold_timing": {
+            "value": "not_reported",
+            "evidence": [
+              "article:p27"
+            ],
+            "explanation": "No cutoff fitting described"
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "supp.xlsx/Sheet1/A3",
+              "supp.xlsx/Sheet1/A22"
+            ],
+            "explanation": "Grey rows of Supplementary Data 2 give each evaluable patient ID, regimen and response evaluation"
+          },
+          "regimen_match": {
+            "value": "partial",
+            "evidence": [
+              "supp.xlsx/Sheet1/M3",
+              "supp.xlsx/Sheet1/F9"
+            ],
+            "explanation": "9/10 exact regimen matches; LC101 compared on-chip gefitinib with clinical osimertinib (same EGFR-TKI class)"
+          },
+          "n_units": {
+            "value": 10,
+            "evidence": [
+              "article:p27"
+            ],
+            "explanation": "Ten organoid lines with evaluable and comparable patient responses"
+          },
+          "split": {
+            "value": "none",
+            "evidence": [
+              "article:p27"
+            ],
+            "explanation": "No discovery/training cohort; the 10 pairs are the entire comparison"
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 1.0,
+          "reported_evidence": [
+            "article:p27",
+            "article:p28",
+            "vision/contingency_sensitive_responder",
+            "vision/contingency_nonsensitive_nonresponder"
+          ],
+          "threshold": 0.5,
+          "op": ">",
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "LC96+PC",
+              "score": {
+                "refs": [
+                  "41467_2021_22676_MOESM9_ESM.xlsx/Drug responses of LCOs/B58",
+                  "41467_2021_22676_MOESM9_ESM.xlsx/Drug responses of LCOs/C58",
+                  "41467_2021_22676_MOESM9_ESM.xlsx/Drug responses of LCOs/D58"
+                ],
+                "aggregate": "mean",
+                "threshold": 0.5,
+                "op": "<"
+              },
+              "truth": {
+                "ref": "supp.xlsx/Sheet1/I3",
+                "map": {
+                  "PD to PC": 0
+                }
+              }
+            },
+            {
+              "id": "LC132+Afa",
+              "score": {
+                "refs": [
+                  "41467_2021_22676_MOESM9_ESM.xlsx/Drug responses of LCOs/B33",
+                  "41467_2021_22676_MOESM9_ESM.xlsx/Drug responses of LCOs/C33",
+                  "41467_2021_22676_MOESM9_ESM.xlsx/Drug responses of LCOs/D33"
+                ],
+                "aggregate": "mean",
+                "threshold": 0.5,
+                "op": "<"
+              },
+              "truth": {
+                "ref": "supp.xlsx/Sheet1/I4",
+                "map": {
+                  "PD to Afa": 0
+                }
+              }
+            },
+            {
+              "id": "CRC1+Oxa",
+              "score": {
+                "refs": [
+                  "41467_2021_22676_MOESM9_ESM.xlsx/Drug responses of LCOs/B153",
+                  "41467_2021_22676_MOESM9_ESM.xlsx/Drug responses of LCOs/C153",
+                  "41467_2021_22676_MOESM9_ESM.xlsx/Drug responses of LCOs/D153"
+                ],
+                "aggregate": "mean",
+                "threshold": 0.5,
+                "op": "<"
+              },
+              "truth": {
+                "ref": "supp.xlsx/Sheet1/E5",
+                "map": {
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "LC131+Gef",
+              "score": {
+                "refs": [
+                  "41467_2021_22676_MOESM9_ESM.xlsx/Drug responses of LCOs/T11",
+                  "41467_2021_22676_MOESM9_ESM.xlsx/Drug responses of LCOs/U11",
+                  "41467_2021_22676_MOESM9_ESM.xlsx/Drug responses of LCOs/V11"
+                ],
+                "aggregate": "mean",
+                "threshold": 0.5,
+                "op": "<"
+              },
+              "truth": {
+                "ref": "supp.xlsx/Sheet1/I6",
+                "map": {
+                  "non-PD": 1
+                }
+              }
+            },
+            {
+              "id": "LC133+Gef",
+              "score": {
+                "refs": [
+                  "41467_2021_22676_MOESM9_ESM.xlsx/Drug responses of LCOs/W11",
+                  "41467_2021_22676_MOESM9_ESM.xlsx/Drug responses of LCOs/X11",
+                  "41467_2021_22676_MOESM9_ESM.xlsx/Drug responses of LCOs/Y11"
+                ],
+                "aggregate": "mean",
+                "threshold": 0.5,
+                "op": "<"
+              },
+              "truth": {
+                "ref": "supp.xlsx/Sheet1/I7",
+                "map": {
+                  "PR to Gef": 1
+                }
+              }
+            },
+            {
+              "id": "LC134+GC",
+              "score": {
+                "refs": [
+                  "41467_2021_22676_MOESM9_ESM.xlsx/Drug responses of LCOs/E82",
+                  "41467_2021_22676_MOESM9_ESM.xlsx/Drug responses of LCOs/F82",
+                  "41467_2021_22676_MOESM9_ESM.xlsx/Drug responses of LCOs/G82"
+                ],
+                "aggregate": "mean",
+                "threshold": 0.5,
+                "op": "<"
+              },
+              "truth": {
+                "ref": "supp.xlsx/Sheet1/I8",
+                "map": {
+                  "PR to GC": 1
+                }
+              }
+            },
+            {
+              "id": "LC101+Gef",
+              "score": {
+                "refs": [
+                  "41467_2021_22676_MOESM9_ESM.xlsx/Drug responses of LCOs/H11",
+                  "41467_2021_22676_MOESM9_ESM.xlsx/Drug responses of LCOs/I11",
+                  "41467_2021_22676_MOESM9_ESM.xlsx/Drug responses of LCOs/J11"
+                ],
+                "aggregate": "mean",
+                "threshold": 0.5,
+                "op": "<"
+              },
+              "truth": {
+                "ref": "supp.xlsx/Sheet1/I9",
+                "map": {
+                  "non-PD to Osi": 1
+                }
+              }
+            },
+            {
+              "id": "LC127+PC",
+              "score": {
+                "refs": [
+                  "41467_2021_22676_MOESM9_ESM.xlsx/Drug responses of LCOs/Q58",
+                  "41467_2021_22676_MOESM9_ESM.xlsx/Drug responses of LCOs/R58",
+                  "41467_2021_22676_MOESM9_ESM.xlsx/Drug responses of LCOs/S58"
+                ],
+                "aggregate": "mean",
+                "threshold": 0.5,
+                "op": "<"
+              },
+              "truth": {
+                "ref": "supp.xlsx/Sheet1/I10",
+                "map": {
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "LC97+GC",
+              "score": {
+                "refs": [
+                  "41467_2021_22676_MOESM9_ESM.xlsx/Drug responses of LCOs/B82",
+                  "41467_2021_22676_MOESM9_ESM.xlsx/Drug responses of LCOs/C82",
+                  "41467_2021_22676_MOESM9_ESM.xlsx/Drug responses of LCOs/D82"
+                ],
+                "aggregate": "mean",
+                "threshold": 0.5,
+                "op": "<"
+              },
+              "truth": {
+                "ref": "supp.xlsx/Sheet1/I14",
+                "map": {
+                  "PD to GC": 0
+                }
+              }
+            },
+            {
+              "id": "LC137+EC",
+              "score": {
+                "ref": "vision/LC137_EC_onchip_resistant"
+              },
+              "truth": {
+                "ref": "supp.xlsx/Sheet1/E22",
+                "map": {
+                  "PD": 0
+                }
+              }
+            }
+          ],
+          "blocked_reason": null
+        },
+        "notes": [
+          "article:p27: 1-week on-chip results agreed with clinical data in 10/10 evaluable lines = 100% accuracy and specificity (Fisher P=0.0048); Supp Fig 11d contingency 4/0/0/6 confirms (4+6)/10.",
+          "Score = mean replicate viability at the highest tested concentration (Source Data 'Drug responses of LCOs'); <0.5 = on-chip sensitive. LC137+EC on-chip call from Supp Fig 11a heat map (red = resistant) since no numeric etoposide+cisplatin curve is provided.",
+          "Truth = patient response from Supplementary Data 2 grey rows: responder (PR/CR/non-PD)=1, non-responder (PD)=0; CRC1 and LC137 truth from response to the previous regimen of the same agent class."
+        ]
+      },
+      "execution_feedback": {
+        "matched": true,
+        "metric": "accuracy",
+        "computed": 1.0,
+        "reported": 1.0,
+        "difference": 0.0,
+        "n": 10,
+        "errors": [],
+        "expected": {
+          "metric": "accuracy",
+          "value": 1.0,
+          "n": 10
+        }
+      }
+    }
+  }
+]

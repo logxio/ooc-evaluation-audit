@@ -1,0 +1,17 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "# Examine Table S2 structure more carefully\n# Rows 1-2 are title, Row 3-5 are headers spread across multiple rows\n# Actual data starts from row 6\n\nrows = tables['supp.pdf']['page12']['rows']\n\n# Find where data starts\nprint(\"Table S2 structure:\")\nfor i in range(min(10, len(rows))):\n    print(f\"Row {i+1}: {[str(c) for c in rows[i][:6]]}\")\n\n# Check how many data rows exist\ndata_rows = []\nfor i in range(5, len(rows)):  # Skip title and header rows\n    row = rows[i]\n    if len(row) < 5:\n        continue\n    pid_cell = row[0]\n    if isinstance(pid_cell, dict):\n        pid_str = str(pid_cell.get('value', ''))\n    else:\n        pid_str = str(pid_cell)\n    \n    if 'Patient' in pid_str:\n        data_rows.append((i, pid_str, row))\n\nprint(f\"\\nTotal data rows found: {len(data_rows)}\")\nprint(f\"First few: {[(d[1], d[2][4]) for d in data_rows[:5]]}\")\nprint(f\"Last few: {[(d[1], d[2][4]) for d in data_rows[-5:]]}\")\n\n# Check if validation cohort (P81-P128) is present\nval_patients = [d for d in data_rows if any(str(int(d[1].replace('Patient',''))) == str(p) for p in range(81, 129))]\nprint(f\"\\nValidation cohort patients found: {len(val_patients)}\")\nif val_patients:\n    print(f\"First validation patient: {val_patients[0][1]}, Combined ratio: {val_patients[0][2][4]}\")"
+    },
+    "output": {
+      "returncode": 0,
+      "stdout": "Table S2 structure:\nRow 1: ['Supplementary', 'Table', '2.', 'Ratios', 'of', 'RCO']\nRow 2: ['treatments', 'and', 'combined', 'chemoradiation,', 'Related', 'to']\nRow 3: ['Patients', '5-fluorouracil', 'Irinotecan', 'Combined']\nRow 4: ['Irradiation']\nRow 5: ['number', '6-(5-Fu)', '(CPT-11)', 'treatments']\nRow 6: ['Patient1', '0.1732', '0.1245', '0.1796', '0.0779']\nRow 7: ['Patient2', '1.602', '0.9826', '1.1959', '0.4014']\nRow 8: ['Patient3', '1.0596', '0.5233', '0.1737', '0.6521']\nRow 9: ['Patient4', '1.3869', '0.0449', '0.0947', '0.0426']\nRow 10: ['Patient5', '0.9694', '0.7991', '0.7702', '0.5579']\n\nTotal data rows found: 40\nFirst few: [('Patient1', '0.0779'), ('Patient2', '0.4014'), ('Patient3', '0.6521'), ('Patient4', '0.0426'), ('Patient5', '0.5579')]\nLast few: [('Patient36', '0.0733'), ('Patient37', '0.3476'), ('Patient38', '0.0111'), ('Patient39', '0.1635'), ('Patient40', '0.0486')]\n\nValidation cohort patients found: 0\n",
+      "stderr": "",
+      "seconds": 0.1298121669969987,
+      "peak_rss_bytes": 147456,
+      "limit_error": null,
+      "code_sha256": "b465d28df8e21a3f2b153f2add3a5489fb3f08d37c5541d5f47e8786dc37614e"
+    }
+  }
+]

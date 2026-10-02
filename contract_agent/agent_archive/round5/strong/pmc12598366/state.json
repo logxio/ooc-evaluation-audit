@@ -1,0 +1,2123 @@
+{
+  "turn": 2,
+  "tool_count": 0,
+  "tokens": 49598,
+  "done": true,
+  "stop_reason": "verified",
+  "checkpoints": {
+    "single_pass": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p26",
+              "article:p32"
+            ],
+            "explanation": "Each of the 14 evaluable patients contributes one MADO treatment-response comparison."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p26"
+            ],
+            "explanation": "Drug responses were measured in malignant ascites-derived organoids (MADOs)."
+          },
+          "readout": {
+            "value": "viability",
+            "evidence": [
+              "article:p26"
+            ],
+            "explanation": "CellTiter-Glo viability and maximum inhibition from dose-response curves were used to classify sensitivity."
+          },
+          "direction": {
+            "value": "higher_sensitive",
+            "evidence": [
+              "article:p26"
+            ],
+            "explanation": "Higher maximum inhibition indicated sensitivity; inhibition below 20% indicated resistance."
+          },
+          "threshold_rule": {
+            "value": "fixed_numeric",
+            "evidence": [
+              "article:p26"
+            ],
+            "explanation": "The binary clinical comparison treats high or low sensitivity as sensitive and <20% maximum inhibition as resistant."
+          },
+          "threshold_timing": {
+            "value": "independent_reference",
+            "evidence": [
+              "article:p26"
+            ],
+            "explanation": "Cut-offs were based on comparable historical cases in the K2 Oncology database and prior organoid methods, not optimized on these 14 outcomes."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "article:p32",
+              "article.xml/Table 2"
+            ],
+            "explanation": "Table 2 and the text identify each patient-derived model, its assay result, and RECIST outcome."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p26"
+            ],
+            "explanation": "Assayed drugs corresponded to the administered XELOX, SOX, GP, or pemetrexed regimen; 5-FU was the prespecified surrogate for capecitabine and S-1."
+          },
+          "n_units": {
+            "value": 14,
+            "evidence": [
+              "article:p26",
+              "article:p33"
+            ],
+            "explanation": "Fourteen samples with evaluable clinical efficacy were included in the SD-as-effective analysis."
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p33"
+            ],
+            "explanation": "The reported concordance is for the 14 evaluated cases; thresholds came from an external historical reference rather than a separate held-out cohort."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.8571428571428571,
+          "reported_evidence": [
+            "article:p33"
+          ],
+          "threshold": 0.5,
+          "op": ">",
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "KOCO-H064X",
+              "score": {
+                "ref": "article.xml/Table 2/R2C7",
+                "map": {
+                  "Resistant": 0,
+                  "resistance": 0,
+                  "Sensitive": 1,
+                  "Highly sensitive": 1,
+                  "High sensitivity": 1,
+                  "Lowly sensitive": 1,
+                  "Low sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R2C3",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "KOCO-H067X",
+              "score": {
+                "ref": "article.xml/Table 2/R4C7",
+                "map": {
+                  "Resistant": 0,
+                  "resistance": 0,
+                  "Sensitive": 1,
+                  "Highly sensitive": 1,
+                  "High sensitivity": 1,
+                  "Lowly sensitive": 1,
+                  "Low sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R4C3",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "KOCO-H070X",
+              "score": {
+                "ref": "article.xml/Table 2/R6C8",
+                "map": {
+                  "Resistant": 0,
+                  "resistance": 0,
+                  "Sensitive": 1,
+                  "Highly sensitive": 1,
+                  "High sensitivity": 1,
+                  "Lowly sensitive": 1,
+                  "Low sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R6C3",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "KOCO-H072X",
+              "score": {
+                "ref": "article.xml/Table 2/R8C8",
+                "map": {
+                  "Resistant": 0,
+                  "resistance": 0,
+                  "Sensitive": 1,
+                  "Highly sensitive": 1,
+                  "High sensitivity": 1,
+                  "Lowly sensitive": 1,
+                  "Low sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R8C3",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "KOCO-H075X",
+              "score": {
+                "ref": "article.xml/Table 2/R10C8",
+                "map": {
+                  "Resistant": 0,
+                  "resistance": 0,
+                  "Sensitive": 1,
+                  "Highly sensitive": 1,
+                  "High sensitivity": 1,
+                  "Lowly sensitive": 1,
+                  "Low sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R10C3",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "KOCO-H076X",
+              "score": {
+                "ref": "article.xml/Table 2/R12C8",
+                "map": {
+                  "Resistant": 0,
+                  "resistance": 0,
+                  "Sensitive": 1,
+                  "Highly sensitive": 1,
+                  "High sensitivity": 1,
+                  "Lowly sensitive": 1,
+                  "Low sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R12C3",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "KOCO-H082X",
+              "score": {
+                "ref": "article.xml/Table 2/R14C8",
+                "map": {
+                  "Resistant": 0,
+                  "resistance": 0,
+                  "Sensitive": 1,
+                  "Highly sensitive": 1,
+                  "High sensitivity": 1,
+                  "Lowly sensitive": 1,
+                  "Low sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R14C3",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "KOGS-H058X",
+              "score": {
+                "ref": "article.xml/Table 2/R16C7",
+                "map": {
+                  "Resistant": 0,
+                  "resistance": 0,
+                  "Sensitive": 1,
+                  "Highly sensitive": 1,
+                  "High sensitivity": 1,
+                  "Lowly sensitive": 1,
+                  "Low sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R16C3",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "KOGS-H059X",
+              "score": {
+                "ref": "article.xml/Table 2/R18C8",
+                "map": {
+                  "Resistant": 0,
+                  "resistance": 0,
+                  "Sensitive": 1,
+                  "Highly sensitive": 1,
+                  "High sensitivity": 1,
+                  "Lowly sensitive": 1,
+                  "Low sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R18C3",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "KOGS-H061X",
+              "score": {
+                "ref": "article.xml/Table 2/R20C7",
+                "map": {
+                  "Resistant": 0,
+                  "resistance": 0,
+                  "Sensitive": 1,
+                  "Highly sensitive": 1,
+                  "High sensitivity": 1,
+                  "Lowly sensitive": 1,
+                  "Low sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R20C3",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "KOGS-H063X",
+              "score": {
+                "ref": "article.xml/Table 2/R22C8",
+                "map": {
+                  "Resistant": 0,
+                  "resistance": 0,
+                  "Sensitive": 1,
+                  "Highly sensitive": 1,
+                  "High sensitivity": 1,
+                  "Lowly sensitive": 1,
+                  "Low sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R22C3",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "KOGS-H064X",
+              "score": {
+                "ref": "article.xml/Table 2/R24C8",
+                "map": {
+                  "Resistant": 0,
+                  "resistance": 0,
+                  "Sensitive": 1,
+                  "Highly sensitive": 1,
+                  "High sensitivity": 1,
+                  "Lowly sensitive": 1,
+                  "Low sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R24C3",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "KOPT-H002X",
+              "score": {
+                "ref": "article.xml/Table 2/R26C7",
+                "map": {
+                  "Resistant": 0,
+                  "resistance": 0,
+                  "Sensitive": 1,
+                  "Highly sensitive": 1,
+                  "High sensitivity": 1,
+                  "Lowly sensitive": 1,
+                  "Low sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R26C3",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "KOGB-H038X",
+              "score": {
+                "ref": "article.xml/Table 2/R27C8",
+                "map": {
+                  "Resistant": 0,
+                  "resistance": 0,
+                  "Sensitive": 1,
+                  "Highly sensitive": 1,
+                  "High sensitivity": 1,
+                  "Lowly sensitive": 1,
+                  "Low sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R27C3",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            }
+          ],
+          "blocked_reason": null
+        },
+        "notes": [
+          "This is the first published scenario: PR and SD are good responses and PD is a poor response.",
+          "The two stated mismatches are KOCO-H072X and KOGS-H063X, giving 12/14 = 85.71% accuracy.",
+          "Diagnostic record count: 14"
+        ]
+      },
+      "evaluation": {
+        "matched": false,
+        "metric": "accuracy",
+        "computed": null,
+        "reported": 0.8571428571428571,
+        "difference": null,
+        "n": 14,
+        "errors": [
+          "patient_mapping: missing evidence article.xml/Table 2"
+        ],
+        "rows": [
+          {
+            "id": "KOCO-H064X",
+            "score": 0.0,
+            "truth": 0
+          },
+          {
+            "id": "KOCO-H067X",
+            "score": 0.0,
+            "truth": 0
+          },
+          {
+            "id": "KOCO-H070X",
+            "score": 1.0,
+            "truth": 1
+          },
+          {
+            "id": "KOCO-H072X",
+            "score": 1.0,
+            "truth": 0
+          },
+          {
+            "id": "KOCO-H075X",
+            "score": 1.0,
+            "truth": 1
+          },
+          {
+            "id": "KOCO-H076X",
+            "score": 1.0,
+            "truth": 1
+          },
+          {
+            "id": "KOCO-H082X",
+            "score": 1.0,
+            "truth": 1
+          },
+          {
+            "id": "KOGS-H058X",
+            "score": 0.0,
+            "truth": 0
+          },
+          {
+            "id": "KOGS-H059X",
+            "score": 1.0,
+            "truth": 1
+          },
+          {
+            "id": "KOGS-H061X",
+            "score": 0.0,
+            "truth": 0
+          },
+          {
+            "id": "KOGS-H063X",
+            "score": 0.0,
+            "truth": 1
+          },
+          {
+            "id": "KOGS-H064X",
+            "score": 0.0,
+            "truth": 0
+          },
+          {
+            "id": "KOPT-H002X",
+            "score": 0.0,
+            "truth": 0
+          },
+          {
+            "id": "KOGB-H038X",
+            "score": 1.0,
+            "truth": 1
+          }
+        ],
+        "expected": {
+          "metric": "accuracy",
+          "value": 0.8571428571428571,
+          "n": 14
+        }
+      },
+      "calls": 1,
+      "tokens": 24809
+    },
+    "one_feedback": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p26",
+              "article:p32"
+            ],
+            "explanation": "Each of the 14 evaluable patients contributes one MADO treatment-response comparison."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p26"
+            ],
+            "explanation": "Drug responses were measured in malignant ascites-derived organoids (MADOs)."
+          },
+          "readout": {
+            "value": "viability",
+            "evidence": [
+              "article:p26"
+            ],
+            "explanation": "CellTiter-Glo viability and maximum inhibition from dose-response curves were used to classify sensitivity."
+          },
+          "direction": {
+            "value": "higher_sensitive",
+            "evidence": [
+              "article:p26"
+            ],
+            "explanation": "Higher maximum inhibition indicated sensitivity; inhibition below 20% indicated resistance."
+          },
+          "threshold_rule": {
+            "value": "fixed_numeric",
+            "evidence": [
+              "article:p26"
+            ],
+            "explanation": "The binary clinical comparison treats high or low sensitivity as sensitive and <20% maximum inhibition as resistant."
+          },
+          "threshold_timing": {
+            "value": "independent_reference",
+            "evidence": [
+              "article:p26"
+            ],
+            "explanation": "Cut-offs were based on comparable historical cases in the K2 Oncology database and prior organoid methods, not optimized on these 14 outcomes."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "article:p32",
+              "article:p33"
+            ],
+            "explanation": "The narrative identifies individual patient-derived models and their corresponding assay results and RECIST outcomes; row-level cell references are supplied in the records."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p26"
+            ],
+            "explanation": "Assayed drugs corresponded to the administered XELOX, SOX, GP, or pemetrexed regimen; 5-FU was the prespecified surrogate for capecitabine and S-1."
+          },
+          "n_units": {
+            "value": 14,
+            "evidence": [
+              "article:p26",
+              "article:p33"
+            ],
+            "explanation": "Fourteen samples with evaluable clinical efficacy were included in the SD-as-effective analysis."
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p33"
+            ],
+            "explanation": "The reported concordance is for the 14 evaluated cases; thresholds came from an external historical reference rather than a separate held-out cohort."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.8571428571428571,
+          "reported_evidence": [
+            "article:p33"
+          ],
+          "threshold": 0.5,
+          "op": ">",
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "KOCO-H064X",
+              "score": {
+                "ref": "article.xml/Table 2/R2C7",
+                "map": {
+                  "Resistant": 0,
+                  "Resistance": 0,
+                  "Drug-resistant": 0,
+                  "Sensitive": 1,
+                  "Highly sensitive": 1,
+                  "High sensitivity": 1,
+                  "Lowly sensitive": 1,
+                  "Low sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R2C3",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "KOCO-H067X",
+              "score": {
+                "ref": "article.xml/Table 2/R4C7",
+                "map": {
+                  "Resistant": 0,
+                  "Resistance": 0,
+                  "Drug-resistant": 0,
+                  "Sensitive": 1,
+                  "Highly sensitive": 1,
+                  "High sensitivity": 1,
+                  "Lowly sensitive": 1,
+                  "Low sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R4C3",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "KOCO-H070X",
+              "score": {
+                "ref": "article.xml/Table 2/R6C8",
+                "map": {
+                  "Resistant": 0,
+                  "Resistance": 0,
+                  "Drug-resistant": 0,
+                  "Sensitive": 1,
+                  "Highly sensitive": 1,
+                  "High sensitivity": 1,
+                  "Lowly sensitive": 1,
+                  "Low sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R6C3",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "KOCO-H072X",
+              "score": {
+                "ref": "article.xml/Table 2/R8C8",
+                "map": {
+                  "Resistant": 0,
+                  "Resistance": 0,
+                  "Drug-resistant": 0,
+                  "Sensitive": 1,
+                  "Highly sensitive": 1,
+                  "High sensitivity": 1,
+                  "Lowly sensitive": 1,
+                  "Low sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R8C3",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "KOCO-H075X",
+              "score": {
+                "ref": "article.xml/Table 2/R10C8",
+                "map": {
+                  "Resistant": 0,
+                  "Resistance": 0,
+                  "Drug-resistant": 0,
+                  "Sensitive": 1,
+                  "Highly sensitive": 1,
+                  "High sensitivity": 1,
+                  "Lowly sensitive": 1,
+                  "Low sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R10C3",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "KOCO-H076X",
+              "score": {
+                "ref": "article.xml/Table 2/R12C8",
+                "map": {
+                  "Resistant": 0,
+                  "Resistance": 0,
+                  "Drug-resistant": 0,
+                  "Sensitive": 1,
+                  "Highly sensitive": 1,
+                  "High sensitivity": 1,
+                  "Lowly sensitive": 1,
+                  "Low sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R12C3",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "KOCO-H082X",
+              "score": {
+                "ref": "article.xml/Table 2/R14C8",
+                "map": {
+                  "Resistant": 0,
+                  "Resistance": 0,
+                  "Drug-resistant": 0,
+                  "Sensitive": 1,
+                  "Highly sensitive": 1,
+                  "High sensitivity": 1,
+                  "Lowly sensitive": 1,
+                  "Low sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R14C3",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "KOGS-H058X",
+              "score": {
+                "ref": "article.xml/Table 2/R16C7",
+                "map": {
+                  "Resistant": 0,
+                  "Resistance": 0,
+                  "Drug-resistant": 0,
+                  "Sensitive": 1,
+                  "Highly sensitive": 1,
+                  "High sensitivity": 1,
+                  "Lowly sensitive": 1,
+                  "Low sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R16C3",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "KOGS-H059X",
+              "score": {
+                "ref": "article.xml/Table 2/R18C8",
+                "map": {
+                  "Resistant": 0,
+                  "Resistance": 0,
+                  "Drug-resistant": 0,
+                  "Sensitive": 1,
+                  "Highly sensitive": 1,
+                  "High sensitivity": 1,
+                  "Lowly sensitive": 1,
+                  "Low sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R18C3",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "KOGS-H061X",
+              "score": {
+                "ref": "article.xml/Table 2/R20C7",
+                "map": {
+                  "Resistant": 0,
+                  "Resistance": 0,
+                  "Drug-resistant": 0,
+                  "Sensitive": 1,
+                  "Highly sensitive": 1,
+                  "High sensitivity": 1,
+                  "Lowly sensitive": 1,
+                  "Low sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R20C3",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "KOGS-H063X",
+              "score": {
+                "ref": "article.xml/Table 2/R22C8",
+                "map": {
+                  "Resistant": 0,
+                  "Resistance": 0,
+                  "Drug-resistant": 0,
+                  "Sensitive": 1,
+                  "Highly sensitive": 1,
+                  "High sensitivity": 1,
+                  "Lowly sensitive": 1,
+                  "Low sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R22C3",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "KOGS-H064X",
+              "score": {
+                "ref": "article.xml/Table 2/R24C8",
+                "map": {
+                  "Resistant": 0,
+                  "Resistance": 0,
+                  "Drug-resistant": 0,
+                  "Sensitive": 1,
+                  "Highly sensitive": 1,
+                  "High sensitivity": 1,
+                  "Lowly sensitive": 1,
+                  "Low sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R24C3",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "KOPT-H002X",
+              "score": {
+                "ref": "article.xml/Table 2/R26C7",
+                "map": {
+                  "Resistant": 0,
+                  "Resistance": 0,
+                  "Drug-resistant": 0,
+                  "Sensitive": 1,
+                  "Highly sensitive": 1,
+                  "High sensitivity": 1,
+                  "Lowly sensitive": 1,
+                  "Low sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R26C3",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "KOGB-H038X",
+              "score": {
+                "ref": "article.xml/Table 2/R27C8",
+                "map": {
+                  "Resistant": 0,
+                  "Resistance": 0,
+                  "Drug-resistant": 0,
+                  "Sensitive": 1,
+                  "Highly sensitive": 1,
+                  "High sensitivity": 1,
+                  "Lowly sensitive": 1,
+                  "Low sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R27C3",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            }
+          ],
+          "blocked_reason": null
+        },
+        "notes": [
+          "This is the first published scenario: PR and SD are good responses and PD is a poor response.",
+          "The two stated mismatches are KOCO-H072X and KOGS-H063X, giving 12/14 = 85.71% accuracy.",
+          "Diagnostic record count: 14"
+        ]
+      },
+      "evaluation": {
+        "matched": true,
+        "metric": "accuracy",
+        "computed": 0.8571428571428571,
+        "reported": 0.8571428571428571,
+        "difference": 0.0,
+        "n": 14,
+        "errors": [],
+        "rows": [
+          {
+            "id": "KOCO-H064X",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "KOCO-H067X",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "KOCO-H070X",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "KOCO-H072X",
+            "score": 1.0,
+            "truth": 0,
+            "prediction": 1
+          },
+          {
+            "id": "KOCO-H075X",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "KOCO-H076X",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "KOCO-H082X",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "KOGS-H058X",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "KOGS-H059X",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "KOGS-H061X",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "KOGS-H063X",
+            "score": 0.0,
+            "truth": 1,
+            "prediction": 0
+          },
+          {
+            "id": "KOGS-H064X",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "KOPT-H002X",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "KOGB-H038X",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          }
+        ],
+        "expected": {
+          "metric": "accuracy",
+          "value": 0.8571428571428571,
+          "n": 14
+        }
+      },
+      "calls": 2,
+      "tokens": 49598
+    },
+    "tool_loop": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p26",
+              "article:p32"
+            ],
+            "explanation": "Each of the 14 evaluable patients contributes one MADO treatment-response comparison."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p26"
+            ],
+            "explanation": "Drug responses were measured in malignant ascites-derived organoids (MADOs)."
+          },
+          "readout": {
+            "value": "viability",
+            "evidence": [
+              "article:p26"
+            ],
+            "explanation": "CellTiter-Glo viability and maximum inhibition from dose-response curves were used to classify sensitivity."
+          },
+          "direction": {
+            "value": "higher_sensitive",
+            "evidence": [
+              "article:p26"
+            ],
+            "explanation": "Higher maximum inhibition indicated sensitivity; inhibition below 20% indicated resistance."
+          },
+          "threshold_rule": {
+            "value": "fixed_numeric",
+            "evidence": [
+              "article:p26"
+            ],
+            "explanation": "The binary clinical comparison treats high or low sensitivity as sensitive and <20% maximum inhibition as resistant."
+          },
+          "threshold_timing": {
+            "value": "independent_reference",
+            "evidence": [
+              "article:p26"
+            ],
+            "explanation": "Cut-offs were based on comparable historical cases in the K2 Oncology database and prior organoid methods, not optimized on these 14 outcomes."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "article:p32",
+              "article:p33"
+            ],
+            "explanation": "The narrative identifies individual patient-derived models and their corresponding assay results and RECIST outcomes; row-level cell references are supplied in the records."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p26"
+            ],
+            "explanation": "Assayed drugs corresponded to the administered XELOX, SOX, GP, or pemetrexed regimen; 5-FU was the prespecified surrogate for capecitabine and S-1."
+          },
+          "n_units": {
+            "value": 14,
+            "evidence": [
+              "article:p26",
+              "article:p33"
+            ],
+            "explanation": "Fourteen samples with evaluable clinical efficacy were included in the SD-as-effective analysis."
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p33"
+            ],
+            "explanation": "The reported concordance is for the 14 evaluated cases; thresholds came from an external historical reference rather than a separate held-out cohort."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.8571428571428571,
+          "reported_evidence": [
+            "article:p33"
+          ],
+          "threshold": 0.5,
+          "op": ">",
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "KOCO-H064X",
+              "score": {
+                "ref": "article.xml/Table 2/R2C7",
+                "map": {
+                  "Resistant": 0,
+                  "Resistance": 0,
+                  "Drug-resistant": 0,
+                  "Sensitive": 1,
+                  "Highly sensitive": 1,
+                  "High sensitivity": 1,
+                  "Lowly sensitive": 1,
+                  "Low sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R2C3",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "KOCO-H067X",
+              "score": {
+                "ref": "article.xml/Table 2/R4C7",
+                "map": {
+                  "Resistant": 0,
+                  "Resistance": 0,
+                  "Drug-resistant": 0,
+                  "Sensitive": 1,
+                  "Highly sensitive": 1,
+                  "High sensitivity": 1,
+                  "Lowly sensitive": 1,
+                  "Low sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R4C3",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "KOCO-H070X",
+              "score": {
+                "ref": "article.xml/Table 2/R6C8",
+                "map": {
+                  "Resistant": 0,
+                  "Resistance": 0,
+                  "Drug-resistant": 0,
+                  "Sensitive": 1,
+                  "Highly sensitive": 1,
+                  "High sensitivity": 1,
+                  "Lowly sensitive": 1,
+                  "Low sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R6C3",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "KOCO-H072X",
+              "score": {
+                "ref": "article.xml/Table 2/R8C8",
+                "map": {
+                  "Resistant": 0,
+                  "Resistance": 0,
+                  "Drug-resistant": 0,
+                  "Sensitive": 1,
+                  "Highly sensitive": 1,
+                  "High sensitivity": 1,
+                  "Lowly sensitive": 1,
+                  "Low sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R8C3",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "KOCO-H075X",
+              "score": {
+                "ref": "article.xml/Table 2/R10C8",
+                "map": {
+                  "Resistant": 0,
+                  "Resistance": 0,
+                  "Drug-resistant": 0,
+                  "Sensitive": 1,
+                  "Highly sensitive": 1,
+                  "High sensitivity": 1,
+                  "Lowly sensitive": 1,
+                  "Low sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R10C3",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "KOCO-H076X",
+              "score": {
+                "ref": "article.xml/Table 2/R12C8",
+                "map": {
+                  "Resistant": 0,
+                  "Resistance": 0,
+                  "Drug-resistant": 0,
+                  "Sensitive": 1,
+                  "Highly sensitive": 1,
+                  "High sensitivity": 1,
+                  "Lowly sensitive": 1,
+                  "Low sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R12C3",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "KOCO-H082X",
+              "score": {
+                "ref": "article.xml/Table 2/R14C8",
+                "map": {
+                  "Resistant": 0,
+                  "Resistance": 0,
+                  "Drug-resistant": 0,
+                  "Sensitive": 1,
+                  "Highly sensitive": 1,
+                  "High sensitivity": 1,
+                  "Lowly sensitive": 1,
+                  "Low sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R14C3",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "KOGS-H058X",
+              "score": {
+                "ref": "article.xml/Table 2/R16C7",
+                "map": {
+                  "Resistant": 0,
+                  "Resistance": 0,
+                  "Drug-resistant": 0,
+                  "Sensitive": 1,
+                  "Highly sensitive": 1,
+                  "High sensitivity": 1,
+                  "Lowly sensitive": 1,
+                  "Low sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R16C3",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "KOGS-H059X",
+              "score": {
+                "ref": "article.xml/Table 2/R18C8",
+                "map": {
+                  "Resistant": 0,
+                  "Resistance": 0,
+                  "Drug-resistant": 0,
+                  "Sensitive": 1,
+                  "Highly sensitive": 1,
+                  "High sensitivity": 1,
+                  "Lowly sensitive": 1,
+                  "Low sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R18C3",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "KOGS-H061X",
+              "score": {
+                "ref": "article.xml/Table 2/R20C7",
+                "map": {
+                  "Resistant": 0,
+                  "Resistance": 0,
+                  "Drug-resistant": 0,
+                  "Sensitive": 1,
+                  "Highly sensitive": 1,
+                  "High sensitivity": 1,
+                  "Lowly sensitive": 1,
+                  "Low sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R20C3",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "KOGS-H063X",
+              "score": {
+                "ref": "article.xml/Table 2/R22C8",
+                "map": {
+                  "Resistant": 0,
+                  "Resistance": 0,
+                  "Drug-resistant": 0,
+                  "Sensitive": 1,
+                  "Highly sensitive": 1,
+                  "High sensitivity": 1,
+                  "Lowly sensitive": 1,
+                  "Low sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R22C3",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "KOGS-H064X",
+              "score": {
+                "ref": "article.xml/Table 2/R24C8",
+                "map": {
+                  "Resistant": 0,
+                  "Resistance": 0,
+                  "Drug-resistant": 0,
+                  "Sensitive": 1,
+                  "Highly sensitive": 1,
+                  "High sensitivity": 1,
+                  "Lowly sensitive": 1,
+                  "Low sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R24C3",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "KOPT-H002X",
+              "score": {
+                "ref": "article.xml/Table 2/R26C7",
+                "map": {
+                  "Resistant": 0,
+                  "Resistance": 0,
+                  "Drug-resistant": 0,
+                  "Sensitive": 1,
+                  "Highly sensitive": 1,
+                  "High sensitivity": 1,
+                  "Lowly sensitive": 1,
+                  "Low sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R26C3",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "KOGB-H038X",
+              "score": {
+                "ref": "article.xml/Table 2/R27C8",
+                "map": {
+                  "Resistant": 0,
+                  "Resistance": 0,
+                  "Drug-resistant": 0,
+                  "Sensitive": 1,
+                  "Highly sensitive": 1,
+                  "High sensitivity": 1,
+                  "Lowly sensitive": 1,
+                  "Low sensitivity": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R27C3",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            }
+          ],
+          "blocked_reason": null
+        },
+        "notes": [
+          "This is the first published scenario: PR and SD are good responses and PD is a poor response.",
+          "The two stated mismatches are KOCO-H072X and KOGS-H063X, giving 12/14 = 85.71% accuracy.",
+          "Diagnostic record count: 14"
+        ]
+      },
+      "evaluation": {
+        "matched": true,
+        "metric": "accuracy",
+        "computed": 0.8571428571428571,
+        "reported": 0.8571428571428571,
+        "difference": 0.0,
+        "n": 14,
+        "errors": [],
+        "rows": [
+          {
+            "id": "KOCO-H064X",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "KOCO-H067X",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "KOCO-H070X",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "KOCO-H072X",
+            "score": 1.0,
+            "truth": 0,
+            "prediction": 1
+          },
+          {
+            "id": "KOCO-H075X",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "KOCO-H076X",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "KOCO-H082X",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "KOGS-H058X",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "KOGS-H059X",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "KOGS-H061X",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "KOGS-H063X",
+            "score": 0.0,
+            "truth": 1,
+            "prediction": 0
+          },
+          {
+            "id": "KOGS-H064X",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "KOPT-H002X",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "KOGB-H038X",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          }
+        ],
+        "expected": {
+          "metric": "accuracy",
+          "value": 0.8571428571428571,
+          "n": 14
+        }
+      },
+      "calls": 2,
+      "tokens": 49598
+    }
+  },
+  "last_contract": {
+    "status": "computed",
+    "fields": {
+      "unit": {
+        "value": "patient",
+        "evidence": [
+          "article:p26",
+          "article:p32"
+        ],
+        "explanation": "Each of the 14 evaluable patients contributes one MADO treatment-response comparison."
+      },
+      "platform": {
+        "value": "organoid",
+        "evidence": [
+          "article:p26"
+        ],
+        "explanation": "Drug responses were measured in malignant ascites-derived organoids (MADOs)."
+      },
+      "readout": {
+        "value": "viability",
+        "evidence": [
+          "article:p26"
+        ],
+        "explanation": "CellTiter-Glo viability and maximum inhibition from dose-response curves were used to classify sensitivity."
+      },
+      "direction": {
+        "value": "higher_sensitive",
+        "evidence": [
+          "article:p26"
+        ],
+        "explanation": "Higher maximum inhibition indicated sensitivity; inhibition below 20% indicated resistance."
+      },
+      "threshold_rule": {
+        "value": "fixed_numeric",
+        "evidence": [
+          "article:p26"
+        ],
+        "explanation": "The binary clinical comparison treats high or low sensitivity as sensitive and <20% maximum inhibition as resistant."
+      },
+      "threshold_timing": {
+        "value": "independent_reference",
+        "evidence": [
+          "article:p26"
+        ],
+        "explanation": "Cut-offs were based on comparable historical cases in the K2 Oncology database and prior organoid methods, not optimized on these 14 outcomes."
+      },
+      "patient_mapping": {
+        "value": "individual_available",
+        "evidence": [
+          "article:p32",
+          "article:p33"
+        ],
+        "explanation": "The narrative identifies individual patient-derived models and their corresponding assay results and RECIST outcomes; row-level cell references are supplied in the records."
+      },
+      "regimen_match": {
+        "value": "matched",
+        "evidence": [
+          "article:p26"
+        ],
+        "explanation": "Assayed drugs corresponded to the administered XELOX, SOX, GP, or pemetrexed regimen; 5-FU was the prespecified surrogate for capecitabine and S-1."
+      },
+      "n_units": {
+        "value": 14,
+        "evidence": [
+          "article:p26",
+          "article:p33"
+        ],
+        "explanation": "Fourteen samples with evaluable clinical efficacy were included in the SD-as-effective analysis."
+      },
+      "split": {
+        "value": "same_cohort",
+        "evidence": [
+          "article:p33"
+        ],
+        "explanation": "The reported concordance is for the 14 evaluated cases; thresholds came from an external historical reference rather than a separate held-out cohort."
+      }
+    },
+    "headline": {
+      "metric": "accuracy",
+      "reported": 0.8571428571428571,
+      "reported_evidence": [
+        "article:p33"
+      ],
+      "threshold": 0.5,
+      "op": ">",
+      "score_direction": "higher",
+      "records": [
+        {
+          "id": "KOCO-H064X",
+          "score": {
+            "ref": "article.xml/Table 2/R2C7",
+            "map": {
+              "Resistant": 0,
+              "Resistance": 0,
+              "Drug-resistant": 0,
+              "Sensitive": 1,
+              "Highly sensitive": 1,
+              "High sensitivity": 1,
+              "Lowly sensitive": 1,
+              "Low sensitivity": 1
+            }
+          },
+          "truth": {
+            "ref": "article.xml/Table 2/R2C3",
+            "map": {
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "KOCO-H067X",
+          "score": {
+            "ref": "article.xml/Table 2/R4C7",
+            "map": {
+              "Resistant": 0,
+              "Resistance": 0,
+              "Drug-resistant": 0,
+              "Sensitive": 1,
+              "Highly sensitive": 1,
+              "High sensitivity": 1,
+              "Lowly sensitive": 1,
+              "Low sensitivity": 1
+            }
+          },
+          "truth": {
+            "ref": "article.xml/Table 2/R4C3",
+            "map": {
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "KOCO-H070X",
+          "score": {
+            "ref": "article.xml/Table 2/R6C8",
+            "map": {
+              "Resistant": 0,
+              "Resistance": 0,
+              "Drug-resistant": 0,
+              "Sensitive": 1,
+              "Highly sensitive": 1,
+              "High sensitivity": 1,
+              "Lowly sensitive": 1,
+              "Low sensitivity": 1
+            }
+          },
+          "truth": {
+            "ref": "article.xml/Table 2/R6C3",
+            "map": {
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "KOCO-H072X",
+          "score": {
+            "ref": "article.xml/Table 2/R8C8",
+            "map": {
+              "Resistant": 0,
+              "Resistance": 0,
+              "Drug-resistant": 0,
+              "Sensitive": 1,
+              "Highly sensitive": 1,
+              "High sensitivity": 1,
+              "Lowly sensitive": 1,
+              "Low sensitivity": 1
+            }
+          },
+          "truth": {
+            "ref": "article.xml/Table 2/R8C3",
+            "map": {
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "KOCO-H075X",
+          "score": {
+            "ref": "article.xml/Table 2/R10C8",
+            "map": {
+              "Resistant": 0,
+              "Resistance": 0,
+              "Drug-resistant": 0,
+              "Sensitive": 1,
+              "Highly sensitive": 1,
+              "High sensitivity": 1,
+              "Lowly sensitive": 1,
+              "Low sensitivity": 1
+            }
+          },
+          "truth": {
+            "ref": "article.xml/Table 2/R10C3",
+            "map": {
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "KOCO-H076X",
+          "score": {
+            "ref": "article.xml/Table 2/R12C8",
+            "map": {
+              "Resistant": 0,
+              "Resistance": 0,
+              "Drug-resistant": 0,
+              "Sensitive": 1,
+              "Highly sensitive": 1,
+              "High sensitivity": 1,
+              "Lowly sensitive": 1,
+              "Low sensitivity": 1
+            }
+          },
+          "truth": {
+            "ref": "article.xml/Table 2/R12C3",
+            "map": {
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "KOCO-H082X",
+          "score": {
+            "ref": "article.xml/Table 2/R14C8",
+            "map": {
+              "Resistant": 0,
+              "Resistance": 0,
+              "Drug-resistant": 0,
+              "Sensitive": 1,
+              "Highly sensitive": 1,
+              "High sensitivity": 1,
+              "Lowly sensitive": 1,
+              "Low sensitivity": 1
+            }
+          },
+          "truth": {
+            "ref": "article.xml/Table 2/R14C3",
+            "map": {
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "KOGS-H058X",
+          "score": {
+            "ref": "article.xml/Table 2/R16C7",
+            "map": {
+              "Resistant": 0,
+              "Resistance": 0,
+              "Drug-resistant": 0,
+              "Sensitive": 1,
+              "Highly sensitive": 1,
+              "High sensitivity": 1,
+              "Lowly sensitive": 1,
+              "Low sensitivity": 1
+            }
+          },
+          "truth": {
+            "ref": "article.xml/Table 2/R16C3",
+            "map": {
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "KOGS-H059X",
+          "score": {
+            "ref": "article.xml/Table 2/R18C8",
+            "map": {
+              "Resistant": 0,
+              "Resistance": 0,
+              "Drug-resistant": 0,
+              "Sensitive": 1,
+              "Highly sensitive": 1,
+              "High sensitivity": 1,
+              "Lowly sensitive": 1,
+              "Low sensitivity": 1
+            }
+          },
+          "truth": {
+            "ref": "article.xml/Table 2/R18C3",
+            "map": {
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "KOGS-H061X",
+          "score": {
+            "ref": "article.xml/Table 2/R20C7",
+            "map": {
+              "Resistant": 0,
+              "Resistance": 0,
+              "Drug-resistant": 0,
+              "Sensitive": 1,
+              "Highly sensitive": 1,
+              "High sensitivity": 1,
+              "Lowly sensitive": 1,
+              "Low sensitivity": 1
+            }
+          },
+          "truth": {
+            "ref": "article.xml/Table 2/R20C3",
+            "map": {
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "KOGS-H063X",
+          "score": {
+            "ref": "article.xml/Table 2/R22C8",
+            "map": {
+              "Resistant": 0,
+              "Resistance": 0,
+              "Drug-resistant": 0,
+              "Sensitive": 1,
+              "Highly sensitive": 1,
+              "High sensitivity": 1,
+              "Lowly sensitive": 1,
+              "Low sensitivity": 1
+            }
+          },
+          "truth": {
+            "ref": "article.xml/Table 2/R22C3",
+            "map": {
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "KOGS-H064X",
+          "score": {
+            "ref": "article.xml/Table 2/R24C8",
+            "map": {
+              "Resistant": 0,
+              "Resistance": 0,
+              "Drug-resistant": 0,
+              "Sensitive": 1,
+              "Highly sensitive": 1,
+              "High sensitivity": 1,
+              "Lowly sensitive": 1,
+              "Low sensitivity": 1
+            }
+          },
+          "truth": {
+            "ref": "article.xml/Table 2/R24C3",
+            "map": {
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "KOPT-H002X",
+          "score": {
+            "ref": "article.xml/Table 2/R26C7",
+            "map": {
+              "Resistant": 0,
+              "Resistance": 0,
+              "Drug-resistant": 0,
+              "Sensitive": 1,
+              "Highly sensitive": 1,
+              "High sensitivity": 1,
+              "Lowly sensitive": 1,
+              "Low sensitivity": 1
+            }
+          },
+          "truth": {
+            "ref": "article.xml/Table 2/R26C3",
+            "map": {
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "KOGB-H038X",
+          "score": {
+            "ref": "article.xml/Table 2/R27C8",
+            "map": {
+              "Resistant": 0,
+              "Resistance": 0,
+              "Drug-resistant": 0,
+              "Sensitive": 1,
+              "Highly sensitive": 1,
+              "High sensitivity": 1,
+              "Lowly sensitive": 1,
+              "Low sensitivity": 1
+            }
+          },
+          "truth": {
+            "ref": "article.xml/Table 2/R27C3",
+            "map": {
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        }
+      ],
+      "blocked_reason": null
+    },
+    "notes": [
+      "This is the first published scenario: PR and SD are good responses and PD is a poor response.",
+      "The two stated mismatches are KOCO-H072X and KOGS-H063X, giving 12/14 = 85.71% accuracy.",
+      "Diagnostic record count: 14"
+    ]
+  },
+  "last_evaluation": {
+    "matched": true,
+    "metric": "accuracy",
+    "computed": 0.8571428571428571,
+    "reported": 0.8571428571428571,
+    "difference": 0.0,
+    "n": 14,
+    "errors": [],
+    "rows": [
+      {
+        "id": "KOCO-H064X",
+        "score": 0.0,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "KOCO-H067X",
+        "score": 0.0,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "KOCO-H070X",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "KOCO-H072X",
+        "score": 1.0,
+        "truth": 0,
+        "prediction": 1
+      },
+      {
+        "id": "KOCO-H075X",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "KOCO-H076X",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "KOCO-H082X",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "KOGS-H058X",
+        "score": 0.0,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "KOGS-H059X",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "KOGS-H061X",
+        "score": 0.0,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "KOGS-H063X",
+        "score": 0.0,
+        "truth": 1,
+        "prediction": 0
+      },
+      {
+        "id": "KOGS-H064X",
+        "score": 0.0,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "KOPT-H002X",
+        "score": 0.0,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "KOGB-H038X",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      }
+    ],
+    "expected": {
+      "metric": "accuracy",
+      "value": 0.8571428571428571,
+      "n": 14
+    }
+  }
+}

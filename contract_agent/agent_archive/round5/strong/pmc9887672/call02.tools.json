@@ -1,0 +1,312 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "rows = get_rows('article.xml','Table 2.')\n\ntruth_by_drug = {\n    'Sotalol': 1,\n    'Dofetilide': 1,\n    'Quinidine': 1,\n    'Cisapride': 1,\n    'Terfenadine': 1,\n    'Ranolazine': 1,\n    'Mexiletine': 0,\n    'Nifedipine': 0,\n    'Verapamil': 0,\n    'Alfuzosin': 0,\n    'Aspirin': 0,\n    'DMSO': 0,\n}\n\nrecords = []\nfor r in [4, 5, 6, 7, 8, 10, 12, 13, 14, 15, 16, 17]:\n    row = rows[r - 1]\n    drug = str(row[1]).strip()\n    mid_value = str(row[3]).strip()\n    prediction = 1 if mid_value.startswith('↑') else 0\n    records.append({\n        'id': drug,\n        'score': {\n            'ref': f'article.xml/Table 2./R{r}C4',\n            'map': {mid_value: prediction}\n        },\n        'truth': {\n            'ref': f'article.xml/Table 2./R{r}C2',\n            'map': {drug: truth_by_drug[drug]}\n        }\n    })\n\n# Independent executable check of the bound binary records.\nscores = [next(iter(x['score']['map'].values())) for x in records]\ntruths = [next(iter(x['truth']['map'].values())) for x in records]\naccuracy = sum(int(s > 0.5) == t for s, t in zip(scores, truths)) / len(records)\nassert len(records) == 12\nassert abs(accuracy - 11/12) < 1e-12\n\nCONTRACT = {\n    'status': 'computed',\n    'fields': {\n        'unit': {\n            'value': 'drug',\n            'evidence': ['article.xml/Table 2./R2C2', 'article:p29'],\n            'explanation': 'Each evaluated unit is one tested compound; DMSO is included as the negative control.'\n        },\n        'platform': {\n            'value': 'unknown',\n            'evidence': ['article:p2', 'article:p3'],\n            'explanation': 'uHeart is a 3D engineered human cardiac microtissue with integrated electrical recording and does not map exactly to organoid, perfused chip, microwell, or spheroid.'\n        },\n        'readout': {\n            'value': 'other',\n            'evidence': ['article.xml/Table 2./R2C4', 'article:p29'],\n            'explanation': 'The assay readout is percentage change in Fridericia-corrected field potential duration, FPDcF.'\n        },\n        'direction': {\n            'value': 'higher_sensitive',\n            'evidence': ['article:p29'],\n            'explanation': 'A larger positive FPDcF percentage change indicates QT prolongation.'\n        },\n        'threshold_rule': {\n            'value': 'roc_optimized',\n            'evidence': ['article:p29', 'kfac108_supplementary_data.docx:p24'],\n            'explanation': 'The 15% MID cutoff is described as the optimal threshold and is examined in the ROC analysis.'\n        },\n        'threshold_timing': {\n            'value': 'outcome_optimized',\n            'evidence': ['article:p29', 'kfac108_supplementary_data.docx:p24'],\n            'explanation': 'The optimal MID threshold was selected from analyses of the same tested compounds; no independent held-out cohort is reported.'\n        },\n        'patient_mapping': {\n            'value': 'absent',\n            'evidence': ['article:p29'],\n            'explanation': 'FDA drug labels provide the clinical reference, with no individual patient outcomes.'\n        },\n        'regimen_match': {\n            'value': 'not_applicable',\n            'evidence': ['article.xml/Table 2./R2C2'],\n            'explanation': 'This is a drug-level cardiotoxicity comparison rather than a patient-regimen comparison.'\n        },\n        'n_units': {\n            'value': 12,\n            'evidence': ['article:p29', 'article.xml/Table 2./R4C2', 'article.xml/Table 2./R17C2'],\n            'explanation': 'Eleven drugs plus DMSO give the exact 12-compound denominator.'\n        },\n        'split': {\n            'value': 'same_cohort',\n            'evidence': ['article:p29'],\n            'explanation': 'Threshold selection and performance reporting use the same 12 evaluated compounds.'\n        }\n    },\n    'headline': {\n        'metric': 'accuracy',\n        'reported': 0.916,\n        'reported_evidence': ['article:p29', 'article:p2'],\n        'threshold': 0.5,\n        'op': '>',\n        'score_direction': 'higher',\n        'records': records,\n        'blocked_reason': None\n    },\n    'notes': [\n        'Table 2 reports the concentration at which FPDcF crosses the MID threshold; the leading upward arrow is mapped to assay-positive prolongation, while no upward arrow is assay-negative.',\n        'At the published biological MID cutoff of 15% FPDcF change, the article reports 5 true positives, 6 true negatives, 1 false negative, and no false positives for QT prolongation.',\n        'The resulting accuracy is 11/12 = 0.9167, reported as 91.6%. The contract threshold 0.5 operates on the source-derived binary assay flag, not on the biological 15% cutoff.'\n    ]\n}\nprint(accuracy, [(r['id'], next(iter(r['score']['map'].values())), next(iter(r['truth']['map'].values()))) for r in records])"
+    },
+    "output": {
+      "returncode": 0,
+      "stdout": "0.9166666666666666 [('Sotalol', 1, 1), ('Dofetilide', 1, 1), ('Quinidine', 1, 1), ('Cisapride', 0, 1), ('Terfenadine', 1, 1), ('Ranolazine', 1, 1), ('Mexiletine', 0, 0), ('Nifedipine', 0, 0), ('Verapamil', 0, 0), ('Alfuzosin', 0, 0), ('Aspirin', 0, 0), ('DMSO', 0, 0)]\n",
+      "stderr": "",
+      "seconds": 0.18150174999027513,
+      "peak_rss_bytes": 25395200,
+      "limit_error": null,
+      "code_sha256": "287a33c8d1a4864f569a6754db66c76eca5f88ea4e28fd134083f177d2abe45e",
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "drug",
+            "evidence": [
+              "article.xml/Table 2./R2C2",
+              "article:p29"
+            ],
+            "explanation": "Each evaluated unit is one tested compound; DMSO is included as the negative control."
+          },
+          "platform": {
+            "value": "unknown",
+            "evidence": [
+              "article:p2",
+              "article:p3"
+            ],
+            "explanation": "uHeart is a 3D engineered human cardiac microtissue with integrated electrical recording and does not map exactly to organoid, perfused chip, microwell, or spheroid."
+          },
+          "readout": {
+            "value": "other",
+            "evidence": [
+              "article.xml/Table 2./R2C4",
+              "article:p29"
+            ],
+            "explanation": "The assay readout is percentage change in Fridericia-corrected field potential duration, FPDcF."
+          },
+          "direction": {
+            "value": "higher_sensitive",
+            "evidence": [
+              "article:p29"
+            ],
+            "explanation": "A larger positive FPDcF percentage change indicates QT prolongation."
+          },
+          "threshold_rule": {
+            "value": "roc_optimized",
+            "evidence": [
+              "article:p29",
+              "kfac108_supplementary_data.docx:p24"
+            ],
+            "explanation": "The 15% MID cutoff is described as the optimal threshold and is examined in the ROC analysis."
+          },
+          "threshold_timing": {
+            "value": "outcome_optimized",
+            "evidence": [
+              "article:p29",
+              "kfac108_supplementary_data.docx:p24"
+            ],
+            "explanation": "The optimal MID threshold was selected from analyses of the same tested compounds; no independent held-out cohort is reported."
+          },
+          "patient_mapping": {
+            "value": "absent",
+            "evidence": [
+              "article:p29"
+            ],
+            "explanation": "FDA drug labels provide the clinical reference, with no individual patient outcomes."
+          },
+          "regimen_match": {
+            "value": "not_applicable",
+            "evidence": [
+              "article.xml/Table 2./R2C2"
+            ],
+            "explanation": "This is a drug-level cardiotoxicity comparison rather than a patient-regimen comparison."
+          },
+          "n_units": {
+            "value": 12,
+            "evidence": [
+              "article:p29",
+              "article.xml/Table 2./R4C2",
+              "article.xml/Table 2./R17C2"
+            ],
+            "explanation": "Eleven drugs plus DMSO give the exact 12-compound denominator."
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p29"
+            ],
+            "explanation": "Threshold selection and performance reporting use the same 12 evaluated compounds."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.916,
+          "reported_evidence": [
+            "article:p29",
+            "article:p2"
+          ],
+          "threshold": 0.5,
+          "op": ">",
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "Sotalol",
+              "score": {
+                "ref": "article.xml/Table 2./R4C4",
+                "map": {
+                  "↑30": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2./R4C2",
+                "map": {
+                  "Sotalol": 1
+                }
+              }
+            },
+            {
+              "id": "Dofetilide",
+              "score": {
+                "ref": "article.xml/Table 2./R5C4",
+                "map": {
+                  "↑ 0.002": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2./R5C2",
+                "map": {
+                  "Dofetilide": 1
+                }
+              }
+            },
+            {
+              "id": "Quinidine",
+              "score": {
+                "ref": "article.xml/Table 2./R6C4",
+                "map": {
+                  "↑ 1": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2./R6C2",
+                "map": {
+                  "Quinidine": 1
+                }
+              }
+            },
+            {
+              "id": "Cisapride",
+              "score": {
+                "ref": "article.xml/Table 2./R7C4",
+                "map": {
+                  "↓ 0.0025": 0
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2./R7C2",
+                "map": {
+                  "Cisapride": 1
+                }
+              }
+            },
+            {
+              "id": "Terfenadine",
+              "score": {
+                "ref": "article.xml/Table 2./R8C4",
+                "map": {
+                  "↑ 0.1": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2./R8C2",
+                "map": {
+                  "Terfenadine": 1
+                }
+              }
+            },
+            {
+              "id": "Ranolazine",
+              "score": {
+                "ref": "article.xml/Table 2./R10C4",
+                "map": {
+                  "↑ 2": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2./R10C2",
+                "map": {
+                  "Ranolazine": 1
+                }
+              }
+            },
+            {
+              "id": "Mexiletine",
+              "score": {
+                "ref": "article.xml/Table 2./R12C4",
+                "map": {
+                  "↔": 0
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2./R12C2",
+                "map": {
+                  "Mexiletine": 0
+                }
+              }
+            },
+            {
+              "id": "Nifedipine",
+              "score": {
+                "ref": "article.xml/Table 2./R13C4",
+                "map": {
+                  "↓ 0.005": 0
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2./R13C2",
+                "map": {
+                  "Nifedipine": 0
+                }
+              }
+            },
+            {
+              "id": "Verapamil",
+              "score": {
+                "ref": "article.xml/Table 2./R14C4",
+                "map": {
+                  "↓ 0.05": 0
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2./R14C2",
+                "map": {
+                  "Verapamil": 0
+                }
+              }
+            },
+            {
+              "id": "Alfuzosin",
+              "score": {
+                "ref": "article.xml/Table 2./R15C4",
+                "map": {
+                  "↔": 0
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2./R15C2",
+                "map": {
+                  "Alfuzosin": 0
+                }
+              }
+            },
+            {
+              "id": "Aspirin",
+              "score": {
+                "ref": "article.xml/Table 2./R16C4",
+                "map": {
+                  "↔": 0
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2./R16C2",
+                "map": {
+                  "Aspirin": 0
+                }
+              }
+            },
+            {
+              "id": "DMSO",
+              "score": {
+                "ref": "article.xml/Table 2./R17C4",
+                "map": {
+                  "↔": 0
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2./R17C2",
+                "map": {
+                  "DMSO": 0
+                }
+              }
+            }
+          ],
+          "blocked_reason": null
+        },
+        "notes": [
+          "Table 2 reports the concentration at which FPDcF crosses the MID threshold; the leading upward arrow is mapped to assay-positive prolongation, while no upward arrow is assay-negative.",
+          "At the published biological MID cutoff of 15% FPDcF change, the article reports 5 true positives, 6 true negatives, 1 false negative, and no false positives for QT prolongation.",
+          "The resulting accuracy is 11/12 = 0.9167, reported as 91.6%. The contract threshold 0.5 operates on the source-derived binary assay flag, not on the biological 15% cutoff."
+        ]
+      },
+      "execution_feedback": {
+        "matched": true,
+        "metric": "accuracy",
+        "computed": 0.9166666666666666,
+        "reported": 0.916,
+        "difference": 0.0006666666666665932,
+        "n": 12,
+        "errors": [],
+        "expected": {
+          "metric": "accuracy",
+          "value": 0.916,
+          "n": 12
+        }
+      }
+    }
+  }
+]

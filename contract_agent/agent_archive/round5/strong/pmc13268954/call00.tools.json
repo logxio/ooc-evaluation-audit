@@ -1,0 +1,115 @@
+[
+  {
+    "name": "initial_code",
+    "output": {
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "seconds": 1.742427166987909,
+      "peak_rss_bytes": 29032448,
+      "limit_error": null,
+      "code_sha256": "5e202aa23ea3d4f764a5661ef088f467104d95de783190059edc61f888f4c485",
+      "contract": {
+        "status": "no_headline",
+        "fields": {
+          "unit": {
+            "value": "patient_regimen",
+            "evidence": [
+              "article:p12",
+              "article:p13"
+            ],
+            "explanation": "One patient had PDOTS testing for lenvatinib, tislelizumab, and their combination, then received the matched lenvatinib-plus-tislelizumab regimen."
+          },
+          "platform": {
+            "value": "perfused_chip",
+            "evidence": [
+              "article:p11",
+              "article:p12"
+            ],
+            "explanation": "Biopsy fragments were embedded in collagen and cultured in a 3D microfluidic PDOTS chip."
+          },
+          "readout": {
+            "value": "viability",
+            "evidence": [
+              "article:p11",
+              "article:p12"
+            ],
+            "explanation": "AO/PI fluorescence was used to quantify relative cell viability and derive the Organoid Killing Index."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p12"
+            ],
+            "explanation": "OKI equals 1 minus relative viability, so greater killing/lower viability indicates greater sensitivity."
+          },
+          "threshold_rule": {
+            "value": "fixed_numeric",
+            "evidence": [
+              "article:p12"
+            ],
+            "explanation": "A predefined cutoff classified OKI greater than 40% as sensitive."
+          },
+          "threshold_timing": {
+            "value": "explicitly_prespecified",
+            "evidence": [
+              "article:p12"
+            ],
+            "explanation": "The article describes OKI > 40% as a pre-defined sensitivity criterion."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "article:p9",
+              "article:p13"
+            ],
+            "explanation": "The assay, treatment, and follow-up outcomes are traceable to one identified 64-year-old male patient."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p12",
+              "article:p13"
+            ],
+            "explanation": "The clinically administered lenvatinib-plus-tislelizumab regimen was the combination tested in PDOTS."
+          },
+          "n_units": {
+            "value": 1,
+            "evidence": [
+              "article:p3",
+              "article:p4"
+            ],
+            "explanation": "The report contains a single patient-regimen observation, not a validation cohort."
+          },
+          "split": {
+            "value": "none",
+            "evidence": [
+              "article:p4",
+              "article:p25"
+            ],
+            "explanation": "No training/test split or cohort-level predictive evaluation was performed in this single-case proof-of-concept report."
+          }
+        },
+        "headline": {
+          "metric": null,
+          "reported": null,
+          "reported_evidence": [
+            "article:p4",
+            "article:p21",
+            "article:p25"
+          ],
+          "threshold": null,
+          "op": null,
+          "score_direction": null,
+          "records": [],
+          "blocked_reason": "No global clinical or toxicity predictive headline is reported; the study describes concordance in only one patient and explicitly states that this is preliminary proof-of-concept rather than definitive validation."
+        },
+        "notes": [
+          "PDOTS OKI values were 31% for lenvatinib, 25% for tislelizumab, and 50% for the combination.",
+          "The patient achieved a partial response after six cycles and maintained it for 14 cycles.",
+          "The cited 88% predictive accuracy concerns prior NSCLC work and is not a headline computed from this article's HCC evidence."
+        ]
+      }
+    }
+  }
+]

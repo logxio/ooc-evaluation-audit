@@ -1,0 +1,1130 @@
+{
+  "version": 2,
+  "eligibility_rule": "A row-level patient, patient-regimen or clinical-toxicity drug table plus a locatable numerical clinical/toxicity headline; plots or cell styles may provide missing outcome labels. Eligibility is fixed before model runs. A qualitative matched comparison with an explicit mismatch count is eligible but must preserve its published interpretation.",
+  "eligible": [
+    "ewart",
+    "hu",
+    "dai",
+    "rectal",
+    "crlm",
+    "tan",
+    "tiriac",
+    "wang"
+  ],
+  "negative_controls": [
+    "schuster",
+    "steinberg"
+  ],
+  "targets": {
+    "ewart": {
+      "metric": "sensitivity",
+      "value": 0.8666666666666667,
+      "n": 18,
+      "tolerance": 0.005
+    },
+    "hu": {
+      "metric": "accuracy",
+      "value": 1.0,
+      "n": 10,
+      "tolerance": 1e-06
+    },
+    "dai": {
+      "metric": "accuracy",
+      "value": 0.8636363636363636,
+      "n": 22,
+      "tolerance": 0.0001
+    },
+    "rectal": {
+      "metric": "accuracy",
+      "value": 0.9375,
+      "n": 48,
+      "tolerance": 1e-06
+    },
+    "crlm": {
+      "metric": "auc",
+      "value": 0.85,
+      "n": 13,
+      "tolerance": 1e-06
+    },
+    "tan": {
+      "metric": "accuracy",
+      "value": 0.8275862068965517,
+      "n": 29,
+      "tolerance": 0.005
+    },
+    "tiriac": {
+      "metric": "accuracy",
+      "value": 0.8888888888888888,
+      "n": 9,
+      "tolerance": 1e-06
+    },
+    "wang": {
+      "metric": "accuracy",
+      "value": 0.8333333333333334,
+      "n": 54,
+      "tolerance": 0.0005
+    }
+  },
+  "stages": [
+    "single_pass",
+    "one_feedback",
+    "tool_loop"
+  ],
+  "max_model_calls_per_paper": 12,
+  "max_tool_calls_per_paper": 32,
+  "max_total_tokens_per_paper": 1000000,
+  "max_python_seconds": 20,
+  "max_python_rss_bytes": 1500000000,
+  "max_input_chars_per_tool": 32000,
+  "v2_cost_ceiling_cny": 107.54,
+  "cumulative_cost_ceiling_cny": 150,
+  "prior_conservative_reserve_cny": 42.46,
+  "pilot_papers": [
+    "crlm",
+    "rectal"
+  ],
+  "majority_gate": 5,
+  "prediction": "Strong full loop at least 5/8 eligible; weak 2-4/8; controls correctly refused 2/2.",
+  "target_provenance": {
+    "tiriac": "article paragraph reports one of nine inconsistent; Table S4 and Figure S6A contain assay and clinical linkage. Eight of nine remains a published qualitative concordance target, not a newly invented threshold rule."
+  },
+  "amendment_before_any_valid_response": "Initial max/plus calls and a diagnostic Flash call all returned HTTP400 Arrearage with the same credential. The formerly successful minimal competition-kit Flash probe now returns the same error. No valid benchmark response received; original strong max/weak plus design retained.",
+  "pilot_amendment": "2026-10-02, after two valid crlm first steps and before any cohort result: (1) prompt states that get_rows returns plain lists of raw values (the weak model treated rows as the {ref,value} preview objects and crashed) and that each of the first two replies is scored alone, so it must set CONTRACT (the strong model spent its single pass printing the table); (2) the per-paper cumulative token cap rises from 300,000 to 1,000,000 because one strong call already used 22,260 tokens, so 300,000 would stop the 12-call design after about six calls; cost stays bounded by the shared CNY ceiling and the 12-call cap; (3) tool turns allow parallel tool calls, matching the 32-tool/12-call design. The two pre-amendment crlm first steps are archived in runs/agent_v2_pilot0 and excluded from all results.",
+  "round2_change": "Round 2 changes the figure path: the agent can no longer write visual labels. record_visual_labels is replaced by read_figure, which sends the rendered figure or crop to the lane's own model in a fresh conversation that never sees the task, the target or the agent's notes (reader_prompt.txt); its transcription becomes vision/<image>/R<row>C<col> references. Round 1 showed why: the strong agent's two figure-based passes (tiriac, tan) each rested on misread labels whose errors cancelled to the published number, one of them filled from the paper's aggregate counts. Round 2 also runs on the Doubao model set because the Qwen account went into arrears during round 1; the two rounds are separate rulers and their pass rates are never subtracted or pooled. Cohort, targets, 12 model calls, 32 tool calls, 1,000,000 tokens per paper and the judge are unchanged.",
+  "model_sets": {
+    "qwen": {
+      "source": "help.aliyun.com/zh/model-studio/models (Beijing list prices) and context-cache (implicit hits at 20% of input)",
+      "strong": {
+        "model": "qwen3.8-max",
+        "profile": "aliyun-qwen36-plus",
+        "request": {
+          "enable_thinking": true,
+          "thinking_budget": 8192,
+          "max_tokens": 12000
+        },
+        "output_cap": 20192,
+        "price_cny_per_million": [
+          {
+            "max_input_tokens": null,
+            "input": 12,
+            "cached_input": 2.4,
+            "output": 36
+          }
+        ]
+      },
+      "weak": {
+        "model": "qwen3.7-plus",
+        "profile": "aliyun-qwen36-plus",
+        "request": {
+          "enable_thinking": false,
+          "max_tokens": 12000
+        },
+        "output_cap": 12000,
+        "price_cny_per_million": [
+          {
+            "max_input_tokens": 256000,
+            "input": 2,
+            "cached_input": 0.4,
+            "output": 8
+          },
+          {
+            "max_input_tokens": null,
+            "input": 6,
+            "cached_input": 1.2,
+            "output": 24
+          }
+        ]
+      }
+    },
+    "doubao": {
+      "source": "Volcano Ark model-pricing, online inference (regular), updated 2026-09-28; tiers apply to each request's input length",
+      "strong": {
+        "model": "doubao-seed-2-1-pro-260915",
+        "profile": "doubao",
+        "request": {
+          "thinking": {
+            "type": "enabled"
+          },
+          "reasoning_effort": "medium",
+          "max_completion_tokens": 32768
+        },
+        "output_cap": 32768,
+        "price_cny_per_million": [
+          {
+            "max_input_tokens": null,
+            "input": 6,
+            "cached_input": 1.2,
+            "output": 30
+          }
+        ],
+        "note": "reasoning_effort medium: the default (high) used 5x the thinking tokens of medium on the same task, and under platform load seed-2.1-pro decoded about 6-11 tokens per second per stream with 5 streams open, so a default-effort step ran past ten minutes"
+      },
+      "weak": {
+        "model": "doubao-seed-2-0-pro-260215",
+        "profile": "doubao",
+        "request": {
+          "thinking": {
+            "type": "disabled"
+          },
+          "max_tokens": 12000
+        },
+        "output_cap": 12000,
+        "price_cny_per_million": [
+          {
+            "max_input_tokens": 32000,
+            "input": 3.2,
+            "cached_input": 0.64,
+            "output": 16
+          },
+          {
+            "max_input_tokens": 128000,
+            "input": 4.8,
+            "cached_input": 0.96,
+            "output": 24
+          },
+          {
+            "max_input_tokens": null,
+            "input": 9.6,
+            "cached_input": 1.92,
+            "output": 48
+          }
+        ]
+      }
+    }
+  },
+  "rounds": {
+    "round1": {
+      "model_set": "qwen",
+      "root": "runs/agent_v2",
+      "figure_labels": "agent-recorded"
+    },
+    "round2": {
+      "model_set": "doubao",
+      "root": "runs/agent_v2_r2",
+      "figure_labels": "independent reader"
+    },
+    "round3": {
+      "model_set": "doubao",
+      "root": "runs/agent_v2_r3",
+      "figure_labels": "independent reader",
+      "limits": {
+        "max_model_calls_per_paper": 24,
+        "max_tool_calls_per_paper": 64
+      },
+      "change": "One change after round 2: the per-paper step budget doubles (24 model calls, 64 tool calls); the 1,000,000-token cap stays as the cost guard. Eleven of the twelve failed round-2 chains were still converging when call 12 ended them (reading figure crops, fixing a formula or binding). Round 3 continues every unfinished round-2 chain from its twelfth call; the model is never told the cap, so its first twelve calls are those of a 24-call run."
+    },
+    "round4": {
+      "model_set": "doubao",
+      "root": "runs/agent_v2_r4",
+      "figure_labels": "independent reader for printed labels, deterministic pixel reader for colours",
+      "limits": {
+        "max_model_calls_per_paper": 24,
+        "max_tool_calls_per_paper": 64
+      },
+      "lanes": [
+        "strong"
+      ],
+      "papers": [
+        "hu",
+        "dai",
+        "tiriac",
+        "schuster",
+        "steinberg"
+      ],
+      "carried": {
+        "from": "round3",
+        "papers": [
+          "crlm",
+          "rectal",
+          "tan",
+          "ewart",
+          "wang"
+        ]
+      },
+      "change": "One change after round 3: a read_grid tool. Three of the five failed round-3 strong chains failed on figure reading: three misread heat-map cells, one response grid transcribed with different colour words across crops, and bar ends at the 180-day line that the model reader could only estimate. read_grid samples the centre of every cell of a grid the agent defines and names the colour from the pixels; the agent cannot alter its labels, only map colour names to legend categories under the same judge. Round 4 reruns the three figure papers and the two negative controls from the first call on the strong lane with round-3 limits; the other five papers do not depend on figure colours and keep their round-3 strong results."
+    },
+    "round5": {
+      "model_set": "doubao",
+      "root": "runs/agent_v2_r5",
+      "cohort": "external",
+      "lanes": [
+        "strong"
+      ],
+      "figure_labels": "independent reader for printed labels, deterministic pixel reader for colours",
+      "limits": {
+        "max_model_calls_per_paper": 24,
+        "max_tool_calls_per_paper": 64
+      },
+      "change": "No change to the agent. Round 5 runs the round-4 strong lane (same model, prompts, tools, judge, 24 calls, 64 tools, 1,000,000 tokens) on the external cohort. The workspace builder now also reads Word supplements (tables with captions, paragraphs, embedded figures; legacy .doc converted), fetches .webp figures, and takes sources from the PMC Open Access dataset; read_grid accepts .webp."
+    }
+  },
+  "request_wall_seconds": {
+    "qwen": 230,
+    "doubao": 900
+  },
+  "step_wall_seconds": {
+    "qwen": 250,
+    "doubao": 1800
+  },
+  "external": {
+    "frozen": "2026-10-03T01:30+09:00, before any round-5 model call",
+    "purpose": "Held-out scale-up on papers outside the ten development papers; the agent, prompts, tools, judge and limits are those of round 4.",
+    "eligibility_rule": "A headline in a supported metric (accuracy, sensitivity, specificity, AUC) stated by the paper, per-unit rows in the article or its supplementary files (figures may carry labels), and a reference recomputation from those rows that reproduces the published value within its printed rounding. The headline is the abstract's first-stated supported metric, or the first one in the results when the abstract has none. Eligibility and targets are fixed before any model call; the first 26 eligible papers in the pre-declared order enter.",
+    "order": "pool candidates in list order, then pool spares, then two supplementary Europe PMC searches in the order fetched (runs/agent_v2_originals/extra.txt, extra2.txt)",
+    "eligible": [
+      "pmc11664105",
+      "pmc5974779",
+      "pmc9887672",
+      "pmc7855796",
+      "pmc8196829",
+      "pmc13429446",
+      "pmc12635425",
+      "pmc12666313",
+      "pmc12970873",
+      "pmc12817525",
+      "pmc13486321",
+      "pmc10777586",
+      "pmc6671958",
+      "pmc10569691",
+      "pmc11293329",
+      "pmc12797791",
+      "pmc10481139",
+      "pmc12598366",
+      "pmc11685586",
+      "pmc13386773",
+      "pmc13141165",
+      "pmc10316276",
+      "pmc10542784",
+      "pmc13587291",
+      "pmc13494009",
+      "pmc9746806"
+    ],
+    "negative_controls": [
+      "pmc13268954",
+      "pmc7396373",
+      "pmc9378866",
+      "pmc13092483"
+    ],
+    "types": {
+      "pmc11664105": "toxicity",
+      "pmc5974779": "toxicity",
+      "pmc9887672": "toxicity",
+      "pmc7855796": "clinical",
+      "pmc8196829": "clinical",
+      "pmc13429446": "clinical",
+      "pmc12635425": "clinical",
+      "pmc12666313": "clinical",
+      "pmc12970873": "clinical",
+      "pmc12817525": "clinical",
+      "pmc13486321": "clinical",
+      "pmc10777586": "clinical",
+      "pmc6671958": "clinical",
+      "pmc10569691": "clinical",
+      "pmc11293329": "clinical",
+      "pmc12797791": "clinical",
+      "pmc10481139": "clinical",
+      "pmc12598366": "clinical",
+      "pmc11685586": "clinical",
+      "pmc13386773": "clinical",
+      "pmc13141165": "clinical",
+      "pmc10316276": "clinical",
+      "pmc10542784": "clinical",
+      "pmc13587291": "clinical",
+      "pmc13494009": "clinical",
+      "pmc9746806": "clinical"
+    },
+    "targets": {
+      "pmc11664105": {
+        "metric": "sensitivity",
+        "value": 0.7169811320754716,
+        "n": 98,
+        "tolerance": 0.0005
+      },
+      "pmc5974779": {
+        "metric": "sensitivity",
+        "value": 0.69,
+        "n": 123,
+        "tolerance": 0.005
+      },
+      "pmc9887672": {
+        "metric": "accuracy",
+        "value": 0.916,
+        "n": 12,
+        "tolerance": 0.001
+      },
+      "pmc7855796": {
+        "metric": "accuracy",
+        "value": 0.86,
+        "n": 28,
+        "tolerance": 0.005
+      },
+      "pmc8196829": {
+        "metric": "accuracy",
+        "value": 0.9090909090909091,
+        "n": 11,
+        "tolerance": 1e-06
+      },
+      "pmc13429446": {
+        "metric": "accuracy",
+        "value": 0.85,
+        "n": 20,
+        "tolerance": 0.0005
+      },
+      "pmc12635425": {
+        "metric": "accuracy",
+        "value": 0.833,
+        "n": 24,
+        "tolerance": 0.0005
+      },
+      "pmc12666313": {
+        "metric": "auc",
+        "value": 0.88,
+        "n": 23,
+        "tolerance": 0.005
+      },
+      "pmc12970873": {
+        "metric": "accuracy",
+        "value": 0.909,
+        "n": 11,
+        "tolerance": 0.0005
+      },
+      "pmc12817525": {
+        "metric": "accuracy",
+        "value": 0.8333333333333334,
+        "n": 18,
+        "tolerance": 1e-06
+      },
+      "pmc13486321": {
+        "metric": "sensitivity",
+        "value": 0.875,
+        "n": 18,
+        "tolerance": 0.0005
+      },
+      "pmc10777586": {
+        "metric": "accuracy",
+        "value": 0.9230769230769231,
+        "n": 13,
+        "tolerance": 1e-06
+      },
+      "pmc6671958": {
+        "metric": "accuracy",
+        "value": 0.8863636363636364,
+        "n": 44,
+        "tolerance": 1e-06
+      },
+      "pmc10569691": {
+        "metric": "specificity",
+        "value": 0.7777777777777778,
+        "n": 34,
+        "tolerance": 1e-06
+      },
+      "pmc11293329": {
+        "metric": "accuracy",
+        "value": 0.9166666666666666,
+        "n": 12,
+        "tolerance": 1e-06
+      },
+      "pmc12797791": {
+        "metric": "accuracy",
+        "value": 0.9167,
+        "n": 12,
+        "tolerance": 5e-05
+      },
+      "pmc10481139": {
+        "metric": "sensitivity",
+        "value": 1.0,
+        "n": 14,
+        "tolerance": 1e-06
+      },
+      "pmc12598366": {
+        "metric": "accuracy",
+        "value": 0.8571428571428571,
+        "n": 14,
+        "tolerance": 1e-06
+      },
+      "pmc11685586": {
+        "metric": "accuracy",
+        "value": 0.5789473684210527,
+        "n": 19,
+        "tolerance": 1e-06
+      },
+      "pmc13386773": {
+        "metric": "accuracy",
+        "value": 0.6875,
+        "n": 16,
+        "tolerance": 5e-05
+      },
+      "pmc13141165": {
+        "metric": "auc",
+        "value": 0.899,
+        "n": 24,
+        "tolerance": 0.0005
+      },
+      "pmc10316276": {
+        "metric": "auc",
+        "value": 0.82,
+        "n": 37,
+        "tolerance": 0.005
+      },
+      "pmc10542784": {
+        "metric": "accuracy",
+        "value": 0.75,
+        "n": 20,
+        "tolerance": 1e-06
+      },
+      "pmc13587291": {
+        "metric": "accuracy",
+        "value": 0.8,
+        "n": 20,
+        "tolerance": 0.005
+      },
+      "pmc13494009": {
+        "metric": "accuracy",
+        "value": 1.0,
+        "n": 7,
+        "tolerance": 1e-06
+      },
+      "pmc9746806": {
+        "metric": "accuracy",
+        "value": 0.8181818181818182,
+        "n": 11,
+        "tolerance": 0.005
+      }
+    },
+    "screening": [
+      {
+        "pmcid": "PMC12895850",
+        "type": "toxicity",
+        "eligible": false,
+        "reason": "headline_not_recomputable",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC12145446",
+        "type": "toxicity",
+        "eligible": false,
+        "reason": "no_row_level_data",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC11664105",
+        "type": "toxicity",
+        "eligible": true,
+        "reason": null,
+        "status": "frozen"
+      },
+      {
+        "pmcid": "PMC5974779",
+        "type": "toxicity",
+        "eligible": true,
+        "reason": null,
+        "status": "frozen"
+      },
+      {
+        "pmcid": "PMC9887672",
+        "type": "toxicity",
+        "eligible": true,
+        "reason": null,
+        "status": "frozen"
+      },
+      {
+        "pmcid": "PMC13589501",
+        "type": "clinical",
+        "eligible": false,
+        "reason": "other: the only global headline scores the chip against matched mouse PDX response in vivo, not patient clinical response; the 7 patient samples carry no metric (one anecdotal match, sample #7). The PDX headline itself recomputes exactly (7/8, n=19), so the target below is ready if PDX-surrogate truth is accepted.",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC7855796",
+        "type": "clinical",
+        "eligible": true,
+        "reason": null,
+        "status": "frozen"
+      },
+      {
+        "pmcid": "PMC8196829",
+        "type": "clinical",
+        "eligible": true,
+        "reason": null,
+        "status": "frozen"
+      },
+      {
+        "pmcid": "PMC12433005",
+        "type": "clinical",
+        "eligible": false,
+        "reason": "no_row_level_data",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC13429446",
+        "type": "clinical",
+        "eligible": true,
+        "reason": null,
+        "status": "frozen"
+      },
+      {
+        "pmcid": "PMC12635425",
+        "type": "clinical",
+        "eligible": true,
+        "reason": null,
+        "status": "frozen"
+      },
+      {
+        "pmcid": "PMC12666313",
+        "type": "clinical",
+        "eligible": true,
+        "reason": null,
+        "status": "frozen"
+      },
+      {
+        "pmcid": "PMC12970873",
+        "type": "clinical",
+        "eligible": true,
+        "reason": null,
+        "status": "frozen"
+      },
+      {
+        "pmcid": "PMC10658544",
+        "type": "clinical",
+        "eligible": false,
+        "reason": "no_row_level_data",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC12817525",
+        "type": "clinical",
+        "eligible": true,
+        "reason": null,
+        "status": "frozen"
+      },
+      {
+        "pmcid": "PMC13486321",
+        "type": "clinical",
+        "eligible": true,
+        "reason": null,
+        "status": "frozen"
+      },
+      {
+        "pmcid": "PMC10777586",
+        "type": "clinical",
+        "eligible": true,
+        "reason": null,
+        "status": "frozen"
+      },
+      {
+        "pmcid": "PMC8345202",
+        "type": "clinical",
+        "eligible": false,
+        "reason": "no_row_level_data",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC11347840",
+        "type": "control",
+        "eligible": false,
+        "reason": "no_global_headline",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC10238206",
+        "type": "clinical",
+        "eligible": false,
+        "reason": "no_row_level_data",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC4501185",
+        "type": "clinical",
+        "eligible": false,
+        "reason": "headline_not_recomputable",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC6671958",
+        "type": "clinical",
+        "eligible": true,
+        "reason": null,
+        "status": "frozen"
+      },
+      {
+        "pmcid": "PMC10569691",
+        "type": "clinical",
+        "eligible": true,
+        "reason": null,
+        "status": "frozen"
+      },
+      {
+        "pmcid": "PMC11293329",
+        "type": "clinical",
+        "eligible": true,
+        "reason": null,
+        "status": "frozen"
+      },
+      {
+        "pmcid": "PMC12797791",
+        "type": "clinical",
+        "eligible": true,
+        "reason": null,
+        "status": "frozen"
+      },
+      {
+        "pmcid": "PMC10329174",
+        "type": "clinical",
+        "eligible": false,
+        "reason": "no_row_level_data",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC8656523",
+        "type": "clinical",
+        "eligible": false,
+        "reason": "headline_not_recomputable",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC11764749",
+        "type": "clinical",
+        "eligible": false,
+        "reason": "no_row_level_data",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC10481139",
+        "type": "clinical",
+        "eligible": true,
+        "reason": null,
+        "status": "frozen"
+      },
+      {
+        "pmcid": "PMC13275902",
+        "type": "control",
+        "eligible": false,
+        "reason": "no_global_headline",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC12598366",
+        "type": "clinical",
+        "eligible": true,
+        "reason": null,
+        "status": "frozen"
+      },
+      {
+        "pmcid": "PMC12496255",
+        "type": "control",
+        "eligible": false,
+        "reason": "no_global_headline",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC11685586",
+        "type": "clinical",
+        "eligible": true,
+        "reason": null,
+        "status": "frozen"
+      },
+      {
+        "pmcid": "PMC13386773",
+        "type": "clinical",
+        "eligible": true,
+        "reason": null,
+        "status": "frozen"
+      },
+      {
+        "pmcid": "PMC13141165",
+        "type": "clinical",
+        "eligible": true,
+        "reason": null,
+        "status": "frozen"
+      },
+      {
+        "pmcid": "PMC8207705",
+        "type": "clinical",
+        "eligible": false,
+        "reason": "no_row_level_data",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC8767104",
+        "type": "clinical",
+        "eligible": false,
+        "reason": "no_supported_metric",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC9777060",
+        "type": "clinical",
+        "eligible": false,
+        "reason": "headline_not_recomputable",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC5719985",
+        "type": "clinical",
+        "eligible": false,
+        "reason": "headline_not_recomputable",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC10316276",
+        "type": "clinical",
+        "eligible": true,
+        "reason": null,
+        "status": "frozen"
+      },
+      {
+        "pmcid": "PMC9913532",
+        "type": "control",
+        "eligible": false,
+        "reason": "no_global_headline",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC10898042",
+        "type": "clinical",
+        "eligible": false,
+        "reason": "no_supported_metric",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC12482882",
+        "type": "clinical",
+        "eligible": false,
+        "reason": "no_supported_metric",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC12398560",
+        "type": "clinical",
+        "eligible": false,
+        "reason": "no_supported_metric",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC12293284",
+        "type": "clinical",
+        "eligible": false,
+        "reason": "no_supported_metric",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC10542784",
+        "type": "clinical",
+        "eligible": true,
+        "reason": null,
+        "status": "frozen"
+      },
+      {
+        "pmcid": "PMC10575865",
+        "type": "clinical",
+        "eligible": false,
+        "reason": "no_supported_metric",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC13205027",
+        "type": "clinical",
+        "eligible": false,
+        "reason": "no_supported_metric",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC13587291",
+        "type": "clinical",
+        "eligible": true,
+        "reason": null,
+        "status": "frozen"
+      },
+      {
+        "pmcid": "PMC13494009",
+        "type": "clinical",
+        "eligible": true,
+        "reason": null,
+        "status": "frozen"
+      },
+      {
+        "pmcid": "PMC13219155",
+        "type": "clinical",
+        "eligible": false,
+        "reason": "no_supported_metric",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC13264355",
+        "type": "clinical",
+        "eligible": false,
+        "reason": "no_supported_metric",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC8775909",
+        "type": "clinical",
+        "eligible": false,
+        "reason": "no_row_level_data",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC9746806",
+        "type": "clinical",
+        "eligible": true,
+        "reason": null,
+        "status": "frozen"
+      },
+      {
+        "pmcid": "PMC9856585",
+        "type": "control",
+        "eligible": false,
+        "reason": "no_global_headline",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC6824140",
+        "type": "control",
+        "eligible": false,
+        "reason": "no_global_headline",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC10520686",
+        "type": "control",
+        "eligible": false,
+        "reason": "no_global_headline",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC10905551",
+        "type": "control",
+        "eligible": false,
+        "reason": "no_global_headline",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC8229222",
+        "type": "control",
+        "eligible": false,
+        "reason": "no_global_headline",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC8301364",
+        "type": "control",
+        "eligible": false,
+        "reason": "no_global_headline",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC11743102",
+        "type": "clinical",
+        "eligible": false,
+        "reason": "no_supported_metric",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC12135344",
+        "type": "control",
+        "eligible": false,
+        "reason": "no_global_headline",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC10664561",
+        "type": "clinical",
+        "eligible": false,
+        "reason": "other: the only supported-metric headline scores the organoid call against the patient's ALK rearrangement status, a molecular marker, not against a clinical response; the clinical comparison the paper does make (Fig. 10, five ALK-positive patients, all concordant) is never given as a number. The genotype headline itself recomputes exactly (5/5 sensitivity, n=17), so the target below is ready if marker-surrogate truth is accepted for the pool.",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC4351621",
+        "type": "clinical",
+        "eligible": false,
+        "reason": "no_row_level_data",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC4721000",
+        "type": "clinical",
+        "eligible": true,
+        "reason": null,
+        "status": "eligible, beyond the first 26"
+      },
+      {
+        "pmcid": "PMC6462037",
+        "type": "control",
+        "eligible": false,
+        "reason": "no_global_headline",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC10161587",
+        "type": "clinical",
+        "eligible": false,
+        "reason": "no_supported_metric",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC10265597",
+        "type": "control",
+        "eligible": false,
+        "reason": "no_global_headline",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC10252567",
+        "type": "control",
+        "eligible": false,
+        "reason": "no_global_headline",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC11558855",
+        "type": "control",
+        "eligible": false,
+        "reason": "no_global_headline",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC10733146",
+        "type": "clinical",
+        "eligible": false,
+        "reason": "headline_not_recomputable",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC10503742",
+        "type": "clinical",
+        "eligible": false,
+        "reason": "no_supported_metric",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC9477110",
+        "type": "clinical",
+        "eligible": false,
+        "reason": "no_supported_metric",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC13321693",
+        "type": "clinical",
+        "eligible": false,
+        "reason": "no_supported_metric",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC8481555",
+        "type": "clinical",
+        "eligible": true,
+        "reason": null,
+        "status": "eligible, beyond the first 26"
+      },
+      {
+        "pmcid": "PMC10805426",
+        "type": "clinical",
+        "eligible": true,
+        "reason": null,
+        "status": "eligible, beyond the first 26"
+      },
+      {
+        "pmcid": "PMC13160669",
+        "type": "toxicity",
+        "eligible": false,
+        "reason": "no_supported_metric",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC11574777",
+        "type": "clinical",
+        "eligible": false,
+        "reason": "no_row_level_data",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC4140819",
+        "type": "control",
+        "eligible": false,
+        "reason": "no_global_headline",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC4190467",
+        "type": "clinical",
+        "eligible": false,
+        "reason": "no_supported_metric",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC13301710",
+        "type": "clinical",
+        "eligible": true,
+        "reason": null,
+        "status": "eligible, beyond the first 26"
+      },
+      {
+        "pmcid": "PMC13408482",
+        "type": "clinical",
+        "eligible": true,
+        "reason": null,
+        "status": "eligible, beyond the first 26"
+      },
+      {
+        "pmcid": "PMC12870517",
+        "type": "clinical",
+        "eligible": true,
+        "reason": null,
+        "status": "eligible, beyond the first 26"
+      },
+      {
+        "pmcid": "PMC12597000",
+        "type": "clinical",
+        "eligible": false,
+        "reason": "no_supported_metric",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC11832732",
+        "type": "clinical",
+        "eligible": false,
+        "reason": "other: the only global headline scores the ex vivo REMIT call against mouse PDX response in vivo (10 PDX models), not patient clinical response; the 7 primary-tumour samples (Supplementary Fig. 5) carry REMIT calls only, with no clinical outcome. The PDX headline recomputes exactly (9/10, n=10) from figure-only labels, so the target below is ready if PDX-surrogate truth is accepted.",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC8086019",
+        "type": "clinical",
+        "eligible": false,
+        "reason": "no_supported_metric",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC6429713",
+        "type": "control",
+        "eligible": false,
+        "reason": "no_global_headline",
+        "status": "excluded"
+      },
+      {
+        "pmcid": "PMC13268954",
+        "type": "control",
+        "status": "frozen control",
+        "reason": "no_global_headline"
+      },
+      {
+        "pmcid": "PMC7396373",
+        "type": "control",
+        "status": "frozen control",
+        "reason": "no_global_headline"
+      },
+      {
+        "pmcid": "PMC9378866",
+        "type": "control",
+        "status": "frozen control",
+        "reason": "no_global_headline"
+      },
+      {
+        "pmcid": "PMC13092483",
+        "type": "control",
+        "status": "frozen control",
+        "reason": "no_global_headline"
+      }
+    ]
+  }
+}

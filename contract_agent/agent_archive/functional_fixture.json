@@ -1,0 +1,490 @@
+{
+  "origin": "manually authored integration fixture, not a model accuracy observation",
+  "tools": [
+    {
+      "name": "preview_table",
+      "arguments": {
+        "file": "supp.xls",
+        "sheet": "Table S7",
+        "start": 1,
+        "rows": 4
+      },
+      "output": {
+        "file": "supp.xls",
+        "sheet": "Table S7",
+        "nrows": 24,
+        "ncols": 6,
+        "rows": [
+          {
+            "row": 1,
+            "cells": [
+              {
+                "ref": "supp.xls/Table S7/R1C1",
+                "value": "Patient"
+              },
+              {
+                "ref": "supp.xls/Table S7/R1C2",
+                "value": "Regimen"
+              },
+              {
+                "ref": "supp.xls/Table S7/R1C3",
+                "value": "Treatment Response"
+              },
+              {
+                "ref": "supp.xls/Table S7/R1C4",
+                "value": "IC50 (FOLFOX or FOLFIRI, uM)"
+              },
+              {
+                "ref": "supp.xls/Table S7/R1C5",
+                "value": "PFS (mon)"
+              },
+              {
+                "ref": "supp.xls/Table S7/R1C6",
+                "value": "Status"
+              }
+            ]
+          },
+          {
+            "row": 2,
+            "cells": [
+              {
+                "ref": "supp.xls/Table S7/R2C1",
+                "value": "P2"
+              },
+              {
+                "ref": "supp.xls/Table S7/R2C2",
+                "value": "FOLFIRI"
+              },
+              {
+                "ref": "supp.xls/Table S7/R2C3",
+                "value": "SD/PR"
+              },
+              {
+                "ref": "supp.xls/Table S7/R2C4",
+                "value": 1.181
+              },
+              {
+                "ref": "supp.xls/Table S7/R2C5",
+                "value": 15.6
+              },
+              {
+                "ref": "supp.xls/Table S7/R2C6",
+                "value": "Progression"
+              }
+            ]
+          },
+          {
+            "row": 3,
+            "cells": [
+              {
+                "ref": "supp.xls/Table S7/R3C1",
+                "value": "P3"
+              },
+              {
+                "ref": "supp.xls/Table S7/R3C2",
+                "value": "FOLFOX"
+              },
+              {
+                "ref": "supp.xls/Table S7/R3C3",
+                "value": "PD"
+              },
+              {
+                "ref": "supp.xls/Table S7/R3C4",
+                "value": 30.83
+              },
+              {
+                "ref": "supp.xls/Table S7/R3C5",
+                "value": 3.1
+              },
+              {
+                "ref": "supp.xls/Table S7/R3C6",
+                "value": "Progression"
+              }
+            ]
+          },
+          {
+            "row": 4,
+            "cells": [
+              {
+                "ref": "supp.xls/Table S7/R4C1",
+                "value": "P4"
+              },
+              {
+                "ref": "supp.xls/Table S7/R4C2",
+                "value": "FOLFOX"
+              },
+              {
+                "ref": "supp.xls/Table S7/R4C3",
+                "value": "SD/PR"
+              },
+              {
+                "ref": "supp.xls/Table S7/R4C4",
+                "value": 1.041
+              },
+              {
+                "ref": "supp.xls/Table S7/R4C5",
+                "value": 11.3
+              },
+              {
+                "ref": "supp.xls/Table S7/R4C6",
+                "value": "Progression"
+              }
+            ]
+          }
+        ],
+        "merged": []
+      }
+    },
+    {
+      "name": "python",
+      "arguments": {
+        "code": "records=[]\nfor r,row in enumerate(get_rows('supp.xls','Table S7'),1):\n    if len(row)>3 and row[1]=='FOLFOX':\n        records.append({'id':str(row[0]),'score':{'ref':cell_ref('supp.xls','Table S7',r,4)},'truth':{'ref':cell_ref('supp.xls','Table S7',r,3),'map':{'SD/PR':1,'PD':0}}})\nvalues={'unit':'patient','platform':'organoid','readout':'ic50','direction':'lower_sensitive','threshold_rule':'no_binary_rule','threshold_timing':'not_applicable','patient_mapping':'individual_available','regimen_match':'matched','n_units':13,'split':'same_cohort'}\nCONTRACT={'fields':{k:{'value':v,'evidence':[]} for k,v in values.items()},'headline':{'metric':'auc','reported':.85,'n':13,'score_direction':'lower','records':records}}\n"
+      },
+      "output": {
+        "returncode": 0,
+        "stdout": "",
+        "stderr": "",
+        "seconds": 0.20731475000502542,
+        "peak_rss_bytes": 4046848,
+        "limit_error": null,
+        "code_sha256": "758f435d22908efe16b9e7781a9f68e6eafd80fa595457b6b2b67c1978ec80e2",
+        "contract": {
+          "fields": {
+            "unit": {
+              "value": "patient",
+              "evidence": []
+            },
+            "platform": {
+              "value": "organoid",
+              "evidence": []
+            },
+            "readout": {
+              "value": "ic50",
+              "evidence": []
+            },
+            "direction": {
+              "value": "lower_sensitive",
+              "evidence": []
+            },
+            "threshold_rule": {
+              "value": "no_binary_rule",
+              "evidence": []
+            },
+            "threshold_timing": {
+              "value": "not_applicable",
+              "evidence": []
+            },
+            "patient_mapping": {
+              "value": "individual_available",
+              "evidence": []
+            },
+            "regimen_match": {
+              "value": "matched",
+              "evidence": []
+            },
+            "n_units": {
+              "value": 13,
+              "evidence": []
+            },
+            "split": {
+              "value": "same_cohort",
+              "evidence": []
+            }
+          },
+          "headline": {
+            "metric": "auc",
+            "reported": 0.85,
+            "n": 13,
+            "score_direction": "lower",
+            "records": [
+              {
+                "id": "P3",
+                "score": {
+                  "ref": "supp.xls/Table S7/R3C4"
+                },
+                "truth": {
+                  "ref": "supp.xls/Table S7/R3C3",
+                  "map": {
+                    "SD/PR": 1,
+                    "PD": 0
+                  }
+                }
+              },
+              {
+                "id": "P4",
+                "score": {
+                  "ref": "supp.xls/Table S7/R4C4"
+                },
+                "truth": {
+                  "ref": "supp.xls/Table S7/R4C3",
+                  "map": {
+                    "SD/PR": 1,
+                    "PD": 0
+                  }
+                }
+              },
+              {
+                "id": "P5",
+                "score": {
+                  "ref": "supp.xls/Table S7/R5C4"
+                },
+                "truth": {
+                  "ref": "supp.xls/Table S7/R5C3",
+                  "map": {
+                    "SD/PR": 1,
+                    "PD": 0
+                  }
+                }
+              },
+              {
+                "id": "P6",
+                "score": {
+                  "ref": "supp.xls/Table S7/R6C4"
+                },
+                "truth": {
+                  "ref": "supp.xls/Table S7/R6C3",
+                  "map": {
+                    "SD/PR": 1,
+                    "PD": 0
+                  }
+                }
+              },
+              {
+                "id": "P9",
+                "score": {
+                  "ref": "supp.xls/Table S7/R9C4"
+                },
+                "truth": {
+                  "ref": "supp.xls/Table S7/R9C3",
+                  "map": {
+                    "SD/PR": 1,
+                    "PD": 0
+                  }
+                }
+              },
+              {
+                "id": "P11",
+                "score": {
+                  "ref": "supp.xls/Table S7/R11C4"
+                },
+                "truth": {
+                  "ref": "supp.xls/Table S7/R11C3",
+                  "map": {
+                    "SD/PR": 1,
+                    "PD": 0
+                  }
+                }
+              },
+              {
+                "id": "P12",
+                "score": {
+                  "ref": "supp.xls/Table S7/R12C4"
+                },
+                "truth": {
+                  "ref": "supp.xls/Table S7/R12C3",
+                  "map": {
+                    "SD/PR": 1,
+                    "PD": 0
+                  }
+                }
+              },
+              {
+                "id": "P13",
+                "score": {
+                  "ref": "supp.xls/Table S7/R13C4"
+                },
+                "truth": {
+                  "ref": "supp.xls/Table S7/R13C3",
+                  "map": {
+                    "SD/PR": 1,
+                    "PD": 0
+                  }
+                }
+              },
+              {
+                "id": "P14",
+                "score": {
+                  "ref": "supp.xls/Table S7/R14C4"
+                },
+                "truth": {
+                  "ref": "supp.xls/Table S7/R14C3",
+                  "map": {
+                    "SD/PR": 1,
+                    "PD": 0
+                  }
+                }
+              },
+              {
+                "id": "P18",
+                "score": {
+                  "ref": "supp.xls/Table S7/R18C4"
+                },
+                "truth": {
+                  "ref": "supp.xls/Table S7/R18C3",
+                  "map": {
+                    "SD/PR": 1,
+                    "PD": 0
+                  }
+                }
+              },
+              {
+                "id": "P19",
+                "score": {
+                  "ref": "supp.xls/Table S7/R19C4"
+                },
+                "truth": {
+                  "ref": "supp.xls/Table S7/R19C3",
+                  "map": {
+                    "SD/PR": 1,
+                    "PD": 0
+                  }
+                }
+              },
+              {
+                "id": "P23",
+                "score": {
+                  "ref": "supp.xls/Table S7/R22C4"
+                },
+                "truth": {
+                  "ref": "supp.xls/Table S7/R22C3",
+                  "map": {
+                    "SD/PR": 1,
+                    "PD": 0
+                  }
+                }
+              },
+              {
+                "id": "P25",
+                "score": {
+                  "ref": "supp.xls/Table S7/R24C4"
+                },
+                "truth": {
+                  "ref": "supp.xls/Table S7/R24C3",
+                  "map": {
+                    "SD/PR": 1,
+                    "PD": 0
+                  }
+                }
+              }
+            ]
+          }
+        }
+      }
+    }
+  ],
+  "evaluation": {
+    "matched": true,
+    "metric": "auc",
+    "computed": 0.85,
+    "reported": 0.85,
+    "difference": 0.0,
+    "n": 13,
+    "errors": [],
+    "rows": [
+      {
+        "id": "P3",
+        "score": 30.83,
+        "truth": 0
+      },
+      {
+        "id": "P4",
+        "score": 1.041,
+        "truth": 1
+      },
+      {
+        "id": "P5",
+        "score": 1.268,
+        "truth": 1
+      },
+      {
+        "id": "P6",
+        "score": 7.465,
+        "truth": 0
+      },
+      {
+        "id": "P9",
+        "score": 12.59,
+        "truth": 0
+      },
+      {
+        "id": "P11",
+        "score": 3.605,
+        "truth": 1
+      },
+      {
+        "id": "P12",
+        "score": 2.441,
+        "truth": 1
+      },
+      {
+        "id": "P13",
+        "score": 0.4895,
+        "truth": 1
+      },
+      {
+        "id": "P14",
+        "score": 2.32,
+        "truth": 1
+      },
+      {
+        "id": "P18",
+        "score": 2.254,
+        "truth": 0
+      },
+      {
+        "id": "P19",
+        "score": 15.4,
+        "truth": 0
+      },
+      {
+        "id": "P23",
+        "score": 6.247,
+        "truth": 1
+      },
+      {
+        "id": "P25",
+        "score": 7.895,
+        "truth": 1
+      }
+    ],
+    "expected": {
+      "metric": "auc",
+      "value": 0.85,
+      "n": 13
+    }
+  },
+  "source_cells": {
+    "supp.xls/Table S7/R11C3": "SD/PR",
+    "supp.xls/Table S7/R11C4": 3.605,
+    "supp.xls/Table S7/R12C3": "SD/PR",
+    "supp.xls/Table S7/R12C4": 2.441,
+    "supp.xls/Table S7/R13C3": "SD/PR",
+    "supp.xls/Table S7/R13C4": 0.4895,
+    "supp.xls/Table S7/R14C3": "SD/PR",
+    "supp.xls/Table S7/R14C4": 2.32,
+    "supp.xls/Table S7/R18C3": "PD",
+    "supp.xls/Table S7/R18C4": 2.254,
+    "supp.xls/Table S7/R19C3": "PD",
+    "supp.xls/Table S7/R19C4": 15.4,
+    "supp.xls/Table S7/R22C3": "SD/PR",
+    "supp.xls/Table S7/R22C4": 6.247,
+    "supp.xls/Table S7/R24C3": "SD/PR",
+    "supp.xls/Table S7/R24C4": 7.895,
+    "supp.xls/Table S7/R3C3": "PD",
+    "supp.xls/Table S7/R3C4": 30.83,
+    "supp.xls/Table S7/R4C3": "SD/PR",
+    "supp.xls/Table S7/R4C4": 1.041,
+    "supp.xls/Table S7/R5C3": "SD/PR",
+    "supp.xls/Table S7/R5C4": 1.268,
+    "supp.xls/Table S7/R6C3": "PD",
+    "supp.xls/Table S7/R6C4": 7.465,
+    "supp.xls/Table S7/R9C3": "PD",
+    "supp.xls/Table S7/R9C4": 12.59
+  },
+  "target": {
+    "metric": "auc",
+    "value": 0.85,
+    "n": 13,
+    "tolerance": 1e-06
+  }
+}

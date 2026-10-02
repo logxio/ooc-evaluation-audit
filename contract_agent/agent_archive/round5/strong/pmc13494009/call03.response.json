@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_dmzfq9xpeel39ka86a4cfky1",
+        "type": "function",
+        "function": {
+          "name": "python",
+          "arguments": "{\"code\": \"for p in range(16,20):\\n sh=f'page{p}'\\n rows=get_rows('41698_2026_1663_MOESM1_ESM.pdf',sh)\\n print('\\\\n###',sh)\\n for i,row in enumerate(rows,1):\\n  vals=[]\\n  for j,x in enumerate(row,1):\\n   if x not in (None,''):\\n    vals.append(f'C{j}:{x}')\\n  if vals: print(i, ' | '.join(vals)[:800])\"}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "Need locate tables likely pages 17-19. Dump.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 175,
+    "prompt_tokens": 30456,
+    "total_tokens": 30631,
+    "prompt_tokens_details": {
+      "cached_tokens": 24888
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 15
+    }
+  }
+}

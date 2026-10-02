@@ -1,0 +1,9 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "from PIL import Image\nimport numpy as np\nim=np.array(Image.open('jitc-14-5-g005.jpg').convert('RGB'))\n# E plot approximate region x 300:455, y 470:650 based displayed 735x925\nreg=im[450:660,280:470]\n# black pixels threshold\nmask=(reg[:,:,0]<60)&(reg[:,:,1]<60)&(reg[:,:,2]<60)\n# list components rough via coordinates\nys,xs=np.where(mask)\nprint(im.shape, reg.shape, len(xs), xs.min(),xs.max(),ys.min(),ys.max())\n# cluster points by y,x using simple connected comps scipy? use cv2 unavailable maybe sklearn no. custom dilation\nfrom collections import deque\nseen=np.zeros(mask.shape,bool); comps=[]\nfor y,x in zip(ys,xs):\n if seen[y,x]: continue\n q=[(y,x)]; seen[y,x]=1; pts=[]\n while q:\n  a,b=q.pop(); pts.append((a,b))\n  for da in (-1,0,1):\n   for db in (-1,0,1):\n    aa,bb=a+da,b+db\n    if 0<=aa<mask.shape[0] and 0<=bb<mask.shape[1] and mask[aa,bb] and not seen[aa,bb]:\n     seen[aa,bb]=1;q.append((aa,bb))\n if len(pts)>10: comps.append(pts)\nprint(len(comps))\nfor pts in sorted(comps,key=lambda p:(np.mean([q[0] for q in p]),np.mean([q[1] for q in p]))):\n print(len(pts), round(np.mean([q[1] for q in pts]),1), round(np.mean([q[0] for q in pts]),1))"
+    },
+    "output_sha256": "edd405a899b79a94657823903e995f25464b680b0143b06661a263bf85e44057"
+  }
+]

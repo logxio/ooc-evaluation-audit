@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_kij3txo8zzkcmsw44f9e6zk8",
+        "type": "function",
+        "function": {
+          "name": "python",
+          "arguments": "{\"code\": \"print(type(tables), tables.keys())\\nfor fn in tables:\\n print(fn, type(tables[fn]), list(tables[fn].keys())[:3])\\n for sh in list(tables[fn])[:1]:\\n  o=tables[fn][sh]\\n  print(type(o), o.keys() if isinstance(o,dict) else '')\\n  print(type(o.get('rows')), len(o.get('rows',[])), type(o['rows'][0]))\\n  print(o['rows'][0])\\n\"}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "Need inspect actual structure. Call Python for inspection.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 161,
+    "prompt_tokens": 25161,
+    "total_tokens": 25322,
+    "prompt_tokens_details": {
+      "cached_tokens": 2360
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 21
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_w9uksp2mmyyed8wbc4krt241",
+        "type": "function",
+        "function": {
+          "name": "python",
+          "arguments": "{\"code\": \"vn=get_rows('Source data figure 5.xlsx','5n'); vo=get_rows('Source data figure 5.xlsx','5o')\\nfor i in range(2,24):\\n p=vn[i][0]; vs=sum(vn[i][4:7])/3; ts=sum(vo[i][4:7])/3\\n vr=vs>48.97; tr=ts>50.47\\n print(p, round(vs,2), vr, round(ts,2), tr, 'same',vr==tr)\"}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "Interesting: first crop columns shifted: R1C2 P01?\n\nI’ve sorted out the resistance sensitivity ratings for all listed P-series model parameters.\n\nI’ve sorted out the resistance sensitivity ratings for the right-cropped P-series parameters and clinical test results for corresponding models. A discrepancy has been found between the left and right crop results, so I will verify the alignment issue next.\n\nI will use source numeric cutoffs to derive model predictions, first calculating the consistency of predictions with known clinical mismatch counts.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 662,
+    "prompt_tokens": 61252,
+    "total_tokens": 61914,
+    "prompt_tokens_details": {
+      "cached_tokens": 59192
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 507
+    }
+  }
+}

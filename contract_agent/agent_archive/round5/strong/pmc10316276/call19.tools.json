@@ -1,0 +1,9 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "from PIL import Image\nimport os, numpy as np\n# find file likely cwd\nprint(os.getcwd(), os.path.exists('1081768.fig3.jpg'))\nim=Image.open('1081768.fig3.jpg').convert('RGB')\na=np.array(im); print(im.size,a.shape)\n# panel A rough\n# red threshold dark red, blue dark blue\nR,G,B=a[:,:,0],a[:,:,1],a[:,:,2]\nred=(R>100)&(R<180)&(G<80)&(B<80)\nblue=(B>80)&(R<80)&(G<100)\n# restrict panel A x<260 y 70:280\nfor name,mask in [('red',red),('blue',blue)]:\n ys,xs=np.where(mask & (np.indices(red.shape)[1]<260) & (np.indices(red.shape)[0]>70) & (np.indices(red.shape)[0]<280))\n print(name,len(xs), (xs.min(),xs.max(),ys.min(),ys.max()) if len(xs) else None)\n # connected components simple\n seen=np.zeros(mask.shape,bool); comps=[]\n for x,y in zip(xs,ys):\n  if seen[y,x]: continue\n  stack=[(x,y)]; seen[y,x]=1; pts=[]\n  while stack:\n   X,Y=stack.pop(); pts.append((X,Y))\n   for XX in range(max(0,X-2),min(a.shape[1],X+3)):\n    for YY in range(max(0,Y-2),min(a.shape[0],Y+3)):\n     if mask[YY,XX] and not seen[YY,XX]: seen[YY,XX]=1;stack.append((XX,YY))\n  comps.append(pts)\n print('components',len(comps), sorted([(len(p),np.mean([q[0] for q in p]),np.mean([q[1] for q in p])) for p in comps], reverse=True)[:10])\n"
+    },
+    "output_sha256": "1f9008be8a47a075c07ec58294f8d399984037450bfb38ed29416ed3edd0f158"
+  }
+]

@@ -1,0 +1,883 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "\nimport re\n\n# Get all TRG data for P81-P128 from supp.pdf page11\ntrg_rows = get_rows(\"supp.pdf\", \"page11\")\ntrg_map = {}\nfor row_idx, row in enumerate(trg_rows, 1):\n    if not row or len(row) < 8:\n        continue\n    patient_id = row[0]\n    trg_val = row[7].lower()\n    match = re.match(r\"Patient-(\\d+)\", patient_id)\n    if match:\n        pid = int(match.group(1))\n        if 81 <= pid <= 128:\n            # Map truth: 0,1,ccr -> 1 (good response), 2,3 -> 0 (poor response)\n            truth = 1 if trg_val in {\"0\", \"1\", \"ccr\"} else 0\n            trg_map[pid] = {\n                \"truth\": truth,\n                \"ref\": f\"supp.pdf/page11/R{row_idx}C8\"\n            }\n\n# Get organoid combined treatment ratio for P81-P128 from supp.pdf page13 (rows 41-44) and page14 (all rows)\nratio_rows_p13 = get_rows(\"supp.pdf\", \"page13\")\nratio_rows_p14 = get_rows(\"supp.pdf\", \"page14\")\nratio_rows = ratio_rows_p13 + ratio_rows_p14\nratio_map = {}\nfor row_idx, row in enumerate(ratio_rows, 1):\n    if not row or len(row) < 5:\n        continue\n    patient_id = row[0]\n    ratio_val = row[4]\n    match = re.match(r\"Patient(\\d+)\", patient_id)\n    if match:\n        pid = int(match.group(1))\n        if 81 <= pid <= 128:\n            try:\n                ratio = float(ratio_val)\n                # Score: <= 0.3487 -> 1 (sensitive), > -> 0 (resistant)\n                score = 1 if ratio <= 0.3487 else 0\n                sheet = \"page13\" if row_idx <= len(ratio_rows_p13) else \"page14\"\n                row_in_sheet = row_idx if sheet == \"page13\" else row_idx - len(ratio_rows_p13)\n                ratio_map[pid] = {\n                    \"score\": score,\n                    \"ref\": f\"supp.pdf/{sheet}/R{row_in_sheet}C5\",\n                    \"ratio\": ratio\n                }\n            except ValueError:\n                pass\n\n# Merge to create records, ensure 48 patients\nrecords = []\ncorrect = 0\nfor pid in range(81, 129):\n    if pid not in trg_map or pid not in ratio_map:\n        continue\n    records.append({\n        \"id\": f\"P{pid}\",\n        \"score\": {\n            \"ref\": ratio_map[pid][\"ref\"],\n            \"threshold\": 0.3487,\n            \"op\": \"<=\"\n        },\n        \"truth\": {\n            \"ref\": trg_map[pid][\"ref\"],\n            \"map\": {\"0\": 1, \"1\": 1, \"ccr\": 1, \"2\": 0, \"3\": 0}\n        }\n    })\n    if trg_map[pid][\"truth\"] == ratio_map[pid][\"score\"]:\n        correct += 1\n\naccuracy = correct / len(records) if records else 0.0\n\nCONTRACT = {\n    \"status\": \"computed\",\n    \"fields\": {\n        \"unit\": {\"value\": \"patient\", \"evidence\": [\"article:p16\"], \"explanation\": \"Each record is a unique LARC patient in the validation cohort (P81-P128)\"},\n        \"platform\": {\"value\": \"organoid\", \"evidence\": [\"article:p16\"], \"explanation\": \"Patient-derived rectal cancer organoids (RCOs) used for assay\"},\n        \"readout\": {\"value\": \"size_viability\", \"evidence\": [\"article:p16\"], \"explanation\": \"Assay readout is ratio of organoid size on day 24 post-combined chemoradiation to day 0\"},\n        \"direction\": {\"value\": \"lower_sensitive\", \"evidence\": [\"article:p16\"], \"explanation\": \"Lower size ratio indicates higher sensitivity to combined chemoradiation\"},\n        \"threshold_rule\": {\"value\": \"fixed_numeric\", \"evidence\": [\"article:p16\"], \"explanation\": \"Fixed cutoff of 0.3487 size change ratio, derived from discovery cohort\"},\n        \"threshold_timing\": {\"value\": \"independent_reference\", \"evidence\": [\"article:p16\"], \"explanation\": \"Threshold was pre-specified using the separate discovery cohort, not optimized on validation cohort\"},\n        \"patient_mapping\": {\"value\": \"individual_available\", \"evidence\": [\"article:p16\", \"article:p72\"], \"explanation\": \"One-to-one mapping between organoid lines and patients, clinical outcomes available for all 48 validation patients\"},\n        \"regimen_match\": {\"value\": \"matched\", \"evidence\": [\"article:p28\"], \"explanation\": \"Organoids were treated with the same combined chemoradiation regimen as patients\"},\n        \"n_units\": {\"value\": 48, \"evidence\": [\"article:p16\", \"article:p28\"], \"explanation\": \"Total 48 patients in the validation cohort\"},\n        \"split\": {\"value\": \"independent_test\", \"evidence\": [\"article:p16\"], \"explanation\": \"Validation cohort is separate from the discovery cohort used to set the threshold\"}\n    },\n    \"headline\": {\n        \"metric\": \"accuracy\",\n        \"reported\": 0.9375,\n        \"reported_evidence\": [\"article:p28\"],\n        \"threshold\": 0.3487,\n        \"op\": \"<=\",\n        \"score_direction\": \"higher\",\n        \"records\": records,\n        \"blocked_reason\": None\n    },\n    \"notes\": [f\"Computed accuracy: {accuracy:.4f}, correct classifications: {correct}, total records: {len(records)}\"]\n}\n\nprint(f\"Accuracy check: {accuracy} == 0.9375? {abs(accuracy - 0.9375) < 1e-6}\")\nprint(f\"Missing PIDs: {[pid for pid in range(81, 129) if pid not in trg_map or pid not in ratio_map]}\")\n"
+    },
+    "output": {
+      "returncode": 0,
+      "stdout": "Accuracy check: 0.9285714285714286 == 0.9375? False\nMissing PIDs: [81, 82, 83, 84, 85, 86]\n",
+      "stderr": "",
+      "seconds": 2.4208344589860644,
+      "peak_rss_bytes": 50708480,
+      "limit_error": null,
+      "code_sha256": "c8505b229024fe51ebf8c157f210b892d01e44e8ed33a007ff93a2ace7133cf3",
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p16"
+            ],
+            "explanation": "Each record is a unique LARC patient in the validation cohort (P81-P128)"
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p16"
+            ],
+            "explanation": "Patient-derived rectal cancer organoids (RCOs) used for assay"
+          },
+          "readout": {
+            "value": "size_viability",
+            "evidence": [
+              "article:p16"
+            ],
+            "explanation": "Assay readout is ratio of organoid size on day 24 post-combined chemoradiation to day 0"
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p16"
+            ],
+            "explanation": "Lower size ratio indicates higher sensitivity to combined chemoradiation"
+          },
+          "threshold_rule": {
+            "value": "fixed_numeric",
+            "evidence": [
+              "article:p16"
+            ],
+            "explanation": "Fixed cutoff of 0.3487 size change ratio, derived from discovery cohort"
+          },
+          "threshold_timing": {
+            "value": "independent_reference",
+            "evidence": [
+              "article:p16"
+            ],
+            "explanation": "Threshold was pre-specified using the separate discovery cohort, not optimized on validation cohort"
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "article:p16",
+              "article:p72"
+            ],
+            "explanation": "One-to-one mapping between organoid lines and patients, clinical outcomes available for all 48 validation patients"
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p28"
+            ],
+            "explanation": "Organoids were treated with the same combined chemoradiation regimen as patients"
+          },
+          "n_units": {
+            "value": 48,
+            "evidence": [
+              "article:p16",
+              "article:p28"
+            ],
+            "explanation": "Total 48 patients in the validation cohort"
+          },
+          "split": {
+            "value": "independent_test",
+            "evidence": [
+              "article:p16"
+            ],
+            "explanation": "Validation cohort is separate from the discovery cohort used to set the threshold"
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.9375,
+          "reported_evidence": [
+            "article:p28"
+          ],
+          "threshold": 0.3487,
+          "op": "<=",
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "P87",
+              "score": {
+                "ref": "supp.pdf/page14/R3C5",
+                "threshold": 0.3487,
+                "op": "<="
+              },
+              "truth": {
+                "ref": "supp.pdf/page11/R1C8",
+                "map": {
+                  "0": 1,
+                  "1": 1,
+                  "ccr": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "P88",
+              "score": {
+                "ref": "supp.pdf/page14/R4C5",
+                "threshold": 0.3487,
+                "op": "<="
+              },
+              "truth": {
+                "ref": "supp.pdf/page11/R2C8",
+                "map": {
+                  "0": 1,
+                  "1": 1,
+                  "ccr": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "P89",
+              "score": {
+                "ref": "supp.pdf/page14/R5C5",
+                "threshold": 0.3487,
+                "op": "<="
+              },
+              "truth": {
+                "ref": "supp.pdf/page11/R3C8",
+                "map": {
+                  "0": 1,
+                  "1": 1,
+                  "ccr": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "P90",
+              "score": {
+                "ref": "supp.pdf/page14/R6C5",
+                "threshold": 0.3487,
+                "op": "<="
+              },
+              "truth": {
+                "ref": "supp.pdf/page11/R4C8",
+                "map": {
+                  "0": 1,
+                  "1": 1,
+                  "ccr": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "P91",
+              "score": {
+                "ref": "supp.pdf/page14/R7C5",
+                "threshold": 0.3487,
+                "op": "<="
+              },
+              "truth": {
+                "ref": "supp.pdf/page11/R5C8",
+                "map": {
+                  "0": 1,
+                  "1": 1,
+                  "ccr": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "P92",
+              "score": {
+                "ref": "supp.pdf/page14/R8C5",
+                "threshold": 0.3487,
+                "op": "<="
+              },
+              "truth": {
+                "ref": "supp.pdf/page11/R6C8",
+                "map": {
+                  "0": 1,
+                  "1": 1,
+                  "ccr": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "P93",
+              "score": {
+                "ref": "supp.pdf/page14/R9C5",
+                "threshold": 0.3487,
+                "op": "<="
+              },
+              "truth": {
+                "ref": "supp.pdf/page11/R7C8",
+                "map": {
+                  "0": 1,
+                  "1": 1,
+                  "ccr": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "P94",
+              "score": {
+                "ref": "supp.pdf/page14/R10C5",
+                "threshold": 0.3487,
+                "op": "<="
+              },
+              "truth": {
+                "ref": "supp.pdf/page11/R8C8",
+                "map": {
+                  "0": 1,
+                  "1": 1,
+                  "ccr": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "P95",
+              "score": {
+                "ref": "supp.pdf/page14/R11C5",
+                "threshold": 0.3487,
+                "op": "<="
+              },
+              "truth": {
+                "ref": "supp.pdf/page11/R9C8",
+                "map": {
+                  "0": 1,
+                  "1": 1,
+                  "ccr": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "P96",
+              "score": {
+                "ref": "supp.pdf/page14/R12C5",
+                "threshold": 0.3487,
+                "op": "<="
+              },
+              "truth": {
+                "ref": "supp.pdf/page11/R10C8",
+                "map": {
+                  "0": 1,
+                  "1": 1,
+                  "ccr": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "P97",
+              "score": {
+                "ref": "supp.pdf/page14/R13C5",
+                "threshold": 0.3487,
+                "op": "<="
+              },
+              "truth": {
+                "ref": "supp.pdf/page11/R11C8",
+                "map": {
+                  "0": 1,
+                  "1": 1,
+                  "ccr": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "P98",
+              "score": {
+                "ref": "supp.pdf/page14/R14C5",
+                "threshold": 0.3487,
+                "op": "<="
+              },
+              "truth": {
+                "ref": "supp.pdf/page11/R12C8",
+                "map": {
+                  "0": 1,
+                  "1": 1,
+                  "ccr": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "P99",
+              "score": {
+                "ref": "supp.pdf/page14/R15C5",
+                "threshold": 0.3487,
+                "op": "<="
+              },
+              "truth": {
+                "ref": "supp.pdf/page11/R13C8",
+                "map": {
+                  "0": 1,
+                  "1": 1,
+                  "ccr": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "P100",
+              "score": {
+                "ref": "supp.pdf/page14/R16C5",
+                "threshold": 0.3487,
+                "op": "<="
+              },
+              "truth": {
+                "ref": "supp.pdf/page11/R14C8",
+                "map": {
+                  "0": 1,
+                  "1": 1,
+                  "ccr": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "P101",
+              "score": {
+                "ref": "supp.pdf/page14/R17C5",
+                "threshold": 0.3487,
+                "op": "<="
+              },
+              "truth": {
+                "ref": "supp.pdf/page11/R15C8",
+                "map": {
+                  "0": 1,
+                  "1": 1,
+                  "ccr": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "P102",
+              "score": {
+                "ref": "supp.pdf/page14/R18C5",
+                "threshold": 0.3487,
+                "op": "<="
+              },
+              "truth": {
+                "ref": "supp.pdf/page11/R16C8",
+                "map": {
+                  "0": 1,
+                  "1": 1,
+                  "ccr": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "P103",
+              "score": {
+                "ref": "supp.pdf/page14/R19C5",
+                "threshold": 0.3487,
+                "op": "<="
+              },
+              "truth": {
+                "ref": "supp.pdf/page11/R17C8",
+                "map": {
+                  "0": 1,
+                  "1": 1,
+                  "ccr": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "P104",
+              "score": {
+                "ref": "supp.pdf/page14/R20C5",
+                "threshold": 0.3487,
+                "op": "<="
+              },
+              "truth": {
+                "ref": "supp.pdf/page11/R18C8",
+                "map": {
+                  "0": 1,
+                  "1": 1,
+                  "ccr": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "P105",
+              "score": {
+                "ref": "supp.pdf/page14/R21C5",
+                "threshold": 0.3487,
+                "op": "<="
+              },
+              "truth": {
+                "ref": "supp.pdf/page11/R19C8",
+                "map": {
+                  "0": 1,
+                  "1": 1,
+                  "ccr": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "P106",
+              "score": {
+                "ref": "supp.pdf/page14/R22C5",
+                "threshold": 0.3487,
+                "op": "<="
+              },
+              "truth": {
+                "ref": "supp.pdf/page11/R20C8",
+                "map": {
+                  "0": 1,
+                  "1": 1,
+                  "ccr": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "P107",
+              "score": {
+                "ref": "supp.pdf/page14/R23C5",
+                "threshold": 0.3487,
+                "op": "<="
+              },
+              "truth": {
+                "ref": "supp.pdf/page11/R21C8",
+                "map": {
+                  "0": 1,
+                  "1": 1,
+                  "ccr": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "P108",
+              "score": {
+                "ref": "supp.pdf/page14/R24C5",
+                "threshold": 0.3487,
+                "op": "<="
+              },
+              "truth": {
+                "ref": "supp.pdf/page11/R22C8",
+                "map": {
+                  "0": 1,
+                  "1": 1,
+                  "ccr": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "P109",
+              "score": {
+                "ref": "supp.pdf/page14/R25C5",
+                "threshold": 0.3487,
+                "op": "<="
+              },
+              "truth": {
+                "ref": "supp.pdf/page11/R23C8",
+                "map": {
+                  "0": 1,
+                  "1": 1,
+                  "ccr": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "P110",
+              "score": {
+                "ref": "supp.pdf/page14/R26C5",
+                "threshold": 0.3487,
+                "op": "<="
+              },
+              "truth": {
+                "ref": "supp.pdf/page11/R24C8",
+                "map": {
+                  "0": 1,
+                  "1": 1,
+                  "ccr": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "P111",
+              "score": {
+                "ref": "supp.pdf/page14/R27C5",
+                "threshold": 0.3487,
+                "op": "<="
+              },
+              "truth": {
+                "ref": "supp.pdf/page11/R25C8",
+                "map": {
+                  "0": 1,
+                  "1": 1,
+                  "ccr": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "P112",
+              "score": {
+                "ref": "supp.pdf/page14/R28C5",
+                "threshold": 0.3487,
+                "op": "<="
+              },
+              "truth": {
+                "ref": "supp.pdf/page11/R26C8",
+                "map": {
+                  "0": 1,
+                  "1": 1,
+                  "ccr": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "P113",
+              "score": {
+                "ref": "supp.pdf/page14/R29C5",
+                "threshold": 0.3487,
+                "op": "<="
+              },
+              "truth": {
+                "ref": "supp.pdf/page11/R27C8",
+                "map": {
+                  "0": 1,
+                  "1": 1,
+                  "ccr": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "P114",
+              "score": {
+                "ref": "supp.pdf/page14/R30C5",
+                "threshold": 0.3487,
+                "op": "<="
+              },
+              "truth": {
+                "ref": "supp.pdf/page11/R28C8",
+                "map": {
+                  "0": 1,
+                  "1": 1,
+                  "ccr": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "P115",
+              "score": {
+                "ref": "supp.pdf/page14/R31C5",
+                "threshold": 0.3487,
+                "op": "<="
+              },
+              "truth": {
+                "ref": "supp.pdf/page11/R29C8",
+                "map": {
+                  "0": 1,
+                  "1": 1,
+                  "ccr": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "P116",
+              "score": {
+                "ref": "supp.pdf/page14/R32C5",
+                "threshold": 0.3487,
+                "op": "<="
+              },
+              "truth": {
+                "ref": "supp.pdf/page11/R30C8",
+                "map": {
+                  "0": 1,
+                  "1": 1,
+                  "ccr": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "P117",
+              "score": {
+                "ref": "supp.pdf/page14/R33C5",
+                "threshold": 0.3487,
+                "op": "<="
+              },
+              "truth": {
+                "ref": "supp.pdf/page11/R31C8",
+                "map": {
+                  "0": 1,
+                  "1": 1,
+                  "ccr": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "P118",
+              "score": {
+                "ref": "supp.pdf/page14/R34C5",
+                "threshold": 0.3487,
+                "op": "<="
+              },
+              "truth": {
+                "ref": "supp.pdf/page11/R32C8",
+                "map": {
+                  "0": 1,
+                  "1": 1,
+                  "ccr": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "P119",
+              "score": {
+                "ref": "supp.pdf/page14/R35C5",
+                "threshold": 0.3487,
+                "op": "<="
+              },
+              "truth": {
+                "ref": "supp.pdf/page11/R33C8",
+                "map": {
+                  "0": 1,
+                  "1": 1,
+                  "ccr": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "P120",
+              "score": {
+                "ref": "supp.pdf/page14/R36C5",
+                "threshold": 0.3487,
+                "op": "<="
+              },
+              "truth": {
+                "ref": "supp.pdf/page11/R34C8",
+                "map": {
+                  "0": 1,
+                  "1": 1,
+                  "ccr": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "P121",
+              "score": {
+                "ref": "supp.pdf/page14/R37C5",
+                "threshold": 0.3487,
+                "op": "<="
+              },
+              "truth": {
+                "ref": "supp.pdf/page11/R35C8",
+                "map": {
+                  "0": 1,
+                  "1": 1,
+                  "ccr": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "P122",
+              "score": {
+                "ref": "supp.pdf/page14/R38C5",
+                "threshold": 0.3487,
+                "op": "<="
+              },
+              "truth": {
+                "ref": "supp.pdf/page11/R36C8",
+                "map": {
+                  "0": 1,
+                  "1": 1,
+                  "ccr": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "P123",
+              "score": {
+                "ref": "supp.pdf/page14/R39C5",
+                "threshold": 0.3487,
+                "op": "<="
+              },
+              "truth": {
+                "ref": "supp.pdf/page11/R37C8",
+                "map": {
+                  "0": 1,
+                  "1": 1,
+                  "ccr": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "P124",
+              "score": {
+                "ref": "supp.pdf/page14/R40C5",
+                "threshold": 0.3487,
+                "op": "<="
+              },
+              "truth": {
+                "ref": "supp.pdf/page11/R38C8",
+                "map": {
+                  "0": 1,
+                  "1": 1,
+                  "ccr": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "P125",
+              "score": {
+                "ref": "supp.pdf/page14/R41C5",
+                "threshold": 0.3487,
+                "op": "<="
+              },
+              "truth": {
+                "ref": "supp.pdf/page11/R39C8",
+                "map": {
+                  "0": 1,
+                  "1": 1,
+                  "ccr": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "P126",
+              "score": {
+                "ref": "supp.pdf/page14/R42C5",
+                "threshold": 0.3487,
+                "op": "<="
+              },
+              "truth": {
+                "ref": "supp.pdf/page11/R40C8",
+                "map": {
+                  "0": 1,
+                  "1": 1,
+                  "ccr": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "P127",
+              "score": {
+                "ref": "supp.pdf/page14/R43C5",
+                "threshold": 0.3487,
+                "op": "<="
+              },
+              "truth": {
+                "ref": "supp.pdf/page11/R41C8",
+                "map": {
+                  "0": 1,
+                  "1": 1,
+                  "ccr": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "P128",
+              "score": {
+                "ref": "supp.pdf/page14/R44C5",
+                "threshold": 0.3487,
+                "op": "<="
+              },
+              "truth": {
+                "ref": "supp.pdf/page11/R42C8",
+                "map": {
+                  "0": 1,
+                  "1": 1,
+                  "ccr": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            }
+          ],
+          "blocked_reason": null
+        },
+        "notes": [
+          "Computed accuracy: 0.9286, correct classifications: 39, total records: 42"
+        ]
+      },
+      "execution_feedback": {
+        "matched": false,
+        "metric": "accuracy",
+        "computed": 0.07142857142857142,
+        "reported": 0.9375,
+        "difference": -0.8660714285714286,
+        "n": 42,
+        "errors": [
+          "Contract denominator is 48 but it supplies 42 records",
+          "Expected 48 analysis units, got 42"
+        ],
+        "expected": {
+          "metric": "accuracy",
+          "value": 0.9375,
+          "n": 48
+        }
+      }
+    }
+  }
+]

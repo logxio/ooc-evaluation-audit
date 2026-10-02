@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_z5r9td4azddecbyudohtqtqc",
+        "type": "function",
+        "function": {
+          "name": "python",
+          "arguments": "{\"code\": \"rows=get_rows('mmc2.xlsx','Sheet1')\\nfor i,r in enumerate(rows):\\n print(i,repr(r))\\n\"}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "Need clinical outcomes. Inspect all rows and columns of mmc2.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 81,
+    "prompt_tokens": 31802,
+    "total_tokens": 31883,
+    "prompt_tokens_details": {
+      "cached_tokens": 1848
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 20
+    }
+  }
+}

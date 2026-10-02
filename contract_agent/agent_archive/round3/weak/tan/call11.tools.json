@@ -1,0 +1,600 @@
+[
+  {
+    "name": "finish",
+    "arguments": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient_regimen",
+            "evidence": [
+              "gr4.jpg",
+              "article:p40",
+              "article:p45"
+            ],
+            "explanation": "Evaluations are per treatment regimen per patient, 29 total treatments for 18 patients, confirmed by 29 rows of patient+treatment entries in gr4.jpg Figure 4B table"
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p3"
+            ],
+            "explanation": "Assay uses patient-derived tumor organoids (PDTOs)"
+          },
+          "readout": {
+            "value": "viability",
+            "evidence": [
+              "article:p30"
+            ],
+            "explanation": "PDTO viability is measured via mean size, AUC for single agents, pan-matrix viability for combinations"
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p30",
+              "article:p40"
+            ],
+            "explanation": "Lower viability (lower AUC/viability score) indicates higher sensitivity to treatment"
+          },
+          "threshold_rule": {
+            "value": "cohort_quantile",
+            "evidence": [
+              "article:p40"
+            ],
+            "explanation": "Cutoffs derived from treatment-naive cohort quantiles matching clinical trial response rates (e.g., 25% for 5FU, 20% for oxaliplatin etc.)"
+          },
+          "threshold_timing": {
+            "value": "independent_reference",
+            "evidence": [
+              "article:p40"
+            ],
+            "explanation": "Cutoffs were determined from an independent treatment-naive cohort (n=56) and clinical trial response rates, not fit to the evaluated 29 treatments"
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "gr4.jpg",
+              "article:p45"
+            ],
+            "explanation": "Individual treatment-level predictions and outcomes are available for each of the 29 treatments in gr4.jpg Figure 4B table, with unique patient IDs for each row"
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p40"
+            ],
+            "explanation": "PDTO sensitivity is tested against the exact components of the clinical treatment regimen; combination regimens are considered sensitive if any component is sensitive"
+          },
+          "n_units": {
+            "value": 29,
+            "evidence": [
+              "gr4.jpg",
+              "article:p45",
+              "article:p43"
+            ],
+            "explanation": "29 evaluable treatments for 18 patients in the independent community validation cohort, confirmed by 29 data rows in gr4.jpg Figure 4B table"
+          },
+          "split": {
+            "value": "independent_test",
+            "evidence": [
+              "article:p40"
+            ],
+            "explanation": "The 29 treatments are from an independent validation cohort separate from the training cohort used to set cutoffs"
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.8275862068965517,
+          "reported_evidence": [
+            "gr4.jpg",
+            "article:p45",
+            "article:p3"
+          ],
+          "threshold": 0.5,
+          "op": ">=",
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "WCB015_FOLFOX",
+              "score": {
+                "ref": "vision/b4a0e0c3e423/R1C5",
+                "map": {
+                  "light green square": 1,
+                  "red square": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/b4a0e0c3e423/R1C4",
+                "map": {
+                  "blue square": 1,
+                  "yellow square": 0
+                }
+              }
+            },
+            {
+              "id": "WCB015_FOLFIRI",
+              "score": {
+                "ref": "vision/b4a0e0c3e423/R2C5",
+                "map": {
+                  "light green square": 1,
+                  "red square": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/b4a0e0c3e423/R2C4",
+                "map": {
+                  "blue square": 1,
+                  "yellow square": 0
+                }
+              }
+            },
+            {
+              "id": "WCB015_TAS102",
+              "score": {
+                "ref": "vision/b4a0e0c3e423/R3C5",
+                "map": {
+                  "light green square": 1,
+                  "red square": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/b4a0e0c3e423/R3C4",
+                "map": {
+                  "blue square": 1,
+                  "yellow square": 0
+                }
+              }
+            },
+            {
+              "id": "WCB027_Capecitabine",
+              "score": {
+                "ref": "vision/b4a0e0c3e423/R4C5",
+                "map": {
+                  "light green square": 1,
+                  "red square": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/b4a0e0c3e423/R4C4",
+                "map": {
+                  "blue square": 1,
+                  "yellow square": 0
+                }
+              }
+            },
+            {
+              "id": "WCB027_XELOX",
+              "score": {
+                "ref": "vision/b4a0e0c3e423/R5C5",
+                "map": {
+                  "light green square": 1,
+                  "red square": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/b4a0e0c3e423/R5C4",
+                "map": {
+                  "blue square": 1,
+                  "yellow square": 0
+                }
+              }
+            },
+            {
+              "id": "WCB041_Capecitabine",
+              "score": {
+                "ref": "vision/b4a0e0c3e423/R6C5",
+                "map": {
+                  "light green square": 1,
+                  "red square": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/b4a0e0c3e423/R6C4",
+                "map": {
+                  "blue square": 1,
+                  "yellow square": 0
+                }
+              }
+            },
+            {
+              "id": "WCB041_FOLFIRI",
+              "score": {
+                "ref": "vision/b4a0e0c3e423/R7C5",
+                "map": {
+                  "light green square": 1,
+                  "red square": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/b4a0e0c3e423/R7C4",
+                "map": {
+                  "blue square": 1,
+                  "yellow square": 0
+                }
+              }
+            },
+            {
+              "id": "WCB087_5FU",
+              "score": {
+                "ref": "vision/b4a0e0c3e423/R8C5",
+                "map": {
+                  "light green square": 1,
+                  "red square": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/b4a0e0c3e423/R8C4",
+                "map": {
+                  "blue square": 1,
+                  "yellow square": 0
+                }
+              }
+            },
+            {
+              "id": "WCB091_FOLFOX",
+              "score": {
+                "ref": "vision/b4a0e0c3e423/R9C5",
+                "map": {
+                  "light green square": 1,
+                  "red square": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/b4a0e0c3e423/R9C4",
+                "map": {
+                  "blue square": 1,
+                  "yellow square": 0
+                }
+              }
+            },
+            {
+              "id": "WCB123_FOLFOX",
+              "score": {
+                "ref": "vision/b4a0e0c3e423/R10C5",
+                "map": {
+                  "light green square": 1,
+                  "red square": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/b4a0e0c3e423/R10C4",
+                "map": {
+                  "blue square": 1,
+                  "yellow square": 0
+                }
+              }
+            },
+            {
+              "id": "WCB123_FOLFOXIRI",
+              "score": {
+                "ref": "vision/b4a0e0c3e423/R11C5",
+                "map": {
+                  "light green square": 1,
+                  "red square": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/b4a0e0c3e423/R11C4",
+                "map": {
+                  "blue square": 1,
+                  "yellow square": 0
+                }
+              }
+            },
+            {
+              "id": "WCB139_5FU",
+              "score": {
+                "ref": "vision/b4a0e0c3e423/R12C5",
+                "map": {
+                  "light green square": 1,
+                  "red square": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/b4a0e0c3e423/R12C4",
+                "map": {
+                  "blue square": 1,
+                  "yellow square": 0
+                }
+              }
+            },
+            {
+              "id": "WCB139_TAS102",
+              "score": {
+                "ref": "vision/b4a0e0c3e423/R13C5",
+                "map": {
+                  "light green square": 1,
+                  "red square": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/b4a0e0c3e423/R13C4",
+                "map": {
+                  "blue square": 1,
+                  "yellow square": 0
+                }
+              }
+            },
+            {
+              "id": "WCB146_5FU",
+              "score": {
+                "ref": "vision/b4a0e0c3e423/R14C5",
+                "map": {
+                  "light green square": 1,
+                  "red square": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/b4a0e0c3e423/R14C4",
+                "map": {
+                  "blue square": 1,
+                  "yellow square": 0
+                }
+              }
+            },
+            {
+              "id": "WCB150_5FU",
+              "score": {
+                "ref": "vision/b4a0e0c3e423/R15C5",
+                "map": {
+                  "light green square": 1,
+                  "red square": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/b4a0e0c3e423/R15C4",
+                "map": {
+                  "blue square": 1,
+                  "yellow square": 0
+                }
+              }
+            },
+            {
+              "id": "WCB150_FOLFIRI",
+              "score": {
+                "ref": "vision/b4a0e0c3e423/R16C5",
+                "map": {
+                  "light green square": 1,
+                  "red square": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/b4a0e0c3e423/R16C4",
+                "map": {
+                  "blue square": 1,
+                  "yellow square": 0
+                }
+              }
+            },
+            {
+              "id": "WCB150_TAS102",
+              "score": {
+                "ref": "vision/b4a0e0c3e423/R17C5",
+                "map": {
+                  "light green square": 1,
+                  "red square": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/b4a0e0c3e423/R17C4",
+                "map": {
+                  "blue square": 1,
+                  "yellow square": 0
+                }
+              }
+            },
+            {
+              "id": "WCB203_Capecitabine",
+              "score": {
+                "ref": "vision/b4a0e0c3e423/R18C5",
+                "map": {
+                  "light green square": 1,
+                  "red square": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/b4a0e0c3e423/R18C4",
+                "map": {
+                  "blue square": 1,
+                  "yellow square": 0
+                }
+              }
+            },
+            {
+              "id": "WCB203_Irinotecan",
+              "score": {
+                "ref": "vision/b4a0e0c3e423/R19C5",
+                "map": {
+                  "light green square": 1,
+                  "red square": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/b4a0e0c3e423/R19C4",
+                "map": {
+                  "blue square": 1,
+                  "yellow square": 0
+                }
+              }
+            },
+            {
+              "id": "WCB217_TAS102",
+              "score": {
+                "ref": "vision/b4a0e0c3e423/R20C5",
+                "map": {
+                  "light green square": 1,
+                  "red square": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/b4a0e0c3e423/R20C4",
+                "map": {
+                  "blue square": 1,
+                  "yellow square": 0
+                }
+              }
+            },
+            {
+              "id": "WCB221_FOLFOX",
+              "score": {
+                "ref": "vision/b4a0e0c3e423/R21C5",
+                "map": {
+                  "light green square": 1,
+                  "red square": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/b4a0e0c3e423/R21C4",
+                "map": {
+                  "blue square": 1,
+                  "yellow square": 0
+                }
+              }
+            },
+            {
+              "id": "WCB239_FOLFOX",
+              "score": {
+                "ref": "vision/b4a0e0c3e423/R22C5",
+                "map": {
+                  "light green square": 1,
+                  "red square": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/b4a0e0c3e423/R22C4",
+                "map": {
+                  "blue square": 1,
+                  "yellow square": 0
+                }
+              }
+            },
+            {
+              "id": "WCB239_FOLFIRI",
+              "score": {
+                "ref": "vision/b4a0e0c3e423/R23C5",
+                "map": {
+                  "light green square": 1,
+                  "red square": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/b4a0e0c3e423/R23C4",
+                "map": {
+                  "blue square": 1,
+                  "yellow square": 0
+                }
+              }
+            },
+            {
+              "id": "WCB242_FOLFIRI",
+              "score": {
+                "ref": "vision/b4a0e0c3e423/R24C5",
+                "map": {
+                  "light green square": 1,
+                  "red square": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/b4a0e0c3e423/R24C4",
+                "map": {
+                  "blue square": 1,
+                  "yellow square": 0
+                }
+              }
+            },
+            {
+              "id": "WCB245_FOLFOX",
+              "score": {
+                "ref": "vision/b4a0e0c3e423/R25C5",
+                "map": {
+                  "light green square": 1,
+                  "red square": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/b4a0e0c3e423/R25C4",
+                "map": {
+                  "blue square": 1,
+                  "yellow square": 0
+                }
+              }
+            },
+            {
+              "id": "WCB254_FOLFOXIRI",
+              "score": {
+                "ref": "vision/b4a0e0c3e423/R26C5",
+                "map": {
+                  "light green square": 1,
+                  "red square": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/b4a0e0c3e423/R26C4",
+                "map": {
+                  "blue square": 1,
+                  "yellow square": 0
+                }
+              }
+            },
+            {
+              "id": "WCB254_FOLFOX",
+              "score": {
+                "ref": "vision/b4a0e0c3e423/R27C5",
+                "map": {
+                  "light green square": 1,
+                  "red square": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/b4a0e0c3e423/R27C4",
+                "map": {
+                  "blue square": 1,
+                  "yellow square": 0
+                }
+              }
+            },
+            {
+              "id": "WCB291_5FU",
+              "score": {
+                "ref": "vision/b4a0e0c3e423/R28C5",
+                "map": {
+                  "light green square": 1,
+                  "red square": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/b4a0e0c3e423/R28C4",
+                "map": {
+                  "blue square": 1,
+                  "yellow square": 0
+                }
+              }
+            },
+            {
+              "id": "WCB296_FOLFOXIRI",
+              "score": {
+                "ref": "vision/b4a0e0c3e423/R29C5",
+                "map": {
+                  "light green square": 1,
+                  "red square": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/b4a0e0c3e423/R29C4",
+                "map": {
+                  "blue square": 1,
+                  "yellow square": 0
+                }
+              }
+            }
+          ],
+          "blocked_reason": ""
+        },
+        "notes": [
+          "Reported accuracy is 24 correct predictions out of 29 total treatments, as explicitly stated in article paragraph p45: 'PDTO-based drug response predictions were highly correlated with patient clinical outcomes with concordance for 24 of 29 treatments' leading to 24/29 = 0.8275862068965517 accuracy. Legend from gr4.jpg: blue square = Good clinical response (truth=1, clinical benefit), yellow square = Poor clinical response (truth=0, no benefit), light green square = PDTO sensitive (score=1, predicted benefit), red square = PDTO resistant (score=0, predicted no benefit). Blue square in 'Match' column = correct prediction, orange square = incorrect (5 incorrect total, matching 29-24=5 errors). Accuracy pie chart in gr4.jpg explicitly reports 82.8% accuracy matching the target value."
+        ]
+      }
+    },
+    "output_sha256": "b106a5b1ae25a0273f3567615a300ba523f1828f5e3a4637134cad5a4de15b74"
+  }
+]

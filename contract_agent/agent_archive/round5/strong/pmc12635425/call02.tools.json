@@ -1,0 +1,17 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "print(type(tables), tables.keys())\nfor fn in tables:\n print(fn, type(tables[fn]), list(tables[fn].keys())[:3])\n for sh in list(tables[fn])[:1]:\n  o=tables[fn][sh]\n  print(type(o), o.keys() if isinstance(o,dict) else '')\n  print(type(o.get('rows')), len(o.get('rows',[])), type(o['rows'][0]))\n  print(o['rows'][0])\n"
+    },
+    "output": {
+      "returncode": 0,
+      "stdout": "<class 'dict'> dict_keys(['article.xml', 'CTM2-15-e70534-s003.xls', 'CTM2-15-e70534-s001.xls', 'CTM2-15-e70534-s002.pdf'])\narticle.xml <class 'dict'> ['TABLE 1', 'TABLE 2', 'TABLE 3']\n<class 'dict'> dict_keys(['rows', 'nrows', 'ncols'])\n<class 'list'> 5 <class 'list'>\n['Grade', 'Description']\nCTM2-15-e70534-s003.xls <class 'dict'> ['Sheet1']\n<class 'dict'> dict_keys(['rows', 'nrows', 'ncols'])\n<class 'list'> 38 <class 'list'>\n['Table S1 Clinical information of the patients included in this study, perioperative treatment regimens, and clinical responses.', '', '', '', '', '', '', '', '', '', '', '', '', '']\nCTM2-15-e70534-s001.xls <class 'dict'> ['Sheet1']\n<class 'dict'> dict_keys(['rows', 'nrows', 'ncols'])\n<class 'list'> 45 <class 'list'>\n['', 'REAGENT or RESOURCE', 'SOURCE', 'IDENTIFIER', '', '']\nCTM2-15-e70534-s002.pdf <class 'dict'> ['page1', 'page2', 'page3']\n<class 'dict'> dict_keys(['rows', 'geometry', 'nrows', 'ncols', 'width', 'height'])\n<class 'list'> 9 <class 'list'>\n['Supplemental', 'information']\n",
+      "stderr": "",
+      "seconds": 0.14049679099116474,
+      "peak_rss_bytes": 114688,
+      "limit_error": null,
+      "code_sha256": "6e9315e089ef23d99290a4acdfc3b9beca72feba735adc5838d941744a8799e1"
+    }
+  }
+]

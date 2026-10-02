@@ -1,0 +1,1291 @@
+{
+  "turn": 4,
+  "tool_count": 2,
+  "tokens": 62320,
+  "done": true,
+  "stop_reason": "verified",
+  "reader_calls": 1,
+  "checkpoints": {
+    "single_pass": {
+      "contract": {
+        "status": "blocked",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p79",
+              "article:p86"
+            ],
+            "explanation": "The concordance endpoint is reported for 16 followed-up patients."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p2",
+              "article:p52"
+            ],
+            "explanation": "Drug sensitivity was measured in patient-derived organoids (PDOs)."
+          },
+          "readout": {
+            "value": "ic50",
+            "evidence": [
+              "article:p72",
+              "article:p25"
+            ],
+            "explanation": "Sensitive versus resistant predictions were primarily based on IC50 relative to the cutoff; some lines without full curves used inhibition rates."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p25"
+            ],
+            "explanation": "IC50 below the cutoff was classified as sensitive and IC50 above it as resistant."
+          },
+          "threshold_rule": {
+            "value": "fixed_numeric",
+            "evidence": [
+              "article:p25"
+            ],
+            "explanation": "The study used 25% of the PPC as the fixed cutoff."
+          },
+          "threshold_timing": {
+            "value": "explicitly_prespecified",
+            "evidence": [
+              "article:p25",
+              "article:p86"
+            ],
+            "explanation": "The cutoff was stated as a study rule, and assay assessment and treatment selection were conducted independently."
+          },
+          "patient_mapping": {
+            "value": "partial",
+            "evidence": [
+              "article:p79",
+              "article:p80"
+            ],
+            "explanation": "The article identifies a 16-patient heatmap in Fig. 6A and aggregate matched/mismatched counts, but no machine-readable per-patient predictions and outcomes are present in the parsed source."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p79",
+              "article:p61"
+            ],
+            "explanation": "PDO sensitivity predictions were compared with the clinical efficacy of the patients' prescribed therapies."
+          },
+          "n_units": {
+            "value": 16,
+            "evidence": [
+              "article:p79",
+              "article:p86"
+            ],
+            "explanation": "Sixteen patients received therapy and underwent efficacy evaluation for this comparison."
+          },
+          "split": {
+            "value": "none",
+            "evidence": [
+              "article:p86"
+            ],
+            "explanation": "No predictive-model training or held-out split is described; the fixed assay rule was compared with prospectively observed outcomes."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.6875,
+          "reported_evidence": [
+            "article:p79",
+            "article:p86"
+          ],
+          "threshold": null,
+          "op": "==",
+          "score_direction": "higher",
+          "records": [],
+          "blocked_reason": "Row-level evidence is missing: Fig. 6A must provide, for each of the 16 patients, the PDO sensitive/resistant prediction for the prescribed drug or regimen and the corresponding RECIST v1.1 clinical outcome. The parsed article supplies only aggregate counts (11 matched and 5 mismatched), which are insufficient to construct independently identifiable records for the 0.6875 accuracy."
+        },
+        "notes": [
+          "The published aggregate result is 11/16 = 0.6875, but the contract requires row-level assay and clinical-outcome evidence.",
+          "An independent transcription of Fig. 6A is needed before the headline can be computed as records."
+        ]
+      },
+      "evaluation": {
+        "matched": false,
+        "metric": "accuracy",
+        "computed": null,
+        "reported": 0.6875,
+        "difference": null,
+        "n": 0,
+        "errors": [
+          "No source-bound observations: Row-level evidence is missing: Fig. 6A must provide, for each of the 16 patients, the PDO sensitive/resistant prediction for the prescribed drug or regimen and the corresponding RECIST v1.1 clinical outcome. The parsed article supplies only aggregate counts (11 matched and 5 mismatched), which are insufficient to construct independently identifiable records for the 0.6875 accuracy.",
+          "Expected 16 analysis units, got 0"
+        ],
+        "rows": [],
+        "expected": {
+          "metric": "accuracy",
+          "value": 0.6875,
+          "n": 16
+        }
+      },
+      "calls": 1,
+      "tokens": 10766
+    },
+    "one_feedback": {
+      "contract": {
+        "status": "blocked",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p79"
+            ],
+            "explanation": "16 followed-up patients"
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p2"
+            ],
+            "explanation": "PDO platform"
+          },
+          "readout": {
+            "value": "ic50",
+            "evidence": [
+              "article:p72",
+              "article:p25"
+            ],
+            "explanation": "IC50 cutoff classification"
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p25"
+            ],
+            "explanation": "Lower IC50 means sensitive"
+          },
+          "threshold_rule": {
+            "value": "fixed_numeric",
+            "evidence": [
+              "article:p25"
+            ],
+            "explanation": "25% PPC cutoff"
+          },
+          "threshold_timing": {
+            "value": "explicitly_prespecified",
+            "evidence": [
+              "article:p25",
+              "article:p86"
+            ],
+            "explanation": "Independent prespecified assay rule"
+          },
+          "patient_mapping": {
+            "value": "partial",
+            "evidence": [
+              "article:p80"
+            ],
+            "explanation": "Figure-level row mapping requires transcription"
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p79",
+              "article:p61"
+            ],
+            "explanation": "Prediction compared with prescribed therapy response"
+          },
+          "n_units": {
+            "value": 16,
+            "evidence": [
+              "article:p79"
+            ],
+            "explanation": "16 evaluated patients"
+          },
+          "split": {
+            "value": "none",
+            "evidence": [
+              "article:p86"
+            ],
+            "explanation": "No model fitting or held-out split"
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.6875,
+          "reported_evidence": [
+            "article:p79",
+            "article:p86"
+          ],
+          "threshold": null,
+          "op": "==",
+          "score_direction": "higher",
+          "records": [],
+          "blocked_reason": "Need independent read_figure transcription of Fig. 6A containing each of 16 patient IDs, PDO sensitive/resistant predictions, and RECIST outcomes; aggregate 11 matched/5 mismatched counts alone are not row-level evidence."
+        },
+        "notes": [
+          "Diagnostic scan executed to locate any embedded per-patient source values before requesting figure transcription."
+        ]
+      },
+      "evaluation": {
+        "matched": false,
+        "metric": "accuracy",
+        "computed": null,
+        "reported": 0.6875,
+        "difference": null,
+        "n": 0,
+        "errors": [
+          "No source-bound observations: Need independent read_figure transcription of Fig. 6A containing each of 16 patient IDs, PDO sensitive/resistant predictions, and RECIST outcomes; aggregate 11 matched/5 mismatched counts alone are not row-level evidence.",
+          "Expected 16 analysis units, got 0"
+        ],
+        "rows": [],
+        "expected": {
+          "metric": "accuracy",
+          "value": 0.6875,
+          "n": 16
+        }
+      },
+      "calls": 2,
+      "tokens": 21757
+    },
+    "tool_loop": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p79",
+              "article:p86"
+            ],
+            "explanation": "The endpoint compares one PDO-based prediction with the clinical outcome for each of 16 followed-up patients."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p2",
+              "article:p52"
+            ],
+            "explanation": "Predictions came from hepatic-malignancy patient-derived organoids."
+          },
+          "readout": {
+            "value": "ic50",
+            "evidence": [
+              "article:p25",
+              "article:p72"
+            ],
+            "explanation": "Sensitive versus resistant calls were based on IC50 relative to 25% of PPC, with reduced-concentration exceptions described in the methods."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p25"
+            ],
+            "explanation": "IC50 below the cutoff was classified as sensitive."
+          },
+          "threshold_rule": {
+            "value": "fixed_numeric",
+            "evidence": [
+              "article:p25"
+            ],
+            "explanation": "The assay cutoff was fixed at 25% of PPC."
+          },
+          "threshold_timing": {
+            "value": "explicitly_prespecified",
+            "evidence": [
+              "article:p25",
+              "article:p86"
+            ],
+            "explanation": "The assay rule was prespecified and PDO testing and treatment selection were conducted independently."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "vision/6f2a03075486/R1C1",
+              "vision/6f2a03075486/R2C1"
+            ],
+            "explanation": "Fig. 6A identifies all 16 patients and gives clinical response and concordance by column."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "vision/6f2a03075486/R9C1",
+              "vision/6f2a03075486/R14C1",
+              "article:p79"
+            ],
+            "explanation": "For each patient, the organoid sensitivity call for the drug(s) in the administered regimen was compared with RECIST v1.1 response."
+          },
+          "n_units": {
+            "value": 16,
+            "evidence": [
+              "article:p79",
+              "article:p86"
+            ],
+            "explanation": "Sixteen treated patients had evaluable clinical follow-up."
+          },
+          "split": {
+            "value": "none",
+            "evidence": [
+              "article:p86"
+            ],
+            "explanation": "No model training, cross-validation, or held-out cohort was used; a fixed assay classification was compared with observed outcomes."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.6875,
+          "reported_evidence": [
+            "article:p79",
+            "article:p86",
+            "vision/6f2a03075486/R15C20"
+          ],
+          "explanation": "Eleven of 16 patients were concordant; 11/16 = 0.6875.",
+          "threshold": 0.5,
+          "op": ">",
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "IHCC-161",
+              "score": {
+                "refs": [
+                  "vision/6f2a03075486/R3C2",
+                  "vision/6f2a03075486/R8C2"
+                ],
+                "aggregate": "mean",
+                "map": {
+                  "Sensitive": 1,
+                  "Resistance": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/6f2a03075486/R1C2",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "IHCC-163",
+              "score": {
+                "ref": "vision/6f2a03075486/R8C3",
+                "map": {
+                  "Sensitive": 1,
+                  "Resistance": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/6f2a03075486/R1C3",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "IHCC-165",
+              "score": {
+                "ref": "vision/6f2a03075486/R8C4",
+                "map": {
+                  "Sensitive": 1,
+                  "Resistance": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/6f2a03075486/R1C4",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "IHCC-167",
+              "score": {
+                "ref": "vision/6f2a03075486/R8C5",
+                "map": {
+                  "Sensitive": 1,
+                  "Resistance": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/6f2a03075486/R1C5",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "IHCC-168",
+              "score": {
+                "ref": "vision/6f2a03075486/R3C6",
+                "map": {
+                  "Sensitive": 1,
+                  "Resistance": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/6f2a03075486/R1C6",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "IHCC-170",
+              "score": {
+                "ref": "vision/6f2a03075486/R8C7",
+                "map": {
+                  "Sensitive": 1,
+                  "Resistance": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/6f2a03075486/R1C7",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "IHCC-172",
+              "score": {
+                "refs": [
+                  "vision/6f2a03075486/R4C8",
+                  "vision/6f2a03075486/R6C8",
+                  "vision/6f2a03075486/R8C8"
+                ],
+                "aggregate": "mean",
+                "map": {
+                  "Sensitive": 1,
+                  "Resistance": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/6f2a03075486/R1C8",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "IHCC-173",
+              "score": {
+                "ref": "vision/6f2a03075486/R3C9",
+                "map": {
+                  "Sensitive": 1,
+                  "Resistance": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/6f2a03075486/R1C9",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "IHCC-175",
+              "score": {
+                "ref": "vision/6f2a03075486/R3C10",
+                "map": {
+                  "Sensitive": 1,
+                  "Resistance": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/6f2a03075486/R1C10",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "IHCC-176",
+              "score": {
+                "ref": "vision/6f2a03075486/R8C11",
+                "map": {
+                  "Sensitive": 1,
+                  "Resistance": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/6f2a03075486/R1C11",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "IHCC-179",
+              "score": {
+                "ref": "vision/6f2a03075486/R6C12",
+                "map": {
+                  "Sensitive": 1,
+                  "Resistance": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/6f2a03075486/R1C12",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "IHCC-181",
+              "score": {
+                "ref": "vision/6f2a03075486/R6C13",
+                "map": {
+                  "Sensitive": 1,
+                  "Resistance": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/6f2a03075486/R1C13",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "IHCC-182",
+              "score": {
+                "refs": [
+                  "vision/6f2a03075486/R6C14",
+                  "vision/6f2a03075486/R8C14"
+                ],
+                "aggregate": "mean",
+                "map": {
+                  "Sensitive": 1,
+                  "Resistance": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/6f2a03075486/R1C14",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "IHCC-183",
+              "score": {
+                "refs": [
+                  "vision/6f2a03075486/R6C15",
+                  "vision/6f2a03075486/R8C15"
+                ],
+                "aggregate": "mean",
+                "map": {
+                  "Sensitive": 1,
+                  "Resistance": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/6f2a03075486/R1C15",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "IHCC-184",
+              "score": {
+                "ref": "vision/6f2a03075486/R6C16",
+                "map": {
+                  "Sensitive": 1,
+                  "Resistance": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/6f2a03075486/R1C16",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "IHCC-202",
+              "score": {
+                "ref": "vision/6f2a03075486/R3C17",
+                "map": {
+                  "Sensitive": 1,
+                  "Resistance": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/6f2a03075486/R1C17",
+                "map": {
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            }
+          ]
+        },
+        "notes": [
+          "Clinical truth follows the article's consistency rule: CR/PR/SD are positive/control outcomes and PD is the negative/progressive outcome.",
+          "Drug rows marked in the Patients section identify administered drugs; the corresponding Organoids rows supply assay sensitivity calls.",
+          "Multi-drug records use the mean of the mapped calls; in every multi-drug case shown here the relevant calls were identical, so no regimen-level ambiguity was introduced."
+        ]
+      },
+      "evaluation": {
+        "matched": true,
+        "metric": "accuracy",
+        "computed": 0.6875,
+        "reported": 0.6875,
+        "difference": 0.0,
+        "n": 16,
+        "errors": [],
+        "rows": [
+          {
+            "id": "IHCC-161",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "IHCC-163",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "IHCC-165",
+            "score": 1.0,
+            "truth": 0,
+            "prediction": 1
+          },
+          {
+            "id": "IHCC-167",
+            "score": 1.0,
+            "truth": 0,
+            "prediction": 1
+          },
+          {
+            "id": "IHCC-168",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "IHCC-170",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "IHCC-172",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "IHCC-173",
+            "score": 1.0,
+            "truth": 0,
+            "prediction": 1
+          },
+          {
+            "id": "IHCC-175",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "IHCC-176",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "IHCC-179",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "IHCC-181",
+            "score": 1.0,
+            "truth": 0,
+            "prediction": 1
+          },
+          {
+            "id": "IHCC-182",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "IHCC-183",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "IHCC-184",
+            "score": 0.0,
+            "truth": 1,
+            "prediction": 0
+          },
+          {
+            "id": "IHCC-202",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          }
+        ],
+        "expected": {
+          "metric": "accuracy",
+          "value": 0.6875,
+          "n": 16
+        }
+      },
+      "calls": 4,
+      "tokens": 62320
+    }
+  },
+  "last_contract": {
+    "status": "computed",
+    "fields": {
+      "unit": {
+        "value": "patient",
+        "evidence": [
+          "article:p79",
+          "article:p86"
+        ],
+        "explanation": "The endpoint compares one PDO-based prediction with the clinical outcome for each of 16 followed-up patients."
+      },
+      "platform": {
+        "value": "organoid",
+        "evidence": [
+          "article:p2",
+          "article:p52"
+        ],
+        "explanation": "Predictions came from hepatic-malignancy patient-derived organoids."
+      },
+      "readout": {
+        "value": "ic50",
+        "evidence": [
+          "article:p25",
+          "article:p72"
+        ],
+        "explanation": "Sensitive versus resistant calls were based on IC50 relative to 25% of PPC, with reduced-concentration exceptions described in the methods."
+      },
+      "direction": {
+        "value": "lower_sensitive",
+        "evidence": [
+          "article:p25"
+        ],
+        "explanation": "IC50 below the cutoff was classified as sensitive."
+      },
+      "threshold_rule": {
+        "value": "fixed_numeric",
+        "evidence": [
+          "article:p25"
+        ],
+        "explanation": "The assay cutoff was fixed at 25% of PPC."
+      },
+      "threshold_timing": {
+        "value": "explicitly_prespecified",
+        "evidence": [
+          "article:p25",
+          "article:p86"
+        ],
+        "explanation": "The assay rule was prespecified and PDO testing and treatment selection were conducted independently."
+      },
+      "patient_mapping": {
+        "value": "individual_available",
+        "evidence": [
+          "vision/6f2a03075486/R1C1",
+          "vision/6f2a03075486/R2C1"
+        ],
+        "explanation": "Fig. 6A identifies all 16 patients and gives clinical response and concordance by column."
+      },
+      "regimen_match": {
+        "value": "matched",
+        "evidence": [
+          "vision/6f2a03075486/R9C1",
+          "vision/6f2a03075486/R14C1",
+          "article:p79"
+        ],
+        "explanation": "For each patient, the organoid sensitivity call for the drug(s) in the administered regimen was compared with RECIST v1.1 response."
+      },
+      "n_units": {
+        "value": 16,
+        "evidence": [
+          "article:p79",
+          "article:p86"
+        ],
+        "explanation": "Sixteen treated patients had evaluable clinical follow-up."
+      },
+      "split": {
+        "value": "none",
+        "evidence": [
+          "article:p86"
+        ],
+        "explanation": "No model training, cross-validation, or held-out cohort was used; a fixed assay classification was compared with observed outcomes."
+      }
+    },
+    "headline": {
+      "metric": "accuracy",
+      "reported": 0.6875,
+      "reported_evidence": [
+        "article:p79",
+        "article:p86",
+        "vision/6f2a03075486/R15C20"
+      ],
+      "explanation": "Eleven of 16 patients were concordant; 11/16 = 0.6875.",
+      "threshold": 0.5,
+      "op": ">",
+      "score_direction": "higher",
+      "records": [
+        {
+          "id": "IHCC-161",
+          "score": {
+            "refs": [
+              "vision/6f2a03075486/R3C2",
+              "vision/6f2a03075486/R8C2"
+            ],
+            "aggregate": "mean",
+            "map": {
+              "Sensitive": 1,
+              "Resistance": 0
+            }
+          },
+          "truth": {
+            "ref": "vision/6f2a03075486/R1C2",
+            "map": {
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "IHCC-163",
+          "score": {
+            "ref": "vision/6f2a03075486/R8C3",
+            "map": {
+              "Sensitive": 1,
+              "Resistance": 0
+            }
+          },
+          "truth": {
+            "ref": "vision/6f2a03075486/R1C3",
+            "map": {
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "IHCC-165",
+          "score": {
+            "ref": "vision/6f2a03075486/R8C4",
+            "map": {
+              "Sensitive": 1,
+              "Resistance": 0
+            }
+          },
+          "truth": {
+            "ref": "vision/6f2a03075486/R1C4",
+            "map": {
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "IHCC-167",
+          "score": {
+            "ref": "vision/6f2a03075486/R8C5",
+            "map": {
+              "Sensitive": 1,
+              "Resistance": 0
+            }
+          },
+          "truth": {
+            "ref": "vision/6f2a03075486/R1C5",
+            "map": {
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "IHCC-168",
+          "score": {
+            "ref": "vision/6f2a03075486/R3C6",
+            "map": {
+              "Sensitive": 1,
+              "Resistance": 0
+            }
+          },
+          "truth": {
+            "ref": "vision/6f2a03075486/R1C6",
+            "map": {
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "IHCC-170",
+          "score": {
+            "ref": "vision/6f2a03075486/R8C7",
+            "map": {
+              "Sensitive": 1,
+              "Resistance": 0
+            }
+          },
+          "truth": {
+            "ref": "vision/6f2a03075486/R1C7",
+            "map": {
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "IHCC-172",
+          "score": {
+            "refs": [
+              "vision/6f2a03075486/R4C8",
+              "vision/6f2a03075486/R6C8",
+              "vision/6f2a03075486/R8C8"
+            ],
+            "aggregate": "mean",
+            "map": {
+              "Sensitive": 1,
+              "Resistance": 0
+            }
+          },
+          "truth": {
+            "ref": "vision/6f2a03075486/R1C8",
+            "map": {
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "IHCC-173",
+          "score": {
+            "ref": "vision/6f2a03075486/R3C9",
+            "map": {
+              "Sensitive": 1,
+              "Resistance": 0
+            }
+          },
+          "truth": {
+            "ref": "vision/6f2a03075486/R1C9",
+            "map": {
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "IHCC-175",
+          "score": {
+            "ref": "vision/6f2a03075486/R3C10",
+            "map": {
+              "Sensitive": 1,
+              "Resistance": 0
+            }
+          },
+          "truth": {
+            "ref": "vision/6f2a03075486/R1C10",
+            "map": {
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "IHCC-176",
+          "score": {
+            "ref": "vision/6f2a03075486/R8C11",
+            "map": {
+              "Sensitive": 1,
+              "Resistance": 0
+            }
+          },
+          "truth": {
+            "ref": "vision/6f2a03075486/R1C11",
+            "map": {
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "IHCC-179",
+          "score": {
+            "ref": "vision/6f2a03075486/R6C12",
+            "map": {
+              "Sensitive": 1,
+              "Resistance": 0
+            }
+          },
+          "truth": {
+            "ref": "vision/6f2a03075486/R1C12",
+            "map": {
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "IHCC-181",
+          "score": {
+            "ref": "vision/6f2a03075486/R6C13",
+            "map": {
+              "Sensitive": 1,
+              "Resistance": 0
+            }
+          },
+          "truth": {
+            "ref": "vision/6f2a03075486/R1C13",
+            "map": {
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "IHCC-182",
+          "score": {
+            "refs": [
+              "vision/6f2a03075486/R6C14",
+              "vision/6f2a03075486/R8C14"
+            ],
+            "aggregate": "mean",
+            "map": {
+              "Sensitive": 1,
+              "Resistance": 0
+            }
+          },
+          "truth": {
+            "ref": "vision/6f2a03075486/R1C14",
+            "map": {
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "IHCC-183",
+          "score": {
+            "refs": [
+              "vision/6f2a03075486/R6C15",
+              "vision/6f2a03075486/R8C15"
+            ],
+            "aggregate": "mean",
+            "map": {
+              "Sensitive": 1,
+              "Resistance": 0
+            }
+          },
+          "truth": {
+            "ref": "vision/6f2a03075486/R1C15",
+            "map": {
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "IHCC-184",
+          "score": {
+            "ref": "vision/6f2a03075486/R6C16",
+            "map": {
+              "Sensitive": 1,
+              "Resistance": 0
+            }
+          },
+          "truth": {
+            "ref": "vision/6f2a03075486/R1C16",
+            "map": {
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "IHCC-202",
+          "score": {
+            "ref": "vision/6f2a03075486/R3C17",
+            "map": {
+              "Sensitive": 1,
+              "Resistance": 0
+            }
+          },
+          "truth": {
+            "ref": "vision/6f2a03075486/R1C17",
+            "map": {
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        }
+      ]
+    },
+    "notes": [
+      "Clinical truth follows the article's consistency rule: CR/PR/SD are positive/control outcomes and PD is the negative/progressive outcome.",
+      "Drug rows marked in the Patients section identify administered drugs; the corresponding Organoids rows supply assay sensitivity calls.",
+      "Multi-drug records use the mean of the mapped calls; in every multi-drug case shown here the relevant calls were identical, so no regimen-level ambiguity was introduced."
+    ]
+  },
+  "last_evaluation": {
+    "matched": true,
+    "metric": "accuracy",
+    "computed": 0.6875,
+    "reported": 0.6875,
+    "difference": 0.0,
+    "n": 16,
+    "errors": [],
+    "rows": [
+      {
+        "id": "IHCC-161",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "IHCC-163",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "IHCC-165",
+        "score": 1.0,
+        "truth": 0,
+        "prediction": 1
+      },
+      {
+        "id": "IHCC-167",
+        "score": 1.0,
+        "truth": 0,
+        "prediction": 1
+      },
+      {
+        "id": "IHCC-168",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "IHCC-170",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "IHCC-172",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "IHCC-173",
+        "score": 1.0,
+        "truth": 0,
+        "prediction": 1
+      },
+      {
+        "id": "IHCC-175",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "IHCC-176",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "IHCC-179",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "IHCC-181",
+        "score": 1.0,
+        "truth": 0,
+        "prediction": 1
+      },
+      {
+        "id": "IHCC-182",
+        "score": 0.0,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "IHCC-183",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "IHCC-184",
+        "score": 0.0,
+        "truth": 1,
+        "prediction": 0
+      },
+      {
+        "id": "IHCC-202",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      }
+    ],
+    "expected": {
+      "metric": "accuracy",
+      "value": 0.6875,
+      "n": 16
+    }
+  }
+}

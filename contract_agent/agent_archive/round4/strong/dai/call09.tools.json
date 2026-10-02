@@ -1,0 +1,480 @@
+[
+  {
+    "name": "finish",
+    "arguments": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p76",
+              "vision/bb368cdd72f5/R1C1"
+            ],
+            "explanation": "The validation compared one optimized tumoroid-on-a-chip result with the clinical outcome for each of 22 patients."
+          },
+          "platform": {
+            "value": "perfused_chip",
+            "evidence": [
+              "article:p75",
+              "article:p76"
+            ],
+            "explanation": "The assay used a vascularized colorectal tumoroid-on-a-chip with self-assembled, perfused vessels."
+          },
+          "readout": {
+            "value": "size_viability",
+            "evidence": [
+              "article:p76",
+              "vision/bb368cdd72f5/R2C1"
+            ],
+            "explanation": "The bound assay row is the optimized-model tumoroid response, derived from relative tumoroid diameter after FOLFOX plus bevacizumab."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "Relative tumoroid diameter below the optimized-model cutoff was classified sensitive; higher values were classified resistant."
+          },
+          "threshold_rule": {
+            "value": "roc_optimized",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "The tumoroid-diameter cutoff was selected using the Youden index and bootstrap sampling."
+          },
+          "threshold_timing": {
+            "value": "outcome_optimized",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "The cutoff was optimized against clinical outcomes in the same 22-patient validation cohort."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "vision/bb368cdd72f5/R1C2",
+              "vision/bb368cdd72f5/R1C23"
+            ],
+            "explanation": "Figure 5P identifies each assay result and clinical response by patient ID."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "Both the chip drug test and evaluated clinical response concerned FOLFOX plus bevacizumab."
+          },
+          "n_units": {
+            "value": 22,
+            "evidence": [
+              "article:p76",
+              "vision/bb368cdd72f5/R7C24"
+            ],
+            "explanation": "The exact denominator for the reported accuracy was 22 patients."
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p76"
+            ],
+            "explanation": "No independent held-out cohort was reported; thresholds were optimized in this 22-patient cohort."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.8636363636363636,
+          "reported_evidence": [
+            "article:p76",
+            "vision/bb368cdd72f5/R7C24"
+          ],
+          "threshold": 0.5047,
+          "op": ">",
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "P01",
+              "score": {
+                "ref": "vision/bb368cdd72f5/R2C2",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/bb368cdd72f5/R3C2",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P02",
+              "score": {
+                "ref": "vision/bb368cdd72f5/R2C3",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/bb368cdd72f5/R3C3",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P03",
+              "score": {
+                "ref": "vision/bb368cdd72f5/R2C4",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/bb368cdd72f5/R3C4",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P05",
+              "score": {
+                "ref": "vision/bb368cdd72f5/R2C5",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/bb368cdd72f5/R3C5",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P06",
+              "score": {
+                "ref": "vision/bb368cdd72f5/R2C6",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/bb368cdd72f5/R3C6",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P10",
+              "score": {
+                "ref": "vision/bb368cdd72f5/R2C7",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/bb368cdd72f5/R3C7",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P11",
+              "score": {
+                "ref": "vision/bb368cdd72f5/R2C8",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/bb368cdd72f5/R3C8",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P12",
+              "score": {
+                "ref": "vision/bb368cdd72f5/R2C9",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/bb368cdd72f5/R3C9",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P13",
+              "score": {
+                "ref": "vision/bb368cdd72f5/R2C10",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/bb368cdd72f5/R3C10",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P14",
+              "score": {
+                "ref": "vision/bb368cdd72f5/R2C11",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/bb368cdd72f5/R3C11",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P32",
+              "score": {
+                "ref": "vision/bb368cdd72f5/R2C12",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/bb368cdd72f5/R3C12",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P33",
+              "score": {
+                "ref": "vision/bb368cdd72f5/R2C13",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/bb368cdd72f5/R3C13",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P34",
+              "score": {
+                "ref": "vision/bb368cdd72f5/R2C14",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/bb368cdd72f5/R3C14",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P35",
+              "score": {
+                "ref": "vision/bb368cdd72f5/R2C15",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/bb368cdd72f5/R3C15",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P36",
+              "score": {
+                "ref": "vision/bb368cdd72f5/R2C16",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/bb368cdd72f5/R3C16",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P37",
+              "score": {
+                "ref": "vision/bb368cdd72f5/R2C17",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/bb368cdd72f5/R3C17",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P38",
+              "score": {
+                "ref": "vision/bb368cdd72f5/R2C18",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/bb368cdd72f5/R3C18",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P39",
+              "score": {
+                "ref": "vision/bb368cdd72f5/R2C19",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/bb368cdd72f5/R3C19",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P40",
+              "score": {
+                "ref": "vision/bb368cdd72f5/R2C20",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/bb368cdd72f5/R3C20",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P41",
+              "score": {
+                "ref": "vision/bb368cdd72f5/R2C21",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/bb368cdd72f5/R3C21",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P42",
+              "score": {
+                "ref": "vision/bb368cdd72f5/R2C22",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/bb368cdd72f5/R3C22",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            },
+            {
+              "id": "P43",
+              "score": {
+                "ref": "vision/bb368cdd72f5/R2C23",
+                "map": {
+                  "Sensitive": 0,
+                  "Resistant": 1
+                }
+              },
+              "truth": {
+                "ref": "vision/bb368cdd72f5/R3C23",
+                "map": {
+                  "Good response": 0,
+                  "Poor response": 1
+                }
+              }
+            }
+          ],
+          "blocked_reason": null
+        },
+        "notes": [
+          "RECIST CR and PR correspond to Good response/clinical sensitivity (0); SD and PD correspond to Poor response/clinical resistance (1), per article:p76.",
+          "The tumoroid-response classifications produce 19 agreements out of 22, equal to the published 86.36% accuracy. The three disagreements are P01, P12, and P36."
+        ]
+      }
+    },
+    "output_sha256": "abb218f903ac8362c9ecad2b4d863b1613fabda8e62c27f5078c821b35acf318"
+  }
+]

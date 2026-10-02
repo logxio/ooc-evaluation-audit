@@ -1,0 +1,9 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "import re, json\n\ndef getr(file,sheet):\n    o=tables[file][sheet]\n    return o.get('rows',[]) if isinstance(o,dict) else o.rows\nrecs=[]\nfor page in ['page18','page19','page20']:\n    for ri,row in enumerate(getr('mmc1.pdf',page),1):\n        # identify organoid row: C2 organoid ID\n        if len(row)>1 and re.fullmatch(r'P-\\d+-[A-Z0-9]+', str(row[1].get('value',''))):\n            vals=[]\n            for c in row:\n                vals.append((c.get('ref'), str(c.get('value','')), c.get('x0')))\n            # columns by x: regimen ~453, ic50 ~534, response ~568, consistency ~603\n            regimen=next((v for r,v,x in vals if 445<x<470), '')\n            ic=next((v for r,v,x in vals if 525<x<545), '')\n            resp=next((v for r,v,x in vals if 560<x<580), '')\n            cons=next((v for r,v,x in vals if 595<x<615), '')\n            recs.append((page,ri,row[0]['value'],row[1]['value'],regimen,ic,resp,cons))\nprint(len(recs))\nfrom collections import Counter\nprint(Counter(r[6] for r in recs), Counter(r[7] for r in recs))\nfor r in recs:\n print(r)\n"
+    },
+    "output_sha256": "ab33fee8bc02eb300da546a6914a527d14680b5223abeb67528c1b188a1c0023"
+  }
+]

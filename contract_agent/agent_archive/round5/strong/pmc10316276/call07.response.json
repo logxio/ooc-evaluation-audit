@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_ooqoq8i1dhgfvjv76sf3ue1i",
+        "type": "function",
+        "function": {
+          "name": "python",
+          "arguments": "{\"code\": \"PDF='2022_281692_KUUSANMAKI_SUPPL.pdf'\\nfor sh in ['page28','page29','page30']:\\n print('\\\\n---',sh,'---')\\n for r,gr in enumerate(tables[PDF][sh]['geometry']):\\n  vals=[]\\n  for c in gr['cells']:\\n   vals.append(f\\\"{c.get('text')}@{c.get('x0'):.1f}\\\")\\n  print(r+1, ' | '.join(vals))\\n\"}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "Need inspect pages 28-30 full geometry.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 166,
+    "prompt_tokens": 30642,
+    "total_tokens": 30808,
+    "prompt_tokens_details": {
+      "cached_tokens": 28472
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 13
+    }
+  }
+}

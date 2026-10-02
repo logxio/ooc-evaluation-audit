@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_43bslxdj6a7khorpaclgsx02",
+        "type": "function",
+        "function": {
+          "name": "python",
+          "arguments": "{\"code\": \"for fn,sheets in tables.items():\\n print(fn)\\n for sh,o in sheets.items():\\n  print(' ',sh,type(o), (list(o.keys()) if isinstance(o,dict) else ''))\\n\"}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "Interesting: iterating tables fn,Need to check types, will inspect sheet objects.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 112,
+    "prompt_tokens": 26186,
+    "total_tokens": 26298,
+    "prompt_tokens_details": {
+      "cached_tokens": 25400
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 37
+    }
+  }
+}

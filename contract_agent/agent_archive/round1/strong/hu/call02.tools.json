@@ -1,0 +1,453 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "rows = get_rows('41467_2021_22676_MOESM9_ESM.xlsx','Drug responses of LCOs')\nfor i,r in enumerate(rows[:40]):\n    print(i, [c for c in r])\n"
+    },
+    "output": {
+      "returncode": 0,
+      "stdout": "0 ['Fig. 5a Gefitinib', None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]\n1 [' Durg concentration (uM)', 'LC96-O', None, None, 'LC100-O', None, None, 'LC101-O', None, None, 'LC124-O', None, None, 'LC126-O', None, None, 'LC127-O', None, None, 'LC131-O', None, None, 'LC133-O', None, None, 'LC137-O', None, None, None, None, None, None, None, None, None, None, None, None, None, None]\n2 [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, None, None, None, None, None, None, None, None, None, None, None, None]\n3 [0.002, None, None, None, 0.723843, 0.817855, 0.895274, 0.96715, 0.780736, 0.71, 1.350369, 1.556597, 1.275, 1.199504, 0.954034, 0.86, 0.94808, 1.023949, 0.838774, 0.603156339, 0.844622716, 0.93, 1.442482496, 1.301047602, 1.803606172, 1.461619, 1.017848, 0.823666, None, None, None, None, None, None, None, None, None, None, None, None]\n4 [0.01, 1.11779983, 1.233668073, 1.112485606, 0.574625, 0.548163, 0.625458, 0.817326, 0.725526, 0.85, 1.141647, 0.973525, 1.016027, 1.249585, 0.872612, 0.74, 1.014808, 0.738949, 1.038774, 0.963593736, 0.624917562, 0.509, 0.977705157, 0.976006022, 1.069754323, 1.00545, 0.979794, 0.943767, None, None, None, None, None, None, None, None, None, None, None, None]\n5 [0.05, 1.1681706, 1.215098454, 1.169142688, 0.454819, 0.677413, 0.322453, 0.497416, 0.448408, 0.43, 0.676392, 0.508949, 0.871532, 0.706908, 0.983045, 0.61, 1.241559, 0.672581, 0.633952, 0.454610338, 0.705073111, 0.36, 0.893284233, 0.725060997, 0.666, 1.041656, 0.852433, 0.929287, None, None, None, None, None, None, None, None, None, None, None, None]\n6 [0.25, 1.190509372, 1.351956136, 1.249097901, 0.656037, 0.482372, 0.356984, 0.470169, 0.598392, 0.64, 0.382965, 0.344004, 0.448672, 0.54489, 0.416429, 0.818555, 1.101145, 0.847727, 1.150658, 0.24, 0.306674833, 0.502101912, 0.428951553, 0.835122174, 0.98, 0.875703, 0.916038, 0.86, None, None, None, None, None, None, None, None, None, None, None, None]\n7 [1.25, 1.283054602, 1.12, 1.16340583, 0.419803, 0.322474, 0.417281, 0.488962, 0.527932, 0.54, None, None, None, 0.450513, 0.59364, 0.65, 0.684356, 0.809178, 0.715416, 0.5544556, 0.30102396, 0.33137318, 0.506017524, 0.342955901, 0.57, 0.936083, 0.830335, 0.79, None, None, None, None, None, None, None, None, None, None, None, None]\n8 [6.25, 1.13584637, 0.98167345, 0.89364758, 0.327851, 0.159275, 0.15068, 0.368513, 0.270846, 0.4, 0.533337, 0.226566, 0.195254, 0.489105, 0.479576, 0.475, 1.060915, 0.667252, 1.030573, 0.163307058, 0.069236837, 0.15777038, 0.295361589, 0.343069514, 0.36, 0.743364, 0.609498, 0.697976, None, None, None, None, None, None, None, None, None, None, None, None]\n9 [31.25, 1.34, 0.799805059, 1.19380698, 0.080205, 0.111316, 0.019892, 0.20754, 0.282854, 0.31, 0.342616, 0.10812, 0.43, 0.435541, 0.242732, 0.51, 0.644416, 0.797658, 0.606143, 0.088298751, 0.098353379, 0.062412552, 0.330915589, 0.390317668, 0.31, 0.683648, 0.532218, 0.544724, None, None, None, None, None, None, None, None, None, None, None, None]\n10 [156.25, 1.312390691, 0.740711471, 0.871253439, 0.020205, 0.051316, 0.069892, 0.181455, 0.211448, 0.22, 0.184865, 0.11636, 0.14072, 0.252339, 0.176636, 0.28, 0.65811, 0.674136, 0.790888, 0.058298751, 0.03353379, 0.042412552, 0.233532636, 0.269730147, 0.22, 0.510449, 0.505627, 0.504027, None, None, None, None, None, None, None, None, None, None, None, None]\n11 [None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]\n12 ['Fig. 5b Crizotinib', None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]\n13 [' Durg concentration (uM)', 'LC96-O', None, None, 'LC130-O', None, None, 'LC131-O', None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]\n14 [0, 1, 1, 1, 1, 1, 1, 1, 1, 1, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]\n15 [0.000256, 1.04, 1.02, 1.04, 1.51, 1.32, 1.25, 1.240786219, 1.266989391, 0.935799489, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]\n16 [0.00128, 0.992999605, 1.044647996, 1.056933153, 1.513647, 1.5, 1.51, 0.950442854, 0.722847939, 1.391700359, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]\n17 [0.0064, 1.301342431, 1.43343723, 0.914507835, 1.023626, 1.422848, 0.88, 0.810656128, 0.724769757, 1.49528866, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]\n18 [0.032, 1.248864231, 1.347728111, 1.21, 0.993868, 0.621018, 1.13, 0.64241361, 0.690994319, 1.277613347, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]\n19 [0.16, 1.375253266, 1.537834793, 1.242909304, 0.880849, 0.562573, 0.45, 0.862251889, 1.027424266, 0.716105373, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]\n20 [0.8, 1.15202229, 1.29281033, 1.207958616, 0.531975, 0.484319, 0.55, 1.13, 1.198516407, 1.150110854, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]\n21 [4, 1.174172981, 1.047960785, 1.113519153, 0.425275, 0.464288, 0.41, 1.135315783, 0.935001497, 0.863, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]\n22 [20, 1.064453681, 1.162019926, 0.872283305, 0.34486, 0.253, 0.22, 0.406831606, 0.355782963, 0.325477774, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]\n23 [None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]\n24 ['Fig. 5d Afatinib', None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]\n25 [' Durg concentration (uM)', 'LC132-O', None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]\n26 [0, 1, 1, 1, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]\n27 [0.001, 1.146289, 1.01534, 0.790662, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]\n28 [0.01, 1.046289, 1.301534, 0.790662, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]\n29 [0.25, 0.606145, 0.833746, 0.915, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]\n30 [1.25, 0.668301, 0.704221, 0.717, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]\n31 [31.25, 0.65544, 0.670838, 0.6767, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]\n32 [156.25, 0.606131, 0.694522, 0.574, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]\n33 [781.25, 0.447961, 0.506967, 0.428, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]\n34 [None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]\n35 ['Fig. 5d Gefitinib', None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]\n36 [' Durg concentration (uM)', 'LC133-O', None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]\n37 [0, 1, 1, 1, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]\n38 [0.002, 1.142482496, 1.301047602, 1.08, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]\n39 [0.01, 0.977705157, 0.976006022, 1.069754323, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]\n",
+      "stderr": "",
+      "seconds": 0.2218894999823533,
+      "peak_rss_bytes": 33341440,
+      "limit_error": null,
+      "code_sha256": "a5aecc39b4a770cf11d7346afb1d68c63080277ec215e9f8d1f51cd7579a16cc"
+    }
+  },
+  {
+    "name": "preview_table",
+    "arguments": {
+      "file": "41467_2021_22676_MOESM1_ESM.pdf",
+      "sheet": "page14"
+    },
+    "output": {
+      "file": "41467_2021_22676_MOESM1_ESM.pdf",
+      "sheet": "page14",
+      "nrows": 33,
+      "ncols": 15,
+      "rows": [
+        {
+          "row": 1,
+          "cells": [
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R1C1",
+              "value": "Supplementary",
+              "x0": 59.54
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R1C2",
+              "value": "Table",
+              "x0": 140.48
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R1C3",
+              "value": "1:",
+              "x0": 171.5
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R1C4",
+              "value": "Mutations",
+              "x0": 184.1
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R1C5",
+              "value": "in",
+              "x0": 239.4
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R1C6",
+              "value": "the",
+              "x0": 252.0
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R1C7",
+              "value": "EGFR",
+              "x0": 270.6
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R1C8",
+              "value": "and",
+              "x0": 306.45
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R1C9",
+              "value": "ALK",
+              "x0": 327.79
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R1C10",
+              "value": "gene",
+              "x0": 356.35
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R1C11",
+              "value": "in",
+              "x0": 382.26
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R1C12",
+              "value": "12",
+              "x0": 394.96
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R1C13",
+              "value": "tumor",
+              "x0": 409.48
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R1C14",
+              "value": "samples",
+              "x0": 443.67
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R1C15",
+              "value": "(obtained",
+              "x0": 487.18
+            }
+          ]
+        },
+        {
+          "row": 2,
+          "cells": [
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R2C1",
+              "value": "from",
+              "x0": 59.54
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R2C2",
+              "value": "the",
+              "x0": 87.6
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R2C3",
+              "value": "clinical",
+              "x0": 106.56
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R2C4",
+              "value": "data).",
+              "x0": 146.26
+            }
+          ]
+        },
+        {
+          "row": 3,
+          "cells": [
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R3C1",
+              "value": "Sample",
+              "x0": 64.94
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R3C2",
+              "value": "ID",
+              "x0": 107.18
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R3C3",
+              "value": "EGFR",
+              "x0": 135.86
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R3C4",
+              "value": "mutation",
+              "x0": 169.57
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R3C5",
+              "value": "ALK",
+              "x0": 242.21
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R3C6",
+              "value": "mutation",
+              "x0": 267.76
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R3C7",
+              "value": "Targeted",
+              "x0": 355.63
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R3C8",
+              "value": "therapy",
+              "x0": 405.18
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R3C9",
+              "value": "drugs",
+              "x0": 447.88
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R3C10",
+              "value": "tested",
+              "x0": 481.56
+            }
+          ]
+        },
+        {
+          "row": 4,
+          "cells": [
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R4C1",
+              "value": "LC95",
+              "x0": 64.94
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R4C2",
+              "value": "None",
+              "x0": 135.86
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R4C3",
+              "value": "None",
+              "x0": 242.21
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R4C4",
+              "value": "Erl",
+              "x0": 355.63
+            }
+          ]
+        },
+        {
+          "row": 5,
+          "cells": [
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R5C1",
+              "value": "LC96",
+              "x0": 64.94
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R5C2",
+              "value": "None",
+              "x0": 135.86
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R5C3",
+              "value": "None",
+              "x0": 242.21
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R5C4",
+              "value": "Gef,",
+              "x0": 355.63
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R5C5",
+              "value": "Afa,",
+              "x0": 379.6
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R5C6",
+              "value": "Cri",
+              "x0": 402.14
+            }
+          ]
+        },
+        {
+          "row": 6,
+          "cells": [
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R6C1",
+              "value": "LC100",
+              "x0": 64.94
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R6C2",
+              "value": "Exon",
+              "x0": 135.86
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R6C3",
+              "value": "19",
+              "x0": 163.93
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R6C4",
+              "value": "indel",
+              "x0": 179.29
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R6C5",
+              "value": "None",
+              "x0": 242.21
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R6C6",
+              "value": "Gef",
+              "x0": 355.63
+            }
+          ]
+        },
+        {
+          "row": 7,
+          "cells": [
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R7C1",
+              "value": "LC101",
+              "x0": 64.94
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R7C2",
+              "value": "Exon",
+              "x0": 135.86
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R7C3",
+              "value": "21,P.L858R",
+              "x0": 163.93
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R7C4",
+              "value": "None",
+              "x0": 242.21
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R7C5",
+              "value": "Gef",
+              "x0": 355.63
+            }
+          ]
+        },
+        {
+          "row": 8,
+          "cells": [
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R8C1",
+              "value": "LC124",
+              "x0": 64.94
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R8C2",
+              "value": "Exon",
+              "x0": 135.86
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R8C3",
+              "value": "18,P.G719A",
+              "x0": 163.93
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R8C4",
+              "value": "None",
+              "x0": 242.21
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R8C5",
+              "value": "Gef",
+              "x0": 355.63
+            }
+          ]
+        },
+        {
+          "row": 9,
+          "cells": [
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R9C1",
+              "value": "LC126",
+              "x0": 64.94
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R9C2",
+              "value": "Exon",
+              "x0": 135.86
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R9C3",
+              "value": "21,P.L858R",
+              "x0": 163.94
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R9C4",
+              "value": "None",
+              "x0": 242.21
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R9C5",
+              "value": "Gef",
+              "x0": 355.63
+            }
+          ]
+        },
+        {
+          "row": 10,
+          "cells": [
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R10C1",
+              "value": "LC137",
+              "x0": 64.94
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R10C2",
+              "value": "None",
+              "x0": 135.86
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R10C3",
+              "value": "None",
+              "x0": 242.21
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R10C4",
+              "value": "Gef",
+              "x0": 355.63
+            }
+          ]
+        },
+        {
+          "row": 11,
+          "cells": [
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R11C1",
+              "value": "LC127",
+              "x0": 64.94
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R11C2",
+              "value": "None",
+              "x0": 135.86
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R11C3",
+              "value": "None",
+              "x0": 242.21
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R11C4",
+              "value": "Gef",
+              "x0": 355.63
+            }
+          ]
+        },
+        {
+          "row": 12,
+          "cells": [
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R12C1",
+              "value": "LC130",
+              "x0": 64.94
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R12C2",
+              "value": "None",
+              "x0": 135.86
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R12C3",
+              "value": "EML4-ALK(E6-A20)",
+              "x0": 242.21
+            },
+            {
+              "ref": "41467_2021_22676_MOESM1_ESM.pdf/page14/R12C4",
+              "value": "Cri",
+              "x0": 355.63
+            }
+          ]
+        }
+      ],
+      "merged": []
+    }
+  }
+]

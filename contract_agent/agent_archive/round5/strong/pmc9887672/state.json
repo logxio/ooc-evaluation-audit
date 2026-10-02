@@ -1,0 +1,1143 @@
+{
+  "turn": 3,
+  "tool_count": 1,
+  "tokens": 42391,
+  "done": true,
+  "stop_reason": "verified",
+  "checkpoints": {
+    "single_pass": {
+      "contract": null,
+      "evaluation": {
+        "matched": false,
+        "errors": [
+          "Python produced no CONTRACT"
+        ],
+        "execution": {
+          "returncode": 1,
+          "stdout": "1 ['', '', 'uHeart']\n2 ['Risk CiPa', 'Drug', '[%FPDcF] >LOW (µM)', '[%FPDcF] >MID (µM)', '[%FPDcF]>HIGH (µM)', 'Arrhythmic events', 'Stop', '[%FPDcF>LOW]/Cmax', '[%FPDcF>MID]/Cmax', '[%FPDcF>HIGH]/Cmax']\n3 ['QT ↑ and TdP on FDA label']\n4 ['H', 'Sotalol', '↑7.5', '↑30', '↑ 30', 'N', 'N', '0.5', '2.0', '2.0']\n5 ['H', 'Dofetilide', '↑0.001', '↑ 0.002', '↑ 0.002', 'Y (0.001)—66%', 'Y (33%)', '0.5', '1.0', '1.0']\n6 ['H', 'Quinidine', '↑ 0.06', '↑ 1', '↑ 10', 'Y (0.1)—50%', 'N', '0.02', '3.33', '33.3']\n7 ['I', 'Cisapride', '↓ 0.0025', '↓ 0.0025', '↓ 0.0025', 'Y (0.001)—50%', 'Y (25%)', '1.0', '1.0', '1.0']\n8 ['I', 'Terfenadine', '↑ 0.1', '↑ 0.1', '↑ 0.1', 'Y (0.001)—60%', 'n', '349.7', '349.7', '349.7']\n9 ['QT ↑, but NO TdP on FDA label']\n10 ['L', 'Ranolazine', '↑ 1', '↑ 2', '↑ 2', 'Y (2)—20%', 'N', '0.5', '5.1', '5.1']\n11 ['NO QT ↑ and NO TdP on FDA label']\n12 ['L', 'Mexiletine', '↑ 50', '↔', '↔', 'N', 'N', '20', '–', '–']\n13 ['L', 'Nifedipine', '↓ 0.001', '↓ 0.005', '↓ 0.01', 'N', 'N', '0.13', '0.65', '1.3']\n14 ['L', 'Verapamil', '↓ 0.010', '↓ 0.05', '↓ 0.05', 'N', 'N', '0.2', '1.1', '1.1']\n15 ['n.a.', 'Alfuzosin', '↓ 0.3', '↔', '↔', 'N', 'N', '3', '–', '–']\n16 ['n.a.', 'Aspirin', '↔', '↔', '↔', 'N', '–', '–', '–', '']\n17 ['n.a.', 'DMSO', '↔', '↔', '↔', 'N', '–', '–', '–', '']\n",
+          "stderr": "Traceback (most recent call last):\n  File \"scratch/python01/worker.py\", line 19, in <module>\n    exec(compile(code,'<agent-code>','exec'))\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<agent-code>\", line 40, in <module>\nAssertionError: 11\n",
+          "seconds": 1.6534829169977456,
+          "peak_rss_bytes": 28721152,
+          "limit_error": null,
+          "code_sha256": "cab6e28a66c9c5032a5a921dd384155b64bcaebc2ad1414c5d37afc94fa17b17"
+        }
+      },
+      "calls": 1,
+      "tokens": 12449
+    },
+    "one_feedback": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "drug",
+            "evidence": [
+              "article.xml/Table 2./R2C2",
+              "article:p29"
+            ],
+            "explanation": "Each evaluated unit is one tested compound; DMSO is included as the negative control."
+          },
+          "platform": {
+            "value": "unknown",
+            "evidence": [
+              "article:p2",
+              "article:p3"
+            ],
+            "explanation": "uHeart is a 3D engineered human cardiac microtissue with integrated electrical recording and does not map exactly to organoid, perfused chip, microwell, or spheroid."
+          },
+          "readout": {
+            "value": "other",
+            "evidence": [
+              "article.xml/Table 2./R2C4",
+              "article:p29"
+            ],
+            "explanation": "The assay readout is percentage change in Fridericia-corrected field potential duration, FPDcF."
+          },
+          "direction": {
+            "value": "higher_sensitive",
+            "evidence": [
+              "article:p29"
+            ],
+            "explanation": "A larger positive FPDcF percentage change indicates QT prolongation."
+          },
+          "threshold_rule": {
+            "value": "roc_optimized",
+            "evidence": [
+              "article:p29",
+              "kfac108_supplementary_data.docx:p24"
+            ],
+            "explanation": "The 15% MID cutoff is described as the optimal threshold and is examined in the ROC analysis."
+          },
+          "threshold_timing": {
+            "value": "outcome_optimized",
+            "evidence": [
+              "article:p29",
+              "kfac108_supplementary_data.docx:p24"
+            ],
+            "explanation": "The optimal MID threshold was selected from analyses of the same tested compounds; no independent held-out cohort is reported."
+          },
+          "patient_mapping": {
+            "value": "absent",
+            "evidence": [
+              "article:p29"
+            ],
+            "explanation": "FDA drug labels provide the clinical reference, with no individual patient outcomes."
+          },
+          "regimen_match": {
+            "value": "not_applicable",
+            "evidence": [
+              "article.xml/Table 2./R2C2"
+            ],
+            "explanation": "This is a drug-level cardiotoxicity comparison rather than a patient-regimen comparison."
+          },
+          "n_units": {
+            "value": 12,
+            "evidence": [
+              "article:p29",
+              "article.xml/Table 2./R4C2",
+              "article.xml/Table 2./R17C2"
+            ],
+            "explanation": "Eleven drugs plus DMSO give the exact 12-compound denominator."
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p29"
+            ],
+            "explanation": "Threshold selection and performance reporting use the same 12 evaluated compounds."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.916,
+          "reported_evidence": [
+            "article:p29",
+            "article:p2"
+          ],
+          "threshold": 15,
+          "op": ">",
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "Sotalol",
+              "score": {
+                "ref": "article.xml/Table 2./R4C4",
+                "map": {
+                  "↑30": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2./R4C2",
+                "map": {
+                  "Sotalol": 1
+                }
+              }
+            },
+            {
+              "id": "Dofetilide",
+              "score": {
+                "ref": "article.xml/Table 2./R5C4",
+                "map": {
+                  "↑ 0.002": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2./R5C2",
+                "map": {
+                  "Dofetilide": 1
+                }
+              }
+            },
+            {
+              "id": "Quinidine",
+              "score": {
+                "ref": "article.xml/Table 2./R6C4",
+                "map": {
+                  "↑ 1": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2./R6C2",
+                "map": {
+                  "Quinidine": 1
+                }
+              }
+            },
+            {
+              "id": "Cisapride",
+              "score": {
+                "ref": "article.xml/Table 2./R7C4",
+                "map": {
+                  "↓ 0.0025": 0
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2./R7C2",
+                "map": {
+                  "Cisapride": 1
+                }
+              }
+            },
+            {
+              "id": "Terfenadine",
+              "score": {
+                "ref": "article.xml/Table 2./R8C4",
+                "map": {
+                  "↑ 0.1": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2./R8C2",
+                "map": {
+                  "Terfenadine": 1
+                }
+              }
+            },
+            {
+              "id": "Ranolazine",
+              "score": {
+                "ref": "article.xml/Table 2./R10C4",
+                "map": {
+                  "↑ 2": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2./R10C2",
+                "map": {
+                  "Ranolazine": 1
+                }
+              }
+            },
+            {
+              "id": "Mexiletine",
+              "score": {
+                "ref": "article.xml/Table 2./R12C4",
+                "map": {
+                  "↔": 0
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2./R12C2",
+                "map": {
+                  "Mexiletine": 0
+                }
+              }
+            },
+            {
+              "id": "Nifedipine",
+              "score": {
+                "ref": "article.xml/Table 2./R13C4",
+                "map": {
+                  "↓ 0.005": 0
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2./R13C2",
+                "map": {
+                  "Nifedipine": 0
+                }
+              }
+            },
+            {
+              "id": "Verapamil",
+              "score": {
+                "ref": "article.xml/Table 2./R14C4",
+                "map": {
+                  "↓ 0.05": 0
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2./R14C2",
+                "map": {
+                  "Verapamil": 0
+                }
+              }
+            },
+            {
+              "id": "Alfuzosin",
+              "score": {
+                "ref": "article.xml/Table 2./R15C4",
+                "map": {
+                  "↔": 0
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2./R15C2",
+                "map": {
+                  "Alfuzosin": 0
+                }
+              }
+            },
+            {
+              "id": "Aspirin",
+              "score": {
+                "ref": "article.xml/Table 2./R16C4",
+                "map": {
+                  "↔": 0
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2./R16C2",
+                "map": {
+                  "Aspirin": 0
+                }
+              }
+            },
+            {
+              "id": "DMSO",
+              "score": {
+                "ref": "article.xml/Table 2./R17C4",
+                "map": {
+                  "↔": 0
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2./R17C2",
+                "map": {
+                  "DMSO": 0
+                }
+              }
+            }
+          ],
+          "blocked_reason": null
+        },
+        "notes": [
+          "At the 15% MID threshold, the article reports 5 true positives, 6 true negatives, 1 false negative, and no false positives for QT prolongation.",
+          "The resulting accuracy is 11/12 = 0.9167, reported as 91.6%."
+        ]
+      },
+      "evaluation": {
+        "matched": false,
+        "metric": "accuracy",
+        "computed": 0.5,
+        "reported": 0.916,
+        "difference": -0.41600000000000004,
+        "n": 12,
+        "errors": [],
+        "rows": [
+          {
+            "id": "Sotalol",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 0
+          },
+          {
+            "id": "Dofetilide",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 0
+          },
+          {
+            "id": "Quinidine",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 0
+          },
+          {
+            "id": "Cisapride",
+            "score": 0.0,
+            "truth": 1,
+            "prediction": 0
+          },
+          {
+            "id": "Terfenadine",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 0
+          },
+          {
+            "id": "Ranolazine",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 0
+          },
+          {
+            "id": "Mexiletine",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "Nifedipine",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "Verapamil",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "Alfuzosin",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "Aspirin",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "DMSO",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          }
+        ],
+        "expected": {
+          "metric": "accuracy",
+          "value": 0.916,
+          "n": 12
+        }
+      },
+      "calls": 2,
+      "tokens": 25921
+    },
+    "tool_loop": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "drug",
+            "evidence": [
+              "article.xml/Table 2./R2C2",
+              "article:p29"
+            ],
+            "explanation": "Each evaluated unit is one tested compound; DMSO is included as the negative control."
+          },
+          "platform": {
+            "value": "unknown",
+            "evidence": [
+              "article:p2",
+              "article:p3"
+            ],
+            "explanation": "uHeart is a 3D engineered human cardiac microtissue with integrated electrical recording and does not map exactly to organoid, perfused chip, microwell, or spheroid."
+          },
+          "readout": {
+            "value": "other",
+            "evidence": [
+              "article.xml/Table 2./R2C4",
+              "article:p29"
+            ],
+            "explanation": "The assay readout is percentage change in Fridericia-corrected field potential duration, FPDcF."
+          },
+          "direction": {
+            "value": "higher_sensitive",
+            "evidence": [
+              "article:p29"
+            ],
+            "explanation": "A larger positive FPDcF percentage change indicates QT prolongation."
+          },
+          "threshold_rule": {
+            "value": "roc_optimized",
+            "evidence": [
+              "article:p29",
+              "kfac108_supplementary_data.docx:p24"
+            ],
+            "explanation": "The 15% MID cutoff is described as the optimal threshold and is examined in the ROC analysis."
+          },
+          "threshold_timing": {
+            "value": "outcome_optimized",
+            "evidence": [
+              "article:p29",
+              "kfac108_supplementary_data.docx:p24"
+            ],
+            "explanation": "The optimal MID threshold was selected from analyses of the same tested compounds; no independent held-out cohort is reported."
+          },
+          "patient_mapping": {
+            "value": "absent",
+            "evidence": [
+              "article:p29"
+            ],
+            "explanation": "FDA drug labels provide the clinical reference, with no individual patient outcomes."
+          },
+          "regimen_match": {
+            "value": "not_applicable",
+            "evidence": [
+              "article.xml/Table 2./R2C2"
+            ],
+            "explanation": "This is a drug-level cardiotoxicity comparison rather than a patient-regimen comparison."
+          },
+          "n_units": {
+            "value": 12,
+            "evidence": [
+              "article:p29",
+              "article.xml/Table 2./R4C2",
+              "article.xml/Table 2./R17C2"
+            ],
+            "explanation": "Eleven drugs plus DMSO give the exact 12-compound denominator."
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p29"
+            ],
+            "explanation": "Threshold selection and performance reporting use the same 12 evaluated compounds."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.916,
+          "reported_evidence": [
+            "article:p29",
+            "article:p2"
+          ],
+          "threshold": 0.5,
+          "op": ">",
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "Sotalol",
+              "score": {
+                "ref": "article.xml/Table 2./R4C4",
+                "map": {
+                  "↑30": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2./R4C2",
+                "map": {
+                  "Sotalol": 1
+                }
+              }
+            },
+            {
+              "id": "Dofetilide",
+              "score": {
+                "ref": "article.xml/Table 2./R5C4",
+                "map": {
+                  "↑ 0.002": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2./R5C2",
+                "map": {
+                  "Dofetilide": 1
+                }
+              }
+            },
+            {
+              "id": "Quinidine",
+              "score": {
+                "ref": "article.xml/Table 2./R6C4",
+                "map": {
+                  "↑ 1": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2./R6C2",
+                "map": {
+                  "Quinidine": 1
+                }
+              }
+            },
+            {
+              "id": "Cisapride",
+              "score": {
+                "ref": "article.xml/Table 2./R7C4",
+                "map": {
+                  "↓ 0.0025": 0
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2./R7C2",
+                "map": {
+                  "Cisapride": 1
+                }
+              }
+            },
+            {
+              "id": "Terfenadine",
+              "score": {
+                "ref": "article.xml/Table 2./R8C4",
+                "map": {
+                  "↑ 0.1": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2./R8C2",
+                "map": {
+                  "Terfenadine": 1
+                }
+              }
+            },
+            {
+              "id": "Ranolazine",
+              "score": {
+                "ref": "article.xml/Table 2./R10C4",
+                "map": {
+                  "↑ 2": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2./R10C2",
+                "map": {
+                  "Ranolazine": 1
+                }
+              }
+            },
+            {
+              "id": "Mexiletine",
+              "score": {
+                "ref": "article.xml/Table 2./R12C4",
+                "map": {
+                  "↔": 0
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2./R12C2",
+                "map": {
+                  "Mexiletine": 0
+                }
+              }
+            },
+            {
+              "id": "Nifedipine",
+              "score": {
+                "ref": "article.xml/Table 2./R13C4",
+                "map": {
+                  "↓ 0.005": 0
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2./R13C2",
+                "map": {
+                  "Nifedipine": 0
+                }
+              }
+            },
+            {
+              "id": "Verapamil",
+              "score": {
+                "ref": "article.xml/Table 2./R14C4",
+                "map": {
+                  "↓ 0.05": 0
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2./R14C2",
+                "map": {
+                  "Verapamil": 0
+                }
+              }
+            },
+            {
+              "id": "Alfuzosin",
+              "score": {
+                "ref": "article.xml/Table 2./R15C4",
+                "map": {
+                  "↔": 0
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2./R15C2",
+                "map": {
+                  "Alfuzosin": 0
+                }
+              }
+            },
+            {
+              "id": "Aspirin",
+              "score": {
+                "ref": "article.xml/Table 2./R16C4",
+                "map": {
+                  "↔": 0
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2./R16C2",
+                "map": {
+                  "Aspirin": 0
+                }
+              }
+            },
+            {
+              "id": "DMSO",
+              "score": {
+                "ref": "article.xml/Table 2./R17C4",
+                "map": {
+                  "↔": 0
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2./R17C2",
+                "map": {
+                  "DMSO": 0
+                }
+              }
+            }
+          ],
+          "blocked_reason": null
+        },
+        "notes": [
+          "Table 2 reports the concentration at which FPDcF crosses the MID threshold; the leading upward arrow is mapped to assay-positive prolongation, while no upward arrow is assay-negative.",
+          "At the published biological MID cutoff of 15% FPDcF change, the article reports 5 true positives, 6 true negatives, 1 false negative, and no false positives for QT prolongation.",
+          "The resulting accuracy is 11/12 = 0.9167, reported as 91.6%. The contract threshold 0.5 operates on the source-derived binary assay flag, not on the biological 15% cutoff."
+        ]
+      },
+      "evaluation": {
+        "matched": true,
+        "metric": "accuracy",
+        "computed": 0.9166666666666666,
+        "reported": 0.916,
+        "difference": 0.0006666666666665932,
+        "n": 12,
+        "errors": [],
+        "rows": [
+          {
+            "id": "Sotalol",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "Dofetilide",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "Quinidine",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "Cisapride",
+            "score": 0.0,
+            "truth": 1,
+            "prediction": 0
+          },
+          {
+            "id": "Terfenadine",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "Ranolazine",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "Mexiletine",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "Nifedipine",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "Verapamil",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "Alfuzosin",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "Aspirin",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "DMSO",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          }
+        ],
+        "expected": {
+          "metric": "accuracy",
+          "value": 0.916,
+          "n": 12
+        }
+      },
+      "calls": 3,
+      "tokens": 42391
+    }
+  },
+  "last_contract": {
+    "status": "computed",
+    "fields": {
+      "unit": {
+        "value": "drug",
+        "evidence": [
+          "article.xml/Table 2./R2C2",
+          "article:p29"
+        ],
+        "explanation": "Each evaluated unit is one tested compound; DMSO is included as the negative control."
+      },
+      "platform": {
+        "value": "unknown",
+        "evidence": [
+          "article:p2",
+          "article:p3"
+        ],
+        "explanation": "uHeart is a 3D engineered human cardiac microtissue with integrated electrical recording and does not map exactly to organoid, perfused chip, microwell, or spheroid."
+      },
+      "readout": {
+        "value": "other",
+        "evidence": [
+          "article.xml/Table 2./R2C4",
+          "article:p29"
+        ],
+        "explanation": "The assay readout is percentage change in Fridericia-corrected field potential duration, FPDcF."
+      },
+      "direction": {
+        "value": "higher_sensitive",
+        "evidence": [
+          "article:p29"
+        ],
+        "explanation": "A larger positive FPDcF percentage change indicates QT prolongation."
+      },
+      "threshold_rule": {
+        "value": "roc_optimized",
+        "evidence": [
+          "article:p29",
+          "kfac108_supplementary_data.docx:p24"
+        ],
+        "explanation": "The 15% MID cutoff is described as the optimal threshold and is examined in the ROC analysis."
+      },
+      "threshold_timing": {
+        "value": "outcome_optimized",
+        "evidence": [
+          "article:p29",
+          "kfac108_supplementary_data.docx:p24"
+        ],
+        "explanation": "The optimal MID threshold was selected from analyses of the same tested compounds; no independent held-out cohort is reported."
+      },
+      "patient_mapping": {
+        "value": "absent",
+        "evidence": [
+          "article:p29"
+        ],
+        "explanation": "FDA drug labels provide the clinical reference, with no individual patient outcomes."
+      },
+      "regimen_match": {
+        "value": "not_applicable",
+        "evidence": [
+          "article.xml/Table 2./R2C2"
+        ],
+        "explanation": "This is a drug-level cardiotoxicity comparison rather than a patient-regimen comparison."
+      },
+      "n_units": {
+        "value": 12,
+        "evidence": [
+          "article:p29",
+          "article.xml/Table 2./R4C2",
+          "article.xml/Table 2./R17C2"
+        ],
+        "explanation": "Eleven drugs plus DMSO give the exact 12-compound denominator."
+      },
+      "split": {
+        "value": "same_cohort",
+        "evidence": [
+          "article:p29"
+        ],
+        "explanation": "Threshold selection and performance reporting use the same 12 evaluated compounds."
+      }
+    },
+    "headline": {
+      "metric": "accuracy",
+      "reported": 0.916,
+      "reported_evidence": [
+        "article:p29",
+        "article:p2"
+      ],
+      "threshold": 0.5,
+      "op": ">",
+      "score_direction": "higher",
+      "records": [
+        {
+          "id": "Sotalol",
+          "score": {
+            "ref": "article.xml/Table 2./R4C4",
+            "map": {
+              "↑30": 1
+            }
+          },
+          "truth": {
+            "ref": "article.xml/Table 2./R4C2",
+            "map": {
+              "Sotalol": 1
+            }
+          }
+        },
+        {
+          "id": "Dofetilide",
+          "score": {
+            "ref": "article.xml/Table 2./R5C4",
+            "map": {
+              "↑ 0.002": 1
+            }
+          },
+          "truth": {
+            "ref": "article.xml/Table 2./R5C2",
+            "map": {
+              "Dofetilide": 1
+            }
+          }
+        },
+        {
+          "id": "Quinidine",
+          "score": {
+            "ref": "article.xml/Table 2./R6C4",
+            "map": {
+              "↑ 1": 1
+            }
+          },
+          "truth": {
+            "ref": "article.xml/Table 2./R6C2",
+            "map": {
+              "Quinidine": 1
+            }
+          }
+        },
+        {
+          "id": "Cisapride",
+          "score": {
+            "ref": "article.xml/Table 2./R7C4",
+            "map": {
+              "↓ 0.0025": 0
+            }
+          },
+          "truth": {
+            "ref": "article.xml/Table 2./R7C2",
+            "map": {
+              "Cisapride": 1
+            }
+          }
+        },
+        {
+          "id": "Terfenadine",
+          "score": {
+            "ref": "article.xml/Table 2./R8C4",
+            "map": {
+              "↑ 0.1": 1
+            }
+          },
+          "truth": {
+            "ref": "article.xml/Table 2./R8C2",
+            "map": {
+              "Terfenadine": 1
+            }
+          }
+        },
+        {
+          "id": "Ranolazine",
+          "score": {
+            "ref": "article.xml/Table 2./R10C4",
+            "map": {
+              "↑ 2": 1
+            }
+          },
+          "truth": {
+            "ref": "article.xml/Table 2./R10C2",
+            "map": {
+              "Ranolazine": 1
+            }
+          }
+        },
+        {
+          "id": "Mexiletine",
+          "score": {
+            "ref": "article.xml/Table 2./R12C4",
+            "map": {
+              "↔": 0
+            }
+          },
+          "truth": {
+            "ref": "article.xml/Table 2./R12C2",
+            "map": {
+              "Mexiletine": 0
+            }
+          }
+        },
+        {
+          "id": "Nifedipine",
+          "score": {
+            "ref": "article.xml/Table 2./R13C4",
+            "map": {
+              "↓ 0.005": 0
+            }
+          },
+          "truth": {
+            "ref": "article.xml/Table 2./R13C2",
+            "map": {
+              "Nifedipine": 0
+            }
+          }
+        },
+        {
+          "id": "Verapamil",
+          "score": {
+            "ref": "article.xml/Table 2./R14C4",
+            "map": {
+              "↓ 0.05": 0
+            }
+          },
+          "truth": {
+            "ref": "article.xml/Table 2./R14C2",
+            "map": {
+              "Verapamil": 0
+            }
+          }
+        },
+        {
+          "id": "Alfuzosin",
+          "score": {
+            "ref": "article.xml/Table 2./R15C4",
+            "map": {
+              "↔": 0
+            }
+          },
+          "truth": {
+            "ref": "article.xml/Table 2./R15C2",
+            "map": {
+              "Alfuzosin": 0
+            }
+          }
+        },
+        {
+          "id": "Aspirin",
+          "score": {
+            "ref": "article.xml/Table 2./R16C4",
+            "map": {
+              "↔": 0
+            }
+          },
+          "truth": {
+            "ref": "article.xml/Table 2./R16C2",
+            "map": {
+              "Aspirin": 0
+            }
+          }
+        },
+        {
+          "id": "DMSO",
+          "score": {
+            "ref": "article.xml/Table 2./R17C4",
+            "map": {
+              "↔": 0
+            }
+          },
+          "truth": {
+            "ref": "article.xml/Table 2./R17C2",
+            "map": {
+              "DMSO": 0
+            }
+          }
+        }
+      ],
+      "blocked_reason": null
+    },
+    "notes": [
+      "Table 2 reports the concentration at which FPDcF crosses the MID threshold; the leading upward arrow is mapped to assay-positive prolongation, while no upward arrow is assay-negative.",
+      "At the published biological MID cutoff of 15% FPDcF change, the article reports 5 true positives, 6 true negatives, 1 false negative, and no false positives for QT prolongation.",
+      "The resulting accuracy is 11/12 = 0.9167, reported as 91.6%. The contract threshold 0.5 operates on the source-derived binary assay flag, not on the biological 15% cutoff."
+    ]
+  },
+  "last_evaluation": {
+    "matched": true,
+    "metric": "accuracy",
+    "computed": 0.9166666666666666,
+    "reported": 0.916,
+    "difference": 0.0006666666666665932,
+    "n": 12,
+    "errors": [],
+    "rows": [
+      {
+        "id": "Sotalol",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "Dofetilide",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "Quinidine",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "Cisapride",
+        "score": 0.0,
+        "truth": 1,
+        "prediction": 0
+      },
+      {
+        "id": "Terfenadine",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "Ranolazine",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "Mexiletine",
+        "score": 0.0,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "Nifedipine",
+        "score": 0.0,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "Verapamil",
+        "score": 0.0,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "Alfuzosin",
+        "score": 0.0,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "Aspirin",
+        "score": 0.0,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "DMSO",
+        "score": 0.0,
+        "truth": 0,
+        "prediction": 0
+      }
+    ],
+    "expected": {
+      "metric": "accuracy",
+      "value": 0.916,
+      "n": 12
+    }
+  }
+}

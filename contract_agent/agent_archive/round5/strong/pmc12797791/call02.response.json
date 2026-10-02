@@ -1,0 +1,46 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_8x6c0veunf42dhbff1s2pwl1",
+        "type": "function",
+        "function": {
+          "name": "read_figure",
+          "arguments": "{\"file\": \"12967_2025_7112_Fig4_HTML.jpg\", \"crop\": [0.0, 0.35, 1.0, 0.72]}"
+        }
+      },
+      {
+        "id": "call_ea1c9jddibs35jzvkqtds8tj",
+        "type": "function",
+        "function": {
+          "name": "preview_table",
+          "arguments": "{\"file\": \"12967_2025_7112_MOESM3_ESM.docx\", \"sheet\": \"table1\", \"start\": 1, \"rows\": 23}"
+        }
+      },
+      {
+        "id": "call_6a0e79d5uz7bbpylqui7qryw",
+        "type": "function",
+        "function": {
+          "name": "read_article",
+          "arguments": "{\"query\": \"12 evaluable cases clinical response organoid sensitivity hgsEOC lgsEOC carboplatin paclitaxel\", \"start\": 33, \"limit\": 8}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "We need now full loop tools. Checking all figures and tables will be done via relevant tools.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 277,
+    "prompt_tokens": 21937,
+    "total_tokens": 22214,
+    "prompt_tokens_details": {
+      "cached_tokens": 2360
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 36
+    }
+  }
+}

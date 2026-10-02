@@ -1,0 +1,115 @@
+[
+  {
+    "name": "initial_code",
+    "output": {
+      "returncode": 0,
+      "stdout": "patients: 18 ['RTS032', 'RTS033', 'RTS041', 'RTS053', 'RTS059', 'RTS061', 'RTS070', 'RTS130', 'RTS163', 'RTS205', 'RTS221', 'RTS222', 'RTS229', 'RTS232', 'RTS249', 'RTS250', 'RTS290', 'RTS345']\npathological response scores: ['1', '2', '0', '0', '1', '1', '2', '0', '0', '3', '0', '3', '0', '2', '1', '2', '0', '0']\n",
+      "stderr": "",
+      "seconds": 0.25011324998922646,
+      "peak_rss_bytes": 4177920,
+      "limit_error": null,
+      "code_sha256": "042a58e39c1b5eb7c65aba0fbc2e601f871ea2f8502183d9668bca78c9ea5905",
+      "contract": {
+        "status": "blocked",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article.xml/Table 2/R2C2"
+            ],
+            "explanation": "Table 2 lists one record per patient with an RTS identifier."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p24",
+              "article:p28"
+            ],
+            "explanation": "Predictions were generated from pretreatment patient-derived esophageal cancer organoids."
+          },
+          "readout": {
+            "value": "other",
+            "evidence": [
+              "article:p28",
+              "article:p32"
+            ],
+            "explanation": "The endpoint is the composite CODRP Pathological response index integrating GI-AUC, PDO growth rate, and cTNM stage, rather than a single assay readout."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p28"
+            ],
+            "explanation": "Low CODRP values characterized good pathological responders, while high values characterized poor responders."
+          },
+          "threshold_rule": {
+            "value": "roc_optimized",
+            "evidence": [
+              "article:p28"
+            ],
+            "explanation": "Patients were stratified using optimized cutoff values maximizing sensitivity and specificity."
+          },
+          "threshold_timing": {
+            "value": "outcome_optimized",
+            "evidence": [
+              "article:p28",
+              "article:p32"
+            ],
+            "explanation": "The cutoff and apparent performance were evaluated in the same 18-patient feasibility cohort; no independent cutoff source is reported."
+          },
+          "patient_mapping": {
+            "value": "partial",
+            "evidence": [
+              "article.xml/Table 2/R2C2",
+              "article.xml/Table 2/R2C6"
+            ],
+            "explanation": "Patient IDs and pathological outcomes are available, but the per-patient CODRP Pathological response scores are not present in Table 2."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p28",
+              "article:p43"
+            ],
+            "explanation": "The evaluated patients received neoadjuvant chemoradiotherapy and the assay was designed to predict NCRT response."
+          },
+          "n_units": {
+            "value": 18,
+            "evidence": [
+              "article:p28",
+              "article.xml/Table 2/R2C1",
+              "article.xml/Table 2/R19C1"
+            ],
+            "explanation": "The pathological-response analysis included 18 patients: 8 good responders and 10 poor responders."
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p28",
+              "article:p32"
+            ],
+            "explanation": "The reported sensitivity is an apparent same-cohort result using cutoffs optimized on these subjects."
+          }
+        },
+        "headline": {
+          "metric": "sensitivity",
+          "reported": 0.875,
+          "reported_evidence": [
+            "article:p28",
+            "article:p32",
+            "article:p43"
+          ],
+          "threshold": null,
+          "op": "<",
+          "score_direction": "higher",
+          "records": [],
+          "blocked_reason": "Cannot independently compute 7/8 sensitivity because the workbook/table supplies component Z-scores and pathological outcomes but not per-patient CODRP Pathological response scores or the numeric optimized CODRP cutoff. Those row-level values must be transcribed from Figure 4A and the cutoff/decision rule must be located before a source-bound record-level calculation is possible."
+        },
+        "notes": [
+          "The article explicitly reports CODRP Pathological response sensitivity 87.5% and specificity 100.0% among 18 patients.",
+          "Sensitivity 0.875 corresponds to 7 detected good responders out of 8 actual good responders, but aggregate counts alone do not provide the required row-level evidence."
+        ]
+      }
+    }
+  }
+]

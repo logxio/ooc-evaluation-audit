@@ -1,0 +1,20 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "{\"columns\":[\"label\",\"bar\",\"drugs\"],\"legend\":{\"orange\":\"horizontal bar\",\"blue\":\"blue drug label\",\"gray\":\"gray drug label\"},\"rows\":[[\"hF2\",\"orange horizontal bar\",\"GEM: blue; SN38: blue; 5FU: gray\"],[\"hM1A\",\"orange horizontal bar\",\"SN38: gray; 5FU: blue; OXA: blue\"]],\"uncertain\":[],\"notes\":\"Cropped image with no visible axis titles, tick values, or explicit legend. The hF2 bar is slightly longer than the hM1A bar, but no numerical values are shown.\"}"
+  },
+  "reasoning_content": "We need need transcribe. \n\nThe target image has no visible axis titles, with rows corresponding to drug-coded colored text and orange bars. I need to infer its column and row mappings, output required in JSON format, and the current column speculation is preliminarily determined as [\"label\",\"bar\",\"drugs\"].\n\nI've adjusted the preliminary column speculation to [\"row\",\"bar\",\"label\"], confirmed the legend mapping rules for orange, blue and gray text, and noted that the image has no visible axis values or titles and requires cropping. I've finished preliminary row speculation, confirmed the preliminary column spec [\"label\",\"bar\",\"drugs\"], and will return pure valid JSON.\n",
+  "finish_reason": "stop",
+  "usage": {
+    "completion_tokens": 632,
+    "prompt_tokens": 1529,
+    "total_tokens": 2161,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 498
+    }
+  }
+}

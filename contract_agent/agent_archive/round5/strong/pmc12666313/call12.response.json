@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_jtmi36axdjgqtguytgq5kl7e",
+        "type": "function",
+        "function": {
+          "name": "python",
+          "arguments": "{\"code\": \"PR=[.02,.18,.20,.21,.27,.46,.54,.54,.57,.68]\\nSD=[.28,.30,.38,.45,.55,.60,1]\\nPD=[.59,.61,.69,.77,.81,.83]\\nfor name,N in [('SD+PD',SD+PD),('PD',PD)]:\\n print(name,sum((p<n)+.5*(p==n) for p in PR for n in N)/(len(PR)*len(N)))\\n# if positive response and score lower, yes\"}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "Now 23: PR10 SD7 PD6. Calculations will be performed using panel A scores to verify ROC.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 226,
+    "prompt_tokens": 45502,
+    "total_tokens": 45728,
+    "prompt_tokens_details": {
+      "cached_tokens": 44344
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 53
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_umlehaiez170oa5lwy41j5zh",
+        "type": "function",
+        "function": {
+          "name": "python",
+          "arguments": "{\"code\": \"print(type(files), files[:1] if isinstance(files,list) else list(files)[:3])\\nprint(type(tables))\\nfor k,v in list(tables.items())[:2]:\\n print(k,type(v), v.keys() if isinstance(v,dict) else '')\\n if isinstance(v,dict):\\n  for sk,sv in list(v.items())[:1]: print(' sheet',sk,type(sv), dir(sv)[:10])\\n\"}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "Need inspect structures. Use tool to print diagnostics.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 144,
+    "prompt_tokens": 23620,
+    "total_tokens": 23764,
+    "prompt_tokens_details": {
+      "cached_tokens": 2360
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 13
+    }
+  }
+}

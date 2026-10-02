@@ -1,0 +1,9 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "# list sorted values by truth, censor >1000 as high\nrecs2=recs\ndef parse(s):\n if '(cid:893)' in s: return ('censor',1000)\n try:return ('exact',float(s))\n except:return ('na',None)\nfor tval in [1,0]:\n arr=[]\n for r in recs2:\n  if (r[6]=='PR')==bool(tval): arr.append((parse(r[5]),r[6],r[2],r[3]))\n print('\\nTRUTH',tval,len(arr))\n print(sorted(arr,key=lambda z:(z[0][0]!='exact',z[0][1] if z[0][1] is not None else 9e99)))\n"
+    },
+    "output_sha256": "9660b596586f98a98f07e088e97dd57c48b86f4e97fb1b88b5f3da0328b0856f"
+  }
+]

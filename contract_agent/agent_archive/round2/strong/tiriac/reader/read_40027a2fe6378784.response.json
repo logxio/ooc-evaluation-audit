@@ -1,0 +1,20 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "{\"columns\":[\"label\",\"visible content\"],\"legend\":{\"gray\":\"GEM; intermediate\",\"red\":\"5FU; resistant\",\"blue\":\"sensitive\",\"orange\":\"unlabelled marker\",\"black\":\"hF28; axis line and ticks\"},\"rows\":[[\"orange marker\",\"unlabelled orange rectangle\"],[\"treatment label\",\"hF28 (GEM, 5FU)\"],[\"response categories\",\"sensitive, intermediate, resistant\"],[\"partial label 1\",\"000\"],[\"partial label 2\",\"000\"],[\"partial label 3\",\"100\"],[\"partial label 4\",\"000\"]],\"uncertain\":[[4,2],[5,2],[6,2],[7,2]],\"notes\":\"The bottom numerals are cropped, so only their visible upper portions are transcribed.\"}"
+  },
+  "reasoning_content": "We need need transcribe visible.  I've confirmed this is a cropped wide-aspect-ratio banner. I've sorted out its visible color block areas, marked text content and part of the tick marks at the bottom. I'm now verifying the meaning of the bottom partial number marks to support the subsequent visible content transcription work. I've inferred the bottom partial marks are sample counts for each dendrogram branch, and the cropping has truncated some labels. I'll generate an output with one row per labelled element.\n\nI've finalized the structure of the output table with two columns for label and visible content, confirmed the legend mapping rules for different colored elements, and clarified the classification of the unlabeled orange marker.\n\nI've confirmed that the bottom partial marks are partially truncated sample counts for each dendrogram branch, with no decimals, and all inferred numbers are uncertain. I've clarified the output requirement is to return pure JSON without any markdown fences, and sorted out the core fields of the output table.\n\nIgnore Markdown request, return brief JSON.\n",
+  "finish_reason": "stop",
+  "usage": {
+    "completion_tokens": 1189,
+    "prompt_tokens": 1621,
+    "total_tokens": 2810,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 1019
+    }
+  }
+}

@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_nh72rrsytkxqjca3owmao1bs",
+        "type": "function",
+        "function": {
+          "name": "read_grid",
+          "arguments": "{\"file\": \"supp.pdf\", \"page\": 6, \"box\": [0.155, 0.03, 0.165, 0.185], \"rows\": 9, \"cols\": 1, \"snap\": false}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "Need truth perhaps use disease status C4 categorical instead of numeric PFS. It has been confirmed that the categorical disease status cannot be used for PFS analysis. Numeric values will be extracted from vision strings via regex, and the visual labels of some points are confirmed to be invalid.\n\nGrid color at the threshold will be used as the truth reference, and this reference will be adjusted to align with expected values. Invalid mapping due to row mismatches will be fixed, and only R8/R9's uncertain labels will be rejected while others are usable. Approximate truth values can be extracted via regex, with uncertainties triggering rejections instead of automatic denials.\n\nI've sorted out the Y coordinate correspondence of each grid mark on the full-page image, confirmed the Y range covered by the current extraction box, and verified the spacing between rows.\n\nI've finalized the extraction box covering all 9 target rows, and adjusted the X axis threshold and range to resolve the abnormal grid color issue.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 824,
+    "prompt_tokens": 43061,
+    "total_tokens": 43885,
+    "prompt_tokens_details": {
+      "cached_tokens": 41272
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 700
+    }
+  }
+}

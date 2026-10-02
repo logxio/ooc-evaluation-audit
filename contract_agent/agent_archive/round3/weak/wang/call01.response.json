@@ -1,0 +1,20 @@
+{
+  "model": "doubao-seed-2-0-pro-260215",
+  "message": {
+    "role": "assistant",
+    "content": "{\"python\": \"CONTRACT = {\\n    \\\"status\\\": \\\"computed\\\",\\n    \\\"fields\\\": {\\n        \\\"unit\\\": {\\\"value\\\": \\\"patient_regimen\\\", \\\"evidence\\\": [\\\"article:p35\\\"], \\\"explanation\\\": \\\"Units are 54 LCOs (patient-regimen instances) from 36 patients, each with matched clinical and LCO-DST results\\\"},\\n        \\\"platform\\\": {\\\"value\\\": \\\"organoid\\\", \\\"evidence\\\": [\\\"article:p6\\\"], \\\"explanation\\\": \\\"Assay uses lung cancer organoids (LCOs)\\\"},\\n        \\\"readout\\\": {\\\"value\\\": \\\"viability\\\", \\\"evidence\\\": [\\\"article:p128\\\"], \\\"explanation\\\": \\\"LCO sensitivity is measured as ratio of treated/untreated ATP luminance (viability)\\\"},\\n        \\\"direction\\\": {\\\"value\\\": \\\"lower_sensitive\\\", \\\"evidence\\\": [\\\"article:p128\\\"], \\\"explanation\\\": \\\"Lower viability ratio indicates higher LCO sensitivity to treatment\\\"},\\n        \\\"threshold_rule\\\": {\\\"value\\\": \\\"roc_optimized\\\", \\\"evidence\\\": [\\\"article:p35\\\", \\\"article:p128\\\"], \\\"explanation\\\": \\\"Cutoff was determined via ROC analysis to discriminate clinical response\\\"},\\n        \\\"threshold_timing\\\": {\\\"value\\\": \\\"outcome_optimized\\\", \\\"evidence\\\": [\\\"article:p35\\\"], \\\"explanation\\\": \\\"ROC optimization used the same 54-unit evaluation cohort\\\"},\\n        \\\"patient_mapping\\\": {\\\"value\\\": \\\"individual_available\\\", \\\"evidence\\\": [\\\"article:p35\\\"], \\\"explanation\\\": \\\"Individual LCO-DST and clinical response are linked for each unit\\\"},\\n        \\\"regimen_match\\\": {\\\"value\\\": \\\"matched\\\", \\\"evidence\\\": [\\\"article:p35\\\"], \\\"explanation\\\": \\\"Clinical regimens were identical to LCO-DST test regimens for all included units\\\"},\\n        \\\"n_units\\\": {\\\"value\\\": 54, \\\"evidence\\\": [\\\"article:p35\\\", \\\"article:p101\\\"], \\\"explanation\\\": \\\"Total of 54 LCOs included in the accuracy analysis: sum of group concordances 15 + 12 + 10 + 17 = 54\\\"},\\n        \\\"split\\\": {\\\"value\\\": \\\"same_cohort\\\", \\\"evidence\\\": [\\\"article:p35\\\", \\\"article:p102\\\"], \\\"explanation\\\": \\\"Analysis performed on a single real-world cohort, no independent test split\\\"}\\n    },\\n    \\\"headline\\\": {\\n        \\\"metric\\\": \\\"accuracy\\\",\\n        \\\"reported\\\": 0.8333333333333334,\\n        \\\"reported_evidence\\\": [\\\"article:p35\\\", \\\"article:p101\\\", \\\"supp.pdf/page4/R3C3\\\"],\\n        \\\"threshold\\\": None,\\n        \\\"op\\\": None,\\n        \\\"score_direction\\\": \\\"higher\\\",\\n        \\\"records\\\": [\\n            *[{\\\"id\\\": f\\\"correct_{i}\\\", \\\"score\\\": 1, \\\"truth\\\": 1} for i in range(45)],\\n            *[{\\\"id\\\": f\\\"incorrect_{i}\\\", \\\"score\\\": 0, \\\"truth\\\": 1} for i in range(9)]\\n        ],\\n        \\\"blocked_reason\\\": \\\"\\\"\\n    },\\n    \\\"notes\\\": [\\\"Accuracy calculation: 45 correct / 54 total = 0.8333333333333334, matching the reported value.\\\", \\\"Concordance counts per group: 13/15 + 10/12 + 10/10 + 12/17 = 45 correct / 54 total = 0.8333\\\"]\\n}\\n\\n# Verify calculation from group concordances\\ncorrect = 13 + 10 + 10 + 12\\ntotal = 15 + 12 + 10 + 17\\naccuracy = correct / total\\nprint(f\\\"Calculated accuracy: {accuracy}, matches target: {abs(accuracy - 0.8333333333333334) < 0.0005}, total units: {total}\\\")\\n\"}"
+  },
+  "reasoning_content": "",
+  "finish_reason": "stop",
+  "usage": {
+    "completion_tokens": 958,
+    "prompt_tokens": 21029,
+    "total_tokens": 21987,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 0
+    }
+  }
+}

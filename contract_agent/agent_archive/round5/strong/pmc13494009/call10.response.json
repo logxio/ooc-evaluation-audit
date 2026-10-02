@@ -1,0 +1,70 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_y5fsd3g4wx66gfqo8l2z8wrx",
+        "type": "function",
+        "function": {
+          "name": "read_figure",
+          "arguments": "{\"file\": \"41698_2026_1663_Fig5_HTML.webp\", \"crop\": [0.265, 0.421, 0.325, 0.439]}"
+        }
+      },
+      {
+        "id": "call_whv9x11pdab3vc6lea9pbcp0",
+        "type": "function",
+        "function": {
+          "name": "read_figure",
+          "arguments": "{\"file\": \"41698_2026_1663_Fig5_HTML.webp\", \"crop\": [0.35, 0.421, 0.41, 0.439]}"
+        }
+      },
+      {
+        "id": "call_bgdjyvyoc2s1zlx0ooye7fa2",
+        "type": "function",
+        "function": {
+          "name": "read_figure",
+          "arguments": "{\"file\": \"41698_2026_1663_Fig5_HTML.webp\", \"crop\": [0.35, 0.435, 0.41, 0.453]}"
+        }
+      },
+      {
+        "id": "call_3e0ygqvxm3ifeoa2kyvd3rs8",
+        "type": "function",
+        "function": {
+          "name": "read_figure",
+          "arguments": "{\"file\": \"41698_2026_1663_Fig5_HTML.webp\", \"crop\": [0.435, 0.435, 0.495, 0.453]}"
+        }
+      },
+      {
+        "id": "call_dzo0988nzs3zqkb33hrv2gbu",
+        "type": "function",
+        "function": {
+          "name": "read_figure",
+          "arguments": "{\"file\": \"41698_2026_1663_Fig5_HTML.webp\", \"crop\": [0.52, 0.421, 0.58, 0.439]}"
+        }
+      },
+      {
+        "id": "call_tu31mbg8d1h7tbzlq9cn2cfe",
+        "type": "function",
+        "function": {
+          "name": "read_figure",
+          "arguments": "{\"file\": \"41698_2026_1663_Fig5_HTML.webp\", \"crop\": [0.52, 0.435, 0.58, 0.453]}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "Need eliminate uncertain refs by tighter crops maybe read_figure marks uncertain due blur. \n\nTighter cropping, text region adjustment and individual cell-based cropping have been tested to resolve uncertain score identification issues. Coordinates for target regions including scores, marks and panel B x columns as well as clinical-related rows have been sorted out.\n\nCrop parameters for score and truth regions have been confirmed, and verification of uncertain samples will be carried out next.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 757,
+    "prompt_tokens": 72594,
+    "total_tokens": 73351,
+    "prompt_tokens_details": {
+      "cached_tokens": 70456
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 274
+    }
+  }
+}

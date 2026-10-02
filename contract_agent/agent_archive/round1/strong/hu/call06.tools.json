@@ -1,0 +1,333 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "\n# Build the 10-record accuracy contract: on-chip organoid sensitivity (assay) vs patient clinical response (truth)\n# Assay flags recorded visually from Supp Fig 11a heatmap / 11b,c curves (vision refs);\n# truth from Supplementary Data 2 gray rows (response evaluation), mapped responder=1 / non-responder=0.\n\nscore_map = {\"sensitive\":1, \"resistant\":0}\ntruth_map_pd  = {\"PD to PC\":0, \"PD to Afa\":0, \"PD\":0, \"PD to GC\":0}\ntruth_map_rsp = {\"non-PD\":1, \"PR to Gef\":1, \"PR to GC\":1, \"non-PD to Osi\":1}\n\nrecs = [\n (\"LC96+PC\",   \"vision/LC96+PC_assay\",   \"supp.xlsx/Sheet1/I3\",  truth_map_pd),\n (\"LC132+Afa\", \"vision/LC132+Afa_assay\", \"supp.xlsx/Sheet1/I4\",  truth_map_pd),\n (\"CRC1+Oxa\",  \"vision/CRC1+Oxa_assay\",  \"supp.xlsx/Sheet1/E5\",  truth_map_pd),\n (\"LC131+Gef\", \"vision/LC131+Gef_assay\", \"supp.xlsx/Sheet1/I6\",  truth_map_rsp),\n (\"LC133+Gef\", \"vision/LC133+Gef_assay\", \"supp.xlsx/Sheet1/I7\",  truth_map_rsp),\n (\"LC134+GC\",  \"vision/LC134+GC_assay\",  \"supp.xlsx/Sheet1/I8\",  truth_map_rsp),\n (\"LC101+Gef\", \"vision/LC101+Gef_assay\", \"supp.xlsx/Sheet1/I9\",  truth_map_rsp),\n (\"LC127+PC\",  \"vision/LC127+PC_assay\",  \"supp.xlsx/Sheet1/I10\", truth_map_pd),\n (\"LC97+GC\",   \"vision/LC97+GC_assay\",   \"supp.xlsx/Sheet1/I14\", truth_map_pd),\n (\"LC137+EC\",  \"vision/LC137+EC_assay\",  \"supp.xlsx/Sheet1/E22\", truth_map_pd),\n]\n\nrecords = []\nfor pid, sref, tref, tmap in recs:\n    records.append({\n        \"id\": pid,\n        \"score\": {\"ref\": sref, \"map\": score_map},\n        \"truth\": {\"ref\": tref, \"map\": tmap},\n    })\n\n# sanity check with the visual/label values\nsv = {\"LC96+PC\":0,\"LC132+Afa\":0,\"CRC1+Oxa\":0,\"LC131+Gef\":1,\"LC133+Gef\":1,\"LC134+GC\":1,\"LC101+Gef\":1,\"LC127+PC\":0,\"LC97+GC\":0,\"LC137+EC\":0}\ntv = {\"LC96+PC\":0,\"LC132+Afa\":0,\"CRC1+Oxa\":0,\"LC131+Gef\":1,\"LC133+Gef\":1,\"LC134+GC\":1,\"LC101+Gef\":1,\"LC127+PC\":0,\"LC97+GC\":0,\"LC137+EC\":0}\nacc = sum(1 for k in sv if (sv[k]>=0.5)==(tv[k]>=0.5))/len(sv)\nprint(\"check accuracy:\", acc, \"n:\", len(sv))\n# contingency from Fig 11d: sensitive/responder=4, sens/nonresp=0, nonsens/resp=0, nonsens/nonresp=6 -> acc=(4+6)/10\nprint(\"contingency accuracy:\", (4+6)/10.0)\n\nCONTRACT = {\n \"status\":\"computed\",\n \"fields\":{\n  \"unit\":{\"value\":\"patient_regimen\",\"evidence\":[\"article:p27\",\"supp.xlsx/Sheet1/A3\"],\"explanation\":\"Each record is one patient organoid line matched to the specific regimen the patient received and that was tested on-chip\"},\n  \"platform\":{\"value\":\"microwell\",\"evidence\":[\"article:p16\",\"article:p27\"],\"explanation\":\"1-week drug sensitivity tests performed on the integrated superhydrophobic microwell array chip (InSMAR-chip)\"},\n  \"readout\":{\"value\":\"ic50\",\"evidence\":[\"41467_2021_22676_MOESM1_ESM.pdf/page13/R3C6\",\"article:p20\"],\"explanation\":\"On-chip sensitivity classified from fitted dose-response curves (IC50 / AUC-DRC, log10(IC50) heat map in Supp Fig 11a)\"},\n  \"direction\":{\"value\":\"lower_sensitive\",\"evidence\":[\"article:p20\"],\"explanation\":\"Lower IC50 / lower AUC-DRC indicates drug sensitivity\"},\n  \"threshold_rule\":{\"value\":\"categorical\",\"evidence\":[\"41467_2021_22676_MOESM1_ESM.pdf/page13/R8C12\"],\"explanation\":\"Organoid calls are categorical sensitive vs non-sensitive vs patient responder vs non-responder (Supp Fig 11d); no numeric cutoff published\"},\n  \"threshold_timing\":{\"value\":\"not_reported\",\"evidence\":[\"article:p27\"],\"explanation\":\"No cutoff fitting described; agreement tabulated directly\"},\n  \"patient_mapping\":{\"value\":\"individual_available\",\"evidence\":[\"supp.xlsx/Sheet1/A3\",\"supp.xlsx/Sheet1/A22\"],\"explanation\":\"Grey rows of Supplementary Data 2 list each evaluable patient ID with regimen and response evaluation\"},\n  \"regimen_match\":{\"value\":\"matched\",\"evidence\":[\"article:p27\",\"supp.xlsx/Sheet1/M3\"],\"explanation\":\"Only lines whose administered drug was tested by the on-chip assay are counted (10 of 21)\"},\n  \"n_units\":{\"value\":10,\"evidence\":[\"article:p27\"],\"explanation\":\"Ten organoid lines with evaluable, comparable patient responses\"},\n  \"split\":{\"value\":\"none\",\"evidence\":[\"article:p27\"],\"explanation\":\"No training/discovery cohort; the 10 evaluated pairs are the whole comparison set\"},\n },\n \"headline\":{\n  \"metric\":\"accuracy\",\n  \"reported\":1.0,\n  \"reported_evidence\":[\"article:p27\",\"article:p28\",\"vision/contingency_sensitive_responder\",\"vision/contingency_nonsensitive_nonresponder\"],\n  \"threshold\":0.5,\n  \"op\":\">=\",\n  \"score_direction\":\"higher\",\n  \"records\":records,\n  \"blocked_reason\":None\n },\n \"notes\":[\n  \"article:p27: in 10 of 21 organoid lines the 1-week on-chip results agreed with clinical data, 100% accuracy and specificity (Fisher's exact test P=0.0048).\",\n  \"Supp Fig 11d contingency (4/0/0/6) gives accuracy (4+6)/10 = 1.0; vision labels carry per-cell uncertainty for heat-map colors.\",\n  \"Score = on-chip sensitive(1)/resistant(0) from Supp Fig 11a-c; truth = patient responder(1: PR/CR/non-PD)/non-responder(0: PD) from Supplementary Data 2.\",\n  \"CRC1 and LC137 clinical truth taken from 'Patient response to previous treatments' (PD) because their response-evaluation cell is N/A while the same agent class was tested on-chip.\",\n ]\n}\nprint(\"records:\", len(records))\n"
+    },
+    "output": {
+      "returncode": 0,
+      "stdout": "check accuracy: 1.0 n: 10\ncontingency accuracy: 1.0\nrecords: 10\n",
+      "stderr": "",
+      "seconds": 0.22619783302070573,
+      "peak_rss_bytes": 26214400,
+      "limit_error": null,
+      "code_sha256": "12dd38d9efb7ef130df1cd04b2da1957903e3c57ff30ea26132e7f6f1b6e5d97",
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient_regimen",
+            "evidence": [
+              "article:p27",
+              "supp.xlsx/Sheet1/A3"
+            ],
+            "explanation": "Each record is one patient organoid line matched to the specific regimen the patient received and that was tested on-chip"
+          },
+          "platform": {
+            "value": "microwell",
+            "evidence": [
+              "article:p16",
+              "article:p27"
+            ],
+            "explanation": "1-week drug sensitivity tests performed on the integrated superhydrophobic microwell array chip (InSMAR-chip)"
+          },
+          "readout": {
+            "value": "ic50",
+            "evidence": [
+              "41467_2021_22676_MOESM1_ESM.pdf/page13/R3C6",
+              "article:p20"
+            ],
+            "explanation": "On-chip sensitivity classified from fitted dose-response curves (IC50 / AUC-DRC, log10(IC50) heat map in Supp Fig 11a)"
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p20"
+            ],
+            "explanation": "Lower IC50 / lower AUC-DRC indicates drug sensitivity"
+          },
+          "threshold_rule": {
+            "value": "categorical",
+            "evidence": [
+              "41467_2021_22676_MOESM1_ESM.pdf/page13/R8C12"
+            ],
+            "explanation": "Organoid calls are categorical sensitive vs non-sensitive vs patient responder vs non-responder (Supp Fig 11d); no numeric cutoff published"
+          },
+          "threshold_timing": {
+            "value": "not_reported",
+            "evidence": [
+              "article:p27"
+            ],
+            "explanation": "No cutoff fitting described; agreement tabulated directly"
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "supp.xlsx/Sheet1/A3",
+              "supp.xlsx/Sheet1/A22"
+            ],
+            "explanation": "Grey rows of Supplementary Data 2 list each evaluable patient ID with regimen and response evaluation"
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p27",
+              "supp.xlsx/Sheet1/M3"
+            ],
+            "explanation": "Only lines whose administered drug was tested by the on-chip assay are counted (10 of 21)"
+          },
+          "n_units": {
+            "value": 10,
+            "evidence": [
+              "article:p27"
+            ],
+            "explanation": "Ten organoid lines with evaluable, comparable patient responses"
+          },
+          "split": {
+            "value": "none",
+            "evidence": [
+              "article:p27"
+            ],
+            "explanation": "No training/discovery cohort; the 10 evaluated pairs are the whole comparison set"
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 1.0,
+          "reported_evidence": [
+            "article:p27",
+            "article:p28",
+            "vision/contingency_sensitive_responder",
+            "vision/contingency_nonsensitive_nonresponder"
+          ],
+          "threshold": 0.5,
+          "op": ">=",
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "LC96+PC",
+              "score": {
+                "ref": "vision/LC96+PC_assay",
+                "map": {
+                  "sensitive": 1,
+                  "resistant": 0
+                }
+              },
+              "truth": {
+                "ref": "supp.xlsx/Sheet1/I3",
+                "map": {
+                  "PD to PC": 0,
+                  "PD to Afa": 0,
+                  "PD": 0,
+                  "PD to GC": 0
+                }
+              }
+            },
+            {
+              "id": "LC132+Afa",
+              "score": {
+                "ref": "vision/LC132+Afa_assay",
+                "map": {
+                  "sensitive": 1,
+                  "resistant": 0
+                }
+              },
+              "truth": {
+                "ref": "supp.xlsx/Sheet1/I4",
+                "map": {
+                  "PD to PC": 0,
+                  "PD to Afa": 0,
+                  "PD": 0,
+                  "PD to GC": 0
+                }
+              }
+            },
+            {
+              "id": "CRC1+Oxa",
+              "score": {
+                "ref": "vision/CRC1+Oxa_assay",
+                "map": {
+                  "sensitive": 1,
+                  "resistant": 0
+                }
+              },
+              "truth": {
+                "ref": "supp.xlsx/Sheet1/E5",
+                "map": {
+                  "PD to PC": 0,
+                  "PD to Afa": 0,
+                  "PD": 0,
+                  "PD to GC": 0
+                }
+              }
+            },
+            {
+              "id": "LC131+Gef",
+              "score": {
+                "ref": "vision/LC131+Gef_assay",
+                "map": {
+                  "sensitive": 1,
+                  "resistant": 0
+                }
+              },
+              "truth": {
+                "ref": "supp.xlsx/Sheet1/I6",
+                "map": {
+                  "non-PD": 1,
+                  "PR to Gef": 1,
+                  "PR to GC": 1,
+                  "non-PD to Osi": 1
+                }
+              }
+            },
+            {
+              "id": "LC133+Gef",
+              "score": {
+                "ref": "vision/LC133+Gef_assay",
+                "map": {
+                  "sensitive": 1,
+                  "resistant": 0
+                }
+              },
+              "truth": {
+                "ref": "supp.xlsx/Sheet1/I7",
+                "map": {
+                  "non-PD": 1,
+                  "PR to Gef": 1,
+                  "PR to GC": 1,
+                  "non-PD to Osi": 1
+                }
+              }
+            },
+            {
+              "id": "LC134+GC",
+              "score": {
+                "ref": "vision/LC134+GC_assay",
+                "map": {
+                  "sensitive": 1,
+                  "resistant": 0
+                }
+              },
+              "truth": {
+                "ref": "supp.xlsx/Sheet1/I8",
+                "map": {
+                  "non-PD": 1,
+                  "PR to Gef": 1,
+                  "PR to GC": 1,
+                  "non-PD to Osi": 1
+                }
+              }
+            },
+            {
+              "id": "LC101+Gef",
+              "score": {
+                "ref": "vision/LC101+Gef_assay",
+                "map": {
+                  "sensitive": 1,
+                  "resistant": 0
+                }
+              },
+              "truth": {
+                "ref": "supp.xlsx/Sheet1/I9",
+                "map": {
+                  "non-PD": 1,
+                  "PR to Gef": 1,
+                  "PR to GC": 1,
+                  "non-PD to Osi": 1
+                }
+              }
+            },
+            {
+              "id": "LC127+PC",
+              "score": {
+                "ref": "vision/LC127+PC_assay",
+                "map": {
+                  "sensitive": 1,
+                  "resistant": 0
+                }
+              },
+              "truth": {
+                "ref": "supp.xlsx/Sheet1/I10",
+                "map": {
+                  "PD to PC": 0,
+                  "PD to Afa": 0,
+                  "PD": 0,
+                  "PD to GC": 0
+                }
+              }
+            },
+            {
+              "id": "LC97+GC",
+              "score": {
+                "ref": "vision/LC97+GC_assay",
+                "map": {
+                  "sensitive": 1,
+                  "resistant": 0
+                }
+              },
+              "truth": {
+                "ref": "supp.xlsx/Sheet1/I14",
+                "map": {
+                  "PD to PC": 0,
+                  "PD to Afa": 0,
+                  "PD": 0,
+                  "PD to GC": 0
+                }
+              }
+            },
+            {
+              "id": "LC137+EC",
+              "score": {
+                "ref": "vision/LC137+EC_assay",
+                "map": {
+                  "sensitive": 1,
+                  "resistant": 0
+                }
+              },
+              "truth": {
+                "ref": "supp.xlsx/Sheet1/E22",
+                "map": {
+                  "PD to PC": 0,
+                  "PD to Afa": 0,
+                  "PD": 0,
+                  "PD to GC": 0
+                }
+              }
+            }
+          ],
+          "blocked_reason": null
+        },
+        "notes": [
+          "article:p27: in 10 of 21 organoid lines the 1-week on-chip results agreed with clinical data, 100% accuracy and specificity (Fisher's exact test P=0.0048).",
+          "Supp Fig 11d contingency (4/0/0/6) gives accuracy (4+6)/10 = 1.0; vision labels carry per-cell uncertainty for heat-map colors.",
+          "Score = on-chip sensitive(1)/resistant(0) from Supp Fig 11a-c; truth = patient responder(1: PR/CR/non-PD)/non-responder(0: PD) from Supplementary Data 2.",
+          "CRC1 and LC137 clinical truth taken from 'Patient response to previous treatments' (PD) because their response-evaluation cell is N/A while the same agent class was tested on-chip."
+        ]
+      },
+      "execution_feedback": {
+        "matched": false,
+        "metric": "accuracy",
+        "computed": 1.0,
+        "reported": 1.0,
+        "difference": 0.0,
+        "n": 10,
+        "errors": [
+          "Uncertain visual label vision/LC96+PC_assay",
+          "Uncertain visual label vision/LC132+Afa_assay",
+          "Uncertain visual label vision/CRC1+Oxa_assay",
+          "Uncertain visual label vision/LC131+Gef_assay",
+          "Uncertain visual label vision/LC133+Gef_assay",
+          "Uncertain visual label vision/LC101+Gef_assay",
+          "Uncertain visual label vision/LC97+GC_assay",
+          "Uncertain visual label vision/LC137+EC_assay"
+        ],
+        "expected": {
+          "metric": "accuracy",
+          "value": 1.0,
+          "n": 10
+        },
+        "error_count": 9
+      }
+    }
+  }
+]

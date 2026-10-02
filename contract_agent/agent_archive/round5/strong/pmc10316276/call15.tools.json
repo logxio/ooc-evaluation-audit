@@ -1,0 +1,9 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "for p in article:\n t=p['text']\n if re.search(r'(?i)(supplementary table|Table S5|DSS|AUROC|patient)',t):\n  if any(s in t for s in ['0.82','10.7','AUROC','DSS']): print(p['ref'],t[:1000])\n"
+    },
+    "output_sha256": "47c588da9f340c9068487549f238c53d532c2d502f042c7019814a6813c0663b"
+  }
+]

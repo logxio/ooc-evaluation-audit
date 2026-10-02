@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_4lby0trte2ay9pmoay8mzwqx",
+        "type": "function",
+        "function": {
+          "name": "python",
+          "arguments": "{\"code\": \"PDF='2022_281692_KUUSANMAKI_SUPPL.pdf'; o=tables[PDF]['page1']\\nprint(o.keys())\\nfor k,v in o.items(): print(k,type(v), (len(v) if hasattr(v,'__len__') else None), str(v)[:100])\\n\"}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "Need persistent no.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 112,
+    "prompt_tokens": 27124,
+    "total_tokens": 27236,
+    "prompt_tokens_details": {
+      "cached_tokens": 26424
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 5
+    }
+  }
+}

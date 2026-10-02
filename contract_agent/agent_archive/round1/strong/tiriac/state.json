@@ -1,0 +1,763 @@
+{
+  "turn": 7,
+  "tool_count": 7,
+  "tokens": 259740,
+  "done": true,
+  "stop_reason": "verified",
+  "checkpoints": {
+    "single_pass": {
+      "contract": null,
+      "evaluation": {
+        "matched": false,
+        "errors": [
+          "Python produced no CONTRACT"
+        ],
+        "execution": {
+          "returncode": 0,
+          "stdout": "Chemo sheet: 68 rows, 27 cols\nHeader: ['Table S4A', None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]\nRow 2: ['Sample ID', 'Gemcitabine', 'Paclitaxel', 'SN-38', '5-FU', 'Oxaliplatin', 'Insensitive', None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]\nRow 3: ['hF2', 0.554357724008645, 0.712962208887096, 0.499950071545098, 0.782922474909435, 0.887245681544089, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None, None]\nRow 0: ['Table S4A', None, None, None, None, None, None, None, None, None, None, None, None, None, None]\nRow 1: ['Sample ID', 'Gemcitabine', 'Paclitaxel', 'SN-38', '5-FU', 'Oxaliplatin', 'Insensitive', None, None, None, None, None, None, None, None]\nRow 2: ['hF2', 0.554357724008645, 0.712962208887096, 0.499950071545098, 0.782922474909435, 0.887245681544089, None, None, None, None, None, None, None, None, None]\nRow 3: ['hF23', 0.523994611794011, 0.486710915662748, 0.547860062472992, 0.781999288152443, 0.820843360192987, None, None, None, None, None, None, None, None, None]\nRow 4: ['hF24', 0.609942415034081, 0.742389475755138, 0.549167304580845, 0.671272069100466, 0.809528235109105, None, None, None, None, None, None, None, None, None]\nRow 5: ['hF27', 0.677161905493563, 0.636765656709348, 0.567864966394762, 0.838668541229544, 0.852603292489015, 'YES', None, None, None, None, None, None, None, None]\nRow 6: ['hF28', 0.685010432986769, 0.662779111463729, 0.6514418789944, 0.861745214628544, 0.829213224741049, 'YES', None, None, None, None, None, None, None, None]\nRow 7: ['hF3', 0.619786040802038, 0.544051970514452, 0.56354332582754, 0.718958751213137, 0.946592140165441, None, None, None, None, None, None, None, None, None]\nRow 8: ['hF31', 0.619360018581861, 0.560774590057002, 0.54106355589358, 0.760285557343075, 0.8443832542729, None, None, None, None, None, None, None, None, None]\nRow 9: ['hF32', 0.549507398993009, 0.577008210386458, 0.616808758845471, 0.910581976299166, 0.915300871349735, None, None, None, None, None, None, None, None, None]\n",
+          "stderr": "",
+          "seconds": 0.22683304199017584,
+          "peak_rss_bytes": 26787840,
+          "limit_error": null,
+          "code_sha256": "a4672fea9f052ac9d1e6e4a3a4d24d738490da2315203ef33f7a0afb9e366da4"
+        }
+      },
+      "calls": 1,
+      "tokens": 17080
+    },
+    "one_feedback": {
+      "contract": null,
+      "evaluation": {
+        "matched": false,
+        "errors": [
+          "Python produced no CONTRACT"
+        ],
+        "execution": {
+          "returncode": 0,
+          "stdout": "Total rows: 68\nRow 0: [(0, 'Table S4A')]\nRow 1: [(0, 'Sample ID'), (1, 'Gemcitabine'), (2, 'Paclitaxel'), (3, 'SN-38'), (4, '5-FU'), (5, 'Oxaliplatin'), (6, 'Insensitive')]\nRow 2: [(0, 'hF2'), (1, 0.554357724008645), (2, 0.712962208887096), (3, 0.499950071545098), (4, 0.782922474909435), (5, 0.887245681544089)]\nRow 3: [(0, 'hF23'), (1, 0.523994611794011), (2, 0.486710915662748), (3, 0.547860062472992), (4, 0.781999288152443), (5, 0.820843360192987)]\nRow 4: [(0, 'hF24'), (1, 0.609942415034081), (2, 0.742389475755138), (3, 0.549167304580845), (4, 0.671272069100466), (5, 0.809528235109105)]\nRow 5: [(0, 'hF27'), (1, 0.677161905493563), (2, 0.636765656709348), (3, 0.567864966394762), (4, 0.838668541229544), (5, 0.852603292489015), (6, 'YES')]\nRow 6: [(0, 'hF28'), (1, 0.685010432986769), (2, 0.662779111463729), (3, 0.6514418789944), (4, 0.861745214628544), (5, 0.829213224741049), (6, 'YES')]\nRow 13: [(0, 'hF45'), (1, 0.653678664527895), (2, 0.680983993868605), (3, 0.715255347045912), (4, 0.855192632570545), (5, 0.918397501346954), (6, 'YES')]\nRow 18: [(0, 'hF70'), (1, 0.917493159390797), (2, 0.759484747421569), (3, 0.880285883398784), (4, 0.971617317601717), (5, 0.981540116578909), (6, 'YES')]\nRow 22: [(0, 'hF77'), (1, 0.743855213716024), (2, 0.596950841196933), (3, 0.658731003789186), (4, 0.764027596860033), (5, 0.893166958684133), (6, 'YES')]\nRow 24: [(0, 'hF81'), (1, 0.782606835094292), (2, 0.63377813923944), (3, 0.609675287397909), (4, 0.898189385852502), (5, '#N/A'), (6, 'YES')]\nRow 25: [(0, 'hF82'), (1, 0.687559440593598), (2, 0.706710096671366), (3, 0.673540403368709), (4, 0.889205801008651), (5, 0.927072148768731), (6, 'YES')]\nRow 26: [(0, 'hM17D'), (1, 0.637593135553281), (2, 0.653708785577322), (3, 0.685231504369094), (4, 0.827639489505271), (5, 0.931960030301541), (6, 'YES')]\nRow 27: [(0, 'hM19A'), (1, 0.745544695850794), (2, 0.674024417946036), (3, 0.567859370879097), (4, 0.841834061781402), (5, 0.882457554768711), (6, 'YES')]\nRow 28: [(0, 'hM19B'), (1, 0.737613216075916), (2, 0.69613102156097), (3, 0.599961249095421), (4, 0.915086437559282), (5, 0.940396316355949), (6, 'YES')]\nRow 33: [(0, 'hM1F'), (1, 0.720378558343355), (2, 0.69825852106106), (3, 0.695786567188047), (4, 0.838378629718275), (5, 0.853609207595632), (6, 'YES')]\nRow 34: [(0, 'hM21C'), (1, 0.625028764684969), (2, 0.583975958309521), (3, 0.603933195563621), (4, 0.810265065644644), (5, 0.90110481122593), (6, 'YES')]\nRow 41: [(0, 'hT103'), (1, 0.645163424348444), (2, 0.633493801438608), (3, 0.679608193006254), (4, 0.941135314393602), (5, 0.846650866558312), (6, 'YES')]\nRow 43: [(0, 'hT106'), (1, 0.7044312961379), (2, 0.678700853484761), (3, 0.734786834289122), (4, 0.956048965967013), (5, 0.947495816230799), (6, 'YES')]\nRow 48: [(0, 'hT127'), (1, 0.735587255729813), (2, 0.679923158888876), (3, 0.580242280182591), (4, '#N/A'), (5, 0.916686777153756), (6, 'YES')]\nRow 49: [(0, 'hT133'), (1, 0.713452625122274), (2, 0.657818257373342), (3, 0.639908665373825), (4, 0.880542388085151), (5, '#N/A'), (6, 'YES')]\nRow 51: [(0, 'hT25'), (1, 0.647762685751393), (2, 0.589990231049367), (3, 0.638092269711513), (4, 0.902030480064244), (5, 0.90812349535682), (6, 'YES')]\nRow 53: [(0, 'hT30'), (1, 0.712310541552078), (2, 0.659001872229777), (3, 0.596768579402154), (4, 0.885001818299745), (5, 0.908552680504005), (6, 'YES')]\nRow 56: [(0, 'hT58'), (1, 0.790584762470678), (2, 0.828977810280969), (3, 0.816339605360449), (4, 0.883744856358991), (5, 0.852930431655851), (6, 'YES')]\nRow 59: [(0, 'hT81'), (1, 0.767009549984199), (2, 0.723151684103685), (3, 0.636391230283663), (4, 0.784307940741898), (5, 0.9282312379381), (6, 'YES')]\nRow 61: [(0, 'hT83'), (1, 0.691586419802135), (2, 0.635906900538984), (3, 0.636141982614383), (4, 0.840244159376363), (5, 0.895986099973014), (6, 'YES')]\nRow 64: [(0, 'hT89'), (1, 0.764545513420928), (2, 0.731248436393684), (3, 0.698374958677436), (4, 0.926354779610838), (5, 0.874660972353675), (6, 'YES')]\n",
+          "stderr": "",
+          "seconds": 0.24688437499571592,
+          "peak_rss_bytes": 23248896,
+          "limit_error": null,
+          "code_sha256": "ef92a3326e21a3597d7dfbbee81068e0941aac49d264fefef83e5f4b152a30e6"
+        }
+      },
+      "calls": 2,
+      "tokens": 37331
+    },
+    "tool_loop": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p13",
+              "vision/hF31",
+              "vision/hF2",
+              "vision/hM1A",
+              "vision/hF57",
+              "vision/hF44",
+              "vision/hF23",
+              "vision/hF50",
+              "vision/hF3",
+              "vision/hF28"
+            ],
+            "explanation": "9 advanced PDAC patients with retrospective clinical follow-up matched to their PDO pharmacotyping (Figure S6A)."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p13"
+            ],
+            "explanation": "Patient-derived organoid (PDO) cultures."
+          },
+          "readout": {
+            "value": "auc",
+            "evidence": [
+              "article:p13",
+              "supp.xlsx/Key/A2"
+            ],
+            "explanation": "Normalized AUC of dose-response curves (Table S4A); terciles sensitive/intermediate/resistant."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p13",
+              "supp.xlsx/Key/A4"
+            ],
+            "explanation": "Lowest 33% AUC = sensitive; top 34% AUC = resistant."
+          },
+          "threshold_rule": {
+            "value": "categorical",
+            "evidence": [
+              "article:p13",
+              "supp.xlsx/Key/A3"
+            ],
+            "explanation": "Categorical tercile calls per drug; patient-level prediction = no resistant drug in administered regimen predicts benefit, any resistant drug predicts progression."
+          },
+          "threshold_timing": {
+            "value": "independent_reference",
+            "evidence": [
+              "article:p13"
+            ],
+            "explanation": "Tercile cutoffs defined on the 66-PDO library, independent of the 9 patients' outcomes."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "vision/hF31",
+              "vision/hF2",
+              "vision/hM1A",
+              "vision/hF57",
+              "vision/hF44",
+              "vision/hF23",
+              "vision/hF50",
+              "vision/hF3",
+              "vision/hF28",
+              "supp.xlsx/Chemo /A3",
+              "supp.xlsx/Chemo /A15"
+            ],
+            "explanation": "PDO IDs (hF2, hF3, hF23, hF28, hF31, hF44, hF50, hF57, hM1A) link Figure S6A bars to Table S4A rows."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "vision/hF31_pred",
+              "vision/hF2_pred",
+              "vision/hM1A_pred",
+              "vision/hF57_pred",
+              "vision/hF44_pred",
+              "vision/hF23_pred",
+              "vision/hF50_pred",
+              "vision/hF3_pred",
+              "vision/hF28_pred",
+              "vision/hF31",
+              "vision/hF2",
+              "vision/hM1A",
+              "vision/hF57",
+              "vision/hF44",
+              "vision/hF23",
+              "vision/hF50",
+              "vision/hF3",
+              "vision/hF28"
+            ],
+            "explanation": "Each patient's administered drugs listed beside the PFS bar with per-drug pharmacotyping color; red-fill cross-check in Table S4A (hF3 Oxaliplatin F8, hF28 5-FU E7)."
+          },
+          "n_units": {
+            "value": 9,
+            "evidence": [
+              "article:p13"
+            ],
+            "explanation": "Nine patients with retrospective follow-up (Figure S6A)."
+          },
+          "split": {
+            "value": "none",
+            "evidence": [
+              "article:p13"
+            ],
+            "explanation": "Retrospective case-series concordance; no training/test split."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.8888888888888888,
+          "reported_evidence": [
+            "article:p13"
+          ],
+          "threshold": 0.5,
+          "op": ">=",
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "hF31",
+              "score": {
+                "ref": "vision/hF31_pred",
+                "map": {
+                  "predict_benefit": 1,
+                  "predict_no_benefit": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/hF31",
+                "map": {
+                  "PFS_above_median": 1,
+                  "PFS_below_median": 0
+                }
+              }
+            },
+            {
+              "id": "hF2",
+              "score": {
+                "ref": "vision/hF2_pred",
+                "map": {
+                  "predict_benefit": 1,
+                  "predict_no_benefit": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/hF2",
+                "map": {
+                  "PFS_above_median": 1,
+                  "PFS_below_median": 0
+                }
+              }
+            },
+            {
+              "id": "hM1A",
+              "score": {
+                "ref": "vision/hM1A_pred",
+                "map": {
+                  "predict_benefit": 1,
+                  "predict_no_benefit": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/hM1A",
+                "map": {
+                  "PFS_above_median": 1,
+                  "PFS_below_median": 0
+                }
+              }
+            },
+            {
+              "id": "hF57",
+              "score": {
+                "ref": "vision/hF57_pred",
+                "map": {
+                  "predict_benefit": 1,
+                  "predict_no_benefit": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/hF57",
+                "map": {
+                  "PFS_above_median": 1,
+                  "PFS_below_median": 0
+                }
+              }
+            },
+            {
+              "id": "hF44",
+              "score": {
+                "ref": "vision/hF44_pred",
+                "map": {
+                  "predict_benefit": 1,
+                  "predict_no_benefit": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/hF44",
+                "map": {
+                  "PFS_above_median": 1,
+                  "PFS_below_median": 0
+                }
+              }
+            },
+            {
+              "id": "hF23",
+              "score": {
+                "ref": "vision/hF23_pred",
+                "map": {
+                  "predict_benefit": 1,
+                  "predict_no_benefit": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/hF23",
+                "map": {
+                  "PFS_above_median": 1,
+                  "PFS_below_median": 0
+                }
+              }
+            },
+            {
+              "id": "hF50",
+              "score": {
+                "ref": "vision/hF50_pred",
+                "map": {
+                  "predict_benefit": 1,
+                  "predict_no_benefit": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/hF50",
+                "map": {
+                  "PFS_above_median": 1,
+                  "PFS_below_median": 0
+                }
+              }
+            },
+            {
+              "id": "hF3",
+              "score": {
+                "ref": "vision/hF3_pred",
+                "map": {
+                  "predict_benefit": 1,
+                  "predict_no_benefit": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/hF3",
+                "map": {
+                  "PFS_above_median": 1,
+                  "PFS_below_median": 0
+                }
+              }
+            },
+            {
+              "id": "hF28",
+              "score": {
+                "ref": "vision/hF28_pred",
+                "map": {
+                  "predict_benefit": 1,
+                  "predict_no_benefit": 0
+                }
+              },
+              "truth": {
+                "ref": "vision/hF28",
+                "map": {
+                  "PFS_above_median": 1,
+                  "PFS_below_median": 0
+                }
+              }
+            }
+          ],
+          "blocked_reason": null
+        },
+        "notes": [
+          "Computed concordance 8/9 = 0.8889: only hF50 discordant (PDO predicted benefit via sensitive 5FU but patient progressed early), matching article:p13 ('One of the nine patients exhibited an outcome inconsistent with the matched PDO (hF50)').",
+          "Prediction flags cross-checked against workbook fills: red (resistant) cells within regimen exist only for hF3 (Oxaliplatin, supp.xlsx/Chemo /F8) and hF28 (5-FU, supp.xlsx/Chemo /E7); all other regimens contain no resistant drug.",
+          "Outcome (PFS above/below published median, dashed line ~180 d) read from Figure S6A bar lengths/progression status; assay prediction read from per-drug colors - distinct evidence streams."
+        ]
+      },
+      "evaluation": {
+        "matched": true,
+        "metric": "accuracy",
+        "computed": 0.8888888888888888,
+        "reported": 0.8888888888888888,
+        "difference": 0.0,
+        "n": 9,
+        "errors": [],
+        "rows": [
+          {
+            "id": "hF31",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "hF2",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "hM1A",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "hF57",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "hF44",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "hF23",
+            "score": 1.0,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "hF50",
+            "score": 1.0,
+            "truth": 0,
+            "prediction": 1
+          },
+          {
+            "id": "hF3",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "hF28",
+            "score": 0.0,
+            "truth": 0,
+            "prediction": 0
+          }
+        ],
+        "expected": {
+          "metric": "accuracy",
+          "value": 0.8888888888888888,
+          "n": 9
+        }
+      },
+      "calls": 7,
+      "tokens": 259740
+    }
+  },
+  "last_contract": {
+    "status": "computed",
+    "fields": {
+      "unit": {
+        "value": "patient",
+        "evidence": [
+          "article:p13",
+          "vision/hF31",
+          "vision/hF2",
+          "vision/hM1A",
+          "vision/hF57",
+          "vision/hF44",
+          "vision/hF23",
+          "vision/hF50",
+          "vision/hF3",
+          "vision/hF28"
+        ],
+        "explanation": "9 advanced PDAC patients with retrospective clinical follow-up matched to their PDO pharmacotyping (Figure S6A)."
+      },
+      "platform": {
+        "value": "organoid",
+        "evidence": [
+          "article:p13"
+        ],
+        "explanation": "Patient-derived organoid (PDO) cultures."
+      },
+      "readout": {
+        "value": "auc",
+        "evidence": [
+          "article:p13",
+          "supp.xlsx/Key/A2"
+        ],
+        "explanation": "Normalized AUC of dose-response curves (Table S4A); terciles sensitive/intermediate/resistant."
+      },
+      "direction": {
+        "value": "lower_sensitive",
+        "evidence": [
+          "article:p13",
+          "supp.xlsx/Key/A4"
+        ],
+        "explanation": "Lowest 33% AUC = sensitive; top 34% AUC = resistant."
+      },
+      "threshold_rule": {
+        "value": "categorical",
+        "evidence": [
+          "article:p13",
+          "supp.xlsx/Key/A3"
+        ],
+        "explanation": "Categorical tercile calls per drug; patient-level prediction = no resistant drug in administered regimen predicts benefit, any resistant drug predicts progression."
+      },
+      "threshold_timing": {
+        "value": "independent_reference",
+        "evidence": [
+          "article:p13"
+        ],
+        "explanation": "Tercile cutoffs defined on the 66-PDO library, independent of the 9 patients' outcomes."
+      },
+      "patient_mapping": {
+        "value": "individual_available",
+        "evidence": [
+          "vision/hF31",
+          "vision/hF2",
+          "vision/hM1A",
+          "vision/hF57",
+          "vision/hF44",
+          "vision/hF23",
+          "vision/hF50",
+          "vision/hF3",
+          "vision/hF28",
+          "supp.xlsx/Chemo /A3",
+          "supp.xlsx/Chemo /A15"
+        ],
+        "explanation": "PDO IDs (hF2, hF3, hF23, hF28, hF31, hF44, hF50, hF57, hM1A) link Figure S6A bars to Table S4A rows."
+      },
+      "regimen_match": {
+        "value": "matched",
+        "evidence": [
+          "vision/hF31_pred",
+          "vision/hF2_pred",
+          "vision/hM1A_pred",
+          "vision/hF57_pred",
+          "vision/hF44_pred",
+          "vision/hF23_pred",
+          "vision/hF50_pred",
+          "vision/hF3_pred",
+          "vision/hF28_pred",
+          "vision/hF31",
+          "vision/hF2",
+          "vision/hM1A",
+          "vision/hF57",
+          "vision/hF44",
+          "vision/hF23",
+          "vision/hF50",
+          "vision/hF3",
+          "vision/hF28"
+        ],
+        "explanation": "Each patient's administered drugs listed beside the PFS bar with per-drug pharmacotyping color; red-fill cross-check in Table S4A (hF3 Oxaliplatin F8, hF28 5-FU E7)."
+      },
+      "n_units": {
+        "value": 9,
+        "evidence": [
+          "article:p13"
+        ],
+        "explanation": "Nine patients with retrospective follow-up (Figure S6A)."
+      },
+      "split": {
+        "value": "none",
+        "evidence": [
+          "article:p13"
+        ],
+        "explanation": "Retrospective case-series concordance; no training/test split."
+      }
+    },
+    "headline": {
+      "metric": "accuracy",
+      "reported": 0.8888888888888888,
+      "reported_evidence": [
+        "article:p13"
+      ],
+      "threshold": 0.5,
+      "op": ">=",
+      "score_direction": "higher",
+      "records": [
+        {
+          "id": "hF31",
+          "score": {
+            "ref": "vision/hF31_pred",
+            "map": {
+              "predict_benefit": 1,
+              "predict_no_benefit": 0
+            }
+          },
+          "truth": {
+            "ref": "vision/hF31",
+            "map": {
+              "PFS_above_median": 1,
+              "PFS_below_median": 0
+            }
+          }
+        },
+        {
+          "id": "hF2",
+          "score": {
+            "ref": "vision/hF2_pred",
+            "map": {
+              "predict_benefit": 1,
+              "predict_no_benefit": 0
+            }
+          },
+          "truth": {
+            "ref": "vision/hF2",
+            "map": {
+              "PFS_above_median": 1,
+              "PFS_below_median": 0
+            }
+          }
+        },
+        {
+          "id": "hM1A",
+          "score": {
+            "ref": "vision/hM1A_pred",
+            "map": {
+              "predict_benefit": 1,
+              "predict_no_benefit": 0
+            }
+          },
+          "truth": {
+            "ref": "vision/hM1A",
+            "map": {
+              "PFS_above_median": 1,
+              "PFS_below_median": 0
+            }
+          }
+        },
+        {
+          "id": "hF57",
+          "score": {
+            "ref": "vision/hF57_pred",
+            "map": {
+              "predict_benefit": 1,
+              "predict_no_benefit": 0
+            }
+          },
+          "truth": {
+            "ref": "vision/hF57",
+            "map": {
+              "PFS_above_median": 1,
+              "PFS_below_median": 0
+            }
+          }
+        },
+        {
+          "id": "hF44",
+          "score": {
+            "ref": "vision/hF44_pred",
+            "map": {
+              "predict_benefit": 1,
+              "predict_no_benefit": 0
+            }
+          },
+          "truth": {
+            "ref": "vision/hF44",
+            "map": {
+              "PFS_above_median": 1,
+              "PFS_below_median": 0
+            }
+          }
+        },
+        {
+          "id": "hF23",
+          "score": {
+            "ref": "vision/hF23_pred",
+            "map": {
+              "predict_benefit": 1,
+              "predict_no_benefit": 0
+            }
+          },
+          "truth": {
+            "ref": "vision/hF23",
+            "map": {
+              "PFS_above_median": 1,
+              "PFS_below_median": 0
+            }
+          }
+        },
+        {
+          "id": "hF50",
+          "score": {
+            "ref": "vision/hF50_pred",
+            "map": {
+              "predict_benefit": 1,
+              "predict_no_benefit": 0
+            }
+          },
+          "truth": {
+            "ref": "vision/hF50",
+            "map": {
+              "PFS_above_median": 1,
+              "PFS_below_median": 0
+            }
+          }
+        },
+        {
+          "id": "hF3",
+          "score": {
+            "ref": "vision/hF3_pred",
+            "map": {
+              "predict_benefit": 1,
+              "predict_no_benefit": 0
+            }
+          },
+          "truth": {
+            "ref": "vision/hF3",
+            "map": {
+              "PFS_above_median": 1,
+              "PFS_below_median": 0
+            }
+          }
+        },
+        {
+          "id": "hF28",
+          "score": {
+            "ref": "vision/hF28_pred",
+            "map": {
+              "predict_benefit": 1,
+              "predict_no_benefit": 0
+            }
+          },
+          "truth": {
+            "ref": "vision/hF28",
+            "map": {
+              "PFS_above_median": 1,
+              "PFS_below_median": 0
+            }
+          }
+        }
+      ],
+      "blocked_reason": null
+    },
+    "notes": [
+      "Computed concordance 8/9 = 0.8889: only hF50 discordant (PDO predicted benefit via sensitive 5FU but patient progressed early), matching article:p13 ('One of the nine patients exhibited an outcome inconsistent with the matched PDO (hF50)').",
+      "Prediction flags cross-checked against workbook fills: red (resistant) cells within regimen exist only for hF3 (Oxaliplatin, supp.xlsx/Chemo /F8) and hF28 (5-FU, supp.xlsx/Chemo /E7); all other regimens contain no resistant drug.",
+      "Outcome (PFS above/below published median, dashed line ~180 d) read from Figure S6A bar lengths/progression status; assay prediction read from per-drug colors - distinct evidence streams."
+    ]
+  },
+  "last_evaluation": {
+    "matched": true,
+    "metric": "accuracy",
+    "computed": 0.8888888888888888,
+    "reported": 0.8888888888888888,
+    "difference": 0.0,
+    "n": 9,
+    "errors": [],
+    "rows": [
+      {
+        "id": "hF31",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "hF2",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "hM1A",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "hF57",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "hF44",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "hF23",
+        "score": 1.0,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "hF50",
+        "score": 1.0,
+        "truth": 0,
+        "prediction": 1
+      },
+      {
+        "id": "hF3",
+        "score": 0.0,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "hF28",
+        "score": 0.0,
+        "truth": 0,
+        "prediction": 0
+      }
+    ],
+    "expected": {
+      "metric": "accuracy",
+      "value": 0.8888888888888888,
+      "n": 9
+    }
+  }
+}

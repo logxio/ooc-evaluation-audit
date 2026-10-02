@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_z7238db8adxrqq1jymx2hb8y",
+        "type": "function",
+        "function": {
+          "name": "read_figure",
+          "arguments": "{\"file\": \"CTM2-15-e70534-g008.jpg\", \"crop\": [0.0,0.0,1.0,0.49]}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "We can use figure values via read_figure, We need numeric scores, will extract target data from figure panels via crop first, then match with source data to compute accuracy.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 191,
+    "prompt_tokens": 40210,
+    "total_tokens": 40401,
+    "prompt_tokens_details": {
+      "cached_tokens": 27448
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 114
+    }
+  }
+}

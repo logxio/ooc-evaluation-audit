@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_e050x76hnn1zhwk7ns4w39sf",
+        "type": "function",
+        "function": {
+          "name": "python",
+          "arguments": "{\"code\": \"for sh in ['5l','5m','5n','5o']:\\n    rows=get_rows('Source data figure 5.xlsx',sh)\\n    print('\\\\n',sh,len(rows),max(map(len,rows)))\\n    for i,r in enumerate(rows): print(i,repr(r))\\n\"}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "We need inspect. Run Python diagnostic tool and list sheet rows.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 128,
+    "prompt_tokens": 27000,
+    "total_tokens": 27128,
+    "prompt_tokens_details": {
+      "cached_tokens": 2360
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 29
+    }
+  }
+}

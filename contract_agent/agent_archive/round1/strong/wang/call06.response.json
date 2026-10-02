@@ -1,0 +1,33 @@
+{
+  "model": "qwen3.8-max",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_f5a8ab5960e748cfb1efcdd2",
+        "type": "function",
+        "function": {
+          "name": "view_source",
+          "arguments": "{\"file\": \"supp.pdf\", \"page\": 20}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "The user hasn't asked a question yet — this is just a system setup message with instructions. The appropriate response is a brief acknowledgment. There's no task to execute yet. I should respond minimally, confirming I understand the instructions, without using tools unnecessarily.",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 95,
+    "completion_tokens_details": {
+      "reasoning_tokens": 52,
+      "text_tokens": 42
+    },
+    "prompt_tokens": 40227,
+    "prompt_tokens_details": {
+      "cached_tokens": 37888,
+      "image_tokens": 6127,
+      "text_tokens": 34100
+    },
+    "total_tokens": 40322
+  }
+}

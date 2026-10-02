@@ -1,0 +1,9 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "import numpy as np\nscores=[0,0,.5,.167,.25,0,0,.25,0,.167,.333,.083,0,.083,.167,.25,.25,.167,.167,0,.5,0,0,.417]\ny=[0,0,1,0,0,0,0,0,0,0,1,0,0,0,1,1,0,1,0,0,1,0,0,1]\npos=[s for s,z in zip(scores,y) if z]; neg=[s for s,z in zip(scores,y) if not z]\nprint(np.mean([a>b for a in pos for b in neg])+0.5*np.mean([a==b for a in pos for b in neg]), len(pos),len(neg))"
+    },
+    "output_sha256": "562d4690e11084d36a4173001686c92371e6ebb7b29b89991194a90aaac00165"
+  }
+]

@@ -1,0 +1,775 @@
+[
+  {
+    "name": "finish",
+    "arguments": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article.xml/Table 2/R2C1",
+              "article.xml/Table 2/R19C1"
+            ],
+            "explanation": "Table 2 contains one record for each of the 18 evaluated patients."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p24",
+              "article:p28"
+            ],
+            "explanation": "Predictions were generated from pretreatment patient-derived esophageal cancer organoids."
+          },
+          "readout": {
+            "value": "other",
+            "evidence": [
+              "article.xml/Table 2/R1C14",
+              "article:p24"
+            ],
+            "explanation": "The single-parameter predictor is PDO growth rate, calculated from the increase in mean colony area."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p28",
+              "article:p32"
+            ],
+            "explanation": "Lower growth rates were associated with good pathological response."
+          },
+          "threshold_rule": {
+            "value": "roc_optimized",
+            "evidence": [
+              "article:p28"
+            ],
+            "explanation": "The article states that patients were stratified using cutoff values optimized to maximize sensitivity and specificity."
+          },
+          "threshold_timing": {
+            "value": "outcome_optimized",
+            "evidence": [
+              "article:p28",
+              "article:p32"
+            ],
+            "explanation": "The cutoff and reported performance were determined in the same 18-patient cohort."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "article.xml/Table 2/R2C2",
+              "article.xml/Table 2/R2C6",
+              "article.xml/Table 2/R2C14"
+            ],
+            "explanation": "Each row provides an individual patient ID, pathological response score, and growth-rate measurement."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p28",
+              "article:p43"
+            ],
+            "explanation": "The assay predicted pathological response after the neoadjuvant chemoradiotherapy received by these patients."
+          },
+          "n_units": {
+            "value": 18,
+            "evidence": [
+              "article:p28",
+              "article.xml/Table 2/R2C1",
+              "article.xml/Table 2/R19C1"
+            ],
+            "explanation": "The pathological-response analysis included all 18 patients."
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p28",
+              "article:p32"
+            ],
+            "explanation": "This is an apparent same-cohort performance estimate with an outcome-optimized cutoff."
+          }
+        },
+        "headline": {
+          "metric": "sensitivity",
+          "reported": 0.875,
+          "reported_evidence": [
+            "article:p28",
+            "article:p32"
+          ],
+          "threshold": 160,
+          "op": "<",
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "1",
+              "score": {
+                "ref": "article.xml/Table 2/R2C14"
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R2C6",
+                "map": {
+                  "0": 1,
+                  "1": 0,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "2",
+              "score": {
+                "ref": "article.xml/Table 2/R3C14"
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R3C6",
+                "map": {
+                  "0": 1,
+                  "1": 0,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "3",
+              "score": {
+                "ref": "article.xml/Table 2/R4C14"
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R4C6",
+                "map": {
+                  "0": 1,
+                  "1": 0,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "4",
+              "score": {
+                "ref": "article.xml/Table 2/R5C14"
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R5C6",
+                "map": {
+                  "0": 1,
+                  "1": 0,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "5",
+              "score": {
+                "ref": "article.xml/Table 2/R6C14"
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R6C6",
+                "map": {
+                  "0": 1,
+                  "1": 0,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "6",
+              "score": {
+                "ref": "article.xml/Table 2/R7C14"
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R7C6",
+                "map": {
+                  "0": 1,
+                  "1": 0,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "7",
+              "score": {
+                "ref": "article.xml/Table 2/R8C14"
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R8C6",
+                "map": {
+                  "0": 1,
+                  "1": 0,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "8",
+              "score": {
+                "ref": "article.xml/Table 2/R9C14"
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R9C6",
+                "map": {
+                  "0": 1,
+                  "1": 0,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "9",
+              "score": {
+                "ref": "article.xml/Table 2/R10C14"
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R10C6",
+                "map": {
+                  "0": 1,
+                  "1": 0,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "10",
+              "score": {
+                "ref": "article.xml/Table 2/R11C14"
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R11C6",
+                "map": {
+                  "0": 1,
+                  "1": 0,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "11",
+              "score": {
+                "ref": "article.xml/Table 2/R12C14"
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R12C6",
+                "map": {
+                  "0": 1,
+                  "1": 0,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "12",
+              "score": {
+                "ref": "article.xml/Table 2/R13C14"
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R13C6",
+                "map": {
+                  "0": 1,
+                  "1": 0,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "13",
+              "score": {
+                "ref": "article.xml/Table 2/R14C14"
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R14C6",
+                "map": {
+                  "0": 1,
+                  "1": 0,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "14",
+              "score": {
+                "ref": "article.xml/Table 2/R15C14"
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R15C6",
+                "map": {
+                  "0": 1,
+                  "1": 0,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "15",
+              "score": {
+                "ref": "article.xml/Table 2/R16C14"
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R16C6",
+                "map": {
+                  "0": 1,
+                  "1": 0,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "16",
+              "score": {
+                "ref": "article.xml/Table 2/R17C14"
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R17C6",
+                "map": {
+                  "0": 1,
+                  "1": 0,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "17",
+              "score": {
+                "ref": "article.xml/Table 2/R18C14"
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R18C6",
+                "map": {
+                  "0": 1,
+                  "1": 0,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "18",
+              "score": {
+                "ref": "article.xml/Table 2/R19C14"
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R19C6",
+                "map": {
+                  "0": 1,
+                  "1": 0,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            }
+          ],
+          "blocked_reason": ""
+        },
+        "notes": [
+          "Pathological response score 0 identifies the eight good responders; scores 1, 2, and 3 identify poor responders.",
+          "The headline threshold classifies raw growth-rate scores below 160 as predicted sensitive.",
+          "Seven of the eight good responders have growth rates below 160; RTS345 has a growth rate of 187.1, yielding sensitivity 7/8=0.875.",
+          "The same rule gives one false positive among ten poor responders, reproducing the reported specificity of 90.0%."
+        ]
+      }
+    },
+    "output": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article.xml/Table 2/R2C1",
+              "article.xml/Table 2/R19C1"
+            ],
+            "explanation": "Table 2 contains one record for each of the 18 evaluated patients."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p24",
+              "article:p28"
+            ],
+            "explanation": "Predictions were generated from pretreatment patient-derived esophageal cancer organoids."
+          },
+          "readout": {
+            "value": "other",
+            "evidence": [
+              "article.xml/Table 2/R1C14",
+              "article:p24"
+            ],
+            "explanation": "The single-parameter predictor is PDO growth rate, calculated from the increase in mean colony area."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p28",
+              "article:p32"
+            ],
+            "explanation": "Lower growth rates were associated with good pathological response."
+          },
+          "threshold_rule": {
+            "value": "roc_optimized",
+            "evidence": [
+              "article:p28"
+            ],
+            "explanation": "The article states that patients were stratified using cutoff values optimized to maximize sensitivity and specificity."
+          },
+          "threshold_timing": {
+            "value": "outcome_optimized",
+            "evidence": [
+              "article:p28",
+              "article:p32"
+            ],
+            "explanation": "The cutoff and reported performance were determined in the same 18-patient cohort."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "article.xml/Table 2/R2C2",
+              "article.xml/Table 2/R2C6",
+              "article.xml/Table 2/R2C14"
+            ],
+            "explanation": "Each row provides an individual patient ID, pathological response score, and growth-rate measurement."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p28",
+              "article:p43"
+            ],
+            "explanation": "The assay predicted pathological response after the neoadjuvant chemoradiotherapy received by these patients."
+          },
+          "n_units": {
+            "value": 18,
+            "evidence": [
+              "article:p28",
+              "article.xml/Table 2/R2C1",
+              "article.xml/Table 2/R19C1"
+            ],
+            "explanation": "The pathological-response analysis included all 18 patients."
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p28",
+              "article:p32"
+            ],
+            "explanation": "This is an apparent same-cohort performance estimate with an outcome-optimized cutoff."
+          }
+        },
+        "headline": {
+          "metric": "sensitivity",
+          "reported": 0.875,
+          "reported_evidence": [
+            "article:p28",
+            "article:p32"
+          ],
+          "threshold": 160,
+          "op": "<",
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "1",
+              "score": {
+                "ref": "article.xml/Table 2/R2C14"
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R2C6",
+                "map": {
+                  "0": 1,
+                  "1": 0,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "2",
+              "score": {
+                "ref": "article.xml/Table 2/R3C14"
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R3C6",
+                "map": {
+                  "0": 1,
+                  "1": 0,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "3",
+              "score": {
+                "ref": "article.xml/Table 2/R4C14"
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R4C6",
+                "map": {
+                  "0": 1,
+                  "1": 0,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "4",
+              "score": {
+                "ref": "article.xml/Table 2/R5C14"
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R5C6",
+                "map": {
+                  "0": 1,
+                  "1": 0,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "5",
+              "score": {
+                "ref": "article.xml/Table 2/R6C14"
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R6C6",
+                "map": {
+                  "0": 1,
+                  "1": 0,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "6",
+              "score": {
+                "ref": "article.xml/Table 2/R7C14"
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R7C6",
+                "map": {
+                  "0": 1,
+                  "1": 0,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "7",
+              "score": {
+                "ref": "article.xml/Table 2/R8C14"
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R8C6",
+                "map": {
+                  "0": 1,
+                  "1": 0,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "8",
+              "score": {
+                "ref": "article.xml/Table 2/R9C14"
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R9C6",
+                "map": {
+                  "0": 1,
+                  "1": 0,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "9",
+              "score": {
+                "ref": "article.xml/Table 2/R10C14"
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R10C6",
+                "map": {
+                  "0": 1,
+                  "1": 0,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "10",
+              "score": {
+                "ref": "article.xml/Table 2/R11C14"
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R11C6",
+                "map": {
+                  "0": 1,
+                  "1": 0,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "11",
+              "score": {
+                "ref": "article.xml/Table 2/R12C14"
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R12C6",
+                "map": {
+                  "0": 1,
+                  "1": 0,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "12",
+              "score": {
+                "ref": "article.xml/Table 2/R13C14"
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R13C6",
+                "map": {
+                  "0": 1,
+                  "1": 0,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "13",
+              "score": {
+                "ref": "article.xml/Table 2/R14C14"
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R14C6",
+                "map": {
+                  "0": 1,
+                  "1": 0,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "14",
+              "score": {
+                "ref": "article.xml/Table 2/R15C14"
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R15C6",
+                "map": {
+                  "0": 1,
+                  "1": 0,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "15",
+              "score": {
+                "ref": "article.xml/Table 2/R16C14"
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R16C6",
+                "map": {
+                  "0": 1,
+                  "1": 0,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "16",
+              "score": {
+                "ref": "article.xml/Table 2/R17C14"
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R17C6",
+                "map": {
+                  "0": 1,
+                  "1": 0,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "17",
+              "score": {
+                "ref": "article.xml/Table 2/R18C14"
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R18C6",
+                "map": {
+                  "0": 1,
+                  "1": 0,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "18",
+              "score": {
+                "ref": "article.xml/Table 2/R19C14"
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R19C6",
+                "map": {
+                  "0": 1,
+                  "1": 0,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            }
+          ],
+          "blocked_reason": ""
+        },
+        "notes": [
+          "Pathological response score 0 identifies the eight good responders; scores 1, 2, and 3 identify poor responders.",
+          "The headline threshold classifies raw growth-rate scores below 160 as predicted sensitive.",
+          "Seven of the eight good responders have growth rates below 160; RTS345 has a growth rate of 187.1, yielding sensitivity 7/8=0.875.",
+          "The same rule gives one false positive among ten poor responders, reproducing the reported specificity of 90.0%."
+        ]
+      },
+      "execution_feedback": {
+        "matched": true,
+        "metric": "sensitivity",
+        "computed": 0.875,
+        "reported": 0.875,
+        "difference": 0.0,
+        "n": 18,
+        "errors": [],
+        "expected": {
+          "metric": "sensitivity",
+          "value": 0.875,
+          "n": 18
+        }
+      }
+    }
+  }
+]

@@ -1,0 +1,17 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "pos=[.02,.27,.57,.55,.19,.21,.68,.54,.55,.46,.45,.32,.39,.55]\nneg=[1,.6,.28,.81,.69,.56,.77,.61]\n# auc lower scores indicate positive: P(pos<neg)+.5 ties\nv=sum((p<n)+.5*(p==n) for p in pos for n in neg)/(len(pos)*len(neg))\nprint(len(pos)+len(neg),v)\n# try threshold -30 etc\nfor th in [-50,-40,-30,-20,-10,0,10,20,30]:\n xs=[(-54,.02),(-52,.27),(-53,.57),(-45,.55),(-39,.19),(-38,.21),(-36,.68),(-35,.54),(-33,.55),(-32,.46),(-29,.45),(-29,.32),(-26,.39),(-19,.55),(4,1),(6,.6),(18,.28),(23,.81),(23,.69),(25,.56),(38,.77),(40,.61)]\n P=[s for x,s in xs if x<th]; N=[s for x,s in xs if x>=th]\n if P and N: print(th,len(P),len(N),sum((p<n)+.5*(p==n) for p in P for n in N)/(len(P)*len(N)))"
+    },
+    "output": {
+      "returncode": 0,
+      "stdout": "22 0.875\n-50 3 19 0.7543859649122807\n-40 4 18 0.6944444444444444\n-30 10 12 0.7416666666666667\n-20 13 9 0.8632478632478633\n-10 14 8 0.875\n0 14 8 0.875\n10 16 6 0.78125\n20 17 5 0.8941176470588236\n30 20 2 0.85\n",
+      "stderr": "",
+      "seconds": 3.13557833302184,
+      "peak_rss_bytes": 30212096,
+      "limit_error": null,
+      "code_sha256": "aadec510af7c07ad4939bd8ee30d2812c134b12c3501d46514d7e4d3b394ef30"
+    }
+  }
+]

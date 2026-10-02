@@ -1,0 +1,338 @@
+[
+  {
+    "name": "initial_code",
+    "output": {
+      "returncode": 0,
+      "stdout": "FOLFOX patient count: 13\nFOLFOX rows:\n['P3', 'FOLFOX', 'PD', 30.83, 3.1, 'Progression']\n['P4', 'FOLFOX', 'SD/PR', 1.041, 11.3, 'Progression']\n['P5', 'FOLFOX', 'SD/PR', 1.268, 30.2, 'No Progression']\n['P6', 'FOLFOX', 'PD', 7.465, 6.5, 'Progression']\n['P9', 'FOLFOX', 'PD', 12.59, 4.6, 'Progression']\n['P11', 'FOLFOX', 'SD/PR', 3.605, 13.7, 'Progression']\n['P12', 'FOLFOX', 'SD/PR', 2.441, 27.6, 'No Progression']\n['P13', 'FOLFOX', 'SD/PR', 0.4895, 23.7, 'No Progression']\n['P14', 'FOLFOX', 'SD/PR', 2.32, 24.2, 'No Progression']\n['P18', 'FOLFOX', 'PD', 2.254, 7.1, 'Progression']\n['P19', 'FOLFOX', 'PD', 15.4, 5.2, 'Progression']\n['P23', 'FOLFOX', 'SD/PR', 6.247, 22.5, 'No Progression']\n['P25', 'FOLFOX', 'SD/PR', 7.895, 15.8, 'No Progression']\nTruths: [1, 0, 0, 1, 1, 0, 0, 0, 0, 1, 1, 0, 0]\nLog IC50 scores: [np.float64(1.4889735247265081), np.float64(0.017450729510536125), np.float64(0.10311925354571388), np.float64(0.8730298120610442), np.float64(1.1000257301078626), np.float64(0.5569052690554478), np.float64(0.38756777941718856), np.float64(-0.31024730386084337), np.float64(0.3654879848908996), np.float64(0.3529539117100877), np.float64(1.187520720836463), np.float64(0.7956715059460218), np.float64(0.897352134344313)]\nn1 (PD): 5, n0 (SD/PR): 8\nAUC with log IC50: 0.850\n",
+      "stderr": "",
+      "seconds": 0.7156202500045765,
+      "peak_rss_bytes": 39436288,
+      "limit_error": null,
+      "code_sha256": "71c1f2f0ac356c0be78292437f971f989a74abfdf11af49ea1f0e2fab0b60478",
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p31"
+            ],
+            "explanation": "13 unique CRLM patients receiving FOLFOX chemotherapy"
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p1"
+            ],
+            "explanation": "Patient-derived organoid (PDO) chemosensitivity assay"
+          },
+          "readout": {
+            "value": "ic50",
+            "evidence": [
+              "article:p31"
+            ],
+            "explanation": "Log10-transformed IC50 of FOLFOX in PDOs"
+          },
+          "direction": {
+            "value": "higher_sensitive",
+            "evidence": [
+              "article:p31"
+            ],
+            "explanation": "Higher log(IC50) (more resistant) correlates with progressive disease (PD)"
+          },
+          "threshold_rule": {
+            "value": "no_binary_rule",
+            "evidence": [
+              "article:p31"
+            ],
+            "explanation": "AUC computed across all thresholds, no single classification cutoff"
+          },
+          "threshold_timing": {
+            "value": "not_applicable",
+            "evidence": [],
+            "explanation": "Threshold not applicable for AUC calculation"
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "supp.xls/Table S7/R1C1"
+            ],
+            "explanation": "Each patient has matched organoid and clinical data"
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "supp.xls/Table S7/R1C2"
+            ],
+            "explanation": "Organoids tested with the same FOLFOX regimen the patient received"
+          },
+          "n_units": {
+            "value": 13,
+            "evidence": [
+              "article:p31"
+            ],
+            "explanation": "13 FOLFOX patients included in the analysis"
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p31"
+            ],
+            "explanation": "Retrospective single cohort, no held-out training split"
+          }
+        },
+        "headline": {
+          "metric": "auc",
+          "reported": 0.85,
+          "reported_evidence": [
+            "article:p31"
+          ],
+          "threshold": null,
+          "op": null,
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "P3",
+              "score": {
+                "calc": "log10",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R2C4"
+                  }
+                ]
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R2C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P4",
+              "score": {
+                "calc": "log10",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R3C4"
+                  }
+                ]
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R3C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P5",
+              "score": {
+                "calc": "log10",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R4C4"
+                  }
+                ]
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R4C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P6",
+              "score": {
+                "calc": "log10",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R5C4"
+                  }
+                ]
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R5C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P9",
+              "score": {
+                "calc": "log10",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R6C4"
+                  }
+                ]
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R6C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P11",
+              "score": {
+                "calc": "log10",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R7C4"
+                  }
+                ]
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R7C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P12",
+              "score": {
+                "calc": "log10",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R8C4"
+                  }
+                ]
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R8C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P13",
+              "score": {
+                "calc": "log10",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R9C4"
+                  }
+                ]
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R9C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P14",
+              "score": {
+                "calc": "log10",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R10C4"
+                  }
+                ]
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R10C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P18",
+              "score": {
+                "calc": "log10",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R11C4"
+                  }
+                ]
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R11C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P19",
+              "score": {
+                "calc": "log10",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R12C4"
+                  }
+                ]
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R12C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P23",
+              "score": {
+                "calc": "log10",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R13C4"
+                  }
+                ]
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R13C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            },
+            {
+              "id": "P25",
+              "score": {
+                "calc": "log10",
+                "args": [
+                  {
+                    "ref": "supp.xls/Table S7/R14C4"
+                  }
+                ]
+              },
+              "truth": {
+                "ref": "supp.xls/Table S7/R14C3",
+                "map": {
+                  "SD/PR": 0,
+                  "PD": 1
+                }
+              }
+            }
+          ],
+          "blocked_reason": ""
+        },
+        "notes": [
+          "AUC calculated using log10(IC50) as reported in the article: 0.850",
+          "Positive class: PD (progressive disease), Negative class: SD/PR (stable/partial response)"
+        ]
+      }
+    }
+  }
+]

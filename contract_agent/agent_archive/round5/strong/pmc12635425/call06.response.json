@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_ryray6gac1wo3w4excpmusl1",
+        "type": "function",
+        "function": {
+          "name": "python",
+          "arguments": "{\"code\": \"for pg in range(18,24):\\n sh='page'+str(pg); o=tables['CTM2-15-e70534-s002.pdf'][sh]\\n print('\\\\n---',pg,'---')\\n for ri,row in enumerate(o.rows,1):\\n  print(ri, row)\\n\"}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "AUC values perhaps Table S5 pages 18-20?Inspect rows.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 125,
+    "prompt_tokens": 27675,
+    "total_tokens": 27800,
+    "prompt_tokens_details": {
+      "cached_tokens": 1848
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 20
+    }
+  }
+}

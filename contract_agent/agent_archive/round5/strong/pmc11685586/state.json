@@ -1,0 +1,2625 @@
+{
+  "turn": 2,
+  "tool_count": 0,
+  "tokens": 26195,
+  "done": true,
+  "stop_reason": "verified",
+  "checkpoints": {
+    "single_pass": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient_regimen",
+            "evidence": [
+              "article:p6",
+              "article.xml/Table 2/R1C5"
+            ],
+            "explanation": "The final analysis contained 19 anticancer drug test reports from 17 patients; each record is a patient-specific tested regimen."
+          },
+          "platform": {
+            "value": "spheroid",
+            "evidence": [
+              "article:p1",
+              "article:p26"
+            ],
+            "explanation": "Drug responses were measured in patient-derived tumor spheroids (PDTS) formed with adipose-derived dECM."
+          },
+          "readout": {
+            "value": "viability",
+            "evidence": [
+              "article.xml/Table 2/R1C6",
+              "41598_2024_83409_Fig4_HTML.jpg"
+            ],
+            "explanation": "The assay result was the percentage of viable tumor cells after drug exposure."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "41598_2024_83409_Fig4_HTML.jpg"
+            ],
+            "explanation": "Relative cell viability below 70% was interpreted as a positive drug effect."
+          },
+          "threshold_rule": {
+            "value": "fixed_numeric",
+            "evidence": [
+              "41598_2024_83409_Fig4_HTML.jpg"
+            ],
+            "explanation": "The response cutoff was fixed at 70% relative viability, with values below 70% classified as response."
+          },
+          "threshold_timing": {
+            "value": "not_reported",
+            "evidence": [
+              "article:p38",
+              "41598_2024_83409_Fig4_HTML.jpg"
+            ],
+            "explanation": "The source reports the 70% cutoff but does not state whether it was prespecified before outcome evaluation."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "article.xml/Table 2/R1C1",
+              "article.xml/Table 2/R1C7"
+            ],
+            "explanation": "Each drug-test report is linked in Table 2 to an individual patient identifier and that patient’s clinical outcome."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article.xml/Table 2/R1C5",
+              "article.xml/Table 2/R1C6",
+              "article:p37"
+            ],
+            "explanation": "The listed clinical treatment regimen was compared with the corresponding PDTS drug-test result."
+          },
+          "n_units": {
+            "value": 19,
+            "evidence": [
+              "article:p6"
+            ],
+            "explanation": "Seventeen patients contributed 19 anticancer drug test reports to the overall analysis."
+          },
+          "split": {
+            "value": "none",
+            "evidence": [
+              "article:p6",
+              "article:p38"
+            ],
+            "explanation": "No separate training cohort or cross-validation was used; the fixed assay rule was evaluated on all 19 reports."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.5789473684210527,
+          "reported_evidence": [
+            "article:p1",
+            "article:p6",
+            "article:p14"
+          ],
+          "threshold": 0.7,
+          "op": "<",
+          "score_direction": "lower",
+          "records": [
+            {
+              "id": "1: Osimertinib",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R2C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R2C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "2: Afatinib",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R3C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R3C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "3a: First line: Eribulin",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R4C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R4C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "3a-second: Second line: Vinorelbine",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R5C2",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R5C3",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "4: UFT capsules",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R6C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R6C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "5: Dabrafenib Mesylate + Trametinib Dimethyl Sulfoxide",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R7C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R7C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "6*: Eribulin",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R8C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R8C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "7: TS-1",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R9C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R9C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "8: Methotrexate + Epirubicin",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R10C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R10C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "9: DOCEtaxel + ramucirumab",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R11C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R11C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "10: Osimertinib",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R12C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R12C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "11*: Eribulin",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R13C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R13C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "12: Epirubicin + Methotrexate then Vincristine + Bleomycin then Cisplatin + Mitomycin C",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R14C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R14C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "13: Capecitabine + CyClophosphamide",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R15C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R15C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "14: Capecitabine + Vinorelbine",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R16C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R16C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "15: Gemcitabine + Pembrolizumab",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R17C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R17C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "16: Pembrolizumab + Carboplatin + Topotecan",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R18C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R18C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "17: Afatinib",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R19C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R19C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "18: Regorafenib",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R20C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R20C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            }
+          ],
+          "blocked_reason": null
+        },
+        "notes": [
+          "The article text rounds the overall accuracy to 57%; the exact row-level denominator gives 11/19 = 0.5789473684210527.",
+          "Clinical CR, PR, and SD were treated as benefit/truth-positive, while PD was truth-negative according to article:p37 and article:p38."
+        ]
+      },
+      "evaluation": {
+        "matched": false,
+        "metric": "accuracy",
+        "computed": null,
+        "reported": 0.5789473684210527,
+        "difference": null,
+        "n": 19,
+        "errors": [
+          "readout: missing evidence 41598_2024_83409_Fig4_HTML.jpg",
+          "direction: missing evidence 41598_2024_83409_Fig4_HTML.jpg",
+          "threshold_rule: missing evidence 41598_2024_83409_Fig4_HTML.jpg",
+          "threshold_timing: missing evidence 41598_2024_83409_Fig4_HTML.jpg"
+        ],
+        "rows": [
+          {
+            "id": "1: Osimertinib",
+            "score": 0.88,
+            "truth": 1
+          },
+          {
+            "id": "2: Afatinib",
+            "score": 0.293,
+            "truth": 1
+          },
+          {
+            "id": "3a: First line: Eribulin",
+            "score": 0.84,
+            "truth": 0
+          },
+          {
+            "id": "3a-second: Second line: Vinorelbine",
+            "score": 0.607,
+            "truth": 1
+          },
+          {
+            "id": "4: UFT capsules",
+            "score": 0.674,
+            "truth": 1
+          },
+          {
+            "id": "5: Dabrafenib Mesylate + Trametinib Dimethyl Sulfoxide",
+            "score": 0.904,
+            "truth": 1
+          },
+          {
+            "id": "6*: Eribulin",
+            "score": 0.757,
+            "truth": 0
+          },
+          {
+            "id": "7: TS-1",
+            "score": 0.795,
+            "truth": 0
+          },
+          {
+            "id": "8: Methotrexate + Epirubicin",
+            "score": 0.5670000000000001,
+            "truth": 1
+          },
+          {
+            "id": "9: DOCEtaxel + ramucirumab",
+            "score": 0.42700000000000005,
+            "truth": 0
+          },
+          {
+            "id": "10: Osimertinib",
+            "score": 0.7,
+            "truth": 1
+          },
+          {
+            "id": "11*: Eribulin",
+            "score": 0.782,
+            "truth": 0
+          },
+          {
+            "id": "12: Epirubicin + Methotrexate then Vincristine + Bleomycin then Cisplatin + Mitomycin C",
+            "score": 0.647,
+            "truth": 0
+          },
+          {
+            "id": "13: Capecitabine + CyClophosphamide",
+            "score": 0.6459999999999999,
+            "truth": 1
+          },
+          {
+            "id": "14: Capecitabine + Vinorelbine",
+            "score": 0.507,
+            "truth": 0
+          },
+          {
+            "id": "15: Gemcitabine + Pembrolizumab",
+            "score": 0.557,
+            "truth": 0
+          },
+          {
+            "id": "16: Pembrolizumab + Carboplatin + Topotecan",
+            "score": 0.598,
+            "truth": 0
+          },
+          {
+            "id": "17: Afatinib",
+            "score": 0.40399999999999997,
+            "truth": 1
+          },
+          {
+            "id": "18: Regorafenib",
+            "score": 0.8740000000000001,
+            "truth": 0
+          }
+        ],
+        "expected": {
+          "metric": "accuracy",
+          "value": 0.5789473684210527,
+          "n": 19
+        }
+      },
+      "calls": 1,
+      "tokens": 13285
+    },
+    "one_feedback": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient_regimen",
+            "evidence": [
+              "article:p6",
+              "article.xml/Table 2/R1C5"
+            ],
+            "explanation": "Seventeen patients contributed 19 anticancer drug test reports, so each evaluated unit is a patient plus the tested treatment regimen."
+          },
+          "platform": {
+            "value": "spheroid",
+            "evidence": [
+              "article:p1",
+              "article:p26"
+            ],
+            "explanation": "Drug testing was performed in patient-derived tumor spheroids."
+          },
+          "readout": {
+            "value": "viability",
+            "evidence": [
+              "article.xml/Table 2/R1C6"
+            ],
+            "explanation": "The assay reported the percentage of viable tumor cells after drug exposure."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p19",
+              "article:p20",
+              "article:p21",
+              "41598_2024_83409_MOESM1_ESM.docx:p15",
+              "41598_2024_83409_MOESM1_ESM.docx:p16"
+            ],
+            "explanation": "Lower relative cell viability indicated greater drug sensitivity; viability below 70% was described as a positive effect."
+          },
+          "threshold_rule": {
+            "value": "fixed_numeric",
+            "evidence": [
+              "article:p19",
+              "article:p20",
+              "article:p21",
+              "41598_2024_83409_MOESM1_ESM.docx:p15",
+              "41598_2024_83409_MOESM1_ESM.docx:p16"
+            ],
+            "explanation": "The assay used a fixed 70% relative-viability boundary, with values below 70% classified as response."
+          },
+          "threshold_timing": {
+            "value": "not_reported",
+            "evidence": [
+              "article:p38"
+            ],
+            "explanation": "The source defines response classifications but does not report whether the 70% cutoff was prespecified before clinical outcomes were evaluated."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "article.xml/Table 2/R1C1",
+              "article.xml/Table 2/R1C7"
+            ],
+            "explanation": "Each drug-test report is linked to an individual patient identifier and clinical outcome."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article.xml/Table 2/R1C5",
+              "article.xml/Table 2/R1C6",
+              "article:p37"
+            ],
+            "explanation": "Each clinical treatment regimen was compared with the corresponding PDTS drug-test result."
+          },
+          "n_units": {
+            "value": 19,
+            "evidence": [
+              "article:p6"
+            ],
+            "explanation": "The final overall analysis included 19 anticancer drug test reports."
+          },
+          "split": {
+            "value": "none",
+            "evidence": [
+              "article:p6",
+              "article:p38"
+            ],
+            "explanation": "No training cohort, held-out validation, or cross-validation procedure was reported."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.5789473684210527,
+          "reported_evidence": [
+            "article:p1",
+            "article:p6",
+            "article:p14"
+          ],
+          "threshold": 0.7,
+          "op": "<",
+          "score_direction": "lower",
+          "records": [
+            {
+              "id": "1: Osimertinib",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R2C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R2C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "2: Afatinib",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R3C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R3C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "3a: First line: Eribulin",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R4C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R4C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "3a-second-line: Second line: Vinorelbine",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R5C2",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R5C3",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "4: UFT capsules",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R6C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R6C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "5: Dabrafenib Mesylate + Trametinib Dimethyl Sulfoxide",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R7C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R7C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "6*: Eribulin",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R8C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R8C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "7: TS-1",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R9C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R9C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "8: Methotrexate + Epirubicin",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R10C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R10C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "9: DOCEtaxel + ramucirumab",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R11C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R11C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "10: Osimertinib",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R12C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R12C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "11*: Eribulin",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R13C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R13C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "12: Epirubicin + Methotrexate then Vincristine + Bleomycin then Cisplatin + Mitomycin C",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R14C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R14C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "13: Capecitabine + CyClophosphamide",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R15C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R15C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "14: Capecitabine + Vinorelbine",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R16C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R16C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "15: Gemcitabine + Pembrolizumab",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R17C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R17C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "16: Pembrolizumab + Carboplatin + Topotecan",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R18C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R18C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "17: Afatinib",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R19C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R19C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "18: Regorafenib",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R20C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R20C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            }
+          ],
+          "blocked_reason": null
+        },
+        "notes": [
+          "The reported rounded headline was 57%; applying the row-level comparison to all 19 records gives 11/19 = 0.5789473684210527.",
+          "CR, PR, and SD were clinical benefit, whereas PD was no benefit, as defined in the article."
+        ]
+      },
+      "evaluation": {
+        "matched": true,
+        "metric": "accuracy",
+        "computed": 0.5789473684210527,
+        "reported": 0.5789473684210527,
+        "difference": 0.0,
+        "n": 19,
+        "errors": [],
+        "rows": [
+          {
+            "id": "1: Osimertinib",
+            "score": 0.88,
+            "truth": 1,
+            "prediction": 0
+          },
+          {
+            "id": "2: Afatinib",
+            "score": 0.293,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "3a: First line: Eribulin",
+            "score": 0.84,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "3a-second-line: Second line: Vinorelbine",
+            "score": 0.607,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "4: UFT capsules",
+            "score": 0.674,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "5: Dabrafenib Mesylate + Trametinib Dimethyl Sulfoxide",
+            "score": 0.904,
+            "truth": 1,
+            "prediction": 0
+          },
+          {
+            "id": "6*: Eribulin",
+            "score": 0.757,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "7: TS-1",
+            "score": 0.795,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "8: Methotrexate + Epirubicin",
+            "score": 0.5670000000000001,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "9: DOCEtaxel + ramucirumab",
+            "score": 0.42700000000000005,
+            "truth": 0,
+            "prediction": 1
+          },
+          {
+            "id": "10: Osimertinib",
+            "score": 0.7,
+            "truth": 1,
+            "prediction": 0
+          },
+          {
+            "id": "11*: Eribulin",
+            "score": 0.782,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "12: Epirubicin + Methotrexate then Vincristine + Bleomycin then Cisplatin + Mitomycin C",
+            "score": 0.647,
+            "truth": 0,
+            "prediction": 1
+          },
+          {
+            "id": "13: Capecitabine + CyClophosphamide",
+            "score": 0.6459999999999999,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "14: Capecitabine + Vinorelbine",
+            "score": 0.507,
+            "truth": 0,
+            "prediction": 1
+          },
+          {
+            "id": "15: Gemcitabine + Pembrolizumab",
+            "score": 0.557,
+            "truth": 0,
+            "prediction": 1
+          },
+          {
+            "id": "16: Pembrolizumab + Carboplatin + Topotecan",
+            "score": 0.598,
+            "truth": 0,
+            "prediction": 1
+          },
+          {
+            "id": "17: Afatinib",
+            "score": 0.40399999999999997,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "18: Regorafenib",
+            "score": 0.8740000000000001,
+            "truth": 0,
+            "prediction": 0
+          }
+        ],
+        "expected": {
+          "metric": "accuracy",
+          "value": 0.5789473684210527,
+          "n": 19
+        }
+      },
+      "calls": 2,
+      "tokens": 26195
+    },
+    "tool_loop": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient_regimen",
+            "evidence": [
+              "article:p6",
+              "article.xml/Table 2/R1C5"
+            ],
+            "explanation": "Seventeen patients contributed 19 anticancer drug test reports, so each evaluated unit is a patient plus the tested treatment regimen."
+          },
+          "platform": {
+            "value": "spheroid",
+            "evidence": [
+              "article:p1",
+              "article:p26"
+            ],
+            "explanation": "Drug testing was performed in patient-derived tumor spheroids."
+          },
+          "readout": {
+            "value": "viability",
+            "evidence": [
+              "article.xml/Table 2/R1C6"
+            ],
+            "explanation": "The assay reported the percentage of viable tumor cells after drug exposure."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p19",
+              "article:p20",
+              "article:p21",
+              "41598_2024_83409_MOESM1_ESM.docx:p15",
+              "41598_2024_83409_MOESM1_ESM.docx:p16"
+            ],
+            "explanation": "Lower relative cell viability indicated greater drug sensitivity; viability below 70% was described as a positive effect."
+          },
+          "threshold_rule": {
+            "value": "fixed_numeric",
+            "evidence": [
+              "article:p19",
+              "article:p20",
+              "article:p21",
+              "41598_2024_83409_MOESM1_ESM.docx:p15",
+              "41598_2024_83409_MOESM1_ESM.docx:p16"
+            ],
+            "explanation": "The assay used a fixed 70% relative-viability boundary, with values below 70% classified as response."
+          },
+          "threshold_timing": {
+            "value": "not_reported",
+            "evidence": [
+              "article:p38"
+            ],
+            "explanation": "The source defines response classifications but does not report whether the 70% cutoff was prespecified before clinical outcomes were evaluated."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "article.xml/Table 2/R1C1",
+              "article.xml/Table 2/R1C7"
+            ],
+            "explanation": "Each drug-test report is linked to an individual patient identifier and clinical outcome."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article.xml/Table 2/R1C5",
+              "article.xml/Table 2/R1C6",
+              "article:p37"
+            ],
+            "explanation": "Each clinical treatment regimen was compared with the corresponding PDTS drug-test result."
+          },
+          "n_units": {
+            "value": 19,
+            "evidence": [
+              "article:p6"
+            ],
+            "explanation": "The final overall analysis included 19 anticancer drug test reports."
+          },
+          "split": {
+            "value": "none",
+            "evidence": [
+              "article:p6",
+              "article:p38"
+            ],
+            "explanation": "No training cohort, held-out validation, or cross-validation procedure was reported."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.5789473684210527,
+          "reported_evidence": [
+            "article:p1",
+            "article:p6",
+            "article:p14"
+          ],
+          "threshold": 0.7,
+          "op": "<",
+          "score_direction": "lower",
+          "records": [
+            {
+              "id": "1: Osimertinib",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R2C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R2C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "2: Afatinib",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R3C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R3C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "3a: First line: Eribulin",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R4C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R4C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "3a-second-line: Second line: Vinorelbine",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R5C2",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R5C3",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "4: UFT capsules",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R6C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R6C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "5: Dabrafenib Mesylate + Trametinib Dimethyl Sulfoxide",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R7C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R7C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "6*: Eribulin",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R8C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R8C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "7: TS-1",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R9C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R9C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "8: Methotrexate + Epirubicin",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R10C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R10C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "9: DOCEtaxel + ramucirumab",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R11C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R11C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "10: Osimertinib",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R12C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R12C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "11*: Eribulin",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R13C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R13C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "12: Epirubicin + Methotrexate then Vincristine + Bleomycin then Cisplatin + Mitomycin C",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R14C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R14C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "13: Capecitabine + CyClophosphamide",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R15C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R15C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "14: Capecitabine + Vinorelbine",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R16C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R16C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "15: Gemcitabine + Pembrolizumab",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R17C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R17C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "16: Pembrolizumab + Carboplatin + Topotecan",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R18C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R18C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "17: Afatinib",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R19C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R19C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            },
+            {
+              "id": "18: Regorafenib",
+              "score": {
+                "calc": "divide",
+                "args": [
+                  {
+                    "ref": "article.xml/Table 2/R20C6",
+                    "regex": "(\\d+(?:\\.\\d+)?)%"
+                  },
+                  100
+                ]
+              },
+              "truth": {
+                "ref": "article.xml/Table 2/R20C7",
+                "map": {
+                  "CR": 1,
+                  "PR": 1,
+                  "SD": 1,
+                  "PD": 0
+                }
+              }
+            }
+          ],
+          "blocked_reason": null
+        },
+        "notes": [
+          "The reported rounded headline was 57%; applying the row-level comparison to all 19 records gives 11/19 = 0.5789473684210527.",
+          "CR, PR, and SD were clinical benefit, whereas PD was no benefit, as defined in the article."
+        ]
+      },
+      "evaluation": {
+        "matched": true,
+        "metric": "accuracy",
+        "computed": 0.5789473684210527,
+        "reported": 0.5789473684210527,
+        "difference": 0.0,
+        "n": 19,
+        "errors": [],
+        "rows": [
+          {
+            "id": "1: Osimertinib",
+            "score": 0.88,
+            "truth": 1,
+            "prediction": 0
+          },
+          {
+            "id": "2: Afatinib",
+            "score": 0.293,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "3a: First line: Eribulin",
+            "score": 0.84,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "3a-second-line: Second line: Vinorelbine",
+            "score": 0.607,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "4: UFT capsules",
+            "score": 0.674,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "5: Dabrafenib Mesylate + Trametinib Dimethyl Sulfoxide",
+            "score": 0.904,
+            "truth": 1,
+            "prediction": 0
+          },
+          {
+            "id": "6*: Eribulin",
+            "score": 0.757,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "7: TS-1",
+            "score": 0.795,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "8: Methotrexate + Epirubicin",
+            "score": 0.5670000000000001,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "9: DOCEtaxel + ramucirumab",
+            "score": 0.42700000000000005,
+            "truth": 0,
+            "prediction": 1
+          },
+          {
+            "id": "10: Osimertinib",
+            "score": 0.7,
+            "truth": 1,
+            "prediction": 0
+          },
+          {
+            "id": "11*: Eribulin",
+            "score": 0.782,
+            "truth": 0,
+            "prediction": 0
+          },
+          {
+            "id": "12: Epirubicin + Methotrexate then Vincristine + Bleomycin then Cisplatin + Mitomycin C",
+            "score": 0.647,
+            "truth": 0,
+            "prediction": 1
+          },
+          {
+            "id": "13: Capecitabine + CyClophosphamide",
+            "score": 0.6459999999999999,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "14: Capecitabine + Vinorelbine",
+            "score": 0.507,
+            "truth": 0,
+            "prediction": 1
+          },
+          {
+            "id": "15: Gemcitabine + Pembrolizumab",
+            "score": 0.557,
+            "truth": 0,
+            "prediction": 1
+          },
+          {
+            "id": "16: Pembrolizumab + Carboplatin + Topotecan",
+            "score": 0.598,
+            "truth": 0,
+            "prediction": 1
+          },
+          {
+            "id": "17: Afatinib",
+            "score": 0.40399999999999997,
+            "truth": 1,
+            "prediction": 1
+          },
+          {
+            "id": "18: Regorafenib",
+            "score": 0.8740000000000001,
+            "truth": 0,
+            "prediction": 0
+          }
+        ],
+        "expected": {
+          "metric": "accuracy",
+          "value": 0.5789473684210527,
+          "n": 19
+        }
+      },
+      "calls": 2,
+      "tokens": 26195
+    }
+  },
+  "last_contract": {
+    "status": "computed",
+    "fields": {
+      "unit": {
+        "value": "patient_regimen",
+        "evidence": [
+          "article:p6",
+          "article.xml/Table 2/R1C5"
+        ],
+        "explanation": "Seventeen patients contributed 19 anticancer drug test reports, so each evaluated unit is a patient plus the tested treatment regimen."
+      },
+      "platform": {
+        "value": "spheroid",
+        "evidence": [
+          "article:p1",
+          "article:p26"
+        ],
+        "explanation": "Drug testing was performed in patient-derived tumor spheroids."
+      },
+      "readout": {
+        "value": "viability",
+        "evidence": [
+          "article.xml/Table 2/R1C6"
+        ],
+        "explanation": "The assay reported the percentage of viable tumor cells after drug exposure."
+      },
+      "direction": {
+        "value": "lower_sensitive",
+        "evidence": [
+          "article:p19",
+          "article:p20",
+          "article:p21",
+          "41598_2024_83409_MOESM1_ESM.docx:p15",
+          "41598_2024_83409_MOESM1_ESM.docx:p16"
+        ],
+        "explanation": "Lower relative cell viability indicated greater drug sensitivity; viability below 70% was described as a positive effect."
+      },
+      "threshold_rule": {
+        "value": "fixed_numeric",
+        "evidence": [
+          "article:p19",
+          "article:p20",
+          "article:p21",
+          "41598_2024_83409_MOESM1_ESM.docx:p15",
+          "41598_2024_83409_MOESM1_ESM.docx:p16"
+        ],
+        "explanation": "The assay used a fixed 70% relative-viability boundary, with values below 70% classified as response."
+      },
+      "threshold_timing": {
+        "value": "not_reported",
+        "evidence": [
+          "article:p38"
+        ],
+        "explanation": "The source defines response classifications but does not report whether the 70% cutoff was prespecified before clinical outcomes were evaluated."
+      },
+      "patient_mapping": {
+        "value": "individual_available",
+        "evidence": [
+          "article.xml/Table 2/R1C1",
+          "article.xml/Table 2/R1C7"
+        ],
+        "explanation": "Each drug-test report is linked to an individual patient identifier and clinical outcome."
+      },
+      "regimen_match": {
+        "value": "matched",
+        "evidence": [
+          "article.xml/Table 2/R1C5",
+          "article.xml/Table 2/R1C6",
+          "article:p37"
+        ],
+        "explanation": "Each clinical treatment regimen was compared with the corresponding PDTS drug-test result."
+      },
+      "n_units": {
+        "value": 19,
+        "evidence": [
+          "article:p6"
+        ],
+        "explanation": "The final overall analysis included 19 anticancer drug test reports."
+      },
+      "split": {
+        "value": "none",
+        "evidence": [
+          "article:p6",
+          "article:p38"
+        ],
+        "explanation": "No training cohort, held-out validation, or cross-validation procedure was reported."
+      }
+    },
+    "headline": {
+      "metric": "accuracy",
+      "reported": 0.5789473684210527,
+      "reported_evidence": [
+        "article:p1",
+        "article:p6",
+        "article:p14"
+      ],
+      "threshold": 0.7,
+      "op": "<",
+      "score_direction": "lower",
+      "records": [
+        {
+          "id": "1: Osimertinib",
+          "score": {
+            "calc": "divide",
+            "args": [
+              {
+                "ref": "article.xml/Table 2/R2C6",
+                "regex": "(\\d+(?:\\.\\d+)?)%"
+              },
+              100
+            ]
+          },
+          "truth": {
+            "ref": "article.xml/Table 2/R2C7",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "2: Afatinib",
+          "score": {
+            "calc": "divide",
+            "args": [
+              {
+                "ref": "article.xml/Table 2/R3C6",
+                "regex": "(\\d+(?:\\.\\d+)?)%"
+              },
+              100
+            ]
+          },
+          "truth": {
+            "ref": "article.xml/Table 2/R3C7",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "3a: First line: Eribulin",
+          "score": {
+            "calc": "divide",
+            "args": [
+              {
+                "ref": "article.xml/Table 2/R4C6",
+                "regex": "(\\d+(?:\\.\\d+)?)%"
+              },
+              100
+            ]
+          },
+          "truth": {
+            "ref": "article.xml/Table 2/R4C7",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "3a-second-line: Second line: Vinorelbine",
+          "score": {
+            "calc": "divide",
+            "args": [
+              {
+                "ref": "article.xml/Table 2/R5C2",
+                "regex": "(\\d+(?:\\.\\d+)?)%"
+              },
+              100
+            ]
+          },
+          "truth": {
+            "ref": "article.xml/Table 2/R5C3",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "4: UFT capsules",
+          "score": {
+            "calc": "divide",
+            "args": [
+              {
+                "ref": "article.xml/Table 2/R6C6",
+                "regex": "(\\d+(?:\\.\\d+)?)%"
+              },
+              100
+            ]
+          },
+          "truth": {
+            "ref": "article.xml/Table 2/R6C7",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "5: Dabrafenib Mesylate + Trametinib Dimethyl Sulfoxide",
+          "score": {
+            "calc": "divide",
+            "args": [
+              {
+                "ref": "article.xml/Table 2/R7C6",
+                "regex": "(\\d+(?:\\.\\d+)?)%"
+              },
+              100
+            ]
+          },
+          "truth": {
+            "ref": "article.xml/Table 2/R7C7",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "6*: Eribulin",
+          "score": {
+            "calc": "divide",
+            "args": [
+              {
+                "ref": "article.xml/Table 2/R8C6",
+                "regex": "(\\d+(?:\\.\\d+)?)%"
+              },
+              100
+            ]
+          },
+          "truth": {
+            "ref": "article.xml/Table 2/R8C7",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "7: TS-1",
+          "score": {
+            "calc": "divide",
+            "args": [
+              {
+                "ref": "article.xml/Table 2/R9C6",
+                "regex": "(\\d+(?:\\.\\d+)?)%"
+              },
+              100
+            ]
+          },
+          "truth": {
+            "ref": "article.xml/Table 2/R9C7",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "8: Methotrexate + Epirubicin",
+          "score": {
+            "calc": "divide",
+            "args": [
+              {
+                "ref": "article.xml/Table 2/R10C6",
+                "regex": "(\\d+(?:\\.\\d+)?)%"
+              },
+              100
+            ]
+          },
+          "truth": {
+            "ref": "article.xml/Table 2/R10C7",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "9: DOCEtaxel + ramucirumab",
+          "score": {
+            "calc": "divide",
+            "args": [
+              {
+                "ref": "article.xml/Table 2/R11C6",
+                "regex": "(\\d+(?:\\.\\d+)?)%"
+              },
+              100
+            ]
+          },
+          "truth": {
+            "ref": "article.xml/Table 2/R11C7",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "10: Osimertinib",
+          "score": {
+            "calc": "divide",
+            "args": [
+              {
+                "ref": "article.xml/Table 2/R12C6",
+                "regex": "(\\d+(?:\\.\\d+)?)%"
+              },
+              100
+            ]
+          },
+          "truth": {
+            "ref": "article.xml/Table 2/R12C7",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "11*: Eribulin",
+          "score": {
+            "calc": "divide",
+            "args": [
+              {
+                "ref": "article.xml/Table 2/R13C6",
+                "regex": "(\\d+(?:\\.\\d+)?)%"
+              },
+              100
+            ]
+          },
+          "truth": {
+            "ref": "article.xml/Table 2/R13C7",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "12: Epirubicin + Methotrexate then Vincristine + Bleomycin then Cisplatin + Mitomycin C",
+          "score": {
+            "calc": "divide",
+            "args": [
+              {
+                "ref": "article.xml/Table 2/R14C6",
+                "regex": "(\\d+(?:\\.\\d+)?)%"
+              },
+              100
+            ]
+          },
+          "truth": {
+            "ref": "article.xml/Table 2/R14C7",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "13: Capecitabine + CyClophosphamide",
+          "score": {
+            "calc": "divide",
+            "args": [
+              {
+                "ref": "article.xml/Table 2/R15C6",
+                "regex": "(\\d+(?:\\.\\d+)?)%"
+              },
+              100
+            ]
+          },
+          "truth": {
+            "ref": "article.xml/Table 2/R15C7",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "14: Capecitabine + Vinorelbine",
+          "score": {
+            "calc": "divide",
+            "args": [
+              {
+                "ref": "article.xml/Table 2/R16C6",
+                "regex": "(\\d+(?:\\.\\d+)?)%"
+              },
+              100
+            ]
+          },
+          "truth": {
+            "ref": "article.xml/Table 2/R16C7",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "15: Gemcitabine + Pembrolizumab",
+          "score": {
+            "calc": "divide",
+            "args": [
+              {
+                "ref": "article.xml/Table 2/R17C6",
+                "regex": "(\\d+(?:\\.\\d+)?)%"
+              },
+              100
+            ]
+          },
+          "truth": {
+            "ref": "article.xml/Table 2/R17C7",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "16: Pembrolizumab + Carboplatin + Topotecan",
+          "score": {
+            "calc": "divide",
+            "args": [
+              {
+                "ref": "article.xml/Table 2/R18C6",
+                "regex": "(\\d+(?:\\.\\d+)?)%"
+              },
+              100
+            ]
+          },
+          "truth": {
+            "ref": "article.xml/Table 2/R18C7",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "17: Afatinib",
+          "score": {
+            "calc": "divide",
+            "args": [
+              {
+                "ref": "article.xml/Table 2/R19C6",
+                "regex": "(\\d+(?:\\.\\d+)?)%"
+              },
+              100
+            ]
+          },
+          "truth": {
+            "ref": "article.xml/Table 2/R19C7",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        },
+        {
+          "id": "18: Regorafenib",
+          "score": {
+            "calc": "divide",
+            "args": [
+              {
+                "ref": "article.xml/Table 2/R20C6",
+                "regex": "(\\d+(?:\\.\\d+)?)%"
+              },
+              100
+            ]
+          },
+          "truth": {
+            "ref": "article.xml/Table 2/R20C7",
+            "map": {
+              "CR": 1,
+              "PR": 1,
+              "SD": 1,
+              "PD": 0
+            }
+          }
+        }
+      ],
+      "blocked_reason": null
+    },
+    "notes": [
+      "The reported rounded headline was 57%; applying the row-level comparison to all 19 records gives 11/19 = 0.5789473684210527.",
+      "CR, PR, and SD were clinical benefit, whereas PD was no benefit, as defined in the article."
+    ]
+  },
+  "last_evaluation": {
+    "matched": true,
+    "metric": "accuracy",
+    "computed": 0.5789473684210527,
+    "reported": 0.5789473684210527,
+    "difference": 0.0,
+    "n": 19,
+    "errors": [],
+    "rows": [
+      {
+        "id": "1: Osimertinib",
+        "score": 0.88,
+        "truth": 1,
+        "prediction": 0
+      },
+      {
+        "id": "2: Afatinib",
+        "score": 0.293,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "3a: First line: Eribulin",
+        "score": 0.84,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "3a-second-line: Second line: Vinorelbine",
+        "score": 0.607,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "4: UFT capsules",
+        "score": 0.674,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "5: Dabrafenib Mesylate + Trametinib Dimethyl Sulfoxide",
+        "score": 0.904,
+        "truth": 1,
+        "prediction": 0
+      },
+      {
+        "id": "6*: Eribulin",
+        "score": 0.757,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "7: TS-1",
+        "score": 0.795,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "8: Methotrexate + Epirubicin",
+        "score": 0.5670000000000001,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "9: DOCEtaxel + ramucirumab",
+        "score": 0.42700000000000005,
+        "truth": 0,
+        "prediction": 1
+      },
+      {
+        "id": "10: Osimertinib",
+        "score": 0.7,
+        "truth": 1,
+        "prediction": 0
+      },
+      {
+        "id": "11*: Eribulin",
+        "score": 0.782,
+        "truth": 0,
+        "prediction": 0
+      },
+      {
+        "id": "12: Epirubicin + Methotrexate then Vincristine + Bleomycin then Cisplatin + Mitomycin C",
+        "score": 0.647,
+        "truth": 0,
+        "prediction": 1
+      },
+      {
+        "id": "13: Capecitabine + CyClophosphamide",
+        "score": 0.6459999999999999,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "14: Capecitabine + Vinorelbine",
+        "score": 0.507,
+        "truth": 0,
+        "prediction": 1
+      },
+      {
+        "id": "15: Gemcitabine + Pembrolizumab",
+        "score": 0.557,
+        "truth": 0,
+        "prediction": 1
+      },
+      {
+        "id": "16: Pembrolizumab + Carboplatin + Topotecan",
+        "score": 0.598,
+        "truth": 0,
+        "prediction": 1
+      },
+      {
+        "id": "17: Afatinib",
+        "score": 0.40399999999999997,
+        "truth": 1,
+        "prediction": 1
+      },
+      {
+        "id": "18: Regorafenib",
+        "score": 0.8740000000000001,
+        "truth": 0,
+        "prediction": 0
+      }
+    ],
+    "expected": {
+      "metric": "accuracy",
+      "value": 0.5789473684210527,
+      "n": 19
+    }
+  }
+}

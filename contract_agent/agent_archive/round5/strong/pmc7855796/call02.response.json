@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_tgjqwgbmzrhvr1hgem7o5ri9",
+        "type": "function",
+        "function": {
+          "name": "python",
+          "arguments": "{\"code\": \"fn='NIHMS1625583-supplement-1625583_Supp_DataSet1.xlsx'; sh='Supplementary Table 3'; rows=get_rows(fn,sh)\\nfor i,r in enumerate(rows,1): print(i,repr(r))\"}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "We need need use tools now full loop. Inspect table, use Python tool.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 114,
+    "prompt_tokens": 24795,
+    "total_tokens": 24909,
+    "prompt_tokens_details": {
+      "cached_tokens": 2360
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 21
+    }
+  }
+}

@@ -1,0 +1,20 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "{\"columns\":[\"\",\"\",\"\"],\"legend\":{\"blue\":\"unlabeled blue fill\"},\"rows\":[[\"\",\"10\",\"\"],[\"\",\"FFX\",\"\"],[\"blue\",\"81.2\",\"blue\"],[\"blue\",\"SD\",\"blue\"],[\"\",\"FFX\",\"\"],[\"\",\"1\",\"\"]],\"uncertain\":[[4,2]],\"notes\":\"Centered text on a white background; two horizontal blue bands are flanked by cropped blue side cells. The second blue-band label is blurred and may read 'SD' or '80'.\"}"
+  },
+  "reasoning_content": "We need need transcribe visible. \n\nI'm transcribing the visible content of the low-resolution image with severe blur, and will mark any uncertain values. I've inferred the content of the 5 labeled rows and the possible number columns, and confirmed the \"SD\" blurred text is most likely the number 80.\n\nI’ve further deduced the table’s possible structure, and speculated that FFX may stand for Final Fantasy X, 10 and 1 could be page numbers, 81.2 and SD may represent mean and standard deviation respectively.\n\nFurther analysis confirms the structure may be a repeated label table with two rows, no column titles, blue blocks as unlabeled horizontal bars and no printed legend. I still hold that the blurry \"SD\" text is most likely the number 80, and need to confirm the second uncertain text.\n\nI’ve finalized the transcription rule: \"SD\" will be transcribed as 80 with uncertainty marked, and 81.2 is clearly legible. I’ve confirmed the table uses 3 empty columns, with each non-blue row containing an empty left and right cell, and blue rows containing empty left and right cells with the middle cell holding the corresponding value.\n\nI’ve finalized the complete table structure and corresponding values according to the confirmed rules. I found the original image has cropped edges, so the blue cells on the sides may contain offscreen content. I will output valid raw JSON without any markdown formatting.\n",
+  "finish_reason": "stop",
+  "usage": {
+    "completion_tokens": 1277,
+    "prompt_tokens": 1601,
+    "total_tokens": 2878,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 1163
+    }
+  }
+}

@@ -1,0 +1,9 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "# Check mmc4.xlsx (Table S4) more carefully - it has processed drug sensitivity data\n# Also check supp.xlsx\nfor fname in [\"mmc4.xlsx\", \"supp.xlsx\"]:\n    if fname in tables:\n        for sname, t in tables[fname].items():\n            print(f\"\\n{fname}/{sname}: {t['nrows']} rows, {t['ncols']} cols\")\n            if t[\"rows\"]:\n                # Print header\n                print(f\"Header: {t['rows'][0]}\")\n                # Print first few rows\n                for i in range(1, min(6, t[\"nrows\"])):\n                    print(f\"Row {i}: {t['rows'][i][:8]}\")"
+    },
+    "output_sha256": "f473b8f7c30cb3439546b12da878da843404018878557758fa42eafc21502a87"
+  }
+]

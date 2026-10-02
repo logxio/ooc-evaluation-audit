@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_qt0730k3k0l0i39jzcz1x8tr",
+        "type": "function",
+        "function": {
+          "name": "python",
+          "arguments": "{\"code\": \"for fn in ['supp.xlsx','41467_2021_22676_MOESM5_ESM.xlsx']:\\n    print('\\\\nFILE',fn)\\n    rows=get_rows(fn,'Sheet1')\\n    for i,row in enumerate(rows,1):\\n        print(i, row)\\n    print('STYLES')\\n    for ref,st in sorted(styles.items()):\\n        if fn in ref:\\n            print(ref,st)\\n\"}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "Need inspect. Use python tool.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 154,
+    "prompt_tokens": 25074,
+    "total_tokens": 25228,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 14
+    }
+  }
+}

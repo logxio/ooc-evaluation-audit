@@ -1,0 +1,17 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "import statistics\nrows = get_rows('41467_2021_22676_MOESM9_ESM.xlsx','Drug responses of LCOs')\ndef trip(hdr_idx, row_idx, col):\n    v=[rows[row_idx][col],rows[row_idx][col+1],rows[row_idx][col+2]]\n    return statistics.mean([x for x in v if x is not None]), v\n# Fig5a Gef (header row1): LC96 c1, LC100 c4, LC101 c7, LC124 c10, LC126 c13, LC127 c16, LC131 c19, LC133 c22, LC137 c25\nfor name,c in [('LC96',1),('LC101',7),('LC127',16),('LC131',19),('LC133',22),('LC137',25)]:\n    print('Gef',name,'@156.25',trip(1,10,c))\n# Fig6a Pem (hdr48): LC96 c1, LC127 c16, LC137 c37\nfor name,c in [('LC96',1),('LC127',16),('LC137',37)]:\n    print('Pem',name,'@234.375',trip(48,57,c))\n# Fig5d Afa (hdr25): LC132 c1\nprint('Afa LC132 @156.25',trip(25,32,1))\n# S11c (hdr143): CRC1 Oxa c1\nprint('Oxa CRC1 @100',trip(143,152,1))\n# S11b Gem (hdr119): LC97 c1, LC134 c7\nprint('Gem LC97 @156.25',trip(119,128,1))\nprint('Gem LC134 @156.25',trip(119,128,7))\n"
+    },
+    "output": {
+      "returncode": 0,
+      "stdout": "Gef LC96 @156.25 (0.9747852003333334, [1.312390691, 0.740711471, 0.871253439])\nGef LC101 @156.25 (0.204301, [0.181455, 0.211448, 0.22])\nGef LC127 @156.25 (0.7077113333333334, [0.65811, 0.674136, 0.790888])\nGef LC131 @156.25 (0.04474836433333333, [0.058298751, 0.03353379, 0.042412552])\nGef LC133 @156.25 (0.24108759433333332, [0.233532636, 0.269730147, 0.22])\nGef LC137 @156.25 (0.5067010000000001, [0.510449, 0.505627, 0.504027])\nPem LC96 @234.375 (0.6150024566666666, [0.611901457, 0.556507635, 0.676598278])\nPem LC127 @234.375 (1.0097406666666666, [0.92, 0.978216, 1.131006])\nPem LC137 @234.375 (0.752399, [0.692272, 0.743457, 0.821468])\nAfa LC132 @156.25 (0.6248843333333333, [0.606131, 0.694522, 0.574])\nOxa CRC1 @100 (0.6671713333333333, [0.768997, 0.654443, 0.578074])\nGem LC97 @156.25 (1.0805806003333334, [1.166151058, 1.100324576, 0.975266167])\nGem LC134 @156.25 (0.26297432033333334, [0.219105619, 0.15, 0.419817342])\n",
+      "stderr": "",
+      "seconds": 0.6146623340027872,
+      "peak_rss_bytes": 26640384,
+      "limit_error": null,
+      "code_sha256": "957359375eba150ba78ac56b497a4c886a282e3921b92ca472a16f21f62668af"
+    }
+  }
+]

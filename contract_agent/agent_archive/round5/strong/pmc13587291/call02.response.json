@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_jpsa9o6csskeha53jegebu04",
+        "type": "function",
+        "function": {
+          "name": "python",
+          "arguments": "{\"code\": \"pdf='13048_2026_2178_MOESM1_ESM.pdf'\\nfor page in ['page3','page4','page5']:\\n print('\\\\n###',page)\\n for i,row in enumerate(tables[pdf][page]['rows'],1):\\n  print(i, [(c.get('x0'),c.get('value')) for c in row])\"}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "We need inspect actual rows. Run Python tool to print rows for cell analysis.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 141,
+    "prompt_tokens": 25278,
+    "total_tokens": 25419,
+    "prompt_tokens_details": {
+      "cached_tokens": 2360
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 23
+    }
+  }
+}

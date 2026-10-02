@@ -1,0 +1,637 @@
+[
+  {
+    "name": "finish",
+    "arguments": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p2",
+              "article:p9"
+            ],
+            "explanation": "Each validation record is one patient represented by one PDO line; the independent validation cohort contained 13 patients."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p8",
+              "article:p14"
+            ],
+            "explanation": "Drug response was measured in patient-derived 3D organoid cultures."
+          },
+          "readout": {
+            "value": "auc",
+            "evidence": [
+              "article:p15",
+              "article:p17"
+            ],
+            "explanation": "The predictor was AUCrel from the FLOT dose-response curve; Fig. 2I shows the per-PDO summary values and classifications."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p16",
+              "article:p17"
+            ],
+            "explanation": "Responders had lower AUCrel values; AUCrel at or below 0.559 classified a PDO/patient as a responder."
+          },
+          "threshold_rule": {
+            "value": "fixed_numeric",
+            "evidence": [
+              "article:p17",
+              "article:p15"
+            ],
+            "explanation": "A fixed AUCthreshold of 0.559 was calculated from the exploratory cohort and applied unchanged in validation."
+          },
+          "threshold_timing": {
+            "value": "independent_reference",
+            "evidence": [
+              "article:p9",
+              "article:p17",
+              "article:p18"
+            ],
+            "explanation": "The threshold was established in the first 13 exploratory PDOs and evaluated in the following 13 independent validation PDOs."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R17C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R29C2",
+              "vision/ca4ecbdf3542/R1C1",
+              "vision/ca4ecbdf3542/R13C1"
+            ],
+            "explanation": "Fig. 2I identifies each validation PDO and Supplementary Table 2 maps those PDO IDs to individual patients and Becker regression grades."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p9",
+              "article:p14",
+              "article:p18"
+            ],
+            "explanation": "The in vitro FLOT combination assay was compared with pathological response after clinical neoadjuvant FLOT."
+          },
+          "n_units": {
+            "value": 13,
+            "evidence": [
+              "article:p18",
+              "article:p2",
+              "vision/ca4ecbdf3542/R1C1",
+              "vision/ca4ecbdf3542/R13C1"
+            ],
+            "explanation": "There were 13 independently validated patients/PDO lines."
+          },
+          "split": {
+            "value": "independent_test",
+            "evidence": [
+              "article:p9",
+              "article:p18"
+            ],
+            "explanation": "The 12/13 accuracy was obtained in the independent validation cohort after threshold discovery in a separate exploratory cohort."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.9230769230769231,
+          "reported_evidence": [
+            "article:p18",
+            "article:p3",
+            "vision/ca4ecbdf3542/R1C6",
+            "vision/ca4ecbdf3542/R13C6"
+          ],
+          "threshold": 0.559,
+          "op": "<=",
+          "score_direction": "lower",
+          "records": [
+            {
+              "id": "OO80",
+              "score": {
+                "ref": "vision/ca4ecbdf3542/R1C3"
+              },
+              "truth": {
+                "ref": "vision/ca4ecbdf3542/R1C5",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "OO87",
+              "score": {
+                "ref": "vision/ca4ecbdf3542/R2C3"
+              },
+              "truth": {
+                "ref": "vision/ca4ecbdf3542/R2C5",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "OO88",
+              "score": {
+                "ref": "vision/ca4ecbdf3542/R3C3"
+              },
+              "truth": {
+                "ref": "vision/ca4ecbdf3542/R3C5",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "OO90",
+              "score": {
+                "ref": "vision/ca4ecbdf3542/R4C3"
+              },
+              "truth": {
+                "ref": "vision/ca4ecbdf3542/R4C5",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "OO95",
+              "score": {
+                "ref": "vision/ca4ecbdf3542/R5C3"
+              },
+              "truth": {
+                "ref": "vision/ca4ecbdf3542/R5C5",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "OO98",
+              "score": {
+                "ref": "vision/ca4ecbdf3542/R6C3"
+              },
+              "truth": {
+                "ref": "vision/ca4ecbdf3542/R6C5",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "OO99",
+              "score": {
+                "ref": "vision/ca4ecbdf3542/R7C3"
+              },
+              "truth": {
+                "ref": "vision/ca4ecbdf3542/R7C5",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "OO100",
+              "score": {
+                "ref": "vision/ca4ecbdf3542/R8C3"
+              },
+              "truth": {
+                "ref": "vision/ca4ecbdf3542/R8C5",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "OO103",
+              "score": {
+                "ref": "vision/ca4ecbdf3542/R9C3"
+              },
+              "truth": {
+                "ref": "vision/ca4ecbdf3542/R9C5",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "OO106",
+              "score": {
+                "ref": "vision/ca4ecbdf3542/R10C3"
+              },
+              "truth": {
+                "ref": "vision/ca4ecbdf3542/R10C5",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "OO113",
+              "score": {
+                "ref": "vision/ca4ecbdf3542/R11C3"
+              },
+              "truth": {
+                "ref": "vision/ca4ecbdf3542/R11C5",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "OO116",
+              "score": {
+                "ref": "vision/ca4ecbdf3542/R12C3"
+              },
+              "truth": {
+                "ref": "vision/ca4ecbdf3542/R12C5",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "OO118",
+              "score": {
+                "ref": "vision/ca4ecbdf3542/R13C3"
+              },
+              "truth": {
+                "ref": "vision/ca4ecbdf3542/R13C5",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            }
+          ],
+          "blocked_reason": null
+        },
+        "notes": [
+          "Applying AUCrel <= 0.559 as responder yields 12 agreements and one disagreement: OO98 is classified R but its Becker grade is 2, matching the single X in Fig. 2I.",
+          "The exact accuracy is 12/13 = 0.9230769230769231, reported in the article as 92%.",
+          "The three dots per PDO are assay replicates; the analysis unit remains one patient/PDO, using the PDO summary bar for classification as shown in Fig. 2I and described for at least two testings."
+        ]
+      }
+    },
+    "output": {
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "patient",
+            "evidence": [
+              "article:p2",
+              "article:p9"
+            ],
+            "explanation": "Each validation record is one patient represented by one PDO line; the independent validation cohort contained 13 patients."
+          },
+          "platform": {
+            "value": "organoid",
+            "evidence": [
+              "article:p8",
+              "article:p14"
+            ],
+            "explanation": "Drug response was measured in patient-derived 3D organoid cultures."
+          },
+          "readout": {
+            "value": "auc",
+            "evidence": [
+              "article:p15",
+              "article:p17"
+            ],
+            "explanation": "The predictor was AUCrel from the FLOT dose-response curve; Fig. 2I shows the per-PDO summary values and classifications."
+          },
+          "direction": {
+            "value": "lower_sensitive",
+            "evidence": [
+              "article:p16",
+              "article:p17"
+            ],
+            "explanation": "Responders had lower AUCrel values; AUCrel at or below 0.559 classified a PDO/patient as a responder."
+          },
+          "threshold_rule": {
+            "value": "fixed_numeric",
+            "evidence": [
+              "article:p17",
+              "article:p15"
+            ],
+            "explanation": "A fixed AUCthreshold of 0.559 was calculated from the exploratory cohort and applied unchanged in validation."
+          },
+          "threshold_timing": {
+            "value": "independent_reference",
+            "evidence": [
+              "article:p9",
+              "article:p17",
+              "article:p18"
+            ],
+            "explanation": "The threshold was established in the first 13 exploratory PDOs and evaluated in the following 13 independent validation PDOs."
+          },
+          "patient_mapping": {
+            "value": "individual_available",
+            "evidence": [
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R17C2",
+              "12943_2023_1919_MOESM1_ESM.docx/table2/R29C2",
+              "vision/ca4ecbdf3542/R1C1",
+              "vision/ca4ecbdf3542/R13C1"
+            ],
+            "explanation": "Fig. 2I identifies each validation PDO and Supplementary Table 2 maps those PDO IDs to individual patients and Becker regression grades."
+          },
+          "regimen_match": {
+            "value": "matched",
+            "evidence": [
+              "article:p9",
+              "article:p14",
+              "article:p18"
+            ],
+            "explanation": "The in vitro FLOT combination assay was compared with pathological response after clinical neoadjuvant FLOT."
+          },
+          "n_units": {
+            "value": 13,
+            "evidence": [
+              "article:p18",
+              "article:p2",
+              "vision/ca4ecbdf3542/R1C1",
+              "vision/ca4ecbdf3542/R13C1"
+            ],
+            "explanation": "There were 13 independently validated patients/PDO lines."
+          },
+          "split": {
+            "value": "independent_test",
+            "evidence": [
+              "article:p9",
+              "article:p18"
+            ],
+            "explanation": "The 12/13 accuracy was obtained in the independent validation cohort after threshold discovery in a separate exploratory cohort."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.9230769230769231,
+          "reported_evidence": [
+            "article:p18",
+            "article:p3",
+            "vision/ca4ecbdf3542/R1C6",
+            "vision/ca4ecbdf3542/R13C6"
+          ],
+          "threshold": 0.559,
+          "op": "<=",
+          "score_direction": "lower",
+          "records": [
+            {
+              "id": "OO80",
+              "score": {
+                "ref": "vision/ca4ecbdf3542/R1C3"
+              },
+              "truth": {
+                "ref": "vision/ca4ecbdf3542/R1C5",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "OO87",
+              "score": {
+                "ref": "vision/ca4ecbdf3542/R2C3"
+              },
+              "truth": {
+                "ref": "vision/ca4ecbdf3542/R2C5",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "OO88",
+              "score": {
+                "ref": "vision/ca4ecbdf3542/R3C3"
+              },
+              "truth": {
+                "ref": "vision/ca4ecbdf3542/R3C5",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "OO90",
+              "score": {
+                "ref": "vision/ca4ecbdf3542/R4C3"
+              },
+              "truth": {
+                "ref": "vision/ca4ecbdf3542/R4C5",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "OO95",
+              "score": {
+                "ref": "vision/ca4ecbdf3542/R5C3"
+              },
+              "truth": {
+                "ref": "vision/ca4ecbdf3542/R5C5",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "OO98",
+              "score": {
+                "ref": "vision/ca4ecbdf3542/R6C3"
+              },
+              "truth": {
+                "ref": "vision/ca4ecbdf3542/R6C5",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "OO99",
+              "score": {
+                "ref": "vision/ca4ecbdf3542/R7C3"
+              },
+              "truth": {
+                "ref": "vision/ca4ecbdf3542/R7C5",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "OO100",
+              "score": {
+                "ref": "vision/ca4ecbdf3542/R8C3"
+              },
+              "truth": {
+                "ref": "vision/ca4ecbdf3542/R8C5",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "OO103",
+              "score": {
+                "ref": "vision/ca4ecbdf3542/R9C3"
+              },
+              "truth": {
+                "ref": "vision/ca4ecbdf3542/R9C5",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "OO106",
+              "score": {
+                "ref": "vision/ca4ecbdf3542/R10C3"
+              },
+              "truth": {
+                "ref": "vision/ca4ecbdf3542/R10C5",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "OO113",
+              "score": {
+                "ref": "vision/ca4ecbdf3542/R11C3"
+              },
+              "truth": {
+                "ref": "vision/ca4ecbdf3542/R11C5",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "OO116",
+              "score": {
+                "ref": "vision/ca4ecbdf3542/R12C3"
+              },
+              "truth": {
+                "ref": "vision/ca4ecbdf3542/R12C5",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            },
+            {
+              "id": "OO118",
+              "score": {
+                "ref": "vision/ca4ecbdf3542/R13C3"
+              },
+              "truth": {
+                "ref": "vision/ca4ecbdf3542/R13C5",
+                "map": {
+                  "1a": 1,
+                  "1b": 1,
+                  "2": 0,
+                  "3": 0
+                }
+              }
+            }
+          ],
+          "blocked_reason": null
+        },
+        "notes": [
+          "Applying AUCrel <= 0.559 as responder yields 12 agreements and one disagreement: OO98 is classified R but its Becker grade is 2, matching the single X in Fig. 2I.",
+          "The exact accuracy is 12/13 = 0.9230769230769231, reported in the article as 92%.",
+          "The three dots per PDO are assay replicates; the analysis unit remains one patient/PDO, using the PDO summary bar for classification as shown in Fig. 2I and described for at least two testings."
+        ]
+      },
+      "execution_feedback": {
+        "matched": true,
+        "metric": "accuracy",
+        "computed": 0.9230769230769231,
+        "reported": 0.9230769230769231,
+        "difference": 0.0,
+        "n": 13,
+        "errors": [],
+        "expected": {
+          "metric": "accuracy",
+          "value": 0.9230769230769231,
+          "n": 13
+        }
+      }
+    }
+  }
+]

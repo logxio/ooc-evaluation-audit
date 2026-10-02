@@ -1,0 +1,17 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "import zipfile, re, os\nfor fn in ['Table_1.docx','Table_2.docx','Table_3.docx']:\n print('\\n',fn)\n z=zipfile.ZipFile(fn)\n print(z.namelist()[:20])\n text=''\n for name in z.namelist():\n  if name.endswith('.xml'):\n   data=z.read(name).decode('utf8','ignore')\n   if 'C51' in data or 'C143' in data or 'C128' in data:\n    print('contains in',name)\n   text += re.sub('<[^>]+>',' ',data)+'\\n'\n for pat in ['C51','C143','C128','C14','C288','C190']:\n  print(pat, pat in text)\n print(text[text.find('C51')-200:text.find('C51')+500] if 'C51' in text else text[:500])"
+    },
+    "output": {
+      "returncode": 1,
+      "stdout": "\n Table_1.docx\n",
+      "stderr": "Traceback (most recent call last):\n  File \"scratch/python06/worker.py\", line 19, in <module>\n    exec(compile(code,'<agent-code>','exec'))\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<agent-code>\", line 4, in <module>\n  File \"/opt/homebrew/Cellar/python@3.13/3.13.14/Frameworks/Python.framework/Versions/3.13/lib/python3.13/zipfile/__init__.py\", line 1389, in __init__\n    self.fp = io.open(file, filemode)\n              ~~~~~~~^^^^^^^^^^^^^^^^\nFileNotFoundError: [Errno 2] No such file or directory: 'Table_1.docx'\n",
+      "seconds": 1.5258327500196174,
+      "peak_rss_bytes": 30654464,
+      "limit_error": null,
+      "code_sha256": "77c9ba429cb8f01323580f6b73fec5f0eabd6fdd3b751d1ae224ee54f8cccdf1"
+    }
+  }
+]

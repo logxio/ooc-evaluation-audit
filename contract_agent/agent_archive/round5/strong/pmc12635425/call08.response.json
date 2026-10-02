@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_pgqykhzqr0w0hy87fmyf4wtk",
+        "type": "function",
+        "function": {
+          "name": "python",
+          "arguments": "{\"code\": \"for pg in range(18,24):\\n sh='page'+str(pg); o=tables['CTM2-15-e70534-s002.pdf'][sh]\\n print('\\\\n---',pg,'---')\\n for ri,row in enumerate(o['rows'],1):\\n  print(ri, row)\\n\"}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "Odd intermittent?Potential issues identified, will rerun exact.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 133,
+    "prompt_tokens": 28436,
+    "total_tokens": 28569,
+    "prompt_tokens_details": {
+      "cached_tokens": 27960
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 27
+    }
+  }
+}

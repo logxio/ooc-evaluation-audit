@@ -1,0 +1,294 @@
+[
+  {
+    "name": "initial_code",
+    "output": {
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "seconds": 1.486421750014415,
+      "peak_rss_bytes": 29605888,
+      "limit_error": null,
+      "code_sha256": "041897c99bf5adf02fe87ee85916324502edfeabe0e769abcceb4ee7ea792a26",
+      "contract": {
+        "status": "computed",
+        "fields": {
+          "unit": {
+            "value": "drug",
+            "evidence": [
+              "article.xml/Table 2./R2C2",
+              "article:p29"
+            ],
+            "explanation": "Each evaluated unit is one tested compound; DMSO is included as the negative control."
+          },
+          "platform": {
+            "value": "unknown",
+            "evidence": [
+              "article:p2",
+              "article:p3"
+            ],
+            "explanation": "uHeart is a 3D engineered human cardiac microtissue with integrated electrical recording and does not map exactly to organoid, perfused chip, microwell, or spheroid."
+          },
+          "readout": {
+            "value": "other",
+            "evidence": [
+              "article.xml/Table 2./R2C4",
+              "article:p29"
+            ],
+            "explanation": "The assay readout is percentage change in Fridericia-corrected field potential duration, FPDcF."
+          },
+          "direction": {
+            "value": "higher_sensitive",
+            "evidence": [
+              "article:p29"
+            ],
+            "explanation": "A larger positive FPDcF percentage change indicates QT prolongation."
+          },
+          "threshold_rule": {
+            "value": "roc_optimized",
+            "evidence": [
+              "article:p29",
+              "kfac108_supplementary_data.docx:p24"
+            ],
+            "explanation": "The 15% MID cutoff is described as the optimal threshold and is examined in the ROC analysis."
+          },
+          "threshold_timing": {
+            "value": "outcome_optimized",
+            "evidence": [
+              "article:p29",
+              "kfac108_supplementary_data.docx:p24"
+            ],
+            "explanation": "The optimal MID threshold was selected from analyses of the same tested compounds; no independent held-out cohort is reported."
+          },
+          "patient_mapping": {
+            "value": "absent",
+            "evidence": [
+              "article:p29"
+            ],
+            "explanation": "FDA drug labels provide the clinical reference, with no individual patient outcomes."
+          },
+          "regimen_match": {
+            "value": "not_applicable",
+            "evidence": [
+              "article.xml/Table 2./R2C2"
+            ],
+            "explanation": "This is a drug-level cardiotoxicity comparison rather than a patient-regimen comparison."
+          },
+          "n_units": {
+            "value": 12,
+            "evidence": [
+              "article:p29",
+              "article.xml/Table 2./R4C2",
+              "article.xml/Table 2./R17C2"
+            ],
+            "explanation": "Eleven drugs plus DMSO give the exact 12-compound denominator."
+          },
+          "split": {
+            "value": "same_cohort",
+            "evidence": [
+              "article:p29"
+            ],
+            "explanation": "Threshold selection and performance reporting use the same 12 evaluated compounds."
+          }
+        },
+        "headline": {
+          "metric": "accuracy",
+          "reported": 0.916,
+          "reported_evidence": [
+            "article:p29",
+            "article:p2"
+          ],
+          "threshold": 15,
+          "op": ">",
+          "score_direction": "higher",
+          "records": [
+            {
+              "id": "Sotalol",
+              "score": {
+                "ref": "article.xml/Table 2./R4C4",
+                "map": {
+                  "↑30": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2./R4C2",
+                "map": {
+                  "Sotalol": 1
+                }
+              }
+            },
+            {
+              "id": "Dofetilide",
+              "score": {
+                "ref": "article.xml/Table 2./R5C4",
+                "map": {
+                  "↑ 0.002": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2./R5C2",
+                "map": {
+                  "Dofetilide": 1
+                }
+              }
+            },
+            {
+              "id": "Quinidine",
+              "score": {
+                "ref": "article.xml/Table 2./R6C4",
+                "map": {
+                  "↑ 1": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2./R6C2",
+                "map": {
+                  "Quinidine": 1
+                }
+              }
+            },
+            {
+              "id": "Cisapride",
+              "score": {
+                "ref": "article.xml/Table 2./R7C4",
+                "map": {
+                  "↓ 0.0025": 0
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2./R7C2",
+                "map": {
+                  "Cisapride": 1
+                }
+              }
+            },
+            {
+              "id": "Terfenadine",
+              "score": {
+                "ref": "article.xml/Table 2./R8C4",
+                "map": {
+                  "↑ 0.1": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2./R8C2",
+                "map": {
+                  "Terfenadine": 1
+                }
+              }
+            },
+            {
+              "id": "Ranolazine",
+              "score": {
+                "ref": "article.xml/Table 2./R10C4",
+                "map": {
+                  "↑ 2": 1
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2./R10C2",
+                "map": {
+                  "Ranolazine": 1
+                }
+              }
+            },
+            {
+              "id": "Mexiletine",
+              "score": {
+                "ref": "article.xml/Table 2./R12C4",
+                "map": {
+                  "↔": 0
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2./R12C2",
+                "map": {
+                  "Mexiletine": 0
+                }
+              }
+            },
+            {
+              "id": "Nifedipine",
+              "score": {
+                "ref": "article.xml/Table 2./R13C4",
+                "map": {
+                  "↓ 0.005": 0
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2./R13C2",
+                "map": {
+                  "Nifedipine": 0
+                }
+              }
+            },
+            {
+              "id": "Verapamil",
+              "score": {
+                "ref": "article.xml/Table 2./R14C4",
+                "map": {
+                  "↓ 0.05": 0
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2./R14C2",
+                "map": {
+                  "Verapamil": 0
+                }
+              }
+            },
+            {
+              "id": "Alfuzosin",
+              "score": {
+                "ref": "article.xml/Table 2./R15C4",
+                "map": {
+                  "↔": 0
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2./R15C2",
+                "map": {
+                  "Alfuzosin": 0
+                }
+              }
+            },
+            {
+              "id": "Aspirin",
+              "score": {
+                "ref": "article.xml/Table 2./R16C4",
+                "map": {
+                  "↔": 0
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2./R16C2",
+                "map": {
+                  "Aspirin": 0
+                }
+              }
+            },
+            {
+              "id": "DMSO",
+              "score": {
+                "ref": "article.xml/Table 2./R17C4",
+                "map": {
+                  "↔": 0
+                }
+              },
+              "truth": {
+                "ref": "article.xml/Table 2./R17C2",
+                "map": {
+                  "DMSO": 0
+                }
+              }
+            }
+          ],
+          "blocked_reason": null
+        },
+        "notes": [
+          "At the 15% MID threshold, the article reports 5 true positives, 6 true negatives, 1 false negative, and no false positives for QT prolongation.",
+          "The resulting accuracy is 11/12 = 0.9167, reported as 91.6%."
+        ]
+      }
+    }
+  }
+]

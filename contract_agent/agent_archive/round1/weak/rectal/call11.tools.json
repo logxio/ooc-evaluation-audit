@@ -1,0 +1,17 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "# Extract TRG for P81-P86 from page10\nrows_page10 = tables['supp.pdf']['page10']['rows']\nprint(\"Page10 rows for P81-P86:\")\nfor i, row in enumerate(rows_page10):\n    if len(row) < 8:\n        continue\n    cell = row[0]\n    if isinstance(cell, dict):\n        val = str(cell.get('value', ''))\n    else:\n        val = str(cell)\n    if 'Patient-81' in val or 'Patient-82' in val or 'Patient-83' in val or 'Patient-84' in val or 'Patient-85' in val or 'Patient-86' in val:\n        trg = row[7] if len(row) > 7 else None\n        if isinstance(trg, dict):\n            trg_val = str(trg.get('value', ''))\n        else:\n            trg_val = str(trg)\n        print(f\"  {val}: TRG={trg_val}\")"
+    },
+    "output": {
+      "returncode": 0,
+      "stdout": "Page10 rows for P81-P86:\n  Patient-81: TRG=0\n  Patient-82: TRG=0\n  Patient-83: TRG=2\n  Patient-84: TRG=0\n  Patient-85: TRG=2\n  Patient-86: TRG=ccr\n",
+      "stderr": "",
+      "seconds": 0.1423958330124151,
+      "peak_rss_bytes": 229376,
+      "limit_error": null,
+      "code_sha256": "490b86a9671fc2f9e42276793bff5aaa9a191634031dfc9b386ee7a50e46808f"
+    }
+  }
+]

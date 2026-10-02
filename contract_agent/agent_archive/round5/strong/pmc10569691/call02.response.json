@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_27tev9e5cre7jn3ewygfjw0r",
+        "type": "function",
+        "function": {
+          "name": "python",
+          "arguments": "{\"code\": \"for fn in ['article.xml']:\\n  for sh in ['Table 1','Table 2']:\\n    rows=get_rows(fn,sh)\\n    print(fn,sh,len(rows), 'ncols', tables[fn][sh].ncols)\\n    for i,r in enumerate(rows,1): print(i,repr(r))\\n    print()\"}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "We need inspect actual tables all rows. Use python tool to print rows.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 125,
+    "prompt_tokens": 16371,
+    "total_tokens": 16496,
+    "prompt_tokens_details": {
+      "cached_tokens": 1848
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 17
+    }
+  }
+}

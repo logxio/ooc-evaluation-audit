@@ -1,0 +1,20 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "{\"columns\":[\"point\",\"x (tick labels visible; axis title cropped)\",\"y (no axis labels or scale visible)\"],\"legend\":{\"black circle\":\"data point (no legend label printed)\",\"gray line\":\"sloped fitted line (no legend label printed)\"},\"rows\":[[1,\"≈ -19\",\"no labelled scale\"],[2,\"≈ 2\",\"no labelled scale\"],[3,\"≈ 12\",\"no labelled scale\"],[4,\"≈ 17\",\"no labelled scale\"],[5,\"≈ 17\",\"no labelled scale\"],[6,\"≈ 19\",\"no labelled scale\"],[7,\"≈ 30\",\"no labelled scale\"],[8,\"≈ 31\",\"no labelled scale\"]],\"uncertain\":[[1,2],[1,3],[2,2],[2,3],[3,2],[3,3],[4,2],[4,3],[5,2],[5,3],[6,2],[6,3],[7,2],[7,3],[8,2],[8,3]],\"notes\":\"Cropped scatter plot. Visible statistics read: \\\"58, p = 0.004\\\" and \\\"CI [0.21, 0.8]\\\"; preceding text is cut off. X-axis tick labels are −20, 0, 20, and 40. No y-axis tick labels, axis titles, or printed legend are visible. Coordinates are approximate from the visible axis.\"}"
+  },
+  "reasoning_content": "We need need transcribe visible. \n\nThe target image is a cropped scatter plot. I have clarified all data extraction requirements, including retaining approximate values and coordinate mapping rules, and confirmed the x-axis tick position data.\n\nI’ve confirmed the plot’s scale conversion rule, and have finished extracting approximate coordinates for all 8 scatter points, with corresponding x-axis values calculated. I’ve also located the gray regression line spanning from the left to right section of the plot. Since there are no corresponding y-axis tick marks or labels, I’ve confirmed that no y-axis values need to be included in the final extraction result.\n\nI’ve adjusted the extraction result framework, omitting y-axis values and using relative vertical positions instead. I’ve also spotted the cropped statistical annotations at the top of the plot, including correlation coefficients, p-values and confidence intervals.\n\nI’ve verified the top annotations only show the r value as 0.58, p=0.004 and 95% CI [0.21, 0.8], with no extra inferences. The x-axis label is illegible, and there’s no official legend, so I’ve set reasonable descriptions for scatter points and fitted line, and finalized the table column names for the JSON.\n\nI’ve completed the accurate calculation of each scatter point’s horizontal position, and confirmed that there is no corresponding y-axis scale, so the y-value field will remain empty in the final extraction result, with a note added to explain this situation.\n\nI’ve confirmed that the top statistical annotations should be placed in the notes instead of the table rows, and decided to use relative vertical positions instead of unlabeled axis values for the y-axis to avoid fabricated data.\n\nI’ve confirmed the statistical annotations belong to the notes, and will generate valid JSON without markdown content.\n",
+  "finish_reason": "stop",
+  "usage": {
+    "completion_tokens": 2021,
+    "prompt_tokens": 1580,
+    "total_tokens": 3601,
+    "prompt_tokens_details": {
+      "cached_tokens": 0
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 1705
+    }
+  }
+}

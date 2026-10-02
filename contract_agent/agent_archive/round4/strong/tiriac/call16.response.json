@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_6mtu962mi2tykbiu7k57bl7x",
+        "type": "function",
+        "function": {
+          "name": "finish",
+          "arguments": "{\"contract\": {\"status\": \"computed\", \"fields\": {\"unit\": {\"value\": \"patient\", \"evidence\": [\"article:p13\", \"vision/f03506364208/R1C1\"], \"explanation\": \"Nine advanced PDAC patients are individually listed in Figure S6A and compared with matched PDO pharmacotyping.\"}, \"platform\": {\"value\": \"organoid\", \"evidence\": [\"article:p13\"], \"explanation\": \"Predictions came from pharmacotyping matched patient-derived organoids.\"}, \"readout\": {\"value\": \"auc\", \"evidence\": [\"article:p13\", \"supp.xlsx/Key/A2\"], \"explanation\": \"Organoid drug response was quantified by normalized AUC and categorized as sensitive, intermediate, or resistant.\"}, \"direction\": {\"value\": \"lower_sensitive\", \"evidence\": [\"article:p13\", \"article:p18\"], \"explanation\": \"Lower AUC indicated greater sensitivity; the lowest 33% were sensitive and highest 34% resistant.\"}, \"threshold_rule\": {\"value\": \"categorical\", \"evidence\": [\"vision/f03506364208/R1C2\", \"vision/f03506364208/R8C2\", \"vision/f03506364208/R9C2\"], \"explanation\": \"A regimen was predicted favorable when it included no resistant drug and unfavorable when it included a resistant drug.\"}, \"threshold_timing\": {\"value\": \"independent_reference\", \"evidence\": [\"article:p13\"], \"explanation\": \"The favorable clinical cutoff was the previously published median PFS of 180 days, not a cutoff fitted to these patients.\"}, \"patient_mapping\": {\"value\": \"individual_available\", \"evidence\": [\"vision/f03506364208/R1C1\", \"vision/f03506364208/R9C1\"], \"explanation\": \"All nine patient identifiers and regimen-specific assay classes are individually visible in Figure S6A.\"}, \"regimen_match\": {\"value\": \"matched\", \"evidence\": [\"article:p13\", \"vision/f03506364208/R1C2\"], \"explanation\": \"Only drugs administered to each patient are listed with the corresponding matched PDO pharmacotyping class.\"}, \"n_units\": {\"value\": 9, \"evidence\": [\"article:p13\", \"vision/f03506364208/R9C1\"], \"explanation\": \"The figure and article describe the same nine-patient retrospective comparison.\"}, \"split\": {\"value\": \"same_cohort\", \"evidence\": [\"article:p13\"], \"explanation\": \"This was a retrospective matched case series using PDOs from the evaluated patients.\"}}, \"headline\": {\"metric\": \"accuracy\", \"reported\": 0.8888888888888888, \"reported_evidence\": [\"article:p13\", \"grid/7227b1703bc9/R1C1\", \"grid/7227b1703bc9/R9C1\"], \"threshold\": 180, \"op\": \">\", \"score_direction\": \"higher\", \"records\": [{\"id\": \"hF31\", \"score\": {\"ref\": \"vision/f03506364208/R1C2\", \"map\": {\"GEM: intermediate; PAC: sensitive\": 1}}, \"truth\": {\"ref\": \"grid/7227b1703bc9/R1C1\", \"map\": {\"green\": 1, \"orange\": 1, \"white\": 0}}}, {\"id\": \"hF2\", \"score\": {\"ref\": \"vision/f03506364208/R2C2\", \"map\": {\"GEM: sensitive; SN38: sensitive; 5FU: intermediate\": 1}}, \"truth\": {\"ref\": \"grid/7227b1703bc9/R2C1\", \"map\": {\"green\": 1, \"orange\": 1, \"white\": 0}}}, {\"id\": \"hM1A\", \"score\": {\"ref\": \"vision/f03506364208/R3C2\", \"map\": {\"SN38: intermediate; 5FU: sensitive; OXA: sensitive\": 1}}, \"truth\": {\"ref\": \"grid/7227b1703bc9/R3C1\", \"map\": {\"green\": 1, \"orange\": 1, \"white\": 0}}}, {\"id\": \"hF57\", \"score\": {\"ref\": \"vision/f03506364208/R4C2\", \"map\": {\"GEM: intermediate; PAC: intermediate\": 1}}, \"truth\": {\"ref\": \"grid/7227b1703bc9/R4C1\", \"map\": {\"green\": 1, \"orange\": 1, \"white\": 0}}}, {\"id\": \"hF44\", \"score\": {\"ref\": \"vision/f03506364208/R5C2\", \"map\": {\"SN38: sensitive; 5FU: sensitive; OXA: intermediate\": 1}}, \"truth\": {\"ref\": \"grid/7227b1703bc9/R5C1\", \"map\": {\"green\": 1, \"orange\": 1, \"white\": 0}}}, {\"id\": \"hF23\", \"score\": {\"ref\": \"vision/f03506364208/R6C2\", \"map\": {\"GEM: sensitive; PAC: sensitive\": 1}}, \"truth\": {\"ref\": \"grid/7227b1703bc9/R6C1\", \"map\": {\"green\": 1, \"orange\": 1, \"white\": 0}}}, {\"id\": \"hF50\", \"score\": {\"ref\": \"vision/f03506364208/R7C2\", \"map\": {\"5FU: sensitive\": 1}}, \"truth\": {\"ref\": \"grid/7227b1703bc9/R7C1\", \"map\": {\"green\": 1, \"orange\": 1, \"white\": 0}}}, {\"id\": \"hF3\", \"score\": {\"ref\": \"vision/f03506364208/R8C2\", \"map\": {\"5FU: sensitive; OXA: resistant\": 0}}, \"truth\": {\"ref\": \"grid/7227b1703bc9/R8C1\", \"map\": {\"green\": 1, \"orange\": 1, \"white\": 0}}}, {\"id\": \"hF28\", \"score\": {\"ref\": \"vision/f03506364208/R9C2\", \"map\": {\"GEM: intermediate; 5FU: resistant\": 0}}, \"truth\": {\"ref\": \"grid/7227b1703bc9/R9C1\", \"map\": {\"green\": 1, \"orange\": 1, \"white\": 0}}}]}, \"notes\": [\"The grid samples just before the 180-day vertical reference. Green or orange means the PFS bar crosses 180 days; white means it ends before 180 days.\", \"The article explicitly identifies hF50 as the sole discordant case, giving 8/9 accuracy.\"]}}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "Need map color names,but rows 7/8 missing, I'll use color names for all unmapped entries.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 1768,
+    "prompt_tokens": 52632,
+    "total_tokens": 54400,
+    "prompt_tokens_details": {
+      "cached_tokens": 50488
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 57
+    }
+  }
+}

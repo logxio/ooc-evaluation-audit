@@ -1,0 +1,9 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "for f,shs in [('Source data figure 5.xlsx',['5l','5m','5n','5o']),('mmc2.xlsx',['Sheet1'])]:\n print('\\nFILE',f)\n for sh in shs:\n  rows=get_rows(f,sh)\n  print('\\nSHEET',sh,len(rows),'x',max(map(len,rows)))\n  for i,r in enumerate(rows,1):\n   print(i,repr(r))"
+    },
+    "output_sha256": "c6a112cf261f32e5b0ecd8bcc99138c8ab483859cd1d4e61ed323e3e1617cac3"
+  }
+]

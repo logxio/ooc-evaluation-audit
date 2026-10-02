@@ -1,0 +1,17 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "for f in tables:\n if f.endswith('.pdf'):\n  for sh in tables[f]:\n   rows=get_rows(f,sh)\n   txt=' '.join(str(x) for r in rows for x in r if x)\n   if '375' in txt or 'protein binding' in txt.lower() or 'free fraction' in txt.lower():\n    print(f,sh,txt[:1000])\n"
+    },
+    "output": {
+      "returncode": 0,
+      "stdout": "",
+      "stderr": "",
+      "seconds": 0.4503935830143746,
+      "peak_rss_bytes": 42778624,
+      "limit_error": null,
+      "code_sha256": "76ef4e084399f5de523a134c501883d66cd0146426bdc9d0d487909e2e0c7052"
+    }
+  }
+]

@@ -1,0 +1,9 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "import re\n# reconstruct recs with group labels\nrecs=[]\ncurrent=None\nfor page in ['page18','page19','page20']:\n o=tables['mmc1.pdf'][page]\n # group based on label rows manually by scanning raw rows and data rows\n for ri,(row,g) in enumerate(zip(o['rows'],o['geometry']),1):\n  joined=' '.join(row)\n  if row and row[0]=='Osimertinib' and len(row)>1 and row[1]=='group': current='osi'\n  if row and row[0]=='Other' and len(row)>2 and row[2]=='group': current='other'\n  if row and row[0]=='Dual' and len(row)>3 and row[3]=='group': current='dual'\n  if row and row[0]=='Chemotherapy' and len(row)>1 and row[1]=='group': current='chemo'\n  c1=str(row[0]) if row else ''; c2=str(row[1]) if len(row)>1 else ''\n  m=re.fullmatch(r'(P-\\d+)(P-\\d+-[A-Z0-9]+)',c1)\n  if m: case,org=m.groups()\n  elif re.fullmatch(r'P-\\d+-[A-Z0-9]+',c2): case,org=c1,c2\n  else: continue\n  def near(a,b): return ' '.join(c['text'] for c in g['cells'] if a<=c['x0']<=b)\n  recs.append(dict(group=current,page=page,ri=ri,case=case,org=org,ic=near(525,545),resp=near(560,580)))\ndef val(s):\n if '(cid:893)' in s:return 1001 # above cutoff, can threshold <=\n return float(s)\nfor r in recs:r['x']=val(r['ic']);r['truth']=1 if r['resp']=='PR' else 0\nfrom collections import Counter,defaultdict\nprint(Counter((r['group'],r['resp']) for r in recs))\nfor g in ['osi','chemo','dual','other']:\n arr=[r for r in recs if r['group']==g]\n print('\\n',g,len(arr))\n for th in sorted(set([r['x'] for r in arr]+[0.8,1.5,20])):\n  tp=sum(r['x']<=th and r['truth'] for r in arr)\n  fp=sum(r['x']<=th and not r['truth'] for r in arr)\n  fn=sum(r['x']>th and r['truth'] for r in arr)\n  tn=sum(r['x']>th and not r['truth'] for r in arr)\n  acc=(tp+tn)/len(arr)\n  if acc in [13/15,10/12,1,12/17]: print(th,tp,fp,fn,tn,acc)\n"
+    },
+    "output_sha256": "f5b036e945a810fa357006f969f6b3e9e7a4554ff74abecd264b2c2f2296f709"
+  }
+]

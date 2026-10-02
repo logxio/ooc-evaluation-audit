@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_cwdv2hsaa4p6fza20g5qcpi6",
+        "type": "function",
+        "function": {
+          "name": "python",
+          "arguments": "{\"code\": \"for f in tables:\\n if f.endswith('.xlsx'):\\n  print('\\\\nFILE',f)\\n  for sh in tables[f]:\\n   rows=get_rows(f,sh)\\n   print(' ',sh,len(rows),len(rows[0]) if rows else 0, rows[0][:8] if rows else '')\\n\"}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "Need find corrected MOS likely supplementary 1?Inspect sheets.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 121,
+    "prompt_tokens": 26728,
+    "total_tokens": 26849,
+    "prompt_tokens_details": {
+      "cached_tokens": 23352
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 13
+    }
+  }
+}

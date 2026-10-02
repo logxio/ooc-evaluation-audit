@@ -1,0 +1,30 @@
+{
+  "model": "doubao-seed-2-1-pro-260915",
+  "message": {
+    "role": "assistant",
+    "content": "",
+    "tool_calls": [
+      {
+        "id": "call_q7q7ybq81xibiazhm09hktb4",
+        "type": "function",
+        "function": {
+          "name": "read_grid",
+          "arguments": "{\"file\": \"supp.pdf\", \"page\": 6, \"box\": [0.17, 0.025, 0.18, 0.145], \"rows\": 9, \"cols\": 1, \"snap\": false}"
+        }
+      }
+    ]
+  },
+  "reasoning_content": "Need truth perhaps use disease status C4 categorical rather than numeric threshold. Work is currently underway to confirm the target threshold is 180 with operator >, and to extract numeric values via regex to handle mixed text data. Uncertain labels will be flagged, and a deterministic reading method based on color bars is planned, with coordinate data for reading calibration already obtained.\n\nI've finalized the color bar reading scheme: sample the region right of the 180 threshold line in each target row, and will read the color value next to implement this plan.\n",
+  "finish_reason": "tool_calls",
+  "usage": {
+    "completion_tokens": 510,
+    "prompt_tokens": 41295,
+    "total_tokens": 41805,
+    "prompt_tokens_details": {
+      "cached_tokens": 38200
+    },
+    "completion_tokens_details": {
+      "reasoning_tokens": 387
+    }
+  }
+}

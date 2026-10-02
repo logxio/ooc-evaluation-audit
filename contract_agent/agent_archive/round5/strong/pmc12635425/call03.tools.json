@@ -1,0 +1,17 @@
+[
+  {
+    "name": "python",
+    "arguments": {
+      "code": "for fn,sheets in tables.items():\n for sh,o in sheets.items():\n  for ri,row in enumerate(o.rows,1):\n   for ci,v in enumerate(row,1):\n    if 'AUC' in str(v) or 'auc' in str(v):\n     print(fn,sh,ri,ci,repr(v))\n"
+    },
+    "output": {
+      "returncode": 1,
+      "stdout": "",
+      "stderr": "Traceback (most recent call last):\n  File \"scratch/python04/worker.py\", line 19, in <module>\n    exec(compile(code,'<agent-code>','exec'))\n    ~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^\n  File \"<agent-code>\", line 3, in <module>\nAttributeError: 'dict' object has no attribute 'rows'\n",
+      "seconds": 0.2582666250236798,
+      "peak_rss_bytes": 32768,
+      "limit_error": null,
+      "code_sha256": "fb82be3a285e55a0a905458e2c3a00c55d6c1508b90a17b61d3edb92a6882bd0"
+    }
+  }
+]
