@@ -1,0 +1,40 @@
+{
+ "name": "Second, independent benchmark: frozen AnchorBoost on the US EPA acute MEA screen",
+ "frozen_utc": "2026-10-02T13:51:10Z",
+ "question": "Does the frozen forecaster, with no change and no choice made on new data, beat the strongest sparse-concentration baselines on a second public dose-response screen?",
+ "source": {
+  "url": "https://pasteur.epa.gov/uploads/10.23719/1504294/MEA_All_Data_Scripts.zip",
+  "sha256": "38494e1688ee6eafcbc30832755f5df28453893745c5bf8bc3bbfe4800753247",
+  "member": "MEA_Data/MEA_Data_Input.csv",
+  "record": "US EPA ScienceHub, DOI 10.23719/1504294 (Kosnik et al. 2020 acute MEA concentration-response screen)",
+  "license": "US public domain (EPA ScienceHub)"
+ },
+ "data": {
+  "design": "Mature rat cortical networks on 48-well MEA plates, about one hour of exposure, seven concentrations per chemical, one well per concentration in each of three independent culture runs, 43 network parameters recorded before and after dosing.",
+  "preparation": "EPA's 1_MEA_Data_Prep.r: wells with fewer than 10 active electrodes at baseline removed, dose minus baseline, values beyond 6 SD of each parameter removed. Then each plate is centred on the median of its DMSO wells, each parameter is divided by 1.4826 x the median absolute DMSO value over all plates (the DMSO SD where that is zero: active and bursting electrode counts), and clipped to +-10.",
+  "tasks": "384 chemicals (383 with 7 concentrations, 1 tested twice with 13), concentrations grouped per chemical on a 0.1 log10 grid, 43 outputs at one recording time",
+  "folds": "fold = int(sha256('acute-mea|' + sample ID)[:8], 16) mod 5; 77/79/72/82/74 chemicals",
+  "independence": "Different experiment (acute exposure of mature networks, not developmental exposure from DIV 0); 290 of the 384 chemicals are not among the 243 developmental-assay chemicals; nothing from the developmental benchmark enters training or evaluation.",
+  "checks_before_freeze": {"chemicals": 384, "observed_share": 0.938, "loglinear_k3_curve_error_all_chemicals": 1.8141, "note": "baseline-only computation; no AnchorBoost model was trained on these data before this freeze"}
+ },
+ "model": {
+  "file": "chip_forecast.py",
+  "sha256": "3d02dd3a1bc57e8c53f701a6005c8d5e9d8ad6a15a57cdec3f22b27066015897",
+  "configuration": "frozen F101 AnchorBoost, every C(L,3) design of every training chemical, unchanged features and hyperparameters"
+ },
+ "code": {"file": "chip_forecast_acute.py", "sha256": "752f949aabe0f832048fb35bba14da4388e24e4365eb9ae48b0812d76b2161d3"},
+ "evaluation": {
+  "folds": [0, 1, 2, 3, 4],
+  "k": 3,
+  "designs": "five seeded designs per chemical (chip_forecast.designs)",
+  "metric": "curve error against held-out concentration means, averaged over observed outputs, designs and then chemicals",
+  "comparators": ["log-linear interpolation (primary)", "Hill curve per output", "distance-weighted analog chemicals"],
+  "bootstrap": "paired over chemicals, 4,000 resamples, seed 0 (chip_forecast.paired)"
+ },
+ "pass_rule": "AnchorBoost minus log-linear interpolation over all 384 chemicals: 95% chemical-bootstrap upper bound below zero",
+ "forecast": {
+  "relative_change_vs_loglinear_pct": [-15, -4],
+  "probability_upper_bound_below_zero": 0.75,
+  "versus_hill_and_analog": "AnchorBoost lower than both"
+ }
+}

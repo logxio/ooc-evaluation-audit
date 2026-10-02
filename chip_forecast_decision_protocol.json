@@ -1,0 +1,35 @@
+{
+ "name": "From forecast to decision: release an activity call from three measured concentrations or measure the full series",
+ "frozen_utc": "2026-10-02T13:55:21Z",
+ "question": "Do the registered AnchorBoost forecasts let a laboratory decide more chemicals correctly from three measured concentrations than the measured concentrations alone, under the same calibrated release rule used for the patient report list?",
+ "forecasts": "Registered k=3 AnchorBoost forecasts for the five published designs of every chemical, saved per fold on free Kaggle CPU by chip_forecast_decision.py --predict (sha256 df161e0d21b2...); their per-chemical curve errors equal chip_forecast_result.csv within 1.2e-7 for all 243 chemicals.",
+ "decision": {
+  "endpoint": "Full-series activity call of epa_release.py: active when the largest absolute DIV-mean response over 17 features and all tested concentrations is at least 3 (22.45% of fold-0 designs and 23.7% of folds 1-4 designs come from inactive chemicals).",
+  "scores": "anchorboost: largest absolute DIV-mean response over the full series, measured concentrations as measured and the others as forecast; measured_only: the same over the measured concentrations, which equals the log-linear interpolation score.",
+  "rule": "matched_regimen.py (sha256 f66e05c2...), the rule behind the patient report list: training rows fix the score cutoff for balanced accuracy and the reference ranks; calibration rows fix the release margin by conformal risk control, the smallest grid margin with (wrong releases + 1)/(n + 1) <= 0.10; a call is released when its rank margin exceeds that margin, otherwise the full series is measured.",
+  "splits": "test fold f; training folds = first two of the remaining folds in order, calibration folds = last two",
+  "units": "one row per (chemical, design); wells counted from the data; chemical bootstrap, 4,000 resamples, seed 0"
+ },
+ "code": {"file": "chip_forecast_decision.py", "sha256": "27fbf168797e6eceb3643e18da5719004d798db76aa69184404160d1be8501cf"},
+ "development": {
+  "fold": 0,
+  "note": "Fold 0 is the development fold; splits, threshold 3 and alpha 0.10 were fixed before any AnchorBoost decision was computed (threshold from epa_release.py, alpha from the patient rule). After seeing fold 0, two reported layers were added: the full-coverage call error and coverage at equal realized risk.",
+  "full_coverage_wrong_calls": {"anchorboost": 30, "measured_only": 43, "designs": 245, "difference_per_design": -0.0531, "ci95": [-0.102, -0.0122]},
+  "release_rule_alpha_0.10": {"anchorboost": {"released": 232, "wrong": 28, "realized_overall_wrong": 0.1143}, "measured_only": {"released": 167, "wrong": 14, "realized_overall_wrong": 0.0571}},
+  "equal_risk_coverage": {"risk_0.05": {"anchorboost": 0.7388, "measured_only": 0.6571}, "risk_0.10": {"anchorboost": 0.9102, "measured_only": 0.7918}}
+ },
+ "evaluation": {
+  "test_folds": [1, 2, 3, 4],
+  "pass_rules": {
+   "R1_primary": "full-coverage wrong calls per design, anchorboost minus measured_only: 95% upper bound below zero",
+   "R2_release_rule": "anchorboost realized overall wrong-release share <= 0.10 and released share minus measured_only with 95% lower bound above zero"
+  },
+  "reported_without_pass_rule": "coverage at equal realized wrong-release share 0.05 and 0.10 with bootstrap gap intervals; wells used and saved; no comparison with the neural process, whose forecasts are not published",
+  "forecast": {
+   "R1_difference_per_design": [-0.08, -0.02],
+   "anchorboost_release": {"coverage": [0.85, 0.97], "realized_overall_wrong": [0.07, 0.12]},
+   "measured_only_release_coverage": [0.6, 0.8],
+   "equal_risk_gap_at_0.10": [0.05, 0.2]
+  }
+ }
+}
