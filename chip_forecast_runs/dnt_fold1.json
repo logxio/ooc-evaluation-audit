@@ -1,0 +1,81 @@
+{
+ "source": {
+  "url": "https://pasteur.epa.gov/uploads/10.23719/1407642/Harrill%20et%20al%20DNT_Assay%20Dataset.xlsx",
+  "sha256": "ab6de83c38001c7d1cb977c3758bc77aa110d18658a3b9758369bf3a21d6bc0e",
+  "cells": [
+   "hNP1",
+   "hN2"
+  ]
+ },
+ "k": 3,
+ "folds": [
+  1
+ ],
+ "timing": {
+  "k3_fold1": {
+   "seconds": 61.2,
+   "training_rows": 539592
+  }
+ },
+ "summary": {
+  "n_chemicals": 17,
+  "anchorboost": 1.7975,
+  "versus": {
+   "loglinear_interp": {
+    "mean_diff": -0.2494,
+    "ci95": [
+     -0.4095,
+     -0.0999
+    ],
+    "rel_change_pct": -12.19,
+    "n_chemicals": 17,
+    "frac_chem_improved": 0.706
+   },
+   "hill_per_endpoint": {
+    "mean_diff": -0.6437,
+    "ci95": [
+     -0.8839,
+     -0.4064
+    ],
+    "rel_change_pct": -26.37,
+    "n_chemicals": 17,
+    "frac_chem_improved": 0.882
+   },
+   "analog_knn": {
+    "mean_diff": -0.5259,
+    "ci95": [
+     -0.8439,
+     -0.2469
+    ],
+    "rel_change_pct": -22.63,
+    "n_chemicals": 17,
+    "frac_chem_improved": 0.882
+   }
+  },
+  "fold_means": {
+   "fold1": {
+    "anchorboost": 1.7975,
+    "loglinear_interp": 2.0469,
+    "hill_per_endpoint": 2.4412,
+    "analog_knn": 2.3234
+   }
+  },
+  "fold_versus_loglinear": {
+   "fold1": {
+    "mean_diff": -0.2494,
+    "ci95": [
+     -0.4095,
+     -0.0999
+    ],
+    "rel_change_pct": -12.19,
+    "n_chemicals": 17,
+    "frac_chem_improved": 0.706
+   }
+  },
+  "loglinear_interp": 2.0469,
+  "hill_per_endpoint": 2.4412,
+  "analog_knn": 2.3234
+ },
+ "code_sha256": "41f51044d548073c3e20acb00b91faadf234cdb89b40e25b6e5f4d9d607f4e01",
+ "model_sha256": "3d02dd3a1bc57e8c53f701a6005c8d5e9d8ad6a15a57cdec3f22b27066015897"
+}
