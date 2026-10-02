@@ -1,0 +1,86 @@
+{
+ "schema": "chip_forecast.selfcheck.protocol.v1",
+ "frozen_at": "2026-10-02T09:06:10+00:00",
+ "question": "Does a self-check on the measured concentrations make the forecaster uncertainty-aware: narrower calibrated intervals at the same coverage, and better choices of which chemicals receive the full series?",
+ "point_model": {
+  "code": "chip_forecast.py",
+  "code_sha256": "3d02dd3a1bc57e8c53f701a6005c8d5e9d8ad6a15a57cdec3f22b27066015897",
+  "note": "frozen AnchorBoost; point forecasts identical to chip_forecast_result.csv"
+ },
+ "mechanism": {
+  "name": "self-check",
+  "code": "chip_forecast_selfcheck.py",
+  "code_sha256": "5c16d9cd82513c876ce3b98132338fb4b40bb9b7322c3b05e62ad1be96c23818",
+  "definition": "A helper AnchorBoost trained on the same training folds with one measured concentration fewer re-predicts each measured concentration from the other measured ones; the self-check score of a design is its mean absolute error over measured concentrations and observed outputs; a chemical score averages its five published designs."
+ },
+ "data_and_folds": "as chip_forecast_protocol.json: pinned EPA network-formation bundle, five chemical folds, five published context designs, k = 3",
+ "intervals": {
+  "level": 0.9,
+  "calibration": "cross-conformal: for test fold f, per-output quantiles from the held-out well errors of the other four folds, each predicted by its own fold model",
+  "plain": "half-width = per-output quantile of |error|",
+  "selfcheck": "half-width = per-output quantile of |error| / (score + c) times (score + c) of the test design; c = median chemical score of the calibration folds",
+  "test_folds": [
+   1,
+   2,
+   3,
+   4
+  ],
+  "primary": "width ratio selfcheck/plain (sum of half-widths over wells) with chemical bootstrap 95% interval (4,000, seed 0); pass if self-check coverage lies in [0.88, 0.92] and the ratio interval upper bound is below 1"
+ },
+ "decisions": {
+  "rule": "chemicals ranked by chemical score; the top share receives the full concentration series, removing its forecast curve error",
+  "budgets": [
+   0.1,
+   0.2,
+   0.3
+  ],
+  "primary_budget": 0.2,
+  "comparators": {
+   "activity": "mean |measured concentration means|",
+   "departure": "mean |AnchorBoost - log-linear| over forecast entries",
+   "random": "expected removed share equals the budget",
+   "oracle": "rank by the actual error"
+  },
+  "best_simple": "the comparator with the larger removed share at 20% on development fold 0",
+  "primary": "removed share self-check minus best simple rule at 20% on folds 1-4, chemical bootstrap 95% interval (4,000, seed 0); pass if the lower bound exceeds 0"
+ },
+ "development_log": [
+  {
+   "mechanism": "analog design replay (residual left by interpolation on the nearest analogs under the same design) as features",
+   "fold0_k3_curve": {
+    "n10": 1.0626,
+    "n20": 1.0594
+   },
+   "reference_fold0": 1.0625
+  },
+  {
+   "mechanism": "self replay errors as point-model features (cross-fitted halves)",
+   "fold0_k3_curve": 1.0614,
+   "reference_fold0": 1.0625
+  },
+  {
+   "mechanism": "cross-size episodes (k-1, k, k+1 designs with size feature)",
+   "fold0_k3_curve": 1.0647,
+   "reference_fold0": 1.0625
+  },
+  {
+   "conclusion": "none of the three moves fold-0 point error beyond 0.003; the point model stays frozen and the self-check score is used for intervals and decisions"
+  }
+ ],
+ "forecast": {
+  "selfcheck_coverage": [
+   0.89,
+   0.91
+  ],
+  "width_ratio": [
+   0.85,
+   0.97
+  ],
+  "removed_share_difference_20pct": [
+   -0.02,
+   0.06
+  ],
+  "probability_decision_pass": 0.4
+ },
+ "compute": "free Kaggle CPU, one session per fold; laptop peak memory about 0.5 GB on a subset"
+}
