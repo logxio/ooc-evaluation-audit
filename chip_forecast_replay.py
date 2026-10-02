@@ -29,6 +29,10 @@ from sklearn.ensemble import HistGradientBoostingRegressor
 import chip_forecast as cf
 
 ROOT = Path(__file__).resolve().parent
+SELF_REPLAY = False   # self replay errors as point-model features (fold-0 development 1.0614 against 1.0625)
+REPLICATES = False    # replicate-aware context: spread of replicate wells at the measured concentrations
+TRAIN_DESIGNS = 0     # designs per training chemical: 0 = every design; N = seeded random N of them
+ENSEMBLE = 1          # members with feature subsampling 0.8 and seeds 0..n-1; 1 is the frozen single model
 N_REPLAY = 0          # analog replay: 0 disables (fold-0 development: 10 analogs 1.0626, 20 analogs 1.0594, none 1.0625)
 LEVEL = 0.90
 
@@ -85,9 +89,32 @@ def self_features(lv, errs, q):
     return np.stack([near, top, mean, scale], -1)
 
 
+def replicate_spread(task, ic):
+    """Per measured level and output: standard deviation of the replicate wells (0 with fewer than two wells)."""
+    lv = np.unique(task.logc[ic])
+    out = np.zeros((len(lv), cf.D))
+    for i, level in enumerate(lv):
+        sel = ic & (task.logc == level)
+        y, m = task.y[sel].reshape(sel.sum(), -1), task.m[sel].reshape(sel.sum(), -1)
+        n = m.sum(0)
+        mean = np.where(n > 0, (y * m).sum(0) / np.maximum(n, 1), 0.0)
+        var = np.where(n > 1, (((y - mean) ** 2) * m).sum(0) / np.maximum(n - 1, 1), 0.0)
+        out[i] = np.sqrt(var)
+    return lv, out
+
+
+def replicate_features(task, ic, q):
+    lv, sd = replicate_spread(task, ic)
+    near = sd[np.abs(lv[None, :] - q[:, None]).argmin(1)]
+    return np.stack([near, np.broadcast_to(sd[-1], near.shape), np.broadcast_to(sd[0], near.shape),
+                     np.broadcast_to(sd.mean(0), near.shape), np.full(near.shape, sd.mean())], -1)
+
+
 def features(task, ic, q, analog, profiles, ablation=None, selfcheck=None, size=None):
     base, f = cf.features(task, ic, q, analog, profiles)
     parts = [f]
+    if REPLICATES and ablation != 'no_replicates':
+        parts.append(replicate_features(task, ic, q))
     if size is not None:
         parts.append(np.full(f.shape[:2] + (1,), float(size)))
     if N_REPLAY and ablation != 'no_replay':
@@ -98,6 +125,14 @@ def features(task, ic, q, analog, profiles, ablation=None, selfcheck=None, size=
     return base, np.concatenate(parts, -1)
 
 
+def sampled_designs(task, k):
+    designs = cf.all_designs(task, k)
+    if not TRAIN_DESIGNS or TRAIN_DESIGNS >= len(designs):
+        return designs
+    rng = np.random.default_rng(int(hashlib.sha256(f'{task.chem}|{k}|{TRAIN_DESIGNS}'.encode()).hexdigest()[:8], 16))
+    return [designs[i] for i in sorted(rng.choice(len(designs), TRAIN_DESIGNS, replace=False))]
+
+
 class ReplayBoost:
     def __init__(self, train, k, ablation=None, cross_size=False):
         self.ablation = ablation
@@ -105,13 +140,13 @@ class ReplayBoost:
         self.analog_train = cf.Analog(train, exclude_self=True)
         self.analog = cf.Analog(train)
         self.profiles = cf.Profiles(train)
-        self.self_replay = k >= 2 and ablation != 'no_self_replay' and not cross_size
+        self.self_replay = SELF_REPLAY and k >= 2 and ablation != 'no_self_replay' and not cross_size
         if self.self_replay:
             a, b = halves(train)
             self.helpers = {0: cf.AnchorBoost(b, k - 1), 1: cf.AnchorBoost(a, k - 1)}   # helper i never saw half i
             side = {t.chem: i for i, h in enumerate((a, b)) for t in h}
         span = [s for s in (k - 1, k, k + 1) if s >= 1] if cross_size else [k]
-        rows = [(t, ctx) for t in train for s in span if s < len(t.levels) for ctx in cf.all_designs(t, s)]
+        rows = [(t, ctx) for t in train for s in span if s < len(t.levels) for ctx in sampled_designs(t, s)]
         sizes = [int(t.ok[~np.isin(t.levels, ctx)].sum()) for t, ctx in rows]
         X = y = None
         at = 0
@@ -128,13 +163,15 @@ class ReplayBoost:
             y[at:at + size] = (mu.reshape(len(lv), cf.D) - base).ravel()[keep]
             at += size
         self.rows = int(len(y))
-        self.model = HistGradientBoostingRegressor(**cf.MODEL).fit(X, y)
+        params = [cf.MODEL] if ENSEMBLE == 1 else [dict(cf.MODEL, max_features=0.8, random_state=i) for i in range(ENSEMBLE)]
+        self.models = [HistGradientBoostingRegressor(**pr).fit(X, y) for pr in params]
 
     def __call__(self, task, ic, q):
         check = self_replay(list(self.helpers.values()), task, ic) if self.self_replay else None
         size = len(np.unique(task.logc[ic])) if self.cross_size else None
         base, f = features(task, ic, q, self.analog, self.profiles, self.ablation, check, size)
-        return (base + self.model.predict(f.reshape(-1, f.shape[-1])).reshape(len(q), cf.D)).reshape(len(q), cf.ND, cf.NF)
+        F = f.reshape(-1, f.shape[-1])
+        return (base + np.mean([m.predict(F) for m in self.models], 0).reshape(len(q), cf.D)).reshape(len(q), cf.ND, cf.NF)
 
 
 def run(tasks, folds, ks, ablation=None, residuals=None, cross_size=False):
@@ -215,14 +252,22 @@ def main():
     p.add_argument('--cache', type=Path, default=ROOT / '.cache' / 'neurochip_twin')
     p.add_argument('--folds', type=int, nargs='+', default=[1, 2, 3, 4])
     p.add_argument('--k', type=int, nargs='+', default=[3])
-    p.add_argument('--ablation', choices=['no_replay', 'no_self_replay'])
+    p.add_argument('--ablation', choices=['no_replay', 'no_self_replay', 'no_replicates'])
     p.add_argument('--out', type=Path, default=ROOT / 'chip_forecast_replay_result.json')
     p.add_argument('--residuals', type=Path, help='write held-out absolute well errors for the conformal step')
     p.add_argument('--conformal', type=Path, nargs='+', help='summarise cross-conformal coverage from residual files')
     p.add_argument('--n-replay', type=int, default=N_REPLAY, help='analogs replayed per design')
     p.add_argument('--cross-size', action='store_true', help='train on designs with k-1, k and k+1 measured levels')
+    p.add_argument('--replicates', action='store_true', help='add replicate-well spread at the measured concentrations')
+    p.add_argument('--self-replay', action='store_true', help='self replay errors as features')
+    p.add_argument('--ensemble', type=int, default=ENSEMBLE, help='members with feature subsampling')
+    p.add_argument('--train-designs', type=int, default=TRAIN_DESIGNS, help='designs per training chemical (0 = all)')
     a = p.parse_args()
     globals()['N_REPLAY'] = a.n_replay
+    globals()['REPLICATES'] = a.replicates
+    globals()['SELF_REPLAY'] = a.self_replay
+    globals()['ENSEMBLE'] = a.ensemble
+    globals()['TRAIN_DESIGNS'] = a.train_designs
     if a.conformal:
         print(json.dumps(conformal(a.conformal), indent=1))
         return
@@ -233,7 +278,7 @@ def main():
     name = a.ablation or ('crosssize' if a.cross_size else 'designreplay')
     as_main = [dict(r, method='anchorboost') if r['method'] == name else r for r in rows]   # summarize() reads 'anchorboost'
     result = dict(schema='chip_forecast.replay.result.v1', source=dict(commit=cf.COMMIT, files=cf.FILES), folds=a.folds, ks=a.k,
-                  model=dict(cf.MODEL, n_replay=N_REPLAY, mechanism='analog design replay'), ablation=a.ablation, timing=times,
+                  model=dict(cf.MODEL, n_replay=N_REPLAY, replicates=REPLICATES, ensemble=ENSEMBLE, cross_size=a.cross_size, train_designs=TRAIN_DESIGNS), ablation=a.ablation, timing=times,
                   summary=cf.summarize(as_main, pub, a.folds, a.k),
                   summary_by_fold={f'fold{f}': cf.summarize(as_main, pub, [f], a.k) for f in a.folds},
                   code_sha256=hashlib.sha256(Path(__file__).read_bytes()).hexdigest(),

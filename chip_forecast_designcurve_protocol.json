@@ -1,0 +1,42 @@
+{
+ "schema": "chip_forecast.designcurve.protocol.v1",
+ "frozen_at": "2026-10-02T09:45:02+00:00",
+ "question": "Is design-exhaustive supervision the source of the gain: does held-out error fall as each training chemical contributes more of its sparse designs?",
+ "model": "frozen AnchorBoost features and hyperparameters (chip_forecast.py); only the number of training designs per chemical changes",
+ "code": {
+  "file": "chip_forecast_replay.py",
+  "sha256": "9ab65b07fc02af525964f8c6890c9724a9de16b5b4d88d9c75541b9e1fc69032",
+  "flag": "--train-designs N (seeded random N of the C(L,3) designs per chemical)"
+ },
+ "arms": {
+  "N5": "random 5 designs",
+  "N10": "random 10 designs",
+  "N20": "random 20 designs",
+  "all": "every design (published AnchorBoost run)",
+  "published5": "the five published context designs (prior ablation, 1.183)"
+ },
+ "folds": [
+  1,
+  2,
+  3,
+  4
+ ],
+ "k": 3,
+ "metric": "curve error, paired chemical bootstrap against the every-design model",
+ "forecast": {
+  "N5": [
+   1.17,
+   1.19
+  ],
+  "N10": [
+   1.165,
+   1.18
+  ],
+  "N20": [
+   1.16,
+   1.17
+  ],
+  "monotone": "error decreases from 5 to 10 to 20 to all designs"
+ },
+ "context": "Seven other mechanisms changed development-fold error by at most 0.003 (see chip_forecast_selfcheck_protocol.json development_log and the replay options); this curve tests the one mechanism whose ablation already excluded zero."
+}
