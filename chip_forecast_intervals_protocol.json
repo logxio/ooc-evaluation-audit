@@ -1,0 +1,34 @@
+{
+ "name": "Learned-width cross-conformal intervals for three-concentration forecasts",
+ "frozen_utc": "2026-10-02T10:05:27Z",
+ "point_forecasts": "Frozen AnchorBoost (chip_forecast.py sha256 3d02dd3a1bc57e8c53f701a6005c8d5e9d8ad6a15a57cdec3f22b27066015897) held-out well errors at three measured concentrations, five published designs per chemical, saved per fold by chip_forecast_selfcheck.py (sha256 5c16d9cd82513c876ce3b98132338fb4b40bb9b7322c3b05e62ad1be96c23818) in the competition notebook runs; per-chemical errors equal chip_forecast_result.csv for all 243 chemicals.",
+ "method": {
+  "code": "chip_forecast_intervals.py",
+  "code_sha256": "ad4825c2d0f1f6ccd5698cfe8b21e1d8fb31847f41338ef0ad1bf055fada05d4",
+  "width_model": "HistGradientBoostingRegressor, quantile loss at 0.9 on absolute well error, 300 iterations, learning rate 0.05, 31 leaves, minimum leaf 200, 300,000-row subsample (seed 0), floor 0.05",
+  "inputs": "output, day and feature index; signed distance to the lowest and highest measured concentration, distance to the nearest one and the interior gap; measured level means at the lowest, middle and highest concentration and their largest magnitude; the interpolated value and its magnitude; replicate standard deviation at the three measured concentrations and their mean; chemical-level mean magnitude at the highest measured concentration, mean replicate spread and largest measured magnitude. No unmeasured value, cytotoxicity call or label enters.",
+  "calibration": "For test fold f, each other fold g is scored by a width model trained on the remaining three calibration folds; one global finite-sample 90% quantile of error/width over the four calibration folds multiplies the mean of the four width models on fold f."
+ },
+ "development": {
+  "fold": 0,
+  "note": "Configuration chosen on fold 0 only (calibrated on folds 1-4); folds 1-4 not evaluated with this width model before this freeze. The earlier self-check-scaled intervals (chip_forecast_selfcheck_protocol.json) were evaluated on folds 1-4 and failed their width test; they are a different score.",
+  "plain_per_output": {"coverage": 0.9156, "half_width": 4.267},
+  "chosen_quantile_width_global": {"coverage": 0.9119, "half_width": 3.632, "width_ratio": 0.8513, "width_ratio_ci95": [0.8119, 0.8903]},
+  "alternatives": {
+   "quantile_width_per_output_multiplier": {"coverage": 0.9116, "half_width": 3.655},
+   "log_error_width_global": {"coverage": 0.9146, "half_width": 3.642},
+   "log_error_width_per_output": {"coverage": 0.9136, "half_width": 3.693},
+   "quantile_width_global_all_rows": {"coverage": 0.9119, "half_width": 3.636}
+  }
+ },
+ "evaluation": {
+  "test_folds": [1, 2, 3, 4],
+  "units": "pooled over held-out (well, output) entries; chemical bootstrap, 4,000 resamples, seed 0",
+  "pass_rules": {
+   "coverage": "pooled coverage on folds 1-4 within [0.89, 0.91]",
+   "width": "learned over plain mean half-width ratio below 1 with its 95% chemical-bootstrap interval entirely below 1"
+  },
+  "forecast": {"coverage": [0.895, 0.91], "half_width": [3.40, 3.73], "width_ratio": [0.81, 0.89]},
+  "comparator": "Published neural-process conformal intervals at three measured concentrations, results/conformal_r7.json at commit f9848800dfab66a8bc005e6b3087153eeaabe9ac: coverage 0.8989 [0.8914, 0.906] (chemical mean), full width 7.413, half-width 3.7065, all five folds, scores normalised by the ensemble predictive scale and stratified by a chemical-level AlamarBlue/LDH cytotoxicity call. Descriptive comparison only: no per-entry comparator intervals are published."
+ }
+}
