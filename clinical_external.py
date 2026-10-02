@@ -101,6 +101,8 @@ def metrics(cases):
     p = min(1, 2*sum(math.comb(d,k) for k in range(min(wins,losses)+1))/(2**d)) if d else 1
     return dict(patients=n, reports=n, correct=correct, wrong=n-correct, accuracy=correct/n if n else None,
                 accuracy_wilson95=wilson(correct,n), baseline_correct=baseline,
+                always_benefit_correct=n-baseline,
+                constant_benefit_scope='Post-unblinding class-imbalance diagnostic, not the frozen primary comparator',
                 accuracy_difference=(correct-baseline)/n if n else None,
                 paired_wins=wins, paired_losses=losses, exact_mcnemar_p=p)
 
@@ -108,7 +110,7 @@ def score(data, frozen):
     if prepare(data) != frozen:
         raise ValueError('Source, eligibility, rule or predictions differ from the frozen manifest')
     labels = read_cells(data, {'C'})
-    mapping = {'partial response':1, 'stable disease':1, 'progressive disease':0,
+    mapping = {'partial response':1, 'stable disease':1, 'stable':1, 'progressive disease':0,
                'progression':0, 'PR':1, 'SD':1, 'PD':0}
     cases = []
     for c in frozen['cases']:
@@ -123,6 +125,7 @@ def score(data, frozen):
                 primary=metrics(cases), exact_drug_sensitivity=metrics([c for c in cases if not c['proxy']]),
                 source_table_rows=len(frozen['cases']), linkage_review=sum(not c['eligible'] for c in frozen['cases']),
                 cases=cases,
+                linkage_review_cases=[dict(patient=c['patient'],action=c['action'],reason=c['reason']) for c in frozen['cases'] if not c['eligible']],
                 scope='Validation of source-specific research calls, not a new calibration method or validation of the rectal combined assay',
                 risk_certificate='No independent labelled calibration set; certified 10% conditional-risk coverage remains zero')
 
