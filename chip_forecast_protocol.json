@@ -1,0 +1,158 @@
+{
+ "schema": "chip_forecast.protocol.v1",
+ "frozen_at": "2026-10-02T06:17:36+00:00",
+ "question": "From k measured concentrations of a chemical on the EPA network-formation MEA screen, how closely can the remaining concentrations be forecast across DIV 5/7/9/12 and 17 features?",
+ "data": {
+  "source": "https://raw.githubusercontent.com/Agnuxo1/neurochip-twin/f9848800dfab66a8bc005e6b3087153eeaabe9ac/",
+  "commit": "f9848800dfab66a8bc005e6b3087153eeaabe9ac",
+  "files": {
+   "data_bundle/nfa_tasks.npz": "e1f056ef33f568052fb8dfdba6e095f7b575c7f78d96768e34469918559008d2",
+   "results/trajectory_cv_per_chemical.csv": "0d013127aef781ca5e1de04088532e2e19223364173a198e0686941c04f93abc"
+  },
+  "chemicals": 243,
+  "wells": 6902,
+  "licence": "EPA data: US Government work (public domain); bundle and published results: MIT"
+ },
+ "protocol_origin": "NeuroChip Twin v2 R2 protocol: five chemical folds as packaged, five seeded context designs per chemical and k, curve MAE against held-out level means, paired bootstrap over chemicals (4,000 resamples, seed 0, percentile 95% interval).",
+ "development": "Outer fold 0 only (49 chemicals) was used to choose features and hyperparameters; folds 1-4 (194 chemicals) were not evaluated by any AnchorBoost variant before this freeze.",
+ "development_log": [
+  {
+   "config": "local ridge on same-output features (alpha 1/10/100)",
+   "fold0_k3_curve_mae": [
+    1.1604,
+    1.1597,
+    1.1567
+   ]
+  },
+  {
+   "config": "ridge plus all-output extrapolation features, 5 or 15 designs, alpha 30-1000",
+   "fold0_k3_curve_mae_range": [
+    1.1569,
+    1.2723
+   ]
+  },
+  {
+   "config": "boosted residual, base features, early stopping auto, absolute loss",
+   "fold0_k3_curve_mae": 1.0905
+  },
+  {
+   "config": "same, squared loss",
+   "fold0_k3_curve_mae": 1.1101
+  },
+  {
+   "config": "plus same-feature cross-DIV features",
+   "fold0_k3_curve_mae": 1.0954
+  },
+  {
+   "config": "plus cross-DIV features, 600 iterations, lr .05, 63 leaves, min leaf 100",
+   "fold0_k3_curve_mae": 1.0802
+  },
+  {
+   "config": "base features plus Hill and analog deviations, 600/.05/63/100",
+   "fold0_k3_curve_mae": 1.0608,
+   "versus_published_neural_process": {
+    "mean_diff": -0.0626,
+    "ci95": [
+     -0.1532,
+     0.0078
+    ],
+    "frac_chem_improved": 0.612
+   }
+  },
+  {
+   "config": "plus six profile principal components, categorical output id, no early stopping",
+   "fold0_k3_curve_mae": 1.0716,
+   "note": "peak memory 4.3 GB from categorical handling; dropped"
+  },
+  {
+   "config": "numeric DIV/feature index instead of categorical id, no components, early stopping on / off",
+   "fold0_k3_curve_mae": [
+    1.0701,
+    1.0702
+   ],
+   "peak_memory_gb": [
+    1.73,
+    1.32
+   ]
+  },
+  {
+   "config": "same, 1,200 iterations",
+   "fold0_k3_curve_mae": 1.0682
+  },
+  {
+   "config": "same, 127 leaves, minimum leaf 50 (selected)",
+   "fold0_k3_curve_mae": 1.0607,
+   "peak_memory_gb": 1.07,
+   "versus_log_linear": {
+    "mean_diff": -0.1836,
+    "ci95": [
+     -0.2339,
+     -0.1353
+    ],
+    "frac_chem_improved": 0.898
+   },
+   "versus_published_neural_process": {
+    "mean_diff": -0.0627,
+    "ci95": [
+     -0.1514,
+     0.0077
+    ],
+    "frac_chem_improved": 0.633
+   }
+  }
+ ],
+ "model": {
+  "name": "AnchorBoost",
+  "params": {
+   "loss": "absolute_error",
+   "max_iter": 600,
+   "learning_rate": 0.05,
+   "max_leaf_nodes": 127,
+   "min_samples_leaf": 50,
+   "early_stopping": false,
+   "random_state": 0
+  },
+  "n_pca": 0,
+  "training": "Each outer fold trains one model on the other four folds, on every C(L,k) design of every training chemical; the analog feature excludes the chemical itself.",
+  "code": "chip_forecast.py",
+  "code_sha256": "966f23172fac31c9d508baa08f0f5199b021603ecc1291e2bed2245b91536e31"
+ },
+ "primary": {
+  "k": 3,
+  "folds": [
+   1,
+   2,
+   3,
+   4
+  ],
+  "metric": "curve MAE, mean over the 5 published designs per chemical",
+  "comparator": "log-linear interpolation (the strongest published baseline at k=3)",
+  "statistic": "mean paired difference AnchorBoost minus comparator with 95% bootstrap interval",
+  "success": "upper 95% bound below 0"
+ },
+ "head_to_head": {
+  "comparator": "published neural-process ensemble per-chemical curve MAE (results/trajectory_cv_per_chemical.csv, method neurotrajectory)",
+  "claim_rule": "\"lower error than the published neural process\" only if the upper 95% bound is below 0; otherwise report the difference and interval as measured"
+ },
+ "secondary": [
+  "k = 1, 2, 4 with the same comparators",
+  "all five folds, fold 0 flagged as development",
+  "well MAE",
+  "equal-accuracy design: smallest k at which AnchorBoost matches or beats log-linear interpolation at k+1 and k+2 (wells per chemical)",
+  "ablations at k=3, folds 1-4: no anchor, no Hill deviation, no analog deviation, no profile components, five published designs instead of all designs",
+  "chemicals where AnchorBoost loses most to each comparator"
+ ],
+ "forecast": {
+  "primary_mean_diff": [
+   -0.22,
+   -0.14
+  ],
+  "primary_upper_bound_below_zero_probability": 0.97,
+  "versus_neural_process_mean_diff": [
+   -0.09,
+   -0.01
+  ],
+  "versus_neural_process_upper_bound_below_zero_probability": 0.6
+ },
+ "compute": "Laptop CPU, one process, about 1.1 GB peak per fold; no GPU, no paid service."
+}
