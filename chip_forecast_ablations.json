@@ -1,0 +1,68 @@
+{
+ "schema": "chip_forecast.ablations.v1",
+ "k": 3,
+ "folds": [
+  1,
+  2,
+  3,
+  4
+ ],
+ "platform": "free Kaggle CPU, one session per ablation",
+ "full_model_mean": 1.1606,
+ "ablations": {
+  "no_anchor": {
+   "mean": 1.1692,
+   "minus_full": {
+    "mean_diff": 0.0086,
+    "ci95": [
+     -0.0066,
+     0.0338
+    ],
+    "rel_change_pct": 0.74,
+    "n_chemicals": 194,
+    "frac_chem_improved": 0.5
+   }
+  },
+  "no_hill": {
+   "mean": 1.1647,
+   "minus_full": {
+    "mean_diff": 0.0041,
+    "ci95": [
+     -0.0006,
+     0.0103
+    ],
+    "rel_change_pct": 0.35,
+    "n_chemicals": 194,
+    "frac_chem_improved": 0.515
+   }
+  },
+  "no_analog": {
+   "mean": 1.1797,
+   "minus_full": {
+    "mean_diff": 0.0191,
+    "ci95": [
+     0.0106,
+     0.0293
+    ],
+    "rel_change_pct": 1.64,
+    "n_chemicals": 194,
+    "frac_chem_improved": 0.351
+   }
+  },
+  "five_designs": {
+   "mean": 1.183,
+   "minus_full": {
+    "mean_diff": 0.0224,
+    "ci95": [
+     0.0093,
+     0.0369
+    ],
+    "rel_change_pct": 1.93,
+    "n_chemicals": 194,
+    "frac_chem_improved": 0.351
+   }
+  }
+ },
+ "per_chemical": "chip_forecast_ablations.csv",
+ "note": "Each ablation retrains one model per fold with the flag --ablation; paired bootstrap over chemicals of ablation minus full model."
+}
