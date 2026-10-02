@@ -1,0 +1,173 @@
+{
+ "test_folds": [
+  1,
+  2,
+  3,
+  4
+ ],
+ "threshold": 3.0,
+ "alpha": 0.1,
+ "splits": {
+  "fold1": [
+   [
+    0,
+    2
+   ],
+   [
+    3,
+    4
+   ]
+  ],
+  "fold2": [
+   [
+    0,
+    1
+   ],
+   [
+    3,
+    4
+   ]
+  ],
+  "fold3": [
+   [
+    0,
+    1
+   ],
+   [
+    2,
+    4
+   ]
+  ],
+  "fold4": [
+   [
+    0,
+    1
+   ],
+   [
+    2,
+    3
+   ]
+  ]
+ },
+ "full_series_inactive_share": 0.2371,
+ "rules": {
+  "fold1": {
+   "anchorboost": {
+    "cutoff": 2.9836,
+    "margin": 0.03
+   },
+   "measured_only": {
+    "cutoff": 2.9836,
+    "margin": 0.14
+   }
+  },
+  "fold2": {
+   "anchorboost": {
+    "cutoff": 2.9994,
+    "margin": 0.03
+   },
+   "measured_only": {
+    "cutoff": 2.9812,
+    "margin": 0.17
+   }
+  },
+  "fold3": {
+   "anchorboost": {
+    "cutoff": 2.9994,
+    "margin": 0.03
+   },
+   "measured_only": {
+    "cutoff": 2.9812,
+    "margin": 0.14
+   }
+  },
+  "fold4": {
+   "anchorboost": {
+    "cutoff": 2.9994,
+    "margin": 0.0
+   },
+   "measured_only": {
+    "cutoff": 2.9812,
+    "margin": 0.07
+   }
+  }
+ },
+ "anchorboost": {
+  "designs": 970,
+  "released": 905,
+  "wrong_released": 79,
+  "retests": 65,
+  "coverage": 0.933,
+  "overall_wrong_release": 0.0814,
+  "released_error": 0.0873,
+  "wells_used": 12240,
+  "wells_full": 28185,
+  "wells_saved_fraction": 0.5657,
+  "full_coverage_errors": 102
+ },
+ "measured_only": {
+  "designs": 970,
+  "released": 711,
+  "wrong_released": 79,
+  "retests": 259,
+  "coverage": 0.733,
+  "overall_wrong_release": 0.0814,
+  "released_error": 0.1111,
+  "wells_used": 15373,
+  "wells_full": 28185,
+  "wells_saved_fraction": 0.4546,
+  "full_coverage_errors": 145
+ },
+ "anchorboost_minus_measured_only": {
+  "chemicals": 194,
+  "released_share": {
+   "value": 0.2,
+   "ci95": [
+    0.1598,
+    0.2412
+   ]
+  },
+  "wrong_release_per_design": {
+   "value": 0.0,
+   "ci95": [
+    -0.0196,
+    0.0196
+   ]
+  },
+  "wells_saved_share": {
+   "value": 0.1112,
+   "ci95": [
+    0.0859,
+    0.1376
+   ]
+  },
+  "full_coverage_wrong_calls_per_design": {
+   "value": -0.0443,
+   "ci95": [
+    -0.068,
+    -0.0227
+   ]
+  }
+ },
+ "equal_risk": {
+  "risk_0.05": {
+   "anchorboost": 0.7443,
+   "measured_only": 0.5639,
+   "gap": 0.1804,
+   "gap_ci95": [
+    0.1165,
+    0.3196
+   ]
+  },
+  "risk_0.10": {
+   "anchorboost": 0.9897,
+   "measured_only": 0.8361,
+   "gap": 0.1536,
+   "gap_ci95": [
+    0.0557,
+    0.2763
+   ]
+  }
+ },
+ "code_sha256": "27fbf168797e6eceb3643e18da5719004d798db76aa69184404160d1be8501cf"
+}

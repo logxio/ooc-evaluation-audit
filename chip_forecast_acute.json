@@ -1,0 +1,89 @@
+{
+ "source": {
+  "url": "https://pasteur.epa.gov/uploads/10.23719/1504294/MEA_All_Data_Scripts.zip",
+  "sha256": "38494e1688ee6eafcbc30832755f5df28453893745c5bf8bc3bbfe4800753247",
+  "member": "MEA_Data/MEA_Data_Input.csv"
+ },
+ "k": 3,
+ "folds": [
+  0,
+  1,
+  2,
+  3,
+  4
+ ],
+ "timing": null,
+ "summary": {
+  "n_chemicals": 384,
+  "anchorboost": 1.5541,
+  "versus": {
+   "loglinear_interp": {
+    "mean_diff": -0.26,
+    "ci95": [
+     -0.2812,
+     -0.2382
+    ],
+    "rel_change_pct": -14.33,
+    "n_chemicals": 384,
+    "frac_chem_improved": 0.932
+   },
+   "hill_per_endpoint": {
+    "mean_diff": -0.3612,
+    "ci95": [
+     -0.3823,
+     -0.3394
+    ],
+    "rel_change_pct": -18.86,
+    "n_chemicals": 384,
+    "frac_chem_improved": 0.977
+   },
+   "analog_knn": {
+    "mean_diff": -0.1818,
+    "ci95": [
+     -0.2017,
+     -0.1627
+    ],
+    "rel_change_pct": -10.47,
+    "n_chemicals": 384,
+    "frac_chem_improved": 0.927
+   }
+  },
+  "fold_means": {
+   "fold0": {
+    "anchorboost": 1.5185,
+    "loglinear_interp": 1.7482,
+    "hill_per_endpoint": 1.8486,
+    "analog_knn": 1.7302
+   },
+   "fold1": {
+    "anchorboost": 1.5129,
+    "loglinear_interp": 1.7539,
+    "hill_per_endpoint": 1.8786,
+    "analog_knn": 1.6796
+   },
+   "fold2": {
+    "anchorboost": 1.544,
+    "loglinear_interp": 1.7996,
+    "hill_per_endpoint": 1.8818,
+    "analog_knn": 1.6767
+   },
+   "fold3": {
+    "anchorboost": 1.6144,
+    "loglinear_interp": 1.8667,
+    "hill_per_endpoint": 1.9565,
+    "analog_knn": 1.8257
+   },
+   "fold4": {
+    "anchorboost": 1.578,
+    "loglinear_interp": 1.9027,
+    "hill_per_endpoint": 2.0105,
+    "analog_knn": 1.7596
+   }
+  },
+  "loglinear_interp": 1.8141,
+  "hill_per_endpoint": 1.9152,
+  "analog_knn": 1.7358
+ },
+ "code_sha256": "752f949aabe0f832048fb35bba14da4388e24e4365eb9ae48b0812d76b2161d3",
+ "model_sha256": "3d02dd3a1bc57e8c53f701a6005c8d5e9d8ad6a15a57cdec3f22b27066015897"
+}
