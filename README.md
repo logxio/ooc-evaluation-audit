@@ -1,6 +1,6 @@
-# Measure fewer concentrations, report with evidence
+# Skip more than half the wells of a toxicity screen, with no more wrong calls
 
-Decision tools for organ-chip screens and patient organoids: forecast the unmeasured concentrations of a chip screen, and turn patient readouts into report or retest lists.
+This tool lets a neurotoxicity screen skip more than half its wells (56.6%) and make no more wrong active/inactive calls than reading the measured concentrations alone (8.1%). Forecasts from three of seven concentrations settle 93.3% of 970 held-out designs, and the [970-row action list](chip_forecast_actions.csv) says which chemicals to report now and which to finish. The same release rule turns patient organoid readouts into report or retest lists.
 
 ## Forecast the concentrations a chip screen has not measured yet
 
