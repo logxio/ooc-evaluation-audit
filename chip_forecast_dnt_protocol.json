@@ -1,0 +1,43 @@
+{
+ "name": "Third, independent benchmark: frozen AnchorBoost on human neural cells (US EPA DNT screen)",
+ "frozen_utc": "2026-10-02T14:45:00Z",
+ "question": "Does the frozen forecaster, with no change and no choice made on new data, beat the strongest sparse-concentration baselines on a third public dose-response screen run in human neural progenitors and human neurons?",
+ "source": {
+  "url": "https://pasteur.epa.gov/uploads/10.23719/1407642/Harrill%20et%20al%20DNT_Assay%20Dataset.xlsx",
+  "sha256": "ab6de83c38001c7d1cb977c3758bc77aa110d18658a3b9758369bf3a21d6bc0e",
+  "sheets": ["assay_component", "Data"],
+  "record": "US EPA ScienceHub, DOI 10.23719/1407642 (Harrill et al. 2018, Toxicology and Applied Pharmacology 354:24-39)",
+  "license": "US public domain (EPA ScienceHub)"
+ },
+ "data": {
+  "design": "Every endpoint the file records in human cells: hNP1 neural progenitors (caspase apoptosis, CellTiter viability, three proliferation readouts: object count, percent responders, mean intensity) and hN2 neurons (high-content neurite outgrowth: neuron count, neurite length, neurite count, branch points). Up to 11 concentrations per chemical on three replicate plates. Endpoints are selected by the assay component name prefix hNP1_ or hN2_.",
+  "preparation": "Rows flagged well quality 0 are removed (79 of 21,372 human-cell rows) and rows without a raw value are dropped (6). Each plate is centred on the median of its vehicle wells (well type n), each endpoint is divided by 1.4826 x the median absolute centred vehicle value over all its plates (the vehicle SD where that is zero) and clipped to +-10: the acute MEA benchmark's normalization, unchanged.",
+  "wells": "A well is one plate position for one sample, because plate IDs DNT0201-E1 to E3 each hold two chemicals at the same positions in the source file; endpoints read from the same well share a row, the others are masked. 8,061 test wells.",
+  "tasks": "71 chemicals with at least one human-cell endpoint (61 with 11 concentrations, 5 with 10, 4 with 9, 1 with 7), 9 outputs at one read time, concentrations grouped per chemical on a 0.1 log10 grid. Sample names are used as given (Valproate and Valproic Acid are two samples).",
+  "folds": "fold = int(sha256('dnt-hci|' + sample name)[:8], 16) mod 5; 12/17/14/13/15 chemicals",
+  "independence": "Different species and cells (human neural progenitors and neurons, not rat cortical networks), different readouts (high-content imaging and plate-reader assays, not electrophysiology); nothing from the developmental or acute MEA benchmarks enters training or evaluation.",
+  "checks_before_freeze": {"chemicals": 71, "observed_share": 0.916, "loglinear_k3_curve_error_all_chemicals": 1.9651, "note": "baseline-only computation; no AnchorBoost model was trained on these data before this freeze"}
+ },
+ "model": {
+  "file": "chip_forecast.py",
+  "sha256": "3d02dd3a1bc57e8c53f701a6005c8d5e9d8ad6a15a57cdec3f22b27066015897",
+  "configuration": "frozen F101 AnchorBoost, every C(L,3) design of every training chemical, unchanged features and hyperparameters"
+ },
+ "code": {"file": "chip_forecast_dnt.py", "sha256": "41f51044d548073c3e20acb00b91faadf234cdb89b40e25b6e5f4d9d607f4e01"},
+ "evaluation": {
+  "folds": [0, 1, 2, 3, 4],
+  "k": 3,
+  "designs": "five seeded designs per chemical (chip_forecast.designs)",
+  "metric": "curve error against held-out concentration means, averaged over observed outputs, designs and then chemicals",
+  "comparators": ["log-linear interpolation (primary)", "Hill curve per output", "distance-weighted analog chemicals"],
+  "bootstrap": "paired over chemicals, 4,000 resamples, seed 0 (chip_forecast.paired)",
+  "per_fold": "fold means of every method and the paired difference against log-linear interpolation within each fold"
+ },
+ "pass_rule": "AnchorBoost minus log-linear interpolation over all 71 chemicals: 95% chemical-bootstrap upper bound below zero",
+ "forecast": {
+  "relative_change_vs_loglinear_pct": [-20, -3],
+  "probability_upper_bound_below_zero": 0.7,
+  "versus_hill_and_analog": "AnchorBoost lower than both"
+ },
+ "reporting": "The result is published whatever its sign. A failed pass rule is reported with its numbers and is not followed by any change of preparation, endpoints, model or rule on these data."
+}
