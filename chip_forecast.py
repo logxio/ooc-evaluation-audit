@@ -217,12 +217,16 @@ def features(task, ic, q, analog, profiles, ablation=None):
     L, Q = len(lv), len(q)
     base = interp_rows(lv, mu, ok, q).reshape(Q, D)
     M = mu.reshape(L, D)
-    up = (M[-1] - M[-2]) / (lv[-1] - lv[-2])
-    low = (M[1] - M[0]) / (lv[1] - lv[0])
-    span = (M[-1] - M[0]) / (lv[-1] - lv[0])
+    if L > 1:
+        up = (M[-1] - M[-2]) / (lv[-1] - lv[-2])
+        low = (M[1] - M[0]) / (lv[1] - lv[0])
+        span = (M[-1] - M[0]) / (lv[-1] - lv[0])
+        i = np.clip(np.searchsorted(lv, q), 1, L - 1)
+        gap = (lv[i] - lv[i - 1]) * ((q > lv[0]) & (q < lv[-1]))
+    else:  # one measured level carries no slope or interior gap
+        up = low = span = np.zeros(D)
+        gap = np.zeros(Q)
     above, below = np.clip(q - lv[-1], 0, None), np.clip(lv[0] - q, 0, None)
-    i = np.clip(np.searchsorted(lv, q), 1, L - 1)
-    gap = (lv[i] - lv[i - 1]) * ((q > lv[0]) & (q < lv[-1]))
     hill = predict_hill(task, ic, q).reshape(Q, D) - base
     near = analog.predict(task, ic, q).reshape(Q, D) - base
     P = profiles(M * ok.reshape(L, D))
@@ -233,7 +237,7 @@ def features(task, ic, q, analog, profiles, ablation=None):
         cols.append(hill)
     if ablation != 'no_analog':
         cols += [near, np.abs(near).mean(1)[:, None]]
-    cols += list(P[-1]) + list(P[0]) + list(P[-1] - P[-2])
+    cols += list(P[-1]) + list(P[0]) + list(P[-1] - P[-2] if L > 1 else 0 * P[0])
     cols += [np.arange(D) // NF, np.arange(D) % NF]
     out = np.empty((Q, D, len(cols)), np.float64)
     for c, v in enumerate(cols):
