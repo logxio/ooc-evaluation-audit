@@ -57,6 +57,7 @@ details summary{list-style:none;cursor:pointer;color:var(--ink2);font-weight:600
 details summary::-webkit-details-marker{display:none}
 details summary::after{content:"";width:6px;height:6px;border-right:1.5px solid;border-bottom:1.5px solid;transform:translateY(-2px) rotate(45deg)}
 details[open] summary::after{transform:translateY(1px) rotate(225deg)}
+details summary[aria-description]:is(:hover,:focus-visible)::after{transform:none;width:max-content;height:auto;border:0}
 details summary:hover{color:var(--ink)}
 details[open]{flex-basis:100%}
 .drawer{padding-top:6px}
