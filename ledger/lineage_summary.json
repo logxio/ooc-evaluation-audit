@@ -1,0 +1,167 @@
+{
+  "patients": {
+    "patients": 43,
+    "input_rows_identical": true,
+    "training_ids_identical": true,
+    "original_browser_export_rows_matched": 43,
+    "new_browser_exports_and_independent_formula_rows_matched": 43,
+    "built_in": {
+      "released": 27,
+      "retests": 16,
+      "wrong": 4,
+      "overall_error": 0.09302325581395349,
+      "conditional_error": 0.14814814814814814,
+      "wrong_ids": [
+        "Patient97",
+        "Patient89",
+        "Patient49",
+        "Patient21"
+      ]
+    },
+    "combined": {
+      "released": 43,
+      "retests": 0,
+      "wrong": 1,
+      "overall_error": 0.023255813953488372,
+      "conditional_error": 0.023255813953488372,
+      "wrong_ids": [
+        "Patient105"
+      ]
+    },
+    "changes": {
+      "unchanged": 22,
+      "retest_to_correct_report": 16,
+      "wrong_to_correct_report": 4,
+      "new_wrong_report": 1
+    },
+    "execution": {
+      "browser": "154.0.8037.98",
+      "node": "v24.20.0",
+      "playwright": "1.62.1",
+      "entry": "workbench/index.html",
+      "inputs": [
+        {
+          "path": "workbench/index.html",
+          "sha256": "349ba67e93b0c2e680cab15a26a94977fd789dea3d9cce7df0fc123d7f3d8ef1"
+        },
+        {
+          "path": "workbench/engine.js",
+          "sha256": "007e58276ed177ef08fabbf1b4061df92d106a08a7f7d00e27ff41ab7eb6c209"
+        },
+        {
+          "path": "workbench/stats.js",
+          "sha256": "20ceaa079f797eae3aec8f4ef86e3ee2b2a94348b429f302965592cf6c49e0e3"
+        },
+        {
+          "path": "workbench/chain-engine.js",
+          "sha256": "d9236f633e2eb5fdd49acacb81f3eb5cc9846fe4db75989e219d0aa1e8da5040"
+        },
+        {
+          "path": "workbench/chain.js",
+          "sha256": "65e054f3e3c3160de6cd0ceb0113eb29c3af9adf462cf26e3bb289728345dcfc"
+        },
+        {
+          "path": "workbench/result.js",
+          "sha256": "0e9958f79c5a67eb986897cc60ea7d6c15ea1b709a3878ece234ed463f07de3a"
+        },
+        {
+          "path": "workbench/result.json",
+          "sha256": "e891b56d019e76dcd3bb0c52069cba68cf90c26ea2cc44af6ee19d3cb9949860"
+        },
+        {
+          "path": "patient_workbench_result.json",
+          "sha256": "a32130c99521a630f8fb821adc6181adb154a3a5af7831a5457d2a57fc895cf5"
+        }
+      ],
+      "receipts": [
+        {
+          "name": "built_in_two_readout",
+          "comparison": "Wrong calls · all\nWrong calls · reported\nCost / patient\nTotal cost\nTwo-readout release rule\n27 / 16\n4/43 · 9.30%\n4/27 · 14.81%\n0.1860\n8.0000\nFixed threshold · combined regimen\n43 / 0\n1/43 · 2.33%\n1/43 · 2.33%\n0.0233\n1.0000",
+          "failure": "4 wrong reported calls: Patient97, Patient89, Patient49, Patient21. Baseline right on 4 of 4. Lower cost: Fixed threshold · combined regimen.",
+          "patient_rows": 43,
+          "wrong_reported_rows": 4,
+          "visible_error": null,
+          "csv_sha256": "3c5ba09ffd2c5ada5d8c18950710032dbdbc3c4c69372bfb5a4ea4a5f8aa39f2",
+          "analysis_sha256": "35e307ffbd668de13ff1bdbba7a70216666b178a3b85366deca42a31705ad4da"
+        },
+        {
+          "name": "updated_combined_regimen",
+          "comparison": "Wrong calls · all\nWrong calls · reported\nCost / patient\nTotal cost\nCombined-regimen signal\n43 / 0\n1/43 · 2.33%\n1/43 · 2.33%\n0.0233\n1.0000\nEarlier two-readout agreement\n27 / 16\n4/43 · 9.30%\n4/27 · 14.81%\n0.1860\n8.0000",
+          "failure": "1 wrong reported call: Patient105. Baseline right on 1 of 1. Lower cost: Combined-regimen signal.",
+          "patient_rows": 43,
+          "wrong_reported_rows": 1,
+          "visible_error": null,
+          "csv_sha256": "2f0ab8df2307455ba480081a147b7772e94c475a0f873d6621b54ae8c3a33039",
+          "analysis_sha256": "5add558bffabc214b06011d384d1962fbf9ce643277819598cdeadbf8a6ae832"
+        }
+      ],
+      "errors": [],
+      "elapsed_ms": 1033.4937499999999,
+      "max_rss_node_kib": 141888,
+      "mode": "headless; file entry; local downloads; HTTP requests blocked"
+    },
+    "policy_relationship": "different signals and release policies on the same test patients; old comparator becomes new primary; fixed combined cutoff and overall-CRC give identical calls",
+    "delivery_relationship": "built-in packet uses saved two-readout cases; updated result control opens precomputed combined-regimen cases; CLI is needed for a new combined-regimen input table"
+  },
+  "folds": {
+    "linux_folds_1to4": {
+      "mean": -0.03334179847217374,
+      "ci95": [
+        -0.07020916134414158,
+        -0.0006445145448719041
+      ],
+      "n": 194,
+      "seed": 0,
+      "resamples": 4000
+    },
+    "mixed_macos12_linux34": {
+      "mean": -0.03211082339634461,
+      "ci95": [
+        -0.06942630512437133,
+        0.0012863886876593965
+      ],
+      "n": 194,
+      "seed": 0,
+      "resamples": 4000
+    },
+    "public_vs_private_rows_equal": 776,
+    "new_training_runs": 0,
+    "scope": "archived Linux public rerun and Mac fold 1/2 retrains; summaries and paired bootstrap recomputed now"
+  },
+  "inputs": {
+    "workbench/result.json": "e891b56d019e76dcd3bb0c52069cba68cf90c26ea2cc44af6ee19d3cb9949860",
+    "patient_workbench_result.json": "a32130c99521a630f8fb821adc6181adb154a3a5af7831a5457d2a57fc895cf5",
+    "matched_regimen_frozen.json": "5d4ba0052e39de4b9079cef7b750b14d87b637adac49c16fa041133ab71503cb",
+    "ledger/browser/receipt.json": "2459153004e21bc8684dad18b0ba4d2e09d33f1c2fb93d67b4560b910bde0c4b",
+    "ledger/browser/built_in_two_readout.csv": "3c5ba09ffd2c5ada5d8c18950710032dbdbc3c4c69372bfb5a4ea4a5f8aa39f2",
+    "ledger/browser/updated_combined_regimen.csv": "2f0ab8df2307455ba480081a147b7772e94c475a0f873d6621b54ae8c3a33039",
+    "ledger/browser/built_in_two_readout.json": "35e307ffbd668de13ff1bdbba7a70216666b178a3b85366deca42a31705ad4da",
+    "ledger/browser/updated_combined_regimen.json": "5add558bffabc214b06011d384d1962fbf9ce643277819598cdeadbf8a6ae832",
+    "ledger/reference/patient-actions.csv": "3c5ba09ffd2c5ada5d8c18950710032dbdbc3c4c69372bfb5a4ea4a5f8aa39f2",
+    "chip_forecast_result.csv": "d35d11c5575853043a5d5d68b3165c7510f0fb6baec7a997b51c3f4a3a556658",
+    "ledger/.cache/trajectory_cv_per_chemical.csv": "0d013127aef781ca5e1de04088532e2e19223364173a198e0686941c04f93abc",
+    "ledger/reference/training_summary.json": "ffbc0c3e065e767083b4b6ec759df00e0f753e3195aee6b6b7ef00cb05f37edf",
+    "ledger/reference/public_notebook.json": "e70cc28de941b2ad34ba8c17258caa7071e73048daad583ca86dfceb4f69a31b",
+    "chip_forecast.py": "3d02dd3a1bc57e8c53f701a6005c8d5e9d8ad6a15a57cdec3f22b27066015897",
+    "ledger/reference/linux/fold1/k3_fold1.csv": "284f48f75ad3197c7ca0eed6767fffe5b275cac4a62c2403f8e6b128abddc6de",
+    "ledger/reference/linux/fold1/k3_fold1.json": "35d000f82b82e33ece1f825345afc5e90d72900c0f647f20543cbf25c7691137",
+    "ledger/reference/macos/fold1/k3_fold1.csv": "39b757f8925049c0ac3c134ab4a3fa36fb72d76ab62c0ed9b2ac45436c6c15c7",
+    "ledger/reference/macos/fold1/k3_fold1.json": "99b68952c80a2688859f1dd06467660d373db67c05b640fadaf4eb1c5fb5ad5f",
+    "ledger/reference/linux/fold2/k3_fold2.csv": "bf765c99ed06443c5bafbf1328f4fe902d5fb55d0a21021131c9c2c64d828f97",
+    "ledger/reference/linux/fold2/k3_fold2.json": "223903b9ae0e6d6fe6385df70b0c44615f1c3aac626e1e73462cdcb97f6e3d57",
+    "ledger/reference/macos/fold2/k3_fold2.csv": "d69efe5478a86b35e51e16e3253aff981776b53b208da8f41499304ee9a024eb",
+    "ledger/reference/macos/fold2/k3_fold2.json": "a2495efb0ae984cc29308714f536a1f4196f89b05d5da5ce763ac0b657f4a2fd",
+    "ledger/reference/linux/fold3/k3_fold3.csv": "326ecb19af2de66a80714cea3e6d79fc0775ab9ae131eaef5b7991eda3e81f96",
+    "ledger/reference/linux/fold3/k3_fold3.json": "8019950473a35ed210af92cb7d3d9cf6fef32530ab8e549c2ecb6028734733f9",
+    "ledger/reference/linux/fold4/k3_fold4.csv": "641a78330cad7a05c1966153ae131f9d2dea60ba0490aa9ec48de4db75a0b30f",
+    "ledger/reference/linux/fold4/k3_fold4.json": "0f0fd4fbb3429174cfbbf0913cd82f6c3784c3784b3d11a6be23b30f043d2554",
+    "ledger/summary.json": "a3225331a519879a1e0da6b0f0e208487dd107baacdd7c72b5a2c95b73af3b8b"
+  },
+  "execution": {
+    "python": "3.13.14 (main, Jun 10 2026, 12:24:04) [Clang 21.0.0 (clang-2100.0.123.102)]",
+    "numpy": "2.5.3",
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "seconds": 0.24906150001334026,
+    "max_rss_bytes": 53854208
+  }
+}

@@ -1,0 +1,141 @@
+{
+ "schema": "chip_forecast.result.v1",
+ "source": {
+  "commit": "f9848800dfab66a8bc005e6b3087153eeaabe9ac",
+  "files": {
+   "data_bundle/nfa_tasks.npz": "e1f056ef33f568052fb8dfdba6e095f7b575c7f78d96768e34469918559008d2",
+   "results/trajectory_cv_per_chemical.csv": "0d013127aef781ca5e1de04088532e2e19223364173a198e0686941c04f93abc"
+  }
+ },
+ "folds": [
+  3
+ ],
+ "ks": [
+  3
+ ],
+ "model": {
+  "loss": "absolute_error",
+  "max_iter": 600,
+  "learning_rate": 0.05,
+  "max_leaf_nodes": 127,
+  "min_samples_leaf": 50,
+  "early_stopping": false,
+  "random_state": 0,
+  "n_pca": 0
+ },
+ "ablation": null,
+ "timing": {
+  "k3_fold3": {
+   "seconds": 222.5,
+   "training_rows": 2577815
+  }
+ },
+ "summary": {
+  "k3": {
+   "n_chemicals": 49,
+   "anchorboost": 1.1096,
+   "versus": {
+    "loglinear_interp": {
+     "mean_diff": -0.2178,
+     "ci95": [
+      -0.279,
+      -0.1597
+     ],
+     "rel_change_pct": -16.41,
+     "n_chemicals": 49,
+     "frac_chem_improved": 0.939
+    },
+    "hill_per_endpoint": {
+     "mean_diff": -0.3183,
+     "ci95": [
+      -0.3802,
+      -0.2573
+     ],
+     "rel_change_pct": -22.29,
+     "n_chemicals": 49,
+     "frac_chem_improved": 0.959
+    },
+    "analog_knn": {
+     "mean_diff": -0.1801,
+     "ci95": [
+      -0.2282,
+      -0.136
+     ],
+     "rel_change_pct": -13.96,
+     "n_chemicals": 49,
+     "frac_chem_improved": 0.898
+    },
+    "published_neural_process": {
+     "mean_diff": -0.0364,
+     "ci95": [
+      -0.148,
+      0.0317
+     ],
+     "rel_change_pct": -3.18,
+     "n_chemicals": 49,
+     "frac_chem_improved": 0.49
+    }
+   },
+   "loglinear_interp": 1.3274,
+   "hill_per_endpoint": 1.4279,
+   "analog_knn": 1.2897,
+   "published_neural_process": 1.146
+  }
+ },
+ "summary_by_fold": {
+  "fold3": {
+   "k3": {
+    "n_chemicals": 49,
+    "anchorboost": 1.1096,
+    "versus": {
+     "loglinear_interp": {
+      "mean_diff": -0.2178,
+      "ci95": [
+       -0.279,
+       -0.1597
+      ],
+      "rel_change_pct": -16.41,
+      "n_chemicals": 49,
+      "frac_chem_improved": 0.939
+     },
+     "hill_per_endpoint": {
+      "mean_diff": -0.3183,
+      "ci95": [
+       -0.3802,
+       -0.2573
+      ],
+      "rel_change_pct": -22.29,
+      "n_chemicals": 49,
+      "frac_chem_improved": 0.959
+     },
+     "analog_knn": {
+      "mean_diff": -0.1801,
+      "ci95": [
+       -0.2282,
+       -0.136
+      ],
+      "rel_change_pct": -13.96,
+      "n_chemicals": 49,
+      "frac_chem_improved": 0.898
+     },
+     "published_neural_process": {
+      "mean_diff": -0.0364,
+      "ci95": [
+       -0.148,
+       0.0317
+      ],
+      "rel_change_pct": -3.18,
+      "n_chemicals": 49,
+      "frac_chem_improved": 0.49
+     }
+    },
+    "loglinear_interp": 1.3274,
+    "hill_per_endpoint": 1.4279,
+    "analog_knn": 1.2897,
+    "published_neural_process": 1.146
+   }
+  }
+ },
+ "summary_folds_1to4": null,
+ "code_sha256": "3d02dd3a1bc57e8c53f701a6005c8d5e9d8ad6a15a57cdec3f22b27066015897"
+}

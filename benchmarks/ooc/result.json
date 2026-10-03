@@ -1,0 +1,1354 @@
+{
+  "schema": "ooc-availability-audit.v1",
+  "status": "no_eligible_dataset_under_unchanged_protocol",
+  "scope": "Screened sources only; access failures are not evidence that a dataset does not exist.",
+  "candidate_count": 9,
+  "candidates": [
+    {
+      "id": "ewart",
+      "name": "Ewart 2022 human Liver-Chip",
+      "url": "https://www.nature.com/articles/s43856-022-00209-1",
+      "compounds": {
+        "study": 27,
+        "downloaded_dose_response": 6
+      },
+      "concentration_points": "5 or 6 positive concentrations per compound",
+      "endpoints": 3,
+      "perfused": true,
+      "license": "CC BY 4.0",
+      "status": "incompatible_preprocessing",
+      "reason": "Data 8 has 70 published row positions per endpoint (68 numeric values each), but no vehicle rows, donor identifiers or chip identifiers. Albumin is already normalized. Frozen vehicle-MAD preparation cannot be reconstructed.",
+      "evidence": [
+        "Supplementary Data 1 and 8 downloaded and parsed",
+        "Browser article extraction: methods, Figure 4 and data availability"
+      ]
+    },
+    {
+      "id": "mpsdb",
+      "name": "Pittsburgh MPS-Db / EveAnalytics",
+      "url": "https://mps.csb.pitt.edu/",
+      "compounds": null,
+      "concentration_points": null,
+      "endpoints": null,
+      "perfused": "database spanning multiple systems",
+      "license": "Dataset-specific; not verified",
+      "status": "access_unresolved",
+      "reason": "Browser extraction returned a client-rendered shell / browser assistance request; no raw experimental export was obtained. This is an access limitation, not evidence of absent data.",
+      "evidence": [
+        "Browser extraction returned a client-rendered shell; no raw export obtained.",
+        "Direct RSC article requests: Cloudflare challenge"
+      ]
+    },
+    {
+      "id": "ncats",
+      "name": "NCATS Tissue Chip Testing Centers",
+      "url": "https://ncats.nih.gov/research/research-activities/tissue-chip/projects",
+      "compounds": null,
+      "concentration_points": null,
+      "endpoints": null,
+      "perfused": "program spanning multiple systems",
+      "license": "Dataset-specific; not verified",
+      "status": "access_unresolved",
+      "reason": "The current official page describes independent validation centers; linked centers and 2018 pages returned verification challenges. No per-chip dose-response file was obtained.",
+      "evidence": [
+        "Current NCATS project page read with Browser",
+        "Browser old-center URL verification response"
+      ]
+    },
+    {
+      "id": "gdop",
+      "name": "Wang 2026 GDOP",
+      "url": "https://www.nature.com/articles/s42003-026-09973-5",
+      "compounds": {
+        "study_drugs": 3,
+        "linked_raw_trajectory_drugs": 1
+      },
+      "concentration_points": "6 positive concentrations plus vehicle",
+      "endpoints": {
+        "linked_raw": 2,
+        "reported_additional": "viability and grayscale SD"
+      },
+      "perfused": true,
+      "license": "CC BY-NC-ND 4.0",
+      "status": "insufficient_independent_compounds",
+      "reason": "Data 1 has 840 rows for one compound: 7 levels x 3 channels x 8 chambers x 5 days. A held-out-compound fold has no training compound. Figure workbook does not supply another multi-drug raw trajectory.",
+      "evidence": [
+        "MOESM3 and MOESM4 downloaded and parsed",
+        "Browser article: methods and data availability"
+      ]
+    },
+    {
+      "id": "dryad",
+      "name": "Yakavets 2025 microfluidic organoid regimens",
+      "url": "https://datadryad.org/dataset/doi:10.5061/dryad.0vt4b8h8x",
+      "compounds": null,
+      "concentration_points": null,
+      "endpoints": "viability; other endpoint counts unverified",
+      "perfused": "microfluidic arrays; sustained perfusion unverified",
+      "license": "CC0-1.0",
+      "status": "access_unresolved",
+      "reason": "Official API lists public data.zip (30,467 bytes), but file_stream returns HTTP 403 and the API download returns HTTP 401. Compound/dose/replicate counts remain unverified.",
+      "evidence": [
+        "https://datadryad.org/api/v2/datasets/doi%3A10.5061%2Fdryad.0vt4b8h8x",
+        "https://datadryad.org/api/v2/versions/367012/files",
+        "Browser dataset page read; download shows verification page"
+      ]
+    },
+    {
+      "id": "cbd",
+      "name": "Human quad liver-on-chip CRCE",
+      "url": "https://figshare.com/articles/dataset/Human_quad_liver-on-chip_system_as_a_tool_toward_bridging_the_gap_between_animals_and_humans_regarding_toxicology_and_pharmacology_of_a_cannabidiol-rich_cannabis_extract/26779461",
+      "compounds": 1,
+      "concentration_points": "3 positive concentrations (300, 1200, 4400 ng/mL) plus vehicle",
+      "endpoints": "ALT, miR-122 and CYP readouts; total channel count unverified",
+      "perfused": "on-chip 8 h dosing / 16 h washout; continuous flow unverified",
+      "license": "CC BY 4.0",
+      "status": "insufficient_independent_compounds",
+      "reason": "One extract and three positive concentrations: k=3 leaves no held-out dose. The repository lists TIFF and DOCX attachments, no CSV/XLSX dose-response table.",
+      "evidence": [
+        "https://api.figshare.com/v2/articles/26779461"
+      ]
+    },
+    {
+      "id": "charwat",
+      "name": "Charwat 2022 cardiac MPS",
+      "url": "https://pubs.acs.org/doi/10.1021/acsptsci.2c00088",
+      "compounds": 7,
+      "concentration_points": "4 or 5 positive concentrations",
+      "endpoints": "beat rate, cAPD80, triangulation and arrhythmia descriptors",
+      "perfused": true,
+      "license": "CC BY-NC 4.0 (supplement)",
+      "status": "raw_responses_not_obtained",
+      "reason": "Publisher supplement has drug-dose design and literature ion-channel block/IC50 tables plus figures; no per-tissue numeric response matrix. Literature block percentages are not chip observations.",
+      "evidence": [
+        "https://api.figshare.com/v2/articles/20405877",
+        "https://ndownloader.figshare.com/files/36483489",
+        "Browser converted all 12 pages of the original supplement"
+      ]
+    },
+    {
+      "id": "mathur",
+      "name": "Mathur 2015 cardiac MPS",
+      "url": "https://www.nature.com/articles/srep08883",
+      "compounds": 4,
+      "concentration_points": "serial concentration curves; numeric point count unverified",
+      "endpoints": "beating rate and irregular beating",
+      "perfused": true,
+      "license": "CC BY 4.0",
+      "status": "raw_responses_not_obtained",
+      "reason": "Article has dose-response plots and IC50 summaries; linked source package has eight AVI examples and one supplementary PDF, no downloadable per-chip concentration-response table identified.",
+      "evidence": [
+        "Browser full article and supplementary file list"
+      ]
+    },
+    {
+      "id": "hu",
+      "name": "Hu 2021 InSMAR organoid array",
+      "url": "https://www.nature.com/articles/s41467-021-22676-1",
+      "compounds": "10 distinct drug-name labels; some represent combination regimens",
+      "concentration_points": "typically 7-8 positive levels plus vehicle",
+      "endpoints": 1,
+      "perfused": false,
+      "license": "CC BY 4.0",
+      "status": "incompatible_preprocessing",
+      "reason": "Source workbook contains triplicate normalized viability; every control in the LCO response sheet equals 1, so both control MAD and SD equal zero. Static spot-cover microwells do not add perfused-chip evidence.",
+      "evidence": [
+        "MOESM9 original workbook parsed",
+        "Browser article: InSMAR design and spot-cover drug assay"
+      ]
+    }
+  ],
+  "selected_dataset": null,
+  "n_evaluated_chemicals": 0,
+  "anchorboost": null,
+  "loglinear_interp": null,
+  "paired_difference": null,
+  "ci95": null,
+  "relative_improvement_pct": null,
+  "fold_wins": null,
+  "folds_evaluated": 0,
+  "model_fits": 0,
+  "frozen_protocol": {
+    "model_sha256": "3d02dd3a1bc57e8c53f701a6005c8d5e9d8ad6a15a57cdec3f22b27066015897",
+    "loader_sha256": "41f51044d548073c3e20acb00b91faadf234cdb89b40e25b6e5f4d9d607f4e01",
+    "protocol_sha256": "12f0214a6a50ba35f052c7b9e3fd72e5f23b37bf09ef49e22b63ec74f7e5ee0f",
+    "k": 3,
+    "evaluation": {
+      "folds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "k": 3,
+      "designs": "five seeded designs per chemical (chip_forecast.designs)",
+      "metric": "curve error against held-out concentration means, averaged over observed outputs, designs and then chemicals",
+      "comparators": [
+        "log-linear interpolation (primary)",
+        "Hill curve per output",
+        "distance-weighted analog chemicals"
+      ],
+      "bootstrap": "paired over chemicals, 4,000 resamples, seed 0 (chip_forecast.paired)",
+      "per_fold": "fold means of every method and the paired difference against log-linear interpolation within each fold"
+    },
+    "normalization": "Rows flagged well quality 0 are removed (79 of 21,372 human-cell rows) and rows without a raw value are dropped (6). Each plate is centred on the median of its vehicle wells (well type n), each endpoint is divided by 1.4826 x the median absolute centred vehicle value over all its plates (the vehicle SD where that is zero) and clipped to +-10: the acute MEA benchmark's normalization, unchanged."
+  },
+  "source_audits": {
+    "ewart": {
+      "n_compounds": 6,
+      "n_endpoints": 3,
+      "rows": 210,
+      "per_endpoint_rows": {
+        "ALBUMIN": 70,
+        "ALT": 70,
+        "Morphology": 70
+      },
+      "headers": {
+        "ALBUMIN": [
+          "Compound_Name",
+          "Concentration_Day3",
+          "Normalized_Albumin_Levels"
+        ],
+        "ALT": [
+          "Compound_Name",
+          "Concentration_Day3",
+          "ALT_levels"
+        ],
+        "Morphology": [
+          "Compound_Name",
+          "Concentration_Day3",
+          "Score"
+        ]
+      },
+      "missing_source_values": [
+        {
+          "sheet": "ALBUMIN",
+          "source_row": 39,
+          "source_value": "NaN"
+        },
+        {
+          "sheet": "ALBUMIN",
+          "source_row": 41,
+          "source_value": "NaN"
+        },
+        {
+          "sheet": "ALT",
+          "source_row": 36,
+          "source_value": "NaN"
+        },
+        {
+          "sheet": "ALT",
+          "source_row": 37,
+          "source_value": "NaN"
+        },
+        {
+          "sheet": "Morphology",
+          "source_row": 36,
+          "source_value": "NA"
+        },
+        {
+          "sheet": "Morphology",
+          "source_row": 37,
+          "source_value": "NA"
+        }
+      ],
+      "finite_readings": 204,
+      "finite_per_endpoint": {
+        "ALBUMIN": 68,
+        "ALT": 68,
+        "Morphology": 68
+      },
+      "concentrations": {
+        "Clozapine": [
+          1,
+          3,
+          10,
+          30,
+          100,
+          300
+        ],
+        "Levofloxacin": [
+          1,
+          3,
+          10,
+          15,
+          45
+        ],
+        "Olanzapine": [
+          1,
+          3,
+          10,
+          30,
+          100,
+          300
+        ],
+        "Pioglitazone": [
+          1,
+          3,
+          10,
+          30,
+          100,
+          300
+        ],
+        "Troglitazone": [
+          0.98,
+          2.95,
+          9.82,
+          29.47,
+          98.2,
+          294.72
+        ],
+        "Trovafloxacin": [
+          1,
+          3,
+          10,
+          30,
+          100,
+          300
+        ]
+      },
+      "vehicle_rows": 0,
+      "source_chip_ids_present": false,
+      "source_donor_ids_present": false,
+      "albumin_units": "author-normalized levels; raw paired vehicle distribution absent",
+      "endpoint_pairing": "replicate ordinal is local to each sheet; no inferred cross-endpoint chip identity",
+      "eligible_unchanged_protocol": false,
+      "reason": "Missing matched raw vehicle readings and batch/chip identifiers; the frozen vehicle MAD/SD normalization is undefined. The 27-drug study contributes six example compounds in Data 8."
+    },
+    "gdop": {
+      "rows": 840,
+      "n_compounds_in_linked_trajectory": 1,
+      "n_endpoints": 2,
+      "doses": [
+        0,
+        0.0005,
+        0.005,
+        0.05,
+        0.5,
+        5,
+        50
+      ],
+      "channels": [
+        1,
+        2,
+        3
+      ],
+      "chambers": [
+        1,
+        2,
+        3,
+        4,
+        5,
+        6,
+        7,
+        8
+      ],
+      "timepoints": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "vehicle_rows": 120,
+      "unique_dose_channel_chamber_units": 168,
+      "eligible_unchanged_protocol": false,
+      "reason": "One compound in the linked raw trajectory; holding out that compound leaves zero training compounds. Channels, chambers and days are not additional chemicals."
+    },
+    "hu": {
+      "n_figure_blocks": 13,
+      "blocks": [
+        {
+          "source_row": 1,
+          "title": "Fig. 5a Gefitinib"
+        },
+        {
+          "source_row": 13,
+          "title": "Fig. 5b Crizotinib"
+        },
+        {
+          "source_row": 25,
+          "title": "Fig. 5d Afatinib"
+        },
+        {
+          "source_row": 36,
+          "title": "Fig. 5d Gefitinib"
+        },
+        {
+          "source_row": 48,
+          "title": "Fig. 6a Pemetrexed"
+        },
+        {
+          "source_row": 60,
+          "title": "Fig. 6a Gemcitabine"
+        },
+        {
+          "source_row": 72,
+          "title": "Fig. 6c Gemcitabine"
+        },
+        {
+          "source_row": 84,
+          "title": "Fig. 6f Gemcitabine"
+        },
+        {
+          "source_row": 96,
+          "title": "Fig. 6f Pemetrexed"
+        },
+        {
+          "source_row": 108,
+          "title": "Fig. 6f Paclitaxel"
+        },
+        {
+          "source_row": 119,
+          "title": "Supplementary Fig. 11b Gemcitabine"
+        },
+        {
+          "source_row": 131,
+          "title": "Supplementary Fig. 11b Docetaxel"
+        },
+        {
+          "source_row": 143,
+          "title": "Supplementary Fig. 11c"
+        }
+      ],
+      "treated_scalar_readings": 1117,
+      "control_scalar_readings": 143,
+      "control_values": [
+        1
+      ],
+      "vehicle_mad": 0.0,
+      "vehicle_sd": 0.0,
+      "eligible_unchanged_protocol": false,
+      "reason": "InSMAR is a static microwell array; published viability controls are all 1, giving zero MAD and zero SD in the frozen normalization. Figure labels also include combination regimens, not ten independent single-agent curves."
+    }
+  },
+  "files": {
+    "43856_2022_209_MOESM8_ESM.xlsx": {
+      "sha256": "87cc22d0c1d4508f7e0830df348c52238bdb18d821c8d29cc0751114081509fc",
+      "bytes": 23251,
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs43856-022-00209-1/MediaObjects/43856_2022_209_MOESM8_ESM.xlsx"
+    },
+    "43856_2022_209_MOESM1_ESM.xlsx": {
+      "sha256": "8a37ff64f0b2b425650d4bafc43e9e79f90f995d47b7e87e49a7416e1af9567d",
+      "bytes": 45931,
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs43856-022-00209-1/MediaObjects/43856_2022_209_MOESM1_ESM.xlsx"
+    },
+    "42003_2026_9973_MOESM3_ESM.xlsx": {
+      "sha256": "28f83ec0ddeb402728169fa5ab7b78f8501be83152b4e1ac99419f82179e8d37",
+      "bytes": 54712,
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs42003-026-09973-5/MediaObjects/42003_2026_9973_MOESM3_ESM.xlsx"
+    },
+    "42003_2026_9973_MOESM4_ESM.xlsx": {
+      "sha256": "7372c393ccac0659d4f81456ae229b07e9520655a3bd4efae25447a126a42240",
+      "bytes": 60254,
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs42003-026-09973-5/MediaObjects/42003_2026_9973_MOESM4_ESM.xlsx"
+    },
+    "41467_2021_22676_MOESM9_ESM.xlsx": {
+      "sha256": "3a67ab0b240e74d5e9e62114bafb8e0dca6efd18fd1e1a7cd008e366c23ff462",
+      "bytes": 66163,
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41467-021-22676-1/MediaObjects/41467_2021_22676_MOESM9_ESM.xlsx"
+    },
+    "chip_forecast.py": {
+      "sha256": "3d02dd3a1bc57e8c53f701a6005c8d5e9d8ad6a15a57cdec3f22b27066015897",
+      "bytes": 19428,
+      "url": "https://raw.githubusercontent.com/logxio/ooc-evaluation-audit/dbddd7437b9f1643ef2872bd5de86de0779b209b/chip_forecast.py"
+    },
+    "chip_forecast_dnt.py": {
+      "sha256": "41f51044d548073c3e20acb00b91faadf234cdb89b40e25b6e5f4d9d607f4e01",
+      "bytes": 6777,
+      "url": "https://raw.githubusercontent.com/logxio/ooc-evaluation-audit/dbddd7437b9f1643ef2872bd5de86de0779b209b/chip_forecast_dnt.py"
+    },
+    "chip_forecast_dnt_protocol.json": {
+      "sha256": "12f0214a6a50ba35f052c7b9e3fd72e5f23b37bf09ef49e22b63ec74f7e5ee0f",
+      "bytes": 4291,
+      "url": "https://raw.githubusercontent.com/logxio/ooc-evaluation-audit/dbddd7437b9f1643ef2872bd5de86de0779b209b/chip_forecast_dnt_protocol.json"
+    }
+  },
+  "decision": "The same-protocol fourth benchmark has no score from these sources. A source-normalized Ewart pilot would require an explicitly different preparation protocol.",
+  "ewart_transfer": {
+    "schema": "ewart-transfer.v1",
+    "status": "complete",
+    "platform": "perfused liver-chip",
+    "n_drugs": 6,
+    "n_endpoints": 3,
+    "n_source_positions": 210,
+    "n_numeric_observations": 204,
+    "n_missing_observations": 6,
+    "n_folds": 6,
+    "primary_preparation": "author_units",
+    "model_fits": 36,
+    "input_sha256": "326c494f0ebdae41bd7ea5b425d3697d5e48b5685ac033bb719ff1e7713f3b8c",
+    "model_sha256": "3d02dd3a1bc57e8c53f701a6005c8d5e9d8ad6a15a57cdec3f22b27066015897",
+    "protocol_sha256": "2b57d87faf777cb49ab45791c647e93bb400257443603f1f4fb07303659ca2c4",
+    "adapter_sha256": "ff4edbfc252da97ed65742212e259a584b99d99a8fcb17ebd580a8a8f5f301f6",
+    "model_parameters": {
+      "loss": "absolute_error",
+      "max_iter": 600,
+      "learning_rate": 0.05,
+      "max_leaf_nodes": 127,
+      "min_samples_leaf": 50,
+      "early_stopping": false,
+      "random_state": 0
+    },
+    "runtime_dimensions": {
+      "ND": 1,
+      "NF": 1,
+      "D": 1
+    },
+    "dependency_versions": {
+      "numpy": "2.5.3",
+      "sklearn": "1.9.1"
+    },
+    "summary": {
+      "author_units": {
+        "ALBUMIN": {
+          "n_drugs": 6,
+          "anchorboost_mae": 24.795980843490565,
+          "loglinear_mae": 24.072177282969154,
+          "paired": {
+            "mean_diff": 0.7238,
+            "ci95": [
+              -8.0212,
+              9.8021
+            ],
+            "rel_change_pct": 3.01,
+            "n_chemicals": 6,
+            "frac_chem_improved": 0.667
+          },
+          "lower_error_pct": -3.01,
+          "fold_outcomes": {
+            "win": 4,
+            "loss": 2,
+            "tie": 0
+          },
+          "folds": [
+            {
+              "preparation": "author_units",
+              "endpoint": "ALBUMIN",
+              "chemical": "Clozapine",
+              "fold": 0,
+              "n_designs": 5,
+              "anchorboost": 27.190462740705964,
+              "loglinear_interp": 27.308310890197752,
+              "difference": -0.11784814949178823,
+              "outcome": "win",
+              "training_rows": 260,
+              "n_train_drugs": 5
+            },
+            {
+              "preparation": "author_units",
+              "endpoint": "ALBUMIN",
+              "chemical": "Levofloxacin",
+              "fold": 1,
+              "n_designs": 5,
+              "anchorboost": 21.715695193596524,
+              "loglinear_interp": 7.572007751464843,
+              "difference": 14.14368744213168,
+              "outcome": "loss",
+              "training_rows": 300,
+              "n_train_drugs": 5
+            },
+            {
+              "preparation": "author_units",
+              "endpoint": "ALBUMIN",
+              "chemical": "Olanzapine",
+              "fold": 2,
+              "n_designs": 5,
+              "anchorboost": 30.414969998333515,
+              "loglinear_interp": 13.323395538330079,
+              "difference": 17.091574460003436,
+              "outcome": "loss",
+              "training_rows": 260,
+              "n_train_drugs": 5
+            },
+            {
+              "preparation": "author_units",
+              "endpoint": "ALBUMIN",
+              "chemical": "Pioglitazone",
+              "fold": 3,
+              "n_designs": 5,
+              "anchorboost": 16.490983432452165,
+              "loglinear_interp": 22.991107749938966,
+              "difference": -6.500124317486801,
+              "outcome": "win",
+              "training_rows": 260,
+              "n_train_drugs": 5
+            },
+            {
+              "preparation": "author_units",
+              "endpoint": "ALBUMIN",
+              "chemical": "Troglitazone",
+              "fold": 4,
+              "n_designs": 5,
+              "anchorboost": 38.047600071596854,
+              "loglinear_interp": 43.59231872558594,
+              "difference": -5.5447186539890865,
+              "outcome": "win",
+              "training_rows": 260,
+              "n_train_drugs": 5
+            },
+            {
+              "preparation": "author_units",
+              "endpoint": "ALBUMIN",
+              "chemical": "Trovafloxacin",
+              "fold": 5,
+              "n_designs": 5,
+              "anchorboost": 14.916173624258377,
+              "loglinear_interp": 29.645923042297362,
+              "difference": -14.729749418038985,
+              "outcome": "win",
+              "training_rows": 260,
+              "n_train_drugs": 5
+            }
+          ]
+        },
+        "ALT": {
+          "n_drugs": 6,
+          "anchorboost_mae": 1.463519386572547,
+          "loglinear_mae": 1.4919082317501307,
+          "paired": {
+            "mean_diff": -0.0284,
+            "ci95": [
+              -0.122,
+              0.0674
+            ],
+            "rel_change_pct": -1.9,
+            "n_chemicals": 6,
+            "frac_chem_improved": 0.5
+          },
+          "lower_error_pct": 1.9,
+          "fold_outcomes": {
+            "win": 3,
+            "loss": 3,
+            "tie": 0
+          },
+          "folds": [
+            {
+              "preparation": "author_units",
+              "endpoint": "ALT",
+              "chemical": "Clozapine",
+              "fold": 0,
+              "n_designs": 5,
+              "anchorboost": 0.7896250533693031,
+              "loglinear_interp": 0.8745907306671142,
+              "difference": -0.08496567729781113,
+              "outcome": "win",
+              "training_rows": 220,
+              "n_train_drugs": 5
+            },
+            {
+              "preparation": "author_units",
+              "endpoint": "ALT",
+              "chemical": "Levofloxacin",
+              "fold": 1,
+              "n_designs": 5,
+              "anchorboost": 0.25600090344884235,
+              "loglinear_interp": 0.4736050933599472,
+              "difference": -0.21760418991110486,
+              "outcome": "win",
+              "training_rows": 260,
+              "n_train_drugs": 5
+            },
+            {
+              "preparation": "author_units",
+              "endpoint": "ALT",
+              "chemical": "Olanzapine",
+              "fold": 2,
+              "n_designs": 5,
+              "anchorboost": 0.5523979174774787,
+              "loglinear_interp": 0.5492998898029328,
+              "difference": 0.0030980276745459223,
+              "outcome": "loss",
+              "training_rows": 220,
+              "n_train_drugs": 5
+            },
+            {
+              "preparation": "author_units",
+              "endpoint": "ALT",
+              "chemical": "Pioglitazone",
+              "fold": 3,
+              "n_designs": 5,
+              "anchorboost": 0.3515303691016741,
+              "loglinear_interp": 0.3018733233213425,
+              "difference": 0.04965704578033164,
+              "outcome": "loss",
+              "training_rows": 220,
+              "n_train_drugs": 5
+            },
+            {
+              "preparation": "author_units",
+              "endpoint": "ALT",
+              "chemical": "Troglitazone",
+              "fold": 4,
+              "n_designs": 5,
+              "anchorboost": 0.3136101552207144,
+              "loglinear_interp": 0.14352014884352685,
+              "difference": 0.17009000637718755,
+              "outcome": "loss",
+              "training_rows": 260,
+              "n_train_drugs": 5
+            },
+            {
+              "preparation": "author_units",
+              "endpoint": "ALT",
+              "chemical": "Trovafloxacin",
+              "fold": 5,
+              "n_designs": 5,
+              "anchorboost": 6.51795192081727,
+              "loglinear_interp": 6.60856020450592,
+              "difference": -0.09060828368865081,
+              "outcome": "win",
+              "training_rows": 220,
+              "n_train_drugs": 5
+            }
+          ]
+        },
+        "Morphology": {
+          "n_drugs": 6,
+          "anchorboost_mae": 0.36433572702790507,
+          "loglinear_mae": 0.38680533468723305,
+          "paired": {
+            "mean_diff": -0.0225,
+            "ci95": [
+              -0.0802,
+              0.0288
+            ],
+            "rel_change_pct": -5.81,
+            "n_chemicals": 6,
+            "frac_chem_improved": 0.5
+          },
+          "lower_error_pct": 5.81,
+          "fold_outcomes": {
+            "win": 3,
+            "loss": 3,
+            "tie": 0
+          },
+          "folds": [
+            {
+              "preparation": "author_units",
+              "endpoint": "Morphology",
+              "chemical": "Clozapine",
+              "fold": 0,
+              "n_designs": 5,
+              "anchorboost": 0.6347924593409578,
+              "loglinear_interp": 0.7624907612800598,
+              "difference": -0.12769830193910192,
+              "outcome": "win",
+              "training_rows": 220,
+              "n_train_drugs": 5
+            },
+            {
+              "preparation": "author_units",
+              "endpoint": "Morphology",
+              "chemical": "Levofloxacin",
+              "fold": 1,
+              "n_designs": 5,
+              "anchorboost": 0.17733437194504248,
+              "loglinear_interp": 0.19571205377578735,
+              "difference": -0.01837768183074487,
+              "outcome": "win",
+              "training_rows": 260,
+              "n_train_drugs": 5
+            },
+            {
+              "preparation": "author_units",
+              "endpoint": "Morphology",
+              "chemical": "Olanzapine",
+              "fold": 2,
+              "n_designs": 5,
+              "anchorboost": 0.4145069858765309,
+              "loglinear_interp": 0.3478691875934601,
+              "difference": 0.06663779828307081,
+              "outcome": "loss",
+              "training_rows": 220,
+              "n_train_drugs": 5
+            },
+            {
+              "preparation": "author_units",
+              "endpoint": "Morphology",
+              "chemical": "Pioglitazone",
+              "fold": 3,
+              "n_designs": 5,
+              "anchorboost": 0.2389401826439209,
+              "loglinear_interp": 0.22196803092956544,
+              "difference": 0.016972151714355455,
+              "outcome": "loss",
+              "training_rows": 220,
+              "n_train_drugs": 5
+            },
+            {
+              "preparation": "author_units",
+              "endpoint": "Morphology",
+              "chemical": "Troglitazone",
+              "fold": 4,
+              "n_designs": 5,
+              "anchorboost": 0.24352501377195032,
+              "loglinear_interp": 0.21939295530319214,
+              "difference": 0.024132058468758183,
+              "outcome": "loss",
+              "training_rows": 260,
+              "n_train_drugs": 5
+            },
+            {
+              "preparation": "author_units",
+              "endpoint": "Morphology",
+              "chemical": "Trovafloxacin",
+              "fold": 5,
+              "n_designs": 5,
+              "anchorboost": 0.47691534858902784,
+              "loglinear_interp": 0.573399019241333,
+              "difference": -0.09648367065230512,
+              "outcome": "win",
+              "training_rows": 220,
+              "n_train_drugs": 5
+            }
+          ]
+        }
+      },
+      "lowest_centered": {
+        "ALBUMIN": {
+          "n_drugs": 6,
+          "anchorboost_mae": 23.341696723183603,
+          "loglinear_mae": 24.072176011403403,
+          "paired": {
+            "mean_diff": -0.7305,
+            "ci95": [
+              -9.1552,
+              7.8302
+            ],
+            "rel_change_pct": -3.03,
+            "n_chemicals": 6,
+            "frac_chem_improved": 0.667
+          },
+          "lower_error_pct": 3.03,
+          "fold_outcomes": {
+            "win": 4,
+            "loss": 2,
+            "tie": 0
+          },
+          "folds": [
+            {
+              "preparation": "lowest_centered",
+              "endpoint": "ALBUMIN",
+              "chemical": "Clozapine",
+              "fold": 0,
+              "n_designs": 5,
+              "anchorboost": 17.585574096473444,
+              "loglinear_interp": 27.308312034606935,
+              "difference": -9.722737938133491,
+              "outcome": "win",
+              "training_rows": 260,
+              "n_train_drugs": 5
+            },
+            {
+              "preparation": "lowest_centered",
+              "endpoint": "ALBUMIN",
+              "chemical": "Levofloxacin",
+              "fold": 1,
+              "n_designs": 5,
+              "anchorboost": 22.32274392301806,
+              "loglinear_interp": 7.572004508972168,
+              "difference": 14.750739414045892,
+              "outcome": "loss",
+              "training_rows": 300,
+              "n_train_drugs": 5
+            },
+            {
+              "preparation": "lowest_centered",
+              "endpoint": "ALBUMIN",
+              "chemical": "Olanzapine",
+              "fold": 2,
+              "n_designs": 5,
+              "anchorboost": 28.917056435197328,
+              "loglinear_interp": 13.32339267730713,
+              "difference": 15.593663757890198,
+              "outcome": "loss",
+              "training_rows": 260,
+              "n_train_drugs": 5
+            },
+            {
+              "preparation": "lowest_centered",
+              "endpoint": "ALBUMIN",
+              "chemical": "Pioglitazone",
+              "fold": 3,
+              "n_designs": 5,
+              "anchorboost": 13.295911984333753,
+              "loglinear_interp": 22.991106224060058,
+              "difference": -9.695194239726305,
+              "outcome": "win",
+              "training_rows": 260,
+              "n_train_drugs": 5
+            },
+            {
+              "preparation": "lowest_centered",
+              "endpoint": "ALBUMIN",
+              "chemical": "Troglitazone",
+              "fold": 4,
+              "n_designs": 5,
+              "anchorboost": 33.11092985384998,
+              "loglinear_interp": 43.59231872558594,
+              "difference": -10.481388871735959,
+              "outcome": "win",
+              "training_rows": 260,
+              "n_train_drugs": 5
+            },
+            {
+              "preparation": "lowest_centered",
+              "endpoint": "ALBUMIN",
+              "chemical": "Trovafloxacin",
+              "fold": 5,
+              "n_designs": 5,
+              "anchorboost": 24.817964046229044,
+              "loglinear_interp": 29.645921897888183,
+              "difference": -4.827957851659139,
+              "outcome": "win",
+              "training_rows": 260,
+              "n_train_drugs": 5
+            }
+          ]
+        },
+        "ALT": {
+          "n_drugs": 6,
+          "anchorboost_mae": 1.4897977690075541,
+          "loglinear_mae": 1.4919081363826991,
+          "paired": {
+            "mean_diff": -0.0021,
+            "ci95": [
+              -0.1972,
+              0.1922
+            ],
+            "rel_change_pct": -0.14,
+            "n_chemicals": 6,
+            "frac_chem_improved": 0.5
+          },
+          "lower_error_pct": 0.14,
+          "fold_outcomes": {
+            "win": 3,
+            "loss": 3,
+            "tie": 0
+          },
+          "folds": [
+            {
+              "preparation": "lowest_centered",
+              "endpoint": "ALT",
+              "chemical": "Clozapine",
+              "fold": 0,
+              "n_designs": 5,
+              "anchorboost": 0.7515903775842259,
+              "loglinear_interp": 0.8745907306671142,
+              "difference": -0.12300035308288837,
+              "outcome": "win",
+              "training_rows": 220,
+              "n_train_drugs": 5
+            },
+            {
+              "preparation": "lowest_centered",
+              "endpoint": "ALT",
+              "chemical": "Levofloxacin",
+              "fold": 1,
+              "n_designs": 5,
+              "anchorboost": 0.21010832670267865,
+              "loglinear_interp": 0.4736050933599472,
+              "difference": -0.26349676665726857,
+              "outcome": "win",
+              "training_rows": 260,
+              "n_train_drugs": 5
+            },
+            {
+              "preparation": "lowest_centered",
+              "endpoint": "ALT",
+              "chemical": "Olanzapine",
+              "fold": 2,
+              "n_designs": 5,
+              "anchorboost": 0.6022791839769539,
+              "loglinear_interp": 0.5492998898029328,
+              "difference": 0.05297929417402114,
+              "outcome": "loss",
+              "training_rows": 220,
+              "n_train_drugs": 5
+            },
+            {
+              "preparation": "lowest_centered",
+              "endpoint": "ALT",
+              "chemical": "Pioglitazone",
+              "fold": 3,
+              "n_designs": 5,
+              "anchorboost": 0.5792556717105347,
+              "loglinear_interp": 0.3018733233213425,
+              "difference": 0.27738234838919223,
+              "outcome": "loss",
+              "training_rows": 220,
+              "n_train_drugs": 5
+            },
+            {
+              "preparation": "lowest_centered",
+              "endpoint": "ALT",
+              "chemical": "Troglitazone",
+              "fold": 4,
+              "n_designs": 5,
+              "anchorboost": 0.4801455361615002,
+              "loglinear_interp": 0.14352014884352685,
+              "difference": 0.3366253873179733,
+              "outcome": "loss",
+              "training_rows": 260,
+              "n_train_drugs": 5
+            },
+            {
+              "preparation": "lowest_centered",
+              "endpoint": "ALT",
+              "chemical": "Trovafloxacin",
+              "fold": 5,
+              "n_designs": 5,
+              "anchorboost": 6.315407517909431,
+              "loglinear_interp": 6.608559632301331,
+              "difference": -0.2931521143918996,
+              "outcome": "win",
+              "training_rows": 220,
+              "n_train_drugs": 5
+            }
+          ]
+        },
+        "Morphology": {
+          "n_drugs": 6,
+          "anchorboost_mae": 0.3980876291054723,
+          "loglinear_mae": 0.38680536672472954,
+          "paired": {
+            "mean_diff": 0.0113,
+            "ci95": [
+              -0.0733,
+              0.0986
+            ],
+            "rel_change_pct": 2.92,
+            "n_chemicals": 6,
+            "frac_chem_improved": 0.667
+          },
+          "lower_error_pct": -2.92,
+          "fold_outcomes": {
+            "win": 4,
+            "loss": 2,
+            "tie": 0
+          },
+          "folds": [
+            {
+              "preparation": "lowest_centered",
+              "endpoint": "Morphology",
+              "chemical": "Clozapine",
+              "fold": 0,
+              "n_designs": 5,
+              "anchorboost": 0.6866547065996317,
+              "loglinear_interp": 0.7624907433986664,
+              "difference": -0.07583603679903472,
+              "outcome": "win",
+              "training_rows": 220,
+              "n_train_drugs": 5
+            },
+            {
+              "preparation": "lowest_centered",
+              "endpoint": "Morphology",
+              "chemical": "Levofloxacin",
+              "fold": 1,
+              "n_designs": 5,
+              "anchorboost": 0.19442446300535088,
+              "loglinear_interp": 0.19571209847927093,
+              "difference": -0.0012876354739200513,
+              "outcome": "win",
+              "training_rows": 260,
+              "n_train_drugs": 5
+            },
+            {
+              "preparation": "lowest_centered",
+              "endpoint": "Morphology",
+              "chemical": "Olanzapine",
+              "fold": 2,
+              "n_designs": 5,
+              "anchorboost": 0.5182355692323586,
+              "loglinear_interp": 0.3478692054748535,
+              "difference": 0.17036636375750508,
+              "outcome": "loss",
+              "training_rows": 220,
+              "n_train_drugs": 5
+            },
+            {
+              "preparation": "lowest_centered",
+              "endpoint": "Morphology",
+              "chemical": "Pioglitazone",
+              "fold": 3,
+              "n_designs": 5,
+              "anchorboost": 0.3610371664290194,
+              "loglinear_interp": 0.22196802794933318,
+              "difference": 0.13906913847968622,
+              "outcome": "loss",
+              "training_rows": 220,
+              "n_train_drugs": 5
+            },
+            {
+              "preparation": "lowest_centered",
+              "endpoint": "Morphology",
+              "chemical": "Troglitazone",
+              "fold": 4,
+              "n_designs": 5,
+              "anchorboost": 0.08395128633808027,
+              "loglinear_interp": 0.21939296871423722,
+              "difference": -0.13544168237615695,
+              "outcome": "win",
+              "training_rows": 260,
+              "n_train_drugs": 5
+            },
+            {
+              "preparation": "lowest_centered",
+              "endpoint": "Morphology",
+              "chemical": "Trovafloxacin",
+              "fold": 5,
+              "n_designs": 5,
+              "anchorboost": 0.5442225830283933,
+              "loglinear_interp": 0.573399156332016,
+              "difference": -0.029176573303622666,
+              "outcome": "win",
+              "training_rows": 220,
+              "n_train_drugs": 5
+            }
+          ]
+        }
+      }
+    },
+    "curve_counts": {
+      "ALBUMIN": {
+        "Clozapine": {
+          "n_observations": 12,
+          "n_available_concentrations": 6,
+          "concentrations": [
+            1.0,
+            3.0,
+            10.0,
+            30.0,
+            100.0,
+            300.0
+          ],
+          "reference": 124.7398737835785
+        },
+        "Levofloxacin": {
+          "n_observations": 10,
+          "n_available_concentrations": 5,
+          "concentrations": [
+            1.0,
+            3.0,
+            10.0,
+            15.0,
+            45.0
+          ],
+          "reference": 105.1203179502932
+        },
+        "Olanzapine": {
+          "n_observations": 12,
+          "n_available_concentrations": 6,
+          "concentrations": [
+            1.0,
+            3.0,
+            10.0,
+            30.0,
+            100.0,
+            300.0
+          ],
+          "reference": 140.773059116767
+        },
+        "Pioglitazone": {
+          "n_observations": 10,
+          "n_available_concentrations": 6,
+          "concentrations": [
+            1.0,
+            3.0,
+            10.0,
+            30.0,
+            100.0,
+            300.0
+          ],
+          "reference": 105.363511953388
+        },
+        "Troglitazone": {
+          "n_observations": 12,
+          "n_available_concentrations": 6,
+          "concentrations": [
+            0.98,
+            2.95,
+            9.82,
+            29.47,
+            98.2,
+            294.72
+          ],
+          "reference": 95.7802555442058
+        },
+        "Trovafloxacin": {
+          "n_observations": 12,
+          "n_available_concentrations": 6,
+          "concentrations": [
+            1.0,
+            3.0,
+            10.0,
+            30.0,
+            100.0,
+            300.0
+          ],
+          "reference": 114.7857701679365
+        }
+      },
+      "ALT": {
+        "Clozapine": {
+          "n_observations": 12,
+          "n_available_concentrations": 6,
+          "concentrations": [
+            1.0,
+            3.0,
+            10.0,
+            30.0,
+            100.0,
+            300.0
+          ],
+          "reference": 0.359956264
+        },
+        "Levofloxacin": {
+          "n_observations": 10,
+          "n_available_concentrations": 5,
+          "concentrations": [
+            1.0,
+            3.0,
+            10.0,
+            15.0,
+            45.0
+          ],
+          "reference": 0.0
+        },
+        "Olanzapine": {
+          "n_observations": 12,
+          "n_available_concentrations": 6,
+          "concentrations": [
+            1.0,
+            3.0,
+            10.0,
+            30.0,
+            100.0,
+            300.0
+          ],
+          "reference": 0.0
+        },
+        "Pioglitazone": {
+          "n_observations": 12,
+          "n_available_concentrations": 6,
+          "concentrations": [
+            1.0,
+            3.0,
+            10.0,
+            30.0,
+            100.0,
+            300.0
+          ],
+          "reference": 0.0
+        },
+        "Troglitazone": {
+          "n_observations": 10,
+          "n_available_concentrations": 5,
+          "concentrations": [
+            0.98,
+            2.95,
+            9.82,
+            29.47,
+            98.2
+          ],
+          "reference": 0.0
+        },
+        "Trovafloxacin": {
+          "n_observations": 12,
+          "n_available_concentrations": 6,
+          "concentrations": [
+            1.0,
+            3.0,
+            10.0,
+            30.0,
+            100.0,
+            300.0
+          ],
+          "reference": 1.4638437595
+        }
+      },
+      "Morphology": {
+        "Clozapine": {
+          "n_observations": 12,
+          "n_available_concentrations": 6,
+          "concentrations": [
+            1.0,
+            3.0,
+            10.0,
+            30.0,
+            100.0,
+            300.0
+          ],
+          "reference": 1.5
+        },
+        "Levofloxacin": {
+          "n_observations": 10,
+          "n_available_concentrations": 5,
+          "concentrations": [
+            1.0,
+            3.0,
+            10.0,
+            15.0,
+            45.0
+          ],
+          "reference": 1.5
+        },
+        "Olanzapine": {
+          "n_observations": 12,
+          "n_available_concentrations": 6,
+          "concentrations": [
+            1.0,
+            3.0,
+            10.0,
+            30.0,
+            100.0,
+            300.0
+          ],
+          "reference": 1.5
+        },
+        "Pioglitazone": {
+          "n_observations": 12,
+          "n_available_concentrations": 6,
+          "concentrations": [
+            1.0,
+            3.0,
+            10.0,
+            30.0,
+            100.0,
+            300.0
+          ],
+          "reference": 1.0833333335000002
+        },
+        "Troglitazone": {
+          "n_observations": 10,
+          "n_available_concentrations": 5,
+          "concentrations": [
+            0.98,
+            2.95,
+            9.82,
+            29.47,
+            98.2
+          ],
+          "reference": 1.6666666664999998
+        },
+        "Trovafloxacin": {
+          "n_observations": 12,
+          "n_available_concentrations": 6,
+          "concentrations": [
+            1.0,
+            3.0,
+            10.0,
+            30.0,
+            100.0,
+            300.0
+          ],
+          "reference": 1.25
+        }
+      }
+    },
+    "interpretation": "Endpoint-specific leave-one-drug-out transfer in published units; separate from unchanged-protocol fourth-benchmark availability."
+  }
+}

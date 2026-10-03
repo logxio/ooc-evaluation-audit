@@ -1,0 +1,98 @@
+{
+  "environments": [
+    {
+      "environment": "registered_and_public_Linux_CPU",
+      "python": "3.12; patch not recorded",
+      "numpy": "2.5.3",
+      "sklearn": "1.7.2",
+      "platform": "Kaggle Linux CPU",
+      "model_seed": 0,
+      "design_seed": "sha256(chemical|k) first 8 hex digits",
+      "bootstrap_seed": 0,
+      "folds": "1;2;3;4",
+      "execution": "archived training plus public rerun",
+      "source": "ledger/reference/public_notebook.json; ledger/reference/linux/",
+      "environment_limit": "numpy/sklearn pins retained; Python minor evidenced by log path; Python patch and BLAS/thread configuration absent"
+    },
+    {
+      "environment": "archived_Mac_training",
+      "python": "not recorded in run artifacts",
+      "numpy": "not recorded in run artifacts",
+      "sklearn": "not recorded in run artifacts",
+      "platform": "macOS as recorded in ledger/reference/training_summary.json",
+      "model_seed": 0,
+      "design_seed": "sha256(chemical|k) first 8 hex digits",
+      "bootstrap_seed": 0,
+      "folds": "1;2",
+      "execution": "archived retrains",
+      "source": "ledger/reference/macos/; ledger/reference/training_summary.json",
+      "environment_limit": "exact historical Python, package and BLAS/thread snapshot absent; model config and input/code hashes retained"
+    },
+    {
+      "environment": "current_ledger_replay",
+      "python": "3.13.14",
+      "numpy": "2.5.3",
+      "sklearn": "unused",
+      "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+      "model_seed": "saved predictions",
+      "design_seed": "sha256(chemical|3) first 8 hex digits",
+      "bootstrap_seed": 0,
+      "folds": "1;2;3;4",
+      "execution": "fresh raw-data decision and archive-statistics replay; archived browser exports",
+      "source": "ledger/summary.json; ledger/browser/receipt.json; ledger/lineage_summary.json",
+      "environment_limit": "no new model training; does not reconstruct the absent historical Mac environment"
+    }
+  ],
+  "model": {
+    "fold1": {
+      "kernel": "loxigicck/mea-forecast-fold1",
+      "status": "COMPLETE",
+      "json_sha256": "35d000f82b82e33ece1f825345afc5e90d72900c0f647f20543cbf25c7691137",
+      "seconds": {
+        "k3_fold1": {
+          "seconds": 234.5,
+          "training_rows": 2669945
+        }
+      }
+    },
+    "fold2": {
+      "kernel": "loxigicck/mea-forecast-fold2",
+      "status": "COMPLETE",
+      "json_sha256": "223903b9ae0e6d6fe6385df70b0c44615f1c3aac626e1e73462cdcb97f6e3d57",
+      "seconds": {
+        "k3_fold2": {
+          "seconds": 223.3,
+          "training_rows": 2608878
+        }
+      }
+    },
+    "fold3": {
+      "kernel": "loxigicck/mea-forecast-fold3",
+      "status": "COMPLETE",
+      "json_sha256": "8019950473a35ed210af92cb7d3d9cf6fef32530ab8e549c2ecb6028734733f9",
+      "seconds": {
+        "k3_fold3": {
+          "seconds": 222.5,
+          "training_rows": 2577815
+        }
+      }
+    },
+    "fold4": {
+      "kernel": "loxigicck/mea-forecast-fold4",
+      "status": "COMPLETE",
+      "json_sha256": "0f0fd4fbb3429174cfbbf0913cd82f6c3784c3784b3d11a6be23b30f043d2554",
+      "seconds": {
+        "k3_fold4": {
+          "seconds": 219.3,
+          "training_rows": 2479305
+        }
+      }
+    }
+  },
+  "artifact_tolerance": {
+    "public_linux_saved_rows": 0.0,
+    "archived_summary_rounding": 5e-05,
+    "numerical_tolerance_scope": "precomparison arithmetic checks; cross-platform training differences reported without a pass threshold"
+  },
+  "archived_environment_gap": "historical Mac dependency snapshot and Linux patch/BLAS metadata were not recorded in available artifacts"
+}

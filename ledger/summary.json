@@ -1,0 +1,422 @@
+{
+  "wells": {
+    "baseline_wells": 28185,
+    "first_wells": 11395,
+    "added_retest_wells": 845,
+    "strategy_wells": 12240,
+    "savings_fraction": 0.5657264502394891,
+    "headline_rounded_percent": 56.6,
+    "judge_model_savings_fraction": 0.5331369661266568,
+    "difference_percentage_points": 3.2589484112832245,
+    "observed_unique_heldout_wells": 5637,
+    "concentration_count_chemical_distribution": {
+      "7": 170,
+      "8": 8,
+      "11": 6,
+      "9": 4,
+      "12": 4,
+      "13": 1,
+      "10": 1
+    },
+    "interpretation": "retrospective exposed-well equivalents, summed across five alternative designs per chemical; shared controls and prospective overhead excluded",
+    "decomposition_order": "level count, mean replicate weighting, within-chemical replicate imbalance",
+    "decomposition_order_dependence": "individual increments depend on this stated path; their total is invariant"
+  },
+  "risk": {
+    "anchorboost": {
+      "designs": 970,
+      "released": 905,
+      "retests": 65,
+      "wrong_released": 79,
+      "release_coverage": 0.9329896907216495,
+      "errors_per_all_designs": 0.08144329896907217,
+      "errors_per_released_designs": 0.08729281767955802,
+      "forced_full_coverage_errors": 102,
+      "forced_coverage": 970,
+      "forced_errors_per_all_designs": 0.10515463917525773,
+      "forced_errors_per_released_designs": 0.10515463917525773
+    },
+    "measured_only": {
+      "designs": 970,
+      "released": 711,
+      "retests": 259,
+      "wrong_released": 79,
+      "release_coverage": 0.7329896907216494,
+      "errors_per_all_designs": 0.08144329896907217,
+      "errors_per_released_designs": 0.1111111111111111,
+      "forced_full_coverage_errors": 145,
+      "forced_coverage": 970,
+      "forced_errors_per_all_designs": 0.14948453608247422,
+      "forced_errors_per_released_designs": 0.14948453608247422
+    }
+  },
+  "waterfall": [
+    {
+      "scenario": "uniform_7_levels_3_replicates",
+      "baseline_wells": 20370.0,
+      "strategy_wells": 9510.0,
+      "saving_rate": 0.5331369661266568,
+      "change_percentage_points": 0.0
+    },
+    {
+      "scenario": "actual_level_count_3_replicates",
+      "baseline_wells": 21405.0,
+      "strategy_wells": 9510.0,
+      "saving_rate": 0.5557112824106517,
+      "change_percentage_points": 2.2574316283994866
+    },
+    {
+      "scenario": "actual_mean_replicates_equal_within_chemical",
+      "baseline_wells": 28185.0,
+      "strategy_wells": 12227.079462204461,
+      "saving_rate": 0.5661848691784828,
+      "change_percentage_points": 1.0473586767831056
+    },
+    {
+      "scenario": "actual_retained_wells_per_level",
+      "baseline_wells": 28185.0,
+      "strategy_wells": 12240.0,
+      "saving_rate": 0.5657264502394891,
+      "change_percentage_points": -0.04584189389936766
+    }
+  ],
+  "calibration": [
+    {
+      "test_fold": 1,
+      "method": "anchorboost",
+      "training_folds": "0;2",
+      "calibration_folds": "3;4",
+      "training_designs": 490,
+      "training_chemicals": 98,
+      "calibration_designs": 480,
+      "calibration_chemicals": 96,
+      "cutoff": 2.9836400747299194,
+      "release_margin": 0.03,
+      "calibration_releases": 454,
+      "calibration_wrong_releases": 45,
+      "smoothed_overall_risk": 0.09563409563409564,
+      "alpha": 0.1,
+      "conditional_calibration_error": 0.09911894273127753,
+      "test_designs": 245,
+      "test_releases": 232,
+      "test_wrong_releases": 13
+    },
+    {
+      "test_fold": 1,
+      "method": "measured_only",
+      "training_folds": "0;2",
+      "calibration_folds": "3;4",
+      "training_designs": 490,
+      "training_chemicals": 98,
+      "calibration_designs": 480,
+      "calibration_chemicals": 96,
+      "cutoff": 2.9836400747299194,
+      "release_margin": 0.14,
+      "calibration_releases": 323,
+      "calibration_wrong_releases": 46,
+      "smoothed_overall_risk": 0.09771309771309772,
+      "alpha": 0.1,
+      "conditional_calibration_error": 0.14241486068111456,
+      "test_designs": 245,
+      "test_releases": 176,
+      "test_wrong_releases": 13
+    },
+    {
+      "test_fold": 2,
+      "method": "anchorboost",
+      "training_folds": "0;1",
+      "calibration_folds": "3;4",
+      "training_designs": 490,
+      "training_chemicals": 98,
+      "calibration_designs": 480,
+      "calibration_chemicals": 96,
+      "cutoff": 2.999377965927124,
+      "release_margin": 0.03,
+      "calibration_releases": 442,
+      "calibration_wrong_releases": 46,
+      "smoothed_overall_risk": 0.09771309771309772,
+      "alpha": 0.1,
+      "conditional_calibration_error": 0.10407239819004525,
+      "test_designs": 245,
+      "test_releases": 222,
+      "test_wrong_releases": 16
+    },
+    {
+      "test_fold": 2,
+      "method": "measured_only",
+      "training_folds": "0;1",
+      "calibration_folds": "3;4",
+      "training_designs": 490,
+      "training_chemicals": 98,
+      "calibration_designs": 480,
+      "calibration_chemicals": 96,
+      "cutoff": 2.981178402900696,
+      "release_margin": 0.17,
+      "calibration_releases": 313,
+      "calibration_wrong_releases": 44,
+      "smoothed_overall_risk": 0.09355509355509356,
+      "alpha": 0.1,
+      "conditional_calibration_error": 0.14057507987220447,
+      "test_designs": 245,
+      "test_releases": 169,
+      "test_wrong_releases": 12
+    },
+    {
+      "test_fold": 3,
+      "method": "anchorboost",
+      "training_folds": "0;1",
+      "calibration_folds": "2;4",
+      "training_designs": 490,
+      "training_chemicals": 98,
+      "calibration_designs": 480,
+      "calibration_chemicals": 96,
+      "cutoff": 2.999377965927124,
+      "release_margin": 0.03,
+      "calibration_releases": 446,
+      "calibration_wrong_releases": 44,
+      "smoothed_overall_risk": 0.09355509355509356,
+      "alpha": 0.1,
+      "conditional_calibration_error": 0.09865470852017937,
+      "test_designs": 245,
+      "test_releases": 218,
+      "test_wrong_releases": 18
+    },
+    {
+      "test_fold": 3,
+      "method": "measured_only",
+      "training_folds": "0;1",
+      "calibration_folds": "2;4",
+      "training_designs": 490,
+      "training_chemicals": 98,
+      "calibration_designs": 480,
+      "calibration_chemicals": 96,
+      "cutoff": 2.981178402900696,
+      "release_margin": 0.14,
+      "calibration_releases": 348,
+      "calibration_wrong_releases": 45,
+      "smoothed_overall_risk": 0.09563409563409564,
+      "alpha": 0.1,
+      "conditional_calibration_error": 0.12931034482758622,
+      "test_designs": 245,
+      "test_releases": 166,
+      "test_wrong_releases": 21
+    },
+    {
+      "test_fold": 4,
+      "method": "anchorboost",
+      "training_folds": "0;1",
+      "calibration_folds": "2;3",
+      "training_designs": 490,
+      "training_chemicals": 98,
+      "calibration_designs": 490,
+      "calibration_chemicals": 98,
+      "cutoff": 2.999377965927124,
+      "release_margin": 0.0,
+      "calibration_releases": 483,
+      "calibration_wrong_releases": 48,
+      "smoothed_overall_risk": 0.09979633401221996,
+      "alpha": 0.1,
+      "conditional_calibration_error": 0.09937888198757763,
+      "test_designs": 235,
+      "test_releases": 233,
+      "test_wrong_releases": 32
+    },
+    {
+      "test_fold": 4,
+      "method": "measured_only",
+      "training_folds": "0;1",
+      "calibration_folds": "2;3",
+      "training_designs": 490,
+      "training_chemicals": 98,
+      "calibration_designs": 490,
+      "calibration_chemicals": 98,
+      "cutoff": 2.981178402900696,
+      "release_margin": 0.07,
+      "calibration_releases": 400,
+      "calibration_wrong_releases": 47,
+      "smoothed_overall_risk": 0.09775967413441955,
+      "alpha": 0.1,
+      "conditional_calibration_error": 0.1175,
+      "test_designs": 235,
+      "test_releases": 200,
+      "test_wrong_releases": 33
+    }
+  ],
+  "intervals": {
+    "release_coverage_difference": {
+      "estimate": 0.2,
+      "ci95": [
+        0.15979381443298968,
+        0.24123711340206186
+      ],
+      "one_sided_upper95": 0.23304123711340177,
+      "resamples": 4000,
+      "seed": 0,
+      "unit": "chemical_with_all_five_designs",
+      "inference": "posthoc_percentile_bootstrap_at_fixed_rules"
+    },
+    "overall_wrong_release_difference": {
+      "estimate": 0.0,
+      "ci95": [
+        -0.01958762886597938,
+        0.01958762886597938
+      ],
+      "one_sided_upper95": 0.016494845360824743,
+      "resamples": 4000,
+      "seed": 0,
+      "unit": "chemical_with_all_five_designs",
+      "inference": "posthoc_percentile_bootstrap_at_fixed_rules"
+    },
+    "anchorboost_conditional_error": {
+      "estimate": 0.08729281767955802,
+      "ci95": [
+        0.061449607470001895,
+        0.11462969360095907
+      ],
+      "one_sided_upper95": 0.11086238618672453,
+      "resamples": 4000,
+      "seed": 0,
+      "unit": "chemical_with_all_five_designs",
+      "inference": "posthoc_percentile_bootstrap_at_fixed_rules"
+    },
+    "measured_only_conditional_error": {
+      "estimate": 0.1111111111111111,
+      "ci95": [
+        0.07744360829076866,
+        0.14846043321960936
+      ],
+      "one_sided_upper95": 0.14171836507841132,
+      "resamples": 4000,
+      "seed": 0,
+      "unit": "chemical_with_all_five_designs",
+      "inference": "posthoc_percentile_bootstrap_at_fixed_rules"
+    },
+    "forced_full_coverage_error_difference": {
+      "estimate": -0.0443298969072165,
+      "ci95": [
+        -0.06804123711340206,
+        -0.02268041237113402
+      ],
+      "one_sided_upper95": -0.02577319587628866,
+      "resamples": 4000,
+      "seed": 0,
+      "unit": "chemical_with_all_five_designs",
+      "inference": "posthoc_percentile_bootstrap_at_fixed_rules"
+    },
+    "savings_difference_vs_full_series": {
+      "estimate": 0.11115841759801313,
+      "ci95": [
+        0.08590339829794492,
+        0.13757906393475944
+      ],
+      "one_sided_upper95": 0.132839157841788,
+      "resamples": 4000,
+      "seed": 0,
+      "unit": "chemical_with_all_five_designs",
+      "inference": "posthoc_percentile_bootstrap_at_fixed_rules"
+    },
+    "strategy_savings_relative_to_measured_only": {
+      "estimate": 0.20379886814544979,
+      "ci95": [
+        0.1652346811205115,
+        0.24033082752562904
+      ],
+      "one_sided_upper95": 0.23473147299813432,
+      "resamples": 4000,
+      "seed": 0,
+      "unit": "chemical_with_all_five_designs",
+      "inference": "posthoc_percentile_bootstrap_at_fixed_rules"
+    }
+  },
+  "risk_scope": {
+    "loss": "1{released and predicted call differs from complete-series call}",
+    "calibration_rule": "smallest grid margin with (wrong_calibration_releases+1)/(all_calibration_designs+1)<=0.10",
+    "conditional_rule": "not used: the decision script selects overall_margin",
+    "grouping": "five designs reuse each chemical; calibration designs are not independent biological samples",
+    "crossfit": "each saved forecast excludes its own chemical fold; other-fold forecasts used for cutoff/calibration can have been trained on the current test fold",
+    "guarantee": "reported 10% is the calibration budget; these replay counts and bootstrap intervals do not establish an independent prospective or conditional-risk guarantee"
+  },
+  "observation_units": {
+    "observations": 964187,
+    "unique_heldout_well_rows": 5637,
+    "chemicals": 194,
+    "mapping": "observation_map.csv.gz joins well_records.csv on bundle_well_row",
+    "independence": "the same physical well repeats across day, feature and alternative design; count chemicals for bootstrap",
+    "upstream_physical_key": "chemical,spid,plate,date,well,concentration_uM; bundle retains plate|date and row order only"
+  },
+  "verification": {
+    "archived_action_rows_matched": 970,
+    "decision_summary_matches": {
+      "anchorboost": true,
+      "measured_only": true
+    }
+  },
+  "inputs": [
+    {
+      "path": "ledger/.cache/nfa_tasks.npz",
+      "sha256": "e1f056ef33f568052fb8dfdba6e095f7b575c7f78d96768e34469918559008d2"
+    },
+    {
+      "path": "chip_forecast_runs/decision_fold0.npz",
+      "sha256": "21f5bcf26a998ee51b1f5afdefe7164784fab59bbb127cfb59489fed099223f4"
+    },
+    {
+      "path": "chip_forecast_runs/decision_fold1.npz",
+      "sha256": "91d257613cd491db58fc328eaf92a8409d8ec6f299946cc740a467e4bde3ceb7"
+    },
+    {
+      "path": "chip_forecast_runs/decision_fold2.npz",
+      "sha256": "0cfe5d1a61fe8392029f6738a74bc73cb9b89cc3d765ce6aaae63ec578352de7"
+    },
+    {
+      "path": "chip_forecast_runs/decision_fold3.npz",
+      "sha256": "28d6c75d19852fe380c81049e7eb3baa7b289519b940d49bef6b64d9c891bab9"
+    },
+    {
+      "path": "chip_forecast_runs/decision_fold4.npz",
+      "sha256": "dfaf94093bf9894a571e8750cfe04330b2614f8e6855f9d66ff2a04ab44d9531"
+    },
+    {
+      "path": "chip_forecast.py",
+      "sha256": "3d02dd3a1bc57e8c53f701a6005c8d5e9d8ad6a15a57cdec3f22b27066015897"
+    },
+    {
+      "path": "chip_forecast_decision.py",
+      "sha256": "27fbf168797e6eceb3643e18da5719004d798db76aa69184404160d1be8501cf"
+    },
+    {
+      "path": "chip_forecast_actions.py",
+      "sha256": "1ad3f968873629c413f52d5de904b2789d7cafef022efe44dbb5ae4155ab1be3"
+    },
+    {
+      "path": "chip_forecast_actions.csv",
+      "sha256": "7f049e68f0df2c9a6adaa79e1d1d94c16ab8b3f928cde6f3091d0ada53d7483d"
+    },
+    {
+      "path": "chip_forecast_decision.json",
+      "sha256": "4f301204da7158153f48f891c9810e819add2469e41e691fd0f646c96ca21b6d"
+    },
+    {
+      "path": "chip_forecast_decision_protocol.json",
+      "sha256": "ed85508cf7a111c19dc3e68c12bcbf9dfdc19486510c7d8bd73b9ac5fc8bc9cd"
+    },
+    {
+      "path": "release_calibration.py",
+      "sha256": "a7125166627ba57484322a8b0f355638320fadee3330ac7657e52ba5ef23f6bc"
+    },
+    {
+      "path": "matched_regimen.py",
+      "sha256": "f66e05c29726fdb3152006030ee9b9ddf793990328150ab5a59181860ead367c"
+    }
+  ],
+  "execution": {
+    "python": "3.13.14 (main, Jun 10 2026, 12:24:04) [Clang 21.0.0 (clang-2100.0.123.102)]",
+    "numpy": "2.5.3",
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "seconds": 3.4045707089826465,
+    "max_rss_bytes": 257228800,
+    "new_training_runs": 0,
+    "paid_api_calls": 0,
+    "source_sha256": "a14540b096d8e8d6eebfce07ac6954f95a1e0456863cdcf4da212f1beae52e4e"
+  }
+}

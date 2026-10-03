@@ -1,0 +1,140 @@
+{
+  "schema": "workbench.analysis.v1",
+  "record_type": "local_analysis",
+  "version": "combined-regimen-primary-v1",
+  "source": "published_example",
+  "model_sha256": "e73d6da8e3f731477b54960de40ab2f3221ff3b9831a98cfde905d1bf456a586",
+  "revealed": true,
+  "cost": 0.25,
+  "summary": {
+    "ours": {
+      "patients": 43,
+      "released": 43,
+      "retests": 0,
+      "wrong_released": 1,
+      "overall_wrong_release": 0.023255813953488372,
+      "released_error_rate": 0.023255813953488372,
+      "retest_cost": 0,
+      "total_cost": 1,
+      "loss": 0.023255813953488372,
+      "scored": 43,
+      "scored_released": 43,
+      "scored_retests": 0
+    },
+    "baseline": {
+      "patients": 43,
+      "released": 27,
+      "retests": 16,
+      "wrong_released": 4,
+      "overall_wrong_release": 0.09302325581395349,
+      "released_error_rate": 0.14814814814814814,
+      "retest_cost": 4,
+      "total_cost": 8,
+      "loss": 0.18604651162790697,
+      "scored": 43,
+      "scored_released": 27,
+      "scored_retests": 16
+    },
+    "plans": [
+      {
+        "n": 43,
+        "e": 1,
+        "alpha": 0.1,
+        "upper": 0.10563408261589406,
+        "total": 46,
+        "additional": 3,
+        "assumption": "No further errors; independent released validation patients for a rule fixed in advance."
+      },
+      {
+        "n": 43,
+        "e": 1,
+        "alpha": 0.2,
+        "upper": 0.10563408261589406,
+        "total": 43,
+        "additional": 0,
+        "assumption": "No further errors; independent released validation patients for a rule fixed in advance."
+      }
+    ],
+    "conflicts": 16,
+    "failures": [
+      "Patient105"
+    ],
+    "baseline_wins": [
+      "Patient105"
+    ]
+  },
+  "events": [
+    {
+      "type": "page_open",
+      "elapsed_ms": 4,
+      "at": "2026-10-03T07:04:57.971Z"
+    },
+    {
+      "type": "predictions_fixed",
+      "elapsed_ms": 94,
+      "at": "2026-10-03T07:04:58.061Z",
+      "source": "published_example",
+      "patients": 43,
+      "version": "rectal-frozen-2026-10-02"
+    },
+    {
+      "type": "outcomes_revealed",
+      "elapsed_ms": 173,
+      "at": "2026-10-03T07:04:58.140Z",
+      "labelled": 43
+    },
+    {
+      "type": "download",
+      "elapsed_ms": 225,
+      "at": "2026-10-03T07:04:58.192Z",
+      "file": "patient-actions.csv"
+    },
+    {
+      "type": "analysis_exported",
+      "elapsed_ms": 337,
+      "at": "2026-10-03T07:04:58.304Z"
+    },
+    {
+      "type": "download",
+      "elapsed_ms": 337,
+      "at": "2026-10-03T07:04:58.304Z",
+      "file": "patient-analysis.json"
+    },
+    {
+      "type": "input_changed",
+      "elapsed_ms": 388,
+      "at": "2026-10-03T07:04:58.355Z"
+    },
+    {
+      "type": "predictions_fixed",
+      "elapsed_ms": 388,
+      "at": "2026-10-03T07:04:58.355Z",
+      "source": "published_example",
+      "patients": 43,
+      "version": "combined-regimen-primary-v1"
+    },
+    {
+      "type": "packet_loaded",
+      "elapsed_ms": 389,
+      "at": "2026-10-03T07:04:58.356Z",
+      "version": "combined-regimen-primary-v1"
+    },
+    {
+      "type": "outcomes_revealed",
+      "elapsed_ms": 470,
+      "at": "2026-10-03T07:04:58.437Z",
+      "labelled": 43
+    },
+    {
+      "type": "download",
+      "elapsed_ms": 538,
+      "at": "2026-10-03T07:04:58.505Z",
+      "file": "patient-actions.csv"
+    },
+    {
+      "type": "analysis_exported",
+      "elapsed_ms": 675,
+      "at": "2026-10-03T07:04:58.642Z"
+    }
+  ]
+}

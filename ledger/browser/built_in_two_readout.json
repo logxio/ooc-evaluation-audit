@@ -1,0 +1,104 @@
+{
+  "schema": "workbench.analysis.v1",
+  "record_type": "local_analysis",
+  "version": "rectal-frozen-2026-10-02",
+  "source": "published_example",
+  "model_sha256": "d78e069d414fe51f472a3e0ef5abd607fdd94fbf2ea015ecbd752d3b44ddaacb",
+  "revealed": true,
+  "cost": 0.25,
+  "summary": {
+    "ours": {
+      "patients": 43,
+      "released": 27,
+      "retests": 16,
+      "wrong_released": 4,
+      "overall_wrong_release": 0.09302325581395349,
+      "released_error_rate": 0.14814814814814814,
+      "retest_cost": 4,
+      "total_cost": 8,
+      "loss": 0.18604651162790697,
+      "scored": 43,
+      "scored_released": 27,
+      "scored_retests": 16
+    },
+    "baseline": {
+      "patients": 43,
+      "released": 43,
+      "retests": 0,
+      "wrong_released": 1,
+      "overall_wrong_release": 0.023255813953488372,
+      "released_error_rate": 0.023255813953488372,
+      "retest_cost": 0,
+      "total_cost": 1,
+      "loss": 0.023255813953488372,
+      "scored": 43,
+      "scored_released": 43,
+      "scored_retests": 0
+    },
+    "plans": [
+      {
+        "n": 27,
+        "e": 4,
+        "alpha": 0.1,
+        "upper": 0.307626344227555,
+        "total": 89,
+        "additional": 62,
+        "assumption": "No further errors; independent released validation patients for a rule fixed in advance."
+      },
+      {
+        "n": 27,
+        "e": 4,
+        "alpha": 0.2,
+        "upper": 0.307626344227555,
+        "total": 44,
+        "additional": 17,
+        "assumption": "No further errors; independent released validation patients for a rule fixed in advance."
+      }
+    ],
+    "conflicts": 16,
+    "failures": [
+      "Patient97",
+      "Patient89",
+      "Patient49",
+      "Patient21"
+    ],
+    "baseline_wins": [
+      "Patient97",
+      "Patient89",
+      "Patient49",
+      "Patient21"
+    ]
+  },
+  "events": [
+    {
+      "type": "page_open",
+      "elapsed_ms": 4,
+      "at": "2026-10-03T07:04:57.971Z"
+    },
+    {
+      "type": "predictions_fixed",
+      "elapsed_ms": 94,
+      "at": "2026-10-03T07:04:58.061Z",
+      "source": "published_example",
+      "patients": 43,
+      "version": "rectal-frozen-2026-10-02"
+    },
+    {
+      "type": "outcomes_revealed",
+      "elapsed_ms": 173,
+      "at": "2026-10-03T07:04:58.140Z",
+      "labelled": 43
+    },
+    {
+      "type": "download",
+      "elapsed_ms": 225,
+      "at": "2026-10-03T07:04:58.192Z",
+      "file": "patient-actions.csv"
+    },
+    {
+      "type": "analysis_exported",
+      "elapsed_ms": 337,
+      "at": "2026-10-03T07:04:58.304Z"
+    }
+  ]
+}

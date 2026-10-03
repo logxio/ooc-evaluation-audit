@@ -1,0 +1,137 @@
+{
+  "runs": {
+    "fold1": {
+      "kernel": "loxigicck/mea-forecast-fold1",
+      "status": "COMPLETE",
+      "json_sha256": "35d000f82b82e33ece1f825345afc5e90d72900c0f647f20543cbf25c7691137",
+      "seconds": {
+        "k3_fold1": {
+          "seconds": 234.5,
+          "training_rows": 2669945
+        }
+      }
+    },
+    "fold2": {
+      "kernel": "loxigicck/mea-forecast-fold2",
+      "status": "COMPLETE",
+      "json_sha256": "223903b9ae0e6d6fe6385df70b0c44615f1c3aac626e1e73462cdcb97f6e3d57",
+      "seconds": {
+        "k3_fold2": {
+          "seconds": 223.3,
+          "training_rows": 2608878
+        }
+      }
+    },
+    "fold3": {
+      "kernel": "loxigicck/mea-forecast-fold3",
+      "status": "COMPLETE",
+      "json_sha256": "8019950473a35ed210af92cb7d3d9cf6fef32530ab8e549c2ecb6028734733f9",
+      "seconds": {
+        "k3_fold3": {
+          "seconds": 222.5,
+          "training_rows": 2577815
+        }
+      }
+    },
+    "fold4": {
+      "kernel": "loxigicck/mea-forecast-fold4",
+      "status": "COMPLETE",
+      "json_sha256": "0f0fd4fbb3429174cfbbf0913cd82f6c3784c3784b3d11a6be23b30f043d2554",
+      "seconds": {
+        "k3_fold4": {
+          "seconds": 219.3,
+          "training_rows": 2479305
+        }
+      }
+    }
+  },
+  "primary": {
+    "n_chemicals": 194,
+    "anchorboost": 1.1606,
+    "versus": {
+      "loglinear_interp": {
+        "mean_diff": -0.1847,
+        "ci95": [
+          -0.2165,
+          -0.1539
+        ],
+        "rel_change_pct": -13.73,
+        "n_chemicals": 194,
+        "frac_chem_improved": 0.887
+      },
+      "hill_per_endpoint": {
+        "mean_diff": -0.296,
+        "ci95": [
+          -0.3291,
+          -0.2638
+        ],
+        "rel_change_pct": -20.32,
+        "n_chemicals": 194,
+        "frac_chem_improved": 0.959
+      },
+      "analog_knn": {
+        "mean_diff": -0.1885,
+        "ci95": [
+          -0.2162,
+          -0.1619
+        ],
+        "rel_change_pct": -13.97,
+        "n_chemicals": 194,
+        "frac_chem_improved": 0.907
+      },
+      "published_neural_process": {
+        "mean_diff": -0.0333,
+        "ci95": [
+          -0.0702,
+          -0.0006
+        ],
+        "rel_change_pct": -2.79,
+        "n_chemicals": 194,
+        "frac_chem_improved": 0.541
+      }
+    },
+    "loglinear_interp": 1.3453,
+    "hill_per_endpoint": 1.4566,
+    "analog_knn": 1.3491,
+    "published_neural_process": 1.194
+  },
+  "cross_platform": {
+    "macos_folds": [
+      1,
+      2
+    ],
+    "macos_fold_means": {
+      "fold1": 1.2246,
+      "fold2": 1.1507
+    },
+    "linux_fold_means": {
+      "fold1": 1.2208,
+      "fold2": 1.1497
+    },
+    "baselines": "log-linear and analog errors identical per chemical on both platforms; Hill within 1e-3",
+    "anchorboost_max_per_chemical_diff": {
+      "fold1": 0.178,
+      "fold2": 0.0309
+    },
+    "mixed_macos12_linux34": {
+      "mean": 1.1618,
+      "versus_neural_process": {
+        "mean_diff": -0.0321,
+        "ci95": [
+          -0.0694,
+          0.0013
+        ],
+        "frac_chem_improved": 0.546
+      },
+      "versus_loglinear": {
+        "mean_diff": -0.1834,
+        "ci95": [
+          -0.2156,
+          -0.1516
+        ],
+        "frac_chem_improved": 0.887
+      }
+    },
+    "reading": "Tree training is not bitwise identical across CPU platforms; the log-linear comparison holds on both, the neural-process upper bound moves from -0.001 (registered Linux run) to +0.001 (macOS folds 1-2), so the two are reported as on par or slightly better."
+  }
+}

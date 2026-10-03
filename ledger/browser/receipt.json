@@ -1,0 +1,66 @@
+{
+  "browser": "154.0.8037.98",
+  "node": "v24.20.0",
+  "playwright": "1.62.1",
+  "entry": "workbench/index.html",
+  "inputs": [
+    {
+      "path": "workbench/index.html",
+      "sha256": "349ba67e93b0c2e680cab15a26a94977fd789dea3d9cce7df0fc123d7f3d8ef1"
+    },
+    {
+      "path": "workbench/engine.js",
+      "sha256": "007e58276ed177ef08fabbf1b4061df92d106a08a7f7d00e27ff41ab7eb6c209"
+    },
+    {
+      "path": "workbench/stats.js",
+      "sha256": "20ceaa079f797eae3aec8f4ef86e3ee2b2a94348b429f302965592cf6c49e0e3"
+    },
+    {
+      "path": "workbench/chain-engine.js",
+      "sha256": "d9236f633e2eb5fdd49acacb81f3eb5cc9846fe4db75989e219d0aa1e8da5040"
+    },
+    {
+      "path": "workbench/chain.js",
+      "sha256": "65e054f3e3c3160de6cd0ceb0113eb29c3af9adf462cf26e3bb289728345dcfc"
+    },
+    {
+      "path": "workbench/result.js",
+      "sha256": "0e9958f79c5a67eb986897cc60ea7d6c15ea1b709a3878ece234ed463f07de3a"
+    },
+    {
+      "path": "workbench/result.json",
+      "sha256": "e891b56d019e76dcd3bb0c52069cba68cf90c26ea2cc44af6ee19d3cb9949860"
+    },
+    {
+      "path": "patient_workbench_result.json",
+      "sha256": "a32130c99521a630f8fb821adc6181adb154a3a5af7831a5457d2a57fc895cf5"
+    }
+  ],
+  "receipts": [
+    {
+      "name": "built_in_two_readout",
+      "comparison": "Wrong calls · all\nWrong calls · reported\nCost / patient\nTotal cost\nTwo-readout release rule\n27 / 16\n4/43 · 9.30%\n4/27 · 14.81%\n0.1860\n8.0000\nFixed threshold · combined regimen\n43 / 0\n1/43 · 2.33%\n1/43 · 2.33%\n0.0233\n1.0000",
+      "failure": "4 wrong reported calls: Patient97, Patient89, Patient49, Patient21. Baseline right on 4 of 4. Lower cost: Fixed threshold · combined regimen.",
+      "patient_rows": 43,
+      "wrong_reported_rows": 4,
+      "visible_error": null,
+      "csv_sha256": "3c5ba09ffd2c5ada5d8c18950710032dbdbc3c4c69372bfb5a4ea4a5f8aa39f2",
+      "analysis_sha256": "35e307ffbd668de13ff1bdbba7a70216666b178a3b85366deca42a31705ad4da"
+    },
+    {
+      "name": "updated_combined_regimen",
+      "comparison": "Wrong calls · all\nWrong calls · reported\nCost / patient\nTotal cost\nCombined-regimen signal\n43 / 0\n1/43 · 2.33%\n1/43 · 2.33%\n0.0233\n1.0000\nEarlier two-readout agreement\n27 / 16\n4/43 · 9.30%\n4/27 · 14.81%\n0.1860\n8.0000",
+      "failure": "1 wrong reported call: Patient105. Baseline right on 1 of 1. Lower cost: Combined-regimen signal.",
+      "patient_rows": 43,
+      "wrong_reported_rows": 1,
+      "visible_error": null,
+      "csv_sha256": "2f0ab8df2307455ba480081a147b7772e94c475a0f873d6621b54ae8c3a33039",
+      "analysis_sha256": "5add558bffabc214b06011d384d1962fbf9ce643277819598cdeadbf8a6ae832"
+    }
+  ],
+  "errors": [],
+  "elapsed_ms": 1033.4937499999999,
+  "max_rss_node_kib": 141888,
+  "mode": "headless; file entry; local downloads; HTTP requests blocked"
+}

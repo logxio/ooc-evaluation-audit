@@ -1,0 +1,208 @@
+{
+  "checked_date_jst": "2026-10-03",
+  "downloads": [
+    {
+      "id": "ewart",
+      "file": "43856_2022_209_MOESM8_ESM.xlsx",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs43856-022-00209-1/MediaObjects/43856_2022_209_MOESM8_ESM.xlsx",
+      "sha256": "87cc22d0c1d4508f7e0830df348c52238bdb18d821c8d29cc0751114081509fc"
+    },
+    {
+      "id": "ewart_design",
+      "file": "43856_2022_209_MOESM1_ESM.xlsx",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs43856-022-00209-1/MediaObjects/43856_2022_209_MOESM1_ESM.xlsx",
+      "sha256": "8a37ff64f0b2b425650d4bafc43e9e79f90f995d47b7e87e49a7416e1af9567d"
+    },
+    {
+      "id": "gdop",
+      "file": "42003_2026_9973_MOESM3_ESM.xlsx",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs42003-026-09973-5/MediaObjects/42003_2026_9973_MOESM3_ESM.xlsx",
+      "sha256": "28f83ec0ddeb402728169fa5ab7b78f8501be83152b4e1ac99419f82179e8d37"
+    },
+    {
+      "id": "gdop_figures",
+      "file": "42003_2026_9973_MOESM4_ESM.xlsx",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs42003-026-09973-5/MediaObjects/42003_2026_9973_MOESM4_ESM.xlsx",
+      "sha256": "7372c393ccac0659d4f81456ae229b07e9520655a3bd4efae25447a126a42240"
+    },
+    {
+      "id": "hu",
+      "file": "41467_2021_22676_MOESM9_ESM.xlsx",
+      "url": "https://media.springernature.com/original/springer-static/esm/art%3A10.1038%2Fs41467-021-22676-1/MediaObjects/41467_2021_22676_MOESM9_ESM.xlsx",
+      "sha256": "3a67ab0b240e74d5e9e62114bafb8e0dca6efd18fd1e1a7cd008e366c23ff462"
+    },
+    {
+      "id": "model",
+      "file": "chip_forecast.py",
+      "url": "https://raw.githubusercontent.com/logxio/ooc-evaluation-audit/dbddd7437b9f1643ef2872bd5de86de0779b209b/chip_forecast.py",
+      "sha256": "3d02dd3a1bc57e8c53f701a6005c8d5e9d8ad6a15a57cdec3f22b27066015897"
+    },
+    {
+      "id": "dnt_loader",
+      "file": "chip_forecast_dnt.py",
+      "url": "https://raw.githubusercontent.com/logxio/ooc-evaluation-audit/dbddd7437b9f1643ef2872bd5de86de0779b209b/chip_forecast_dnt.py",
+      "sha256": "41f51044d548073c3e20acb00b91faadf234cdb89b40e25b6e5f4d9d607f4e01"
+    },
+    {
+      "id": "dnt_protocol",
+      "file": "chip_forecast_dnt_protocol.json",
+      "url": "https://raw.githubusercontent.com/logxio/ooc-evaluation-audit/dbddd7437b9f1643ef2872bd5de86de0779b209b/chip_forecast_dnt_protocol.json",
+      "sha256": "12f0214a6a50ba35f052c7b9e3fd72e5f23b37bf09ef49e22b63ec74f7e5ee0f"
+    }
+  ],
+  "candidates": [
+    {
+      "id": "ewart",
+      "name": "Ewart 2022 human Liver-Chip",
+      "url": "https://www.nature.com/articles/s43856-022-00209-1",
+      "compounds": {
+        "study": 27,
+        "downloaded_dose_response": 6
+      },
+      "concentration_points": "5 or 6 positive concentrations per compound",
+      "endpoints": 3,
+      "perfused": true,
+      "license": "CC BY 4.0",
+      "status": "incompatible_preprocessing",
+      "reason": "Data 8 has 70 published row positions per endpoint (68 numeric values each), but no vehicle rows, donor identifiers or chip identifiers. Albumin is already normalized. Frozen vehicle-MAD preparation cannot be reconstructed.",
+      "evidence": [
+        "Supplementary Data 1 and 8 downloaded and parsed",
+        "Browser article extraction: methods, Figure 4 and data availability"
+      ]
+    },
+    {
+      "id": "mpsdb",
+      "name": "Pittsburgh MPS-Db / EveAnalytics",
+      "url": "https://mps.csb.pitt.edu/",
+      "compounds": null,
+      "concentration_points": null,
+      "endpoints": null,
+      "perfused": "database spanning multiple systems",
+      "license": "Dataset-specific; not verified",
+      "status": "access_unresolved",
+      "reason": "Browser extraction returned a client-rendered shell / browser assistance request; no raw experimental export was obtained. This is an access limitation, not evidence of absent data.",
+      "evidence": [
+        "Browser extraction returned a client-rendered shell; no raw export obtained.",
+        "Direct RSC article requests: Cloudflare challenge"
+      ]
+    },
+    {
+      "id": "ncats",
+      "name": "NCATS Tissue Chip Testing Centers",
+      "url": "https://ncats.nih.gov/research/research-activities/tissue-chip/projects",
+      "compounds": null,
+      "concentration_points": null,
+      "endpoints": null,
+      "perfused": "program spanning multiple systems",
+      "license": "Dataset-specific; not verified",
+      "status": "access_unresolved",
+      "reason": "The current official page describes independent validation centers; linked centers and 2018 pages returned verification challenges. No per-chip dose-response file was obtained.",
+      "evidence": [
+        "Current NCATS project page read with Browser",
+        "Browser old-center URL verification response"
+      ]
+    },
+    {
+      "id": "gdop",
+      "name": "Wang 2026 GDOP",
+      "url": "https://www.nature.com/articles/s42003-026-09973-5",
+      "compounds": {
+        "study_drugs": 3,
+        "linked_raw_trajectory_drugs": 1
+      },
+      "concentration_points": "6 positive concentrations plus vehicle",
+      "endpoints": {
+        "linked_raw": 2,
+        "reported_additional": "viability and grayscale SD"
+      },
+      "perfused": true,
+      "license": "CC BY-NC-ND 4.0",
+      "status": "insufficient_independent_compounds",
+      "reason": "Data 1 has 840 rows for one compound: 7 levels x 3 channels x 8 chambers x 5 days. A held-out-compound fold has no training compound. Figure workbook does not supply another multi-drug raw trajectory.",
+      "evidence": [
+        "MOESM3 and MOESM4 downloaded and parsed",
+        "Browser article: methods and data availability"
+      ]
+    },
+    {
+      "id": "dryad",
+      "name": "Yakavets 2025 microfluidic organoid regimens",
+      "url": "https://datadryad.org/dataset/doi:10.5061/dryad.0vt4b8h8x",
+      "compounds": null,
+      "concentration_points": null,
+      "endpoints": "viability; other endpoint counts unverified",
+      "perfused": "microfluidic arrays; sustained perfusion unverified",
+      "license": "CC0-1.0",
+      "status": "access_unresolved",
+      "reason": "Official API lists public data.zip (30,467 bytes), but file_stream returns HTTP 403 and the API download returns HTTP 401. Compound/dose/replicate counts remain unverified.",
+      "evidence": [
+        "https://datadryad.org/api/v2/datasets/doi%3A10.5061%2Fdryad.0vt4b8h8x",
+        "https://datadryad.org/api/v2/versions/367012/files",
+        "Browser dataset page read; download shows verification page"
+      ]
+    },
+    {
+      "id": "cbd",
+      "name": "Human quad liver-on-chip CRCE",
+      "url": "https://figshare.com/articles/dataset/Human_quad_liver-on-chip_system_as_a_tool_toward_bridging_the_gap_between_animals_and_humans_regarding_toxicology_and_pharmacology_of_a_cannabidiol-rich_cannabis_extract/26779461",
+      "compounds": 1,
+      "concentration_points": "3 positive concentrations (300, 1200, 4400 ng/mL) plus vehicle",
+      "endpoints": "ALT, miR-122 and CYP readouts; total channel count unverified",
+      "perfused": "on-chip 8 h dosing / 16 h washout; continuous flow unverified",
+      "license": "CC BY 4.0",
+      "status": "insufficient_independent_compounds",
+      "reason": "One extract and three positive concentrations: k=3 leaves no held-out dose. The repository lists TIFF and DOCX attachments, no CSV/XLSX dose-response table.",
+      "evidence": [
+        "https://api.figshare.com/v2/articles/26779461"
+      ]
+    },
+    {
+      "id": "charwat",
+      "name": "Charwat 2022 cardiac MPS",
+      "url": "https://pubs.acs.org/doi/10.1021/acsptsci.2c00088",
+      "compounds": 7,
+      "concentration_points": "4 or 5 positive concentrations",
+      "endpoints": "beat rate, cAPD80, triangulation and arrhythmia descriptors",
+      "perfused": true,
+      "license": "CC BY-NC 4.0 (supplement)",
+      "status": "raw_responses_not_obtained",
+      "reason": "Publisher supplement has drug-dose design and literature ion-channel block/IC50 tables plus figures; no per-tissue numeric response matrix. Literature block percentages are not chip observations.",
+      "evidence": [
+        "https://api.figshare.com/v2/articles/20405877",
+        "https://ndownloader.figshare.com/files/36483489",
+        "Browser converted all 12 pages of the original supplement"
+      ]
+    },
+    {
+      "id": "mathur",
+      "name": "Mathur 2015 cardiac MPS",
+      "url": "https://www.nature.com/articles/srep08883",
+      "compounds": 4,
+      "concentration_points": "serial concentration curves; numeric point count unverified",
+      "endpoints": "beating rate and irregular beating",
+      "perfused": true,
+      "license": "CC BY 4.0",
+      "status": "raw_responses_not_obtained",
+      "reason": "Article has dose-response plots and IC50 summaries; linked source package has eight AVI examples and one supplementary PDF, no downloadable per-chip concentration-response table identified.",
+      "evidence": [
+        "Browser full article and supplementary file list"
+      ]
+    },
+    {
+      "id": "hu",
+      "name": "Hu 2021 InSMAR organoid array",
+      "url": "https://www.nature.com/articles/s41467-021-22676-1",
+      "compounds": "10 distinct drug-name labels; some represent combination regimens",
+      "concentration_points": "typically 7-8 positive levels plus vehicle",
+      "endpoints": 1,
+      "perfused": false,
+      "license": "CC BY 4.0",
+      "status": "incompatible_preprocessing",
+      "reason": "Source workbook contains triplicate normalized viability; every control in the LCO response sheet equals 1, so both control MAD and SD equal zero. Static spot-cover microwells do not add perfused-chip evidence.",
+      "evidence": [
+        "MOESM9 original workbook parsed",
+        "Browser article: InSMAR design and spot-cover drug assay"
+      ]
+    }
+  ]
+}
