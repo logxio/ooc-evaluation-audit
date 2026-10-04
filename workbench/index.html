@@ -24,6 +24,7 @@
   .atlas { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--s2); align-items: start; }
   .index { grid-column: span 3; position: sticky; top: var(--s2); display: grid; gap: var(--s1); max-height: calc(100vh - 2 * var(--s2)); grid-template-rows: auto auto auto 1fr auto; }
   .export { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s1); width: 100%; }
+  .export[hidden] { display: none; }
   .export .ink3 { font-weight: 400; font-variant-numeric: tabular-nums; }
   .index .export { background: var(--surface); } .index .export:hover { background: var(--line); }
   .index .seg { width: 100%; } .index .seg button { flex: 1; }
