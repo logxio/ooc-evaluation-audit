@@ -203,11 +203,11 @@ table.mini th { color: var(--ink-3); font-weight: 600; white-space: nowrap; }
 .picker-list { position: absolute; z-index: 20; left: 0; right: 0; top: calc(100% + 4px); margin: 0; padding: 4px; list-style: none; background: var(--raised); border-radius: 6px; box-shadow: 0 6px 24px rgba(20, 18, 14, .12), 0 0 0 1px var(--line); }
 .picker-list li { padding: 4px var(--s1); border-radius: 4px; cursor: pointer; }
 .picker-list li.on, .picker-list li:hover { background: var(--sunk); }
-/* methods footnote: four equal cells across the full page width, one label line and one text line each */
+/* methods footnote: four equal cells with naturally wrapping text */
 .methods { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s2); }
 .methods .cell { min-width: 0; cursor: default; border-radius: 4px; }
 .methods h4 { margin: 0; font: 600 var(--f1)/var(--l1) var(--sans); color: var(--ink-2); }
-.methods p { margin: 0; font: 400 var(--f1)/var(--l1) var(--sans); color: var(--ink-3); white-space: nowrap; overflow: hidden; text-overflow: ellipsis; }
+.methods p { margin: 0; font: 400 var(--f1)/var(--l1) var(--sans); color: var(--ink-3); overflow-wrap: anywhere; }
 .tip.line { max-width: none; white-space: nowrap; }
 @media (max-width: 960px) { .agent { grid-template-columns: 1fr; } .methods { grid-template-columns: 1fr 1fr; } }
 
