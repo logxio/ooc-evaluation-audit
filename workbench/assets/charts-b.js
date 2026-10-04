@@ -169,7 +169,7 @@
   const screens = [
     ['nfa', 'Rat cortical networks, chronic', 'static 48-well MEA'],
     ['acute', 'Rat cortical networks, acute', 'static MEA'],
-    ['human', 'Human neural progenitors and neurons', 'hNP1 and hN2 cells, imaging and plate reader']
+    ['human', 'Human neural progenitors and neurons', 'hNP1 and hN2 cells']
   ];
   const ns = r => r.lo < 0 && r.hi > 0;
   Charts.forestPanels = () => {
