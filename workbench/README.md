@@ -1,43 +1,29 @@
-# Patient readouts to release or retest
+# Chip Forecast Workbench
 
-Open `index.html`, load the public patient table, predict actions, reveal clinical outcomes, compare the fixed single-readout baseline, and download the report/retest list. All calculations run in the browser. Patient tables remain on the reader's computer.
+Open `index.html`. Measure three of seven concentrations of a neural MEA screen and the page shows the whole concentration-response series: the forecast at the four unmeasured concentrations with 90% intervals, the hit call against the cutoff, and whether to report the call or measure the full series. The same page calls organoid patients sensitive, resistant or retest. Everything is computed in the browser from files in this folder; pasted tables never leave the machine, and the page makes no network request.
 
-The page is static and needs no package installation or backend. Serve this folder as `/workbench/` from the repository's GitHub Pages site. All assets use relative paths; there are no analytics, remote fonts, network requests for patient data, or runtime dependencies. The proposed Pages address is `https://logxio.github.io/ooc-evaluation-audit/workbench/`; publication is a separate repository action.
+Live: https://logxio.github.io/ooc-evaluation-audit/workbench/
 
-The default example is a retrospective 2025 rectal-organoid replay with a fixed patient split. Its measured combined-regimen single-readout comparator is stronger than the two separate assay channels. The page shows that result and the individual failures. “Report” describes a research reporting action under the selected rule. Assay scale, clinical endpoint and regimen mapping remain part of the study definition.
+## What is on the page
 
-## Your own data
+- **Chemicals.** 194 chemicals of the EPA network formation assay, each held out from training, with five three-concentration designs each (970 designs). Pages: *Curve* (measured wells, forecast, 90% interval, log-linear interpolation, and a call track of the largest DIV-mean response against the cutoff of 3; a 17 feature × 4 recording-day error matrix picks the output), *Plate* (the chemical's 48-well plates with run and unrun wells, the 35 possible three-of-seven layouts and how often each settled the call, and the wells-against-wrong-calls frontier with a retest-cost slider), *Evidence* (per-chemical error against log-linear interpolation, analog chemicals, Hill fits and the published neural process; every held-out fold of three screens; interval coverage by day and feature; ablations) and *Model* (what was trained, and a call-by-call replay of the contract agent rebuilding a published clinical headline from a paper's own table and figure).
+- **Patients.** 43 held-out rectal-organoid patients called from one combined-regimen readout at a frozen training cutoff. *Reveal outcomes* opens the clinical response; a wrong call turns red on the map and on the plate.
+- **Your data.** Paste or open a table:
+  - seven concentrations with the three you will measure marked `*`: the page returns how often that layout settled the call among the held-out designs and how many wells it saves;
+  - `patient,readout1,readout2[,baseline_readout,response]`: the frozen two-readout release rule in `result.json` reports agreeing calls and sends the rest to retest (try `examples/T1_input.csv`);
+  - `patient,combined[,irradiation,response]`: the frozen combined-regimen cutoff.
+  Outcomes can arrive later through *Add outcomes* (`patient,response`); *Download actions* saves one row per patient. A different assay goes through `worksheet.html`.
 
-Paste a CSV or tab-separated table, or open/drop a CSV. Use `patient,readout1` and optional `readout2,baseline_readout,response`. Response is 1 for a clinical responder, 0 for a non-responder, or empty. Each row is one coded patient. The main chain applies the displayed frozen model to compatible assay measurements. Missing paired measurements go to retest. If `baseline_readout` is absent, the comparison uses the stored calibration-selected single channel and explicitly names it. A separate `patient,response` file can reveal all or some outcomes later; only labelled patients enter observed-risk denominators.
+`sample.html` (validation sample size) and `audits/index.html` (published studies) are linked from the header.
 
-For a different assay, the retained `worksheet.html` fits leave-one-patient-out thresholds or exploratory cohort medians. `sample.html` and `audits/index.html` remain secondary analysis pages. The earlier timed-study files remain archived outside the entry page's navigation.
+## Files
 
-## Replace the result, keep the page
+- `index.html` with `assets/` (design system, charts, claims) and `vendor/` (D3 7.9.0 under ISC; Newsreader, Source Sans 3 and Source Code Pro as woff2 under the SIL Open Font License, licence texts alongside).
+- `data/ooc-data.js`: every number the page draws, built from the repository's results by `build_data.py`. The builder re-runs the repository's own code and stops unless the decision chain reproduces `chip_forecast_decision.json`, the action list matches `chip_forecast_actions.csv`, per-chemical comparisons match `chip_forecast_result.json`, the example forecasts match `chip_forecast_examples.json`, plain interval coverage matches `chip_forecast_intervals.json` exactly and learned interval coverage lands within 0.002 of it:
 
-`result.json` is the result packet; `result.js` wraps the same object as `window.WORKBENCH_RESULT = ...;` for direct-file browsers. The page reads patient predictions from `cases`, then recomputes observed counts after reveal. The JavaScript contains no study-specific outcome totals.
+  ```sh
+  for f in 1 2 3 4; do python workbench/build_data.py widths --fold $f; done
+  python workbench/build_data.py export
+  ```
 
-The interface is `workbench.result.v1`:
-
-- `version`, `study.{title,status,input_note,split}` identify the cohort and its interpretation.
-- `rows` contains `{patient,readout1,readout2,baseline_readout,response}`; unused measurements and unknown responses are `null`.
-- `cases`, in the same patient order, contains `{patient,calls:[0|1|null,0|1|null],margin,action,baseline_action}`. Actions are the strings `"0"`, `"1"`, or `"retest"`. `reason` is optional.
-- `rule.{name,kind,description}` identifies the method. `kind:"two_readout_v2"` includes the existing CLI's `certificate` and enables local prediction for new compatible inputs. `kind:"precomputed"` displays any method's saved CLI predictions; new inputs for that method arrive as another result packet.
-- `baseline.{kind,name,field,cutoff,selection,fallback_field,fallback_cutoff,fallback_name,fallback_selection}` describes a fixed single-readout comparator. Fallback is used only for local prediction when the comparator's measured field is missing.
-- `cost.retest` is a nonnegative cost relative to one wrong release. `provenance` records core/source hashes; `expected` holds reference counts for verification.
-
-For new results, keep those fields and replace the packet. The **Open updated result packet** control exercises that same interface locally. For a static release, wrap an updated JSON file with:
-
-```sh
-python -c 'import json,pathlib; p=pathlib.Path("workbench/result.json"); pathlib.Path("workbench/result.js").write_text("window.WORKBENCH_RESULT = "+json.dumps(json.loads(p.read_text()),allow_nan=False)+";\n")'
-```
-
-Rebuild this example from the repository's existing frozen outputs with:
-
-```sh
-python workbench/build_result.py
-python workbench/verify.py --out workbench/verification
-```
-
-Verification calls `chip_release.py` before/after reveal, calls `matched_regimen.py` for the strong comparator, and compares patient calls, margins, aggregate risks/costs, changed inputs and exact-binomial sample calculations with the browser engine. It uses the repository's existing Python dependencies plus Node.js. A new method's author supplies its CLI prediction references in the same format and extends the adapter comparison for that method; the display does not require a method-specific rewrite.
-
-Sample needs are planning minima for independent released validation patients, retaining all observed errors and assuming no further errors, with a one-sided 95% Clopper–Pearson upper bound. Relative loss counts wrong releases plus the chosen retest penalty. It measures a decision-cost assumption, not observed money or staff time.
+- `engine.js`, `stats.js`, `chain-engine.js`, `result.json` / `result.js`: the frozen two-readout release rule used for pasted tables; `verify.py` checks the browser engine against `chip_release.py` and `matched_regimen.py`.

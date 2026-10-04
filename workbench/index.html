@@ -1,14 +1,358 @@
-<!doctype html><html lang="en" data-stage="input"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Report or retest, patient by patient</title><meta name="description" content="For organoid and tumour-chip researchers: compare per-patient calls with clinical response and a fixed single-readout baseline. Computed in your browser; your data stays on your computer."><link rel="icon" href="data:,"><link rel="stylesheet" href="style.css?v=00565f6"><script defer src="engine.js"></script><script defer src="stats.js"></script><script defer src="chain-engine.js"></script><script defer src="result.js"></script><script defer src="chain.js"></script></head><body>
-<header><h1>Report or retest, patient by patient</h1><nav><a href="sample.html">Sample size</a><a href="audits/index.html">Published studies</a><a href="https://github.com/logxio/ooc-evaluation-audit">Source</a></nav></header>
-<main class="bench">
-<div class="steps">
-<section class="sec s1" id="drop-zone"><h2><b>1</b>Input</h2><div class="body"><button id="example" class="go">Load published patients</button><a id="source-note" target="_blank" rel="noopener"></a><div class="more"><details id="input-details"><summary aria-description="Computed in your browser. Your data stays on your computer.">Use your own table</summary><div class="drawer"><textarea id="input" rows="5" aria-label="Patient table" spellcheck="false" placeholder="patient,readout1,readout2,response&#10;P01,0.6,0.4,1&#10;P02,1.2,0.8,0"></textarea><div class="row"><label class="file">Open CSV<input id="csv-file" type="file" accept=".csv,text/csv"></label><button id="predict">Predict patient actions</button><a href="worksheet.html" aria-description="Fit leave-one-patient-out cutoffs to your own assay">Different assay →</a></div><p class="hint">One row per patient · readouts in the study's units and direction · response 1, 0 or empty · a single or missing readout goes to retest</p></div></details><details><summary>Rule and study</summary><div class="drawer"><p id="rule-note"></p><p id="study-note"></p><div class="row"><a href="result.json" download>Download result packet</a><label class="file">Open updated result packet<input id="packet-file" type="file" accept=".json,application/json"></label></div></div></details></div></div></section>
-<p id="error" role="alert" hidden></p>
-<section id="results" hidden>
-<section class="sec s2"><h2><b>2</b>Predict</h2><div class="body"><div id="counts" class="metrics"></div></div></section>
-<section class="sec s3"><h2><b>3</b>Reveal</h2><div class="body"><button id="reveal" class="go">Reveal outcomes</button><label class="file" aria-description="patient,response CSV · 1 = responder, 0 = non-responder · a subset of patients works">Add outcomes CSV<input id="outcome-file" type="file" accept=".csv,text/csv"></label></div></section>
-<section class="sec s5"><h2><b>5</b>Act</h2><div class="body"><button id="download" class="go">Download patient action list</button><button id="export">Download analysis</button><div class="lists"><details><summary id="release-label"></summary><p id="release-list"></p></details><details><summary id="retest-label"></summary><p id="retest-list"></p></details></div><div id="plans"></div></div></section>
+<!doctype html>
+<html lang="en" data-style="figure">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Chip Forecast Workbench</title>
+<meta name="description" content="Measure three concentrations of a neural MEA screen and get the whole concentration-response series with 90% intervals and a hit call; call organoid patients sensitive, resistant or retest. Runs in your browser.">
+<link rel="icon" href="data:,">
+<link rel="stylesheet" href="assets/system.css">
+<style>
+  .top { display: flex; align-items: center; justify-content: space-between; gap: var(--s3); height: 64px; }
+  .mark { font: 500 var(--f3)/var(--l3) var(--serif); }
+  .top nav { display: flex; align-items: center; gap: var(--s3); }
+  .top nav a { color: var(--ink-2); }
+  .top nav a:hover { color: var(--ink); }
+  /* hero: two blocks of two 56 px rows each; row one and row two share a baseline across the page */
+  .hero { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: 56px 56px; align-items: baseline; column-gap: var(--s3); padding: var(--s2) 0 var(--s3); }
+  .hero h1, .hero .figure { display: contents; }
+  .hero h1 span { grid-column: 1; font: 400 var(--f5)/var(--l5) var(--serif); letter-spacing: -.012em; white-space: nowrap; }
+  .hero h1 span:first-child { grid-row: 1; }
+  .hero h1 span:last-child { grid-row: 2; }
+  .hero .num { grid-column: 2; grid-row: 1; justify-self: end; font: 400 var(--f5)/var(--l5) var(--serif); letter-spacing: -.012em; font-variant-numeric: lining-nums proportional-nums; cursor: default; }
+  .hero .lab { grid-column: 2; grid-row: 2; justify-self: end; font: 400 var(--f3)/var(--l3) var(--serif); color: var(--ink-2); cursor: default; }
+  .atlas { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--s2); align-items: start; }
+  .index { grid-column: span 3; position: sticky; top: var(--s2); display: grid; gap: var(--s1); max-height: calc(100vh - 2 * var(--s2)); grid-template-rows: auto auto auto 1fr; }
+  .index .seg { width: 100%; } .index .seg button { flex: 1; }
+  .list { overflow: auto; margin: 0; padding: 0; list-style: none; border-radius: var(--radius); background: var(--surface); }
+  .list li button { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: var(--s1); width: 100%; border: 0; background: transparent; text-align: left; padding: 6px var(--s2); cursor: pointer; color: var(--ink); }
+  .list li button:hover { background: var(--sunk); }
+  .list li button[aria-selected="true"] { background: var(--ink); color: var(--surface); }
+  .list li button[aria-selected="true"] .meta { color: var(--surface); opacity: .8; }
+  .list .name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+  .list .meta { display: flex; align-items: center; gap: 3px; color: var(--ink-3); font-size: var(--f1); font-variant-numeric: tabular-nums; }
+  .list .meta i { width: 6px; height: 6px; border-radius: 50%; display: inline-block; }
+  .list .you { font-weight: 600; }
+  .sheet { grid-column: span 9; background: var(--surface); border-radius: var(--radius); padding: var(--s3); min-width: 0; }
+  .sheet:not([data-tab="chem"]) .views { margin-top: var(--s3); }
+  .index .seg button { white-space: nowrap; }
+  .entity { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: var(--s2); }
+  .entity > div:first-child { flex: 1 1 320px; min-width: 0; }
+  .facts { display: flex; flex-wrap: wrap; gap: var(--s1) var(--s3); margin-top: var(--s1); color: var(--ink-2); }
+  .facts b { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
+  .pages { display: flex; gap: var(--s3); margin: var(--s3) 0 var(--s2); }
+  .pages button { border: 0; background: transparent; padding: 0; cursor: pointer; color: var(--ink-3); font: 600 var(--f2)/var(--l2) var(--sans); transition: color var(--t) var(--ease); }
+  .pages button[aria-selected="true"] { color: var(--ink); }
+  .pages button[aria-selected="true"]::before { content: ""; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-right: var(--s1); vertical-align: 2px; }
+  .page-view:not(.on) { display: none; }
+  .views { display: grid; align-items: start; grid-template-columns: repeat(9, minmax(0, 1fr)); gap: var(--s3) var(--s2); }
+  .v9 { grid-column: span 9; } .v6 { grid-column: span 6; } .v5 { grid-column: span 5; } .v4 { grid-column: span 4; } .v3 { grid-column: span 3; }
+  .fig-block .head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s2); margin-bottom: var(--s2); }
+  .tools { display: flex; align-items: center; gap: var(--s1); }
+  .tools input[type="file"] { display: none; }
+  .lede { color: var(--ink-2); max-width: 64ch; }
+  .note { margin-top: var(--s1); color: var(--ink-2); }
+  .links { display: flex; flex-wrap: wrap; gap: var(--s1) var(--s3); margin-top: var(--s2); }
+  .foot { padding: var(--s3) 0; }
+  @media (max-width: 1280px) { .index { grid-column: span 4; } .sheet { grid-column: span 8; } .views > .v6, .views > .v5, .views > .v4, .views > .v3 { grid-column: 1 / -1; } }
+  @media (max-width: 960px) {
+    .atlas { grid-template-columns: 1fr; } .index, .sheet { grid-column: 1 / -1; } .index { position: static; max-height: none; } .views > * { grid-column: 1 / -1; }
+    .hero { grid-template-columns: 1fr; grid-template-rows: none; } .hero h1 span, .hero .num, .hero .lab { grid-column: 1; grid-row: auto; justify-self: start; white-space: normal; }
+    .top nav a { display: none; }
+  }
+</style>
+</head>
+<body>
+<header class="page top">
+  <span class="mark">Chip Forecast</span>
+  <nav class="t2"><a href="sample.html">Sample size</a><a href="audits/index.html">Published studies</a><a href="https://github.com/logxio/ooc-evaluation-audit">Source</a><button class="btn" type="button" id="paste-cta">Paste your table</button></nav>
+</header>
+
+<section class="page hero" id="hero">
+  <h1><span>Run three concentrations.</span><span>Get the whole curve.</span></h1>
+  <div class="figure"><span class="num" id="hero-num"></span><span class="lab" id="hero-label">fewer wells than running the full series</span></div>
 </section>
-</div>
-<section class="sec s4 obj"><h2><b>4</b>Compare</h2><div class="body"><label class="cost" aria-description="One wrong reported call costs 1 unit. A retest costs this many units, a planning assumption.">Retest cost<input id="cost" type="number" min="0" step="0.05" value="0.25"></label><div id="comparison"></div><p id="failure" hidden></p><div class="patients"><table><tbody id="patients"></tbody></table></div></div></section>
-</main></body></html>
+
+<main class="page atlas">
+  <aside class="index">
+    <div class="seg" id="tabs" role="tablist"></div>
+    <div id="search"></div>
+    <div class="row" id="sort"></div>
+    <ul class="list" id="list" role="listbox"></ul>
+  </aside>
+
+  <article class="sheet">
+    <div id="entity"></div>
+    <nav class="pages" id="pages" role="tablist"></nav>
+
+    <section class="page-view views" data-page="curve">
+      <div class="v6 fig-block">
+        <div class="head"><h2 class="t3" id="curve-claim"></h2></div>
+        <div class="keys-head" id="curve-keys" style="justify-content: flex-start; margin-bottom: var(--s2)"></div>
+        <div id="readout"></div>
+        <div id="curve-chart" style="margin-top: var(--s2)"></div>
+      </div>
+      <div class="v3 fig-block">
+        <div class="head"><h3 class="t3">68 outputs forecast at once, 17 features across four recording days</h3></div>
+        <div class="keys-head" id="heat-scale" style="justify-content: flex-start; margin-bottom: var(--s1)"></div>
+        <div id="heat"></div>
+      </div>
+    </section>
+
+    <section class="page-view views" data-page="plate">
+      <div class="v5 fig-block">
+        <div class="head"><h2 class="t3" id="plate-claim"></h2></div>
+        <div class="seg" id="plate-mode" style="margin-bottom: var(--s2)"><button type="button" data-full="0">3 measured</button><button type="button" data-full="1">Full series</button></div>
+        <div id="plate-chart"></div>
+      </div>
+      <div class="v4 fig-block">
+        <div class="head"><h3 class="t3" id="layout-claim"></h3></div>
+        <div id="layouts"></div>
+      </div>
+      <div class="v9 fig-block">
+        <div class="head"><h3 class="t3" id="trade-claim"></h3><div class="keys-head" id="trade-keys"></div></div>
+        <div id="trade"></div>
+        <div id="slider" style="margin-top: var(--s1)"></div>
+        <p class="t1 note" id="trade-note"></p>
+      </div>
+    </section>
+
+    <section class="page-view views" data-page="evidence">
+      <p class="v9 t3 lede" id="evidence-lede"></p>
+      <div class="v9 fig-block">
+        <div class="head"><h2 class="t3" id="wf-claim"></h2><div class="seg" id="versus"></div></div>
+        <div id="waterfall"></div>
+      </div>
+      <div class="v5 fig-block">
+        <div class="head"><h3 class="t3" id="forest-claim"></h3></div>
+        <div id="forest"></div>
+      </div>
+      <div class="v4 fig-block">
+        <div class="head"><h3 class="t3" id="cal-claim"></h3></div>
+        <div class="keys-head" id="cal-keys" style="justify-content: flex-start; margin-bottom: var(--s1)"></div>
+        <div id="calibration"></div>
+      </div>
+      <div class="v9 fig-block">
+        <div class="head"><h3 class="t3" id="abl-claim"></h3></div>
+        <div id="ablation"></div>
+      </div>
+    </section>
+
+    <section class="page-view views" data-page="model">
+      <div class="v9 fig-block"><div class="stats" id="band"></div></div>
+      <div class="v9 fig-block">
+        <div class="head"><h2 class="t3" id="agent-claim"></h2><span class="t1 ink3" id="agent-src"></span></div>
+        <div class="agent" id="agent-replay"></div>
+      </div>
+    </section>
+
+    <section class="page-view views" data-page="patient">
+      <div class="v9 fig-block">
+        <div class="head"><h2 class="t3" id="pt-claim"></h2>
+          <div class="tools"><button class="btn quiet" type="button" id="reveal"></button><label class="btn quiet">Add outcomes<input type="file" id="outcomes" accept=".csv,.tsv,.txt,text/csv"></label><button class="btn quiet" type="button" id="download">Download actions</button></div>
+        </div>
+        <div class="stats" id="pt-stats" style="grid-template-columns: repeat(4, 1fr)"></div>
+      </div>
+      <div class="v6 fig-block"><div id="pt-map"></div></div>
+      <div class="v3 fig-block"><div id="pt-plate"></div><p class="t1 note" id="pt-note"></p></div>
+    </section>
+
+    <section class="page-view views" data-page="yours">
+      <div class="v9 fig-block">
+        <div id="input"></div>
+        <div class="links t2"><a href="worksheet.html">Fit cutoffs to a different assay</a><a href="result.json" download>Download the frozen patient rule</a><a href="examples/T1_input.csv" download>Example two-readout table</a></div>
+      </div>
+    </section>
+  </article>
+</main>
+
+<footer class="page foot" id="method"></footer>
+
+<script src="vendor/d3.v7.9.0.min.js"></script>
+<script src="data/ooc-data.js"></script>
+<script src="engine.js"></script>
+<script src="stats.js"></script>
+<script src="chain-engine.js"></script>
+<script src="result.js"></script>
+<script src="assets/core.js"></script>
+<script src="assets/charts-a.js"></script>
+<script src="assets/charts-b.js"></script>
+<script src="assets/charts-c.js"></script>
+<script src="assets/copy.js"></script>
+<script>
+(function () {
+  const C = Core, O = C.O, K = Charts, $ = id => document.getElementById(id), h = K.h;
+  $('hero-num').textContent = Copy.heroNumber;
+  Copy.heroTip([$('hero-num'), $('hero-label')]);
+
+  /* ---------- index: chemicals, patients, your data ---------- */
+  const view = { tab: C.hash.get('tab') || 'chem', page: C.hash.get('page') || 'curve', q: '', sort: 'gain' };
+  const tabLabel = { chem: () => `Chemicals ${O.chems.length}`, patient: () => `Patients ${C.state.patients.length}`, yours: () => 'Your data' };
+  ['chem', 'patient', 'yours'].forEach(k => { const b = h('button'); b.type = 'button'; b.dataset.k = k; b.onclick = () => setTab(k); $('tabs').appendChild(b); });
+  const search = h('input', 'field'); search.type = 'search'; search.placeholder = 'Filter the list';
+  search.style.cssText = 'font-family: var(--sans); font-size: var(--f2); line-height: var(--l2); padding: 6px var(--s1)';
+  search.oninput = () => { view.q = search.value.trim().toLowerCase(); list(); };
+  $('search').appendChild(search);
+  [['gain', 'Largest gain'], ['name', 'A–Z']].forEach(([k, label]) => {
+    const b = h('button', 'chip', label); b.type = 'button'; b.dataset.k = k;
+    b.onclick = () => { view.sort = k; list(); }; $('sort').appendChild(b);
+  });
+  const gain = c => c.err.loglinear_interp - c.err.anchorboost;
+  const wrong = r => C.state.reveal && (r.response === 0 || r.response === 1) && r.call !== null && r.call !== r.response;
+  function list() {
+    const ul = $('list'); ul.textContent = '';
+    $('tabs').querySelectorAll('button').forEach(b => { b.textContent = tabLabel[b.dataset.k](); b.setAttribute('aria-pressed', String(b.dataset.k === view.tab)); });
+    $('sort').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.k === view.sort)));
+    $('sort').style.display = view.tab === 'chem' ? '' : 'none';
+    $('search').style.display = view.tab === 'yours' ? 'none' : '';
+    if (view.tab === 'chem') {
+      const rows = O.chems.filter(c => c.name.toLowerCase().includes(view.q)).sort(view.sort === 'gain' ? (a, b) => gain(b) - gain(a) : (a, b) => a.name.localeCompare(b.name));
+      rows.forEach(c => {
+        const li = h('li'), b = h('button'); b.type = 'button'; b.setAttribute('role', 'option');
+        b.setAttribute('aria-selected', String(c.i === C.state.chem));
+        const meta = h('span', 'meta');
+        c.d.forEach(d => { const i = h('i'); i.style.background = d.act ? 'var(--report)' : 'var(--retest)'; meta.appendChild(i); });
+        meta.appendChild(document.createTextNode(` ${gain(c) >= 0 ? '+' : ''}${C.fix(gain(c))}`));
+        b.append(h('span', 'name', c.name), meta);
+        b.title = `${c.name} · error ${C.fix(c.err.anchorboost)} against ${C.fix(c.err.loglinear_interp)} by interpolation`;
+        b.onclick = () => { C.set({ chem: c.i }); };
+        li.appendChild(b); ul.appendChild(li);
+      });
+    } else if (view.tab === 'patient') {
+      C.state.patients.filter(r => r.id.toLowerCase().includes(view.q)).forEach(r => {
+        const li = h('li'), b = h('button'); b.type = 'button'; b.setAttribute('role', 'option');
+        b.setAttribute('aria-selected', String(r.id === C.state.patient));
+        const meta = h('span', 'meta'), i = h('i');
+        const tone = wrong(r) ? 'var(--wrong)' : r.call === null ? 'var(--retest)' : 'var(--report)';
+        i.style.background = wrong(r) || r.call === 1 ? tone : 'transparent';
+        i.style.boxShadow = 'inset 0 0 0 1.5px ' + tone;
+        meta.append(i, document.createTextNode(` ${r.call === null ? 'retest' : r.call === 1 ? 'sensitive' : 'resistant'}`));
+        b.append(h('span', 'name', r.id), meta);
+        b.onclick = () => C.set({ patient: r.id });
+        li.appendChild(b); ul.appendChild(li);
+      });
+    } else {
+      const li = h('li'), b = h('button'); b.type = 'button'; b.setAttribute('aria-selected', 'true');
+      b.append(h('span', 'name you', 'Paste a series or a patient table'), h('span', 'meta', 'local'));
+      li.appendChild(b); ul.appendChild(li);
+    }
+  }
+  function setTab(k) {
+    view.tab = k;
+    if (k === 'chem' && !['curve', 'plate', 'evidence', 'model'].includes(view.page)) view.page = 'curve';
+    if (k === 'patient') view.page = 'patient';
+    if (k === 'yours') view.page = 'yours';
+    list(); pages(); entity();
+  }
+  $('paste-cta').onclick = () => setTab('yours');
+
+  /* ---------- canvas ---------- */
+  const chemPages = [['curve', 'Curve'], ['plate', 'Plate'], ['evidence', 'Evidence'], ['model', 'Model']];
+  function pages() {
+    const nav = $('pages'); nav.textContent = '';
+    nav.style.display = view.tab === 'chem' ? '' : 'none';
+    chemPages.forEach(([k, label]) => { const b = h('button', null, label); b.type = 'button'; b.setAttribute('aria-selected', String(view.page === k)); b.onclick = () => { view.page = k; pages(); }; nav.appendChild(b); });
+    document.querySelectorAll('.page-view').forEach(s => s.classList.toggle('on', s.dataset.page === view.page));
+    document.querySelector('.sheet').dataset.tab = view.tab;
+  }
+  const chipsEl = h('div'); K.designChips(chipsEl);
+  const fact = (k, v) => { const s = h('span'); s.append(document.createTextNode(k + ' '), h('b', null, v)); return s; };
+  function entity() {
+    const el = $('entity'); el.textContent = '';
+    if (view.tab === 'chem') {
+      const c = O.chems[C.state.chem], w = c.w;
+      const wrap = h('div', 'entity'), left = h('div');
+      left.appendChild(h('h2', 't4', c.name));
+      const facts = h('div', 'facts t2');
+      facts.append(fact('Concentrations', `${C.uM(w.levels[0])}–${C.uM(w.levels[w.levels.length - 1])} µM, ${w.levels.length} levels`), fact('Wells', String(w.lv.length)),
+        fact('EPA label', c.label), fact('Held out in fold', String(c.fold)));
+      left.appendChild(facts);
+      wrap.append(left, chipsEl); el.appendChild(wrap);
+    } else if (view.tab === 'patient') {
+      const r = C.state.patients.find(x => x.id === C.state.patient) || C.state.patients[0];
+      const wrap = h('div'); wrap.appendChild(h('h2', 't4', r ? r.id : 'Patients'));
+      const facts = h('div', 'facts t2'), f = v => (v === null || v === undefined ? '—' : C.fix(v, 3));
+      if (r) {
+        (r.mode === 'two' ? [['Readout 1', f(r.r1)], ['Readout 2', f(r.r2)]] : [['Combined regimen', f(r.combined)], ['Irradiation', f(r.irr)]])
+          .forEach(([k, v]) => facts.appendChild(fact(k, v)));
+        facts.append(fact('Action', r.call === null ? 'retest' : r.call === 1 ? 'report sensitive' : 'report resistant'),
+          fact('Clinical', C.state.reveal ? (r.response === 1 ? 'responder' : r.response === 0 ? 'non-responder' : 'not given') : 'closed'));
+      }
+      wrap.appendChild(facts); el.appendChild(wrap);
+    } else {
+      el.appendChild(h('h2', 't4', 'Your data stays in this browser'));
+    }
+  }
+  C.on((S, p) => {
+    if (!p || !Object.keys(p).length) return;
+    if ('chem' in p) { if (view.tab !== 'chem') { view.tab = 'chem'; view.page = 'curve'; pages(); } list(); entity(); }
+    if ('patients' in p && S.patientSource === 'own' && view.tab !== 'patient') { view.tab = 'patient'; view.page = 'patient'; pages(); }
+    if ('patient' in p || 'reveal' in p || 'patients' in p) { if ('patient' in p && S.patient && view.tab !== 'patient') { view.tab = 'patient'; view.page = 'patient'; pages(); } list(); entity(); }
+  });
+
+  /* ---------- views ---------- */
+  K.keys($('curve-keys'), Copy.curveKeys);
+  K.callReadout($('readout'));
+  K.curve($('curve-chart'), { height: 300 });
+  C.on((S, p) => { if (!p || !Object.keys(p).length || 'chem' in p || 'design' in p) $('curve-claim').textContent = Copy.curveClaim(S); });
+  K.heat($('heat'), { scale: $('heat-scale'), labelWidth: 168 });
+
+  K.plate($('plate-chart'), { plateWidth: 200, max: 2, onCount: n => { $('plate-claim').textContent = Copy.plateClaim(n); } });
+  const pm = $('plate-mode');
+  pm.querySelectorAll('button').forEach(b => b.onclick = () => C.set({ full: b.dataset.full === '1' }));
+  C.on(S => pm.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String((b.dataset.full === '1') === S.full))));
+  $('layout-claim').textContent = Copy.layoutClaim();
+  K.layouts($('layouts'));
+  K.keys($('trade-keys'), Copy.tradeKeys);
+  K.tradeoff($('trade'), { height: 240, onClaim: c => { $('trade-claim').textContent = Copy.tradeClaim(c); } });
+  K.costSlider($('slider'), $('trade-note'));
+
+  $('evidence-lede').textContent = Copy.lead;
+  Copy.versus($('versus'));
+  K.waterfall($('waterfall'), { height: 200, onClaim: (k, v) => { $('wf-claim').textContent = Copy.waterfallClaim(k, v); } });
+  $('forest-claim').textContent = Copy.forestClaim();
+  K.forest($('forest'), { labelWidth: 176 });
+  $('cal-claim').textContent = Copy.calibrationClaim();
+  K.keys($('cal-keys'), Copy.calKeys);
+  K.calibration($('calibration'), { labelWidth: 160 });
+  $('abl-claim').textContent = Copy.ablationClaim();
+  K.ablation($('ablation'), { labelWidth: 176 });
+
+  K.band($('band'));
+  $('agent-claim').textContent = Copy.agentClaim();
+  $('agent-src').textContent = Copy.agentSource();
+  K.agent($('agent-replay'));
+
+  Copy.bindPatients($('pt-claim'), $('pt-stats'));
+  K.patients($('pt-map'), { height: 300 });
+  K.patientPlate($('pt-plate'), { cell: 36 });
+  K.patientSummary($('pt-note'));
+  const rv = $('reveal');
+  rv.onclick = () => C.set({ reveal: !C.state.reveal });
+  C.on(S => {
+    const known = S.patients.some(r => r.response === 0 || r.response === 1);
+    rv.disabled = !known;
+    rv.textContent = !known ? 'Outcomes not added' : S.reveal ? 'Hide outcomes' : 'Reveal outcomes';
+  });
+  $('outcomes').onchange = async () => {
+    const f = $('outcomes').files[0]; if (!f) return;
+    try { C.set({ patients: C.mergeOutcomes(C.state.patients, await f.text()), reveal: false }); }
+    catch (e) { $('pt-note').textContent = e.message; }
+    $('outcomes').value = '';
+  };
+  $('download').onclick = () => {
+    const blob = new Blob([C.actionsCSV(C.state.patients, C.state.reveal)], { type: 'text/csv' }), a = h('a');
+    a.href = URL.createObjectURL(blob); a.download = 'patient-actions.csv'; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
+  };
+
+  K.input($('input'), { rows: 12, mode: C.hash.get('mode') || 'series' });
+  Copy.methods($('method'));
+
+  if (C.state.patient && view.tab === 'chem' && !C.hash.get('tab')) view.tab = 'patient';
+  if (view.tab === 'patient') view.page = 'patient';
+  if (view.tab === 'yours') view.page = 'yours';
+  list(); pages(); entity();
+})();
+</script>
+</body>
+</html>
