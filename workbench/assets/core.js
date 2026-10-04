@@ -192,10 +192,38 @@
     if (!rows.some(r => got.has(r.id))) throw Error('No outcome matches a patient ID in the table.');
     return out;
   }
+  const cell = v => { const s = v === null || v === undefined ? '' : String(v); return /[",\r\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s; };
+  const csv = (head, rows) => [head].concat(rows.map(r => r.map(cell).join(','))).join('\r\n') + '\r\n';
   function actionsCSV(rows, reveal) {
-    const q = v => { const s = v === null || v === undefined ? '' : String(v); return /[",\r\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s; };
     const act = r => (r.call === null ? 'retest' : r.call === 1 ? 'report sensitive' : 'report resistant');
-    return ['patient,action,reason,response'].concat(rows.map(r => [r.id, act(r), r.reason, reveal ? r.response : ''].map(q).join(','))).join('\r\n') + '\r\n';
+    return csv('patient,action,reason,response', rows.map(r => [r.id, act(r), r.reason, reveal ? r.response : '']));
+  }
+  /* chemical list query: ";", tab, newline or ", " separate a set of names (1,2-Propylene glycol keeps its comma);
+     a set keeps the typed order and takes an exact name before partial matches; one term matches any part of a name */
+  function chemQuery(text) {
+    const terms = String(text || '').split(/\s*(?:[;\t\r\n]|,\s+)\s*/).map(t => t.trim().toLowerCase()).filter(Boolean);
+    const has = t => c => c.name.toLowerCase().includes(t);
+    if (terms.length < 2) return { set: false, chems: O.chems.filter(has(terms[0] || '')) };
+    const seen = new Set(), chems = [];
+    terms.forEach(t => {
+      const exact = O.chems.filter(c => c.name.toLowerCase() === t);
+      (exact.length ? exact : O.chems.filter(has(t))).forEach(c => { if (!seen.has(c.i)) { seen.add(c.i); chems.push(c); } });
+    });
+    return { set: true, chems };
+  }
+  /* one row per chemical at design index k (0-based inside, Design k + 1 on the page and in the file), the same decision as chip_forecast_actions.csv:
+     report the call when the rank margin clears the fold's release margin */
+  function chemActionsCSV(chems, k) {
+    return csv('chemical,design,measured_uM,action,hit_call,epa_label,reason', chems.map(c => {
+      const d = c.d[k], report = d.act === 1;
+      return [c.name, k + 1, d.m.map(l => uM(c.w.levels[l])).join(';'), report ? 'report call' : 'measure full series', d.call === 0 ? 'active' : 'inactive', c.label,
+        `rank margin ${+d.mar.toFixed(4)} ${report ? 'above' : 'within'} the fold's release margin ${c.rm}`];
+    }));
+  }
+  function download(text, name) {
+    const a = document.createElement('a');
+    a.href = URL.createObjectURL(new Blob([text], { type: 'text/csv' })); a.download = name; a.click();
+    setTimeout(() => URL.revokeObjectURL(a.href), 1000);
   }
   function parseSeries(text) {
     const pts = text.split(/[\n,;]+/).map(t => t.trim()).filter(Boolean).map(t => {
@@ -208,6 +236,35 @@
     const pos = pts.map((p, i) => (p.on ? i : -1)).filter(i => i >= 0);
     return { pts, key: pos.length === 3 ? pos.join('') : null, marked: pos.length };
   }
+
+  /* ---------- window.OOC.strongBaseline: the same five contexts against the published neural process, the matched-budget ablation, perfused liver chips ----------
+     every difference is turned into an error reduction, positive when the boosted forecast has the lower error; subgroups appear only where the package has them */
+  const strong = (() => {
+    const S = O.strongBaseline;
+    const red = (d, ci, ci2) => ({ v: -d, lo: -ci[1], hi: -ci[0], lo2: ci2 ? -ci2[1] : null, hi2: ci2 ? -ci2[0] : null });
+    const nfaRow = x => Object.assign({ n: x.n_source_chemicals, win: x.chemical_wins, loss: x.chemical_losses, k: x.K_mean, c: x.C_mean, rel: x.error_reduction_percent }, red(x.mean_difference, x.ci95, x.ci97_5));
+    const extRow = x => Object.assign({ n: x.n_independent_units, win: x.wins, loss: x.losses, k: x.k_mae, c: x.c_mae, rel: -x.relative_change_pct }, red(x.delta, x.ci95, x.ci97_5));
+    const folds = (F, row) => Object.keys(F).map(Number).sort((a, b) => a - b).map(f => Object.assign({ fold: f }, row(F[f])));
+    const total = (row, p) => Object.assign(row(p), { foldWin: p.fold_wins, foldLoss: p.fold_losses });
+    const subs = g => Object.keys(g.subgroups || {}).map(k => Object.assign({ label: k }, extRow(g.subgroups[k])));
+    const N = S.primary, A = S.external.acute, H = S.external.harrill, AB = S.matchedAblation, CT = S.anchorControl;
+    return {
+      joint: S.jointExternalAdvantage,
+      screens: [
+        { key: 'nfa', total: total(nfaRow, N.summary), labels: N.cohort.primary_source_chemicals, folds: folds(N.folds, nfaRow), source: N.source,
+          extra: [Object.assign({ label: 'without phenobarbital, whose sodium salt was in training' }, nfaRow(N.identitySensitivity))] },
+        { key: 'acute', total: total(extRow, A.summary), labels: A.cohort.sourceLabels, excluded: A.cohort.excludedLabels, folds: folds(A.folds, extRow), source: A.source, extra: subs(A) },
+        { key: 'human', total: total(extRow, H.summary), labels: H.cohort.sourceLabels, excluded: H.cohort.excludedLabels, folds: folds(H.folds, extRow), source: H.source, extra: subs(H) }
+      ],
+      ablation: Object.assign({ n: AB.summary.n_chemicals, win: AB.summary.wins, loss: AB.summary.losses, foldWin: AB.summary.fold_wins, foldLoss: AB.summary.fold_losses,
+        full: AB.summary.full_curve_mae, other: AB.summary.five_matched_curve_mae, wallClock: AB.wallClockMatched, source: AB.source }, red(AB.summary.mean_delta, AB.summary.ci95)),
+      control: Object.assign({ n: CT.summary.n_chemicals, win: CT.summary.wins, loss: CT.summary.losses, full: CT.summary.full_curve_mae, other: CT.summary.direct_target_curve_mae,
+        retrospective: CT.retrospective, source: CT.source }, red(CT.summary.mean_delta, CT.summary.ci95)),
+      chips: S.chips.primaryEndpoints.map(r => Object.assign({ dataset: r.dataset, endpoint: r.endpoint, config: r.configuration, n: r.n_independent_chemicals, unit: r.unit,
+        k: r.anchorboost_mae, li: r.loglinear_mae, win: r.outcomes.win, loss: r.outcomes.loss, rows: r.training_rows }, red(r.difference, r.ci95))),
+      chipCounts: S.chips.counts, chipUrls: S.chips.sourceUrls, chipSource: S.chips.source
+    };
+  })();
 
   /* ---------- selection store ---------- */
   const listeners = new Set();
@@ -273,5 +330,5 @@
   }
 
   window.Core = { O, D, NF, ND, dec, chemBy, hash, wells, levelStats, design, track, defaultOutput, frontier, atRisk, registered, optimum, layouts, designsAll, wellsFull,
-    publishedPatients, callPatients, patientStats, parsePatients, parseSeries, mergeOutcomes, actionsCSV, state, set, on, pct, fix, int, uM, outName, tip, untip, selfTest };
+    publishedPatients, callPatients, patientStats, parsePatients, parseSeries, mergeOutcomes, actionsCSV, chemQuery, chemActionsCSV, download, strong, state, set, on, pct, fix, int, uM, outName, tip, untip, selfTest };
 })();

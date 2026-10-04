@@ -22,7 +22,10 @@
   .hero .num { grid-column: 2; grid-row: 1; justify-self: end; font: 400 var(--f5)/var(--l5) var(--serif); letter-spacing: -.012em; font-variant-numeric: lining-nums proportional-nums; cursor: default; }
   .hero .lab { grid-column: 2; grid-row: 2; justify-self: end; font: 400 var(--f3)/var(--l3) var(--serif); color: var(--ink-2); cursor: default; }
   .atlas { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--s2); align-items: start; }
-  .index { grid-column: span 3; position: sticky; top: var(--s2); display: grid; gap: var(--s1); max-height: calc(100vh - 2 * var(--s2)); grid-template-rows: auto auto auto 1fr; }
+  .index { grid-column: span 3; position: sticky; top: var(--s2); display: grid; gap: var(--s1); max-height: calc(100vh - 2 * var(--s2)); grid-template-rows: auto auto auto 1fr auto; }
+  .export { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s1); width: 100%; }
+  .export .ink3 { font-weight: 400; font-variant-numeric: tabular-nums; }
+  .index .export { background: var(--surface); } .index .export:hover { background: var(--line); }
   .index .seg { width: 100%; } .index .seg button { flex: 1; }
   .list { overflow: auto; margin: 0; padding: 0; list-style: none; border-radius: var(--radius); background: var(--surface); }
   .list li button { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: var(--s1); width: 100%; border: 0; background: transparent; text-align: left; padding: 6px var(--s2); cursor: pointer; color: var(--ink); }
@@ -79,6 +82,7 @@
     <div id="search"></div>
     <div class="row" id="sort"></div>
     <ul class="list" id="list" role="listbox"></ul>
+    <button class="btn quiet export" type="button" id="chem-export"></button>
   </aside>
 
   <article class="sheet">
@@ -118,30 +122,39 @@
     </section>
 
     <section class="page-view views" data-page="evidence">
-      <p class="v9 t3 lede" id="evidence-lede"></p>
+      <div class="v9 fig-block">
+        <div class="stats" id="replay"></div>
+        <p class="t1 note" id="replay-note"></p>
+      </div>
       <div class="v9 fig-block">
         <div class="head"><h2 class="t3" id="wf-claim"></h2><div class="seg" id="versus"></div></div>
         <div id="waterfall"></div>
       </div>
-      <div class="v5 fig-block">
-        <div class="head"><h3 class="t3" id="forest-claim"></h3></div>
+      <div class="v9 fig-block">
+        <div class="head"><h3 class="t3" id="forest-claim"></h3><span class="t1" id="forest-src"></span></div>
         <div id="forest"></div>
+        <p class="t1 note" id="forest-note"></p>
+      </div>
+      <div class="v5 fig-block">
+        <div class="head"><h3 class="t3" id="chips-claim"></h3><span class="t1" id="chips-src"></span></div>
+        <div id="chips"></div>
+        <p class="t1 note" id="chips-note"></p>
       </div>
       <div class="v4 fig-block">
         <div class="head"><h3 class="t3" id="cal-claim"></h3></div>
         <div class="keys-head" id="cal-keys" style="justify-content: flex-start; margin-bottom: var(--s1)"></div>
         <div id="calibration"></div>
       </div>
-      <div class="v9 fig-block">
-        <div class="head"><h3 class="t3" id="abl-claim"></h3></div>
-        <div id="ablation"></div>
-      </div>
     </section>
 
     <section class="page-view views" data-page="model">
       <div class="v9 fig-block"><div class="stats" id="band"></div></div>
       <div class="v9 fig-block">
-        <div class="head"><h2 class="t3" id="agent-claim"></h2><span class="t1 ink3" id="agent-src"></span></div>
+        <div class="head"><h2 class="t3" id="abl-claim"></h2><span class="t1" id="abl-src"></span></div>
+        <div id="ablation"></div>
+      </div>
+      <div class="v9 fig-block">
+        <div class="head"><h3 class="t3" id="agent-claim"></h3><span class="t1 ink3" id="agent-src"></span></div>
         <div class="agent" id="agent-replay"></div>
       </div>
     </section>
@@ -186,27 +199,52 @@
   Copy.heroTip([$('hero-num'), $('hero-label')]);
 
   /* ---------- index: chemicals, patients, your data ---------- */
-  const view = { tab: C.hash.get('tab') || 'chem', page: C.hash.get('page') || 'curve', q: '', sort: 'gain' };
+  /* typed: a pasted set of names keeps its order until a sort chip is pressed */
+  const view = { tab: C.hash.get('tab') || 'chem', page: C.hash.get('page') || 'curve', q: '', sort: 'gain', typed: false, rows: [] };
   const tabLabel = { chem: () => `Chemicals ${O.chems.length}`, patient: () => `Patients ${C.state.patients.length}`, yours: () => 'Your data' };
   ['chem', 'patient', 'yours'].forEach(k => { const b = h('button'); b.type = 'button'; b.dataset.k = k; b.onclick = () => setTab(k); $('tabs').appendChild(b); });
   const search = h('input', 'field'); search.type = 'search'; search.placeholder = 'Filter the list';
   search.style.cssText = 'font-family: var(--sans); font-size: var(--f2); line-height: var(--l2); padding: 6px var(--s1)';
-  search.oninput = () => { view.q = search.value.trim().toLowerCase(); list(); };
+  search.oninput = () => { view.q = search.value; view.typed = view.tab === 'chem' && C.chemQuery(view.q).set; list(); };
+  /* a column pasted from a spreadsheet arrives as one name per line; keep the lines as a set */
+  search.addEventListener('paste', e => {
+    const t = (e.clipboardData && e.clipboardData.getData('text')) || '';
+    if (!/[\r\n]/.test(t.trim())) return;
+    e.preventDefault();
+    search.setRangeText(t.trim().split(/\s*[\r\n]+\s*/).join('; '), search.selectionStart, search.selectionEnd, 'end');
+    search.oninput();
+  });
   $('search').appendChild(search);
   [['gain', 'Largest gain'], ['name', 'A–Z']].forEach(([k, label]) => {
     const b = h('button', 'chip', label); b.type = 'button'; b.dataset.k = k;
-    b.onclick = () => { view.sort = k; list(); }; $('sort').appendChild(b);
+    b.onclick = () => { view.sort = k; view.typed = false; list(); }; $('sort').appendChild(b);
   });
   const gain = c => c.err.loglinear_interp - c.err.anchorboost;
   const wrong = r => C.state.reveal && (r.response === 0 || r.response === 1) && r.call !== null && r.call !== r.response;
+  /* the listed chemicals at the open design, one CSV row each */
+  const exp = $('chem-export');
+  function exportLabel() {
+    exp.hidden = view.tab !== 'chem';
+    const n = view.rows.length;
+    exp.textContent = '';
+    exp.append(h('span', null, 'Download actions'), h('span', 'ink3', `${n} chemical${n === 1 ? '' : 's'} · Design ${C.state.design + 1}`));
+    exp.disabled = !n;
+  }
+  exp.onclick = () => C.download(C.chemActionsCSV(view.rows, C.state.design), `chemical-actions-design${C.state.design + 1}.csv`);
+  const expTip = ev => C.tip(ev.clientX !== undefined ? ev : { clientX: exp.getBoundingClientRect().left, clientY: exp.getBoundingClientRect().top - 8 },
+    `Design ${C.state.design + 1} for the ${view.rows.length} listed chemicals`,
+    ['CSV: chemical, design, measured µM, action, hit call, EPA label, reason', 'List a set: separate names with ; or a comma and a space, or paste a column']);
+  exp.addEventListener('pointermove', expTip); exp.addEventListener('focus', expTip);
+  exp.addEventListener('pointerleave', C.untip); exp.addEventListener('blur', C.untip);
   function list() {
     const ul = $('list'); ul.textContent = '';
     $('tabs').querySelectorAll('button').forEach(b => { b.textContent = tabLabel[b.dataset.k](); b.setAttribute('aria-pressed', String(b.dataset.k === view.tab)); });
-    $('sort').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.k === view.sort)));
+    $('sort').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(!view.typed && b.dataset.k === view.sort)));
     $('sort').style.display = view.tab === 'chem' ? '' : 'none';
     $('search').style.display = view.tab === 'yours' ? 'none' : '';
     if (view.tab === 'chem') {
-      const rows = O.chems.filter(c => c.name.toLowerCase().includes(view.q)).sort(view.sort === 'gain' ? (a, b) => gain(b) - gain(a) : (a, b) => a.name.localeCompare(b.name));
+      const hit = C.chemQuery(view.q).chems;
+      const rows = view.rows = view.typed ? hit : hit.slice().sort(view.sort === 'gain' ? (a, b) => gain(b) - gain(a) : (a, b) => a.name.localeCompare(b.name));
       rows.forEach(c => {
         const li = h('li'), b = h('button'); b.type = 'button'; b.setAttribute('role', 'option');
         b.setAttribute('aria-selected', String(c.i === C.state.chem));
@@ -219,7 +257,8 @@
         li.appendChild(b); ul.appendChild(li);
       });
     } else if (view.tab === 'patient') {
-      C.state.patients.filter(r => r.id.toLowerCase().includes(view.q)).forEach(r => {
+      const q = view.q.trim().toLowerCase();
+      C.state.patients.filter(r => r.id.toLowerCase().includes(q)).forEach(r => {
         const li = h('li'), b = h('button'); b.type = 'button'; b.setAttribute('role', 'option');
         b.setAttribute('aria-selected', String(r.id === C.state.patient));
         const meta = h('span', 'meta'), i = h('i');
@@ -236,9 +275,15 @@
       b.append(h('span', 'name you', 'Paste a series or a patient table'), h('span', 'meta', 'local'));
       li.appendChild(b); ul.appendChild(li);
     }
+    exportLabel();
+  }
+  /* each list keeps its own filter: switching between chemicals, patients and your data starts from an empty one */
+  function goTab(k) {
+    if (view.tab !== k) { view.q = ''; view.typed = false; search.value = ''; }
+    view.tab = k;
   }
   function setTab(k) {
-    view.tab = k;
+    goTab(k);
     if (k === 'chem' && !['curve', 'plate', 'evidence', 'model'].includes(view.page)) view.page = 'curve';
     if (k === 'patient') view.page = 'patient';
     if (k === 'yours') view.page = 'yours';
@@ -285,9 +330,10 @@
   }
   C.on((S, p) => {
     if (!p || !Object.keys(p).length) return;
-    if ('chem' in p) { if (view.tab !== 'chem') { view.tab = 'chem'; view.page = 'curve'; pages(); } list(); entity(); }
-    if ('patients' in p && S.patientSource === 'own' && view.tab !== 'patient') { view.tab = 'patient'; view.page = 'patient'; pages(); }
-    if ('patient' in p || 'reveal' in p || 'patients' in p) { if ('patient' in p && S.patient && view.tab !== 'patient') { view.tab = 'patient'; view.page = 'patient'; pages(); } list(); entity(); }
+    if ('chem' in p) { if (view.tab !== 'chem') { goTab('chem'); view.page = 'curve'; pages(); } list(); entity(); }
+    else if ('design' in p) exportLabel();
+    if ('patients' in p && S.patientSource === 'own' && view.tab !== 'patient') { goTab('patient'); view.page = 'patient'; pages(); }
+    if ('patient' in p || 'reveal' in p || 'patients' in p) { if ('patient' in p && S.patient && view.tab !== 'patient') { goTab('patient'); view.page = 'patient'; pages(); } list(); entity(); }
   });
 
   /* ---------- views ---------- */
@@ -305,20 +351,28 @@
   K.layouts($('layouts'));
   K.keys($('trade-keys'), Copy.tradeKeys);
   K.tradeoff($('trade'), { height: 240, onClaim: c => { $('trade-claim').textContent = Copy.tradeClaim(c); } });
-  K.costSlider($('slider'), $('trade-note'));
+  K.costSlider($('slider'), $('trade-note'), Copy.tradeNote);
 
-  $('evidence-lede').textContent = Copy.lead;
+  Copy.replay.forEach(([v, k]) => { const d = h('div', 'stat'); d.append(h('div', 'v', v), h('div', 'k', k)); $('replay').appendChild(d); });
+  $('replay-note').textContent = Copy.replayNote;
   Copy.versus($('versus'));
   K.waterfall($('waterfall'), { height: 200, onClaim: (k, v) => { $('wf-claim').textContent = Copy.waterfallClaim(k, v); } });
   $('forest-claim').textContent = Copy.forestClaim();
+  Copy.source($('forest-src'), 'benchmarks/strong_baseline/README.md');
   K.forest($('forest'), { labelWidth: 176 });
+  $('forest-note').textContent = Copy.forestNote();
+  $('chips-claim').textContent = Copy.chipsClaim();
+  Copy.source($('chips-src'), C.strong.chipSource);
+  K.chips($('chips'), { labelWidth: 152 });
+  $('chips-note').textContent = Copy.chipsNote();
   $('cal-claim').textContent = Copy.calibrationClaim();
   K.keys($('cal-keys'), Copy.calKeys);
   K.calibration($('calibration'), { labelWidth: 160 });
-  $('abl-claim').textContent = Copy.ablationClaim();
-  K.ablation($('ablation'), { labelWidth: 176 });
 
   K.band($('band'));
+  $('abl-claim').textContent = Copy.ablationClaim();
+  Copy.source($('abl-src'), C.strong.ablation.source);
+  K.ablation($('ablation'), { labelWidth: 176 });
   $('agent-claim').textContent = Copy.agentClaim();
   $('agent-src').textContent = Copy.agentSource();
   K.agent($('agent-replay'));
@@ -340,10 +394,7 @@
     catch (e) { $('pt-note').textContent = e.message; }
     $('outcomes').value = '';
   };
-  $('download').onclick = () => {
-    const blob = new Blob([C.actionsCSV(C.state.patients, C.state.reveal)], { type: 'text/csv' }), a = h('a');
-    a.href = URL.createObjectURL(blob); a.download = 'patient-actions.csv'; a.click(); setTimeout(() => URL.revokeObjectURL(a.href), 1000);
-  };
+  $('download').onclick = () => C.download(C.actionsCSV(C.state.patients, C.state.reveal), 'patient-actions.csv');
 
   K.input($('input'), { rows: 12, mode: C.hash.get('mode') || 'series' });
   Copy.methods($('method'));

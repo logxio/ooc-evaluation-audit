@@ -120,14 +120,14 @@
       const line = d3.line().x(p => x(p.wrong)).y(p => y(p.saved));
       const clip = pts => pts.filter(p => p.wrong <= 0.11);
       layer(g, 'risk').selectAll('line').data([0.05]).join('line').attr('class', 'cutoff').attr('x1', x(0.05)).attr('x2', x(0.05)).attr('y1', 0).attr('y2', H1);
-      layer(g, 'riskl').selectAll('text').data(['5% budget']).join('text').attr('class', 'tick-label').attr('x', x(0.05) + 6).attr('y', 10).text(t => t);
+      layer(g, 'riskl').selectAll('text').data(['5% wrong calls']).join('text').attr('class', 'tick-label').attr('x', x(0.05) + 6).attr('y', 10).text(t => t);
       layer(g, 'mo').selectAll('path').data([clip(Mo)]).join('path').attr('fill', 'none').attr('stroke', css('measured')).attr('stroke-width', 1.5).attr('d', line);
       layer(g, 'fo').selectAll('path').data([clip(F)]).join('path').attr('fill', 'none').attr('stroke', css('forecast')).attr('stroke-width', 2).attr('d', line);
       const a5 = C.atRisk(F, 0.05), m5 = C.atRisk(Mo, 0.05);
       layer(g, 'reg').selectAll('circle').data([{ p: regF, c: 'forecast' }, { p: regM, c: 'measured' }, { p: a5, c: 'forecast', s: 1 }, { p: m5, c: 'measured', s: 1 }])
         .join('circle').attr('r', q => (q.s ? 3.5 : 5)).attr('fill', q => (q.s ? css(q.c) : css('surface'))).attr('stroke', q => css(q.c)).attr('stroke-width', 2)
         .attr('cx', q => x(q.p.wrong)).attr('cy', q => y(q.p.saved));
-      layer(g, 'regl').selectAll('text').data([{ p: regF, t: 'registered rule' }]).join('text').attr('class', 'label')
+      layer(g, 'regl').selectAll('text').data([{ p: regF, t: 'release rule' }]).join('text').attr('class', 'label')
         .attr('x', q => x(q.p.wrong) + 9).attr('y', q => y(q.p.saved) + 14).text(q => q.t);
       const opt0 = C.optimum(F, S.cost);
       layer(g, 'opt').selectAll('circle').data([opt0]).join('circle').attr('r', 6).attr('fill', css('forecast')).attr('stroke', css('surface')).attr('stroke-width', 2)
@@ -149,7 +149,7 @@
     C.on((S, p) => { if (!p || !Object.keys(p).length || 'cost' in p) draw(S, p); });
     return draw;
   };
-  Charts.costSlider = function (el, readout) {
+  Charts.costSlider = function (el, readout, sentence) {
     el.textContent = '';
     const lab = document.createElement('label'); lab.className = 'row2'; lab.style.width = '100%';
     const name = document.createElement('span'); name.className = 't1 ink2'; name.style.whiteSpace = 'nowrap'; name.textContent = 'Retest cost';
@@ -159,77 +159,194 @@
     lab.append(name, input, val); el.appendChild(lab);
     if (readout) C.on((S, p) => {
       if (p && Object.keys(p).length && !('cost' in p)) return;
-      const o = C.optimum(C.frontier('forecast'), S.cost);
-      readout.textContent = `Best setting at this cost: settle ${o.k} of ${C.designsAll.length} designs from three concentrations, leave ${C.pct(o.saved)} of wells unrun, ${C.fix(o.wrong * 100, 1)} wrong calls per 100 designs.`;
+      readout.textContent = sentence(C.optimum(C.frontier('forecast'), S.cost));
     });
   };
 
-  /* ---------------- 9. forest: every held-out fold of three screens, rat and human ---------------- */
+  /* ---------------- 9. forest: every held-out fold of three neural screens, rat and human, against two comparators ----------------
+     one label column, two panels: the same folds against log-linear interpolation and against the published neural process
+     given the same five three-concentration contexts; reductions are positive when the boosted forecast has the lower error */
+  const screens = [
+    ['nfa', 'Rat cortical networks, chronic', 'static 48-well MEA'],
+    ['acute', 'Rat cortical networks, acute', 'static MEA'],
+    ['human', 'Human neural progenitors and neurons', 'hNP1 and hN2 cells, imaging and plate reader']
+  ];
+  const ns = r => r.lo < 0 && r.hi > 0;
+  Charts.forestPanels = () => {
+    const interp = screens.map(([k]) => {
+      const key = k === 'human' ? 'dnt' : k, t = O.forest.totals[key];
+      return { k, n: O.forest.chemicals[key], folds: O.forest.rows.filter(r => r.screen === key).map(r => ({ fold: r.fold, v: -r.d, lo: -r.hi, hi: -r.lo, n: r.n })),
+        total: { v: -t.mean_diff, lo: -t.ci95[1], hi: -t.ci95[0], rel: -t.rel_change_pct, n: t.n_chemicals, frac: t.frac_chem_improved } };
+    });
+    const neural = C.strong.screens.map(s => ({ k: s.key, n: s.total.n, of: s.labels, excluded: s.excluded, folds: s.folds, total: s.total, extra: s.extra }));
+    return [
+      { key: 'interp', title: 'vs log-linear interpolation', name: 'log-linear interpolation', groups: interp },
+      { key: 'neural', title: 'vs published neural process', name: 'the published neural process', groups: neural }
+    ];
+  };
   Charts.forest = function (el, opt) {
     opt = opt || {};
-    const groups = [
-      ['nfa', 'Rat cortical networks, chronic', 'network formation assay'],
-      ['acute', 'Rat cortical networks, acute', 'acute MEA screen'],
-      ['dnt', 'Human neural progenitors and neurons', 'hNP1 and hN2 imaging and plate reader']
-    ];
+    const panels = Charts.forestPanels();
     const draw = Charts.mount(el, (svg, W) => {
-      const lab = opt.labelWidth || 208, rh = 18, items = [];
-      groups.forEach(([k, name]) => {
-        items.push({ head: true, k, label: name, n: O.forest.chemicals[k] });
-        O.forest.rows.filter(r => r.screen === k).forEach(r => items.push({ k, label: `fold ${r.fold}`, v: -r.d, lo: -r.hi, hi: -r.lo, rel: -r.rel, n: r.n }));
-        const t = O.forest.totals[k];
-        items.push({ k, sum: true, label: 'all folds', v: -t.mean_diff, lo: -t.ci95[1], hi: -t.ci95[0], rel: -t.rel_change_pct, n: t.n_chemicals, frac: t.frac_chem_improved });
+      const lab = opt.labelWidth || 176, rh = 18, top = 24, gap = 32, tail = 96;
+      const items = [];
+      screens.forEach(([k, name, kind], gi) => {
+        items.push({ head: true, k, label: name, kind, gi });
+        panels[0].groups[gi].folds.forEach((f, fi) => items.push({ k, gi, fi, label: `fold ${f.fold}` }));
+        items.push({ k, gi, sum: true, label: 'all folds' });
       });
-      const H = 8 + items.length * rh + 48;
+      const H = top + items.length * rh + 44;
       svg.attr('viewBox', `0 0 ${W} ${H}`).attr('height', H);
-      const x = d3.scaleLinear().domain([0, d3.max(items, r => r.hi || 0)]).nice(4).range([lab, W - 96]);
-      const yOf = i => 8 + i * rh + rh / 2;
-      const axisY = 8 + items.length * rh + 4;
-      layer(svg, 'xax').attr('transform', `translate(0,${axisY})`).attr('class', 'xax axis')
-        .call(d3.axisBottom(x).ticks(4).tickSize(4).tickPadding(6)).call(a => a.select('.domain').attr('stroke', css('axis')));
-      layer(svg, 'xt').selectAll('text').data(['error reduction against log-linear interpolation, 95% interval']).join('text').attr('class', 'axis-title').attr('x', W - 96).attr('y', H - 2).attr('text-anchor', 'end').text(t => t);
-      const spans = groups.map(([k]) => { const idx = items.map((r, i) => (r.k === k && !r.head ? i : -1)).filter(i => i >= 0); return { k, a: yOf(idx[0]) - rh / 2, b: yOf(idx[idx.length - 1]) + rh / 2 }; });
-      layer(svg, 'zero').selectAll('line').data(spans, s => s.k).join('line').attr('class', 'zero').attr('x1', x(0)).attr('x2', x(0)).attr('y1', s => s.a).attr('y2', s => s.b);
+      const yOf = i => top + i * rh + rh / 2, pw = (W - lab - gap) / 2;
+      /* screen rows carry the platform after the name: the header runs across the empty first panel row */
       layer(svg, 'labels').selectAll('text').data(items).join('text').attr('class', r => (r.head || r.sum ? 'label strong' : 'label'))
         .attr('x', r => (r.head ? 0 : lab - 8)).attr('text-anchor', r => (r.head ? 'start' : 'end')).attr('y', (r, i) => yOf(i) + 4)
-        .text(r => (r.head ? `${r.label} · ${r.n} chemicals` : r.label));
-      const data = items.map((r, i) => Object.assign({ i }, r)).filter(r => !r.head);
-      layer(svg, 'ci').selectAll('line').data(data).join('line').attr('stroke', r => (r.sum ? css('forecast') : css('ink-2'))).attr('stroke-width', r => (r.sum ? 2 : 1.5))
-        .attr('x1', r => x(r.lo)).attr('x2', r => x(r.hi)).attr('y1', r => yOf(r.i)).attr('y2', r => yOf(r.i));
-      layer(svg, 'pt').selectAll('path').data(data).join('path')
-        .attr('d', r => (r.sum ? 'M0,-6L6,0L0,6L-6,0Z' : 'M-3.5,-3.5h7v7h-7Z')).attr('transform', r => `translate(${x(r.v)},${yOf(r.i)})`)
-        .attr('fill', r => (r.sum ? css('forecast') : css('ink'))).attr('stroke', css('surface')).attr('stroke-width', 1.5);
-      layer(svg, 'rel').selectAll('text').data(data.filter(r => r.sum)).join('text').attr('class', 'label strong').attr('x', W - 88).attr('y', r => yOf(r.i) + 4)
-        .text(r => `${C.fix(r.rel, 1)}% lower`);
-      layer(svg, 'hits').selectAll('rect').data(data).join('rect').attr('class', 'hit').attr('x', 0).attr('width', W).attr('y', r => yOf(r.i) - rh / 2).attr('height', rh)
-        .on('pointermove', (ev, r) => C.tip(ev, `${C.fix(r.rel, 1)}% lower error`, [`${r.label} · ${r.n} chemicals`, `reduction ${C.fix(r.v, 3)} (95% interval ${C.fix(r.lo, 3)} to ${C.fix(r.hi, 3)})`].concat(r.frac ? [`closer on ${C.pct(r.frac)} of chemicals`] : [])))
-        .on('pointerleave', C.untip);
+        .each(function (r) {
+          const t = d3.select(this); t.text(null);
+          t.append('tspan').text(r.label);
+          if (r.head) t.append('tspan').attr('class', 'kind').style('font-weight', 400).style('fill', css('ink-3')).text(` · ${r.kind}`);
+          /* a narrow sheet keeps the platform in the tooltip only, clear of the count column */
+          if (r.head && this.getComputedTextLength() > lab + pw - tail - 8) t.select('.kind').remove();
+        });
+      panels.forEach((P, pi) => {
+        const x0 = lab + pi * (pw + gap), g = layer(svg, 'p' + pi);
+        const rows = items.map((r, i) => {
+          if (r.head) return null;
+          const grp = P.groups[r.gi], d = r.sum ? grp.total : grp.folds[r.fi];
+          return Object.assign({ i, sum: !!r.sum, label: r.label, grp }, d);
+        }).filter(Boolean);
+        const lo = d3.min(rows, r => Math.min(r.lo, r.lo2 === null || r.lo2 === undefined ? r.lo : r.lo2)), hi = d3.max(rows, r => Math.max(r.hi, r.hi2 || r.hi));
+        const x = d3.scaleLinear().domain([Math.min(0, lo), hi]).nice(4).range([x0, x0 + pw - tail]);
+        layer(g, 'title').selectAll('text').data([P.title]).join('text').attr('class', 'label strong').attr('x', x0).attr('y', 12).text(t => t);
+        layer(g, 'n').selectAll('text').data(items.map((r, i) => ({ r, i })).filter(q => q.r.head)).join('text').attr('class', 'tick-label').attr('x', x0 + pw - tail + 8).attr('y', q => yOf(q.i) + 4)
+          .text(q => { const grp = P.groups[q.r.gi]; return grp.of && grp.of !== grp.n ? `${grp.n} of ${grp.of} labels` : `${grp.n} chemicals`; });
+        const spans = screens.map((s, gi) => { const idx = rows.filter(r => r.grp === P.groups[gi]).map(r => r.i); return { gi, a: yOf(d3.min(idx)) - rh / 2, b: yOf(d3.max(idx)) + rh / 2 }; });
+        layer(g, 'zero').selectAll('line').data(spans).join('line').attr('class', 'zero').attr('x1', x(0)).attr('x2', x(0)).attr('y1', s => s.a).attr('y2', s => s.b);
+        layer(g, 'ci2').selectAll('line').data(rows.filter(r => r.lo2 !== null && r.lo2 !== undefined && r.sum)).join('line').attr('stroke', css('ink-3')).attr('stroke-width', 1)
+          .attr('x1', r => x(r.lo2)).attr('x2', r => x(r.hi2)).attr('y1', r => yOf(r.i)).attr('y2', r => yOf(r.i));
+        layer(g, 'ci').selectAll('line').data(rows).join('line').attr('stroke', r => (r.sum ? css('forecast') : css('ink-2'))).attr('stroke-width', r => (r.sum ? 2.5 : 1.5))
+          .attr('x1', r => x(r.lo)).attr('x2', r => x(r.hi)).attr('y1', r => yOf(r.i)).attr('y2', r => yOf(r.i));
+        layer(g, 'pt').selectAll('path').data(rows).join('path')
+          .attr('d', r => (r.sum ? 'M0,-6L6,0L0,6L-6,0Z' : 'M-3.5,-3.5h7v7h-7Z')).attr('transform', r => `translate(${x(r.v)},${yOf(r.i)})`)
+          .attr('fill', r => (r.sum ? (ns(r) ? css('surface') : css('forecast')) : css('ink'))).attr('stroke', r => (r.sum && ns(r) ? css('forecast') : css('surface'))).attr('stroke-width', 1.5);
+        layer(g, 'rel').selectAll('text').data(rows.filter(r => r.sum)).join('text').attr('class', r => (ns(r) ? 'label' : 'label strong')).attr('x', x0 + pw - tail + 8).attr('y', r => yOf(r.i) + 4)
+          .text(r => `${C.fix(r.rel, 1)}% lower${ns(r) ? ', ns' : ''}`);
+        layer(g, 'xax').attr('transform', `translate(0,${top + items.length * rh + 4})`).attr('class', 'xax axis')
+          .call(d3.axisBottom(x).ticks(4).tickSize(4).tickPadding(6)).call(a => a.select('.domain').attr('stroke', css('axis')));
+        layer(g, 'hits').selectAll('rect').data(rows).join('rect').attr('class', 'hit').attr('x', x0).attr('width', pw).attr('y', r => yOf(r.i) - rh / 2).attr('height', rh)
+          .on('pointermove', (ev, r) => C.tip(ev, r.sum ? `${C.fix(r.rel, 1)}% lower error than ${P.name}` : `${r.label}: reduction ${C.fix(r.v, 3)}`, Charts.forestTip(P, r)))
+          .on('pointerleave', C.untip);
+      });
+      layer(svg, 'xt').selectAll('text').data(['error reduction, curve MAE, 95% interval; thin line 97.5%; ns: 95% interval includes 0']).join('text').attr('class', 'axis-title')
+        .attr('x', W).attr('y', H - 2).attr('text-anchor', 'end').text(t => t);
+    });
+    C.on((S, p) => { if (!p || !Object.keys(p).length) draw(S, p); });
+    return draw;
+  };
+  Charts.forestTip = (P, r) => {
+    const s = screens.find(q => q[0] === r.grp.k), iv = (a, b) => `${C.fix(a, 3)} to ${C.fix(b, 3)}`;
+    const rows = [`${s[1]} · ${s[2]}`, `${r.n} chemicals · reduction ${C.fix(r.v, 3)}, 95% interval ${iv(r.lo, r.hi)}` + (r.lo2 !== null && r.lo2 !== undefined && r.sum ? `, 97.5% ${iv(r.lo2, r.hi2)}` : '')];
+    if (r.k !== undefined) rows.push(`curve MAE ${C.fix(r.k, 3)} boosted forecast against ${C.fix(r.c, 3)}`);
+    if (r.win !== undefined) rows.push(`${r.win} of ${r.win + r.loss} chemicals closer` + (r.sum && r.foldWin !== undefined ? ` · ${r.foldWin} of ${r.foldWin + r.foldLoss} folds` : ''));
+    else if (r.frac) rows.push(`closer on ${C.pct(r.frac)} of chemicals`);
+    if (r.sum && r.grp.extra) r.grp.extra.forEach(e => rows.push(`${e.label}, ${e.n} chemicals: reduction ${C.fix(e.v, 3)}, 95% ${iv(e.lo, e.hi)}`));
+    if (r.sum && r.grp.excluded && r.grp.excluded.length) rows.push(`${r.grp.excluded.join(' and ')} left out: one parent compound split across folds`);
+    if (r.sum && r.grp.of && r.grp.of !== r.n && !(r.grp.excluded && r.grp.excluded.length)) rows.push(`${r.grp.of} source IDs; IDs of one chemical in the same fold count once`);
+    return rows;
+  };
+
+  /* ---------------- 10. perfused liver chips: five endpoints, each in its own published units ----------------
+     one row per endpoint with its own axis; the point is the error reduction against interpolation with its 95% interval over drugs */
+  Charts.CHIP = { Ewart2022: ['Ewart 2022', 'primary human hepatocytes, perfused'], Yuan2025: ['Yuan 2025', 'human cell lines, perfused'] };
+  Charts.CHIP_END = { ALBUMIN: 'albumin, normalized', ALT: 'ALT', Morphology: 'morphology score', LDH: 'LDH' };
+  Charts.chips = function (el, opt) {
+    opt = opt || {};
+    const rows = [];
+    C.strong.chips.forEach(r => {
+      if (!rows.some(q => q.head && q.dataset === r.dataset)) rows.push({ head: true, dataset: r.dataset, config: r.config });
+      rows.push(r);
+    });
+    const draw = Charts.mount(el, (svg, W) => {
+      const lab = opt.labelWidth || 152, tail = 88, hh = 24, rh = 40;
+      let y = 0;
+      rows.forEach(r => { r.y = y; y += r.head ? hh : rh; });
+      const H = y + 20;
+      svg.attr('viewBox', `0 0 ${W} ${H}`).attr('height', H);
+      /* each dataset row links to its paper */
+      layer(svg, 'heads').selectAll('a').data(rows.filter(r => r.head)).join('a').attr('href', r => C.strong.chipUrls[r.dataset]).attr('target', '_blank').attr('rel', 'noopener')
+        .each(function (r) {
+          const t = d3.select(this).selectAll('text').data([r]).join('text').attr('class', 'label strong').attr('x', 0).attr('y', r.y + 16).text(null);
+          t.append('tspan').style('fill', css('accent-ink')).text(Charts.CHIP[r.dataset][0]);
+          t.append('tspan').text(` · ${r.config} · ${Charts.CHIP[r.dataset][1]}`);
+        });
+      const ends = rows.filter(r => !r.head);
+      const g = layer(svg, 'rows').selectAll('g.row').data(ends, r => r.dataset + r.endpoint).join('g').attr('class', 'row').attr('transform', r => `translate(0,${r.y})`);
+      g.each(function (r) {
+        const s = d3.select(this), m = Math.max(Math.abs(r.lo), Math.abs(r.hi)) * 1.1;
+        const x = d3.scaleLinear().domain([-m, m]).nice(2).range([lab, W - tail]);
+        layer(s, 'name').selectAll('text').data([0]).join('text').attr('class', 'label').attr('x', lab - 8).attr('y', 14).attr('text-anchor', 'end')
+          .text(`${Charts.CHIP_END[r.endpoint]} · ${r.n} drugs`);
+        const end = x.domain()[1];
+        layer(s, 'xax').attr('transform', 'translate(0,20)').attr('class', 'xax axis').call(d3.axisBottom(x).tickValues([-end, 0, end]).tickSize(3).tickPadding(4).tickFormat(d3.format('~g')))
+          .call(a => a.select('.domain').attr('stroke', css('axis')));
+        layer(s, 'zero').selectAll('line').data([0]).join('line').attr('class', 'zero').attr('x1', x(0)).attr('x2', x(0)).attr('y1', 0).attr('y2', 20);
+        layer(s, 'ci').selectAll('line').data([0]).join('line').attr('stroke', css('ink')).attr('stroke-width', 2).attr('x1', x(r.lo)).attr('x2', x(r.hi)).attr('y1', 10).attr('y2', 10);
+        layer(s, 'pt').selectAll('circle').data([0]).join('circle').attr('r', 4.5).attr('cx', x(r.v)).attr('cy', 10)
+          .attr('fill', r.lo > 0 ? css('forecast') : r.hi < 0 ? css('compare') : css('surface')).attr('stroke', r.hi < 0 ? css('compare') : css('forecast')).attr('stroke-width', 2);
+        layer(s, 'res').selectAll('text').data([0]).join('text').attr('class', r.hi < 0 ? 'label' : 'label strong').attr('x', W - tail + 8).attr('y', 14)
+          .text(r.hi < 0 ? `behind, ${r.win} of ${r.n}` : `${r.win} of ${r.n} closer`);
+        layer(s, 'hit').selectAll('rect').data([0]).join('rect').attr('class', 'hit').attr('x', 0).attr('width', W).attr('y', -4).attr('height', rh - 4)
+          .on('pointermove', ev => C.tip(ev, `${Charts.CHIP[r.dataset][0]} ${r.config} · ${Charts.CHIP_END[r.endpoint]}`, [
+            `${r.n} drugs, leave one drug out · ${r.win} closer, ${r.loss} farther than interpolation`,
+            `MAE ${C.fix(r.k, 4)} boosted forecast against ${C.fix(r.li, 4)} interpolation, published units`,
+            `error reduction ${d3.format('+.3~g')(r.v)}, 95% interval ${d3.format('+.3~g')(r.lo)} to ${d3.format('+.3~g')(r.hi)} over drugs`]))
+          .on('pointerleave', C.untip);
+      });
+      layer(svg, 'xt').selectAll('text').data(['error reduction vs interpolation, published units, 95% interval']).join('text')
+        .attr('class', 'axis-title').attr('x', W - tail).attr('y', H - 2).attr('text-anchor', 'end').text(t => t);
     });
     C.on((S, p) => { if (!p || !Object.keys(p).length) draw(S, p); });
     return draw;
   };
 
-  /* ---------------- 10. ablations: what each input is worth ---------------- */
+  /* ---------------- 11. ablations: what each input is worth, in curve MAE ----------------
+     the layout ablation is matched on training rows times boosting iterations; the anchor row compares residual and direct targets on identical rows */
+  Charts.ablationRows = () => {
+    const A = O.ablations.ablations, S = C.strong;
+    const old = (k, label, short, note) => ({ label, short, v: A[k].minus_full.mean_diff, lo: A[k].minus_full.ci95[0], hi: A[k].minus_full.ci95[1], n: A[k].minus_full.n_chemicals, note });
+    return [
+      { label: 'Every layout in training', short: 'every layout', v: S.ablation.v, lo: S.ablation.lo, hi: S.ablation.hi, n: S.ablation.n,
+        note: [`five designs per chemical, rows repeated to the same count, 600 iterations: MAE ${C.fix(S.ablation.other, 4)} against ${C.fix(S.ablation.full, 4)}`,
+          `${S.ablation.win} of ${S.ablation.n} chemicals and ${S.ablation.foldWin} of ${S.ablation.foldWin + S.ablation.foldLoss} folds favour every layout`,
+          `matched on training rows times iterations${S.ablation.wallClock ? '' : '; wall-clock time is not matched'}`] },
+      old('no_analog', 'Analog chemicals', 'analog chemicals', ['analog-chemical features removed, retrained per fold']),
+      old('no_hill', 'Hill fit', 'the Hill fit', ['per-output Hill features removed, retrained per fold']),
+      { label: 'Interpolation anchor', short: 'the interpolation anchor', v: S.control.v, lo: S.control.lo, hi: S.control.hi, n: S.control.n,
+        note: [`residual on interpolation against a direct target, identical rows and 600 iterations: MAE ${C.fix(S.control.full, 4)} against ${C.fix(S.control.other, 4)}`,
+          `${S.control.win} of ${S.control.n} chemicals favour the residual, ${S.control.loss} the direct target` + (S.control.retrospective ? '; control run after the main results' : '')] }
+    ];
+  };
   Charts.ablation = function (el, opt) {
     opt = opt || {};
-    const A = O.ablations, full = A.full_model_mean;
-    const names = { no_analog: 'Analog chemicals', five_designs: 'Every layout in training', no_anchor: 'Interpolation anchor', no_hill: 'Hill fit' };
-    const rows = ['no_analog', 'five_designs', 'no_anchor', 'no_hill'].map(k => ({ k, label: names[k], v: A.ablations[k].minus_full.rel_change_pct,
-      lo: 100 * A.ablations[k].minus_full.ci95[0] / full, hi: 100 * A.ablations[k].minus_full.ci95[1] / full }));
+    const rows = Charts.ablationRows();
     const draw = Charts.mount(el, (svg, W) => {
-      const lab = opt.labelWidth || 160, rh = 32, H = rows.length * rh + 32;
+      const lab = opt.labelWidth || 176, rh = 32, tail = 96, H = rows.length * rh + 44;
       svg.attr('viewBox', `0 0 ${W} ${H}`).attr('height', H);
-      const x = d3.scaleLinear().domain([Math.min(0, d3.min(rows, r => r.lo)), d3.max(rows, r => r.hi)]).nice(4).range([lab, W - 56]);
-      layer(svg, 'xax').attr('transform', `translate(0,${H - 28})`).attr('class', 'xax axis')
-        .call(d3.axisBottom(x).ticks(4).tickFormat(v => `${v > 0 ? '+' : ''}${v}%`).tickSize(4).tickPadding(6)).call(a => a.select('.domain').attr('stroke', css('axis')));
-      layer(svg, 'zero').selectAll('line').data([0]).join('line').attr('class', 'zero').attr('x1', x(0)).attr('x2', x(0)).attr('y1', 0).attr('y2', H - 28);
+      const x = d3.scaleLinear().domain([Math.min(0, d3.min(rows, r => r.lo)), d3.max(rows, r => r.hi)]).nice(4).range([lab, W - tail]);
+      layer(svg, 'xax').attr('transform', `translate(0,${rows.length * rh + 4})`).attr('class', 'xax axis')
+        .call(d3.axisBottom(x).ticks(5).tickFormat(v => (v === 0 ? '0' : d3.format('+.2~f')(v))).tickSize(4).tickPadding(6)).call(a => a.select('.domain').attr('stroke', css('axis')));
+      layer(svg, 'xt').selectAll('text').data(['error added without it, curve MAE over 194 held-out chemicals, 95% interval']).join('text').attr('class', 'axis-title')
+        .attr('x', W - tail).attr('y', H - 2).attr('text-anchor', 'end').text(t => t);
+      layer(svg, 'zero').selectAll('line').data([0]).join('line').attr('class', 'zero').attr('x1', x(0)).attr('x2', x(0)).attr('y1', 0).attr('y2', rows.length * rh + 4);
       layer(svg, 'labels').selectAll('text').data(rows).join('text').attr('class', 'label').attr('x', lab - 8).attr('text-anchor', 'end').attr('y', (r, i) => i * rh + rh / 2 + 4).text(r => r.label);
-      layer(svg, 'bars').selectAll('rect').data(rows).join('rect').attr('fill', css('forecast')).attr('rx', 3)
-        .attr('x', x(0)).attr('y', (r, i) => i * rh + rh / 2 - 6).attr('height', 12).attr('width', r => Math.max(2, x(r.v) - x(0)));
+      layer(svg, 'bars').selectAll('rect').data(rows).join('rect').attr('fill', r => (ns(r) ? css('band') : css('forecast'))).attr('rx', 3)
+        .attr('x', r => Math.min(x(0), x(r.v))).attr('y', (r, i) => i * rh + rh / 2 - 6).attr('height', 12).attr('width', r => Math.max(2, Math.abs(x(r.v) - x(0))));
       layer(svg, 'ci').selectAll('line').data(rows).join('line').attr('stroke', css('ink')).attr('stroke-width', 1.25)
         .attr('x1', r => x(r.lo)).attr('x2', r => x(r.hi)).attr('y1', (r, i) => i * rh + rh / 2).attr('y2', (r, i) => i * rh + rh / 2);
+      layer(svg, 'val').selectAll('text').data(rows).join('text').attr('class', r => (ns(r) ? 'label' : 'label strong')).attr('x', W - tail + 8).attr('y', (r, i) => i * rh + rh / 2 + 4)
+        .text(r => `${d3.format('+.3f')(r.v)}${ns(r) ? ', ns' : ''}`);
       layer(svg, 'hits').selectAll('rect').data(rows).join('rect').attr('class', 'hit').attr('x', 0).attr('width', W).attr('y', (r, i) => i * rh).attr('height', rh)
-        .on('pointermove', (ev, r) => C.tip(ev, `+${C.fix(r.v, 2)}% error without it`, [r.label, `95% interval ${C.fix(r.lo, 2)}% to ${C.fix(r.hi, 2)}%`, '194 held-out chemicals, paired']))
+        .on('pointermove', (ev, r) => C.tip(ev, `${r.label}: ${d3.format('+.4f')(r.v)} curve MAE when removed`, [`95% interval ${d3.format('+.4f')(r.lo)} to ${d3.format('+.4f')(r.hi)}, ${r.n} chemicals, paired`].concat(r.note)))
         .on('pointerleave', C.untip);
     });
     C.on((S, p) => { if (!p || !Object.keys(p).length) draw(S, p); });

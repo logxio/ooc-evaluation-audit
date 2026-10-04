@@ -10,11 +10,15 @@ learned interval coverage within 0.002 of chip_forecast_intervals.json (the quan
 Run from the repository root; each step is one short process (about 30 s and under 1 GB on a laptop CPU):
   for f in 1 2 3 4; do python workbench/build_data.py widths --fold $f; done
   python workbench/build_data.py export
+
+Refresh the released comparison evidence without refitting interval models:
+  python workbench/build_data.py evidence
 """
 import argparse
 import base64
 import csv
 import hashlib
+import importlib.util
 import json
 import math
 import sys
@@ -27,10 +31,6 @@ ROOT = REL = HERE.parent
 OUT = HERE / 'data' / 'ooc-data.js'
 BUILD = HERE / '.build'
 sys.path[:0] = [str(REL), str(REL / 'src')]
-
-import chip_forecast as cf  # noqa: E402
-import chip_forecast_decision as dc  # noqa: E402
-import chip_forecast_selfcheck as sc  # noqa: E402
 
 FEATURES = ['mean firing rate', 'burst rate', 'interspike interval within bursts', 'percent of spikes in bursts',
             'mean burst duration', 'mean interburst interval', 'active electrodes', 'bursting electrodes',
@@ -58,6 +58,176 @@ def read(path):
 
 def load_json(path):
     return json.loads(read(path).read_text())
+
+
+def strong_baseline():
+    """Project the released source results into the existing workbench package.
+
+    Score tables are checked at their original chemical/identity denominator.
+    This path only aggregates saved errors; it never fits a model.
+    """
+    base = REL / 'benchmarks' / 'strong_baseline'
+    spec = importlib.util.spec_from_file_location('strong_baseline_reproduce', read(base / 'reproduce.py'))
+    replay = importlib.util.module_from_spec(spec)
+    spec.loader.exec_module(replay)
+
+    def table(name):
+        with read(base / name).open(newline='') as fh:
+            return list(csv.DictReader(fh))
+
+    def source(name):
+        return load_json(base / name)
+
+    def check(rows, expected, keys, tolerance=1e-12, replicates=10000):
+        actual = replay.paired(rows, tolerance, replicates)
+        replay.check_stats(actual, expected, *keys)
+        if 'ci97_5' in expected:
+            np.testing.assert_allclose(actual['ci97_5'], expected['ci97_5'], rtol=0, atol=1e-11)
+        for key in ('wins', 'losses', 'ties', 'fold_wins', 'fold_losses', 'fold_ties'):
+            target = key if key in expected else 'chemical_' + key
+            if target in expected:
+                assert actual[key] == expected[target], (key, actual[key], expected[target])
+        return actual
+
+    nfa = source('nfa/result.json')
+    np_ = source('nfa/protocol.json')
+    nrows = table('nfa/per_chemical.csv')
+    pairs = [(x['chemical'], int(x['fold']), float(x['K_linux_curve_mae']),
+              float(x['C_published_curve_mae'])) for x in nrows]
+    nkeys = ('n_source_chemicals', 'mean_difference', 'K_mean', 'C_mean')
+    check(pairs, nfa['primary'], nkeys, tolerance=0)
+    assert len({x['identity_cluster'] for x in nrows}) == nfa['primary']['n_independent_test_identity_clusters']
+    omitted = set(np_['identity_sensitivity']['exclude_test_chemicals'])
+    sensitivity = [x for x in pairs if x[0] not in omitted]
+    assert {x['chemical'] for x in nrows if x['included_identity_sensitivity'] == 'False'} == omitted
+    check(sensitivity, nfa['identity_sensitivity'], nkeys, tolerance=0)
+    assert sorted({x[1] for x in pairs}) == np_['primary_folds']
+    for f, summary in nfa['folds'].items():
+        check([x for x in pairs if x[1] == int(f)], summary, nkeys, tolerance=0)
+
+    ep = source('external/protocol.json')
+    external = {}
+    ekeys = ('n_independent_units', 'delta', 'k_mae', 'c_mae')
+    for screen in ('acute', 'harrill'):
+        result = source(f'external/{screen}/result.json')
+        rows = table(f'external/{screen}/per_chemical.csv')
+        excluded = {x['chemical'] for x in ep['exclusions'] if x['screen'] == screen}
+        assert len(rows) == result['all_original_labels']['n_source_labels']
+        assert excluded <= {x['chemical'] for x in rows}
+        groups = {}
+        for row in rows:
+            if row['chemical'] not in excluded:
+                groups.setdefault(row['identity'], []).append(row)
+        grouped = []
+        for identity, members in sorted(groups.items()):
+            folds = {int(x['fold']) for x in members}
+            assert len(folds) == 1, (screen, identity, folds)
+            grouped.append((identity, folds.pop(),
+                            float(np.mean([float(x['k_mae']) for x in members])),
+                            float(np.mean([float(x['c_mae']) for x in members]))))
+        check(grouped, result['primary'], ekeys)
+        assert sorted({x[1] for x in grouped}) == ep['folds']
+        for f, summary in result['folds'].items():
+            check([x for x in grouped if x[1] == int(f)], summary, ekeys)
+        external[screen] = dict(
+            summary=result['primary'], folds=result['folds'],
+            cohort=dict(sourceLabels=len(rows), retainedLabels=len(rows)-len(excluded),
+                        independentIdentities=len(grouped), excludedLabels=sorted(excluded)),
+            deltaDefinition=np_['paired_difference'], unit='vehicle-standardized curve MAE',
+            training=dict(configurationOrigin=ep['c_configuration_origin'], configuration=ep['c_config'],
+                          seeds=ep['c_seeds'], weightsRefitPerScreen=True, kRecipe=ep['k_config']),
+            allOriginalLabels=result['all_original_labels'],
+            allIdentityClusters=result['all_identity_clusters'], subgroups=result['subgroups'],
+            source=f'benchmarks/strong_baseline/external/{screen}/result.json')
+
+    ablation = source('ablation/result.json')
+    ap = source('ablation/protocol.json')
+    akeys = ('n_chemicals', 'mean_delta', 'full_curve_mae', 'five_matched_curve_mae')
+    check([(x['chemical'], x['fold'], x['full_curve_mae'], x['five_matched_curve_mae'])
+           for x in ablation['per_chemical']], ablation['primary'], akeys)
+    budgets = {}
+    for fold, budget in ablation['budgets'].items():
+        matched, full = budget['matched'], budget['full_same_environment']
+        for key in ('training_rows', 'iterations', 'feature_width', 'row_iteration_budget'):
+            assert matched[key] == full[key], (fold, key)
+        assert matched['iterations'] == ap['fixed_model']['max_iter']
+        assert sum(x['full_rows'] for x in matched['chemical_budgets']) == matched['training_rows']
+        budgets[fold] = dict(matched={k:v for k,v in matched.items() if k != 'chemical_budgets'},
+                             fullSameEnvironment=full, fullHistorical=budget['full_historical'])
+
+    anchor = source('ablation/control_summary.json')
+    cp = source('ablation/control_protocol.json')
+    check([(x['chemical'], x['fold'], x['full_curve_mae'], x['direct_target_curve_mae'])
+           for x in anchor['per_chemical']], anchor['summary'],
+          ('n_chemicals', 'mean_delta', 'full_curve_mae', 'direct_target_curve_mae'))
+
+    chips = source('chips/result.json')
+    chip_rows = table('chips/compound_risk.csv')
+    endpoint_rows = table('chips/endpoint_summary.csv')
+    columns = ('dataset', 'preparation', 'endpoint', 'configuration')
+    endpoint_csv = {tuple(x[k] for k in columns):x for x in endpoint_rows}
+    endpoints = []
+    for row in chips['results']:
+        key = tuple(row[k] for k in columns)
+        members = [x for x in chip_rows if tuple(x[k] for k in columns) == key]
+        expected = row['recomputed_paired_4000_full_precision']
+        actual = replay.paired([(x['chemical'], int(x['fold']), float(x['anchorboost']),
+                                 float(x['loglinear_interp'])) for x in members],
+                               tolerance=0, replicates=expected['resamples'])
+        assert actual['n'] == row['n_independent_chemicals'] == int(endpoint_csv[key]['n'])
+        for a, b in [('K_mae', 'anchorboost_mae'), ('comparator_mae', 'loglinear_mae'), ('delta', 'difference')]:
+            np.testing.assert_allclose(actual[a], row[b], rtol=0, atol=1e-11)
+        np.testing.assert_allclose(actual['ci95'], expected['ci95'], rtol=0, atol=1e-11)
+        assert dict(win=actual['wins'], loss=actual['losses'], tie=actual['ties']) == row['outcomes']
+        np.testing.assert_allclose(float(endpoint_csv[key]['delta']), row['difference'], rtol=0, atol=1e-11)
+        endpoints.append(dict(row, ci95=expected['ci95'], unit='published endpoint units',
+                              unitId=f'{row["dataset"]}/{row["endpoint"]}',
+                              deltaDefinition=chips['delta_definition']))
+    assert len(endpoint_csv) == len(endpoints) == chips['n_all_endpoint_preparation_configuration_rows']
+    primary_endpoints = [x for x in endpoints if x['primary']]
+    assert len(primary_endpoints) == chips['n_primary_endpoint_rows']
+    assert len({x['chemical'] for x in chip_rows}) == chips['n_independent_chemical_identities']
+    joint = all(x['summary']['ci97_5'][1] < 0 for x in external.values())
+    return dict(
+        schema='ooc.workbench.strong-baseline.v1',
+        primary=dict(summary=nfa['primary'], folds=nfa['folds'], cohort=nfa['counts'],
+                     identitySensitivity=nfa['identity_sensitivity'],
+                     deltaDefinition=np_['paired_difference'], unit='vehicle-standardized curve MAE',
+                     checkpointReplay=nfa['replay_comparison'], replayPrecision=nfa['replay_precision'],
+                     source='benchmarks/strong_baseline/nfa/result.json'),
+        external=external, jointExternalAdvantage=joint, jointExternalRule=ep['interval']['joint_claim'],
+        matchedAblation=dict(summary=ablation['primary'], folds=ablation['by_fold'], budgets=budgets,
+                             deltaDefinition=ap['evaluation']['delta'], unit='vehicle-standardized curve MAE',
+                             budgetDefinition=ap['budget_interpretation'], wallClockMatched=False,
+                             unmatchedReference=ablation['unmatched_reference'],
+                             source='benchmarks/strong_baseline/ablation/result.json'),
+        anchorControl=dict(summary=anchor['summary'], folds=anchor['by_fold'], budgets=anchor['budgets'],
+                           deltaDefinition=cp['contrast'], unit='vehicle-standardized curve MAE',
+                           budgetDefinition=cp['training_budget'], retrospective=True,
+                           source='benchmarks/strong_baseline/ablation/control_summary.json'),
+        chips=dict(primaryEndpoints=primary_endpoints, allEndpoints=endpoints,
+                   counts={k:v for k,v in chips.items() if k.startswith('n_')},
+                   interpretation=chips['interpretation'], sourceUrls=chips['source_urls'],
+                   source='benchmarks/strong_baseline/chips/result.json'),
+        sources={k:v for k,v in SOURCES.items() if k.startswith('benchmarks/strong_baseline/')})
+
+
+def refresh_evidence():
+    """Refresh only evidence in the one existing payload; retain every legacy cohort."""
+    text = OUT.read_text()
+    prefix, suffix = 'window.OOC = ', ';\n'
+    if not text.startswith(prefix) or not text.endswith(suffix):
+        raise ValueError('Unexpected workbench data format')
+    data = json.loads(text[len(prefix):-len(suffix)])
+    data['strongBaseline'] = strong_baseline()
+    data['sources'].update(SOURCES)
+    OUT.write_text(prefix + json.dumps(data, separators=(',', ':'), allow_nan=False) + suffix)
+    print(json.dumps(dict(out=str(OUT), bytes=OUT.stat().st_size,
+                          sha256=hashlib.sha256(OUT.read_bytes()).hexdigest(),
+                          originalInterpolationCohorts=data['forest']['chemicals'],
+                          neuralProcessCohorts=[data['strongBaseline']['primary']['summary']['n_source_chemicals']]
+                          + [v['summary']['n_independent_units'] for v in data['strongBaseline']['external'].values()],
+                          primaryChipEndpoints=len(data['strongBaseline']['chips']['primaryEndpoints']))))
 
 
 def tasks_all():
@@ -289,7 +459,7 @@ def export():
         coverage=dict(hit=[int(v) for v in cov_hit], plainHit=[int(v) for v in cov_hit_plain], n=[int(v) for v in cov_n]),
         intervals=pub_int, decision=pub_dec,
         versus=summary, examples=[dict(chemical=e['chemical'], role=e['role'], feature=e['feature']) for e in examples],
-        ablations=abl, designcurve=curve, forest=forest,
+        ablations=abl, designcurve=curve, forest=forest, strongBaseline=strong_baseline(),
         model=dict(params=fres['model'], timing=timing, designs_enumerated=designs_enumerated, train_chems=train_chems,
                    wells=int(sum(len(t.logc) for t in tasks)), chemicals=len(tasks), held_out=len(held)),
         patients=dict(rows=pw['rows'], cases=pw['cases'], rule=pw['rule'], study=pw['study'],
@@ -386,5 +556,15 @@ if __name__ == '__main__':
     sub = ap.add_subparsers(dest='cmd', required=True)
     sub.add_parser('widths').add_argument('--fold', type=int, required=True, choices=TEST)
     sub.add_parser('export')
+    sub.add_parser('evidence')
     a = ap.parse_args()
-    widths(a.fold) if a.cmd == 'widths' else export()
+    if a.cmd != 'evidence':
+        import chip_forecast as cf
+        import chip_forecast_decision as dc
+        import chip_forecast_selfcheck as sc
+    if a.cmd == 'widths':
+        widths(a.fold)
+    elif a.cmd == 'evidence':
+        refresh_evidence()
+    else:
+        export()
