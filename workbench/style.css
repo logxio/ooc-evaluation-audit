@@ -94,8 +94,8 @@ html[data-stage] .go{background:var(--chip);border-color:var(--line);color:var(-
 [data-stage=input] #example,[data-stage=predicted] #reveal,:is([data-stage=revealed],[data-stage=done]) #download{background:var(--blue);border-color:var(--blue);color:#fff}
 [data-stage=input] #example:hover,[data-stage=predicted] #reveal:hover,:is([data-stage=revealed],[data-stage=done]) #download:hover{background:var(--blue-deep);border-color:var(--blue-deep)}
 #example,#reveal,#download{flex:1 1 100%}
-#reveal:disabled{opacity:1;background:none;border-color:transparent;color:var(--blue)}
-#reveal:disabled::before{content:"✓";margin-right:8px}
+:is([data-stage=revealed],[data-stage=done]) #reveal:disabled{opacity:1;background:none;border-color:transparent;color:var(--blue)}
+:is([data-stage=revealed],[data-stage=done]) #reveal:disabled::before{content:"✓";margin-right:8px}
 html[data-stage] .sec h2{color:var(--ink3)}
 html[data-stage=predicted] :is(.s1,.s2) h2,html[data-stage=revealed] :is(.s1,.s2,.s3,.s4) h2,html[data-stage=done] .sec h2{color:var(--ink)}
 [data-stage=predicted] :is(.s1,.s2) h2 b,[data-stage=revealed] :is(.s1,.s2,.s3,.s4) h2 b,[data-stage=done] .sec h2 b{background:var(--ink);border-color:var(--ink);color:#fff}
