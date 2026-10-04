@@ -3,9 +3,21 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Chip Forecast Workbench</title>
+<title>More screening decisions from fewer measurements</title>
 <meta name="description" content="Measure three concentrations of a neural MEA screen and get the whole concentration-response series with 90% intervals and a hit call; call organoid patients sensitive, resistant or retest. Runs in your browser.">
 <link rel="icon" href="data:,">
+<link rel="preload" href="vendor/fonts/newsreader-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="vendor/fonts/source-sans-3-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<script>
+  document.documentElement.dataset.entry = 'loading';
+  window.addEventListener('error', event => {
+    if (document.documentElement.dataset.entry !== 'loading') return;
+    if (!(event instanceof ErrorEvent) && !(event.target instanceof HTMLScriptElement)) return;
+    document.documentElement.dataset.entry = 'error';
+    const status = document.getElementById('entry-status');
+    if (status) status.textContent = 'Screening data could not load. Refresh to retry.';
+  }, true);
+</script>
 <link rel="stylesheet" href="assets/system.css">
 <style>
   .top { display: flex; align-items: center; justify-content: space-between; gap: var(--s3); height: 64px; }
@@ -14,7 +26,7 @@
   .top nav a { color: var(--ink-2); }
   .top nav a:hover { color: var(--ink); }
   /* hero: two blocks of two 56 px rows each; row one and row two share a baseline across the page */
-  .hero { display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: 56px 56px; align-items: baseline; column-gap: var(--s3); padding: var(--s2) 0 var(--s3); }
+  .hero { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: 56px 56px; align-items: baseline; column-gap: var(--s3); padding: var(--s2) 0 var(--s3); }
   .hero h1, .hero .figure { display: contents; }
   .hero h1 span { grid-column: 1; font: 400 var(--f5)/var(--l5) var(--serif); letter-spacing: -.012em; white-space: nowrap; }
   .hero h1 span:first-child { grid-row: 1; }
@@ -58,6 +70,18 @@
   .note { margin-top: var(--s1); color: var(--ink-2); }
   .links { display: flex; flex-wrap: wrap; gap: var(--s1) var(--s3); margin-top: var(--s2); }
   .foot { padding: var(--s3) 0; }
+  .entry-status { position: absolute; left: 0; bottom: var(--s1); color: var(--ink-3); }
+  html:not([data-entry]) .entry-status, html[data-entry="ready"] .entry-status { display: none; }
+  html[data-entry="loading"] :is(.atlas, .foot, .hero .figure),
+  html[data-entry="error"] :is(.atlas, .foot, .hero .figure) { visibility: hidden; }
+  @media (prefers-reduced-motion: no-preference) {
+    .hero h1 span { animation: enter-title 320ms var(--ease) both; }
+    .hero h1 span:last-child { animation-delay: 40ms; }
+    html[data-entry="ready"] :is(.index, .sheet, .hero .num, .hero .lab, .foot) { animation: enter-content 280ms var(--ease) both; }
+    html[data-entry="ready"] .sheet { animation-delay: 40ms; }
+    @keyframes enter-title { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+    @keyframes enter-content { from { opacity: .15; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+  }
   @media (max-width: 1280px) { .index { grid-column: span 4; } .sheet { grid-column: span 8; } .views > .v6, .views > .v5, .views > .v4, .views > .v3 { grid-column: 1 / -1; } }
   @media (max-width: 960px) {
     .atlas { grid-template-columns: 1fr; } .index, .sheet { grid-column: 1 / -1; } .index { contain: none; } .list { flex: none; max-height: 50vh; } .views > * { grid-column: 1 / -1; }
@@ -74,8 +98,9 @@
 </header>
 
 <section class="page hero" id="hero">
-  <h1><span>Run three concentrations.</span><span>Get the whole curve.</span></h1>
+  <h1><span>More screening decisions</span> <span>from fewer measurements</span></h1>
   <div class="figure"><span class="num" id="hero-num"></span><span class="lab" id="hero-label">fewer wells than running the full series</span></div>
+  <p class="t1 entry-status" id="entry-status" role="status">Loading screening data…</p>
 </section>
 
 <main class="page atlas">
@@ -405,6 +430,16 @@
   if (view.tab === 'patient') view.page = 'patient';
   if (view.tab === 'yours') view.page = 'yours';
   list(); pages(); entity();
+  document.fonts.ready.then(() => requestAnimationFrame(function enter() {
+    if (document.documentElement.dataset.entry === 'error') return;
+    const charts = [...document.querySelectorAll('.page-view.on svg.chart')];
+    if (charts.some(svg => Math.abs(svg.viewBox.baseVal.width - Math.max(240, svg.parentElement.clientWidth)) > 1)) {
+      requestAnimationFrame(enter);
+      return;
+    }
+    d3.timerFlush();
+    document.documentElement.dataset.entry = 'ready';
+  }));
 })();
 </script>
 </body>

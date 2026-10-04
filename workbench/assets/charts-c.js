@@ -108,8 +108,8 @@
         return;
       }
       const miss = rows.filter(r => wrong(r, S)).map(r => r.id);
-      el.textContent = (s.fp === 0 ? 'Every reported non-responder was flagged resistant before treatment' : `${s.tn} non-responders were flagged resistant before treatment`) +
-        (miss.length ? `; the ${miss.length === 1 ? 'single miss is' : 'misses are'} ${miss.join(', ')}, called against the clinic.` : '.');
+      el.textContent = (s.fp === 0 ? 'Every clinical non-responder is classified resistant in this retrospective replay' : `${s.tn} clinical non-responders are classified resistant in this retrospective replay`) +
+        (miss.length ? `; ${miss.join(', ')} ${miss.length === 1 ? 'is the single wrong call' : 'are the wrong calls'}.` : '.');
     });
   };
 
