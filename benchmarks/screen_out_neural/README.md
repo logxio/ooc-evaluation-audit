@@ -74,3 +74,23 @@ remains private; this package is self-contained. Code is MIT, including the
 attributed NeuroChip Twin comparator; Ewart data are CC BY 4.0. EPA source access
 and dataset-license qualifications are documented in [SOURCES.md](SOURCES.md).
 `checksums.json` covers the packaged scientific inputs and code.
+
+The public [CPU reproduction notebook](https://www.kaggle.com/code/loxigicck/screen-out-neural-cpu-reproduction) completed as version 1,
+using Git commit `1fca4edbb7ba2e579e50401179f245a67b33966a` and a pinned manifest SHA-256.
+Kaggle confirmed public visibility with GPU and TPU disabled. It downloaded and
+verified 54 files (14,618,588 bytes) from GitHub,
+including all prepared training inputs and 11 checkpoints, then ran aggregation.
+The complete download-and-recompute sequence took **6.23 s**;
+aggregation took **2.399 s**, with **171.15 MB** peak process RSS.
+All 326 drug-endpoint results and 26 main-table rows matched the frozen experiment;
+the maximum main-table difference was **0.0**. Recorded cost was **$0**.
+The original private notebook above remains training provenance.
+
+The [local notebook](kaggle/cpu_reproduction.ipynb),
+[platform completion](kaggle/platform_completion.txt),
+[reproduction receipt](kaggle/reproduction_receipt.json),
+[published metadata](kaggle/published_metadata.json) and
+[Kaggle table](kaggle/main_table.csv) preserve the actual public run.
+`kaggle/prepare.py --commit COMMIT` prepares a notebook for another immutable
+public commit. `checksums.json` records the current scientific and publication files;
+the completed notebook retains the original source commit's manifest digest.
