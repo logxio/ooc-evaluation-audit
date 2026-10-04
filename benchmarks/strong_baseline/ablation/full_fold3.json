@@ -1,0 +1,4533 @@
+{
+  "schema": "strong-baseline.ablation.fold.v1",
+  "status": "complete",
+  "fold": 3,
+  "probe": false,
+  "full_arm": true,
+  "test_n": 49,
+  "training_chemicals": 194,
+  "protocol_sha256": "747fb2a45ac98ba24824b90482808c3456ac077ce67cb8d81dc030a1d067206b",
+  "code_sha256": "34945300229bc671ec43df12963e257230d77d1cbc72eca631ce4e47c288a991",
+  "source_sha256": "3d02dd3a1bc57e8c53f701a6005c8d5e9d8ad6a15a57cdec3f22b27066015897",
+  "timestamp": "2026-10-04T13:25:07.942636+00:00",
+  "environment": {
+    "python": "3.13.15",
+    "numpy": "2.1.3",
+    "sklearn": "1.6.1",
+    "platform": "Linux-6.18.48+-x86_64-with-glibc2.39"
+  },
+  "timing": {
+    "fit_seconds": 348.30473118400005,
+    "training_rows": 2577815,
+    "feature_width": 22,
+    "iterations": 600,
+    "row_iteration_budget": 1546689000,
+    "feature_plus_fit_seconds": 373.0981028570001,
+    "feature_seconds": 24.793371673000024,
+    "total_seconds": 384.7211209269999,
+    "peak_rss_bytes": 1009889280
+  },
+  "rows": [
+    {
+      "chemical": "1-Methyl-4-phenylpyridinium iodide",
+      "fold": 3,
+      "label": "positive",
+      "full_curve_mae": 1.2040513487773274,
+      "contexts": [
+        {
+          "context_log_concentration": [
+            -2.0,
+            -1.5228787660598755,
+            -0.5228787660598755
+          ],
+          "target_log_concentration": [
+            -1.0,
+            0.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "curve_mae": 1.3303813619014415,
+          "well_mae": 1.66976645752955,
+          "n_valid_scalar_targets": 244
+        },
+        {
+          "context_log_concentration": [
+            -2.0,
+            -1.0,
+            0.4771212637424469
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -0.5228787660598755,
+            0.0,
+            1.0
+          ],
+          "curve_mae": 1.202400284114402,
+          "well_mae": 1.5419687218495717,
+          "n_valid_scalar_targets": 244
+        },
+        {
+          "context_log_concentration": [
+            -2.0,
+            -1.5228787660598755,
+            0.4771212637424469
+          ],
+          "target_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            0.0,
+            1.0
+          ],
+          "curve_mae": 1.249752333185969,
+          "well_mae": 1.5706495942468384,
+          "n_valid_scalar_targets": 244
+        },
+        {
+          "context_log_concentration": [
+            -2.0,
+            -0.5228787660598755,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            0.0,
+            0.4771212637424469
+          ],
+          "curve_mae": 1.0456613851718373,
+          "well_mae": 1.3649286981357276,
+          "n_valid_scalar_targets": 252
+        },
+        {
+          "context_log_concentration": [
+            -2.0,
+            -1.5228787660598755,
+            0.0
+          ],
+          "target_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            0.4771212637424469,
+            1.0
+          ],
+          "curve_mae": 1.1920613795129877,
+          "well_mae": 1.5077595133495132,
+          "n_valid_scalar_targets": 244
+        }
+      ],
+      "rerun_full_curve_mae": 1.2040513487773274,
+      "historical_minus_rerun_full": 0.0
+    },
+    {
+      "chemical": "2-Ethylhexyl 2,3,4,5-tetrabromobenzoate",
+      "fold": 3,
+      "label": "unknown",
+      "full_curve_mae": 1.7495839479054023,
+      "contexts": [
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            -0.5228787660598755,
+            0.0
+          ],
+          "target_log_concentration": [
+            -1.0,
+            0.4771212637424469,
+            1.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 1.8587457232821027,
+          "well_mae": 2.512646847566206,
+          "n_valid_scalar_targets": 233
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            0.4771212637424469
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            0.0,
+            1.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 1.917815163191849,
+          "well_mae": 2.294554220135964,
+          "n_valid_scalar_targets": 241
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            0.0,
+            0.4771212637424469
+          ],
+          "target_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            1.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 1.7414815168897242,
+          "well_mae": 2.2635572669295017,
+          "n_valid_scalar_targets": 238
+        },
+        {
+          "context_log_concentration": [
+            0.0,
+            0.4771212637424469,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            -0.5228787660598755,
+            1.0
+          ],
+          "curve_mae": 1.45564171756307,
+          "well_mae": 1.9706618752223408,
+          "n_valid_scalar_targets": 265
+        },
+        {
+          "context_log_concentration": [
+            -0.5228787660598755,
+            0.0,
+            0.4771212637424469
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            1.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 1.774235618600266,
+          "well_mae": 2.2653879107621053,
+          "n_valid_scalar_targets": 236
+        }
+      ],
+      "rerun_full_curve_mae": 1.7495839479054023,
+      "historical_minus_rerun_full": 0.0
+    },
+    {
+      "chemical": "3-Iodo-2-propynyl-N-butylcarbamate",
+      "fold": 3,
+      "label": "unknown",
+      "full_curve_mae": 1.0608076727731703,
+      "contexts": [
+        {
+          "context_log_concentration": [
+            -2.0,
+            -0.5228787660598755,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            0.0,
+            0.4771212637424469,
+            1.3010300397872925
+          ],
+          "curve_mae": 0.7550297948829144,
+          "well_mae": 1.8136439016010024,
+          "n_valid_scalar_targets": 303
+        },
+        {
+          "context_log_concentration": [
+            0.0,
+            0.4771212637424469,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -2.0,
+            -1.5228787660598755,
+            -1.0,
+            -0.5228787660598755,
+            1.0
+          ],
+          "curve_mae": 0.565193843282867,
+          "well_mae": 1.4256440349134134,
+          "n_valid_scalar_targets": 308
+        },
+        {
+          "context_log_concentration": [
+            -2.0,
+            -1.5228787660598755,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            0.0,
+            0.4771212637424469,
+            1.3010300397872925
+          ],
+          "curve_mae": 1.4222895205472432,
+          "well_mae": 2.2790042242338675,
+          "n_valid_scalar_targets": 303
+        },
+        {
+          "context_log_concentration": [
+            -0.5228787660598755,
+            1.0,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -2.0,
+            -1.5228787660598755,
+            -1.0,
+            0.0,
+            0.4771212637424469
+          ],
+          "curve_mae": 0.6963388992755813,
+          "well_mae": 1.7479349366153412,
+          "n_valid_scalar_targets": 335
+        },
+        {
+          "context_log_concentration": [
+            -2.0,
+            -1.0,
+            -0.5228787660598755
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            0.0,
+            0.4771212637424469,
+            1.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 1.865186305877245,
+          "well_mae": 2.740245743896895,
+          "n_valid_scalar_targets": 271
+        }
+      ],
+      "rerun_full_curve_mae": 1.0608076727731703,
+      "historical_minus_rerun_full": 0.0
+    },
+    {
+      "chemical": "5,5-Diphenylhydantoin",
+      "fold": 3,
+      "label": "positive",
+      "full_curve_mae": 0.876070732864062,
+      "contexts": [
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            0.0,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            0.4771212637424469,
+            1.4771212339401245
+          ],
+          "curve_mae": 0.9149780984467091,
+          "well_mae": 1.3308051865021209,
+          "n_valid_scalar_targets": 254
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            -0.5228787660598755,
+            1.4771212339401245
+          ],
+          "target_log_concentration": [
+            -1.0,
+            0.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "curve_mae": 0.844551863976826,
+          "well_mae": 1.3297105330586008,
+          "n_valid_scalar_targets": 252
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            0.4771212637424469
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            0.0,
+            1.0,
+            1.4771212339401245
+          ],
+          "curve_mae": 0.9656098940625302,
+          "well_mae": 1.443827094230477,
+          "n_valid_scalar_targets": 249
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -0.5228787660598755,
+            0.0,
+            1.4771212339401245
+          ],
+          "curve_mae": 0.8355723183696289,
+          "well_mae": 1.3244605259871447,
+          "n_valid_scalar_targets": 254
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            1.4771212339401245
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            0.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "curve_mae": 0.8196414894646162,
+          "well_mae": 1.2802382797523306,
+          "n_valid_scalar_targets": 252
+        }
+      ],
+      "rerun_full_curve_mae": 0.876070732864062,
+      "historical_minus_rerun_full": 0.0
+    },
+    {
+      "chemical": "6-Methyl-2-thiouracil",
+      "fold": 3,
+      "label": "positive",
+      "full_curve_mae": 1.0450744876280411,
+      "contexts": [
+        {
+          "context_log_concentration": [
+            -0.5228787660598755,
+            0.0,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "curve_mae": 0.8561423662171722,
+          "well_mae": 1.5218299626496852,
+          "n_valid_scalar_targets": 240
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            0.4771212637424469
+          ],
+          "target_log_concentration": [
+            -0.5228787660598755,
+            0.0,
+            1.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 1.240971881495727,
+          "well_mae": 1.6593223986828187,
+          "n_valid_scalar_targets": 240
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            1.0,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            0.0,
+            0.4771212637424469
+          ],
+          "curve_mae": 1.101547592605652,
+          "well_mae": 1.5033466365026869,
+          "n_valid_scalar_targets": 240
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            -0.5228787660598755,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.0,
+            0.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "curve_mae": 0.8534723574104227,
+          "well_mae": 1.4167059216995115,
+          "n_valid_scalar_targets": 240
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            -0.5228787660598755,
+            0.0
+          ],
+          "target_log_concentration": [
+            -1.0,
+            0.4771212637424469,
+            1.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 1.1732382404112311,
+          "well_mae": 1.6537448239801409,
+          "n_valid_scalar_targets": 240
+        }
+      ],
+      "rerun_full_curve_mae": 1.0450744876280411,
+      "historical_minus_rerun_full": 0.0
+    },
+    {
+      "chemical": "Acenaphthene",
+      "fold": 3,
+      "label": "unknown",
+      "full_curve_mae": 0.8190032785887806,
+      "contexts": [
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            0.4771212637424469,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            0.0,
+            1.0
+          ],
+          "curve_mae": 0.7535189722953092,
+          "well_mae": 1.5245496495820694,
+          "n_valid_scalar_targets": 272
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            -0.5228787660598755
+          ],
+          "target_log_concentration": [
+            0.0,
+            0.4771212637424469,
+            1.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 0.9028047987415073,
+          "well_mae": 1.5057415388068607,
+          "n_valid_scalar_targets": 272
+        },
+        {
+          "context_log_concentration": [
+            -0.5228787660598755,
+            0.4771212637424469,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            0.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 0.7576083263475567,
+          "well_mae": 1.4083379373139209,
+          "n_valid_scalar_targets": 272
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -0.5228787660598755,
+            0.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 0.7772336269400683,
+          "well_mae": 1.4167346263271654,
+          "n_valid_scalar_targets": 272
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            0.0
+          ],
+          "target_log_concentration": [
+            -0.5228787660598755,
+            0.4771212637424469,
+            1.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 0.9038506686194617,
+          "well_mae": 1.4334407811717358,
+          "n_valid_scalar_targets": 272
+        }
+      ],
+      "rerun_full_curve_mae": 0.8190032785887806,
+      "historical_minus_rerun_full": 0.0
+    },
+    {
+      "chemical": "Allethrin",
+      "fold": 3,
+      "label": "positive",
+      "full_curve_mae": 1.104053343171114,
+      "contexts": [
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            -0.5228787660598755,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.0,
+            0.0,
+            0.4771212637424469,
+            1.3010300397872925
+          ],
+          "curve_mae": 0.9616670118461133,
+          "well_mae": 1.6530048295598827,
+          "n_valid_scalar_targets": 232
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            1.0
+          ],
+          "target_log_concentration": [
+            -0.5228787660598755,
+            0.0,
+            0.4771212637424469,
+            1.3010300397872925
+          ],
+          "curve_mae": 1.0051748828814862,
+          "well_mae": 1.6040270434681059,
+          "n_valid_scalar_targets": 230
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            -0.5228787660598755
+          ],
+          "target_log_concentration": [
+            0.0,
+            0.4771212637424469,
+            1.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 1.3539567651960422,
+          "well_mae": 1.8807155099416182,
+          "n_valid_scalar_targets": 230
+        },
+        {
+          "context_log_concentration": [
+            0.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            -0.5228787660598755,
+            1.3010300397872925
+          ],
+          "curve_mae": 0.899324089965708,
+          "well_mae": 1.5411242780575414,
+          "n_valid_scalar_targets": 230
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            0.0,
+            0.4771212637424469
+          ],
+          "target_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            1.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 1.3001439659662197,
+          "well_mae": 1.8352870779685124,
+          "n_valid_scalar_targets": 228
+        }
+      ],
+      "rerun_full_curve_mae": 1.104053343171114,
+      "historical_minus_rerun_full": 0.0
+    },
+    {
+      "chemical": "Anthracene",
+      "fold": 3,
+      "label": "negative",
+      "full_curve_mae": 0.8406857306327348,
+      "contexts": [
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            -0.5228787660598755,
+            0.4771212637424469
+          ],
+          "target_log_concentration": [
+            -1.0,
+            0.0,
+            1.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 0.8020575260766712,
+          "well_mae": 1.2887544324072755,
+          "n_valid_scalar_targets": 240
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            0.4771212637424469
+          ],
+          "target_log_concentration": [
+            -0.5228787660598755,
+            0.0,
+            1.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 0.8849636993894342,
+          "well_mae": 1.4632708962781018,
+          "n_valid_scalar_targets": 240
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            0.4771212637424469,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            0.0,
+            1.0
+          ],
+          "curve_mae": 0.6381527064188869,
+          "well_mae": 1.2424414546614313,
+          "n_valid_scalar_targets": 240
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            0.0,
+            0.4771212637424469,
+            1.3010300397872925
+          ],
+          "curve_mae": 0.7671599106150442,
+          "well_mae": 1.178396592011016,
+          "n_valid_scalar_targets": 240
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            0.0
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            0.4771212637424469,
+            1.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 1.1110948106636376,
+          "well_mae": 1.549769428727785,
+          "n_valid_scalar_targets": 240
+        }
+      ],
+      "rerun_full_curve_mae": 0.8406857306327348,
+      "historical_minus_rerun_full": 0.0
+    },
+    {
+      "chemical": "Benzo(b)fluoranthene",
+      "fold": 3,
+      "label": "unknown",
+      "full_curve_mae": 0.8839205052647158,
+      "contexts": [
+        {
+          "context_log_concentration": [
+            0.0,
+            1.0,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            -0.5228787660598755,
+            0.4771212637424469
+          ],
+          "curve_mae": 0.6373576862971186,
+          "well_mae": 1.220173782229948,
+          "n_valid_scalar_targets": 272
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            0.4771212637424469,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -0.5228787660598755,
+            0.0,
+            1.0
+          ],
+          "curve_mae": 0.7244677077727054,
+          "well_mae": 1.329566060813362,
+          "n_valid_scalar_targets": 272
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -0.5228787660598755,
+            0.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 0.8394807204879288,
+          "well_mae": 1.396061652643703,
+          "n_valid_scalar_targets": 265
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            0.0,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            0.4771212637424469,
+            1.0
+          ],
+          "curve_mae": 0.7038249848209772,
+          "well_mae": 1.346464593046477,
+          "n_valid_scalar_targets": 272
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            -0.5228787660598755
+          ],
+          "target_log_concentration": [
+            0.0,
+            0.4771212637424469,
+            1.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 1.5144714269448487,
+          "well_mae": 2.004305433211031,
+          "n_valid_scalar_targets": 265
+        }
+      ],
+      "rerun_full_curve_mae": 0.8839205052647158,
+      "historical_minus_rerun_full": 0.0
+    },
+    {
+      "chemical": "Carbofuran",
+      "fold": 3,
+      "label": "unknown",
+      "full_curve_mae": 1.0652089407746512,
+      "contexts": [
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            0.0,
+            0.4771212637424469
+          ],
+          "target_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            1.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 1.1007007002161093,
+          "well_mae": 2.083537809481573,
+          "n_valid_scalar_targets": 272
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            0.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "curve_mae": 0.8473289710537406,
+          "well_mae": 1.8489304901334829,
+          "n_valid_scalar_targets": 272
+        },
+        {
+          "context_log_concentration": [
+            0.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            -0.5228787660598755,
+            1.3010300397872925
+          ],
+          "curve_mae": 0.8486981635449874,
+          "well_mae": 1.7734601831193104,
+          "n_valid_scalar_targets": 272
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            0.4771212637424469
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            0.0,
+            1.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 1.1685447369629742,
+          "well_mae": 2.200743981842788,
+          "n_valid_scalar_targets": 272
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            0.0
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            0.4771212637424469,
+            1.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 1.360772132095445,
+          "well_mae": 2.268101194064084,
+          "n_valid_scalar_targets": 272
+        }
+      ],
+      "rerun_full_curve_mae": 1.0652089407746512,
+      "historical_minus_rerun_full": 0.0
+    },
+    {
+      "chemical": "Chlorendic acid",
+      "fold": 3,
+      "label": "unknown",
+      "full_curve_mae": 0.8696141853128493,
+      "contexts": [
+        {
+          "context_log_concentration": [
+            -0.5228787660598755,
+            0.0,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            0.4771212637424469,
+            1.3010300397872925
+          ],
+          "curve_mae": 0.9702129088329644,
+          "well_mae": 1.3816774157746443,
+          "n_valid_scalar_targets": 255
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            0.4771212637424469
+          ],
+          "target_log_concentration": [
+            -0.5228787660598755,
+            0.0,
+            1.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 0.7813390857016822,
+          "well_mae": 1.3302015033601509,
+          "n_valid_scalar_targets": 252
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            0.0,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -0.5228787660598755,
+            0.4771212637424469,
+            1.0
+          ],
+          "curve_mae": 0.862979485807776,
+          "well_mae": 1.316115000351917,
+          "n_valid_scalar_targets": 255
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            0.4771212637424469,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            0.0,
+            1.0
+          ],
+          "curve_mae": 0.8694113348214227,
+          "well_mae": 1.3918298472360717,
+          "n_valid_scalar_targets": 252
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            0.0,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            0.4771212637424469,
+            1.0
+          ],
+          "curve_mae": 0.8641281114004011,
+          "well_mae": 1.3656195302174032,
+          "n_valid_scalar_targets": 252
+        }
+      ],
+      "rerun_full_curve_mae": 0.8696141853128493,
+      "historical_minus_rerun_full": 0.0
+    },
+    {
+      "chemical": "Clodinafop-propargyl",
+      "fold": 3,
+      "label": "unknown",
+      "full_curve_mae": 0.6754143619696303,
+      "contexts": [
+        {
+          "context_log_concentration": [
+            -0.5228787660598755,
+            1.0,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            0.0,
+            0.4771212637424469
+          ],
+          "curve_mae": 0.6713014891000696,
+          "well_mae": 1.1604640423410024,
+          "n_valid_scalar_targets": 246
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            0.4771212637424469
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            0.0,
+            1.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 0.6814250960419004,
+          "well_mae": 1.1957324051058462,
+          "n_valid_scalar_targets": 249
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -0.5228787660598755,
+            0.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 0.6541059408272927,
+          "well_mae": 1.0940052811072118,
+          "n_valid_scalar_targets": 246
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            0.0,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -0.5228787660598755,
+            0.4771212637424469,
+            1.0
+          ],
+          "curve_mae": 0.6919554473938025,
+          "well_mae": 1.2712418149270488,
+          "n_valid_scalar_targets": 246
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            0.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "curve_mae": 0.6782838364850861,
+          "well_mae": 1.2353376914209486,
+          "n_valid_scalar_targets": 249
+        }
+      ],
+      "rerun_full_curve_mae": 0.6754143619696303,
+      "historical_minus_rerun_full": 0.0
+    },
+    {
+      "chemical": "Cocaine",
+      "fold": 3,
+      "label": "positive",
+      "full_curve_mae": 0.8713479010021444,
+      "contexts": [
+        {
+          "context_log_concentration": [
+            0.4771212637424469,
+            1.0,
+            1.4771212339401245
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            -0.5228787660598755,
+            0.0
+          ],
+          "curve_mae": 0.9119115541737616,
+          "well_mae": 1.7366561413277841,
+          "n_valid_scalar_targets": 272
+        },
+        {
+          "context_log_concentration": [
+            -0.5228787660598755,
+            0.0,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            0.4771212637424469,
+            1.4771212339401245
+          ],
+          "curve_mae": 0.896548775037342,
+          "well_mae": 1.710071243348775,
+          "n_valid_scalar_targets": 272
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            1.4771212339401245
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            0.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "curve_mae": 0.8312814887190269,
+          "well_mae": 1.6327592898637984,
+          "n_valid_scalar_targets": 272
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            0.0,
+            1.4771212339401245
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -0.5228787660598755,
+            0.4771212637424469,
+            1.0
+          ],
+          "curve_mae": 0.8882311584312574,
+          "well_mae": 1.6786871862486454,
+          "n_valid_scalar_targets": 272
+        },
+        {
+          "context_log_concentration": [
+            0.0,
+            0.4771212637424469,
+            1.4771212339401245
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            -0.5228787660598755,
+            1.0
+          ],
+          "curve_mae": 0.8287665286493349,
+          "well_mae": 1.6848215736525545,
+          "n_valid_scalar_targets": 272
+        }
+      ],
+      "rerun_full_curve_mae": 0.8713479010021444,
+      "historical_minus_rerun_full": 0.0
+    },
+    {
+      "chemical": "Colchicine",
+      "fold": 3,
+      "label": "positive",
+      "full_curve_mae": 0.9160941513953675,
+      "contexts": [
+        {
+          "context_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            0.0
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            0.4771212637424469,
+            1.0,
+            1.4771212339401245
+          ],
+          "curve_mae": 0.7797539408404124,
+          "well_mae": 0.7567834486667893,
+          "n_valid_scalar_targets": 158
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            0.0,
+            0.4771212637424469,
+            1.4771212339401245
+          ],
+          "curve_mae": 0.8149813280189072,
+          "well_mae": 0.7861998757755112,
+          "n_valid_scalar_targets": 158
+        },
+        {
+          "context_log_concentration": [
+            0.4771212637424469,
+            1.0,
+            1.4771212339401245
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            -0.5228787660598755,
+            0.0
+          ],
+          "curve_mae": 1.1587155260919317,
+          "well_mae": 1.0824988140542833,
+          "n_valid_scalar_targets": 158
+        },
+        {
+          "context_log_concentration": [
+            -0.5228787660598755,
+            0.4771212637424469,
+            1.4771212339401245
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            0.0,
+            1.0
+          ],
+          "curve_mae": 0.9672320986506577,
+          "well_mae": 0.9113820809426156,
+          "n_valid_scalar_targets": 158
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -0.5228787660598755,
+            0.0,
+            1.4771212339401245
+          ],
+          "curve_mae": 0.8597878633749289,
+          "well_mae": 0.8201861699483202,
+          "n_valid_scalar_targets": 158
+        }
+      ],
+      "rerun_full_curve_mae": 0.9160941513953675,
+      "historical_minus_rerun_full": 0.0
+    },
+    {
+      "chemical": "D-Mannitol",
+      "fold": 3,
+      "label": "negative",
+      "full_curve_mae": 0.9713520233305838,
+      "contexts": [
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            1.0,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            0.0,
+            0.4771212637424469
+          ],
+          "curve_mae": 1.0719580934123722,
+          "well_mae": 1.4863354745488728,
+          "n_valid_scalar_targets": 240
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            0.0
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            0.4771212637424469,
+            1.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 1.0183433115654157,
+          "well_mae": 1.3051388444132723,
+          "n_valid_scalar_targets": 240
+        },
+        {
+          "context_log_concentration": [
+            -0.5228787660598755,
+            0.0,
+            0.4771212637424469
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            1.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 0.9202021524252585,
+          "well_mae": 1.2573964667920683,
+          "n_valid_scalar_targets": 240
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            0.4771212637424469
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            0.0,
+            1.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 0.935891448979772,
+          "well_mae": 1.2724730240936417,
+          "n_valid_scalar_targets": 240
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            -0.5228787660598755,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.0,
+            0.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "curve_mae": 0.9103651102701006,
+          "well_mae": 1.2658990632650289,
+          "n_valid_scalar_targets": 240
+        }
+      ],
+      "rerun_full_curve_mae": 0.9713520233305838,
+      "historical_minus_rerun_full": 0.0
+    },
+    {
+      "chemical": "DDT",
+      "fold": 3,
+      "label": "positive",
+      "full_curve_mae": 1.1720833293199142,
+      "contexts": [
+        {
+          "context_log_concentration": [
+            0.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            -0.5228787660598755,
+            1.3010300397872925
+          ],
+          "curve_mae": 0.5301875286641793,
+          "well_mae": 1.4157339869536336,
+          "n_valid_scalar_targets": 225
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -0.5228787660598755,
+            0.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 0.526875787402404,
+          "well_mae": 1.4652513588418825,
+          "n_valid_scalar_targets": 225
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            0.0,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            0.4771212637424469,
+            1.3010300397872925
+          ],
+          "curve_mae": 0.6715007693233757,
+          "well_mae": 1.514665752344206,
+          "n_valid_scalar_targets": 225
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            0.4771212637424469
+          ],
+          "target_log_concentration": [
+            -0.5228787660598755,
+            0.0,
+            1.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 2.0958550728447087,
+          "well_mae": 2.7255348014582426,
+          "n_valid_scalar_targets": 214
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            0.0,
+            0.4771212637424469
+          ],
+          "target_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            1.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 2.0359974883649037,
+          "well_mae": 2.638247416442218,
+          "n_valid_scalar_targets": 214
+        }
+      ],
+      "rerun_full_curve_mae": 1.1720833293199142,
+      "historical_minus_rerun_full": 0.0
+    },
+    {
+      "chemical": "Deltamethrin",
+      "fold": 3,
+      "label": "positive",
+      "full_curve_mae": 1.4537280801249326,
+      "contexts": [
+        {
+          "context_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            1.4771212339401245
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            0.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "curve_mae": 1.562815024025252,
+          "well_mae": 2.1579434057258142,
+          "n_valid_scalar_targets": 256
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            -0.5228787660598755,
+            1.4771212339401245
+          ],
+          "target_log_concentration": [
+            -1.0,
+            0.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "curve_mae": 1.60016722869132,
+          "well_mae": 2.3273874272163866,
+          "n_valid_scalar_targets": 256
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            1.0,
+            1.4771212339401245
+          ],
+          "target_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            0.0,
+            0.4771212637424469
+          ],
+          "curve_mae": 1.3950007404280207,
+          "well_mae": 2.1909118230689306,
+          "n_valid_scalar_targets": 272
+        },
+        {
+          "context_log_concentration": [
+            -0.5228787660598755,
+            0.0,
+            0.4771212637424469
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            1.0,
+            1.4771212339401245
+          ],
+          "curve_mae": 1.1101341279125465,
+          "well_mae": 1.9039237496228552,
+          "n_valid_scalar_targets": 224
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            0.0,
+            1.4771212339401245
+          ],
+          "target_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            0.4771212637424469,
+            1.0
+          ],
+          "curve_mae": 1.6005232795675226,
+          "well_mae": 2.350488450857164,
+          "n_valid_scalar_targets": 256
+        }
+      ],
+      "rerun_full_curve_mae": 1.4537280801249326,
+      "historical_minus_rerun_full": 0.0
+    },
+    {
+      "chemical": "Dexamethasone",
+      "fold": 3,
+      "label": "positive",
+      "full_curve_mae": 0.9804723285719102,
+      "contexts": [
+        {
+          "context_log_concentration": [
+            -0.5228787660598755,
+            0.4771212637424469,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            0.0,
+            1.4771212339401245
+          ],
+          "curve_mae": 1.0062495901641126,
+          "well_mae": 1.5018396826240763,
+          "n_valid_scalar_targets": 255
+        },
+        {
+          "context_log_concentration": [
+            -0.5228787660598755,
+            1.0,
+            1.4771212339401245
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            0.0,
+            0.4771212637424469
+          ],
+          "curve_mae": 0.9593037952631022,
+          "well_mae": 1.4795280830055983,
+          "n_valid_scalar_targets": 255
+        },
+        {
+          "context_log_concentration": [
+            0.0,
+            0.4771212637424469,
+            1.4771212339401245
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            -0.5228787660598755,
+            1.0
+          ],
+          "curve_mae": 0.9911044100404257,
+          "well_mae": 1.4457051039965345,
+          "n_valid_scalar_targets": 252
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            0.4771212637424469,
+            1.4771212339401245
+          ],
+          "target_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            0.0,
+            1.0
+          ],
+          "curve_mae": 0.9856020287571774,
+          "well_mae": 1.4595924773596014,
+          "n_valid_scalar_targets": 255
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            0.0,
+            1.4771212339401245
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -0.5228787660598755,
+            0.4771212637424469,
+            1.0
+          ],
+          "curve_mae": 0.960101818634733,
+          "well_mae": 1.3630822699930767,
+          "n_valid_scalar_targets": 252
+        }
+      ],
+      "rerun_full_curve_mae": 0.9804723285719102,
+      "historical_minus_rerun_full": 0.0
+    },
+    {
+      "chemical": "Dibenz[a,c]anthracene",
+      "fold": 3,
+      "label": "unknown",
+      "full_curve_mae": 1.0115576491119165,
+      "contexts": [
+        {
+          "context_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            0.0,
+            0.4771212637424469,
+            1.3010300397872925
+          ],
+          "curve_mae": 1.0219745217706775,
+          "well_mae": 1.4579680584554209,
+          "n_valid_scalar_targets": 235
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            0.4771212637424469,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            0.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 0.8550198930897493,
+          "well_mae": 1.2728960108860774,
+          "n_valid_scalar_targets": 235
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            0.4771212637424469
+          ],
+          "target_log_concentration": [
+            -0.5228787660598755,
+            0.0,
+            1.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 1.101269353073852,
+          "well_mae": 1.6032599721023373,
+          "n_valid_scalar_targets": 230
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            -0.5228787660598755,
+            0.0
+          ],
+          "target_log_concentration": [
+            -1.0,
+            0.4771212637424469,
+            1.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 1.1029635754118114,
+          "well_mae": 1.6729695293291418,
+          "n_valid_scalar_targets": 230
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            0.0,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -0.5228787660598755,
+            0.4771212637424469,
+            1.0
+          ],
+          "curve_mae": 0.9765609022134919,
+          "well_mae": 1.4696203023572674,
+          "n_valid_scalar_targets": 235
+        }
+      ],
+      "rerun_full_curve_mae": 1.0115576491119165,
+      "historical_minus_rerun_full": 0.0
+    },
+    {
+      "chemical": "Dicrotophos",
+      "fold": 3,
+      "label": "unknown",
+      "full_curve_mae": 1.0354138870873382,
+      "contexts": [
+        {
+          "context_log_concentration": [
+            -1.0,
+            1.4771212339401245,
+            2.0
+          ],
+          "target_log_concentration": [
+            -0.5228787660598755,
+            0.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "curve_mae": 0.6634433010138227,
+          "well_mae": 1.1716305190787273,
+          "n_valid_scalar_targets": 272
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            0.4771212637424469,
+            1.4771212339401245
+          ],
+          "target_log_concentration": [
+            -0.5228787660598755,
+            0.0,
+            1.0,
+            2.0
+          ],
+          "curve_mae": 1.7068677832140027,
+          "well_mae": 2.166951396688822,
+          "n_valid_scalar_targets": 272
+        },
+        {
+          "context_log_concentration": [
+            -0.5228787660598755,
+            0.4771212637424469,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.0,
+            0.0,
+            1.4771212339401245,
+            2.0
+          ],
+          "curve_mae": 0.882182717995295,
+          "well_mae": 1.2837773108577193,
+          "n_valid_scalar_targets": 272
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            1.0
+          ],
+          "target_log_concentration": [
+            0.0,
+            0.4771212637424469,
+            1.4771212339401245,
+            2.0
+          ],
+          "curve_mae": 0.9903293217703955,
+          "well_mae": 1.4588944828282284,
+          "n_valid_scalar_targets": 272
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            0.4771212637424469,
+            2.0
+          ],
+          "target_log_concentration": [
+            -0.5228787660598755,
+            0.0,
+            1.0,
+            1.4771212339401245
+          ],
+          "curve_mae": 0.9342463114431754,
+          "well_mae": 1.3317618055541618,
+          "n_valid_scalar_targets": 272
+        }
+      ],
+      "rerun_full_curve_mae": 1.0354138870873382,
+      "historical_minus_rerun_full": 0.0
+    },
+    {
+      "chemical": "Emamectin benzoate",
+      "fold": 3,
+      "label": "unknown",
+      "full_curve_mae": 1.6164667599045444,
+      "contexts": [
+        {
+          "context_log_concentration": [
+            -2.522878646850586,
+            -1.5228787660598755,
+            -1.0
+          ],
+          "target_log_concentration": [
+            -4.0,
+            -3.522878646850586,
+            -3.0,
+            -2.0,
+            -0.5228787660598755,
+            0.0,
+            0.4771212637424469,
+            1.0,
+            1.4771212339401245
+          ],
+          "curve_mae": 1.436652663175206,
+          "well_mae": 1.644526619017599,
+          "n_valid_scalar_targets": 460
+        },
+        {
+          "context_log_concentration": [
+            -4.0,
+            -2.0,
+            -1.0
+          ],
+          "target_log_concentration": [
+            -3.522878646850586,
+            -3.0,
+            -2.522878646850586,
+            -1.5228787660598755,
+            -0.5228787660598755,
+            0.0,
+            0.4771212637424469,
+            1.0,
+            1.4771212339401245
+          ],
+          "curve_mae": 1.5695278022522583,
+          "well_mae": 2.0146230932691216,
+          "n_valid_scalar_targets": 452
+        },
+        {
+          "context_log_concentration": [
+            -0.5228787660598755,
+            0.0,
+            1.0
+          ],
+          "target_log_concentration": [
+            -4.0,
+            -3.522878646850586,
+            -3.0,
+            -2.522878646850586,
+            -2.0,
+            -1.5228787660598755,
+            -1.0,
+            0.4771212637424469,
+            1.4771212339401245
+          ],
+          "curve_mae": 2.071979864270317,
+          "well_mae": 2.5340672192135494,
+          "n_valid_scalar_targets": 532
+        },
+        {
+          "context_log_concentration": [
+            -3.0,
+            -1.0,
+            0.4771212637424469
+          ],
+          "target_log_concentration": [
+            -4.0,
+            -3.522878646850586,
+            -2.522878646850586,
+            -2.0,
+            -1.5228787660598755,
+            -0.5228787660598755,
+            0.0,
+            1.0,
+            1.4771212339401245
+          ],
+          "curve_mae": 1.2857037921377983,
+          "well_mae": 1.7251635534253726,
+          "n_valid_scalar_targets": 484
+        },
+        {
+          "context_log_concentration": [
+            -4.0,
+            -3.522878646850586,
+            1.4771212339401245
+          ],
+          "target_log_concentration": [
+            -3.0,
+            -2.522878646850586,
+            -2.0,
+            -1.5228787660598755,
+            -1.0,
+            -0.5228787660598755,
+            0.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "curve_mae": 1.7184696776871418,
+          "well_mae": 2.377430086456234,
+          "n_valid_scalar_targets": 476
+        }
+      ],
+      "rerun_full_curve_mae": 1.6164667599045444,
+      "historical_minus_rerun_full": 0.0
+    },
+    {
+      "chemical": "Es-fenvalerate",
+      "fold": 3,
+      "label": "unknown",
+      "full_curve_mae": 1.0048754847231387,
+      "contexts": [
+        {
+          "context_log_concentration": [
+            -1.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -0.5228787660598755,
+            0.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 0.8085939859012469,
+          "well_mae": 1.2033621092161964,
+          "n_valid_scalar_targets": 211
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            0.0,
+            0.4771212637424469
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -0.5228787660598755,
+            1.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 0.8948915542601525,
+          "well_mae": 1.2226090708248845,
+          "n_valid_scalar_targets": 203
+        },
+        {
+          "context_log_concentration": [
+            -0.5228787660598755,
+            1.0,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            0.0,
+            0.4771212637424469
+          ],
+          "curve_mae": 1.0774066219202578,
+          "well_mae": 1.4695315804764222,
+          "n_valid_scalar_targets": 230
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            0.0,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            0.4771212637424469,
+            1.0
+          ],
+          "curve_mae": 1.1387939947365184,
+          "well_mae": 1.471910479953687,
+          "n_valid_scalar_targets": 222
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            0.0,
+            0.4771212637424469,
+            1.3010300397872925
+          ],
+          "curve_mae": 1.1046912667975173,
+          "well_mae": 1.4421001270260982,
+          "n_valid_scalar_targets": 206
+        }
+      ],
+      "rerun_full_curve_mae": 1.0048754847231387,
+      "historical_minus_rerun_full": 0.0
+    },
+    {
+      "chemical": "Esketamine hydrochloride",
+      "fold": 3,
+      "label": "unknown",
+      "full_curve_mae": 1.121838696117847,
+      "contexts": [
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            0.4771212637424469
+          ],
+          "target_log_concentration": [
+            -0.5228787660598755,
+            0.0,
+            1.0,
+            1.4771212339401245
+          ],
+          "curve_mae": 1.176929332554319,
+          "well_mae": 1.5196181712411694,
+          "n_valid_scalar_targets": 256
+        },
+        {
+          "context_log_concentration": [
+            -0.5228787660598755,
+            1.0,
+            1.4771212339401245
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            0.0,
+            0.4771212637424469
+          ],
+          "curve_mae": 1.0489558149654448,
+          "well_mae": 1.4998610642348864,
+          "n_valid_scalar_targets": 267
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            0.0,
+            0.4771212637424469,
+            1.4771212339401245
+          ],
+          "curve_mae": 0.9399575246611318,
+          "well_mae": 1.3889776832385223,
+          "n_valid_scalar_targets": 264
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            0.0,
+            0.4771212637424469
+          ],
+          "target_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            1.0,
+            1.4771212339401245
+          ],
+          "curve_mae": 1.333449084581753,
+          "well_mae": 1.7816056396691307,
+          "n_valid_scalar_targets": 251
+        },
+        {
+          "context_log_concentration": [
+            -0.5228787660598755,
+            0.0,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            0.4771212637424469,
+            1.4771212339401245
+          ],
+          "curve_mae": 1.1099017238265865,
+          "well_mae": 1.6448590496725806,
+          "n_valid_scalar_targets": 259
+        }
+      ],
+      "rerun_full_curve_mae": 1.121838696117847,
+      "historical_minus_rerun_full": 0.0
+    },
+    {
+      "chemical": "Etofenprox",
+      "fold": 3,
+      "label": "unknown",
+      "full_curve_mae": 1.0678440925653194,
+      "contexts": [
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            0.4771212637424469,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            0.0,
+            1.0
+          ],
+          "curve_mae": 0.8996904855304743,
+          "well_mae": 1.452528532688121,
+          "n_valid_scalar_targets": 235
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            0.0,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -0.5228787660598755,
+            0.4771212637424469,
+            1.3010300397872925
+          ],
+          "curve_mae": 0.9679216139014089,
+          "well_mae": 1.488165401268003,
+          "n_valid_scalar_targets": 211
+        },
+        {
+          "context_log_concentration": [
+            0.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            -0.5228787660598755,
+            1.3010300397872925
+          ],
+          "curve_mae": 0.9346438348180065,
+          "well_mae": 1.3873925255053539,
+          "n_valid_scalar_targets": 216
+        },
+        {
+          "context_log_concentration": [
+            -0.5228787660598755,
+            0.0,
+            0.4771212637424469
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            1.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 1.299309578869069,
+          "well_mae": 1.747367105968386,
+          "n_valid_scalar_targets": 211
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            0.0,
+            0.4771212637424469
+          ],
+          "target_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            1.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 1.2376549497076381,
+          "well_mae": 1.7231131745114183,
+          "n_valid_scalar_targets": 211
+        }
+      ],
+      "rerun_full_curve_mae": 1.0678440925653194,
+      "historical_minus_rerun_full": 0.0
+    },
+    {
+      "chemical": "Fenpropathrin",
+      "fold": 3,
+      "label": "unknown",
+      "full_curve_mae": 1.0744852963568905,
+      "contexts": [
+        {
+          "context_log_concentration": [
+            0.0,
+            1.0,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            -0.5228787660598755,
+            0.4771212637424469
+          ],
+          "curve_mae": 0.8159073814352487,
+          "well_mae": 1.277586000456496,
+          "n_valid_scalar_targets": 240
+        },
+        {
+          "context_log_concentration": [
+            -0.5228787660598755,
+            1.0,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            0.0,
+            0.4771212637424469
+          ],
+          "curve_mae": 0.8317041007763105,
+          "well_mae": 1.3100856490974904,
+          "n_valid_scalar_targets": 240
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            0.4771212637424469
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            0.0,
+            1.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 1.5605534392936746,
+          "well_mae": 1.9035986366558246,
+          "n_valid_scalar_targets": 211
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            0.4771212637424469,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -0.5228787660598755,
+            0.0,
+            1.0
+          ],
+          "curve_mae": 1.207099645493018,
+          "well_mae": 1.5651475166968032,
+          "n_valid_scalar_targets": 235
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            0.0,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -0.5228787660598755,
+            0.4771212637424469,
+            1.3010300397872925
+          ],
+          "curve_mae": 0.9571619147862009,
+          "well_mae": 1.2773749143607753,
+          "n_valid_scalar_targets": 216
+        }
+      ],
+      "rerun_full_curve_mae": 1.0744852963568905,
+      "historical_minus_rerun_full": 0.0
+    },
+    {
+      "chemical": "Firemaster 550",
+      "fold": 3,
+      "label": "unknown",
+      "full_curve_mae": 1.0562583241004304,
+      "contexts": [
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            0.0,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            0.4771212637424469,
+            1.0
+          ],
+          "curve_mae": 0.8961748074395366,
+          "well_mae": 1.4708096971846403,
+          "n_valid_scalar_targets": 267
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            0.4771212637424469,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            0.0,
+            1.0
+          ],
+          "curve_mae": 1.065626583319188,
+          "well_mae": 1.5804450712936546,
+          "n_valid_scalar_targets": 267
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -0.5228787660598755,
+            0.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 1.1537599679301898,
+          "well_mae": 1.6755870549762644,
+          "n_valid_scalar_targets": 267
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            0.4771212637424469
+          ],
+          "target_log_concentration": [
+            -0.5228787660598755,
+            0.0,
+            1.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 1.2211484485754678,
+          "well_mae": 1.735646113821719,
+          "n_valid_scalar_targets": 262
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            0.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "curve_mae": 0.9445818132377704,
+          "well_mae": 1.4048904547975785,
+          "n_valid_scalar_targets": 267
+        }
+      ],
+      "rerun_full_curve_mae": 1.0562583241004304,
+      "historical_minus_rerun_full": 0.0
+    },
+    {
+      "chemical": "Folic acid",
+      "fold": 3,
+      "label": "unknown",
+      "full_curve_mae": 1.1413098591421285,
+      "contexts": [
+        {
+          "context_log_concentration": [
+            -1.0,
+            1.0,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -0.5228787660598755,
+            0.0,
+            0.4771212637424469
+          ],
+          "curve_mae": 1.1718191467046624,
+          "well_mae": 1.7412918989589308,
+          "n_valid_scalar_targets": 230
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            1.0
+          ],
+          "target_log_concentration": [
+            -0.5228787660598755,
+            0.0,
+            0.4771212637424469,
+            1.3010300397872925
+          ],
+          "curve_mae": 1.1274118907609123,
+          "well_mae": 1.756123506190638,
+          "n_valid_scalar_targets": 225
+        },
+        {
+          "context_log_concentration": [
+            -0.5228787660598755,
+            0.0,
+            0.4771212637424469
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            1.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 1.3204179490228019,
+          "well_mae": 1.808655870148395,
+          "n_valid_scalar_targets": 225
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            1.0,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            0.0,
+            0.4771212637424469
+          ],
+          "curve_mae": 1.0017490108248883,
+          "well_mae": 1.6016916629192857,
+          "n_valid_scalar_targets": 225
+        },
+        {
+          "context_log_concentration": [
+            -0.5228787660598755,
+            1.0,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            0.0,
+            0.4771212637424469
+          ],
+          "curve_mae": 1.0851512983973772,
+          "well_mae": 1.644701016482692,
+          "n_valid_scalar_targets": 230
+        }
+      ],
+      "rerun_full_curve_mae": 1.1413098591421285,
+      "historical_minus_rerun_full": 0.0
+    },
+    {
+      "chemical": "Haloperidol",
+      "fold": 3,
+      "label": "positive",
+      "full_curve_mae": 1.571209375781603,
+      "contexts": [
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            1.4771212339401245
+          ],
+          "target_log_concentration": [
+            -0.5228787660598755,
+            0.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "curve_mae": 1.3853980496499945,
+          "well_mae": 1.896156659927204,
+          "n_valid_scalar_targets": 211
+        },
+        {
+          "context_log_concentration": [
+            -0.5228787660598755,
+            0.0,
+            0.4771212637424469
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            1.0,
+            1.4771212339401245
+          ],
+          "curve_mae": 1.18569762357406,
+          "well_mae": 1.5820707799766858,
+          "n_valid_scalar_targets": 198
+        },
+        {
+          "context_log_concentration": [
+            0.4771212637424469,
+            1.0,
+            1.4771212339401245
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            -0.5228787660598755,
+            0.0
+          ],
+          "curve_mae": 1.5715023720423102,
+          "well_mae": 1.9445129450977066,
+          "n_valid_scalar_targets": 249
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            -0.5228787660598755
+          ],
+          "target_log_concentration": [
+            0.0,
+            0.4771212637424469,
+            1.0,
+            1.4771212339401245
+          ],
+          "curve_mae": 2.3625025183143618,
+          "well_mae": 2.8163054975254336,
+          "n_valid_scalar_targets": 184
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            0.4771212637424469
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            0.0,
+            1.0,
+            1.4771212339401245
+          ],
+          "curve_mae": 1.3509463153272894,
+          "well_mae": 1.7741254421945387,
+          "n_valid_scalar_targets": 195
+        }
+      ],
+      "rerun_full_curve_mae": 1.571209375781603,
+      "historical_minus_rerun_full": 0.0
+    },
+    {
+      "chemical": "Hexachlorophene",
+      "fold": 3,
+      "label": "positive",
+      "full_curve_mae": 1.536967908476034,
+      "contexts": [
+        {
+          "context_log_concentration": [
+            -2.0,
+            -0.5228787660598755,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            0.0,
+            0.4771212637424469,
+            1.0,
+            1.4771212339401245
+          ],
+          "curve_mae": 1.8256050364014185,
+          "well_mae": 2.3912862519075504,
+          "n_valid_scalar_targets": 315
+        },
+        {
+          "context_log_concentration": [
+            0.4771212637424469,
+            1.0,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -2.0,
+            -1.5228787660598755,
+            -1.0,
+            -0.5228787660598755,
+            0.0,
+            1.4771212339401245
+          ],
+          "curve_mae": 1.7826521978562226,
+          "well_mae": 2.451107005883338,
+          "n_valid_scalar_targets": 366
+        },
+        {
+          "context_log_concentration": [
+            1.0,
+            1.3010300397872925,
+            1.4771212339401245
+          ],
+          "target_log_concentration": [
+            -2.0,
+            -1.5228787660598755,
+            -1.0,
+            -0.5228787660598755,
+            0.0,
+            0.4771212637424469
+          ],
+          "curve_mae": 1.771770858225474,
+          "well_mae": 2.51863897075418,
+          "n_valid_scalar_targets": 374
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "target_log_concentration": [
+            -2.0,
+            -1.5228787660598755,
+            -0.5228787660598755,
+            0.0,
+            1.3010300397872925,
+            1.4771212339401245
+          ],
+          "curve_mae": 1.1799402298104267,
+          "well_mae": 1.8407568391758635,
+          "n_valid_scalar_targets": 334
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            0.0,
+            0.4771212637424469
+          ],
+          "target_log_concentration": [
+            -2.0,
+            -1.0,
+            -0.5228787660598755,
+            1.0,
+            1.3010300397872925,
+            1.4771212339401245
+          ],
+          "curve_mae": 1.1248712200866273,
+          "well_mae": 1.7391927279468902,
+          "n_valid_scalar_targets": 307
+        }
+      ],
+      "rerun_full_curve_mae": 1.536967908476034,
+      "historical_minus_rerun_full": 0.0
+    },
+    {
+      "chemical": "Lead(II) acetate trihydrate",
+      "fold": 3,
+      "label": "positive",
+      "full_curve_mae": 1.8135805633610134,
+      "contexts": [
+        {
+          "context_log_concentration": [
+            -0.5228787660598755,
+            0.4771212637424469,
+            1.4771212339401245
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            0.0,
+            1.0
+          ],
+          "curve_mae": 1.0369920425804524,
+          "well_mae": 1.599094322873879,
+          "n_valid_scalar_targets": 267
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            0.4771212637424469
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            0.0,
+            1.0,
+            1.4771212339401245
+          ],
+          "curve_mae": 1.9481778435123547,
+          "well_mae": 2.3510130286099677,
+          "n_valid_scalar_targets": 241
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            -0.5228787660598755,
+            0.0
+          ],
+          "target_log_concentration": [
+            -1.0,
+            0.4771212637424469,
+            1.0,
+            1.4771212339401245
+          ],
+          "curve_mae": 2.0899051817495815,
+          "well_mae": 2.4669298590783035,
+          "n_valid_scalar_targets": 241
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            0.4771212637424469
+          ],
+          "target_log_concentration": [
+            -0.5228787660598755,
+            0.0,
+            1.0,
+            1.4771212339401245
+          ],
+          "curve_mae": 2.0136458059456386,
+          "well_mae": 2.56899924116578,
+          "n_valid_scalar_targets": 241
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            0.0,
+            0.4771212637424469
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -0.5228787660598755,
+            1.0,
+            1.4771212339401245
+          ],
+          "curve_mae": 1.9791819430170396,
+          "well_mae": 2.4311581685694277,
+          "n_valid_scalar_targets": 241
+        }
+      ],
+      "rerun_full_curve_mae": 1.8135805633610134,
+      "historical_minus_rerun_full": 0.0
+    },
+    {
+      "chemical": "Malathion",
+      "fold": 3,
+      "label": "unknown",
+      "full_curve_mae": 1.181131539023776,
+      "contexts": [
+        {
+          "context_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            1.4771212339401245
+          ],
+          "target_log_concentration": [
+            0.0,
+            0.4771212637424469,
+            1.0,
+            2.0
+          ],
+          "curve_mae": 1.0125030764803435,
+          "well_mae": 1.4608526911864237,
+          "n_valid_scalar_targets": 222
+        },
+        {
+          "context_log_concentration": [
+            0.0,
+            0.4771212637424469,
+            2.0
+          ],
+          "target_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            1.0,
+            1.4771212339401245
+          ],
+          "curve_mae": 0.8917354345475441,
+          "well_mae": 1.307431455012175,
+          "n_valid_scalar_targets": 219
+        },
+        {
+          "context_log_concentration": [
+            -0.5228787660598755,
+            0.4771212637424469,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.0,
+            0.0,
+            1.4771212339401245,
+            2.0
+          ],
+          "curve_mae": 1.3307538960536356,
+          "well_mae": 1.83592417195682,
+          "n_valid_scalar_targets": 201
+        },
+        {
+          "context_log_concentration": [
+            -0.5228787660598755,
+            1.0,
+            2.0
+          ],
+          "target_log_concentration": [
+            -1.0,
+            0.0,
+            0.4771212637424469,
+            1.4771212339401245
+          ],
+          "curve_mae": 0.7641316038812871,
+          "well_mae": 1.265199381837437,
+          "n_valid_scalar_targets": 219
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            0.0,
+            0.4771212637424469
+          ],
+          "target_log_concentration": [
+            -0.5228787660598755,
+            1.0,
+            1.4771212339401245,
+            2.0
+          ],
+          "curve_mae": 1.9065336841560692,
+          "well_mae": 2.2848710890263724,
+          "n_valid_scalar_targets": 201
+        }
+      ],
+      "rerun_full_curve_mae": 1.181131539023776,
+      "historical_minus_rerun_full": 0.0
+    },
+    {
+      "chemical": "Mancozeb",
+      "fold": 3,
+      "label": "unknown",
+      "full_curve_mae": 0.7056759775452529,
+      "contexts": [
+        {
+          "context_log_concentration": [
+            0.4771212637424469,
+            1.0,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            -0.5228787660598755,
+            0.0
+          ],
+          "curve_mae": 0.6140842019512567,
+          "well_mae": 1.3917355860278535,
+          "n_valid_scalar_targets": 272
+        },
+        {
+          "context_log_concentration": [
+            -0.5228787660598755,
+            0.0,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            0.4771212637424469,
+            1.3010300397872925
+          ],
+          "curve_mae": 0.697541860121261,
+          "well_mae": 1.3996614645155054,
+          "n_valid_scalar_targets": 267
+        },
+        {
+          "context_log_concentration": [
+            -0.5228787660598755,
+            1.0,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            0.0,
+            0.4771212637424469
+          ],
+          "curve_mae": 0.7717396807482022,
+          "well_mae": 1.4508469311984835,
+          "n_valid_scalar_targets": 272
+        },
+        {
+          "context_log_concentration": [
+            -0.5228787660598755,
+            0.0,
+            0.4771212637424469
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            1.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 0.7726610524797866,
+          "well_mae": 1.4927077441042016,
+          "n_valid_scalar_targets": 267
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -0.5228787660598755,
+            0.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "curve_mae": 0.6723530924257578,
+          "well_mae": 1.426844817246497,
+          "n_valid_scalar_targets": 272
+        }
+      ],
+      "rerun_full_curve_mae": 0.7056759775452529,
+      "historical_minus_rerun_full": 0.0
+    },
+    {
+      "chemical": "Manganese(II) acetate",
+      "fold": 3,
+      "label": "positive",
+      "full_curve_mae": 0.7738103347299551,
+      "contexts": [
+        {
+          "context_log_concentration": [
+            -1.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -0.5228787660598755,
+            0.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 0.7363706144061949,
+          "well_mae": 1.1947906259928085,
+          "n_valid_scalar_targets": 252
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            0.4771212637424469,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            0.0,
+            1.0
+          ],
+          "curve_mae": 0.7185738552191357,
+          "well_mae": 1.1501396362193719,
+          "n_valid_scalar_targets": 252
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            0.0,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -0.5228787660598755,
+            0.4771212637424469,
+            1.3010300397872925
+          ],
+          "curve_mae": 0.7747549391210256,
+          "well_mae": 1.173398741752473,
+          "n_valid_scalar_targets": 252
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            0.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "curve_mae": 0.8235006913253035,
+          "well_mae": 1.2596596177285522,
+          "n_valid_scalar_targets": 252
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            0.0
+          ],
+          "target_log_concentration": [
+            -0.5228787660598755,
+            0.4771212637424469,
+            1.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 0.8158515735781159,
+          "well_mae": 1.2115542150959377,
+          "n_valid_scalar_targets": 252
+        }
+      ],
+      "rerun_full_curve_mae": 0.7738103347299551,
+      "historical_minus_rerun_full": 0.0
+    },
+    {
+      "chemical": "Naloxone hydrochloride dihydrate",
+      "fold": 3,
+      "label": "positive",
+      "full_curve_mae": 0.9818979111229786,
+      "contexts": [
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            0.0,
+            1.4771212339401245
+          ],
+          "target_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            0.4771212637424469,
+            1.0
+          ],
+          "curve_mae": 0.9123203437784778,
+          "well_mae": 1.3244490068833532,
+          "n_valid_scalar_targets": 249
+        },
+        {
+          "context_log_concentration": [
+            -0.5228787660598755,
+            0.0,
+            0.4771212637424469
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            1.0,
+            1.4771212339401245
+          ],
+          "curve_mae": 0.9700711915439324,
+          "well_mae": 1.3119406805472245,
+          "n_valid_scalar_targets": 249
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            0.4771212637424469,
+            1.4771212339401245
+          ],
+          "target_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            0.0,
+            1.0
+          ],
+          "curve_mae": 0.9225434915180725,
+          "well_mae": 1.2172808247320823,
+          "n_valid_scalar_targets": 246
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            0.0
+          ],
+          "target_log_concentration": [
+            -0.5228787660598755,
+            0.4771212637424469,
+            1.0,
+            1.4771212339401245
+          ],
+          "curve_mae": 1.0844076477496103,
+          "well_mae": 1.473977726351939,
+          "n_valid_scalar_targets": 252
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            1.4771212339401245
+          ],
+          "target_log_concentration": [
+            -0.5228787660598755,
+            0.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "curve_mae": 1.0201468810248,
+          "well_mae": 1.4070944007107338,
+          "n_valid_scalar_targets": 249
+        }
+      ],
+      "rerun_full_curve_mae": 0.9818979111229786,
+      "historical_minus_rerun_full": 0.0
+    },
+    {
+      "chemical": "Phenol",
+      "fold": 3,
+      "label": "negative",
+      "full_curve_mae": 0.9985813313156292,
+      "contexts": [
+        {
+          "context_log_concentration": [
+            -1.0,
+            0.0,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -0.5228787660598755,
+            0.4771212637424469,
+            1.4771212339401245
+          ],
+          "curve_mae": 0.9810780507041023,
+          "well_mae": 1.4325626373476075,
+          "n_valid_scalar_targets": 246
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            0.0,
+            1.4771212339401245
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -0.5228787660598755,
+            0.4771212637424469,
+            1.0
+          ],
+          "curve_mae": 0.9642997102494543,
+          "well_mae": 1.43645986816517,
+          "n_valid_scalar_targets": 246
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -0.5228787660598755,
+            0.0,
+            1.4771212339401245
+          ],
+          "curve_mae": 0.9751235872572298,
+          "well_mae": 1.4596606064723294,
+          "n_valid_scalar_targets": 246
+        },
+        {
+          "context_log_concentration": [
+            -0.5228787660598755,
+            0.0,
+            0.4771212637424469
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            1.0,
+            1.4771212339401245
+          ],
+          "curve_mae": 1.121928028165428,
+          "well_mae": 1.5132622444634358,
+          "n_valid_scalar_targets": 246
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            -0.5228787660598755,
+            1.4771212339401245
+          ],
+          "target_log_concentration": [
+            -1.0,
+            0.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "curve_mae": 0.9504772802019321,
+          "well_mae": 1.3905912045100968,
+          "n_valid_scalar_targets": 243
+        }
+      ],
+      "rerun_full_curve_mae": 0.9985813313156292,
+      "historical_minus_rerun_full": 0.0
+    },
+    {
+      "chemical": "Phorate",
+      "fold": 3,
+      "label": "unknown",
+      "full_curve_mae": 1.205628568780287,
+      "contexts": [
+        {
+          "context_log_concentration": [
+            0.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            1.4771212339401245,
+            2.0
+          ],
+          "curve_mae": 1.0843996531464815,
+          "well_mae": 1.5324275204675568,
+          "n_valid_scalar_targets": 235
+        },
+        {
+          "context_log_concentration": [
+            -0.5228787660598755,
+            1.0,
+            2.0
+          ],
+          "target_log_concentration": [
+            -1.0,
+            0.0,
+            0.4771212637424469,
+            1.4771212339401245
+          ],
+          "curve_mae": 0.9342067638515552,
+          "well_mae": 1.3788907017961676,
+          "n_valid_scalar_targets": 267
+        },
+        {
+          "context_log_concentration": [
+            0.0,
+            1.0,
+            1.4771212339401245
+          ],
+          "target_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            0.4771212637424469,
+            2.0
+          ],
+          "curve_mae": 1.3861036341071993,
+          "well_mae": 1.7172322718846111,
+          "n_valid_scalar_targets": 240
+        },
+        {
+          "context_log_concentration": [
+            0.4771212637424469,
+            1.0,
+            2.0
+          ],
+          "target_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            0.0,
+            1.4771212339401245
+          ],
+          "curve_mae": 1.1914148100253603,
+          "well_mae": 1.5316045767613982,
+          "n_valid_scalar_targets": 267
+        },
+        {
+          "context_log_concentration": [
+            0.0,
+            0.4771212637424469,
+            1.4771212339401245
+          ],
+          "target_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            1.0,
+            2.0
+          ],
+          "curve_mae": 1.4320179827708386,
+          "well_mae": 1.8859741338159706,
+          "n_valid_scalar_targets": 240
+        }
+      ],
+      "rerun_full_curve_mae": 1.205628568780287,
+      "historical_minus_rerun_full": 0.0
+    },
+    {
+      "chemical": "Piperonyl butoxide",
+      "fold": 3,
+      "label": "unknown",
+      "full_curve_mae": 1.1735384092378276,
+      "contexts": [
+        {
+          "context_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            0.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "curve_mae": 1.009508292745037,
+          "well_mae": 1.7560213460311145,
+          "n_valid_scalar_targets": 220
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            0.4771212637424469,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            0.0,
+            1.0
+          ],
+          "curve_mae": 1.142479395888185,
+          "well_mae": 1.681593264931424,
+          "n_valid_scalar_targets": 228
+        },
+        {
+          "context_log_concentration": [
+            0.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            -0.5228787660598755,
+            1.3010300397872925
+          ],
+          "curve_mae": 1.5120646022203135,
+          "well_mae": 2.0104906897180115,
+          "n_valid_scalar_targets": 220
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            -0.5228787660598755,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.0,
+            0.0,
+            0.4771212637424469,
+            1.3010300397872925
+          ],
+          "curve_mae": 1.1430418220868146,
+          "well_mae": 1.7999406378971048,
+          "n_valid_scalar_targets": 215
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            0.0,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            0.4771212637424469,
+            1.0
+          ],
+          "curve_mae": 1.0605979332487878,
+          "well_mae": 1.559767882571994,
+          "n_valid_scalar_targets": 228
+        }
+      ],
+      "rerun_full_curve_mae": 1.1735384092378276,
+      "historical_minus_rerun_full": 0.0
+    },
+    {
+      "chemical": "Profenofos",
+      "fold": 3,
+      "label": "unknown",
+      "full_curve_mae": 1.1403705927404653,
+      "contexts": [
+        {
+          "context_log_concentration": [
+            -2.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            -0.5228787660598755,
+            0.0
+          ],
+          "curve_mae": 1.186930471944556,
+          "well_mae": 1.9922847569053375,
+          "n_valid_scalar_targets": 257
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            0.0
+          ],
+          "target_log_concentration": [
+            -2.0,
+            -0.5228787660598755,
+            0.4771212637424469,
+            1.0
+          ],
+          "curve_mae": 1.317987884398298,
+          "well_mae": 1.8445629026486137,
+          "n_valid_scalar_targets": 257
+        },
+        {
+          "context_log_concentration": [
+            -0.5228787660598755,
+            0.0,
+            1.0
+          ],
+          "target_log_concentration": [
+            -2.0,
+            -1.5228787660598755,
+            -1.0,
+            0.4771212637424469
+          ],
+          "curve_mae": 1.0722027614575411,
+          "well_mae": 1.7160775103854775,
+          "n_valid_scalar_targets": 252
+        },
+        {
+          "context_log_concentration": [
+            -2.0,
+            -0.5228787660598755,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            0.0,
+            0.4771212637424469
+          ],
+          "curve_mae": 1.1018948383515554,
+          "well_mae": 1.8433830836201124,
+          "n_valid_scalar_targets": 257
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            -0.5228787660598755,
+            0.4771212637424469
+          ],
+          "target_log_concentration": [
+            -2.0,
+            -1.0,
+            0.0,
+            1.0
+          ],
+          "curve_mae": 1.0228370075503765,
+          "well_mae": 1.6738214158128637,
+          "n_valid_scalar_targets": 262
+        }
+      ],
+      "rerun_full_curve_mae": 1.1403705927404653,
+      "historical_minus_rerun_full": 0.0
+    },
+    {
+      "chemical": "Pyrene",
+      "fold": 3,
+      "label": "unknown",
+      "full_curve_mae": 0.6426320627348643,
+      "contexts": [
+        {
+          "context_log_concentration": [
+            -0.5228787660598755,
+            0.0,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "curve_mae": 0.6371531811804315,
+          "well_mae": 1.4272514315541032,
+          "n_valid_scalar_targets": 240
+        },
+        {
+          "context_log_concentration": [
+            0.0,
+            1.0,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            -0.5228787660598755,
+            0.4771212637424469
+          ],
+          "curve_mae": 0.6757485239895633,
+          "well_mae": 1.3969946793669326,
+          "n_valid_scalar_targets": 240
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            0.0,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            0.4771212637424469,
+            1.3010300397872925
+          ],
+          "curve_mae": 0.6654501393004669,
+          "well_mae": 1.4310624617501808,
+          "n_valid_scalar_targets": 240
+        },
+        {
+          "context_log_concentration": [
+            -0.5228787660598755,
+            0.4771212637424469,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            0.0,
+            1.0
+          ],
+          "curve_mae": 0.6293860140924029,
+          "well_mae": 1.4588423520558504,
+          "n_valid_scalar_targets": 240
+        },
+        {
+          "context_log_concentration": [
+            -0.5228787660598755,
+            0.4771212637424469,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            0.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 0.6054224551114565,
+          "well_mae": 1.4249794271435259,
+          "n_valid_scalar_targets": 240
+        }
+      ],
+      "rerun_full_curve_mae": 0.6426320627348643,
+      "historical_minus_rerun_full": 0.0
+    },
+    {
+      "chemical": "S-Bioallethrin",
+      "fold": 3,
+      "label": "unknown",
+      "full_curve_mae": 1.1335759495585367,
+      "contexts": [
+        {
+          "context_log_concentration": [
+            -0.5228787660598755,
+            0.0,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            0.4771212637424469,
+            1.3010300397872925
+          ],
+          "curve_mae": 1.1273919191482216,
+          "well_mae": 1.4720658269383944,
+          "n_valid_scalar_targets": 232
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            -0.5228787660598755,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.0,
+            0.0,
+            0.4771212637424469,
+            1.3010300397872925
+          ],
+          "curve_mae": 1.1036659627593342,
+          "well_mae": 1.475694810192963,
+          "n_valid_scalar_targets": 232
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            0.0
+          ],
+          "target_log_concentration": [
+            -0.5228787660598755,
+            0.4771212637424469,
+            1.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 1.2830272845204165,
+          "well_mae": 1.7227538682022074,
+          "n_valid_scalar_targets": 232
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            0.0
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            0.4771212637424469,
+            1.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 1.3292395649592967,
+          "well_mae": 1.7120713824974327,
+          "n_valid_scalar_targets": 232
+        },
+        {
+          "context_log_concentration": [
+            0.0,
+            1.0,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            -0.5228787660598755,
+            0.4771212637424469
+          ],
+          "curve_mae": 0.8245550164054137,
+          "well_mae": 1.2365247164179995,
+          "n_valid_scalar_targets": 240
+        }
+      ],
+      "rerun_full_curve_mae": 1.1335759495585367,
+      "historical_minus_rerun_full": 0.0
+    },
+    {
+      "chemical": "Simvastatin",
+      "fold": 3,
+      "label": "unknown",
+      "full_curve_mae": 1.7297583835019097,
+      "contexts": [
+        {
+          "context_log_concentration": [
+            -2.0,
+            -1.5228787660598755,
+            -0.5228787660598755
+          ],
+          "target_log_concentration": [
+            -2.522878646850586,
+            -1.0,
+            0.0,
+            0.4771212637424469,
+            1.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 1.5803823711117895,
+          "well_mae": 2.580698734194867,
+          "n_valid_scalar_targets": 292
+        },
+        {
+          "context_log_concentration": [
+            -2.522878646850586,
+            -2.0,
+            0.4771212637424469
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            -0.5228787660598755,
+            0.0,
+            1.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 2.8252644653338317,
+          "well_mae": 3.7397325954091483,
+          "n_valid_scalar_targets": 321
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            1.0,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -2.522878646850586,
+            -2.0,
+            -1.0,
+            -0.5228787660598755,
+            0.0,
+            0.4771212637424469
+          ],
+          "curve_mae": 1.5280039992680718,
+          "well_mae": 2.761467256414636,
+          "n_valid_scalar_targets": 338
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            -0.5228787660598755,
+            1.0
+          ],
+          "target_log_concentration": [
+            -2.522878646850586,
+            -2.0,
+            -1.0,
+            0.0,
+            0.4771212637424469,
+            1.3010300397872925
+          ],
+          "curve_mae": 1.3099993710289706,
+          "well_mae": 2.402433239331874,
+          "n_valid_scalar_targets": 311
+        },
+        {
+          "context_log_concentration": [
+            -2.0,
+            -1.5228787660598755,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -2.522878646850586,
+            -1.0,
+            -0.5228787660598755,
+            0.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "curve_mae": 1.4051417107668844,
+          "well_mae": 2.6968386292785955,
+          "n_valid_scalar_targets": 319
+        }
+      ],
+      "rerun_full_curve_mae": 1.7297583835019097,
+      "historical_minus_rerun_full": 0.0
+    },
+    {
+      "chemical": "Sodium fluoride",
+      "fold": 3,
+      "label": "positive",
+      "full_curve_mae": 0.836169186508665,
+      "contexts": [
+        {
+          "context_log_concentration": [
+            -0.5228787660598755,
+            0.4771212637424469,
+            1.4771212339401245
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            0.0,
+            1.0
+          ],
+          "curve_mae": 0.8541840542685362,
+          "well_mae": 1.2689069268072404,
+          "n_valid_scalar_targets": 272
+        },
+        {
+          "context_log_concentration": [
+            -0.5228787660598755,
+            1.0,
+            1.4771212339401245
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            0.0,
+            0.4771212637424469
+          ],
+          "curve_mae": 0.7746411767706147,
+          "well_mae": 1.2609529461804627,
+          "n_valid_scalar_targets": 272
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            0.0
+          ],
+          "target_log_concentration": [
+            -0.5228787660598755,
+            0.4771212637424469,
+            1.0,
+            1.4771212339401245
+          ],
+          "curve_mae": 0.8241490117517528,
+          "well_mae": 1.4564859730474484,
+          "n_valid_scalar_targets": 272
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            1.4771212339401245
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            0.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "curve_mae": 0.913018469047375,
+          "well_mae": 1.3508317754898576,
+          "n_valid_scalar_targets": 272
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            0.0,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -0.5228787660598755,
+            0.4771212637424469,
+            1.4771212339401245
+          ],
+          "curve_mae": 0.8148532207050467,
+          "well_mae": 1.3403706427705797,
+          "n_valid_scalar_targets": 272
+        }
+      ],
+      "rerun_full_curve_mae": 0.836169186508665,
+      "historical_minus_rerun_full": 0.0
+    },
+    {
+      "chemical": "Spiroxamine",
+      "fold": 3,
+      "label": "unknown",
+      "full_curve_mae": 1.8929231018822201,
+      "contexts": [
+        {
+          "context_log_concentration": [
+            -2.522878646850586,
+            -1.0,
+            1.4771212339401245
+          ],
+          "target_log_concentration": [
+            -3.522878646850586,
+            -3.0,
+            -2.0,
+            -1.5228787660598755,
+            -0.5228787660598755,
+            0.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "curve_mae": 2.31696883854568,
+          "well_mae": 2.899101772908624,
+          "n_valid_scalar_targets": 443
+        },
+        {
+          "context_log_concentration": [
+            -3.0,
+            -2.522878646850586,
+            1.4771212339401245
+          ],
+          "target_log_concentration": [
+            -3.522878646850586,
+            -2.0,
+            -1.5228787660598755,
+            -1.0,
+            -0.5228787660598755,
+            0.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "curve_mae": 1.3808387899418608,
+          "well_mae": 2.1398129207490104,
+          "n_valid_scalar_targets": 443
+        },
+        {
+          "context_log_concentration": [
+            -2.0,
+            -1.0,
+            1.4771212339401245
+          ],
+          "target_log_concentration": [
+            -3.522878646850586,
+            -3.0,
+            -2.522878646850586,
+            -1.5228787660598755,
+            -0.5228787660598755,
+            0.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "curve_mae": 2.5299707327545167,
+          "well_mae": 3.0412323345016397,
+          "n_valid_scalar_targets": 443
+        },
+        {
+          "context_log_concentration": [
+            -3.0,
+            -2.0,
+            -1.0
+          ],
+          "target_log_concentration": [
+            -3.522878646850586,
+            -2.522878646850586,
+            -1.5228787660598755,
+            -0.5228787660598755,
+            0.0,
+            0.4771212637424469,
+            1.0,
+            1.4771212339401245
+          ],
+          "curve_mae": 2.0867396633537023,
+          "well_mae": 2.642374639608875,
+          "n_valid_scalar_targets": 411
+        },
+        {
+          "context_log_concentration": [
+            -0.5228787660598755,
+            0.0,
+            1.0
+          ],
+          "target_log_concentration": [
+            -3.522878646850586,
+            -3.0,
+            -2.522878646850586,
+            -2.0,
+            -1.5228787660598755,
+            -1.0,
+            0.4771212637424469,
+            1.4771212339401245
+          ],
+          "curve_mae": 1.1500974848153402,
+          "well_mae": 1.6739518325749918,
+          "n_valid_scalar_targets": 480
+        }
+      ],
+      "rerun_full_curve_mae": 1.8929231018822201,
+      "historical_minus_rerun_full": 0.0
+    },
+    {
+      "chemical": "Tamoxifen",
+      "fold": 3,
+      "label": "unknown",
+      "full_curve_mae": 1.273991642020062,
+      "contexts": [
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            -0.5228787660598755,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.0,
+            0.0,
+            0.4771212637424469,
+            1.3010300397872925
+          ],
+          "curve_mae": 1.1931448799033153,
+          "well_mae": 1.5238708612498348,
+          "n_valid_scalar_targets": 185
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -0.5228787660598755,
+            0.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 1.1104784294383774,
+          "well_mae": 1.3418827700399045,
+          "n_valid_scalar_targets": 190
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            1.0,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            0.0,
+            0.4771212637424469
+          ],
+          "curve_mae": 1.7194725115253484,
+          "well_mae": 2.06396019479907,
+          "n_valid_scalar_targets": 201
+        },
+        {
+          "context_log_concentration": [
+            -0.5228787660598755,
+            0.0,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            0.4771212637424469,
+            1.3010300397872925
+          ],
+          "curve_mae": 1.2314187013158402,
+          "well_mae": 1.5261318777424535,
+          "n_valid_scalar_targets": 193
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            0.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "curve_mae": 1.1154436879174279,
+          "well_mae": 1.441601942185965,
+          "n_valid_scalar_targets": 185
+        }
+      ],
+      "rerun_full_curve_mae": 1.273991642020062,
+      "historical_minus_rerun_full": 0.0
+    },
+    {
+      "chemical": "Tefluthrin",
+      "fold": 3,
+      "label": "unknown",
+      "full_curve_mae": 1.0577567294077073,
+      "contexts": [
+        {
+          "context_log_concentration": [
+            0.0,
+            0.4771212637424469,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            -0.5228787660598755,
+            1.0
+          ],
+          "curve_mae": 1.005224104805234,
+          "well_mae": 1.344082033736839,
+          "n_valid_scalar_targets": 220
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            0.4771212637424469,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            0.0,
+            1.0
+          ],
+          "curve_mae": 1.1390223069468846,
+          "well_mae": 1.4961836533911366,
+          "n_valid_scalar_targets": 215
+        },
+        {
+          "context_log_concentration": [
+            -0.5228787660598755,
+            0.0,
+            0.4771212637424469
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            1.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 0.9419131458596156,
+          "well_mae": 1.2160490192619566,
+          "n_valid_scalar_targets": 201
+        },
+        {
+          "context_log_concentration": [
+            0.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            -0.5228787660598755,
+            1.3010300397872925
+          ],
+          "curve_mae": 0.9895341540704874,
+          "well_mae": 1.3743338256959294,
+          "n_valid_scalar_targets": 206
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            1.0,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -0.5228787660598755,
+            0.0,
+            0.4771212637424469
+          ],
+          "curve_mae": 1.2130899353563143,
+          "well_mae": 1.7161682241704246,
+          "n_valid_scalar_targets": 225
+        }
+      ],
+      "rerun_full_curve_mae": 1.0577567294077073,
+      "historical_minus_rerun_full": 0.0
+    },
+    {
+      "chemical": "Tetracycline",
+      "fold": 3,
+      "label": "negative",
+      "full_curve_mae": 0.8343643382756586,
+      "contexts": [
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            0.0
+          ],
+          "target_log_concentration": [
+            -0.5228787660598755,
+            0.4771212637424469,
+            1.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 0.9978894442262779,
+          "well_mae": 1.384186046224893,
+          "n_valid_scalar_targets": 246
+        },
+        {
+          "context_log_concentration": [
+            -0.5228787660598755,
+            0.0,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            0.4771212637424469,
+            1.3010300397872925
+          ],
+          "curve_mae": 0.841014086038436,
+          "well_mae": 1.3288987124983367,
+          "n_valid_scalar_targets": 249
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            0.4771212637424469,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            0.0,
+            1.0
+          ],
+          "curve_mae": 0.7368255098622903,
+          "well_mae": 1.2616372990008486,
+          "n_valid_scalar_targets": 243
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -0.5228787660598755,
+            0.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "curve_mae": 0.8855447092145613,
+          "well_mae": 1.2694323775064993,
+          "n_valid_scalar_targets": 246
+        },
+        {
+          "context_log_concentration": [
+            0.4771212637424469,
+            1.0,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            -0.5228787660598755,
+            0.0
+          ],
+          "curve_mae": 0.7105479420367276,
+          "well_mae": 1.1944709494999206,
+          "n_valid_scalar_targets": 246
+        }
+      ],
+      "rerun_full_curve_mae": 0.8343643382756586,
+      "historical_minus_rerun_full": 0.0
+    },
+    {
+      "chemical": "Thiamethoxam",
+      "fold": 3,
+      "label": "unknown",
+      "full_curve_mae": 0.7596850587426476,
+      "contexts": [
+        {
+          "context_log_concentration": [
+            -1.0,
+            1.0,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -0.5228787660598755,
+            0.0,
+            0.4771212637424469
+          ],
+          "curve_mae": 0.770146502928545,
+          "well_mae": 1.2862272097775427,
+          "n_valid_scalar_targets": 252
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            0.0
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            0.4771212637424469,
+            1.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 0.7471976569368456,
+          "well_mae": 1.1808860061217623,
+          "n_valid_scalar_targets": 252
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            -0.5228787660598755,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.0,
+            0.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "curve_mae": 0.8244191935332189,
+          "well_mae": 1.263452128285346,
+          "n_valid_scalar_targets": 252
+        },
+        {
+          "context_log_concentration": [
+            -0.5228787660598755,
+            0.0,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "curve_mae": 0.7254876688746953,
+          "well_mae": 1.1444543462576287,
+          "n_valid_scalar_targets": 252
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            0.0
+          ],
+          "target_log_concentration": [
+            -0.5228787660598755,
+            0.4771212637424469,
+            1.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 0.7311742714399325,
+          "well_mae": 1.203751033374156,
+          "n_valid_scalar_targets": 252
+        }
+      ],
+      "rerun_full_curve_mae": 0.7596850587426476,
+      "historical_minus_rerun_full": 0.0
+    },
+    {
+      "chemical": "Tributyltin chloride",
+      "fold": 3,
+      "label": "positive",
+      "full_curve_mae": 1.0852787436308895,
+      "contexts": [
+        {
+          "context_log_concentration": [
+            -2.0,
+            -1.5228787660598755,
+            0.0
+          ],
+          "target_log_concentration": [
+            -3.522878646850586,
+            -3.0,
+            -2.522878646850586,
+            -1.0,
+            -0.5228787660598755,
+            0.4771212637424469,
+            1.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 0.9533046607406767,
+          "well_mae": 1.808636162627796,
+          "n_valid_scalar_targets": 360
+        },
+        {
+          "context_log_concentration": [
+            -3.522878646850586,
+            -2.522878646850586,
+            -1.5228787660598755
+          ],
+          "target_log_concentration": [
+            -3.0,
+            -2.0,
+            -1.0,
+            -0.5228787660598755,
+            0.0,
+            0.4771212637424469,
+            1.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 1.7143885187117325,
+          "well_mae": 2.410393402239699,
+          "n_valid_scalar_targets": 331
+        },
+        {
+          "context_log_concentration": [
+            -0.5228787660598755,
+            1.0,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -3.522878646850586,
+            -3.0,
+            -2.522878646850586,
+            -2.0,
+            -1.5228787660598755,
+            -1.0,
+            0.0,
+            0.4771212637424469
+          ],
+          "curve_mae": 1.2705958179872048,
+          "well_mae": 2.0353612258696216,
+          "n_valid_scalar_targets": 406
+        },
+        {
+          "context_log_concentration": [
+            -2.522878646850586,
+            -2.0,
+            -0.5228787660598755
+          ],
+          "target_log_concentration": [
+            -3.522878646850586,
+            -3.0,
+            -1.5228787660598755,
+            -1.0,
+            0.0,
+            0.4771212637424469,
+            1.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 0.6929545503538831,
+          "well_mae": 1.6799393782230805,
+          "n_valid_scalar_targets": 363
+        },
+        {
+          "context_log_concentration": [
+            -3.0,
+            -0.5228787660598755,
+            1.0
+          ],
+          "target_log_concentration": [
+            -3.522878646850586,
+            -2.522878646850586,
+            -2.0,
+            -1.5228787660598755,
+            -1.0,
+            0.0,
+            0.4771212637424469,
+            1.3010300397872925
+          ],
+          "curve_mae": 0.7951501703609496,
+          "well_mae": 1.7894340827420978,
+          "n_valid_scalar_targets": 382
+        }
+      ],
+      "rerun_full_curve_mae": 1.0852787436308895,
+      "historical_minus_rerun_full": 0.0
+    },
+    {
+      "chemical": "Triphenyl phosphates isopropylated",
+      "fold": 3,
+      "label": "unknown",
+      "full_curve_mae": 1.3537105774774114,
+      "contexts": [
+        {
+          "context_log_concentration": [
+            -1.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -0.5228787660598755,
+            0.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 1.2882772620445002,
+          "well_mae": 1.93649688615921,
+          "n_valid_scalar_targets": 256
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            0.0,
+            0.4771212637424469,
+            1.0
+          ],
+          "curve_mae": 1.3814050803675542,
+          "well_mae": 1.9669228731022632,
+          "n_valid_scalar_targets": 265
+        },
+        {
+          "context_log_concentration": [
+            -1.5228787660598755,
+            0.4771212637424469,
+            1.3010300397872925
+          ],
+          "target_log_concentration": [
+            -1.0,
+            -0.5228787660598755,
+            0.0,
+            1.0
+          ],
+          "curve_mae": 1.1815695634740448,
+          "well_mae": 1.792607610475037,
+          "n_valid_scalar_targets": 268
+        },
+        {
+          "context_log_concentration": [
+            -1.0,
+            0.0,
+            0.4771212637424469
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -0.5228787660598755,
+            1.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 1.5306153648654532,
+          "well_mae": 1.9614417598685732,
+          "n_valid_scalar_targets": 254
+        },
+        {
+          "context_log_concentration": [
+            -0.5228787660598755,
+            0.0,
+            0.4771212637424469
+          ],
+          "target_log_concentration": [
+            -1.5228787660598755,
+            -1.0,
+            1.0,
+            1.3010300397872925
+          ],
+          "curve_mae": 1.3866856166355046,
+          "well_mae": 1.8881160432465511,
+          "n_valid_scalar_targets": 252
+        }
+      ],
+      "rerun_full_curve_mae": 1.3537105774774114,
+      "historical_minus_rerun_full": 0.0
+    }
+  ],
+  "max_absolute_historical_gap": 0.0
+}

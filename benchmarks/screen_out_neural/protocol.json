@@ -1,0 +1,76 @@
+{
+  "schema": "shared-design-neural.protocol.v1",
+  "frozen_utc": "2026-10-04T11:28:21.611940+00:00",
+  "decision": "Does shared design conditioning justify paid scaling beyond one free T4 experiment?",
+  "paid_budget_usd": 0,
+  "prediction_before_fit": {
+    "screen_out_neural_minus_anchorboost_relative_pct": [
+      -5,
+      25
+    ],
+    "expected_trustworthy_screen_wins": [
+      0,
+      1
+    ],
+    "expected_ewart": "Endpoint-dependent; six-drug confidence intervals may cross zero",
+    "gpu_hours_estimate": [
+      0.3,
+      1.2
+    ],
+    "peak_gpu_gb_estimate": [
+      0.1,
+      1.5
+    ]
+  },
+  "fixed_model": {
+    "shared_encoder": [
+      3,
+      48,
+      48
+    ],
+    "shared_decoder": [
+      74,
+      96,
+      48,
+      1
+    ],
+    "loss": "dimensionless residual weighted L1; equal screen/chemical mass",
+    "epochs": 2,
+    "batch": 4096,
+    "seed": 1741,
+    "learning_rate": 0.001,
+    "weight_decay": 0.0001,
+    "hyperparameter_search": false,
+    "context": 3,
+    "train_designs": "all C(L,3), every observed target output retained"
+  },
+  "evaluation": {
+    "screen_out": "4 fits. Entire target screen withheld, plus all its chemical identities excluded from source screens. Evaluate original fold 1 of NFA/acute/Harrill and all Ewart drugs.",
+    "within_screen": "Original fold 1 for three larger screens with a single shared model; six Ewart leave-one-drug-out shared models. Exclude test chemical identity globally.",
+    "metrics": "Original per-design curve MAE, five seeded original contexts; then average designs and drugs. Ewart author units separately by endpoint.",
+    "comparator": "Frozen target-informed within-screen AnchorBoost per-drug errors, on exact same samples/designs; recompute only if original baseline training contains a test alias. This reference is stronger in data access than screen-out neural.",
+    "published_neural_process": "Frozen original per-chemical NFA errors only, same k=3 designs/metric. Other screens unavailable, never imputed.",
+    "bootstrap": "4000 paired resamples of chemical identity, seed0; 95% reported; familywise 6 comparison interval for rental decision",
+    "rental_trigger": "At least one screen-out difference vs AnchorBoost has familywise upper bound <0 and >=12 independent chemical identities; then query current Vast.ai cards/prices/hours only. Point estimate wins with CI crossing zero give rental recommendation $0."
+  },
+  "scaling": {
+    "fitted": "One dimensionless residual scale fitted on training rows only, separately per fit; saved in checkpoint.",
+    "observed_context_forward": "Per-endpoint max absolute observed response, with exactly-zero context set to 1, is an algebraic input transform only; full test curves never enter it.",
+    "upstream_representation": "Reuse immutable existing benchmark target matrices and original preparation. NFA published control transform, acute/Harrill pooled vehicle normalization and acute pooled outlier filtering are inherited benchmark definitions. Claims concern training isolation conditional on these matrices, not an upstream raw-data inductive audit.",
+    "mixed_units": "Raw endpoints never share an unscaled loss or pooled Ewart MAE."
+  },
+  "resource": {
+    "local": "minimum probe only, <4GB per process and <5min",
+    "remote": "new private slug, free T4, one device used, no paid purchase",
+    "stop": "All four screens both frozen evaluations complete or real platform/data error. No search/retraining based on test error."
+  },
+  "completion": [
+    "summary.json",
+    "conclusion.md",
+    "predictions.csv.gz",
+    "drug_results.json",
+    "splits.json",
+    "all model checkpoints",
+    "raw platform receipts"
+  ]
+}

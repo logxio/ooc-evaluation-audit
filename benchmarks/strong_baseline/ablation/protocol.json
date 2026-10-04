@@ -1,0 +1,61 @@
+{
+  "schema": "strong-baseline.ablation.protocol.v1",
+  "frozen_at": "2026-10-04T12:45:19.573639+00:00",
+  "question": "Does enumerating all concentration contexts improve curve MAE at the same scalar-row and boosting-iteration training budget?",
+  "status": "frozen before new ablation training or scoring",
+  "dataset": "EPA NFA, 243 chemicals, 4 DIV x 17 endpoints",
+  "evaluation": {
+    "folds": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "development_fold": 0,
+    "n_test_chemicals": 194,
+    "context_size": 3,
+    "test_designs": "unchanged five published seeded contexts from designs(task,3)",
+    "metric": "curve MAE averaged within chemical over published contexts; each chemical one bootstrap observation",
+    "bootstrap": {
+      "unit": "chemical",
+      "replicates": 10000,
+      "seed": 0,
+      "confidence": 0.95
+    },
+    "delta": "full enumeration minus five-design row-matched; negative favours enumeration",
+    "ties_absolute_tolerance": 1e-12
+  },
+  "arms": {
+    "full": "Reuse byte-frozen published full-enumeration per-chemical errors; source SHA, recipe and train rows verified per fold. Retain historical elapsed time as historical, not same-machine time.",
+    "five_matched": "For each training chemical, build only the five original published design rows in original order. Let F be its number of valid scalar target rows over all contexts, and R its corresponding five-design count. Repeat each of these R rows floor(F/R) times, then add one copy of F mod R rows chosen by a seeded permutation; physically materialize F rows. Seed=first 8 hex digits of SHA256(chemical|rowmatch|3). This matches each chemical and fold scalar-row budget exactly.",
+    "five_unmatched_reference": "Previously published five-design-only 600-iteration run retained separately; excluded from the primary budget-matched claim."
+  },
+  "fixed_model": {
+    "loss": "absolute_error",
+    "max_iter": 600,
+    "learning_rate": 0.05,
+    "max_leaf_nodes": 127,
+    "min_samples_leaf": 50,
+    "early_stopping": false,
+    "random_state": 0,
+    "n_pca": 0
+  },
+  "resource": {
+    "threads": 1,
+    "memory_bytes_max": 4000000000,
+    "local_process_seconds_max": 300,
+    "probe": "first 12 non-fold-1 chemicals in source order; 20 iterations, no test scoring",
+    "termination": "each finite fold fit and its fixed test list completes, or 300s local hard stop; failed attempts retained"
+  },
+  "budget_interpretation": "Equal materialized scalar training rows, feature width and 600 boosting iterations. Unique rows and design coverage differ by construction. Histogram binning, tree structure and wall-clock time may differ. No test tuning or selection.",
+  "input_sha256": {
+    "chip_forecast.py": "3d02dd3a1bc57e8c53f701a6005c8d5e9d8ad6a15a57cdec3f22b27066015897",
+    "nfa_tasks.npz": "e1f056ef33f568052fb8dfdba6e095f7b575c7f78d96768e34469918559008d2",
+    "published_full.csv": "d35d11c5575853043a5d5d68b3165c7510f0fb6baec7a997b51c3f4a3a556658",
+    "published_full.json": "fffb50617d2b20b14410dfcf706fae513e61ea8400ea45171e7a073c1e5ffe83",
+    "unmatched_five.csv": "f4b6c15dc5449d7f577a55596b6a2ad2c6214ff05caf28ade63f2393a747e2f7",
+    "unmatched_five.json": "60c65233e686849d17bc2414373ada58aa72491caf2f7e3c4d0f440e4a47b423"
+  },
+  "reproduction": "python train_ablation.py --out <new-directory> --fold 1 --arm full|five",
+  "original_sha256": "747fb2a45ac98ba24824b90482808c3456ac077ce67cb8d81dc030a1d067206b"
+}

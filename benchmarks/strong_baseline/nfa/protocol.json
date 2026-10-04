@@ -1,0 +1,58 @@
+{
+  "schema": "strong-baseline-s1.nfa.protocol.v1",
+  "primary_k": 3,
+  "primary_folds": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "excluded_development_fold": 0,
+  "test_designs": "Five published chemical-name-seeded distinct context designs; all observed wells at each of the three context concentrations.",
+  "endpoint": "Curve MAE over observed held-out concentration means, 4 DIVs x 17 features, then equal-weight mean over designs and chemicals.",
+  "K": {
+    "commit": "dbddd7437b9f1643ef2872bd5de86de0779b209b",
+    "code_sha256": "3d02dd3a1bc57e8c53f701a6005c8d5e9d8ad6a15a57cdec3f22b27066015897",
+    "predictions": "Original frozen K free-Kaggle/Linux decision_fold1-4.npz",
+    "main_errors": "Original Linux chip_forecast_result.csv"
+  },
+  "C": {
+    "commit": "f9848800dfab66a8bc005e6b3087153eeaabe9ac",
+    "predictions": "Mean of three published CNP checkpoints for each outer fold, seeds 0/1/2; no training or selection in this run.",
+    "main_errors": "Published trajectory_cv_per_chemical.csv",
+    "likelihood": "gaussian",
+    "use_interp": true,
+    "steps": 4000,
+    "n_freq": 8
+  },
+  "paired_difference": "K minus C, negative favors K",
+  "bootstrap": {
+    "replicates": 10000,
+    "seed": 0,
+    "resampling_unit": "chemical identity within the held-out test cohort",
+    "intervals": [
+      0.95,
+      0.975
+    ],
+    "method": "paired percentile bootstrap of the equally weighted chemical differences; sorted chemical keys"
+  },
+  "identity_sensitivity": {
+    "exclude_test_chemicals": [
+      "Phenobarbital"
+    ],
+    "reason": "Phenobarbital fold 4 and phenobarbital sodium fold 0 share the pre-existing conservative parent-identity cluster spid:EX000348. The original 194-row table remains primary; a 193-row sensitivity omits the test form whose parent identity occurs in training."
+  },
+  "pointwise_reproduction_tolerances": {
+    "K_max_per_chemical_absolute_error_gap": 1e-06,
+    "C_max_per_chemical_absolute_error_gap": 1e-05
+  },
+  "retained_results": "All four preselected folds and all 194 primary chemicals, including negative differences, with a complete exclusion table.",
+  "resource": {
+    "device": "CPU",
+    "torch_threads": 1,
+    "paid_cost": 0,
+    "process_memory_limit_bytes": 4294967296
+  },
+  "original_protocol_sha256": "78fe24bcc591606fc50c1bbf7b1619c7e320dd50c7b233d4c084aa7a83c8b37f",
+  "inputs": "Per-chemical published score subset and fold1\u20134 prediction arrays in this directory; source provenance in ../sources.json."
+}

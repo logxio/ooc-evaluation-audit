@@ -1,0 +1,312 @@
+{
+ "schema": "chip_forecast.result.v1",
+ "source": {
+  "commit": "f9848800dfab66a8bc005e6b3087153eeaabe9ac",
+  "files": {
+   "data_bundle/nfa_tasks.npz": "e1f056ef33f568052fb8dfdba6e095f7b575c7f78d96768e34469918559008d2",
+   "results/trajectory_cv_per_chemical.csv": "0d013127aef781ca5e1de04088532e2e19223364173a198e0686941c04f93abc"
+  }
+ },
+ "folds": [
+  1,
+  2,
+  3,
+  4
+ ],
+ "ks": [
+  3
+ ],
+ "model": {
+  "loss": "absolute_error",
+  "max_iter": 600,
+  "learning_rate": 0.05,
+  "max_leaf_nodes": 127,
+  "min_samples_leaf": 50,
+  "early_stopping": false,
+  "random_state": 0,
+  "n_pca": 0
+ },
+ "ablation": "five_designs",
+ "timing": {
+  "k3_fold1": {
+   "seconds": 45.6,
+   "training_rows": 252106
+  },
+  "k3_fold2": {
+   "seconds": 44.3,
+   "training_rows": 251039
+  },
+  "k3_fold3": {
+   "seconds": 44.5,
+   "training_rows": 251312
+  },
+  "k3_fold4": {
+   "seconds": 44.9,
+   "training_rows": 251852
+  }
+ },
+ "summary": {
+  "k3": {
+   "n_chemicals": 194,
+   "anchorboost": 1.183,
+   "versus": {
+    "loglinear_interp": {
+     "mean_diff": -0.1623,
+     "ci95": [
+      -0.1969,
+      -0.1256
+     ],
+     "rel_change_pct": -12.07,
+     "n_chemicals": 194,
+     "frac_chem_improved": 0.845
+    },
+    "hill_per_endpoint": {
+     "mean_diff": -0.2736,
+     "ci95": [
+      -0.3101,
+      -0.2356
+     ],
+     "rel_change_pct": -18.79,
+     "n_chemicals": 194,
+     "frac_chem_improved": 0.959
+    },
+    "analog_knn": {
+     "mean_diff": -0.1661,
+     "ci95": [
+      -0.196,
+      -0.1357
+     ],
+     "rel_change_pct": -12.31,
+     "n_chemicals": 194,
+     "frac_chem_improved": 0.881
+    },
+    "published_neural_process": {
+     "mean_diff": -0.011,
+     "ci95": [
+      -0.0437,
+      0.0204
+     ],
+     "rel_change_pct": -0.92,
+     "n_chemicals": 194,
+     "frac_chem_improved": 0.495
+    }
+   },
+   "loglinear_interp": 1.3453,
+   "hill_per_endpoint": 1.4566,
+   "analog_knn": 1.3491,
+   "published_neural_process": 1.194
+  }
+ },
+ "summary_by_fold": {
+  "fold1": {
+   "k3": {
+    "n_chemicals": 49,
+    "anchorboost": 1.2479,
+    "versus": {
+     "loglinear_interp": {
+      "mean_diff": -0.13,
+      "ci95": [
+       -0.2118,
+       -0.0315
+      ],
+      "rel_change_pct": -9.44,
+      "n_chemicals": 49,
+      "frac_chem_improved": 0.776
+     },
+     "hill_per_endpoint": {
+      "mean_diff": -0.2603,
+      "ci95": [
+       -0.3362,
+       -0.1641
+      ],
+      "rel_change_pct": -17.26,
+      "n_chemicals": 49,
+      "frac_chem_improved": 0.98
+     },
+     "analog_knn": {
+      "mean_diff": -0.1093,
+      "ci95": [
+       -0.1791,
+       -0.021
+      ],
+      "rel_change_pct": -8.05,
+      "n_chemicals": 49,
+      "frac_chem_improved": 0.816
+     },
+     "published_neural_process": {
+      "mean_diff": 0.0288,
+      "ci95": [
+       -0.0335,
+       0.1139
+      ],
+      "rel_change_pct": 2.36,
+      "n_chemicals": 49,
+      "frac_chem_improved": 0.51
+     }
+    },
+    "loglinear_interp": 1.3779,
+    "hill_per_endpoint": 1.5081,
+    "analog_knn": 1.3571,
+    "published_neural_process": 1.2191
+   }
+  },
+  "fold2": {
+   "k3": {
+    "n_chemicals": 49,
+    "anchorboost": 1.1661,
+    "versus": {
+     "loglinear_interp": {
+      "mean_diff": -0.1544,
+      "ci95": [
+       -0.204,
+       -0.1087
+      ],
+      "rel_change_pct": -11.69,
+      "n_chemicals": 49,
+      "frac_chem_improved": 0.796
+     },
+     "hill_per_endpoint": {
+      "mean_diff": -0.2363,
+      "ci95": [
+       -0.2818,
+       -0.1929
+      ],
+      "rel_change_pct": -16.85,
+      "n_chemicals": 49,
+      "frac_chem_improved": 0.918
+     },
+     "analog_knn": {
+      "mean_diff": -0.1842,
+      "ci95": [
+       -0.2325,
+       -0.1394
+      ],
+      "rel_change_pct": -13.64,
+      "n_chemicals": 49,
+      "frac_chem_improved": 0.898
+     },
+     "published_neural_process": {
+      "mean_diff": -0.0338,
+      "ci95": [
+       -0.0949,
+       0.0218
+      ],
+      "rel_change_pct": -2.82,
+      "n_chemicals": 49,
+      "frac_chem_improved": 0.551
+     }
+    },
+    "loglinear_interp": 1.3205,
+    "hill_per_endpoint": 1.4023,
+    "analog_knn": 1.3503,
+    "published_neural_process": 1.1999
+   }
+  },
+  "fold3": {
+   "k3": {
+    "n_chemicals": 49,
+    "anchorboost": 1.14,
+    "versus": {
+     "loglinear_interp": {
+      "mean_diff": -0.1874,
+      "ci95": [
+       -0.2608,
+       -0.1045
+      ],
+      "rel_change_pct": -14.12,
+      "n_chemicals": 49,
+      "frac_chem_improved": 0.898
+     },
+     "hill_per_endpoint": {
+      "mean_diff": -0.2879,
+      "ci95": [
+       -0.3558,
+       -0.2056
+      ],
+      "rel_change_pct": -20.16,
+      "n_chemicals": 49,
+      "frac_chem_improved": 0.98
+     },
+     "analog_knn": {
+      "mean_diff": -0.1497,
+      "ci95": [
+       -0.1992,
+       -0.1065
+      ],
+      "rel_change_pct": -11.61,
+      "n_chemicals": 49,
+      "frac_chem_improved": 0.857
+     },
+     "published_neural_process": {
+      "mean_diff": -0.0061,
+      "ci95": [
+       -0.0784,
+       0.0436
+      ],
+      "rel_change_pct": -0.53,
+      "n_chemicals": 49,
+      "frac_chem_improved": 0.469
+     }
+    },
+    "loglinear_interp": 1.3274,
+    "hill_per_endpoint": 1.4279,
+    "analog_knn": 1.2897,
+    "published_neural_process": 1.146
+   }
+  },
+  "fold4": {
+   "k3": {
+    "n_chemicals": 47,
+    "anchorboost": 1.1778,
+    "versus": {
+     "loglinear_interp": {
+      "mean_diff": -0.178,
+      "ci95": [
+       -0.2364,
+       -0.1188
+      ],
+      "rel_change_pct": -13.13,
+      "n_chemicals": 47,
+      "frac_chem_improved": 0.915
+     },
+     "hill_per_endpoint": {
+      "mean_diff": -0.3117,
+      "ci95": [
+       -0.3876,
+       -0.2274
+      ],
+      "rel_change_pct": -20.92,
+      "n_chemicals": 47,
+      "frac_chem_improved": 0.957
+     },
+     "analog_knn": {
+      "mean_diff": -0.2236,
+      "ci95": [
+       -0.2861,
+       -0.1652
+      ],
+      "rel_change_pct": -15.96,
+      "n_chemicals": 47,
+      "frac_chem_improved": 0.957
+     },
+     "published_neural_process": {
+      "mean_diff": -0.0338,
+      "ci95": [
+       -0.1,
+       0.0256
+      ],
+      "rel_change_pct": -2.79,
+      "n_chemicals": 47,
+      "frac_chem_improved": 0.447
+     }
+    },
+    "loglinear_interp": 1.3558,
+    "hill_per_endpoint": 1.4894,
+    "analog_knn": 1.4014,
+    "published_neural_process": 1.2116
+   }
+  }
+ },
+ "summary_folds_1to4": null,
+ "code_sha256": "3d02dd3a1bc57e8c53f701a6005c8d5e9d8ad6a15a57cdec3f22b27066015897"
+}

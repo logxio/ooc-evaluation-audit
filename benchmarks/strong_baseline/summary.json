@@ -1,0 +1,118 @@
+{
+  "schema": "strong-baseline.release.v1",
+  "difference": "K minus C; full enumeration minus five-design matched training",
+  "nfa": {
+    "n_source_chemicals": 194,
+    "n_independent_test_identity_clusters": 194,
+    "K_mean": 1.1606120562951439,
+    "C_mean": 1.1939538547673176,
+    "mean_difference": -0.03334179847217374,
+    "error_reduction_percent": 2.7925533586615474,
+    "ci95": [
+      -0.07028436620564797,
+      -0.0004067495255171118
+    ],
+    "ci97_5": [
+      -0.0763207145184502,
+      0.00322606973979569
+    ],
+    "chemical_wins": 105,
+    "chemical_losses": 89,
+    "chemical_ties": 0,
+    "resamples": 10000,
+    "seed": 0,
+    "fold_wins": 3,
+    "fold_losses": 1,
+    "fold_ties": 0
+  },
+  "nfa_identity_sensitivity": {
+    "n_source_chemicals": 193,
+    "n_independent_test_identity_clusters": 193,
+    "K_mean": 1.1620874434266941,
+    "C_mean": 1.1919609601015873,
+    "mean_difference": -0.02987351667489308,
+    "error_reduction_percent": 2.5062495899485713,
+    "ci95": [
+      -0.06582521648389004,
+      0.002217276480863853
+    ],
+    "ci97_5": [
+      -0.07161435781936558,
+      0.006366508219568955
+    ],
+    "chemical_wins": 104,
+    "chemical_losses": 89,
+    "chemical_ties": 0,
+    "resamples": 10000,
+    "seed": 0
+  },
+  "acute": {
+    "n_independent_units": 383,
+    "n_source_labels": 384,
+    "unit": "chemical identity",
+    "k_mae": 1.554264772661943,
+    "c_mae": 1.5701401477849828,
+    "delta": -0.015875375123039732,
+    "relative_change_pct": -1.0110801348169671,
+    "ci95": [
+      -0.030804203486282194,
+      -0.0012561659306319006
+    ],
+    "ci97_5": [
+      -0.03296360974514194,
+      0.0007780707866410577
+    ],
+    "wins": 209,
+    "losses": 174,
+    "ties": 0,
+    "bootstrap_replicates": 10000,
+    "bootstrap_seed": 0,
+    "fold_wins": 5,
+    "fold_losses": 0,
+    "fold_ties": 0
+  },
+  "harrill": {
+    "n_independent_units": 69,
+    "n_source_labels": 69,
+    "unit": "chemical identity",
+    "k_mae": 1.6949755598475438,
+    "c_mae": 1.7444217405457423,
+    "delta": -0.04944618069819896,
+    "relative_change_pct": -2.8345313262794885,
+    "ci95": [
+      -0.11312363211246092,
+      0.013459481182216187
+    ],
+    "ci97_5": [
+      -0.12286372135027415,
+      0.022713545024157938
+    ],
+    "wins": 36,
+    "losses": 33,
+    "ties": 0,
+    "bootstrap_replicates": 10000,
+    "bootstrap_seed": 0,
+    "fold_wins": 4,
+    "fold_losses": 1,
+    "fold_ties": 0
+  },
+  "ablation": {
+    "n_chemicals": 194,
+    "mean_delta": -0.02290333564626706,
+    "ci95": [
+      -0.03508854037142928,
+      -0.012074191462815013
+    ],
+    "wins": 134,
+    "losses": 60,
+    "ties": 0,
+    "full_curve_mae": 1.1606120562951439,
+    "five_matched_curve_mae": 1.183515391941411,
+    "relative_change_pct": -1.9351954188527254,
+    "fold_wins": 4,
+    "fold_losses": 0,
+    "fold_ties": 0
+  },
+  "paid_cost_usd": 0,
+  "reproduction": "python benchmarks/strong_baseline/reproduce.py --out strong-baseline-recomputed.json"
+}

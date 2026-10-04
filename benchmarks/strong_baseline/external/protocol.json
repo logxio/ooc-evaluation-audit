@@ -1,0 +1,181 @@
+{
+  "schema": "strong-baseline.external.protocol.v1",
+  "frozen_at_utc": "2026-10-04T12:50:40.367814+00:00",
+  "decision": "Measure chemical-paired K minus published C on both external screens without test-set tuning.",
+  "hypotheses": "Report either sign, all five folds, every failed fit and every exclusion; no outcome-driven reruns.",
+  "source_commit": "f9848800dfab66a8bc005e6b3087153eeaabe9ac",
+  "model_k_commit": "dbddd743",
+  "normalization": "Existing acute and human DNT vehicle-standardization loaders, unchanged.",
+  "folds": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "context_k": 3,
+  "test_designs": 5,
+  "design_seed": "int(SHA256(chemical + \"|3\")[:8],16); published five designs",
+  "c_config": {
+    "steps": 4000,
+    "batch": 32,
+    "lr": 0.001,
+    "wd": 0.0001,
+    "max_ctx_levels": 5,
+    "likelihood": "gaussian",
+    "use_interp": true,
+    "n_freq": 8,
+    "use_attention": true
+  },
+  "c_seeds": [
+    0,
+    1,
+    2
+  ],
+  "c_ensemble": "arithmetic mean of three final-checkpoint predicted means",
+  "c_configuration_origin": "Same configuration selected in published primary-screen outer folds 1\u20134; frozen here, no external validation selection.",
+  "c_adaptation": "Original source bytes; set module ND=1, NF=43 (acute) or 9 (human DNT), D_OUT=ND*NF before construction.",
+  "k_config": {
+    "loss": "absolute_error",
+    "max_iter": 600,
+    "learning_rate": 0.05,
+    "max_leaf_nodes": 127,
+    "min_samples_leaf": 50,
+    "early_stopping": false,
+    "random_state": 0
+  },
+  "k_primary": "Frozen recipe refit in the recorded Kaggle environment; original published per-chemical results retained and paired separately.",
+  "missing": "Original masks; no target imputation; omit a design endpoint only if it has no observed target scalar.",
+  "score": "MAE over observed held-out concentration-level means; mean across designs within chemical; average sample IDs within parent-identity group.",
+  "primary_population": "Remove evaluation labels whose identity occurs in another fold; preserve original folds and training sets. Acute:383 identity groups from384 IDs. Human DNT:69 identity-clean chemicals from71 source labels.",
+  "secondary_populations": [
+    "All original 384 acute sample IDs and71 human DNT labels",
+    "All70 human DNT identity groups with original cross-fold aliases retained",
+    "hNP1 five-output subgroup and hN2 four-output subgroup on the69 identity-clean chemicals"
+  ],
+  "interval": {
+    "unit": "chemical identity",
+    "replicates": 10000,
+    "seed": 0,
+    "method": "paired percentile bootstrap",
+    "levels": [
+      0.95,
+      0.975
+    ],
+    "joint_claim": "Both external differences must have negative upper97.5% bounds for a joint directional claim."
+  },
+  "collision_audit": [
+    {
+      "screen": "acute",
+      "identity": "spid:TP0001649B03",
+      "members": [
+        {
+          "chemical": "TX006863",
+          "fold": 2
+        },
+        {
+          "chemical": "TX008618",
+          "fold": 2
+        }
+      ],
+      "crosses_folds": false
+    },
+    {
+      "screen": "harrill",
+      "identity": "spid:EX000439",
+      "members": [
+        {
+          "chemical": "Valproate",
+          "fold": 0
+        },
+        {
+          "chemical": "Valproic Acid",
+          "fold": 1
+        }
+      ],
+      "crosses_folds": true
+    }
+  ],
+  "exclusions": [
+    {
+      "screen": "harrill",
+      "chemical": "Valproate",
+      "fold": 0,
+      "identity": "spid:EX000439",
+      "exclusion_scope": "identity-clean primary only; original-fold result retained",
+      "reason": "another name of the same parent compound occurs in a training fold"
+    },
+    {
+      "screen": "harrill",
+      "chemical": "Valproic Acid",
+      "fold": 1,
+      "identity": "spid:EX000439",
+      "exclusion_scope": "identity-clean primary only; original-fold result retained",
+      "reason": "another name of the same parent compound occurs in a training fold"
+    }
+  ],
+  "resource": {
+    "paid_cost": 0,
+    "remote": "Kaggle free CPU/T4",
+    "local_max_process_bytes": 4000000000
+  },
+  "provenance": {
+    "nfa_tasks.npz": {
+      "sha256": "e1f056ef33f568052fb8dfdba6e095f7b575c7f78d96768e34469918559008d2",
+      "bytes": 671009
+    },
+    "MEA_All_Data_Scripts.zip": {
+      "sha256": "38494e1688ee6eafcbc30832755f5df28453893745c5bf8bc3bbfe4800753247",
+      "bytes": 20036406
+    },
+    "Harrill_DNT_Assay_Dataset.xlsx": {
+      "sha256": "ab6de83c38001c7d1cb977c3758bc77aa110d18658a3b9758369bf3a21d6bc0e",
+      "bytes": 2291926
+    },
+    "ewart_readings.csv": {
+      "sha256": "326c494f0ebdae41bd7ea5b425d3697d5e48b5685ac033bb719ff1e7713f3b8c",
+      "bytes": 8303
+    },
+    "annotate_dnt_ref_chems.csv": {
+      "sha256": "664de5d0c26671f1f45bd8bfe3e1ae44c100c5249f6b2dc1aa1a288d7a045875",
+      "bytes": 44835
+    },
+    "transform.json": {
+      "sha256": "a3d8ddbda653ee7ac7b29b529f3207d034d750d38b2a59a19ca8b71560389dc0",
+      "bytes": 3435
+    },
+    "trajectory_cv_per_chemical.csv": {
+      "sha256": "0d013127aef781ca5e1de04088532e2e19223364173a198e0686941c04f93abc",
+      "bytes": 908740
+    },
+    "prepared": {
+      "tasks.npz": "79d51c297ae88f8e2c37561a7c6a368d589c0385c216579a4858723e824506a1",
+      "tasks.json": "6515c1a2cea93d6eb01d118861e456bcbe3e5f7755b42323991247f427711cd3",
+      "identities.json": "972dff1009f6cd476d89d4f5a38d97ff954748fb6c2bbc24c1f7b6a725efe032",
+      "baseline_acute.csv": "836f3cbb79e4be9d6af7b2535788d4ae9691a73741791d2523aa3ac6275d60fc",
+      "baseline_ewart.csv": "92deff84db490980d4758d21de39d974df9fab8ca7a64a892cc36cc43cd74fb4",
+      "baseline_ewart_predictions.csv": "c1b4bd5cfd30473dda57a150fb3d0fb74069340eac85f19e2461f652f63cbd37",
+      "baseline_harrill.csv": "922c8f7e52280d6097ba50d7db06b1e1780bd460b22c722e9ad38580c2995dfe",
+      "baseline_nfa.csv": "d35d11c5575853043a5d5d68b3165c7510f0fb6baec7a997b51c3f4a3a556658"
+    },
+    "code": {
+      "chip_forecast.py": "3d02dd3a1bc57e8c53f701a6005c8d5e9d8ad6a15a57cdec3f22b27066015897",
+      "chip_forecast_acute.py": "752f949aabe0f832048fb35bba14da4388e24e4365eb9ae48b0812d76b2161d3",
+      "chip_forecast_dnt.py": "41f51044d548073c3e20acb00b91faadf234cdb89b40e25b6e5f4d9d607f4e01",
+      "ewart_transfer.py": "ff4edbfc252da97ed65742212e259a584b99d99a8fcb17ebd580a8a8f5f301f6"
+    }
+  },
+  "input_sha256": {
+    "tasks.npz": "363fb65d1506903f4e3701c1d2c931abc490a8a7f58d33ca2b0d184437026f13",
+    "baseline_acute.csv": "836f3cbb79e4be9d6af7b2535788d4ae9691a73741791d2523aa3ac6275d60fc",
+    "baseline_harrill.csv": "922c8f7e52280d6097ba50d7db06b1e1780bd460b22c722e9ad38580c2995dfe",
+    "tasks.json": "15d2cfef01665082269b9a588e4d74b80b9eba52a4553850106adc856070ce8a",
+    "source/chip_forecast_acute.py": "752f949aabe0f832048fb35bba14da4388e24e4365eb9ae48b0812d76b2161d3",
+    "source/chip_forecast_dnt.py": "41f51044d548073c3e20acb00b91faadf234cdb89b40e25b6e5f4d9d607f4e01",
+    "source/chip_forecast.py": "3d02dd3a1bc57e8c53f701a6005c8d5e9d8ad6a15a57cdec3f22b27066015897",
+    "source/published_c/LICENSE": "417bbd8ccc24f5e7e98e8f671acbf79ac4b8cf5f307183f6bc47442cff104094",
+    "source/published_c/__init__.py": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+    "source/published_c/trajectory.py": "acacab407097c069484c929a8d9eff621b2895a42b5c107a78028d668e664c5b",
+    "source/published_c/cnp.py": "3051e79562d19badded13293c4b3b376d5ba83c48b9d9ec722a94ca60baeaf94"
+  }
+}
