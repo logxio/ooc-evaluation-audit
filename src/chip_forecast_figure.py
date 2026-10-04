@@ -5,16 +5,18 @@ Each panel uses the chemical's first published three-concentration design, the m
 fold and the DIV 12 feature whose measured concentration means vary most. Computing the series trains two
 fold models (a few minutes on CPU) and saves them to JSON; drawing reads only that JSON.
 
-Run: python chip_forecast_figure.py --data chip_forecast_examples.json      (compute, then draw)
-     python chip_forecast_figure.py --plot chip_forecast_examples.json      (draw only)
+Run: python src/chip_forecast_figure.py --data chip_forecast_examples.json  (compute, then draw)
+     python src/chip_forecast_figure.py --plot chip_forecast_examples.json  (draw only)
 """
 import argparse
 import json
+import sys
 from pathlib import Path
 
 import numpy as np
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[1]
+sys.path.insert(0, str(ROOT))
 EXAMPLES = [('Trimethyltin hydroxide', 'largest gain over interpolation'),
             ('Cariporide mesylate', 'median gain over interpolation'),
             ('Sodium valproate', 'largest loss')]

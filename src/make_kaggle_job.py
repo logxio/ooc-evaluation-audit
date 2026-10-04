@@ -7,7 +7,7 @@ from pathlib import Path
 import argparse
 import json
 
-ROOT = Path(__file__).resolve().parent
+ROOT = Path(__file__).resolve().parents[1]
 JOB = ROOT / ".cache" / "kaggle_f1"
 SOURCE = ROOT / "ooc_qc.py"
 TAIL = 'if __name__ == "__main__":\n    main()'
