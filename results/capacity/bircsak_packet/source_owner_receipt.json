@@ -1,0 +1,1228 @@
+{
+  "schema": "bircsak.source-owner-receipt.v1",
+  "status": "qualified_and_exported",
+  "custodian_session": "01a10729-5d5d-7540-8b0e-b587ba605f4b",
+  "created_at": "2026-10-04T16:13:53.796287+00:00",
+  "forecast_owner": "论文容量S1",
+  "forecast_session": "01a10786-fc38-7f21-a3ce-2c734616cdb5",
+  "packet_path": "<local-input>/independent_bircsak",
+  "citation": "Bircsak KM, et al. A 3D microfluidic liver model for high throughput compound toxicity screening in the OrganoPlate®. Toxicology. 2021;450:152667. doi:10.1016/j.tox.2020.152667.",
+  "publication": "https://doi.org/10.1016/j.tox.2020.152667",
+  "license": "CC BY 4.0",
+  "citation_evidence": {
+    "source": "archived publisher article, heading/journal metadata/license and CRediT",
+    "sha256": "64f8f7cbdf02213029224c562d4e397da4b13f89e795e07c1c14dbeb0c9eae8b"
+  },
+  "protocol": {
+    "path": "<local-input>/independent_protocol.json",
+    "sha256": "8213c89526adfad2ef5f5702634520b931010436ff8317bf5c5ded3e06a286fb",
+    "markdown_sha256": "0c8dad33eb0ba66fc57308fb5baaff9d18012fb4fa83a76442064cf3b60c3c1e"
+  },
+  "source_snapshot_sha256": {
+    "curve_inventory.json": "26d915de9cd44a7d5b3316e08fa520c6b49c96e8378b584d85654609c8821b63",
+    "normalized_digitized.csv": "0097cbd26f910180df2e4307024fcdf43e27b2b3c18e4d991c20e1694d7ed984",
+    "digitization_points.csv": "73f72c2172a71af19132e7059f8ad0cdd5b2bd17e8a88bc00e437569b0413f68",
+    "vehicle_digitized.csv": "15cd480503ca9491c6f450e752af4ac7169751ff3991019626b5b53c59822a51"
+  },
+  "source_revision": {
+    "frozen_data_files_matched": 4,
+    "input_amendment_required": false,
+    "response_or_dose_changes": 0,
+    "qc_receipt_metadata_revision": {
+      "peak_rss_mb": {
+        "previous": 43.859375,
+        "current": 47.59375
+      }
+    },
+    "qc_revision_interpretation": "Only report-rebuild peak RSS changed; all four frozen inputs retain their original hashes."
+  },
+  "qc": {
+    "status": "passed",
+    "verification_sha256": "e77af031da4fba70e13cf8fd9394d54163f395896b346a89d367a889cf46258b",
+    "rebuild_receipt_sha256": "8bd9a0387b57db2a57f13bd3c4b731a0a140def13f3830633929069650248b60",
+    "exact_author_response_reference_points": 0,
+    "empirical_mae": null,
+    "error_abs": "Native-unit worst-case bound from mean ±2 original pixels and anchors ±1 pixel; published SD caps are separate and retained in sealed provenance."
+  },
+  "source_figures": [
+    {
+      "figure": "Supplemental Figure 5",
+      "endpoint": "VIABILITY",
+      "source_url": "https://ars.els-cdn.com/content/image/1-s2.0-S0300483X20303061-mmc5_lrg.jpg",
+      "image_sha256": "ce2d6147068284b97325ac27a401c90e9fbcb1326f3aab6e1bd11886a882cacb",
+      "image_size": [
+        3177,
+        1628
+      ],
+      "frozen_point_json_sha256": "697e1411aef2716f4d165687dbc2859ed89f6d120c9e2a0dbeed98c5bbd55a71",
+      "source_selection": "Circular mean symbols; smooth fitted TC50 curves excluded",
+      "traceability": "Complete pixel coordinates, caps, axis anchors and source point IDs retained in sealed/; visible CSVs carry original point_id, source_locator and error_abs."
+    },
+    {
+      "figure": "Supplemental Figure 6",
+      "endpoint": "ALBUMIN",
+      "source_url": "https://ars.els-cdn.com/content/image/1-s2.0-S0300483X20303061-mmc6_lrg.jpg",
+      "image_sha256": "aafa13ddb432814bab6220a6d9585e9e56bca0d0a6007392e7751f23754275af",
+      "image_size": [
+        3177,
+        1571
+      ],
+      "frozen_point_json_sha256": "6a0c324dfd47ea7dae4d6f242b582d944364374dba746ae850317929bcc384a9",
+      "source_selection": "Circular mean symbols; smooth fitted TC50 curves excluded",
+      "traceability": "Complete pixel coordinates, caps, axis anchors and source point IDs retained in sealed/; visible CSVs carry original point_id, source_locator and error_abs."
+    }
+  ],
+  "aliases": {
+    "Aflatoxin B1": [
+      "aflatoxin-b1",
+      "AFB1"
+    ],
+    "Amiodarone": [],
+    "Azathioprine": [],
+    "Chlorpheniramine": [],
+    "Chlorpromazine": [
+      "CPZ"
+    ],
+    "Dexamethasone": [],
+    "Fluoxetine": [],
+    "Fluphenazine": [],
+    "Glafenine": [],
+    "Iproniazid": [],
+    "Ketoconazole": [],
+    "Meloxicam": [],
+    "Nefazodone": [],
+    "Nevirapine": [],
+    "Nifedipine": [],
+    "Nimesulide": [],
+    "Nitrofurantoin": [],
+    "Tamoxifen": [],
+    "Theophylline": [],
+    "Tolcapone": [],
+    "Troglitazone": [
+      "TRO"
+    ]
+  },
+  "registration": [
+    {
+      "curve_id": "Bircsak2021_S5_Aflatoxin_B1",
+      "compound": "Aflatoxin B1",
+      "endpoint": "VIABILITY",
+      "split": "training",
+      "positive_doses": 6,
+      "context_indices": [
+        0,
+        1,
+        3
+      ],
+      "concentration_unit": "uM",
+      "value_unit": "percent live iHep",
+      "time": "72h",
+      "configuration": "human iHep/HMEC-1/THP-1; OrganoPlate 2-lane; rocker perfusion; endpoint unit=percent live iHep",
+      "source_locator": "Supplemental Fig. 5; Aflatoxin B1",
+      "curve_present": true,
+      "source_gap": "Article describes seven concentrations generally; only independently visible mean symbols are recorded (4–7 per panel).",
+      "generic_seven_level_design_shortfall": 1,
+      "shortfall_interpretation": "Comparison to the general seven-concentration description only; unresolved/undisplayed dose identities remain unknown and are not reconstructed."
+    },
+    {
+      "curve_id": "Bircsak2021_S5_Amiodarone",
+      "compound": "Amiodarone",
+      "endpoint": "VIABILITY",
+      "split": "calibration",
+      "positive_doses": 7,
+      "context_indices": [
+        0,
+        2,
+        4
+      ],
+      "concentration_unit": "uM",
+      "value_unit": "percent live iHep",
+      "time": "72h",
+      "configuration": "human iHep/HMEC-1/THP-1; OrganoPlate 2-lane; rocker perfusion; endpoint unit=percent live iHep",
+      "source_locator": "Supplemental Fig. 5; Amiodarone",
+      "curve_present": true,
+      "source_gap": "Article describes seven concentrations generally; only independently visible mean symbols are recorded (4–7 per panel).",
+      "generic_seven_level_design_shortfall": 0,
+      "shortfall_interpretation": "Comparison to the general seven-concentration description only; unresolved/undisplayed dose identities remain unknown and are not reconstructed."
+    },
+    {
+      "curve_id": "Bircsak2021_S5_Azathioprine",
+      "compound": "Azathioprine",
+      "endpoint": "VIABILITY",
+      "split": "calibration",
+      "positive_doses": 7,
+      "context_indices": [
+        0,
+        2,
+        4
+      ],
+      "concentration_unit": "uM",
+      "value_unit": "percent live iHep",
+      "time": "72h",
+      "configuration": "human iHep/HMEC-1/THP-1; OrganoPlate 2-lane; rocker perfusion; endpoint unit=percent live iHep",
+      "source_locator": "Supplemental Fig. 5; Azathioprine",
+      "curve_present": true,
+      "source_gap": "Article describes seven concentrations generally; only independently visible mean symbols are recorded (4–7 per panel).",
+      "generic_seven_level_design_shortfall": 0,
+      "shortfall_interpretation": "Comparison to the general seven-concentration description only; unresolved/undisplayed dose identities remain unknown and are not reconstructed."
+    },
+    {
+      "curve_id": "Bircsak2021_S5_Chlorpheniramine",
+      "compound": "Chlorpheniramine",
+      "endpoint": "VIABILITY",
+      "split": "calibration",
+      "positive_doses": 7,
+      "context_indices": [
+        0,
+        2,
+        4
+      ],
+      "concentration_unit": "uM",
+      "value_unit": "percent live iHep",
+      "time": "72h",
+      "configuration": "human iHep/HMEC-1/THP-1; OrganoPlate 2-lane; rocker perfusion; endpoint unit=percent live iHep",
+      "source_locator": "Supplemental Fig. 5; Chlorpheniramine",
+      "curve_present": true,
+      "source_gap": "Article describes seven concentrations generally; only independently visible mean symbols are recorded (4–7 per panel).",
+      "generic_seven_level_design_shortfall": 0,
+      "shortfall_interpretation": "Comparison to the general seven-concentration description only; unresolved/undisplayed dose identities remain unknown and are not reconstructed."
+    },
+    {
+      "curve_id": "Bircsak2021_S5_Chlorpromazine",
+      "compound": "Chlorpromazine",
+      "endpoint": "VIABILITY",
+      "split": "test",
+      "positive_doses": 7,
+      "context_indices": [
+        0,
+        2,
+        4
+      ],
+      "concentration_unit": "uM",
+      "value_unit": "percent live iHep",
+      "time": "72h",
+      "configuration": "human iHep/HMEC-1/THP-1; OrganoPlate 2-lane; rocker perfusion; endpoint unit=percent live iHep",
+      "source_locator": "Supplemental Fig. 5; Chlorpromazine",
+      "curve_present": true,
+      "source_gap": "Article describes seven concentrations generally; only independently visible mean symbols are recorded (4–7 per panel).",
+      "generic_seven_level_design_shortfall": 0,
+      "shortfall_interpretation": "Comparison to the general seven-concentration description only; unresolved/undisplayed dose identities remain unknown and are not reconstructed."
+    },
+    {
+      "curve_id": "Bircsak2021_S5_Dexamethasone",
+      "compound": "Dexamethasone",
+      "endpoint": "VIABILITY",
+      "split": "test",
+      "positive_doses": 7,
+      "context_indices": [
+        0,
+        2,
+        4
+      ],
+      "concentration_unit": "uM",
+      "value_unit": "percent live iHep",
+      "time": "72h",
+      "configuration": "human iHep/HMEC-1/THP-1; OrganoPlate 2-lane; rocker perfusion; endpoint unit=percent live iHep",
+      "source_locator": "Supplemental Fig. 5; Dexamethasone",
+      "curve_present": true,
+      "source_gap": "Article describes seven concentrations generally; only independently visible mean symbols are recorded (4–7 per panel).",
+      "generic_seven_level_design_shortfall": 0,
+      "shortfall_interpretation": "Comparison to the general seven-concentration description only; unresolved/undisplayed dose identities remain unknown and are not reconstructed."
+    },
+    {
+      "curve_id": "Bircsak2021_S5_Fluoxetine",
+      "compound": "Fluoxetine",
+      "endpoint": "VIABILITY",
+      "split": "calibration",
+      "positive_doses": 7,
+      "context_indices": [
+        0,
+        2,
+        4
+      ],
+      "concentration_unit": "uM",
+      "value_unit": "percent live iHep",
+      "time": "72h",
+      "configuration": "human iHep/HMEC-1/THP-1; OrganoPlate 2-lane; rocker perfusion; endpoint unit=percent live iHep",
+      "source_locator": "Supplemental Fig. 5; Fluoxetine",
+      "curve_present": true,
+      "source_gap": "Article describes seven concentrations generally; only independently visible mean symbols are recorded (4–7 per panel).",
+      "generic_seven_level_design_shortfall": 0,
+      "shortfall_interpretation": "Comparison to the general seven-concentration description only; unresolved/undisplayed dose identities remain unknown and are not reconstructed."
+    },
+    {
+      "curve_id": "Bircsak2021_S5_Fluphenazine",
+      "compound": "Fluphenazine",
+      "endpoint": "VIABILITY",
+      "split": "calibration",
+      "positive_doses": 6,
+      "context_indices": [
+        0,
+        1,
+        3
+      ],
+      "concentration_unit": "uM",
+      "value_unit": "percent live iHep",
+      "time": "72h",
+      "configuration": "human iHep/HMEC-1/THP-1; OrganoPlate 2-lane; rocker perfusion; endpoint unit=percent live iHep",
+      "source_locator": "Supplemental Fig. 5; Fluphenazine",
+      "curve_present": true,
+      "source_gap": "Article describes seven concentrations generally; only independently visible mean symbols are recorded (4–7 per panel).",
+      "generic_seven_level_design_shortfall": 1,
+      "shortfall_interpretation": "Comparison to the general seven-concentration description only; unresolved/undisplayed dose identities remain unknown and are not reconstructed."
+    },
+    {
+      "curve_id": "Bircsak2021_S5_Glafenine",
+      "compound": "Glafenine",
+      "endpoint": "VIABILITY",
+      "split": "test",
+      "positive_doses": 7,
+      "context_indices": [
+        0,
+        2,
+        4
+      ],
+      "concentration_unit": "uM",
+      "value_unit": "percent live iHep",
+      "time": "72h",
+      "configuration": "human iHep/HMEC-1/THP-1; OrganoPlate 2-lane; rocker perfusion; endpoint unit=percent live iHep",
+      "source_locator": "Supplemental Fig. 5; Glafenine",
+      "curve_present": true,
+      "source_gap": "Article describes seven concentrations generally; only independently visible mean symbols are recorded (4–7 per panel).",
+      "generic_seven_level_design_shortfall": 0,
+      "shortfall_interpretation": "Comparison to the general seven-concentration description only; unresolved/undisplayed dose identities remain unknown and are not reconstructed."
+    },
+    {
+      "curve_id": "Bircsak2021_S5_Iproniazid",
+      "compound": "Iproniazid",
+      "endpoint": "VIABILITY",
+      "split": "training",
+      "positive_doses": 7,
+      "context_indices": [
+        0,
+        2,
+        4
+      ],
+      "concentration_unit": "uM",
+      "value_unit": "percent live iHep",
+      "time": "72h",
+      "configuration": "human iHep/HMEC-1/THP-1; OrganoPlate 2-lane; rocker perfusion; endpoint unit=percent live iHep",
+      "source_locator": "Supplemental Fig. 5; Iproniazid",
+      "curve_present": true,
+      "source_gap": "Article describes seven concentrations generally; only independently visible mean symbols are recorded (4–7 per panel).",
+      "generic_seven_level_design_shortfall": 0,
+      "shortfall_interpretation": "Comparison to the general seven-concentration description only; unresolved/undisplayed dose identities remain unknown and are not reconstructed."
+    },
+    {
+      "curve_id": "Bircsak2021_S5_Ketoconazole",
+      "compound": "Ketoconazole",
+      "endpoint": "VIABILITY",
+      "split": "test",
+      "positive_doses": 7,
+      "context_indices": [
+        0,
+        2,
+        4
+      ],
+      "concentration_unit": "uM",
+      "value_unit": "percent live iHep",
+      "time": "72h",
+      "configuration": "human iHep/HMEC-1/THP-1; OrganoPlate 2-lane; rocker perfusion; endpoint unit=percent live iHep",
+      "source_locator": "Supplemental Fig. 5; Ketoconazole",
+      "curve_present": true,
+      "source_gap": "Article describes seven concentrations generally; only independently visible mean symbols are recorded (4–7 per panel).",
+      "generic_seven_level_design_shortfall": 0,
+      "shortfall_interpretation": "Comparison to the general seven-concentration description only; unresolved/undisplayed dose identities remain unknown and are not reconstructed."
+    },
+    {
+      "curve_id": "Bircsak2021_S5_Meloxicam",
+      "compound": "Meloxicam",
+      "endpoint": "VIABILITY",
+      "split": "calibration",
+      "positive_doses": 7,
+      "context_indices": [
+        0,
+        2,
+        4
+      ],
+      "concentration_unit": "uM",
+      "value_unit": "percent live iHep",
+      "time": "72h",
+      "configuration": "human iHep/HMEC-1/THP-1; OrganoPlate 2-lane; rocker perfusion; endpoint unit=percent live iHep",
+      "source_locator": "Supplemental Fig. 5; Meloxicam",
+      "curve_present": true,
+      "source_gap": "Article describes seven concentrations generally; only independently visible mean symbols are recorded (4–7 per panel).",
+      "generic_seven_level_design_shortfall": 0,
+      "shortfall_interpretation": "Comparison to the general seven-concentration description only; unresolved/undisplayed dose identities remain unknown and are not reconstructed."
+    },
+    {
+      "curve_id": "Bircsak2021_S5_Nefazodone",
+      "compound": "Nefazodone",
+      "endpoint": "VIABILITY",
+      "split": "training",
+      "positive_doses": 7,
+      "context_indices": [
+        0,
+        2,
+        4
+      ],
+      "concentration_unit": "uM",
+      "value_unit": "percent live iHep",
+      "time": "72h",
+      "configuration": "human iHep/HMEC-1/THP-1; OrganoPlate 2-lane; rocker perfusion; endpoint unit=percent live iHep",
+      "source_locator": "Supplemental Fig. 5; Nefazodone",
+      "curve_present": true,
+      "source_gap": "Article describes seven concentrations generally; only independently visible mean symbols are recorded (4–7 per panel).",
+      "generic_seven_level_design_shortfall": 0,
+      "shortfall_interpretation": "Comparison to the general seven-concentration description only; unresolved/undisplayed dose identities remain unknown and are not reconstructed."
+    },
+    {
+      "curve_id": "Bircsak2021_S5_Nevirapine",
+      "compound": "Nevirapine",
+      "endpoint": "VIABILITY",
+      "split": "calibration",
+      "positive_doses": 7,
+      "context_indices": [
+        0,
+        2,
+        4
+      ],
+      "concentration_unit": "uM",
+      "value_unit": "percent live iHep",
+      "time": "72h",
+      "configuration": "human iHep/HMEC-1/THP-1; OrganoPlate 2-lane; rocker perfusion; endpoint unit=percent live iHep",
+      "source_locator": "Supplemental Fig. 5; Nevirapine",
+      "curve_present": true,
+      "source_gap": "Article describes seven concentrations generally; only independently visible mean symbols are recorded (4–7 per panel).",
+      "generic_seven_level_design_shortfall": 0,
+      "shortfall_interpretation": "Comparison to the general seven-concentration description only; unresolved/undisplayed dose identities remain unknown and are not reconstructed."
+    },
+    {
+      "curve_id": "Bircsak2021_S5_Nifedipine",
+      "compound": "Nifedipine",
+      "endpoint": "VIABILITY",
+      "split": "training",
+      "positive_doses": 7,
+      "context_indices": [
+        0,
+        2,
+        4
+      ],
+      "concentration_unit": "uM",
+      "value_unit": "percent live iHep",
+      "time": "72h",
+      "configuration": "human iHep/HMEC-1/THP-1; OrganoPlate 2-lane; rocker perfusion; endpoint unit=percent live iHep",
+      "source_locator": "Supplemental Fig. 5; Nifedipine",
+      "curve_present": true,
+      "source_gap": "Article describes seven concentrations generally; only independently visible mean symbols are recorded (4–7 per panel).",
+      "generic_seven_level_design_shortfall": 0,
+      "shortfall_interpretation": "Comparison to the general seven-concentration description only; unresolved/undisplayed dose identities remain unknown and are not reconstructed."
+    },
+    {
+      "curve_id": "Bircsak2021_S5_Nimesulide",
+      "compound": "Nimesulide",
+      "endpoint": "VIABILITY",
+      "split": "training",
+      "positive_doses": 7,
+      "context_indices": [
+        0,
+        2,
+        4
+      ],
+      "concentration_unit": "uM",
+      "value_unit": "percent live iHep",
+      "time": "72h",
+      "configuration": "human iHep/HMEC-1/THP-1; OrganoPlate 2-lane; rocker perfusion; endpoint unit=percent live iHep",
+      "source_locator": "Supplemental Fig. 5; Nimesulide",
+      "curve_present": true,
+      "source_gap": "Article describes seven concentrations generally; only independently visible mean symbols are recorded (4–7 per panel).",
+      "generic_seven_level_design_shortfall": 0,
+      "shortfall_interpretation": "Comparison to the general seven-concentration description only; unresolved/undisplayed dose identities remain unknown and are not reconstructed."
+    },
+    {
+      "curve_id": "Bircsak2021_S5_Nitrofurantoin",
+      "compound": "Nitrofurantoin",
+      "endpoint": "VIABILITY",
+      "split": "calibration",
+      "positive_doses": 7,
+      "context_indices": [
+        0,
+        2,
+        4
+      ],
+      "concentration_unit": "uM",
+      "value_unit": "percent live iHep",
+      "time": "72h",
+      "configuration": "human iHep/HMEC-1/THP-1; OrganoPlate 2-lane; rocker perfusion; endpoint unit=percent live iHep",
+      "source_locator": "Supplemental Fig. 5; Nitrofurantoin",
+      "curve_present": true,
+      "source_gap": "Article describes seven concentrations generally; only independently visible mean symbols are recorded (4–7 per panel).",
+      "generic_seven_level_design_shortfall": 0,
+      "shortfall_interpretation": "Comparison to the general seven-concentration description only; unresolved/undisplayed dose identities remain unknown and are not reconstructed."
+    },
+    {
+      "curve_id": "Bircsak2021_S5_Tamoxifen",
+      "compound": "Tamoxifen",
+      "endpoint": "VIABILITY",
+      "split": "test",
+      "positive_doses": 7,
+      "context_indices": [
+        0,
+        2,
+        4
+      ],
+      "concentration_unit": "uM",
+      "value_unit": "percent live iHep",
+      "time": "72h",
+      "configuration": "human iHep/HMEC-1/THP-1; OrganoPlate 2-lane; rocker perfusion; endpoint unit=percent live iHep",
+      "source_locator": "Supplemental Fig. 5; Tamoxifen",
+      "curve_present": true,
+      "source_gap": "Article describes seven concentrations generally; only independently visible mean symbols are recorded (4–7 per panel).",
+      "generic_seven_level_design_shortfall": 0,
+      "shortfall_interpretation": "Comparison to the general seven-concentration description only; unresolved/undisplayed dose identities remain unknown and are not reconstructed."
+    },
+    {
+      "curve_id": "Bircsak2021_S5_Theophylline",
+      "compound": "Theophylline",
+      "endpoint": "VIABILITY",
+      "split": "test",
+      "positive_doses": 6,
+      "context_indices": [
+        0,
+        1,
+        3
+      ],
+      "concentration_unit": "uM",
+      "value_unit": "percent live iHep",
+      "time": "72h",
+      "configuration": "human iHep/HMEC-1/THP-1; OrganoPlate 2-lane; rocker perfusion; endpoint unit=percent live iHep",
+      "source_locator": "Supplemental Fig. 5; Theophylline",
+      "curve_present": true,
+      "source_gap": "Article describes seven concentrations generally; only independently visible mean symbols are recorded (4–7 per panel).",
+      "generic_seven_level_design_shortfall": 1,
+      "shortfall_interpretation": "Comparison to the general seven-concentration description only; unresolved/undisplayed dose identities remain unknown and are not reconstructed."
+    },
+    {
+      "curve_id": "Bircsak2021_S5_Tolcapone",
+      "compound": "Tolcapone",
+      "endpoint": "VIABILITY",
+      "split": "calibration",
+      "positive_doses": 7,
+      "context_indices": [
+        0,
+        2,
+        4
+      ],
+      "concentration_unit": "uM",
+      "value_unit": "percent live iHep",
+      "time": "72h",
+      "configuration": "human iHep/HMEC-1/THP-1; OrganoPlate 2-lane; rocker perfusion; endpoint unit=percent live iHep",
+      "source_locator": "Supplemental Fig. 5; Tolcapone",
+      "curve_present": true,
+      "source_gap": "Article describes seven concentrations generally; only independently visible mean symbols are recorded (4–7 per panel).",
+      "generic_seven_level_design_shortfall": 0,
+      "shortfall_interpretation": "Comparison to the general seven-concentration description only; unresolved/undisplayed dose identities remain unknown and are not reconstructed."
+    },
+    {
+      "curve_id": "Bircsak2021_S5_Troglitazone",
+      "compound": "Troglitazone",
+      "endpoint": "VIABILITY",
+      "split": "training",
+      "positive_doses": 4,
+      "context_indices": [
+        0,
+        1,
+        2
+      ],
+      "concentration_unit": "uM",
+      "value_unit": "percent live iHep",
+      "time": "72h",
+      "configuration": "human iHep/HMEC-1/THP-1; OrganoPlate 2-lane; rocker perfusion; endpoint unit=percent live iHep",
+      "source_locator": "Supplemental Fig. 5; Troglitazone",
+      "curve_present": true,
+      "source_gap": "Article describes seven concentrations generally; only independently visible mean symbols are recorded (4–7 per panel).",
+      "generic_seven_level_design_shortfall": 3,
+      "shortfall_interpretation": "Comparison to the general seven-concentration description only; unresolved/undisplayed dose identities remain unknown and are not reconstructed."
+    },
+    {
+      "curve_id": "Bircsak2021_S6_Aflatoxin_B1",
+      "compound": "Aflatoxin B1",
+      "endpoint": "ALBUMIN",
+      "split": "training",
+      "positive_doses": 6,
+      "context_indices": [
+        0,
+        1,
+        3
+      ],
+      "concentration_unit": "uM",
+      "value_unit": "ng/mL",
+      "time": "72h",
+      "configuration": "human iHep/HMEC-1/THP-1; OrganoPlate 2-lane; rocker perfusion; endpoint unit=ng/mL",
+      "source_locator": "Supplemental Fig. 6; Aflatoxin B1",
+      "curve_present": true,
+      "source_gap": "Article describes seven concentrations generally; only independently visible mean symbols are recorded (4–7 per panel).",
+      "generic_seven_level_design_shortfall": 1,
+      "shortfall_interpretation": "Comparison to the general seven-concentration description only; unresolved/undisplayed dose identities remain unknown and are not reconstructed."
+    },
+    {
+      "curve_id": "Bircsak2021_S6_Amiodarone",
+      "compound": "Amiodarone",
+      "endpoint": "ALBUMIN",
+      "split": "calibration",
+      "positive_doses": 7,
+      "context_indices": [
+        0,
+        2,
+        4
+      ],
+      "concentration_unit": "uM",
+      "value_unit": "ng/mL",
+      "time": "72h",
+      "configuration": "human iHep/HMEC-1/THP-1; OrganoPlate 2-lane; rocker perfusion; endpoint unit=ng/mL",
+      "source_locator": "Supplemental Fig. 6; Amiodarone",
+      "curve_present": true,
+      "source_gap": "Article describes seven concentrations generally; only independently visible mean symbols are recorded (4–7 per panel).",
+      "generic_seven_level_design_shortfall": 0,
+      "shortfall_interpretation": "Comparison to the general seven-concentration description only; unresolved/undisplayed dose identities remain unknown and are not reconstructed."
+    },
+    {
+      "curve_id": "Bircsak2021_S6_Azathioprine",
+      "compound": "Azathioprine",
+      "endpoint": "ALBUMIN",
+      "split": "calibration",
+      "positive_doses": 7,
+      "context_indices": [
+        0,
+        2,
+        4
+      ],
+      "concentration_unit": "uM",
+      "value_unit": "ng/mL",
+      "time": "72h",
+      "configuration": "human iHep/HMEC-1/THP-1; OrganoPlate 2-lane; rocker perfusion; endpoint unit=ng/mL",
+      "source_locator": "Supplemental Fig. 6; Azathioprine",
+      "curve_present": true,
+      "source_gap": "Article describes seven concentrations generally; only independently visible mean symbols are recorded (4–7 per panel).",
+      "generic_seven_level_design_shortfall": 0,
+      "shortfall_interpretation": "Comparison to the general seven-concentration description only; unresolved/undisplayed dose identities remain unknown and are not reconstructed."
+    },
+    {
+      "curve_id": "Bircsak2021_S6_Chlorpheniramine",
+      "compound": "Chlorpheniramine",
+      "endpoint": "ALBUMIN",
+      "split": "calibration",
+      "positive_doses": 7,
+      "context_indices": [
+        0,
+        2,
+        4
+      ],
+      "concentration_unit": "uM",
+      "value_unit": "ng/mL",
+      "time": "72h",
+      "configuration": "human iHep/HMEC-1/THP-1; OrganoPlate 2-lane; rocker perfusion; endpoint unit=ng/mL",
+      "source_locator": "Supplemental Fig. 6; Chlorpheniramine",
+      "curve_present": true,
+      "source_gap": "Article describes seven concentrations generally; only independently visible mean symbols are recorded (4–7 per panel).",
+      "generic_seven_level_design_shortfall": 0,
+      "shortfall_interpretation": "Comparison to the general seven-concentration description only; unresolved/undisplayed dose identities remain unknown and are not reconstructed."
+    },
+    {
+      "curve_id": "Bircsak2021_S6_Chlorpromazine",
+      "compound": "Chlorpromazine",
+      "endpoint": "ALBUMIN",
+      "split": "test",
+      "positive_doses": 7,
+      "context_indices": [
+        0,
+        2,
+        4
+      ],
+      "concentration_unit": "uM",
+      "value_unit": "ng/mL",
+      "time": "72h",
+      "configuration": "human iHep/HMEC-1/THP-1; OrganoPlate 2-lane; rocker perfusion; endpoint unit=ng/mL",
+      "source_locator": "Supplemental Fig. 6; Chlorpromazine",
+      "curve_present": true,
+      "source_gap": "Article describes seven concentrations generally; only independently visible mean symbols are recorded (4–7 per panel).",
+      "generic_seven_level_design_shortfall": 0,
+      "shortfall_interpretation": "Comparison to the general seven-concentration description only; unresolved/undisplayed dose identities remain unknown and are not reconstructed."
+    },
+    {
+      "curve_id": "Bircsak2021_S6_Dexamethasone",
+      "compound": "Dexamethasone",
+      "endpoint": "ALBUMIN",
+      "split": "test",
+      "positive_doses": 7,
+      "context_indices": [
+        0,
+        2,
+        4
+      ],
+      "concentration_unit": "uM",
+      "value_unit": "ng/mL",
+      "time": "72h",
+      "configuration": "human iHep/HMEC-1/THP-1; OrganoPlate 2-lane; rocker perfusion; endpoint unit=ng/mL",
+      "source_locator": "Supplemental Fig. 6; Dexamethasone",
+      "curve_present": true,
+      "source_gap": "Article describes seven concentrations generally; only independently visible mean symbols are recorded (4–7 per panel).",
+      "generic_seven_level_design_shortfall": 0,
+      "shortfall_interpretation": "Comparison to the general seven-concentration description only; unresolved/undisplayed dose identities remain unknown and are not reconstructed."
+    },
+    {
+      "curve_id": "Bircsak2021_S6_Fluoxetine",
+      "compound": "Fluoxetine",
+      "endpoint": "ALBUMIN",
+      "split": "calibration",
+      "positive_doses": 7,
+      "context_indices": [
+        0,
+        2,
+        4
+      ],
+      "concentration_unit": "uM",
+      "value_unit": "ng/mL",
+      "time": "72h",
+      "configuration": "human iHep/HMEC-1/THP-1; OrganoPlate 2-lane; rocker perfusion; endpoint unit=ng/mL",
+      "source_locator": "Supplemental Fig. 6; Fluoxetine",
+      "curve_present": true,
+      "source_gap": "Article describes seven concentrations generally; only independently visible mean symbols are recorded (4–7 per panel).",
+      "generic_seven_level_design_shortfall": 0,
+      "shortfall_interpretation": "Comparison to the general seven-concentration description only; unresolved/undisplayed dose identities remain unknown and are not reconstructed."
+    },
+    {
+      "curve_id": "Bircsak2021_S6_Fluphenazine",
+      "compound": "Fluphenazine",
+      "endpoint": "ALBUMIN",
+      "split": "calibration",
+      "positive_doses": 6,
+      "context_indices": [
+        0,
+        1,
+        3
+      ],
+      "concentration_unit": "uM",
+      "value_unit": "ng/mL",
+      "time": "72h",
+      "configuration": "human iHep/HMEC-1/THP-1; OrganoPlate 2-lane; rocker perfusion; endpoint unit=ng/mL",
+      "source_locator": "Supplemental Fig. 6; Fluphenazine",
+      "curve_present": true,
+      "source_gap": "Article describes seven concentrations generally; only independently visible mean symbols are recorded (4–7 per panel).",
+      "generic_seven_level_design_shortfall": 1,
+      "shortfall_interpretation": "Comparison to the general seven-concentration description only; unresolved/undisplayed dose identities remain unknown and are not reconstructed."
+    },
+    {
+      "curve_id": "Bircsak2021_S6_Glafenine",
+      "compound": "Glafenine",
+      "endpoint": "ALBUMIN",
+      "split": "test",
+      "positive_doses": 7,
+      "context_indices": [
+        0,
+        2,
+        4
+      ],
+      "concentration_unit": "uM",
+      "value_unit": "ng/mL",
+      "time": "72h",
+      "configuration": "human iHep/HMEC-1/THP-1; OrganoPlate 2-lane; rocker perfusion; endpoint unit=ng/mL",
+      "source_locator": "Supplemental Fig. 6; Glafenine",
+      "curve_present": true,
+      "source_gap": "Article describes seven concentrations generally; only independently visible mean symbols are recorded (4–7 per panel).",
+      "generic_seven_level_design_shortfall": 0,
+      "shortfall_interpretation": "Comparison to the general seven-concentration description only; unresolved/undisplayed dose identities remain unknown and are not reconstructed."
+    },
+    {
+      "curve_id": "Bircsak2021_S6_Iproniazid",
+      "compound": "Iproniazid",
+      "endpoint": "ALBUMIN",
+      "split": "training",
+      "positive_doses": 7,
+      "context_indices": [
+        0,
+        2,
+        4
+      ],
+      "concentration_unit": "uM",
+      "value_unit": "ng/mL",
+      "time": "72h",
+      "configuration": "human iHep/HMEC-1/THP-1; OrganoPlate 2-lane; rocker perfusion; endpoint unit=ng/mL",
+      "source_locator": "Supplemental Fig. 6; Iproniazid",
+      "curve_present": true,
+      "source_gap": "Article describes seven concentrations generally; only independently visible mean symbols are recorded (4–7 per panel).",
+      "generic_seven_level_design_shortfall": 0,
+      "shortfall_interpretation": "Comparison to the general seven-concentration description only; unresolved/undisplayed dose identities remain unknown and are not reconstructed."
+    },
+    {
+      "curve_id": "Bircsak2021_S6_Ketoconazole",
+      "compound": "Ketoconazole",
+      "endpoint": "ALBUMIN",
+      "split": "test",
+      "positive_doses": 7,
+      "context_indices": [
+        0,
+        2,
+        4
+      ],
+      "concentration_unit": "uM",
+      "value_unit": "ng/mL",
+      "time": "72h",
+      "configuration": "human iHep/HMEC-1/THP-1; OrganoPlate 2-lane; rocker perfusion; endpoint unit=ng/mL",
+      "source_locator": "Supplemental Fig. 6; Ketoconazole",
+      "curve_present": true,
+      "source_gap": "Article describes seven concentrations generally; only independently visible mean symbols are recorded (4–7 per panel).",
+      "generic_seven_level_design_shortfall": 0,
+      "shortfall_interpretation": "Comparison to the general seven-concentration description only; unresolved/undisplayed dose identities remain unknown and are not reconstructed."
+    },
+    {
+      "curve_id": "Bircsak2021_S6_Meloxicam",
+      "compound": "Meloxicam",
+      "endpoint": "ALBUMIN",
+      "split": "calibration",
+      "positive_doses": 7,
+      "context_indices": [
+        0,
+        2,
+        4
+      ],
+      "concentration_unit": "uM",
+      "value_unit": "ng/mL",
+      "time": "72h",
+      "configuration": "human iHep/HMEC-1/THP-1; OrganoPlate 2-lane; rocker perfusion; endpoint unit=ng/mL",
+      "source_locator": "Supplemental Fig. 6; Meloxicam",
+      "curve_present": true,
+      "source_gap": "Article describes seven concentrations generally; only independently visible mean symbols are recorded (4–7 per panel).",
+      "generic_seven_level_design_shortfall": 0,
+      "shortfall_interpretation": "Comparison to the general seven-concentration description only; unresolved/undisplayed dose identities remain unknown and are not reconstructed."
+    },
+    {
+      "curve_id": "Bircsak2021_S6_Nefazodone",
+      "compound": "Nefazodone",
+      "endpoint": "ALBUMIN",
+      "split": "training",
+      "positive_doses": 7,
+      "context_indices": [
+        0,
+        2,
+        4
+      ],
+      "concentration_unit": "uM",
+      "value_unit": "ng/mL",
+      "time": "72h",
+      "configuration": "human iHep/HMEC-1/THP-1; OrganoPlate 2-lane; rocker perfusion; endpoint unit=ng/mL",
+      "source_locator": "Supplemental Fig. 6; Nefazodone",
+      "curve_present": true,
+      "source_gap": "Article describes seven concentrations generally; only independently visible mean symbols are recorded (4–7 per panel).",
+      "generic_seven_level_design_shortfall": 0,
+      "shortfall_interpretation": "Comparison to the general seven-concentration description only; unresolved/undisplayed dose identities remain unknown and are not reconstructed."
+    },
+    {
+      "curve_id": "Bircsak2021_S6_Nevirapine",
+      "compound": "Nevirapine",
+      "endpoint": "ALBUMIN",
+      "split": "calibration",
+      "positive_doses": 7,
+      "context_indices": [
+        0,
+        2,
+        4
+      ],
+      "concentration_unit": "uM",
+      "value_unit": "ng/mL",
+      "time": "72h",
+      "configuration": "human iHep/HMEC-1/THP-1; OrganoPlate 2-lane; rocker perfusion; endpoint unit=ng/mL",
+      "source_locator": "Supplemental Fig. 6; Nevirapine",
+      "curve_present": true,
+      "source_gap": "Article describes seven concentrations generally; only independently visible mean symbols are recorded (4–7 per panel).",
+      "generic_seven_level_design_shortfall": 0,
+      "shortfall_interpretation": "Comparison to the general seven-concentration description only; unresolved/undisplayed dose identities remain unknown and are not reconstructed."
+    },
+    {
+      "curve_id": "Bircsak2021_S6_Nifedipine",
+      "compound": "Nifedipine",
+      "endpoint": "ALBUMIN",
+      "split": "training",
+      "positive_doses": 7,
+      "context_indices": [
+        0,
+        2,
+        4
+      ],
+      "concentration_unit": "uM",
+      "value_unit": "ng/mL",
+      "time": "72h",
+      "configuration": "human iHep/HMEC-1/THP-1; OrganoPlate 2-lane; rocker perfusion; endpoint unit=ng/mL",
+      "source_locator": "Supplemental Fig. 6; Nifedipine",
+      "curve_present": true,
+      "source_gap": "Article describes seven concentrations generally; only independently visible mean symbols are recorded (4–7 per panel).",
+      "generic_seven_level_design_shortfall": 0,
+      "shortfall_interpretation": "Comparison to the general seven-concentration description only; unresolved/undisplayed dose identities remain unknown and are not reconstructed."
+    },
+    {
+      "curve_id": "Bircsak2021_S6_Nimesulide",
+      "compound": "Nimesulide",
+      "endpoint": "ALBUMIN",
+      "split": "training",
+      "positive_doses": 7,
+      "context_indices": [
+        0,
+        2,
+        4
+      ],
+      "concentration_unit": "uM",
+      "value_unit": "ng/mL",
+      "time": "72h",
+      "configuration": "human iHep/HMEC-1/THP-1; OrganoPlate 2-lane; rocker perfusion; endpoint unit=ng/mL",
+      "source_locator": "Supplemental Fig. 6; Nimesulide",
+      "curve_present": true,
+      "source_gap": "Article describes seven concentrations generally; only independently visible mean symbols are recorded (4–7 per panel).",
+      "generic_seven_level_design_shortfall": 0,
+      "shortfall_interpretation": "Comparison to the general seven-concentration description only; unresolved/undisplayed dose identities remain unknown and are not reconstructed."
+    },
+    {
+      "curve_id": "Bircsak2021_S6_Nitrofurantoin",
+      "compound": "Nitrofurantoin",
+      "endpoint": "ALBUMIN",
+      "split": "calibration",
+      "positive_doses": 7,
+      "context_indices": [
+        0,
+        2,
+        4
+      ],
+      "concentration_unit": "uM",
+      "value_unit": "ng/mL",
+      "time": "72h",
+      "configuration": "human iHep/HMEC-1/THP-1; OrganoPlate 2-lane; rocker perfusion; endpoint unit=ng/mL",
+      "source_locator": "Supplemental Fig. 6; Nitrofurantoin",
+      "curve_present": true,
+      "source_gap": "Article describes seven concentrations generally; only independently visible mean symbols are recorded (4–7 per panel).",
+      "generic_seven_level_design_shortfall": 0,
+      "shortfall_interpretation": "Comparison to the general seven-concentration description only; unresolved/undisplayed dose identities remain unknown and are not reconstructed."
+    },
+    {
+      "curve_id": "Bircsak2021_S6_Tamoxifen",
+      "compound": "Tamoxifen",
+      "endpoint": "ALBUMIN",
+      "split": "test",
+      "positive_doses": 7,
+      "context_indices": [
+        0,
+        2,
+        4
+      ],
+      "concentration_unit": "uM",
+      "value_unit": "ng/mL",
+      "time": "72h",
+      "configuration": "human iHep/HMEC-1/THP-1; OrganoPlate 2-lane; rocker perfusion; endpoint unit=ng/mL",
+      "source_locator": "Supplemental Fig. 6; Tamoxifen",
+      "curve_present": true,
+      "source_gap": "Article describes seven concentrations generally; only independently visible mean symbols are recorded (4–7 per panel).",
+      "generic_seven_level_design_shortfall": 0,
+      "shortfall_interpretation": "Comparison to the general seven-concentration description only; unresolved/undisplayed dose identities remain unknown and are not reconstructed."
+    },
+    {
+      "curve_id": "Bircsak2021_S6_Theophylline",
+      "compound": "Theophylline",
+      "endpoint": "ALBUMIN",
+      "split": "test",
+      "positive_doses": 6,
+      "context_indices": [
+        0,
+        1,
+        3
+      ],
+      "concentration_unit": "uM",
+      "value_unit": "ng/mL",
+      "time": "72h",
+      "configuration": "human iHep/HMEC-1/THP-1; OrganoPlate 2-lane; rocker perfusion; endpoint unit=ng/mL",
+      "source_locator": "Supplemental Fig. 6; Theophylline",
+      "curve_present": true,
+      "source_gap": "Article describes seven concentrations generally; only independently visible mean symbols are recorded (4–7 per panel).",
+      "generic_seven_level_design_shortfall": 1,
+      "shortfall_interpretation": "Comparison to the general seven-concentration description only; unresolved/undisplayed dose identities remain unknown and are not reconstructed."
+    },
+    {
+      "curve_id": "Bircsak2021_S6_Tolcapone",
+      "compound": "Tolcapone",
+      "endpoint": "ALBUMIN",
+      "split": "calibration",
+      "positive_doses": 7,
+      "context_indices": [
+        0,
+        2,
+        4
+      ],
+      "concentration_unit": "uM",
+      "value_unit": "ng/mL",
+      "time": "72h",
+      "configuration": "human iHep/HMEC-1/THP-1; OrganoPlate 2-lane; rocker perfusion; endpoint unit=ng/mL",
+      "source_locator": "Supplemental Fig. 6; Tolcapone",
+      "curve_present": true,
+      "source_gap": "Article describes seven concentrations generally; only independently visible mean symbols are recorded (4–7 per panel).",
+      "generic_seven_level_design_shortfall": 0,
+      "shortfall_interpretation": "Comparison to the general seven-concentration description only; unresolved/undisplayed dose identities remain unknown and are not reconstructed."
+    },
+    {
+      "curve_id": "Bircsak2021_S6_Troglitazone",
+      "compound": "Troglitazone",
+      "endpoint": "ALBUMIN",
+      "split": "training",
+      "positive_doses": 4,
+      "context_indices": [
+        0,
+        1,
+        2
+      ],
+      "concentration_unit": "uM",
+      "value_unit": "ng/mL",
+      "time": "72h",
+      "configuration": "human iHep/HMEC-1/THP-1; OrganoPlate 2-lane; rocker perfusion; endpoint unit=ng/mL",
+      "source_locator": "Supplemental Fig. 6; Troglitazone",
+      "curve_present": true,
+      "source_gap": "Article describes seven concentrations generally; only independently visible mean symbols are recorded (4–7 per panel).",
+      "generic_seven_level_design_shortfall": 3,
+      "shortfall_interpretation": "Comparison to the general seven-concentration description only; unresolved/undisplayed dose identities remain unknown and are not reconstructed."
+    }
+  ],
+  "split_compounds": {
+    "training": [
+      "Troglitazone",
+      "Nimesulide",
+      "Nifedipine",
+      "Nefazodone",
+      "Aflatoxin B1",
+      "Iproniazid"
+    ],
+    "calibration": [
+      "Chlorpheniramine",
+      "Meloxicam",
+      "Amiodarone",
+      "Tolcapone",
+      "Fluoxetine",
+      "Fluphenazine",
+      "Azathioprine",
+      "Nitrofurantoin",
+      "Nevirapine"
+    ],
+    "test": [
+      "Theophylline",
+      "Ketoconazole",
+      "Glafenine",
+      "Dexamethasone",
+      "Chlorpromazine",
+      "Tamoxifen"
+    ]
+  },
+  "missing_keys": {
+    "donor": "blank in all 282 source means",
+    "batch": "absent in source; blank",
+    "chip_id": "individual physical chip identity unavailable; blank",
+    "replicate": "aggregate mean; blank",
+    "biological_n": "reported n=3, not expanded to synthetic chip rows"
+  },
+  "vehicles": {
+    "rows": 0,
+    "file": "vehicle.csv",
+    "reason": "No separately resolved zero-dose vehicle mean was digitized in S5/S6; no control response is synthesized."
+  },
+  "development_exposure": {
+    "per_test_compound": [
+      {
+        "compound": "Theophylline",
+        "endpoints": [
+          "ALBUMIN",
+          "VIABILITY"
+        ],
+        "custodian_read_full_response": true,
+        "custodian_viewed_original_images": true,
+        "exposure_time": "During prior digitization/QC, before this export and before the independent protocol freeze",
+        "source_preparation_only": true,
+        "activities": [
+          "manual circular mean selection",
+          "axis calibration",
+          "visible error-cap extraction",
+          "unit/missingness/provenance checks",
+          "all-source eligibility audit"
+        ],
+        "predictor_fits_by_this_owner": 0,
+        "predictor_selection_by_this_owner": false,
+        "response_based_model_tuning_by_this_owner": false,
+        "old_method_development_use_of_this_Bircsak_response": "No such use in this owner session or its data-only scripts; other sessions beyond the supplied attestations are not audited.",
+        "forecast_owner_report": "Capacity S1 reports metadata/QC only before delivery in its task file and external_status_final.json.",
+        "controller_report": "Current dispatch states schema/compound/dose-count/QC only; complete Bircsak response/image exposure denied by the controller.",
+        "scope_limit": "These are separately attributed self-reports. This custodian has not audited every other agent log or historical dataset. Chemical identity novelty across other screens is unassessed."
+      },
+      {
+        "compound": "Ketoconazole",
+        "endpoints": [
+          "ALBUMIN",
+          "VIABILITY"
+        ],
+        "custodian_read_full_response": true,
+        "custodian_viewed_original_images": true,
+        "exposure_time": "During prior digitization/QC, before this export and before the independent protocol freeze",
+        "source_preparation_only": true,
+        "activities": [
+          "manual circular mean selection",
+          "axis calibration",
+          "visible error-cap extraction",
+          "unit/missingness/provenance checks",
+          "all-source eligibility audit"
+        ],
+        "predictor_fits_by_this_owner": 0,
+        "predictor_selection_by_this_owner": false,
+        "response_based_model_tuning_by_this_owner": false,
+        "old_method_development_use_of_this_Bircsak_response": "No such use in this owner session or its data-only scripts; other sessions beyond the supplied attestations are not audited.",
+        "forecast_owner_report": "Capacity S1 reports metadata/QC only before delivery in its task file and external_status_final.json.",
+        "controller_report": "Current dispatch states schema/compound/dose-count/QC only; complete Bircsak response/image exposure denied by the controller.",
+        "scope_limit": "These are separately attributed self-reports. This custodian has not audited every other agent log or historical dataset. Chemical identity novelty across other screens is unassessed."
+      },
+      {
+        "compound": "Glafenine",
+        "endpoints": [
+          "ALBUMIN",
+          "VIABILITY"
+        ],
+        "custodian_read_full_response": true,
+        "custodian_viewed_original_images": true,
+        "exposure_time": "During prior digitization/QC, before this export and before the independent protocol freeze",
+        "source_preparation_only": true,
+        "activities": [
+          "manual circular mean selection",
+          "axis calibration",
+          "visible error-cap extraction",
+          "unit/missingness/provenance checks",
+          "all-source eligibility audit"
+        ],
+        "predictor_fits_by_this_owner": 0,
+        "predictor_selection_by_this_owner": false,
+        "response_based_model_tuning_by_this_owner": false,
+        "old_method_development_use_of_this_Bircsak_response": "No such use in this owner session or its data-only scripts; other sessions beyond the supplied attestations are not audited.",
+        "forecast_owner_report": "Capacity S1 reports metadata/QC only before delivery in its task file and external_status_final.json.",
+        "controller_report": "Current dispatch states schema/compound/dose-count/QC only; complete Bircsak response/image exposure denied by the controller.",
+        "scope_limit": "These are separately attributed self-reports. This custodian has not audited every other agent log or historical dataset. Chemical identity novelty across other screens is unassessed."
+      },
+      {
+        "compound": "Dexamethasone",
+        "endpoints": [
+          "ALBUMIN",
+          "VIABILITY"
+        ],
+        "custodian_read_full_response": true,
+        "custodian_viewed_original_images": true,
+        "exposure_time": "During prior digitization/QC, before this export and before the independent protocol freeze",
+        "source_preparation_only": true,
+        "activities": [
+          "manual circular mean selection",
+          "axis calibration",
+          "visible error-cap extraction",
+          "unit/missingness/provenance checks",
+          "all-source eligibility audit"
+        ],
+        "predictor_fits_by_this_owner": 0,
+        "predictor_selection_by_this_owner": false,
+        "response_based_model_tuning_by_this_owner": false,
+        "old_method_development_use_of_this_Bircsak_response": "No such use in this owner session or its data-only scripts; other sessions beyond the supplied attestations are not audited.",
+        "forecast_owner_report": "Capacity S1 reports metadata/QC only before delivery in its task file and external_status_final.json.",
+        "controller_report": "Current dispatch states schema/compound/dose-count/QC only; complete Bircsak response/image exposure denied by the controller.",
+        "scope_limit": "These are separately attributed self-reports. This custodian has not audited every other agent log or historical dataset. Chemical identity novelty across other screens is unassessed."
+      },
+      {
+        "compound": "Chlorpromazine",
+        "endpoints": [
+          "ALBUMIN",
+          "VIABILITY"
+        ],
+        "custodian_read_full_response": true,
+        "custodian_viewed_original_images": true,
+        "exposure_time": "During prior digitization/QC, before this export and before the independent protocol freeze",
+        "source_preparation_only": true,
+        "activities": [
+          "manual circular mean selection",
+          "axis calibration",
+          "visible error-cap extraction",
+          "unit/missingness/provenance checks",
+          "all-source eligibility audit"
+        ],
+        "predictor_fits_by_this_owner": 0,
+        "predictor_selection_by_this_owner": false,
+        "response_based_model_tuning_by_this_owner": false,
+        "old_method_development_use_of_this_Bircsak_response": "No such use in this owner session or its data-only scripts; other sessions beyond the supplied attestations are not audited.",
+        "forecast_owner_report": "Capacity S1 reports metadata/QC only before delivery in its task file and external_status_final.json.",
+        "controller_report": "Current dispatch states schema/compound/dose-count/QC only; complete Bircsak response/image exposure denied by the controller.",
+        "scope_limit": "These are separately attributed self-reports. This custodian has not audited every other agent log or historical dataset. Chemical identity novelty across other screens is unassessed."
+      },
+      {
+        "compound": "Tamoxifen",
+        "endpoints": [
+          "ALBUMIN",
+          "VIABILITY"
+        ],
+        "custodian_read_full_response": true,
+        "custodian_viewed_original_images": true,
+        "exposure_time": "During prior digitization/QC, before this export and before the independent protocol freeze",
+        "source_preparation_only": true,
+        "activities": [
+          "manual circular mean selection",
+          "axis calibration",
+          "visible error-cap extraction",
+          "unit/missingness/provenance checks",
+          "all-source eligibility audit"
+        ],
+        "predictor_fits_by_this_owner": 0,
+        "predictor_selection_by_this_owner": false,
+        "response_based_model_tuning_by_this_owner": false,
+        "old_method_development_use_of_this_Bircsak_response": "No such use in this owner session or its data-only scripts; other sessions beyond the supplied attestations are not audited.",
+        "forecast_owner_report": "Capacity S1 reports metadata/QC only before delivery in its task file and external_status_final.json.",
+        "controller_report": "Current dispatch states schema/compound/dose-count/QC only; complete Bircsak response/image exposure denied by the controller.",
+        "scope_limit": "These are separately attributed self-reports. This custodian has not audited every other agent log or historical dataset. Chemical identity novelty across other screens is unassessed."
+      }
+    ],
+    "custodian_scope": "Own source acquisition, digitization, QC scripts and current/previous own session; supplied protocol and the capacity owner task/external-status attestation. No model developer role.",
+    "evidence": [
+      {
+        "path": "<local-input>/external_status_final.json",
+        "sha256": "2469c0d5c93228e2e3208eb4ff9c4f557e57132b9a8b98f1c12656aa37ab3b33"
+      },
+      {
+        "path": "<local-input>/论文容量-Series1.md",
+        "note": "Capacity S1 task attestation read in current export turn",
+        "sha256": "744d4a6a7edac99901ea4472ab1c6f74be52add50f0392835d299b7e0a6292d3"
+      }
+    ],
+    "prior_Ewart_Yuan": "Known retrospective development data; protocol assigns overlapping Troglitazone to training.",
+    "cross_session_qualification": "Controller holds and merges any wider exposure records. This export preserves attribution and makes no independent assertion that uninspected sessions never read data."
+  },
+  "visible_input_files": [
+    "training.csv",
+    "calibration.csv",
+    "test_contexts.csv",
+    "test_dose_metadata.csv",
+    "vehicle.csv"
+  ],
+  "metadata_allowed_fields": [
+    "dataset",
+    "compound",
+    "endpoint",
+    "configuration",
+    "time",
+    "concentration",
+    "concentration_unit",
+    "curve_id",
+    "point_id",
+    "dose_index",
+    "is_context",
+    "value_unit"
+  ],
+  "reference_status": "sealed_unrevealed",
+  "shared_disk_boundary": "Procedural entrypoint isolation on shared filesystem. sealed permissions 0700/0600; same-user agents are not cryptographically isolated. Existing parent source package stays unchanged.",
+  "operator_rule": "Forecast owner enters through this package. sealed/ and original parent response/image/pixel/source-code files remain custodian-only until the separate reveal instruction.",
+  "resources": {
+    "paid_cost": 0,
+    "predictor_fits": 0,
+    "background_jobs": 0
+  },
+  "source_original_file_count": 395
+}

@@ -1,0 +1,422 @@
+{
+  "status": "released_after_prediction_seal",
+  "required_status_after_release": "released_after_prediction_seal",
+  "owner_session": "01a10729-5d5d-7540-8b0e-b587ba605f4b",
+  "prediction_manifest_sha256": "6e74e84ec97a5536390e9917897eab6898fafee46cc450edb987ebb09e30652e",
+  "predictions_sha256": "a870e254f0086766a124d844e35bb381087786de8e9f03c9573fb5bda32b5187",
+  "choices_sha256": "33638760668389f608423de8bdbc0a4c0cb675bcf11120a50aa71eda63248973",
+  "reference_commitment_sha256": "72462d8cdff2ffdb031a689c4153248efdb2d9a213bfbc9651fb18a716366d1b",
+  "reference_sha256": "7acf9090ef664218f3b927241f6156e776c73d5f16df9e8a520fedfd257a2128",
+  "received_prediction_at": "2026-10-05T01:33:24.876099+09:00",
+  "released_at": "2026-10-05T01:33:24.887954+09:00",
+  "instructions": "Custodian fills actual timezone-aware receipt/release times and release status after checking all manifest artifacts and 46-query coverage. Preserve the original six packet files byte-for-byte; return the identical committed reference separately as reference_reveal.csv and this filled receipt as reveal_receipt.json. This template grants no reveal permission.",
+  "verified_at": "2026-10-05T01:33:24.887438+09:00",
+  "prediction_sealed_at": "2026-10-04T16:19:13.980225+00:00",
+  "reference_sealed_at": "2026-10-04T16:13:53.796287+00:00",
+  "received_prediction_at_definition": "Actual intake of original manifest bytes by this custodian verification process; notification time is not substituted.",
+  "released_at_definition": "Observed immediately after atomic publication of reference_reveal.csv; readback was byte-identical.",
+  "authorization": "User explicitly authorized release immediately after frozen verification conditions pass in this task turn.",
+  "reference_path": "<local-input>/reference_reveal.csv",
+  "reference_rows": 82,
+  "observed_context_rows": 36,
+  "held_query_rows": 46,
+  "query_rows_per_method": {
+    "fixed50": 46,
+    "interpolation": 46,
+    "selected": 46
+  },
+  "prediction_rows": 138,
+  "action_rows": 36,
+  "test_drugs": 6,
+  "endpoints": 2,
+  "test_curves": 12,
+  "exact_string_query_key_match": true,
+  "frozen_context_indices_match": true,
+  "next_dose_and_model_linkage_match": true,
+  "reference_byte_identity": true,
+  "original_sealed_reference_and_visible_inputs_preserved": true,
+  "original_packet_and_run_file_count": 35,
+  "original_packet_and_run_hashes_preserved": true,
+  "manifest_listed_file_hashes_verified": 20,
+  "hash_checks": [
+    {
+      "category": "manifest",
+      "name": "prediction_manifest.json",
+      "path": "<local-input>/prediction_manifest.json",
+      "expected_sha256": "6e74e84ec97a5536390e9917897eab6898fafee46cc450edb987ebb09e30652e",
+      "actual_sha256": "6e74e84ec97a5536390e9917897eab6898fafee46cc450edb987ebb09e30652e",
+      "matches": true
+    },
+    {
+      "category": "input",
+      "name": "training.csv",
+      "path": "<local-input>/training.csv",
+      "expected_sha256": "fa67152ff259f1d670d677d783f73992800d298adc6f481e41cabef8ade67c35",
+      "actual_sha256": "fa67152ff259f1d670d677d783f73992800d298adc6f481e41cabef8ade67c35",
+      "matches": true
+    },
+    {
+      "category": "input",
+      "name": "calibration.csv",
+      "path": "<local-input>/calibration.csv",
+      "expected_sha256": "0934dc3a113229cecac85ffb2cbd4b9e53eb9d12cf02e6e7700041c6de2bad81",
+      "actual_sha256": "0934dc3a113229cecac85ffb2cbd4b9e53eb9d12cf02e6e7700041c6de2bad81",
+      "matches": true
+    },
+    {
+      "category": "input",
+      "name": "test_contexts.csv",
+      "path": "<local-input>/test_contexts.csv",
+      "expected_sha256": "d281e602d65c8712e9adaf57035ba7abcb101ff956a29240324950afc92170f4",
+      "actual_sha256": "d281e602d65c8712e9adaf57035ba7abcb101ff956a29240324950afc92170f4",
+      "matches": true
+    },
+    {
+      "category": "input",
+      "name": "test_dose_metadata.csv",
+      "path": "<local-input>/test_dose_metadata.csv",
+      "expected_sha256": "660b4bc18cf00c5e121cecca6d23e965dd7bcccef9105a83a1ebaf7afbf829d5",
+      "actual_sha256": "660b4bc18cf00c5e121cecca6d23e965dd7bcccef9105a83a1ebaf7afbf829d5",
+      "matches": true
+    },
+    {
+      "category": "input",
+      "name": "source_owner_receipt.json",
+      "path": "<local-input>/source_owner_receipt.json",
+      "expected_sha256": "bc4e41a51513ea10e53f2500bd1681d6c8453c4e925edc5ffcf1c847e67e087d",
+      "actual_sha256": "bc4e41a51513ea10e53f2500bd1681d6c8453c4e925edc5ffcf1c847e67e087d",
+      "matches": true
+    },
+    {
+      "category": "input",
+      "name": "reference_commitment.json",
+      "path": "<local-input>/reference_commitment.json",
+      "expected_sha256": "72462d8cdff2ffdb031a689c4153248efdb2d9a213bfbc9651fb18a716366d1b",
+      "actual_sha256": "72462d8cdff2ffdb031a689c4153248efdb2d9a213bfbc9651fb18a716366d1b",
+      "matches": true
+    },
+    {
+      "category": "artifact",
+      "name": "probe.json",
+      "path": "<local-input>/probe.json",
+      "expected_sha256": "e25c30be2f22974b393d3f15e2cdbcc89e3917de2ee970692e32b3979ebb1dc0",
+      "actual_sha256": "e25c30be2f22974b393d3f15e2cdbcc89e3917de2ee970692e32b3979ebb1dc0",
+      "matches": true
+    },
+    {
+      "category": "artifact",
+      "name": "packet_validation.json",
+      "path": "<local-input>/packet_validation.json",
+      "expected_sha256": "25d8dce6edda32bc4e8f894e76ec4a5c2882cb07021c4c8df7a45754a51a5465",
+      "actual_sha256": "25d8dce6edda32bc4e8f894e76ec4a5c2882cb07021c4c8df7a45754a51a5465",
+      "matches": true
+    },
+    {
+      "category": "artifact",
+      "name": "model_ALBUMIN_fixed50.joblib",
+      "path": "<local-input>/model_ALBUMIN_fixed50.joblib",
+      "expected_sha256": "b4333f24e02654341ce36f55267a3d40ce7bde756b3388aadb07990920b72901",
+      "actual_sha256": "b4333f24e02654341ce36f55267a3d40ce7bde756b3388aadb07990920b72901",
+      "matches": true
+    },
+    {
+      "category": "artifact",
+      "name": "model_VIABILITY_fixed50.joblib",
+      "path": "<local-input>/model_VIABILITY_fixed50.joblib",
+      "expected_sha256": "e94ec7721fd57c3015fd2a2e0bc227f581810294e127c3a81fa1b0d823ad8d8b",
+      "actual_sha256": "e94ec7721fd57c3015fd2a2e0bc227f581810294e127c3a81fa1b0d823ad8d8b",
+      "matches": true
+    },
+    {
+      "category": "artifact",
+      "name": "model_VIABILITY_adaptive10.joblib",
+      "path": "<local-input>/model_VIABILITY_adaptive10.joblib",
+      "expected_sha256": "e94ec7721fd57c3015fd2a2e0bc227f581810294e127c3a81fa1b0d823ad8d8b",
+      "actual_sha256": "e94ec7721fd57c3015fd2a2e0bc227f581810294e127c3a81fa1b0d823ad8d8b",
+      "matches": true
+    },
+    {
+      "category": "artifact",
+      "name": "selection.json",
+      "path": "<local-input>/selection.json",
+      "expected_sha256": "5ed45da975f5f5df110bab2eb7dea275ed4d02279a59cb2aefa42ff673e6611e",
+      "actual_sha256": "5ed45da975f5f5df110bab2eb7dea275ed4d02279a59cb2aefa42ff673e6611e",
+      "matches": true
+    },
+    {
+      "category": "artifact",
+      "name": "fit_audit.json",
+      "path": "<local-input>/fit_audit.json",
+      "expected_sha256": "672c5eb933859479dafac355db34e693f2d1986eb877b3a0185e55d3f9101f7e",
+      "actual_sha256": "672c5eb933859479dafac355db34e693f2d1986eb877b3a0185e55d3f9101f7e",
+      "matches": true
+    },
+    {
+      "category": "artifact",
+      "name": "calibration.json",
+      "path": "<local-input>/calibration.json",
+      "expected_sha256": "d329ec66128f20c0fe9f4f29ebeba87646ced8bad7f69c8c4c23aed089126ea2",
+      "actual_sha256": "d329ec66128f20c0fe9f4f29ebeba87646ced8bad7f69c8c4c23aed089126ea2",
+      "matches": true
+    },
+    {
+      "category": "artifact",
+      "name": "calibration_predictions.csv",
+      "path": "<local-input>/calibration_predictions.csv",
+      "expected_sha256": "4352763e3795d4cd38bc658808dab3d7b7d58e4b3ce6d5b55f302204a89a237c",
+      "actual_sha256": "4352763e3795d4cd38bc658808dab3d7b7d58e4b3ce6d5b55f302204a89a237c",
+      "matches": true
+    },
+    {
+      "category": "artifact",
+      "name": "predictions.csv",
+      "path": "<local-input>/predictions.csv",
+      "expected_sha256": "a870e254f0086766a124d844e35bb381087786de8e9f03c9573fb5bda32b5187",
+      "actual_sha256": "a870e254f0086766a124d844e35bb381087786de8e9f03c9573fb5bda32b5187",
+      "matches": true
+    },
+    {
+      "category": "artifact",
+      "name": "choices.csv",
+      "path": "<local-input>/choices.csv",
+      "expected_sha256": "33638760668389f608423de8bdbc0a4c0cb675bcf11120a50aa71eda63248973",
+      "actual_sha256": "33638760668389f608423de8bdbc0a4c0cb675bcf11120a50aa71eda63248973",
+      "matches": true
+    },
+    {
+      "category": "code",
+      "name": "runner",
+      "path": "<local-input>/paper_capacity_independent.py",
+      "expected_sha256": "de1b8c1870050b3fee74f62e2515aaca3f69126b8ba95993df8015af627a4d7d",
+      "actual_sha256": "de1b8c1870050b3fee74f62e2515aaca3f69126b8ba95993df8015af627a4d7d",
+      "matches": true
+    },
+    {
+      "category": "code",
+      "name": "capacity_core",
+      "path": "<local-input>/paper_capacity.py",
+      "expected_sha256": "711d059feb45bea2f1d299b5a9e934f8183165bf8af437e185c7c6e50d974d9b",
+      "actual_sha256": "711d059feb45bea2f1d299b5a9e934f8183165bf8af437e185c7c6e50d974d9b",
+      "matches": true
+    },
+    {
+      "category": "code",
+      "name": "model_source",
+      "path": "<local-input>/chip_forecast.py",
+      "expected_sha256": "3d02dd3a1bc57e8c53f701a6005c8d5e9d8ad6a15a57cdec3f22b27066015897",
+      "actual_sha256": "3d02dd3a1bc57e8c53f701a6005c8d5e9d8ad6a15a57cdec3f22b27066015897",
+      "matches": true
+    },
+    {
+      "category": "protocol",
+      "name": "independent_protocol.json",
+      "path": "<local-input>/independent_protocol.json",
+      "expected_sha256": "8213c89526adfad2ef5f5702634520b931010436ff8317bf5c5ded3e06a286fb",
+      "actual_sha256": "8213c89526adfad2ef5f5702634520b931010436ff8317bf5c5ded3e06a286fb",
+      "matches": true
+    },
+    {
+      "category": "protocol",
+      "name": "independent_protocol.json",
+      "path": "<local-input>/independent_protocol.json",
+      "expected_sha256": "8213c89526adfad2ef5f5702634520b931010436ff8317bf5c5ded3e06a286fb",
+      "actual_sha256": "8213c89526adfad2ef5f5702634520b931010436ff8317bf5c5ded3e06a286fb",
+      "matches": true
+    },
+    {
+      "category": "candidate_protocol",
+      "name": "protocol.json",
+      "path": "<local-input>/protocol.json",
+      "expected_sha256": "e4d8c4138dbc2bd42f2d29e4e3c5945a3c0d36c7858e81f4979bb7c6b026a9ad",
+      "actual_sha256": "e4d8c4138dbc2bd42f2d29e4e3c5945a3c0d36c7858e81f4979bb7c6b026a9ad",
+      "matches": true
+    },
+    {
+      "category": "source",
+      "name": "curve_inventory.json",
+      "path": "<local-input>/curve_inventory.json",
+      "expected_sha256": "26d915de9cd44a7d5b3316e08fa520c6b49c96e8378b584d85654609c8821b63",
+      "actual_sha256": "26d915de9cd44a7d5b3316e08fa520c6b49c96e8378b584d85654609c8821b63",
+      "matches": true
+    },
+    {
+      "category": "source",
+      "name": "normalized_digitized.csv",
+      "path": "<local-input>/normalized_digitized.csv",
+      "expected_sha256": "0097cbd26f910180df2e4307024fcdf43e27b2b3c18e4d991c20e1694d7ed984",
+      "actual_sha256": "0097cbd26f910180df2e4307024fcdf43e27b2b3c18e4d991c20e1694d7ed984",
+      "matches": true
+    },
+    {
+      "category": "source",
+      "name": "digitization_points.csv",
+      "path": "<local-input>/digitization_points.csv",
+      "expected_sha256": "73f72c2172a71af19132e7059f8ad0cdd5b2bd17e8a88bc00e437569b0413f68",
+      "actual_sha256": "73f72c2172a71af19132e7059f8ad0cdd5b2bd17e8a88bc00e437569b0413f68",
+      "matches": true
+    },
+    {
+      "category": "source",
+      "name": "vehicle_digitized.csv",
+      "path": "<local-input>/vehicle_digitized.csv",
+      "expected_sha256": "15cd480503ca9491c6f450e752af4ac7169751ff3991019626b5b53c59822a51",
+      "actual_sha256": "15cd480503ca9491c6f450e752af4ac7169751ff3991019626b5b53c59822a51",
+      "matches": true
+    },
+    {
+      "category": "sealed_reference",
+      "name": "test_reference.csv",
+      "path": "<local-input>/test_reference.csv",
+      "expected_sha256": "7acf9090ef664218f3b927241f6156e776c73d5f16df9e8a520fedfd257a2128",
+      "actual_sha256": "7acf9090ef664218f3b927241f6156e776c73d5f16df9e8a520fedfd257a2128",
+      "matches": true
+    },
+    {
+      "category": "original_packet",
+      "name": "training.csv",
+      "path": "<local-input>/training.csv",
+      "expected_sha256": "fa67152ff259f1d670d677d783f73992800d298adc6f481e41cabef8ade67c35",
+      "actual_sha256": "fa67152ff259f1d670d677d783f73992800d298adc6f481e41cabef8ade67c35",
+      "matches": true
+    },
+    {
+      "category": "original_packet",
+      "name": "calibration.csv",
+      "path": "<local-input>/calibration.csv",
+      "expected_sha256": "0934dc3a113229cecac85ffb2cbd4b9e53eb9d12cf02e6e7700041c6de2bad81",
+      "actual_sha256": "0934dc3a113229cecac85ffb2cbd4b9e53eb9d12cf02e6e7700041c6de2bad81",
+      "matches": true
+    },
+    {
+      "category": "original_packet",
+      "name": "test_contexts.csv",
+      "path": "<local-input>/test_contexts.csv",
+      "expected_sha256": "d281e602d65c8712e9adaf57035ba7abcb101ff956a29240324950afc92170f4",
+      "actual_sha256": "d281e602d65c8712e9adaf57035ba7abcb101ff956a29240324950afc92170f4",
+      "matches": true
+    },
+    {
+      "category": "original_packet",
+      "name": "test_dose_metadata.csv",
+      "path": "<local-input>/test_dose_metadata.csv",
+      "expected_sha256": "660b4bc18cf00c5e121cecca6d23e965dd7bcccef9105a83a1ebaf7afbf829d5",
+      "actual_sha256": "660b4bc18cf00c5e121cecca6d23e965dd7bcccef9105a83a1ebaf7afbf829d5",
+      "matches": true
+    },
+    {
+      "category": "original_packet",
+      "name": "vehicle.csv",
+      "path": "<local-input>/vehicle.csv",
+      "expected_sha256": "ce0ffc2b4e655250b22df94da054ee467d7ae5154bcbee0571a32be206c6c568",
+      "actual_sha256": "ce0ffc2b4e655250b22df94da054ee467d7ae5154bcbee0571a32be206c6c568",
+      "matches": true
+    },
+    {
+      "category": "original_packet",
+      "name": "reference_commitment.json",
+      "path": "<local-input>/reference_commitment.json",
+      "expected_sha256": "72462d8cdff2ffdb031a689c4153248efdb2d9a213bfbc9651fb18a716366d1b",
+      "actual_sha256": "72462d8cdff2ffdb031a689c4153248efdb2d9a213bfbc9651fb18a716366d1b",
+      "matches": true
+    },
+    {
+      "category": "original_packet",
+      "name": "source_owner_receipt.json",
+      "path": "<local-input>/source_owner_receipt.json",
+      "expected_sha256": "bc4e41a51513ea10e53f2500bd1681d6c8453c4e925edc5ffcf1c847e67e087d",
+      "actual_sha256": "bc4e41a51513ea10e53f2500bd1681d6c8453c4e925edc5ffcf1c847e67e087d",
+      "matches": true
+    }
+  ],
+  "curve_coverage": [
+    {
+      "compound": "Chlorpromazine",
+      "endpoint": "ALBUMIN",
+      "positive_doses": 7,
+      "contexts": 3,
+      "held_queries": 4
+    },
+    {
+      "compound": "Chlorpromazine",
+      "endpoint": "VIABILITY",
+      "positive_doses": 7,
+      "contexts": 3,
+      "held_queries": 4
+    },
+    {
+      "compound": "Dexamethasone",
+      "endpoint": "ALBUMIN",
+      "positive_doses": 7,
+      "contexts": 3,
+      "held_queries": 4
+    },
+    {
+      "compound": "Dexamethasone",
+      "endpoint": "VIABILITY",
+      "positive_doses": 7,
+      "contexts": 3,
+      "held_queries": 4
+    },
+    {
+      "compound": "Glafenine",
+      "endpoint": "ALBUMIN",
+      "positive_doses": 7,
+      "contexts": 3,
+      "held_queries": 4
+    },
+    {
+      "compound": "Glafenine",
+      "endpoint": "VIABILITY",
+      "positive_doses": 7,
+      "contexts": 3,
+      "held_queries": 4
+    },
+    {
+      "compound": "Ketoconazole",
+      "endpoint": "ALBUMIN",
+      "positive_doses": 7,
+      "contexts": 3,
+      "held_queries": 4
+    },
+    {
+      "compound": "Ketoconazole",
+      "endpoint": "VIABILITY",
+      "positive_doses": 7,
+      "contexts": 3,
+      "held_queries": 4
+    },
+    {
+      "compound": "Tamoxifen",
+      "endpoint": "ALBUMIN",
+      "positive_doses": 7,
+      "contexts": 3,
+      "held_queries": 4
+    },
+    {
+      "compound": "Tamoxifen",
+      "endpoint": "VIABILITY",
+      "positive_doses": 7,
+      "contexts": 3,
+      "held_queries": 4
+    },
+    {
+      "compound": "Theophylline",
+      "endpoint": "ALBUMIN",
+      "positive_doses": 6,
+      "contexts": 3,
+      "held_queries": 3
+    },
+    {
+      "compound": "Theophylline",
+      "endpoint": "VIABILITY",
+      "positive_doses": 6,
+      "contexts": 3,
+      "held_queries": 3
+    }
+  ],
+  "custodian_verifier_path": "<local-input>/verify_and_reveal.py",
+  "custodian_verifier_sha256": "a3bfe51a2998919197fa5cf8f5d31e12ff55040b1474b132c8917ddfb55f5c6c",
+  "seconds": 0.02160316599838552,
+  "peak_rss_bytes": 23412736,
+  "added_cost": 0
+}

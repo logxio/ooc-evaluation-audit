@@ -1,0 +1,145 @@
+{
+  "schema": "paper.capacity.independent.v1",
+  "frozen_at": "2026-10-04T15:43:51.184564+00:00",
+  "status": "frozen_before_new_response_exposure; awaiting data-owner qualification and isolated packet",
+  "source": "Bircsak2021",
+  "source_snapshot_sha256": {
+    "curve_inventory.json": "26d915de9cd44a7d5b3316e08fa520c6b49c96e8378b584d85654609c8821b63",
+    "normalized_digitized.csv": "0097cbd26f910180df2e4307024fcdf43e27b2b3c18e4d991c20e1694d7ed984",
+    "digitization_points.csv": "73f72c2172a71af19132e7059f8ad0cdd5b2bd17e8a88bc00e437569b0413f68",
+    "vehicle_digitized.csv": "15cd480503ca9491c6f450e752af4ac7169751ff3991019626b5b53c59822a51"
+  },
+  "eligibility": "Data owner confirms circular mean-symbol extraction, four or more distinct positive doses per curve, drug aliases, source license and final calibration QC. Source changes require a labelled input amendment before any predictions. All registered outcomes retained.",
+  "development_exposure": "Only dataset/compound/endpoint/dose-count/unit/issue metadata and response presence counts were exposed; response values and images were withheld. Prior Ewart/Yuan outcomes are retrospective. Chemical novelty across EPA screens is not asserted.",
+  "candidate_family_sha256": "e4d8c4138dbc2bd42f2d29e4e3c5945a3c0d36c7858e81f4979bb7c6b026a9ad",
+  "candidate_family": [
+    {
+      "id": "interpolation",
+      "rule": "none",
+      "alpha": 0.0
+    },
+    {
+      "id": "fixed50_a0.25",
+      "rule": "fixed50",
+      "alpha": 0.25
+    },
+    {
+      "id": "adaptive10_a0.25",
+      "rule": "adaptive10",
+      "alpha": 0.25
+    },
+    {
+      "id": "fixed5_a0.25",
+      "rule": "fixed5",
+      "alpha": 0.25
+    },
+    {
+      "id": "fixed2_a0.25",
+      "rule": "fixed2",
+      "alpha": 0.25
+    },
+    {
+      "id": "fixed50_a0.5",
+      "rule": "fixed50",
+      "alpha": 0.5
+    },
+    {
+      "id": "adaptive10_a0.5",
+      "rule": "adaptive10",
+      "alpha": 0.5
+    },
+    {
+      "id": "fixed5_a0.5",
+      "rule": "fixed5",
+      "alpha": 0.5
+    },
+    {
+      "id": "fixed2_a0.5",
+      "rule": "fixed2",
+      "alpha": 0.5
+    },
+    {
+      "id": "fixed50_a1",
+      "rule": "fixed50",
+      "alpha": 1.0
+    },
+    {
+      "id": "adaptive10_a1",
+      "rule": "adaptive10",
+      "alpha": 1.0
+    },
+    {
+      "id": "fixed5_a1",
+      "rule": "fixed5",
+      "alpha": 1.0
+    },
+    {
+      "id": "fixed2_a1",
+      "rule": "fixed2",
+      "alpha": 1.0
+    }
+  ],
+  "model_source_sha256": "3d02dd3a1bc57e8c53f701a6005c8d5e9d8ad6a15a57cdec3f22b27066015897",
+  "training_drugs": [
+    "Troglitazone",
+    "Nimesulide",
+    "Nifedipine",
+    "Nefazodone",
+    "Aflatoxin B1",
+    "Iproniazid"
+  ],
+  "calibration_drugs": [
+    "Chlorpheniramine",
+    "Meloxicam",
+    "Amiodarone",
+    "Tolcapone",
+    "Fluoxetine",
+    "Fluphenazine",
+    "Azathioprine",
+    "Nitrofurantoin",
+    "Nevirapine"
+  ],
+  "test_drugs": [
+    "Theophylline",
+    "Ketoconazole",
+    "Glafenine",
+    "Dexamethasone",
+    "Chlorpromazine",
+    "Tamoxifen"
+  ],
+  "splitting": "Previous Ewart/Yuan drug identities go to training. Other source drug names ranked by SHA256(capacity-external-v1|name); fill training to 6, next 9 calibrate, last 6 test. Same drug membership across both endpoints.",
+  "endpoints": [
+    "ALBUMIN",
+    "VIABILITY"
+  ],
+  "context_indices": "For L sorted distinct positive doses, use indices [0, floor((L-1)/3), floor(2*(L-1)/3)] per curve; each endpoint uses exactly three observed concentrations. Expose candidate dose metadata, conceal other responses.",
+  "preprocessing": "Each endpoint keeps native published concentration and response units. No cross-endpoint pooling, no Ewart xCmax to Bircsak uM conversion, no invented Cmax. Source-native training avoids cross-source unit substitution.",
+  "model_selection": "Same frozen 13 candidates. Train only on six training drugs, inner leave-one-drug-out mean MAE using the fixed three-point context rule. Enumerate all C(L,3) training designs. Exact ties within 1e-12 use original candidate order. Fit selected and fixed50 on six training drugs; interpolation remains comparator. Calibration/test drugs are absent from every model/analog/profile fit and candidate choice.",
+  "calibration": "Nine separate drugs calibrate a 90% simultaneous prediction envelope: per drug take maximum absolute held-dose error across both endpoints divided by each endpoint context scale max(abs(lowest-context response), eps_endpoint). eps_endpoint=1e-6*median(abs(all training responses)), floored at 1e-12. q is sorted score ceil((9+1)*0.90)=9. Halfwidth=q*context scale. This is conditional on exchangeability of drug-level curves and targets digitized means. 95% would require the infinite sentinel at n=9.",
+  "research_decision": "Per endpoint flag a 50% response reduction relative to its lowest observed dose. If an observed context value or any upper prediction bound is <= 0.5*lowest response, output report_reduction. If all observed contexts and all lower bounds are > threshold, output report_no_reduction. Otherwise output measure_next. If lowest context <=0, output measure_next and preserve the curve in MAE analysis. This is a research threshold, separate from validated clinical toxicity classification.",
+  "next_point": "Among unmeasured concentrations, first prioritize intervals containing the threshold, then maximize distance in log10 concentration from the nearest measured dose; ties choose larger concentration. Uses observed values, model predictions and dose metadata only. Record next dose for every curve before revealing references.",
+  "freeze_order": [
+    "data owner final QC/exposure receipt and source hashes",
+    "data owner exports train full curves, calibration full curves, test three-point values and dose metadata; retains test full response file separately",
+    "forecast owner selects on training only, freezes model/candidate choices",
+    "calibrate once on nine calibration drugs",
+    "save all test point predictions, intervals, next-dose choices and decisions; hash and timestamp manifest",
+    "data owner verifies manifest, supplies full test reference and its matching earlier hash",
+    "score all six test drugs and both endpoints once; preserve exclusions/missingness and signs; no candidate changes"
+  ],
+  "required_artifacts": [
+    "source_owner_receipt.json",
+    "training.csv",
+    "calibration.csv",
+    "test_contexts.csv",
+    "test_dose_metadata.csv",
+    "reference_commitment.json",
+    "predictions.csv",
+    "choices.csv",
+    "prediction_manifest.json",
+    "reference_reveal.csv",
+    "scores.json"
+  ],
+  "reporting": "Drug-macro MAE and each drug; paired differences vs fixed50 and interpolation; simultaneous envelope coverage; report/retest counts; wrong report/all curves and wrong report/reported; next-dose observed error. Native units separate, no total-chip/well savings without chip/replicate/cost IDs. External published-sequence replay, not prospective wet-lab savings.",
+  "owner_boundary": "Data custodian is existing chip-digitization owner; forecast owner receives context package only until prediction manifest is sealed. Shared filesystem gives procedural/entrypoint isolation, not cryptographic access isolation. Any full-reference exposure before prediction is logged and moves those curves to retrospective analysis."
+}

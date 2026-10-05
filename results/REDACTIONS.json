@@ -1,0 +1,400 @@
+{
+  "schema": "ooc.redactions.v1",
+  "rule": "Each absolute local file-system path under the home directory of the machine that wrote the file is replaced in place by \"<local-input>/\" followed by the last component of that path. In paper_capacity_independent.py, the name of the environment variable that the session runtime sets is replaced by AGENT_THREAD_ID. No other byte changes, and line numbers are unchanged.",
+  "verification": "paper_nested_decision.frozen_sha(), used by paper_nested_decision.py and paper_nested_decision_check.py, and paper_capacity_score_audit.py accept a listed file only when its SHA-256 equals redacted_sha256; they then use original_sha256, the hash that the freeze, manifest and score records cite. Files not listed here must match those records directly.",
+  "files": [
+    {
+      "path": "results/nested/protocol.json",
+      "original_sha256": "d15f70d8ba11f111516a13a087d3970ea270bb2e9711547db8aaf6b6f71ff20d",
+      "redacted_sha256": "e36129743f2fd250047878322d4a6b30011e49232bcff776684adcd13daf0e9c",
+      "cited_by": [
+        "results/nested/fold0/inner0_runtime.json",
+        "results/nested/fold0/inner1_runtime.json",
+        "results/nested/fold0/outer_runtime.json",
+        "results/nested/fold0/pretest_freeze.json",
+        "results/nested/fold1/execution_protocol.json",
+        "results/nested/fold2/execution_protocol.json",
+        "results/nested/fold3/execution_protocol.json",
+        "results/nested/fold4/execution_protocol.json",
+        "results/nested/summary.json",
+        "technical_report.md"
+      ],
+      "replacements": [
+        {
+          "line": 217,
+          "category": "input data file"
+        },
+        {
+          "line": 221,
+          "category": "input data file"
+        },
+        {
+          "line": 225,
+          "category": "input data file"
+        },
+        {
+          "line": 229,
+          "category": "input data file"
+        }
+      ]
+    },
+    {
+      "path": "results/nested/fold1/execution_protocol.json",
+      "original_sha256": "d6a211c085d608f522e8a1dedda2b760156702e7969dcfd86b5b95aca10eca68",
+      "redacted_sha256": "02daa5e648893730228f696d6d59c3f33e3e932ee6bf17a1e80bbc094880fea6",
+      "cited_by": [
+        "results/nested/fold1/inner0_runtime.json",
+        "results/nested/fold1/inner1_runtime.json",
+        "results/nested/fold1/outer_runtime.json",
+        "results/nested/fold1/pretest_freeze.json",
+        "results/nested/fold2/inner0_runtime.json",
+        "results/nested/fold2/inner1_runtime.json",
+        "results/nested/fold2/outer_runtime.json",
+        "results/nested/fold2/pretest_freeze.json",
+        "results/nested/fold3/inner0_runtime.json",
+        "results/nested/fold3/inner1_runtime.json",
+        "results/nested/fold3/outer_runtime.json",
+        "results/nested/fold3/pretest_freeze.json",
+        "results/nested/fold4/inner0_runtime.json",
+        "results/nested/fold4/inner1_runtime.json",
+        "results/nested/fold4/outer_runtime.json",
+        "results/nested/fold4/pretest_freeze.json"
+      ],
+      "replacements": [
+        {
+          "line": 221,
+          "category": "input data file"
+        },
+        {
+          "line": 225,
+          "category": "input data file"
+        }
+      ]
+    },
+    {
+      "path": "results/nested/fold2/execution_protocol.json",
+      "original_sha256": "d6a211c085d608f522e8a1dedda2b760156702e7969dcfd86b5b95aca10eca68",
+      "redacted_sha256": "02daa5e648893730228f696d6d59c3f33e3e932ee6bf17a1e80bbc094880fea6",
+      "cited_by": [
+        "results/nested/fold1/inner0_runtime.json",
+        "results/nested/fold1/inner1_runtime.json",
+        "results/nested/fold1/outer_runtime.json",
+        "results/nested/fold1/pretest_freeze.json",
+        "results/nested/fold2/inner0_runtime.json",
+        "results/nested/fold2/inner1_runtime.json",
+        "results/nested/fold2/outer_runtime.json",
+        "results/nested/fold2/pretest_freeze.json",
+        "results/nested/fold3/inner0_runtime.json",
+        "results/nested/fold3/inner1_runtime.json",
+        "results/nested/fold3/outer_runtime.json",
+        "results/nested/fold3/pretest_freeze.json",
+        "results/nested/fold4/inner0_runtime.json",
+        "results/nested/fold4/inner1_runtime.json",
+        "results/nested/fold4/outer_runtime.json",
+        "results/nested/fold4/pretest_freeze.json"
+      ],
+      "replacements": [
+        {
+          "line": 221,
+          "category": "input data file"
+        },
+        {
+          "line": 225,
+          "category": "input data file"
+        }
+      ]
+    },
+    {
+      "path": "results/nested/fold3/execution_protocol.json",
+      "original_sha256": "d6a211c085d608f522e8a1dedda2b760156702e7969dcfd86b5b95aca10eca68",
+      "redacted_sha256": "02daa5e648893730228f696d6d59c3f33e3e932ee6bf17a1e80bbc094880fea6",
+      "cited_by": [
+        "results/nested/fold1/inner0_runtime.json",
+        "results/nested/fold1/inner1_runtime.json",
+        "results/nested/fold1/outer_runtime.json",
+        "results/nested/fold1/pretest_freeze.json",
+        "results/nested/fold2/inner0_runtime.json",
+        "results/nested/fold2/inner1_runtime.json",
+        "results/nested/fold2/outer_runtime.json",
+        "results/nested/fold2/pretest_freeze.json",
+        "results/nested/fold3/inner0_runtime.json",
+        "results/nested/fold3/inner1_runtime.json",
+        "results/nested/fold3/outer_runtime.json",
+        "results/nested/fold3/pretest_freeze.json",
+        "results/nested/fold4/inner0_runtime.json",
+        "results/nested/fold4/inner1_runtime.json",
+        "results/nested/fold4/outer_runtime.json",
+        "results/nested/fold4/pretest_freeze.json"
+      ],
+      "replacements": [
+        {
+          "line": 221,
+          "category": "input data file"
+        },
+        {
+          "line": 225,
+          "category": "input data file"
+        }
+      ]
+    },
+    {
+      "path": "results/nested/fold4/execution_protocol.json",
+      "original_sha256": "d6a211c085d608f522e8a1dedda2b760156702e7969dcfd86b5b95aca10eca68",
+      "redacted_sha256": "02daa5e648893730228f696d6d59c3f33e3e932ee6bf17a1e80bbc094880fea6",
+      "cited_by": [
+        "results/nested/fold1/inner0_runtime.json",
+        "results/nested/fold1/inner1_runtime.json",
+        "results/nested/fold1/outer_runtime.json",
+        "results/nested/fold1/pretest_freeze.json",
+        "results/nested/fold2/inner0_runtime.json",
+        "results/nested/fold2/inner1_runtime.json",
+        "results/nested/fold2/outer_runtime.json",
+        "results/nested/fold2/pretest_freeze.json",
+        "results/nested/fold3/inner0_runtime.json",
+        "results/nested/fold3/inner1_runtime.json",
+        "results/nested/fold3/outer_runtime.json",
+        "results/nested/fold3/pretest_freeze.json",
+        "results/nested/fold4/inner0_runtime.json",
+        "results/nested/fold4/inner1_runtime.json",
+        "results/nested/fold4/outer_runtime.json",
+        "results/nested/fold4/pretest_freeze.json"
+      ],
+      "replacements": [
+        {
+          "line": 221,
+          "category": "input data file"
+        },
+        {
+          "line": 225,
+          "category": "input data file"
+        }
+      ]
+    },
+    {
+      "path": "results/capacity/bircsak_run_v1/packet_validation.json",
+      "original_sha256": "25d8dce6edda32bc4e8f894e76ec4a5c2882cb07021c4c8df7a45754a51a5465",
+      "redacted_sha256": "61aebf9075dc79959b5f7c2220346cd24f0b73890919d3fbee7c88335ad1a63f",
+      "cited_by": [
+        "results/capacity/bircsak_packet/reveal_receipt.json",
+        "results/capacity/bircsak_run_v1/prediction_manifest.json"
+      ],
+      "replacements": [
+        {
+          "line": 184,
+          "category": "result artifact file"
+        },
+        {
+          "line": 188,
+          "category": "working note"
+        }
+      ]
+    },
+    {
+      "path": "results/capacity/bircsak_packet/source_owner_receipt.json",
+      "original_sha256": "bc4e41a51513ea10e53f2500bd1681d6c8453c4e925edc5ffcf1c847e67e087d",
+      "redacted_sha256": "86f2dab07889e0c8fff902e2b5e7e5e4f5cee3f158b2b8246fa8787aa6f7df03",
+      "cited_by": [
+        "results/capacity/bircsak_packet/reveal_receipt.json",
+        "results/capacity/bircsak_run_v1/packet_validation.json",
+        "results/capacity/bircsak_run_v1/prediction_manifest.json",
+        "results/capacity/bircsak_run_v1/probe.json"
+      ],
+      "replacements": [
+        {
+          "line": 8,
+          "category": "directory"
+        },
+        {
+          "line": 17,
+          "category": "protocol file"
+        },
+        {
+          "line": 1186,
+          "category": "result artifact file"
+        },
+        {
+          "line": 1190,
+          "category": "working note"
+        }
+      ]
+    },
+    {
+      "path": "results/capacity/bircsak_packet/reveal_receipt.json",
+      "original_sha256": "7def8a193cc16109e1a988808dd5a037ae6fdc545e5c85059f2fde31315f44b0",
+      "redacted_sha256": "6e7ce749a0dd0fa63013a22e126dca8cab0ade93db4581e62ac6994c8a0be51f",
+      "cited_by": [
+        "results/capacity/bircsak_run_v1/scores.json"
+      ],
+      "replacements": [
+        {
+          "line": 19,
+          "category": "input data file"
+        },
+        {
+          "line": 45,
+          "category": "result artifact file"
+        },
+        {
+          "line": 53,
+          "category": "input data file"
+        },
+        {
+          "line": 61,
+          "category": "input data file"
+        },
+        {
+          "line": 69,
+          "category": "input data file"
+        },
+        {
+          "line": 77,
+          "category": "input data file"
+        },
+        {
+          "line": 85,
+          "category": "custodian receipt file"
+        },
+        {
+          "line": 93,
+          "category": "custodian receipt file"
+        },
+        {
+          "line": 101,
+          "category": "result artifact file"
+        },
+        {
+          "line": 109,
+          "category": "result artifact file"
+        },
+        {
+          "line": 117,
+          "category": "result artifact file"
+        },
+        {
+          "line": 125,
+          "category": "result artifact file"
+        },
+        {
+          "line": 133,
+          "category": "result artifact file"
+        },
+        {
+          "line": 141,
+          "category": "result artifact file"
+        },
+        {
+          "line": 149,
+          "category": "result artifact file"
+        },
+        {
+          "line": 157,
+          "category": "result artifact file"
+        },
+        {
+          "line": 165,
+          "category": "result artifact file"
+        },
+        {
+          "line": 173,
+          "category": "result artifact file"
+        },
+        {
+          "line": 181,
+          "category": "result artifact file"
+        },
+        {
+          "line": 189,
+          "category": "source code file"
+        },
+        {
+          "line": 197,
+          "category": "source code file"
+        },
+        {
+          "line": 205,
+          "category": "source code file"
+        },
+        {
+          "line": 213,
+          "category": "protocol file"
+        },
+        {
+          "line": 221,
+          "category": "protocol file"
+        },
+        {
+          "line": 229,
+          "category": "protocol file"
+        },
+        {
+          "line": 237,
+          "category": "input data file"
+        },
+        {
+          "line": 245,
+          "category": "input data file"
+        },
+        {
+          "line": 253,
+          "category": "input data file"
+        },
+        {
+          "line": 261,
+          "category": "input data file"
+        },
+        {
+          "line": 269,
+          "category": "input data file"
+        },
+        {
+          "line": 277,
+          "category": "input data file"
+        },
+        {
+          "line": 285,
+          "category": "input data file"
+        },
+        {
+          "line": 293,
+          "category": "input data file"
+        },
+        {
+          "line": 301,
+          "category": "input data file"
+        },
+        {
+          "line": 309,
+          "category": "input data file"
+        },
+        {
+          "line": 317,
+          "category": "custodian receipt file"
+        },
+        {
+          "line": 325,
+          "category": "custodian receipt file"
+        },
+        {
+          "line": 417,
+          "category": "source code file"
+        }
+      ]
+    },
+    {
+      "path": "paper_capacity_independent.py",
+      "original_sha256": "de1b8c1870050b3fee74f62e2515aaca3f69126b8ba95993df8015af627a4d7d",
+      "redacted_sha256": "6439685c2f4a259d8d923334f055b6b74d0cdfc2a6917e000a35f9dc5d20083b",
+      "cited_by": [
+        "results/capacity/bircsak_packet/reveal_receipt.json",
+        "results/capacity/bircsak_run_v1/prediction_manifest.json",
+        "results/capacity/bircsak_run_v1/probe.json"
+      ],
+      "replacements": [
+        {
+          "line": 265,
+          "category": "execution-environment variable name"
+        }
+      ]
+    }
+  ]
+}

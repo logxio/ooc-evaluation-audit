@@ -1,0 +1,23 @@
+{
+  "schema": "ooc.code_amendments.v1",
+  "amendments": [
+    {
+      "amendment": 1,
+      "file": "paper_nested_decision.py",
+      "frozen_sha256": "9e94f01c6d7c959587e4c77ce6f0792db270e3e7b316cc512a1795012be8c832",
+      "amended_sha256": "22de67e35239a390a03e93d1df2c557671837944afc341e1eb2f5d46a9c094d7",
+      "created_utc": "2026-10-05T11:25:49.340176+00:00",
+      "change": [
+        "apply_rule keeps the frozen float margin and adds its exact value: rank weights 1/d become integer counts on scale lcm(d), so the margin |rank2(score) - rank2(cutoff)| / (2 * total count) is a ratio of integers. Order comparisons of a margin with a release-grid value j/100 use integer cross-multiplication.",
+        "calibrate decides feasibility, (sum_g L_g + 1)/(n + 1) <= alpha, from exact group-loss fractions.",
+        "read_run accepts a code hash that differs from a frozen protocol only through an entry of this file.",
+        "input_path reads the raw and legacy_result inputs from repository copies (.cache/epa/All_DIV_Data.Rdata, downloaded from the pinned EPA commit when absent; chip_forecast_decision.json) before the recorded path, and checks each input against its protocol SHA-256.",
+        "frozen_sha maps a published copy listed in results/REDACTIONS.json, whose local paths were replaced by placeholders, to the original hash that freeze records cite; read_run, summarize and the recorded protocol hashes use it."
+      ],
+      "unchanged": "Cutoffs, rank references, weights, margin grid, alpha, losses, stored float margins, interfaces and every output file format.",
+      "why": "Rank margins are k / (2 * scale * G) and can equal a grid value exactly. Under the frozen strict float comparison the last bit of a floating-point sum decided such a release, and that bit can differ between numerical libraries and platforms.",
+      "effect_on_frozen_runs": "Re-judging the saved nested folds 0-4 and the common-scale arm A folds from their saved scores, rules and labels changes no calibrated lambda, report count, wrong-report count or released design set.",
+      "receipt": "exact_rule_receipt.json"
+    }
+  ]
+}

@@ -1,0 +1,192 @@
+{
+  "status": "scored_after_custodian_release",
+  "scored_at": "2026-10-04T16:35:45.061436+00:00",
+  "evidence_kind": "independent_candidate_attributed_exposure",
+  "n_test_drugs": 6,
+  "n_test_curves": 12,
+  "summary": [
+    {
+      "endpoint": "ALBUMIN",
+      "method": "selected",
+      "n_drugs": 6,
+      "mae": 280.09715433156845,
+      "decisions": {
+        "measure_next": 6
+      },
+      "wrong_reports": 0,
+      "reported": 0,
+      "wrong_per_all": 0.0,
+      "wrong_per_reported": null,
+      "mean_next_absolute_error": 557.9601129099856
+    },
+    {
+      "endpoint": "ALBUMIN",
+      "method": "fixed50",
+      "n_drugs": 6,
+      "mae": 322.1096155222129,
+      "decisions": {
+        "measure_next": 6
+      },
+      "wrong_reports": 0,
+      "reported": 0,
+      "wrong_per_all": 0.0,
+      "wrong_per_reported": null,
+      "mean_next_absolute_error": 421.07127913376524
+    },
+    {
+      "endpoint": "ALBUMIN",
+      "method": "interpolation",
+      "n_drugs": 6,
+      "mae": 280.09715433156845,
+      "decisions": {
+        "measure_next": 6
+      },
+      "wrong_reports": 0,
+      "reported": 0,
+      "wrong_per_all": 0.0,
+      "wrong_per_reported": null,
+      "mean_next_absolute_error": 557.9601129099856
+    },
+    {
+      "endpoint": "VIABILITY",
+      "method": "selected",
+      "n_drugs": 6,
+      "mae": 19.10415492051415,
+      "decisions": {
+        "measure_next": 6
+      },
+      "wrong_reports": 0,
+      "reported": 0,
+      "wrong_per_all": 0.0,
+      "wrong_per_reported": null,
+      "mean_next_absolute_error": 37.5722506895309
+    },
+    {
+      "endpoint": "VIABILITY",
+      "method": "fixed50",
+      "n_drugs": 6,
+      "mae": 17.372178417497363,
+      "decisions": {
+        "measure_next": 6
+      },
+      "wrong_reports": 0,
+      "reported": 0,
+      "wrong_per_all": 0.0,
+      "wrong_per_reported": null,
+      "mean_next_absolute_error": 32.27925444362874
+    },
+    {
+      "endpoint": "VIABILITY",
+      "method": "interpolation",
+      "n_drugs": 6,
+      "mae": 20.71689847302702,
+      "decisions": {
+        "measure_next": 6
+      },
+      "wrong_reports": 0,
+      "reported": 0,
+      "wrong_per_all": 0.0,
+      "wrong_per_reported": null,
+      "mean_next_absolute_error": 42.764017142864894
+    }
+  ],
+  "paired": [
+    {
+      "endpoint": "ALBUMIN",
+      "contrast": "selected_minus_fixed50",
+      "drug_differences": {
+        "Theophylline": -262.17909598677386,
+        "Ketoconazole": 118.3148481913135,
+        "Glafenine": 13.120580987026358,
+        "Dexamethasone": 82.81220800493017,
+        "Chlorpromazine": -456.36882691208626,
+        "Tamoxifen": 252.22551857172311
+      },
+      "mean_difference": -42.0124611906445
+    },
+    {
+      "endpoint": "ALBUMIN",
+      "contrast": "selected_minus_interpolation",
+      "drug_differences": {
+        "Theophylline": 0.0,
+        "Ketoconazole": 0.0,
+        "Glafenine": 0.0,
+        "Dexamethasone": 0.0,
+        "Chlorpromazine": 0.0,
+        "Tamoxifen": 0.0
+      },
+      "mean_difference": 0.0
+    },
+    {
+      "endpoint": "VIABILITY",
+      "contrast": "selected_minus_fixed50",
+      "drug_differences": {
+        "Theophylline": -1.1294129392682823,
+        "Ketoconazole": 7.55546950226312,
+        "Glafenine": -2.531328033867233,
+        "Dexamethasone": -4.407647163958238,
+        "Chlorpromazine": 7.755949648335573,
+        "Tamoxifen": 3.148828004595785
+      },
+      "mean_difference": 1.7319765030167875
+    },
+    {
+      "endpoint": "VIABILITY",
+      "contrast": "selected_minus_interpolation",
+      "drug_differences": {
+        "Theophylline": -1.347132600706767,
+        "Ketoconazole": -2.5827026298084768,
+        "Glafenine": -2.9615052106679087,
+        "Dexamethasone": 0.8775625285227449,
+        "Chlorpromazine": -2.5853165494451957,
+        "Tamoxifen": -1.0773668529716218
+      },
+      "mean_difference": -1.612743552512871
+    }
+  ],
+  "coverage": [
+    {
+      "method": "selected",
+      "drug_simultaneous_coverage": {
+        "Theophylline": true,
+        "Ketoconazole": true,
+        "Glafenine": true,
+        "Dexamethasone": true,
+        "Chlorpromazine": true,
+        "Tamoxifen": true
+      },
+      "fraction": 1.0
+    },
+    {
+      "method": "fixed50",
+      "drug_simultaneous_coverage": {
+        "Theophylline": true,
+        "Ketoconazole": true,
+        "Glafenine": true,
+        "Dexamethasone": true,
+        "Chlorpromazine": false,
+        "Tamoxifen": false
+      },
+      "fraction": 0.6666666666666666
+    },
+    {
+      "method": "interpolation",
+      "drug_simultaneous_coverage": {
+        "Theophylline": true,
+        "Ketoconazole": true,
+        "Glafenine": true,
+        "Dexamethasone": true,
+        "Chlorpromazine": true,
+        "Tamoxifen": true
+      },
+      "fraction": 1.0
+    }
+  ],
+  "prediction_manifest_sha256": "6e74e84ec97a5536390e9917897eab6898fafee46cc450edb987ebb09e30652e",
+  "reveal_receipt_sha256": "7def8a193cc16109e1a988808dd5a037ae6fdc545e5c85059f2fde31315f44b0",
+  "reference_sha256": "7acf9090ef664218f3b927241f6156e776c73d5f16df9e8a520fedfd257a2128",
+  "files": {
+    "scored_predictions.csv": "2538cb94c9b71c4453083d9502bd423137e4c0c07e956960b5361afa6512c8a8",
+    "scores_by_curve.csv": "6d7183f19df6add66c791ca7709fd2789429e4357ebcc3f802a255d89d963775"
+  }
+}

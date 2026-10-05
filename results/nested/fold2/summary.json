@@ -1,0 +1,95 @@
+{
+  "designs": 255,
+  "substances": 51,
+  "drugs": 49,
+  "methods": {
+    "anchorboost": {
+      "released": 255,
+      "wrong_released": 18,
+      "error_all_designs": 0.07058823529411765,
+      "error_released": 0.07058823529411765,
+      "drug_mean_loss": 0.06938775510204083,
+      "drug_mean_release_rate": 1.0,
+      "release_rate": 1.0,
+      "full_coverage_errors": 18,
+      "full_coverage_error_rate": 0.07058823529411765,
+      "wells_used": 2973,
+      "wells_full": 7375,
+      "savings_vs_full": 0.5968813559322034,
+      "savings_vs_measured_only_fallback": 0.10451807228915666,
+      "savings_vs_observed_active_fallback_fallback": 0.32859078590785906
+    },
+    "loglinear": {
+      "released": 222,
+      "wrong_released": 13,
+      "error_all_designs": 0.050980392156862744,
+      "error_released": 0.05855855855855856,
+      "drug_mean_loss": 0.05306122448979592,
+      "drug_mean_release_rate": 0.8714285714285713,
+      "release_rate": 0.8705882352941177,
+      "full_coverage_errors": 19,
+      "full_coverage_error_rate": 0.07450980392156863,
+      "wells_used": 3512,
+      "wells_full": 7375,
+      "savings_vs_full": 0.5237966101694915,
+      "savings_vs_measured_only_fallback": -0.05783132530120483,
+      "savings_vs_observed_active_fallback_fallback": 0.20686540198735326
+    },
+    "measured_only": {
+      "released": 234,
+      "wrong_released": 13,
+      "error_all_designs": 0.050980392156862744,
+      "error_released": 0.05555555555555555,
+      "drug_mean_loss": 0.05306122448979592,
+      "drug_mean_release_rate": 0.9183673469387755,
+      "release_rate": 0.9176470588235294,
+      "full_coverage_errors": 19,
+      "full_coverage_error_rate": 0.07450980392156863,
+      "wells_used": 3320,
+      "wells_full": 7375,
+      "savings_vs_full": 0.5498305084745763,
+      "savings_vs_measured_only_fallback": 0.0,
+      "savings_vs_observed_active_fallback_fallback": 0.2502258355916892
+    },
+    "observed_active_fallback": {
+      "released": 169,
+      "wrong_released": 0,
+      "error_all_designs": 0.0,
+      "error_released": 0.0,
+      "drug_mean_loss": 0.0,
+      "drug_mean_release_rate": 0.673469387755102,
+      "release_rate": 0.6627450980392157,
+      "full_coverage_errors": 21,
+      "full_coverage_error_rate": 0.08235294117647059,
+      "wells_used": 4428,
+      "wells_full": 7375,
+      "savings_vs_full": 0.39959322033898304,
+      "savings_vs_measured_only_fallback": -0.3337349397590361,
+      "savings_vs_observed_active_fallback_fallback": 0.0
+    }
+  },
+  "full_measurement": {
+    "wells_used": 7375,
+    "reference_disagreement": 0,
+    "scope": "Reference by definition, not biological ground truth."
+  },
+  "curve_prediction": {
+    "anchorboost": {
+      "drug_mean_target_level_mae": 1.2819249160084543,
+      "drug_mean_interval_point_coverage": 0.9887376139090865,
+      "mean_half_width": 6.698431041643851,
+      "interval_scope": "Training-only descriptive level-mean bands, no promised coverage."
+    },
+    "loglinear": {
+      "drug_mean_target_level_mae": 1.337696762281118,
+      "drug_mean_interval_point_coverage": 0.9839480535266945,
+      "mean_half_width": 7.001788412823396,
+      "interval_scope": "Training-only descriptive level-mean bands, no promised coverage."
+    }
+  },
+  "runtime": {
+    "seconds": 25.438907019,
+    "peak_rss_bytes": 460242944
+  },
+  "pretest_freeze_sha256": "469a7cd7fb2d9b9f4e530f22eb79b1dc416495d50cf37b417772a4f8c4d88e9d"
+}

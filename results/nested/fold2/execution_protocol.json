@@ -1,0 +1,248 @@
+{
+  "schema": "paper.nested_decision.v1",
+  "created_utc": "2026-10-04T15:41:46.514119+00:00",
+  "status": "Retrospective re-splitting of previously inspected public data; execution freeze is not prospective preregistration.",
+  "question": "Does drug-disjoint prediction plus group-level calibration substantiate reliable release and savings relative to three-point fallback?",
+  "expected_before_run": {
+    "release_share": [
+      0.5,
+      0.95
+    ],
+    "error_all_designs": [
+      0.03,
+      0.16
+    ],
+    "gain_over_measured_only": [
+      -0.1,
+      0.2
+    ],
+    "interpretation": "Planning ranges, not acceptance criteria."
+  },
+  "outer_order": [
+    0,
+    1,
+    2,
+    3,
+    4
+  ],
+  "primary_folds": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "secondary_folds": [
+    0
+  ],
+  "identity": "DTXSID and sample identifiers plus frozen conservative active-moiety groups; all source files of an identity share a role.",
+  "conservative_parent_groups": [
+    [
+      "Phenobarbital",
+      "Phenobarbital sodium"
+    ],
+    [
+      "Bis(tributyltin)oxide",
+      "Tributyltin chloride",
+      "Tributyltin methacrylate"
+    ],
+    [
+      "Manganese dichloride",
+      "Manganese(II) acetate"
+    ],
+    [
+      "Allethrin",
+      "S-Bioallethrin"
+    ],
+    [
+      "DDT",
+      "o,p'-DDT"
+    ]
+  ],
+  "drug_groups": 237,
+  "substances": 243,
+  "missing_keys": {
+    "donor": "No donor identifier in the raw 30-column table.",
+    "biological_batch": "plate/date and source file available; plate/date is a technical batch, not donor or culture preparation."
+  },
+  "preprocessing": "Fit asinh scales, per-DIV robust SD, and plate/date/DIV vehicle centers using only controls on training-associated plate/date keys. Unseen batches use the training median of batch centers per DIV. Calibration/test controls never fit or update this map. Inner fits repeat the whole transformation using inner-training drugs only.",
+  "endpoint": "inactive=1 iff maximum absolute masked DIV-mean over all concentrations and 17 features is <3 in that fit training-derived assay scale; threshold equality is active. Units/labels may differ between outer fits and from historical globally normalized replay.",
+  "model": {
+    "class": "chip_forecast.AnchorBoost",
+    "params": {
+      "loss": "absolute_error",
+      "max_iter": 600,
+      "learning_rate": 0.05,
+      "max_leaf_nodes": 127,
+      "min_samples_leaf": 50,
+      "early_stopping": false,
+      "random_state": 0
+    },
+    "n_pca": 0,
+    "historical_selection": "A40 architecture/parameters were developed on already-seen data; this evaluates a fixed retrospective procedure."
+  },
+  "designs": "Five published SHA-seeded k=3 designs per substance; all C(L,3) training designs; k=3 controls excluded from exposed-well budget.",
+  "rule": "Two group-disjoint inner fits generate training-only out-of-fold scores. Equal-drug weighted balanced accuracy selects cutoff, lowest cutoff breaks ties. Weighted training ECDF gives absolute rank margin. Final predictor trains all and only outer-training drugs.",
+  "intervals": "Per-output 90th percentile across training drugs of the maximum absolute inner-held-out level-mean residual over their designs/targets; fixed before calibration, descriptive bands with no interval coverage theorem claimed.",
+  "risk": {
+    "alpha": 0.1,
+    "unit": "drug_group",
+    "within_drug": "arithmetic mean over all substance/design rows of the group",
+    "loss": "L_g(lambda)=mean_d[1(margin_gd>lambda)*1(call_gd!=truth_gd)] in [0,1]",
+    "selection": "first increasing lambda with (sum_g L_g(lambda)+1)/(n_calibration_drugs+1)<=alpha; otherwise lambda=1 and all fall back",
+    "margin_grid": [
+      -1.0,
+      0.0,
+      0.01,
+      0.02,
+      0.03,
+      0.04,
+      0.05,
+      0.06,
+      0.07,
+      0.08,
+      0.09,
+      0.1,
+      0.11,
+      0.12,
+      0.13,
+      0.14,
+      0.15,
+      0.16,
+      0.17,
+      0.18,
+      0.19,
+      0.2,
+      0.21,
+      0.22,
+      0.23,
+      0.24,
+      0.25,
+      0.26,
+      0.27,
+      0.28,
+      0.29,
+      0.3,
+      0.31,
+      0.32,
+      0.33,
+      0.34,
+      0.35,
+      0.36,
+      0.37,
+      0.38,
+      0.39,
+      0.4,
+      0.41,
+      0.42,
+      0.43,
+      0.44,
+      0.45,
+      0.46,
+      0.47,
+      0.48,
+      0.49,
+      0.5,
+      0.51,
+      0.52,
+      0.53,
+      0.54,
+      0.55,
+      0.56,
+      0.57,
+      0.58,
+      0.59,
+      0.6,
+      0.61,
+      0.62,
+      0.63,
+      0.64,
+      0.65,
+      0.66,
+      0.67,
+      0.68,
+      0.69,
+      0.7,
+      0.71,
+      0.72,
+      0.73,
+      0.74,
+      0.75,
+      0.76,
+      0.77,
+      0.78,
+      0.79,
+      0.8,
+      0.81,
+      0.82,
+      0.83,
+      0.84,
+      0.85,
+      0.86,
+      0.87,
+      0.88,
+      0.89,
+      0.9,
+      0.91,
+      0.92,
+      0.93,
+      0.94,
+      0.95,
+      0.96,
+      0.97,
+      0.98,
+      0.99,
+      1.0
+    ],
+    "scope": "Expected marginal drug loss under independent training and exchangeable calibration/future drug loss functions; no conditional released-error or finite-batch guarantee. Shared batches and legacy stratified folds limit a literal exchangeability claim."
+  },
+  "comparators": [
+    "loglinear with its own training-only cutoff and group CRC",
+    "measured_only with its own training-only cutoff and group CRC (historical three-point fallback comparator)",
+    "observed_active_fallback: release only when the measured three-point endpoint is >=3; otherwise full measurement",
+    "full_measurement: reference endpoint from every exposed well"
+  ],
+  "cost": "An accepted design costs its measured exposed wells; fallback costs all exposed wells, reusing the initial three levels. Report both full-series and calibrated measured-only fallback denominators, plus the observed-active fallback. This is counterfactual exposed-well replay, excluding controls, repeats, failed assays and overhead.",
+  "selection_order": [
+    "identity/splits/protocol freeze",
+    "inner training and held-out training predictions",
+    "training-only cutoffs/ranks/interval widths freeze",
+    "final training model freeze",
+    "calibration forecasts and drug loss curves",
+    "final thresholds freeze",
+    "test context-only forecasts/decisions freeze",
+    "test full-series outcomes score"
+  ],
+  "inputs": {
+    "raw": {
+      "path": "/kaggle/working/input/All_DIV_Data.Rdata",
+      "sha256": "fe8015c789770092b485fb63dd8aa0f643120e366df73c5624665454ee982af6"
+    },
+    "bundle_metadata": {
+      "path": "<local-input>/nfa_tasks.npz",
+      "sha256": "e1f056ef33f568052fb8dfdba6e095f7b575c7f78d96768e34469918559008d2"
+    },
+    "identities": {
+      "path": "<local-input>/splits_epa_nfa.json",
+      "sha256": "d48c504258085216cccd32ea77b66f21cfe9c098c540ef4e43c367a6f1234f7d"
+    },
+    "legacy_result": {
+      "path": "/kaggle/working/input/legacy_result.json",
+      "sha256": "4f301204da7158153f48f891c9810e819add2469e41e691fd0f646c96ca21b6d"
+    }
+  },
+  "dependencies": {
+    "numpy": "2.5.3",
+    "pandas": "3.0.6",
+    "sklearn": "1.9.1",
+    "rdata": "1.1.0"
+  },
+  "code_sha256": {
+    "paper_nested_decision.py": "9e94f01c6d7c959587e4c77ce6f0792db270e3e7b316cc512a1795012be8c832",
+    "chip_forecast.py": "3d02dd3a1bc57e8c53f701a6005c8d5e9d8ad6a15a57cdec3f22b27066015897"
+  },
+  "resource_limit_bytes": 4000000000,
+  "splits_sha256": "a455fa45a25c0b6f80e6e4b4cb0235dc72da89e6ad6a7eaa240051f7df72aa4c",
+  "identities_sha256": "ef322cee97084b3b4e01b4d8a164ecb63562ae9981e226cdc4809f0c72acf3b5",
+  "execution_parent_protocol_sha256": "d15f70d8ba11f111516a13a087d3970ea270bb2e9711547db8aaf6b6f71ff20d",
+  "execution_path_amendment": "Only raw and historical-result input locations are changed for private remote execution. Splits, methods, hyperparameters, alpha and all input/code hashes remain unchanged."
+}

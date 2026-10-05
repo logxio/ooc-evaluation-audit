@@ -1,0 +1,290 @@
+{
+  "status": "complete",
+  "evidence_status": "post-development retrospective re-evaluation for BOTH Yuan2025 and Ewart2022",
+  "protocol_sha256": "e4d8c4138dbc2bd42f2d29e4e3c5945a3c0d36c7858e81f4979bb7c6b026a9ad",
+  "predictions_before_scoring_sha256": "e55968b16bf4c4932a0392d34625e4c1fa1766f5627e307ba1bba3197e0a826c",
+  "outer_scoring_started_after_predictions": true,
+  "completed_at": "2026-10-04T15:37:13.238523+00:00",
+  "n_outer_drug_endpoints": 27,
+  "n_unique_drugs": 11,
+  "model_fits": 282,
+  "seconds": 94.72935108299862,
+  "peak_rss_bytes": 325779456,
+  "paid_usd": 0,
+  "versions": {
+    "python": "3.13.14",
+    "numpy": "2.5.3",
+    "sklearn": "1.9.1"
+  },
+  "summary": [
+    {
+      "dataset": "Ewart2022",
+      "endpoint": "ALBUMIN",
+      "n_drugs": 6,
+      "mae": {
+        "selected": 26.30642559827517,
+        "fixed50": 24.795980843490565,
+        "loglinear": 24.07217686971029
+      },
+      "comparisons": {
+        "selected_minus_loglinear": {
+          "mean_difference": 2.234248728564879,
+          "ci95": [
+            -3.3200919463595926,
+            9.51746014470495
+          ],
+          "p_signflip": 0.6875,
+          "improved": 4,
+          "equal": 0,
+          "worsened": 2,
+          "holm_p": 1.0
+        },
+        "selected_minus_fixed50": {
+          "mean_difference": 1.5104447547846007,
+          "ci95": [
+            -3.019514090329684,
+            5.349651654771972
+          ],
+          "p_signflip": 0.53125,
+          "improved": 2,
+          "equal": 0,
+          "worsened": 4,
+          "holm_p": 1.0
+        },
+        "fixed50_minus_loglinear": {
+          "mean_difference": 0.7238039737802792,
+          "ci95": [
+            -8.020385362741493,
+            9.959307855666202
+          ],
+          "p_signflip": 0.9375,
+          "improved": 4,
+          "equal": 0,
+          "worsened": 2,
+          "holm_p": 1.0
+        }
+      },
+      "selections": {
+        "adaptive10_a0.5": 1,
+        "fixed50_a0.5": 1,
+        "adaptive10_a1": 1,
+        "adaptive10_a0.25": 2,
+        "fixed2_a0.25": 1
+      }
+    },
+    {
+      "dataset": "Ewart2022",
+      "endpoint": "ALT",
+      "n_drugs": 6,
+      "mae": {
+        "selected": 1.4818145657230257,
+        "fixed50": 1.463519386572547,
+        "loglinear": 1.4919081590034893
+      },
+      "comparisons": {
+        "selected_minus_loglinear": {
+          "mean_difference": -0.010093593280463858,
+          "ci95": [
+            -0.07122875087602887,
+            0.07097636775573359
+          ],
+          "p_signflip": 0.875,
+          "improved": 3,
+          "equal": 0,
+          "worsened": 3,
+          "holm_p": 1.0
+        },
+        "selected_minus_fixed50": {
+          "mean_difference": 0.01829517915047855,
+          "ci95": [
+            -0.02399370113864749,
+            0.07887923859008314
+          ],
+          "p_signflip": 1.0,
+          "improved": 1,
+          "equal": 4,
+          "worsened": 1,
+          "holm_p": 1.0
+        },
+        "fixed50_minus_loglinear": {
+          "mean_difference": -0.02838877243094241,
+          "ci95": [
+            -0.12884781104252455,
+            0.07097636775573359
+          ],
+          "p_signflip": 0.625,
+          "improved": 3,
+          "equal": 0,
+          "worsened": 3,
+          "holm_p": 1.0
+        }
+      },
+      "selections": {
+        "fixed50_a1": 4,
+        "fixed50_a0.25": 1,
+        "fixed50_a0.5": 1
+      }
+    },
+    {
+      "dataset": "Ewart2022",
+      "endpoint": "Morphology",
+      "n_drugs": 6,
+      "mae": {
+        "selected": 0.36171963925414724,
+        "fixed50": 0.36433572702790507,
+        "loglinear": 0.38680533170700077
+      },
+      "comparisons": {
+        "selected_minus_loglinear": {
+          "mean_difference": -0.0250856924528535,
+          "ci95": [
+            -0.06238390649048906,
+            0.00871742523382008
+          ],
+          "p_signflip": 0.40625,
+          "improved": 3,
+          "equal": 0,
+          "worsened": 3,
+          "holm_p": 1.0
+        },
+        "selected_minus_fixed50": {
+          "mean_difference": -0.0026160877737578295,
+          "ci95": [
+            -0.03220672451101459,
+            0.026974548963498934
+          ],
+          "p_signflip": 0.875,
+          "improved": 2,
+          "equal": 2,
+          "worsened": 2,
+          "holm_p": 1.0
+        },
+        "fixed50_minus_loglinear": {
+          "mean_difference": -0.022469604679095673,
+          "ci95": [
+            -0.07947480414247282,
+            0.0300223658846996
+          ],
+          "p_signflip": 0.46875,
+          "improved": 3,
+          "equal": 0,
+          "worsened": 3,
+          "holm_p": 1.0
+        }
+      },
+      "selections": {
+        "fixed50_a0.5": 2,
+        "adaptive10_a0.5": 1,
+        "fixed50_a1": 2,
+        "fixed2_a1": 1
+      }
+    },
+    {
+      "dataset": "Yuan2025",
+      "endpoint": "LDH",
+      "n_drugs": 5,
+      "mae": {
+        "selected": 8.502315721082619,
+        "fixed50": 9.116799926757812,
+        "loglinear": 8.376799011230469
+      },
+      "comparisons": {
+        "selected_minus_loglinear": {
+          "mean_difference": 0.1255167098521497,
+          "ci95": [
+            -0.25575376901783786,
+            0.6323038985742869
+          ],
+          "p_signflip": 1.0,
+          "improved": 1,
+          "equal": 3,
+          "worsened": 1,
+          "holm_p": 1.0
+        },
+        "selected_minus_fixed50": {
+          "mean_difference": -0.6144842056751939,
+          "ci95": [
+            -1.2643673554436186,
+            0.41744336390631814
+          ],
+          "p_signflip": 0.3125,
+          "improved": 4,
+          "equal": 0,
+          "worsened": 1,
+          "holm_p": 1.0
+        },
+        "fixed50_minus_loglinear": {
+          "mean_difference": 0.7400009155273436,
+          "ci95": [
+            0.21486053466796876,
+            1.0086135864257808
+          ],
+          "p_signflip": 0.125,
+          "improved": 1,
+          "equal": 0,
+          "worsened": 4,
+          "holm_p": 0.625
+        }
+      },
+      "selections": {
+        "fixed5_a0.5": 1,
+        "interpolation": 3,
+        "adaptive10_a0.5": 1
+      }
+    },
+    {
+      "dataset": "Yuan2025",
+      "endpoint": "ALT",
+      "n_drugs": 4,
+      "mae": {
+        "selected": 0.030830948407598535,
+        "fixed50": 0.03139944995443027,
+        "loglinear": 0.02931750938296318
+      },
+      "comparisons": {
+        "selected_minus_loglinear": {
+          "mean_difference": 0.001513439024635352,
+          "ci95": [
+            0.0004712361127840181,
+            0.0022321690184201612
+          ],
+          "p_signflip": 0.25,
+          "improved": 0,
+          "equal": 1,
+          "worsened": 3,
+          "holm_p": 1.0
+        },
+        "selected_minus_fixed50": {
+          "mean_difference": -0.0005685015468317291,
+          "ci95": [
+            -0.001540273427963255,
+            0.0004032703342997969
+          ],
+          "p_signflip": 0.375,
+          "improved": 3,
+          "equal": 0,
+          "worsened": 1,
+          "holm_p": 1.0
+        },
+        "fixed50_minus_loglinear": {
+          "mean_difference": 0.002081940571467081,
+          "ci95": [
+            0.0011458347241083775,
+            0.0030180464188257847
+          ],
+          "p_signflip": 0.125,
+          "improved": 0,
+          "equal": 0,
+          "worsened": 4,
+          "holm_p": 0.625
+        }
+      },
+      "selections": {
+        "interpolation": 1,
+        "adaptive10_a0.5": 1,
+        "fixed50_a0.5": 1,
+        "adaptive10_a1": 1
+      }
+    }
+  ]
+}

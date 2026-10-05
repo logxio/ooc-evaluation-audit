@@ -1,0 +1,3316 @@
+{
+  "schema": "ooc.exact_rule_receipt.v1",
+  "created_utc": "2026-10-05T11:58:41.522131+00:00",
+  "question": "Does exact rational evaluation of the rank-margin release rule change any saved calibration or release decision?",
+  "rule": "Rank weights 1/d become integer counts on scale lcm(d); exact margin = |rank2(score) - rank2(cutoff)| / (2 * total count). A design is reported iff exact margin > lambda, lambda in {-1, 0, 0.01, ..., 1} read as exact rationals; calibration takes the first lambda whose exact corrected group risk (sum_g c_g/s_g + 1)/(n + 1) <= 1/10. Stored float margins keep the frozen formula and agree with the exact value within 1e-12.",
+  "code_sha256": {
+    "paper_nested_decision.py": {
+      "frozen_float": "9e94f01c6d7c959587e4c77ce6f0792db270e3e7b316cc512a1795012be8c832",
+      "exact": "22de67e35239a390a03e93d1df2c557671837944afc341e1eb2f5d46a9c094d7"
+    }
+  },
+  "old": "Saved calibration.json lambda and saved *_release flags of each fold.",
+  "new": "apply_rules + calibrate of the exact code on the saved calibration and test rows; release = margin > lambda.",
+  "new_fits": 0,
+  "result": {
+    "folds": 14,
+    "fold_methods": 42,
+    "identical_fold_methods": 42,
+    "lambda_changed": 0,
+    "released_sets_changed": 0,
+    "rows_flipped": 0,
+    "max_abs_saved_float_minus_exact": 1.2212453270876722e-15,
+    "grid_tie_rows": {
+      "calibration": 230,
+      "test": 287
+    },
+    "all_identical": true
+  },
+  "folds": [
+    {
+      "analysis": "nested",
+      "fold": 0,
+      "inputs_sha256": {
+        "training_rules.json": "0e65fb28c020b04090b848b4e6dd49841ace3e783a079c119a16855587f14162",
+        "calibration_design_decisions.json": "6b2a08729606d3b82e08205c3415c1bb7e4fce706276b4300bf3ac2f8d4ab6a3",
+        "calibration.json": "a1243d26c105a02d8685821ad3e357bccce9690f2a30b3a11bcea87e879edfa6",
+        "design_decisions.json": "d00deba092633015be152517a46889679e08ef25d624bffef11200592f9641cd"
+      },
+      "calibration_rows": 460,
+      "test_rows": 250,
+      "calibration_identities": 91,
+      "test_identities": 49,
+      "rank_lattice_denominator": 5820,
+      "methods": {
+        "anchorboost": {
+          "lambda": {
+            "saved": 0.05,
+            "exact": 0.05,
+            "frozen_float_code_here": 0.05
+          },
+          "corrected_risk": {
+            "saved_float": 0.0891304347826087,
+            "exact": "41/460"
+          },
+          "calibration_curve_points_changed": [],
+          "alpha_boundary_float_vs_exact_disagreements": [],
+          "grid_ties": {
+            "calibration": {
+              "rows_on_grid": 0,
+              "saved_float_above": 0,
+              "saved_float_below": 0,
+              "saved_float_equal": 0,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            },
+            "test": {
+              "rows_on_grid": 1,
+              "saved_float_above": 0,
+              "saved_float_below": 0,
+              "saved_float_equal": 1,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            }
+          },
+          "test": {
+            "saved": {
+              "reports": 226,
+              "wrong_reports": 25,
+              "false_negative": 22,
+              "false_positive": 3
+            },
+            "exact": {
+              "reports": 226,
+              "wrong_reports": 25,
+              "false_negative": 22,
+              "false_positive": 3
+            },
+            "frozen_float_code_here": {
+              "reports": 226,
+              "wrong_reports": 25,
+              "false_negative": 22,
+              "false_positive": 3
+            },
+            "released_set_identical": true,
+            "frozen_float_code_here_matches_saved": true,
+            "released_set_sha256": {
+              "saved": "5429b3cddb1f8447bfbeea4804ae7d5c85e38f29fbb84b6178f246ac33c62eb4",
+              "exact": "5429b3cddb1f8447bfbeea4804ae7d5c85e38f29fbb84b6178f246ac33c62eb4"
+            },
+            "flipped_rows": []
+          },
+          "identical": true
+        },
+        "loglinear": {
+          "lambda": {
+            "saved": 0.18,
+            "exact": 0.18,
+            "frozen_float_code_here": 0.18
+          },
+          "corrected_risk": {
+            "saved_float": 0.09565217391304348,
+            "exact": "11/115"
+          },
+          "calibration_curve_points_changed": [],
+          "alpha_boundary_float_vs_exact_disagreements": [],
+          "grid_ties": {
+            "calibration": {
+              "rows_on_grid": 3,
+              "saved_float_above": 0,
+              "saved_float_below": 0,
+              "saved_float_equal": 3,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            },
+            "test": {
+              "rows_on_grid": 0,
+              "saved_float_above": 0,
+              "saved_float_below": 0,
+              "saved_float_equal": 0,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            }
+          },
+          "test": {
+            "saved": {
+              "reports": 152,
+              "wrong_reports": 8,
+              "false_negative": 8,
+              "false_positive": 0
+            },
+            "exact": {
+              "reports": 152,
+              "wrong_reports": 8,
+              "false_negative": 8,
+              "false_positive": 0
+            },
+            "frozen_float_code_here": {
+              "reports": 152,
+              "wrong_reports": 8,
+              "false_negative": 8,
+              "false_positive": 0
+            },
+            "released_set_identical": true,
+            "frozen_float_code_here_matches_saved": true,
+            "released_set_sha256": {
+              "saved": "7a598f8fbba3a29f26df1859263570f8c4f8b0418f6479d7e5f45ce73c27e8f2",
+              "exact": "7a598f8fbba3a29f26df1859263570f8c4f8b0418f6479d7e5f45ce73c27e8f2"
+            },
+            "flipped_rows": []
+          },
+          "identical": true
+        },
+        "measured_only": {
+          "lambda": {
+            "saved": 0.18,
+            "exact": 0.18,
+            "frozen_float_code_here": 0.18
+          },
+          "corrected_risk": {
+            "saved_float": 0.09565217391304348,
+            "exact": "11/115"
+          },
+          "calibration_curve_points_changed": [],
+          "alpha_boundary_float_vs_exact_disagreements": [],
+          "grid_ties": {
+            "calibration": {
+              "rows_on_grid": 3,
+              "saved_float_above": 0,
+              "saved_float_below": 0,
+              "saved_float_equal": 3,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            },
+            "test": {
+              "rows_on_grid": 0,
+              "saved_float_above": 0,
+              "saved_float_below": 0,
+              "saved_float_equal": 0,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            }
+          },
+          "test": {
+            "saved": {
+              "reports": 154,
+              "wrong_reports": 9,
+              "false_negative": 9,
+              "false_positive": 0
+            },
+            "exact": {
+              "reports": 154,
+              "wrong_reports": 9,
+              "false_negative": 9,
+              "false_positive": 0
+            },
+            "frozen_float_code_here": {
+              "reports": 154,
+              "wrong_reports": 9,
+              "false_negative": 9,
+              "false_positive": 0
+            },
+            "released_set_identical": true,
+            "frozen_float_code_here_matches_saved": true,
+            "released_set_sha256": {
+              "saved": "34c160c266df705dbc302a7bde305b8b83efdd141a861160ed54bc93ee3e1957",
+              "exact": "34c160c266df705dbc302a7bde305b8b83efdd141a861160ed54bc93ee3e1957"
+            },
+            "flipped_rows": []
+          },
+          "identical": true
+        }
+      },
+      "calls_identical": true,
+      "max_abs_saved_float_minus_exact": 9.992007221626409e-16,
+      "frozen_float_recomputed_here_bitwise_equal_to_saved": "2130/2130"
+    },
+    {
+      "analysis": "nested",
+      "fold": 1,
+      "inputs_sha256": {
+        "training_rules.json": "4028e1859c4dbe579412cf31d002d8839781d1ee15b1b627eb3a629da4fc2133",
+        "calibration_design_decisions.json": "c0635a1d604dfd9bad7b5f18ec10c2a06d00b930ed5b050695972dead20fd846",
+        "calibration.json": "9b0346017ef1a9e6ffdc32c76eaa9a05587adda2c693d1db8f5cf014387de783",
+        "design_decisions.json": "d991d361a430f4e0e37e0f256e8352b66d623b48a2b41b49c71355e3a54058b3"
+      },
+      "calibration_rows": 460,
+      "test_rows": 250,
+      "calibration_identities": 91,
+      "test_identities": 48,
+      "rank_lattice_denominator": 1960,
+      "methods": {
+        "anchorboost": {
+          "lambda": {
+            "saved": 0.05,
+            "exact": 0.05,
+            "frozen_float_code_here": 0.05
+          },
+          "corrected_risk": {
+            "saved_float": 0.09347826086956523,
+            "exact": "43/460"
+          },
+          "calibration_curve_points_changed": [
+            {
+              "lambda": 0.2,
+              "saved": {
+                "loss_sum": 3.0,
+                "corrected": 0.043478260869565216,
+                "released_designs": 258
+              },
+              "exact": {
+                "loss_sum": 3.0,
+                "corrected": 0.043478260869565216,
+                "released_designs": 257
+              }
+            }
+          ],
+          "alpha_boundary_float_vs_exact_disagreements": [],
+          "grid_ties": {
+            "calibration": {
+              "rows_on_grid": 20,
+              "saved_float_above": 1,
+              "saved_float_below": 14,
+              "saved_float_equal": 5,
+              "on_chosen_lambda": 4,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 4
+            },
+            "test": {
+              "rows_on_grid": 3,
+              "saved_float_above": 0,
+              "saved_float_below": 3,
+              "saved_float_equal": 0,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            }
+          },
+          "test": {
+            "saved": {
+              "reports": 231,
+              "wrong_reports": 16,
+              "false_negative": 12,
+              "false_positive": 4
+            },
+            "exact": {
+              "reports": 231,
+              "wrong_reports": 16,
+              "false_negative": 12,
+              "false_positive": 4
+            },
+            "frozen_float_code_here": {
+              "reports": 231,
+              "wrong_reports": 16,
+              "false_negative": 12,
+              "false_positive": 4
+            },
+            "released_set_identical": true,
+            "frozen_float_code_here_matches_saved": true,
+            "released_set_sha256": {
+              "saved": "8c6997c6e00ed3e62d998977a4dacd05c934243ea19b3f18bb9953dd16b67244",
+              "exact": "8c6997c6e00ed3e62d998977a4dacd05c934243ea19b3f18bb9953dd16b67244"
+            },
+            "flipped_rows": []
+          },
+          "identical": true
+        },
+        "loglinear": {
+          "lambda": {
+            "saved": 0.17,
+            "exact": 0.17,
+            "frozen_float_code_here": 0.17
+          },
+          "corrected_risk": {
+            "saved_float": 0.1,
+            "exact": "1/10"
+          },
+          "calibration_curve_points_changed": [
+            {
+              "lambda": 0.2,
+              "saved": {
+                "loss_sum": 6.800000000000001,
+                "corrected": 0.08478260869565218,
+                "released_designs": 265
+              },
+              "exact": {
+                "loss_sum": 6.6000000000000005,
+                "corrected": 0.08260869565217392,
+                "released_designs": 260
+              }
+            }
+          ],
+          "alpha_boundary_float_vs_exact_disagreements": [],
+          "grid_ties": {
+            "calibration": {
+              "rows_on_grid": 8,
+              "saved_float_above": 5,
+              "saved_float_below": 0,
+              "saved_float_equal": 3,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            },
+            "test": {
+              "rows_on_grid": 2,
+              "saved_float_above": 2,
+              "saved_float_below": 0,
+              "saved_float_equal": 0,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            }
+          },
+          "test": {
+            "saved": {
+              "reports": 167,
+              "wrong_reports": 12,
+              "false_negative": 12,
+              "false_positive": 0
+            },
+            "exact": {
+              "reports": 167,
+              "wrong_reports": 12,
+              "false_negative": 12,
+              "false_positive": 0
+            },
+            "frozen_float_code_here": {
+              "reports": 167,
+              "wrong_reports": 12,
+              "false_negative": 12,
+              "false_positive": 0
+            },
+            "released_set_identical": true,
+            "frozen_float_code_here_matches_saved": true,
+            "released_set_sha256": {
+              "saved": "22255431e2a59a483fb8e936dfbde8c917fd3adc917bc6ec44378a5bdbb4edae",
+              "exact": "22255431e2a59a483fb8e936dfbde8c917fd3adc917bc6ec44378a5bdbb4edae"
+            },
+            "flipped_rows": []
+          },
+          "identical": true
+        },
+        "measured_only": {
+          "lambda": {
+            "saved": 0.17,
+            "exact": 0.17,
+            "frozen_float_code_here": 0.17
+          },
+          "corrected_risk": {
+            "saved_float": 0.09782608695652174,
+            "exact": "9/92"
+          },
+          "calibration_curve_points_changed": [
+            {
+              "lambda": 0.2,
+              "saved": {
+                "loss_sum": 6.800000000000001,
+                "corrected": 0.08478260869565218,
+                "released_designs": 266
+              },
+              "exact": {
+                "loss_sum": 6.800000000000001,
+                "corrected": 0.08478260869565218,
+                "released_designs": 259
+              }
+            }
+          ],
+          "alpha_boundary_float_vs_exact_disagreements": [],
+          "grid_ties": {
+            "calibration": {
+              "rows_on_grid": 10,
+              "saved_float_above": 7,
+              "saved_float_below": 0,
+              "saved_float_equal": 3,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            },
+            "test": {
+              "rows_on_grid": 1,
+              "saved_float_above": 1,
+              "saved_float_below": 0,
+              "saved_float_equal": 0,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            }
+          },
+          "test": {
+            "saved": {
+              "reports": 167,
+              "wrong_reports": 12,
+              "false_negative": 12,
+              "false_positive": 0
+            },
+            "exact": {
+              "reports": 167,
+              "wrong_reports": 12,
+              "false_negative": 12,
+              "false_positive": 0
+            },
+            "frozen_float_code_here": {
+              "reports": 167,
+              "wrong_reports": 12,
+              "false_negative": 12,
+              "false_positive": 0
+            },
+            "released_set_identical": true,
+            "frozen_float_code_here_matches_saved": true,
+            "released_set_sha256": {
+              "saved": "22255431e2a59a483fb8e936dfbde8c917fd3adc917bc6ec44378a5bdbb4edae",
+              "exact": "22255431e2a59a483fb8e936dfbde8c917fd3adc917bc6ec44378a5bdbb4edae"
+            },
+            "flipped_rows": []
+          },
+          "identical": true
+        }
+      },
+      "calls_identical": true,
+      "max_abs_saved_float_minus_exact": 5.551115123125783e-16,
+      "frozen_float_recomputed_here_bitwise_equal_to_saved": "498/2130"
+    },
+    {
+      "analysis": "nested",
+      "fold": 2,
+      "inputs_sha256": {
+        "training_rules.json": "7142a241b59eaee120b8c6693bcf694906cfff3e6ff79b32917347f0ef634149",
+        "calibration_design_decisions.json": "bd16be44f550dc0c0d3a09b405a45cbcc0d667aa25153405cff1aff354a10aab",
+        "calibration.json": "ef5d50128971a0d0e252a83b9edb37d7ef055af89d7806171cd985c0de2d572e",
+        "design_decisions.json": "5c4e5ef035f346a254bf32a422521aea920fd6c2d90ed3bcf7d752e0735f6d59"
+      },
+      "calibration_rows": 460,
+      "test_rows": 255,
+      "calibration_identities": 91,
+      "test_identities": 49,
+      "rank_lattice_denominator": 5820,
+      "methods": {
+        "anchorboost": {
+          "lambda": {
+            "saved": -1.0,
+            "exact": -1.0,
+            "frozen_float_code_here": -1.0
+          },
+          "corrected_risk": {
+            "saved_float": 0.09782608695652174,
+            "exact": "9/92"
+          },
+          "calibration_curve_points_changed": [
+            {
+              "lambda": 0.2,
+              "saved": {
+                "loss_sum": 0.6000000000000001,
+                "corrected": 0.017391304347826087,
+                "released_designs": 260
+              },
+              "exact": {
+                "loss_sum": 0.6000000000000001,
+                "corrected": 0.017391304347826087,
+                "released_designs": 256
+              }
+            },
+            {
+              "lambda": 0.4,
+              "saved": {
+                "loss_sum": 0.2,
+                "corrected": 0.013043478260869565,
+                "released_designs": 156
+              },
+              "exact": {
+                "loss_sum": 0.2,
+                "corrected": 0.013043478260869565,
+                "released_designs": 149
+              }
+            }
+          ],
+          "alpha_boundary_float_vs_exact_disagreements": [],
+          "grid_ties": {
+            "calibration": {
+              "rows_on_grid": 11,
+              "saved_float_above": 11,
+              "saved_float_below": 0,
+              "saved_float_equal": 0,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            },
+            "test": {
+              "rows_on_grid": 1,
+              "saved_float_above": 1,
+              "saved_float_below": 0,
+              "saved_float_equal": 0,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            }
+          },
+          "test": {
+            "saved": {
+              "reports": 255,
+              "wrong_reports": 18,
+              "false_negative": 14,
+              "false_positive": 4
+            },
+            "exact": {
+              "reports": 255,
+              "wrong_reports": 18,
+              "false_negative": 14,
+              "false_positive": 4
+            },
+            "frozen_float_code_here": {
+              "reports": 255,
+              "wrong_reports": 18,
+              "false_negative": 14,
+              "false_positive": 4
+            },
+            "released_set_identical": true,
+            "frozen_float_code_here_matches_saved": true,
+            "released_set_sha256": {
+              "saved": "7e05d82899393fab2b7232d3d32db3558078fdf759ba5d10ac25bee3466fa7b2",
+              "exact": "7e05d82899393fab2b7232d3d32db3558078fdf759ba5d10ac25bee3466fa7b2"
+            },
+            "flipped_rows": []
+          },
+          "identical": true
+        },
+        "loglinear": {
+          "lambda": {
+            "saved": 0.11,
+            "exact": 0.11,
+            "frozen_float_code_here": 0.11
+          },
+          "corrected_risk": {
+            "saved_float": 0.09782608695652174,
+            "exact": "9/92"
+          },
+          "calibration_curve_points_changed": [
+            {
+              "lambda": 0.2,
+              "saved": {
+                "loss_sum": 3.8000000000000003,
+                "corrected": 0.05217391304347827,
+                "released_designs": 276
+              },
+              "exact": {
+                "loss_sum": 3.8000000000000003,
+                "corrected": 0.05217391304347827,
+                "released_designs": 273
+              }
+            }
+          ],
+          "alpha_boundary_float_vs_exact_disagreements": [],
+          "grid_ties": {
+            "calibration": {
+              "rows_on_grid": 3,
+              "saved_float_above": 3,
+              "saved_float_below": 0,
+              "saved_float_equal": 0,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            },
+            "test": {
+              "rows_on_grid": 0,
+              "saved_float_above": 0,
+              "saved_float_below": 0,
+              "saved_float_equal": 0,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            }
+          },
+          "test": {
+            "saved": {
+              "reports": 222,
+              "wrong_reports": 13,
+              "false_negative": 13,
+              "false_positive": 0
+            },
+            "exact": {
+              "reports": 222,
+              "wrong_reports": 13,
+              "false_negative": 13,
+              "false_positive": 0
+            },
+            "frozen_float_code_here": {
+              "reports": 222,
+              "wrong_reports": 13,
+              "false_negative": 13,
+              "false_positive": 0
+            },
+            "released_set_identical": true,
+            "frozen_float_code_here_matches_saved": true,
+            "released_set_sha256": {
+              "saved": "c60ac2da1d7d69332a134bcf16d7ac8fef642262abc20a77b787d62d3c9b8042",
+              "exact": "c60ac2da1d7d69332a134bcf16d7ac8fef642262abc20a77b787d62d3c9b8042"
+            },
+            "flipped_rows": []
+          },
+          "identical": true
+        },
+        "measured_only": {
+          "lambda": {
+            "saved": 0.09,
+            "exact": 0.09,
+            "frozen_float_code_here": 0.09
+          },
+          "corrected_risk": {
+            "saved_float": 0.1,
+            "exact": "1/10"
+          },
+          "calibration_curve_points_changed": [
+            {
+              "lambda": 0.2,
+              "saved": {
+                "loss_sum": 3.6,
+                "corrected": 0.049999999999999996,
+                "released_designs": 272
+              },
+              "exact": {
+                "loss_sum": 3.6,
+                "corrected": 0.049999999999999996,
+                "released_designs": 269
+              }
+            }
+          ],
+          "alpha_boundary_float_vs_exact_disagreements": [],
+          "grid_ties": {
+            "calibration": {
+              "rows_on_grid": 3,
+              "saved_float_above": 3,
+              "saved_float_below": 0,
+              "saved_float_equal": 0,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            },
+            "test": {
+              "rows_on_grid": 0,
+              "saved_float_above": 0,
+              "saved_float_below": 0,
+              "saved_float_equal": 0,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            }
+          },
+          "test": {
+            "saved": {
+              "reports": 234,
+              "wrong_reports": 13,
+              "false_negative": 13,
+              "false_positive": 0
+            },
+            "exact": {
+              "reports": 234,
+              "wrong_reports": 13,
+              "false_negative": 13,
+              "false_positive": 0
+            },
+            "frozen_float_code_here": {
+              "reports": 234,
+              "wrong_reports": 13,
+              "false_negative": 13,
+              "false_positive": 0
+            },
+            "released_set_identical": true,
+            "frozen_float_code_here_matches_saved": true,
+            "released_set_sha256": {
+              "saved": "985e1434820487574bc53ab70460b58ca1c646bd0c48606ad538527e2d05b039",
+              "exact": "985e1434820487574bc53ab70460b58ca1c646bd0c48606ad538527e2d05b039"
+            },
+            "flipped_rows": []
+          },
+          "identical": true
+        }
+      },
+      "calls_identical": true,
+      "max_abs_saved_float_minus_exact": 7.771561172376096e-16,
+      "frozen_float_recomputed_here_bitwise_equal_to_saved": "423/2145"
+    },
+    {
+      "analysis": "nested",
+      "fold": 3,
+      "inputs_sha256": {
+        "training_rules.json": "b20a236d86a3e3dfb60e25fa303ca4ab5f2cd604783f6777673d765fc074c107",
+        "calibration_design_decisions.json": "d243caff833845a0cacbf1aa5012d95d526b239e2876fc1fb393be174041f21e",
+        "calibration.json": "ef3357a4ff740b182785fcc2811d03e351eda639f358ba798e9251f5a4945345",
+        "design_decisions.json": "12c356e48f613be108f49a87330ac80f238e2d63ed8ed32190838f22b8e4f512"
+      },
+      "calibration_rows": 485,
+      "test_rows": 230,
+      "calibration_identities": 95,
+      "test_identities": 45,
+      "rank_lattice_denominator": 5820,
+      "methods": {
+        "anchorboost": {
+          "lambda": {
+            "saved": -1.0,
+            "exact": -1.0,
+            "frozen_float_code_here": -1.0
+          },
+          "corrected_risk": {
+            "saved_float": 0.09166666666666667,
+            "exact": "11/120"
+          },
+          "calibration_curve_points_changed": [],
+          "alpha_boundary_float_vs_exact_disagreements": [],
+          "grid_ties": {
+            "calibration": {
+              "rows_on_grid": 1,
+              "saved_float_above": 0,
+              "saved_float_below": 0,
+              "saved_float_equal": 1,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            },
+            "test": {
+              "rows_on_grid": 4,
+              "saved_float_above": 0,
+              "saved_float_below": 0,
+              "saved_float_equal": 4,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            }
+          },
+          "test": {
+            "saved": {
+              "reports": 230,
+              "wrong_reports": 23,
+              "false_negative": 22,
+              "false_positive": 1
+            },
+            "exact": {
+              "reports": 230,
+              "wrong_reports": 23,
+              "false_negative": 22,
+              "false_positive": 1
+            },
+            "frozen_float_code_here": {
+              "reports": 230,
+              "wrong_reports": 23,
+              "false_negative": 22,
+              "false_positive": 1
+            },
+            "released_set_identical": true,
+            "frozen_float_code_here_matches_saved": true,
+            "released_set_sha256": {
+              "saved": "1f40017367cb131ce1ea7bab53f6446844de852c9d5558405c17d2c0c19d1577",
+              "exact": "1f40017367cb131ce1ea7bab53f6446844de852c9d5558405c17d2c0c19d1577"
+            },
+            "flipped_rows": []
+          },
+          "identical": true
+        },
+        "loglinear": {
+          "lambda": {
+            "saved": 0.1,
+            "exact": 0.1,
+            "frozen_float_code_here": 0.1
+          },
+          "corrected_risk": {
+            "saved_float": 0.09583333333333334,
+            "exact": "23/240"
+          },
+          "calibration_curve_points_changed": [
+            {
+              "lambda": 0.2,
+              "saved": {
+                "loss_sum": 5.2,
+                "corrected": 0.06458333333333334,
+                "released_designs": 330
+              },
+              "exact": {
+                "loss_sum": 5.2,
+                "corrected": 0.06458333333333334,
+                "released_designs": 329
+              }
+            }
+          ],
+          "alpha_boundary_float_vs_exact_disagreements": [],
+          "grid_ties": {
+            "calibration": {
+              "rows_on_grid": 2,
+              "saved_float_above": 1,
+              "saved_float_below": 0,
+              "saved_float_equal": 1,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            },
+            "test": {
+              "rows_on_grid": 3,
+              "saved_float_above": 0,
+              "saved_float_below": 0,
+              "saved_float_equal": 3,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            }
+          },
+          "test": {
+            "saved": {
+              "reports": 182,
+              "wrong_reports": 24,
+              "false_negative": 23,
+              "false_positive": 1
+            },
+            "exact": {
+              "reports": 182,
+              "wrong_reports": 24,
+              "false_negative": 23,
+              "false_positive": 1
+            },
+            "frozen_float_code_here": {
+              "reports": 182,
+              "wrong_reports": 24,
+              "false_negative": 23,
+              "false_positive": 1
+            },
+            "released_set_identical": true,
+            "frozen_float_code_here_matches_saved": true,
+            "released_set_sha256": {
+              "saved": "1d9a5cf06eb2de887eae6c52223f615dd514f3570d9d1735972cf5ff67b370d2",
+              "exact": "1d9a5cf06eb2de887eae6c52223f615dd514f3570d9d1735972cf5ff67b370d2"
+            },
+            "flipped_rows": []
+          },
+          "identical": true
+        },
+        "measured_only": {
+          "lambda": {
+            "saved": 0.09,
+            "exact": 0.09,
+            "frozen_float_code_here": 0.09
+          },
+          "corrected_risk": {
+            "saved_float": 0.09999999999999999,
+            "exact": "1/10"
+          },
+          "calibration_curve_points_changed": [
+            {
+              "lambda": 0.2,
+              "saved": {
+                "loss_sum": 4.8,
+                "corrected": 0.06041666666666667,
+                "released_designs": 326
+              },
+              "exact": {
+                "loss_sum": 4.8,
+                "corrected": 0.06041666666666667,
+                "released_designs": 325
+              }
+            }
+          ],
+          "alpha_boundary_float_vs_exact_disagreements": [],
+          "grid_ties": {
+            "calibration": {
+              "rows_on_grid": 2,
+              "saved_float_above": 1,
+              "saved_float_below": 0,
+              "saved_float_equal": 1,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            },
+            "test": {
+              "rows_on_grid": 3,
+              "saved_float_above": 0,
+              "saved_float_below": 0,
+              "saved_float_equal": 3,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            }
+          },
+          "test": {
+            "saved": {
+              "reports": 187,
+              "wrong_reports": 23,
+              "false_negative": 23,
+              "false_positive": 0
+            },
+            "exact": {
+              "reports": 187,
+              "wrong_reports": 23,
+              "false_negative": 23,
+              "false_positive": 0
+            },
+            "frozen_float_code_here": {
+              "reports": 187,
+              "wrong_reports": 23,
+              "false_negative": 23,
+              "false_positive": 0
+            },
+            "released_set_identical": true,
+            "frozen_float_code_here_matches_saved": true,
+            "released_set_sha256": {
+              "saved": "67a0ecb74cbc19a189f03480b54e11cfcc8cf7c222ce158b36c682a838b41579",
+              "exact": "67a0ecb74cbc19a189f03480b54e11cfcc8cf7c222ce158b36c682a838b41579"
+            },
+            "flipped_rows": []
+          },
+          "identical": true
+        }
+      },
+      "calls_identical": true,
+      "max_abs_saved_float_minus_exact": 5.551115123125783e-16,
+      "frozen_float_recomputed_here_bitwise_equal_to_saved": "391/2145"
+    },
+    {
+      "analysis": "nested",
+      "fold": 4,
+      "inputs_sha256": {
+        "training_rules.json": "f2f2ca173b705825796da84562dad87ab2b7042b84fef8f9764de1db280bc504",
+        "calibration_design_decisions.json": "bbc5a0768ce69353b8ae0fd496097157c1702ef8fc014a8739324e78579332c1",
+        "calibration.json": "2a0db6133195907e4834832977cb1ffaf5a948d751792642e4c0c6c0db65a256",
+        "design_decisions.json": "ad1751aedbd88d8564fb6f561b2767c75ea003dd0ce8ba73a28300a1575e7a7c"
+      },
+      "calibration_rows": 485,
+      "test_rows": 230,
+      "calibration_identities": 94,
+      "test_identities": 46,
+      "rank_lattice_denominator": 5820,
+      "methods": {
+        "anchorboost": {
+          "lambda": {
+            "saved": -1.0,
+            "exact": -1.0,
+            "frozen_float_code_here": -1.0
+          },
+          "corrected_risk": {
+            "saved_float": 0.0863157894736842,
+            "exact": "41/475"
+          },
+          "calibration_curve_points_changed": [
+            {
+              "lambda": 0.4,
+              "saved": {
+                "loss_sum": 0.0,
+                "corrected": 0.010526315789473684,
+                "released_designs": 148
+              },
+              "exact": {
+                "loss_sum": 0.0,
+                "corrected": 0.010526315789473684,
+                "released_designs": 147
+              }
+            }
+          ],
+          "alpha_boundary_float_vs_exact_disagreements": [],
+          "grid_ties": {
+            "calibration": {
+              "rows_on_grid": 5,
+              "saved_float_above": 1,
+              "saved_float_below": 0,
+              "saved_float_equal": 4,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            },
+            "test": {
+              "rows_on_grid": 1,
+              "saved_float_above": 1,
+              "saved_float_below": 0,
+              "saved_float_equal": 0,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            }
+          },
+          "test": {
+            "saved": {
+              "reports": 230,
+              "wrong_reports": 20,
+              "false_negative": 16,
+              "false_positive": 4
+            },
+            "exact": {
+              "reports": 230,
+              "wrong_reports": 20,
+              "false_negative": 16,
+              "false_positive": 4
+            },
+            "frozen_float_code_here": {
+              "reports": 230,
+              "wrong_reports": 20,
+              "false_negative": 16,
+              "false_positive": 4
+            },
+            "released_set_identical": true,
+            "frozen_float_code_here_matches_saved": true,
+            "released_set_sha256": {
+              "saved": "1e8b0a790a409dc054147bbac8781a14628b076ca9840e3b76459a6a44b1fdd3",
+              "exact": "1e8b0a790a409dc054147bbac8781a14628b076ca9840e3b76459a6a44b1fdd3"
+            },
+            "flipped_rows": []
+          },
+          "identical": true
+        },
+        "loglinear": {
+          "lambda": {
+            "saved": 0.02,
+            "exact": 0.02,
+            "frozen_float_code_here": 0.02
+          },
+          "corrected_risk": {
+            "saved_float": 0.09684210526315791,
+            "exact": "46/475"
+          },
+          "calibration_curve_points_changed": [
+            {
+              "lambda": 0.3,
+              "saved": {
+                "loss_sum": 0.0,
+                "corrected": 0.010526315789473684,
+                "released_designs": 187
+              },
+              "exact": {
+                "loss_sum": 0.0,
+                "corrected": 0.010526315789473684,
+                "released_designs": 186
+              }
+            }
+          ],
+          "alpha_boundary_float_vs_exact_disagreements": [],
+          "grid_ties": {
+            "calibration": {
+              "rows_on_grid": 1,
+              "saved_float_above": 1,
+              "saved_float_below": 0,
+              "saved_float_equal": 0,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            },
+            "test": {
+              "rows_on_grid": 5,
+              "saved_float_above": 4,
+              "saved_float_below": 0,
+              "saved_float_equal": 1,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            }
+          },
+          "test": {
+            "saved": {
+              "reports": 218,
+              "wrong_reports": 27,
+              "false_negative": 27,
+              "false_positive": 0
+            },
+            "exact": {
+              "reports": 218,
+              "wrong_reports": 27,
+              "false_negative": 27,
+              "false_positive": 0
+            },
+            "frozen_float_code_here": {
+              "reports": 218,
+              "wrong_reports": 27,
+              "false_negative": 27,
+              "false_positive": 0
+            },
+            "released_set_identical": true,
+            "frozen_float_code_here_matches_saved": true,
+            "released_set_sha256": {
+              "saved": "d785b17bf3ae670747602f9e25cef77a513645077382e63a88c30f8a44033574",
+              "exact": "d785b17bf3ae670747602f9e25cef77a513645077382e63a88c30f8a44033574"
+            },
+            "flipped_rows": []
+          },
+          "identical": true
+        },
+        "measured_only": {
+          "lambda": {
+            "saved": 0.02,
+            "exact": 0.02,
+            "frozen_float_code_here": 0.02
+          },
+          "corrected_risk": {
+            "saved_float": 0.09473684210526316,
+            "exact": "9/95"
+          },
+          "calibration_curve_points_changed": [],
+          "alpha_boundary_float_vs_exact_disagreements": [],
+          "grid_ties": {
+            "calibration": {
+              "rows_on_grid": 0,
+              "saved_float_above": 0,
+              "saved_float_below": 0,
+              "saved_float_equal": 0,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            },
+            "test": {
+              "rows_on_grid": 1,
+              "saved_float_above": 0,
+              "saved_float_below": 0,
+              "saved_float_equal": 1,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            }
+          },
+          "test": {
+            "saved": {
+              "reports": 218,
+              "wrong_reports": 27,
+              "false_negative": 27,
+              "false_positive": 0
+            },
+            "exact": {
+              "reports": 218,
+              "wrong_reports": 27,
+              "false_negative": 27,
+              "false_positive": 0
+            },
+            "frozen_float_code_here": {
+              "reports": 218,
+              "wrong_reports": 27,
+              "false_negative": 27,
+              "false_positive": 0
+            },
+            "released_set_identical": true,
+            "frozen_float_code_here_matches_saved": true,
+            "released_set_sha256": {
+              "saved": "d785b17bf3ae670747602f9e25cef77a513645077382e63a88c30f8a44033574",
+              "exact": "d785b17bf3ae670747602f9e25cef77a513645077382e63a88c30f8a44033574"
+            },
+            "flipped_rows": []
+          },
+          "identical": true
+        }
+      },
+      "calls_identical": true,
+      "max_abs_saved_float_minus_exact": 7.771561172376096e-16,
+      "frozen_float_recomputed_here_bitwise_equal_to_saved": "288/2145"
+    },
+    {
+      "analysis": "batch_heldout_common_scale",
+      "arm": "A",
+      "regime": "R1",
+      "fold": 1,
+      "inputs_sha256": {
+        "training_rules.json": "c3ea44465212d9ac1e1495998114b160b701f308649d78e349499a15cf5eb62b",
+        "calibration_design_decisions.json": "2a89b4bfbedfa3b3f77c72ffceac26b2a01481020f0e3b0b524d81aefd7e3cdb",
+        "calibration.json": "97f79652bc1a8f5bbf24a8d47f47765c0c934402b9f3387c2da8441f6965d315",
+        "design_decisions.json": "302954d0ca577651c9fc9a3ba629ea271713036144a5fbaa611b059fbc6ce554"
+      },
+      "calibration_rows": 460,
+      "test_rows": 250,
+      "calibration_identities": 91,
+      "test_identities": 48,
+      "rank_lattice_denominator": 1960,
+      "methods": {
+        "anchorboost": {
+          "lambda": {
+            "saved": 0.04,
+            "exact": 0.04,
+            "frozen_float_code_here": 0.04
+          },
+          "corrected_risk": {
+            "saved_float": 0.09782608695652174,
+            "exact": "9/92"
+          },
+          "calibration_curve_points_changed": [
+            {
+              "lambda": 0.25,
+              "saved": {
+                "loss_sum": 2.0,
+                "corrected": 0.03260869565217391,
+                "released_designs": 224
+              },
+              "exact": {
+                "loss_sum": 1.8,
+                "corrected": 0.03043478260869565,
+                "released_designs": 220
+              }
+            },
+            {
+              "lambda": 0.3,
+              "saved": {
+                "loss_sum": 0.6000000000000001,
+                "corrected": 0.017391304347826087,
+                "released_designs": 170
+              },
+              "exact": {
+                "loss_sum": 0.4,
+                "corrected": 0.015217391304347825,
+                "released_designs": 165
+              }
+            }
+          ],
+          "alpha_boundary_float_vs_exact_disagreements": [],
+          "grid_ties": {
+            "calibration": {
+              "rows_on_grid": 35,
+              "saved_float_above": 9,
+              "saved_float_below": 25,
+              "saved_float_equal": 1,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            },
+            "test": {
+              "rows_on_grid": 24,
+              "saved_float_above": 2,
+              "saved_float_below": 22,
+              "saved_float_equal": 0,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            }
+          },
+          "test": {
+            "saved": {
+              "reports": 243,
+              "wrong_reports": 23,
+              "false_negative": 16,
+              "false_positive": 7
+            },
+            "exact": {
+              "reports": 243,
+              "wrong_reports": 23,
+              "false_negative": 16,
+              "false_positive": 7
+            },
+            "frozen_float_code_here": {
+              "reports": 243,
+              "wrong_reports": 23,
+              "false_negative": 16,
+              "false_positive": 7
+            },
+            "released_set_identical": true,
+            "frozen_float_code_here_matches_saved": true,
+            "released_set_sha256": {
+              "saved": "2fa444bdebb9e84d0a3c975816d24f6c419275f83b77638a11e22bafab0b462a",
+              "exact": "2fa444bdebb9e84d0a3c975816d24f6c419275f83b77638a11e22bafab0b462a"
+            },
+            "flipped_rows": []
+          },
+          "identical": true
+        },
+        "loglinear": {
+          "lambda": {
+            "saved": 0.19,
+            "exact": 0.19,
+            "frozen_float_code_here": 0.19
+          },
+          "corrected_risk": {
+            "saved_float": 0.1,
+            "exact": "1/10"
+          },
+          "calibration_curve_points_changed": [],
+          "alpha_boundary_float_vs_exact_disagreements": [],
+          "grid_ties": {
+            "calibration": {
+              "rows_on_grid": 9,
+              "saved_float_above": 0,
+              "saved_float_below": 0,
+              "saved_float_equal": 9,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            },
+            "test": {
+              "rows_on_grid": 1,
+              "saved_float_above": 0,
+              "saved_float_below": 0,
+              "saved_float_equal": 1,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            }
+          },
+          "test": {
+            "saved": {
+              "reports": 167,
+              "wrong_reports": 13,
+              "false_negative": 13,
+              "false_positive": 0
+            },
+            "exact": {
+              "reports": 167,
+              "wrong_reports": 13,
+              "false_negative": 13,
+              "false_positive": 0
+            },
+            "frozen_float_code_here": {
+              "reports": 167,
+              "wrong_reports": 13,
+              "false_negative": 13,
+              "false_positive": 0
+            },
+            "released_set_identical": true,
+            "frozen_float_code_here_matches_saved": true,
+            "released_set_sha256": {
+              "saved": "364e1b0010a110f2d485591c9dba742fccaed02db4a8b6721636128ecbca9039",
+              "exact": "364e1b0010a110f2d485591c9dba742fccaed02db4a8b6721636128ecbca9039"
+            },
+            "flipped_rows": []
+          },
+          "identical": true
+        },
+        "measured_only": {
+          "lambda": {
+            "saved": 0.19,
+            "exact": 0.19,
+            "frozen_float_code_here": 0.19
+          },
+          "corrected_risk": {
+            "saved_float": 0.09782608695652174,
+            "exact": "9/92"
+          },
+          "calibration_curve_points_changed": [],
+          "alpha_boundary_float_vs_exact_disagreements": [],
+          "grid_ties": {
+            "calibration": {
+              "rows_on_grid": 9,
+              "saved_float_above": 0,
+              "saved_float_below": 0,
+              "saved_float_equal": 9,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            },
+            "test": {
+              "rows_on_grid": 1,
+              "saved_float_above": 0,
+              "saved_float_below": 0,
+              "saved_float_equal": 1,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            }
+          },
+          "test": {
+            "saved": {
+              "reports": 167,
+              "wrong_reports": 13,
+              "false_negative": 13,
+              "false_positive": 0
+            },
+            "exact": {
+              "reports": 167,
+              "wrong_reports": 13,
+              "false_negative": 13,
+              "false_positive": 0
+            },
+            "frozen_float_code_here": {
+              "reports": 167,
+              "wrong_reports": 13,
+              "false_negative": 13,
+              "false_positive": 0
+            },
+            "released_set_identical": true,
+            "frozen_float_code_here_matches_saved": true,
+            "released_set_sha256": {
+              "saved": "364e1b0010a110f2d485591c9dba742fccaed02db4a8b6721636128ecbca9039",
+              "exact": "364e1b0010a110f2d485591c9dba742fccaed02db4a8b6721636128ecbca9039"
+            },
+            "flipped_rows": []
+          },
+          "identical": true
+        }
+      },
+      "calls_identical": true,
+      "max_abs_saved_float_minus_exact": 1.2212453270876722e-15,
+      "frozen_float_recomputed_here_bitwise_equal_to_saved": "2130/2130"
+    },
+    {
+      "analysis": "batch_heldout_common_scale",
+      "arm": "A",
+      "regime": "R1",
+      "fold": 2,
+      "inputs_sha256": {
+        "training_rules.json": "ef25773f111a552e74c34d55d4624d291a3663d8248be04f0e4a205b0bf3c51b",
+        "calibration_design_decisions.json": "24acc2af5e50d17e031074d79156203c6a309bc9ebd5ab2cd898149909238786",
+        "calibration.json": "168fd80e2a8399470f93267daa84420896dbe851aab5e98a94cb4fa91703d3fa",
+        "design_decisions.json": "706e232d27de7be3f63e3cbaaafb85b80f1631101e9c3a01de3ffb47e02f7f9a"
+      },
+      "calibration_rows": 460,
+      "test_rows": 255,
+      "calibration_identities": 91,
+      "test_identities": 49,
+      "rank_lattice_denominator": 5820,
+      "methods": {
+        "anchorboost": {
+          "lambda": {
+            "saved": 0.03,
+            "exact": 0.03,
+            "frozen_float_code_here": 0.03
+          },
+          "corrected_risk": {
+            "saved_float": 0.09565217391304348,
+            "exact": "11/115"
+          },
+          "calibration_curve_points_changed": [],
+          "alpha_boundary_float_vs_exact_disagreements": [],
+          "grid_ties": {
+            "calibration": {
+              "rows_on_grid": 4,
+              "saved_float_above": 0,
+              "saved_float_below": 0,
+              "saved_float_equal": 4,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            },
+            "test": {
+              "rows_on_grid": 0,
+              "saved_float_above": 0,
+              "saved_float_below": 0,
+              "saved_float_equal": 0,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            }
+          },
+          "test": {
+            "saved": {
+              "reports": 241,
+              "wrong_reports": 21,
+              "false_negative": 18,
+              "false_positive": 3
+            },
+            "exact": {
+              "reports": 241,
+              "wrong_reports": 21,
+              "false_negative": 18,
+              "false_positive": 3
+            },
+            "frozen_float_code_here": {
+              "reports": 241,
+              "wrong_reports": 21,
+              "false_negative": 18,
+              "false_positive": 3
+            },
+            "released_set_identical": true,
+            "frozen_float_code_here_matches_saved": true,
+            "released_set_sha256": {
+              "saved": "59e2ef14f67e2e025c5fec8c587384487d242a80d6c4c969e35d89db2d2a9f97",
+              "exact": "59e2ef14f67e2e025c5fec8c587384487d242a80d6c4c969e35d89db2d2a9f97"
+            },
+            "flipped_rows": []
+          },
+          "identical": true
+        },
+        "loglinear": {
+          "lambda": {
+            "saved": 0.2,
+            "exact": 0.2,
+            "frozen_float_code_here": 0.2
+          },
+          "corrected_risk": {
+            "saved_float": 0.09782608695652174,
+            "exact": "9/92"
+          },
+          "calibration_curve_points_changed": [],
+          "alpha_boundary_float_vs_exact_disagreements": [],
+          "grid_ties": {
+            "calibration": {
+              "rows_on_grid": 4,
+              "saved_float_above": 0,
+              "saved_float_below": 0,
+              "saved_float_equal": 4,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            },
+            "test": {
+              "rows_on_grid": 0,
+              "saved_float_above": 0,
+              "saved_float_below": 0,
+              "saved_float_equal": 0,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            }
+          },
+          "test": {
+            "saved": {
+              "reports": 160,
+              "wrong_reports": 11,
+              "false_negative": 11,
+              "false_positive": 0
+            },
+            "exact": {
+              "reports": 160,
+              "wrong_reports": 11,
+              "false_negative": 11,
+              "false_positive": 0
+            },
+            "frozen_float_code_here": {
+              "reports": 160,
+              "wrong_reports": 11,
+              "false_negative": 11,
+              "false_positive": 0
+            },
+            "released_set_identical": true,
+            "frozen_float_code_here_matches_saved": true,
+            "released_set_sha256": {
+              "saved": "4885f2c7200c7c7762e46cccae46c2d185c186110c152fb99419589e677d9112",
+              "exact": "4885f2c7200c7c7762e46cccae46c2d185c186110c152fb99419589e677d9112"
+            },
+            "flipped_rows": []
+          },
+          "identical": true
+        },
+        "measured_only": {
+          "lambda": {
+            "saved": 0.2,
+            "exact": 0.2,
+            "frozen_float_code_here": 0.2
+          },
+          "corrected_risk": {
+            "saved_float": 0.09782608695652174,
+            "exact": "9/92"
+          },
+          "calibration_curve_points_changed": [],
+          "alpha_boundary_float_vs_exact_disagreements": [],
+          "grid_ties": {
+            "calibration": {
+              "rows_on_grid": 4,
+              "saved_float_above": 0,
+              "saved_float_below": 0,
+              "saved_float_equal": 4,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            },
+            "test": {
+              "rows_on_grid": 0,
+              "saved_float_above": 0,
+              "saved_float_below": 0,
+              "saved_float_equal": 0,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            }
+          },
+          "test": {
+            "saved": {
+              "reports": 160,
+              "wrong_reports": 11,
+              "false_negative": 11,
+              "false_positive": 0
+            },
+            "exact": {
+              "reports": 160,
+              "wrong_reports": 11,
+              "false_negative": 11,
+              "false_positive": 0
+            },
+            "frozen_float_code_here": {
+              "reports": 160,
+              "wrong_reports": 11,
+              "false_negative": 11,
+              "false_positive": 0
+            },
+            "released_set_identical": true,
+            "frozen_float_code_here_matches_saved": true,
+            "released_set_sha256": {
+              "saved": "4885f2c7200c7c7762e46cccae46c2d185c186110c152fb99419589e677d9112",
+              "exact": "4885f2c7200c7c7762e46cccae46c2d185c186110c152fb99419589e677d9112"
+            },
+            "flipped_rows": []
+          },
+          "identical": true
+        }
+      },
+      "calls_identical": true,
+      "max_abs_saved_float_minus_exact": 9.992007221626409e-16,
+      "frozen_float_recomputed_here_bitwise_equal_to_saved": "2145/2145"
+    },
+    {
+      "analysis": "batch_heldout_common_scale",
+      "arm": "A",
+      "regime": "R1",
+      "fold": 3,
+      "inputs_sha256": {
+        "training_rules.json": "96c545e9b2016dce2825f64f6e7b802ac70ffcdec0eabc3da3b88186198f9a4c",
+        "calibration_design_decisions.json": "f09715decfb9c5f8f0e2bca2ba1f4a34f7c20a852901a129a4656fe0c5d5f591",
+        "calibration.json": "37a8ecf76144b19ea8a12d21970a5a174b4132e1b987bcba2b6a00c335c604c7",
+        "design_decisions.json": "f09bd536fa56b6526890e4e15c6d46493f2ee4d4f832ad5771784a6283dcf372"
+      },
+      "calibration_rows": 485,
+      "test_rows": 230,
+      "calibration_identities": 95,
+      "test_identities": 45,
+      "rank_lattice_denominator": 5820,
+      "methods": {
+        "anchorboost": {
+          "lambda": {
+            "saved": 0.04,
+            "exact": 0.04,
+            "frozen_float_code_here": 0.04
+          },
+          "corrected_risk": {
+            "saved_float": 0.09583333333333334,
+            "exact": "23/240"
+          },
+          "calibration_curve_points_changed": [
+            {
+              "lambda": 0.2,
+              "saved": {
+                "loss_sum": 2.4000000000000004,
+                "corrected": 0.03541666666666667,
+                "released_designs": 286
+              },
+              "exact": {
+                "loss_sum": 2.4000000000000004,
+                "corrected": 0.03541666666666667,
+                "released_designs": 283
+              }
+            }
+          ],
+          "alpha_boundary_float_vs_exact_disagreements": [],
+          "grid_ties": {
+            "calibration": {
+              "rows_on_grid": 3,
+              "saved_float_above": 3,
+              "saved_float_below": 0,
+              "saved_float_equal": 0,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            },
+            "test": {
+              "rows_on_grid": 3,
+              "saved_float_above": 0,
+              "saved_float_below": 0,
+              "saved_float_equal": 3,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            }
+          },
+          "test": {
+            "saved": {
+              "reports": 193,
+              "wrong_reports": 13,
+              "false_negative": 12,
+              "false_positive": 1
+            },
+            "exact": {
+              "reports": 193,
+              "wrong_reports": 13,
+              "false_negative": 12,
+              "false_positive": 1
+            },
+            "frozen_float_code_here": {
+              "reports": 193,
+              "wrong_reports": 13,
+              "false_negative": 12,
+              "false_positive": 1
+            },
+            "released_set_identical": true,
+            "frozen_float_code_here_matches_saved": true,
+            "released_set_sha256": {
+              "saved": "f3f41108cb71c3229437fd0d199e3b13f6b4205f50f439b4ef854b36dbe082ca",
+              "exact": "f3f41108cb71c3229437fd0d199e3b13f6b4205f50f439b4ef854b36dbe082ca"
+            },
+            "flipped_rows": []
+          },
+          "identical": true
+        },
+        "loglinear": {
+          "lambda": {
+            "saved": 0.17,
+            "exact": 0.17,
+            "frozen_float_code_here": 0.17
+          },
+          "corrected_risk": {
+            "saved_float": 0.09583333333333334,
+            "exact": "23/240"
+          },
+          "calibration_curve_points_changed": [],
+          "alpha_boundary_float_vs_exact_disagreements": [],
+          "grid_ties": {
+            "calibration": {
+              "rows_on_grid": 0,
+              "saved_float_above": 0,
+              "saved_float_below": 0,
+              "saved_float_equal": 0,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            },
+            "test": {
+              "rows_on_grid": 4,
+              "saved_float_above": 0,
+              "saved_float_below": 0,
+              "saved_float_equal": 4,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            }
+          },
+          "test": {
+            "saved": {
+              "reports": 149,
+              "wrong_reports": 19,
+              "false_negative": 19,
+              "false_positive": 0
+            },
+            "exact": {
+              "reports": 149,
+              "wrong_reports": 19,
+              "false_negative": 19,
+              "false_positive": 0
+            },
+            "frozen_float_code_here": {
+              "reports": 149,
+              "wrong_reports": 19,
+              "false_negative": 19,
+              "false_positive": 0
+            },
+            "released_set_identical": true,
+            "frozen_float_code_here_matches_saved": true,
+            "released_set_sha256": {
+              "saved": "efe1ad962685fac4a403392d121234fb1d9350cc620d697226d204b6145cea1c",
+              "exact": "efe1ad962685fac4a403392d121234fb1d9350cc620d697226d204b6145cea1c"
+            },
+            "flipped_rows": []
+          },
+          "identical": true
+        },
+        "measured_only": {
+          "lambda": {
+            "saved": 0.16,
+            "exact": 0.16,
+            "frozen_float_code_here": 0.16
+          },
+          "corrected_risk": {
+            "saved_float": 0.09999999999999999,
+            "exact": "1/10"
+          },
+          "calibration_curve_points_changed": [],
+          "alpha_boundary_float_vs_exact_disagreements": [],
+          "grid_ties": {
+            "calibration": {
+              "rows_on_grid": 0,
+              "saved_float_above": 0,
+              "saved_float_below": 0,
+              "saved_float_equal": 0,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            },
+            "test": {
+              "rows_on_grid": 4,
+              "saved_float_above": 0,
+              "saved_float_below": 0,
+              "saved_float_equal": 4,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            }
+          },
+          "test": {
+            "saved": {
+              "reports": 151,
+              "wrong_reports": 21,
+              "false_negative": 21,
+              "false_positive": 0
+            },
+            "exact": {
+              "reports": 151,
+              "wrong_reports": 21,
+              "false_negative": 21,
+              "false_positive": 0
+            },
+            "frozen_float_code_here": {
+              "reports": 151,
+              "wrong_reports": 21,
+              "false_negative": 21,
+              "false_positive": 0
+            },
+            "released_set_identical": true,
+            "frozen_float_code_here_matches_saved": true,
+            "released_set_sha256": {
+              "saved": "ce776c5921c7d7a67ec8356f5302f91ddc288fb6fab94e2970ec68672d39a0f1",
+              "exact": "ce776c5921c7d7a67ec8356f5302f91ddc288fb6fab94e2970ec68672d39a0f1"
+            },
+            "flipped_rows": []
+          },
+          "identical": true
+        }
+      },
+      "calls_identical": true,
+      "max_abs_saved_float_minus_exact": 8.881784197001252e-16,
+      "frozen_float_recomputed_here_bitwise_equal_to_saved": "2145/2145"
+    },
+    {
+      "analysis": "batch_heldout_common_scale",
+      "arm": "A",
+      "regime": "R1",
+      "fold": 4,
+      "inputs_sha256": {
+        "training_rules.json": "549b4fa3953fb57df9f2f90ef4e9ce670e76eca5ffa2e210cdd2e512821f9b29",
+        "calibration_design_decisions.json": "7dc1082c462be610ee0a08f116e9260260b8cdb8841bb91f2ffbdfe7c67eee50",
+        "calibration.json": "7e3a608100c72864c315707997344525b3560e6e5ad5dd4e20e5a30715c875a1",
+        "design_decisions.json": "1c62c74e1cfc6613911a209858e709f621661f9fb29887f105a49b947c5d8283"
+      },
+      "calibration_rows": 485,
+      "test_rows": 230,
+      "calibration_identities": 94,
+      "test_identities": 46,
+      "rank_lattice_denominator": 5820,
+      "methods": {
+        "anchorboost": {
+          "lambda": {
+            "saved": 0.02,
+            "exact": 0.02,
+            "frozen_float_code_here": 0.02
+          },
+          "corrected_risk": {
+            "saved_float": 0.09473684210526316,
+            "exact": "9/95"
+          },
+          "calibration_curve_points_changed": [
+            {
+              "lambda": 0.2,
+              "saved": {
+                "loss_sum": 1.9000000000000001,
+                "corrected": 0.03052631578947369,
+                "released_designs": 285
+              },
+              "exact": {
+                "loss_sum": 1.9000000000000001,
+                "corrected": 0.03052631578947369,
+                "released_designs": 284
+              }
+            }
+          ],
+          "alpha_boundary_float_vs_exact_disagreements": [],
+          "grid_ties": {
+            "calibration": {
+              "rows_on_grid": 5,
+              "saved_float_above": 1,
+              "saved_float_below": 0,
+              "saved_float_equal": 4,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            },
+            "test": {
+              "rows_on_grid": 1,
+              "saved_float_above": 1,
+              "saved_float_below": 0,
+              "saved_float_equal": 0,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            }
+          },
+          "test": {
+            "saved": {
+              "reports": 227,
+              "wrong_reports": 26,
+              "false_negative": 24,
+              "false_positive": 2
+            },
+            "exact": {
+              "reports": 227,
+              "wrong_reports": 26,
+              "false_negative": 24,
+              "false_positive": 2
+            },
+            "frozen_float_code_here": {
+              "reports": 227,
+              "wrong_reports": 26,
+              "false_negative": 24,
+              "false_positive": 2
+            },
+            "released_set_identical": true,
+            "frozen_float_code_here_matches_saved": true,
+            "released_set_sha256": {
+              "saved": "8c0b5e2b3961a9ae07c7e8675f70a49d1eaf82018fae29d992c36e28394fe3ea",
+              "exact": "8c0b5e2b3961a9ae07c7e8675f70a49d1eaf82018fae29d992c36e28394fe3ea"
+            },
+            "flipped_rows": []
+          },
+          "identical": true
+        },
+        "loglinear": {
+          "lambda": {
+            "saved": 0.08,
+            "exact": 0.08,
+            "frozen_float_code_here": 0.08
+          },
+          "corrected_risk": {
+            "saved_float": 0.09684210526315791,
+            "exact": "46/475"
+          },
+          "calibration_curve_points_changed": [],
+          "alpha_boundary_float_vs_exact_disagreements": [],
+          "grid_ties": {
+            "calibration": {
+              "rows_on_grid": 4,
+              "saved_float_above": 0,
+              "saved_float_below": 0,
+              "saved_float_equal": 4,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            },
+            "test": {
+              "rows_on_grid": 0,
+              "saved_float_above": 0,
+              "saved_float_below": 0,
+              "saved_float_equal": 0,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            }
+          },
+          "test": {
+            "saved": {
+              "reports": 191,
+              "wrong_reports": 33,
+              "false_negative": 33,
+              "false_positive": 0
+            },
+            "exact": {
+              "reports": 191,
+              "wrong_reports": 33,
+              "false_negative": 33,
+              "false_positive": 0
+            },
+            "frozen_float_code_here": {
+              "reports": 191,
+              "wrong_reports": 33,
+              "false_negative": 33,
+              "false_positive": 0
+            },
+            "released_set_identical": true,
+            "frozen_float_code_here_matches_saved": true,
+            "released_set_sha256": {
+              "saved": "2cfb7db27632ea8520cfb3b037b21db34324fe0a5ace6e53fef732b322bab95c",
+              "exact": "2cfb7db27632ea8520cfb3b037b21db34324fe0a5ace6e53fef732b322bab95c"
+            },
+            "flipped_rows": []
+          },
+          "identical": true
+        },
+        "measured_only": {
+          "lambda": {
+            "saved": 0.08,
+            "exact": 0.08,
+            "frozen_float_code_here": 0.08
+          },
+          "corrected_risk": {
+            "saved_float": 0.09684210526315791,
+            "exact": "46/475"
+          },
+          "calibration_curve_points_changed": [],
+          "alpha_boundary_float_vs_exact_disagreements": [],
+          "grid_ties": {
+            "calibration": {
+              "rows_on_grid": 4,
+              "saved_float_above": 0,
+              "saved_float_below": 0,
+              "saved_float_equal": 4,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            },
+            "test": {
+              "rows_on_grid": 0,
+              "saved_float_above": 0,
+              "saved_float_below": 0,
+              "saved_float_equal": 0,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            }
+          },
+          "test": {
+            "saved": {
+              "reports": 191,
+              "wrong_reports": 33,
+              "false_negative": 33,
+              "false_positive": 0
+            },
+            "exact": {
+              "reports": 191,
+              "wrong_reports": 33,
+              "false_negative": 33,
+              "false_positive": 0
+            },
+            "frozen_float_code_here": {
+              "reports": 191,
+              "wrong_reports": 33,
+              "false_negative": 33,
+              "false_positive": 0
+            },
+            "released_set_identical": true,
+            "frozen_float_code_here_matches_saved": true,
+            "released_set_sha256": {
+              "saved": "2cfb7db27632ea8520cfb3b037b21db34324fe0a5ace6e53fef732b322bab95c",
+              "exact": "2cfb7db27632ea8520cfb3b037b21db34324fe0a5ace6e53fef732b322bab95c"
+            },
+            "flipped_rows": []
+          },
+          "identical": true
+        }
+      },
+      "calls_identical": true,
+      "max_abs_saved_float_minus_exact": 1.1102230246251565e-15,
+      "frozen_float_recomputed_here_bitwise_equal_to_saved": "2145/2145"
+    },
+    {
+      "analysis": "batch_heldout_common_scale",
+      "arm": "A",
+      "regime": "R2",
+      "fold": 0,
+      "inputs_sha256": {
+        "training_rules.json": "78bd3f2aa7076640922781c7e737ec8607cbae502759866e50a4ccfa5c5fa36b",
+        "calibration_design_decisions.json": "6dea74cdfcf0b0cc6bc2e2c4201580bf5e601caeb1c4fc7ac9d4d5a107bd5aa9",
+        "calibration.json": "7523cee287abac81bdfa84f3dda1e48be7f4ec5ec3a6aae4b0a18ce911ffe291",
+        "design_decisions.json": "254c585603faf1906f62c89b250b77c2f8df60979049c0cfe2819baf3e3eb56d"
+      },
+      "calibration_rows": 165,
+      "test_rows": 910,
+      "calibration_identities": 32,
+      "test_identities": 177,
+      "rank_lattice_denominator": 280,
+      "methods": {
+        "anchorboost": {
+          "lambda": {
+            "saved": 0.22,
+            "exact": 0.22,
+            "frozen_float_code_here": 0.22
+          },
+          "corrected_risk": {
+            "saved_float": 0.09696969696969697,
+            "exact": "16/165"
+          },
+          "calibration_curve_points_changed": [
+            {
+              "lambda": 0.05,
+              "saved": {
+                "loss_sum": 4.6,
+                "corrected": 0.16969696969696968,
+                "released_designs": 148
+              },
+              "exact": {
+                "loss_sum": 4.4,
+                "corrected": 0.16363636363636364,
+                "released_designs": 143
+              }
+            },
+            {
+              "lambda": 0.2,
+              "saved": {
+                "loss_sum": 2.4,
+                "corrected": 0.10303030303030303,
+                "released_designs": 89
+              },
+              "exact": {
+                "loss_sum": 2.4,
+                "corrected": 0.10303030303030303,
+                "released_designs": 88
+              }
+            },
+            {
+              "lambda": 0.25,
+              "saved": {
+                "loss_sum": 2.2,
+                "corrected": 0.09696969696969697,
+                "released_designs": 84
+              },
+              "exact": {
+                "loss_sum": 2.2,
+                "corrected": 0.09696969696969697,
+                "released_designs": 82
+              }
+            },
+            {
+              "lambda": 0.45,
+              "saved": {
+                "loss_sum": 1.6,
+                "corrected": 0.0787878787878788,
+                "released_designs": 68
+              },
+              "exact": {
+                "loss_sum": 1.6,
+                "corrected": 0.0787878787878788,
+                "released_designs": 64
+              }
+            },
+            {
+              "lambda": 0.65,
+              "saved": {
+                "loss_sum": 1.2,
+                "corrected": 0.06666666666666667,
+                "released_designs": 37
+              },
+              "exact": {
+                "loss_sum": 1.0,
+                "corrected": 0.06060606060606061,
+                "released_designs": 30
+              }
+            },
+            {
+              "lambda": 0.7,
+              "saved": {
+                "loss_sum": 0.6000000000000001,
+                "corrected": 0.048484848484848485,
+                "released_designs": 22
+              },
+              "exact": {
+                "loss_sum": 0.4,
+                "corrected": 0.04242424242424242,
+                "released_designs": 21
+              }
+            }
+          ],
+          "alpha_boundary_float_vs_exact_disagreements": [],
+          "grid_ties": {
+            "calibration": {
+              "rows_on_grid": 29,
+              "saved_float_above": 20,
+              "saved_float_below": 9,
+              "saved_float_equal": 0,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            },
+            "test": {
+              "rows_on_grid": 99,
+              "saved_float_above": 44,
+              "saved_float_below": 41,
+              "saved_float_equal": 14,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            }
+          },
+          "test": {
+            "saved": {
+              "reports": 406,
+              "wrong_reports": 26,
+              "false_negative": 0,
+              "false_positive": 26
+            },
+            "exact": {
+              "reports": 406,
+              "wrong_reports": 26,
+              "false_negative": 0,
+              "false_positive": 26
+            },
+            "frozen_float_code_here": {
+              "reports": 406,
+              "wrong_reports": 26,
+              "false_negative": 0,
+              "false_positive": 26
+            },
+            "released_set_identical": true,
+            "frozen_float_code_here_matches_saved": true,
+            "released_set_sha256": {
+              "saved": "d7535ff93b26c5c92ad8c39cafb946c554302291a6b0eaa8ad6ada7368530d71",
+              "exact": "d7535ff93b26c5c92ad8c39cafb946c554302291a6b0eaa8ad6ada7368530d71"
+            },
+            "flipped_rows": []
+          },
+          "identical": true
+        },
+        "loglinear": {
+          "lambda": {
+            "saved": 0.16,
+            "exact": 0.16,
+            "frozen_float_code_here": 0.16
+          },
+          "corrected_risk": {
+            "saved_float": 0.08484848484848484,
+            "exact": "14/165"
+          },
+          "calibration_curve_points_changed": [
+            {
+              "lambda": 0.1,
+              "saved": {
+                "loss_sum": 5.0,
+                "corrected": 0.18181818181818182,
+                "released_designs": 149
+              },
+              "exact": {
+                "loss_sum": 4.6000000000000005,
+                "corrected": 0.1696969696969697,
+                "released_designs": 147
+              }
+            },
+            {
+              "lambda": 0.15,
+              "saved": {
+                "loss_sum": 3.4000000000000004,
+                "corrected": 0.13333333333333333,
+                "released_designs": 116
+              },
+              "exact": {
+                "loss_sum": 3.0,
+                "corrected": 0.12121212121212122,
+                "released_designs": 112
+              }
+            },
+            {
+              "lambda": 0.4,
+              "saved": {
+                "loss_sum": 0.0,
+                "corrected": 0.030303030303030304,
+                "released_designs": 60
+              },
+              "exact": {
+                "loss_sum": 0.0,
+                "corrected": 0.030303030303030304,
+                "released_designs": 57
+              }
+            },
+            {
+              "lambda": 0.65,
+              "saved": {
+                "loss_sum": 0.0,
+                "corrected": 0.030303030303030304,
+                "released_designs": 13
+              },
+              "exact": {
+                "loss_sum": 0.0,
+                "corrected": 0.030303030303030304,
+                "released_designs": 7
+              }
+            }
+          ],
+          "alpha_boundary_float_vs_exact_disagreements": [],
+          "grid_ties": {
+            "calibration": {
+              "rows_on_grid": 18,
+              "saved_float_above": 15,
+              "saved_float_below": 0,
+              "saved_float_equal": 3,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            },
+            "test": {
+              "rows_on_grid": 56,
+              "saved_float_above": 49,
+              "saved_float_below": 0,
+              "saved_float_equal": 7,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            }
+          },
+          "test": {
+            "saved": {
+              "reports": 644,
+              "wrong_reports": 25,
+              "false_negative": 25,
+              "false_positive": 0
+            },
+            "exact": {
+              "reports": 644,
+              "wrong_reports": 25,
+              "false_negative": 25,
+              "false_positive": 0
+            },
+            "frozen_float_code_here": {
+              "reports": 644,
+              "wrong_reports": 25,
+              "false_negative": 25,
+              "false_positive": 0
+            },
+            "released_set_identical": true,
+            "frozen_float_code_here_matches_saved": true,
+            "released_set_sha256": {
+              "saved": "cf77ee37d8ec2855b33f3f85360395995f5653dbf14967525f1c64b5381373fb",
+              "exact": "cf77ee37d8ec2855b33f3f85360395995f5653dbf14967525f1c64b5381373fb"
+            },
+            "flipped_rows": []
+          },
+          "identical": true
+        },
+        "measured_only": {
+          "lambda": {
+            "saved": 0.16,
+            "exact": 0.16,
+            "frozen_float_code_here": 0.16
+          },
+          "corrected_risk": {
+            "saved_float": 0.08484848484848484,
+            "exact": "14/165"
+          },
+          "calibration_curve_points_changed": [
+            {
+              "lambda": 0.1,
+              "saved": {
+                "loss_sum": 5.0,
+                "corrected": 0.18181818181818182,
+                "released_designs": 149
+              },
+              "exact": {
+                "loss_sum": 4.6000000000000005,
+                "corrected": 0.1696969696969697,
+                "released_designs": 147
+              }
+            },
+            {
+              "lambda": 0.15,
+              "saved": {
+                "loss_sum": 3.4000000000000004,
+                "corrected": 0.13333333333333333,
+                "released_designs": 116
+              },
+              "exact": {
+                "loss_sum": 3.2,
+                "corrected": 0.1272727272727273,
+                "released_designs": 113
+              }
+            },
+            {
+              "lambda": 0.4,
+              "saved": {
+                "loss_sum": 0.0,
+                "corrected": 0.030303030303030304,
+                "released_designs": 60
+              },
+              "exact": {
+                "loss_sum": 0.0,
+                "corrected": 0.030303030303030304,
+                "released_designs": 57
+              }
+            },
+            {
+              "lambda": 0.65,
+              "saved": {
+                "loss_sum": 0.0,
+                "corrected": 0.030303030303030304,
+                "released_designs": 13
+              },
+              "exact": {
+                "loss_sum": 0.0,
+                "corrected": 0.030303030303030304,
+                "released_designs": 7
+              }
+            }
+          ],
+          "alpha_boundary_float_vs_exact_disagreements": [],
+          "grid_ties": {
+            "calibration": {
+              "rows_on_grid": 17,
+              "saved_float_above": 14,
+              "saved_float_below": 0,
+              "saved_float_equal": 3,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            },
+            "test": {
+              "rows_on_grid": 57,
+              "saved_float_above": 49,
+              "saved_float_below": 0,
+              "saved_float_equal": 8,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            }
+          },
+          "test": {
+            "saved": {
+              "reports": 644,
+              "wrong_reports": 25,
+              "false_negative": 25,
+              "false_positive": 0
+            },
+            "exact": {
+              "reports": 644,
+              "wrong_reports": 25,
+              "false_negative": 25,
+              "false_positive": 0
+            },
+            "frozen_float_code_here": {
+              "reports": 644,
+              "wrong_reports": 25,
+              "false_negative": 25,
+              "false_positive": 0
+            },
+            "released_set_identical": true,
+            "frozen_float_code_here_matches_saved": true,
+            "released_set_sha256": {
+              "saved": "cf77ee37d8ec2855b33f3f85360395995f5653dbf14967525f1c64b5381373fb",
+              "exact": "cf77ee37d8ec2855b33f3f85360395995f5653dbf14967525f1c64b5381373fb"
+            },
+            "flipped_rows": []
+          },
+          "identical": true
+        }
+      },
+      "calls_identical": true,
+      "max_abs_saved_float_minus_exact": 4.440892098500626e-16,
+      "frozen_float_recomputed_here_bitwise_equal_to_saved": "3225/3225"
+    },
+    {
+      "analysis": "batch_heldout_common_scale",
+      "arm": "A",
+      "regime": "R2",
+      "fold": 1,
+      "inputs_sha256": {
+        "training_rules.json": "aa77c685b4445052e44eb3db604865eb9062985a6eb0a4d532675da731cd7f91",
+        "calibration_design_decisions.json": "f44e67a81da687a746625727e539be2b30b935b39dc650c35746f2071a7cc194",
+        "calibration.json": "b414f320c6837dcc715ebe7ce6b4ceb00273aab24ad6bd3b1534a28a595cbc4a",
+        "design_decisions.json": "a407c09e30fe7705a4620d876b16cd7f2c7d86b4adaf7a8d2a261257e9959761"
+      },
+      "calibration_rows": 165,
+      "test_rows": 80,
+      "calibration_identities": 32,
+      "test_identities": 16,
+      "rank_lattice_denominator": 11340,
+      "methods": {
+        "anchorboost": {
+          "lambda": {
+            "saved": 0.17,
+            "exact": 0.17,
+            "frozen_float_code_here": 0.17
+          },
+          "corrected_risk": {
+            "saved_float": 0.08484848484848484,
+            "exact": "14/165"
+          },
+          "calibration_curve_points_changed": [],
+          "alpha_boundary_float_vs_exact_disagreements": [],
+          "grid_ties": {
+            "calibration": {
+              "rows_on_grid": 0,
+              "saved_float_above": 0,
+              "saved_float_below": 0,
+              "saved_float_equal": 0,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            },
+            "test": {
+              "rows_on_grid": 0,
+              "saved_float_above": 0,
+              "saved_float_below": 0,
+              "saved_float_equal": 0,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            }
+          },
+          "test": {
+            "saved": {
+              "reports": 51,
+              "wrong_reports": 7,
+              "false_negative": 7,
+              "false_positive": 0
+            },
+            "exact": {
+              "reports": 51,
+              "wrong_reports": 7,
+              "false_negative": 7,
+              "false_positive": 0
+            },
+            "frozen_float_code_here": {
+              "reports": 51,
+              "wrong_reports": 7,
+              "false_negative": 7,
+              "false_positive": 0
+            },
+            "released_set_identical": true,
+            "frozen_float_code_here_matches_saved": true,
+            "released_set_sha256": {
+              "saved": "dfec9a375b4f0fea46fc82369830662a26c949b01355131236333b37573923eb",
+              "exact": "dfec9a375b4f0fea46fc82369830662a26c949b01355131236333b37573923eb"
+            },
+            "flipped_rows": []
+          },
+          "identical": true
+        },
+        "loglinear": {
+          "lambda": {
+            "saved": 0.16,
+            "exact": 0.16,
+            "frozen_float_code_here": 0.16
+          },
+          "corrected_risk": {
+            "saved_float": 0.09696969696969697,
+            "exact": "16/165"
+          },
+          "calibration_curve_points_changed": [],
+          "alpha_boundary_float_vs_exact_disagreements": [],
+          "grid_ties": {
+            "calibration": {
+              "rows_on_grid": 0,
+              "saved_float_above": 0,
+              "saved_float_below": 0,
+              "saved_float_equal": 0,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            },
+            "test": {
+              "rows_on_grid": 3,
+              "saved_float_above": 0,
+              "saved_float_below": 0,
+              "saved_float_equal": 3,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            }
+          },
+          "test": {
+            "saved": {
+              "reports": 54,
+              "wrong_reports": 9,
+              "false_negative": 9,
+              "false_positive": 0
+            },
+            "exact": {
+              "reports": 54,
+              "wrong_reports": 9,
+              "false_negative": 9,
+              "false_positive": 0
+            },
+            "frozen_float_code_here": {
+              "reports": 54,
+              "wrong_reports": 9,
+              "false_negative": 9,
+              "false_positive": 0
+            },
+            "released_set_identical": true,
+            "frozen_float_code_here_matches_saved": true,
+            "released_set_sha256": {
+              "saved": "fb5623c49d49eb591c65fae03ef26e9e363b7197cae3ae6c2f1d65e193e88fce",
+              "exact": "fb5623c49d49eb591c65fae03ef26e9e363b7197cae3ae6c2f1d65e193e88fce"
+            },
+            "flipped_rows": []
+          },
+          "identical": true
+        },
+        "measured_only": {
+          "lambda": {
+            "saved": 0.17,
+            "exact": 0.17,
+            "frozen_float_code_here": 0.17
+          },
+          "corrected_risk": {
+            "saved_float": 0.09090909090909091,
+            "exact": "1/11"
+          },
+          "calibration_curve_points_changed": [],
+          "alpha_boundary_float_vs_exact_disagreements": [],
+          "grid_ties": {
+            "calibration": {
+              "rows_on_grid": 0,
+              "saved_float_above": 0,
+              "saved_float_below": 0,
+              "saved_float_equal": 0,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            },
+            "test": {
+              "rows_on_grid": 3,
+              "saved_float_above": 0,
+              "saved_float_below": 0,
+              "saved_float_equal": 3,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            }
+          },
+          "test": {
+            "saved": {
+              "reports": 53,
+              "wrong_reports": 9,
+              "false_negative": 9,
+              "false_positive": 0
+            },
+            "exact": {
+              "reports": 53,
+              "wrong_reports": 9,
+              "false_negative": 9,
+              "false_positive": 0
+            },
+            "frozen_float_code_here": {
+              "reports": 53,
+              "wrong_reports": 9,
+              "false_negative": 9,
+              "false_positive": 0
+            },
+            "released_set_identical": true,
+            "frozen_float_code_here_matches_saved": true,
+            "released_set_sha256": {
+              "saved": "448a01ad15aa9183ff9be6389ebbc35861652e65c39547818c9e05913d2a98ae",
+              "exact": "448a01ad15aa9183ff9be6389ebbc35861652e65c39547818c9e05913d2a98ae"
+            },
+            "flipped_rows": []
+          },
+          "identical": true
+        }
+      },
+      "calls_identical": true,
+      "max_abs_saved_float_minus_exact": 2.220446049250313e-16,
+      "frozen_float_recomputed_here_bitwise_equal_to_saved": "735/735"
+    },
+    {
+      "analysis": "batch_heldout_common_scale",
+      "arm": "A",
+      "regime": "R2",
+      "fold": 2,
+      "inputs_sha256": {
+        "training_rules.json": "e5da54892f4547ef1022037f76bea128889be9c4d9a54141dcced6402f427eb3",
+        "calibration_design_decisions.json": "a2a9fd2bbf13deb910733a1869f8883a5854bb105980a9a58baa889165954d16",
+        "calibration.json": "8b5bdf8c094518038161b6bce238160a036552c20a00b5b11e92194e631d35e4",
+        "design_decisions.json": "9d97c4fbd775d496fa037896ca1d576335fedd26987821d92c84abe13079c0b3"
+      },
+      "calibration_rows": 165,
+      "test_rows": 60,
+      "calibration_identities": 32,
+      "test_identities": 12,
+      "rank_lattice_denominator": 11580,
+      "methods": {
+        "anchorboost": {
+          "lambda": {
+            "saved": 0.17,
+            "exact": 0.17,
+            "frozen_float_code_here": 0.17
+          },
+          "corrected_risk": {
+            "saved_float": 0.09090909090909091,
+            "exact": "1/11"
+          },
+          "calibration_curve_points_changed": [],
+          "alpha_boundary_float_vs_exact_disagreements": [],
+          "grid_ties": {
+            "calibration": {
+              "rows_on_grid": 0,
+              "saved_float_above": 0,
+              "saved_float_below": 0,
+              "saved_float_equal": 0,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            },
+            "test": {
+              "rows_on_grid": 0,
+              "saved_float_above": 0,
+              "saved_float_below": 0,
+              "saved_float_equal": 0,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            }
+          },
+          "test": {
+            "saved": {
+              "reports": 29,
+              "wrong_reports": 2,
+              "false_negative": 2,
+              "false_positive": 0
+            },
+            "exact": {
+              "reports": 29,
+              "wrong_reports": 2,
+              "false_negative": 2,
+              "false_positive": 0
+            },
+            "frozen_float_code_here": {
+              "reports": 29,
+              "wrong_reports": 2,
+              "false_negative": 2,
+              "false_positive": 0
+            },
+            "released_set_identical": true,
+            "frozen_float_code_here_matches_saved": true,
+            "released_set_sha256": {
+              "saved": "efd9f41f212b3a4731fff5faec90adae5ba73f37d53edfa0ae78cfbbb22fccd3",
+              "exact": "efd9f41f212b3a4731fff5faec90adae5ba73f37d53edfa0ae78cfbbb22fccd3"
+            },
+            "flipped_rows": []
+          },
+          "identical": true
+        },
+        "loglinear": {
+          "lambda": {
+            "saved": 0.18,
+            "exact": 0.18,
+            "frozen_float_code_here": 0.18
+          },
+          "corrected_risk": {
+            "saved_float": 0.08484848484848484,
+            "exact": "14/165"
+          },
+          "calibration_curve_points_changed": [],
+          "alpha_boundary_float_vs_exact_disagreements": [],
+          "grid_ties": {
+            "calibration": {
+              "rows_on_grid": 0,
+              "saved_float_above": 0,
+              "saved_float_below": 0,
+              "saved_float_equal": 0,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            },
+            "test": {
+              "rows_on_grid": 3,
+              "saved_float_above": 0,
+              "saved_float_below": 3,
+              "saved_float_equal": 0,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            }
+          },
+          "test": {
+            "saved": {
+              "reports": 30,
+              "wrong_reports": 3,
+              "false_negative": 3,
+              "false_positive": 0
+            },
+            "exact": {
+              "reports": 30,
+              "wrong_reports": 3,
+              "false_negative": 3,
+              "false_positive": 0
+            },
+            "frozen_float_code_here": {
+              "reports": 30,
+              "wrong_reports": 3,
+              "false_negative": 3,
+              "false_positive": 0
+            },
+            "released_set_identical": true,
+            "frozen_float_code_here_matches_saved": true,
+            "released_set_sha256": {
+              "saved": "ce8ee1acc1086450a7ee01e83500fc78b9c2ece74c2f011a357323136b93be23",
+              "exact": "ce8ee1acc1086450a7ee01e83500fc78b9c2ece74c2f011a357323136b93be23"
+            },
+            "flipped_rows": []
+          },
+          "identical": true
+        },
+        "measured_only": {
+          "lambda": {
+            "saved": 0.18,
+            "exact": 0.18,
+            "frozen_float_code_here": 0.18
+          },
+          "corrected_risk": {
+            "saved_float": 0.09090909090909091,
+            "exact": "1/11"
+          },
+          "calibration_curve_points_changed": [],
+          "alpha_boundary_float_vs_exact_disagreements": [],
+          "grid_ties": {
+            "calibration": {
+              "rows_on_grid": 0,
+              "saved_float_above": 0,
+              "saved_float_below": 0,
+              "saved_float_equal": 0,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            },
+            "test": {
+              "rows_on_grid": 3,
+              "saved_float_above": 0,
+              "saved_float_below": 3,
+              "saved_float_equal": 0,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            }
+          },
+          "test": {
+            "saved": {
+              "reports": 30,
+              "wrong_reports": 3,
+              "false_negative": 3,
+              "false_positive": 0
+            },
+            "exact": {
+              "reports": 30,
+              "wrong_reports": 3,
+              "false_negative": 3,
+              "false_positive": 0
+            },
+            "frozen_float_code_here": {
+              "reports": 30,
+              "wrong_reports": 3,
+              "false_negative": 3,
+              "false_positive": 0
+            },
+            "released_set_identical": true,
+            "frozen_float_code_here_matches_saved": true,
+            "released_set_sha256": {
+              "saved": "ce8ee1acc1086450a7ee01e83500fc78b9c2ece74c2f011a357323136b93be23",
+              "exact": "ce8ee1acc1086450a7ee01e83500fc78b9c2ece74c2f011a357323136b93be23"
+            },
+            "flipped_rows": []
+          },
+          "identical": true
+        }
+      },
+      "calls_identical": true,
+      "max_abs_saved_float_minus_exact": 1.6653345369377348e-16,
+      "frozen_float_recomputed_here_bitwise_equal_to_saved": "675/675"
+    },
+    {
+      "analysis": "batch_heldout_common_scale",
+      "arm": "A",
+      "regime": "R2",
+      "fold": 3,
+      "inputs_sha256": {
+        "training_rules.json": "499a395b207384db3aac9911fe221776884de2075c6b2664823b2f92ba9d0a38",
+        "calibration_design_decisions.json": "b769c3307160d86c892952c6cce09fc3775b95d7890f1ae1fea85833d1b10545",
+        "calibration.json": "cd6d1a0397c46d1d7d6e2e2b879d5c46253b84359f08ddf246c5ff3593fc7a65",
+        "design_decisions.json": "15701569fcd777cb452303c9a1d792621ea3b4805408ec79c9d5d8efc63b6c4b"
+      },
+      "calibration_rows": 135,
+      "test_rows": 90,
+      "calibration_identities": 27,
+      "test_identities": 17,
+      "rank_lattice_denominator": 11580,
+      "methods": {
+        "anchorboost": {
+          "lambda": {
+            "saved": 0.16,
+            "exact": 0.16,
+            "frozen_float_code_here": 0.16
+          },
+          "corrected_risk": {
+            "saved_float": 0.09999999999999999,
+            "exact": "1/10"
+          },
+          "calibration_curve_points_changed": [],
+          "alpha_boundary_float_vs_exact_disagreements": [],
+          "grid_ties": {
+            "calibration": {
+              "rows_on_grid": 1,
+              "saved_float_above": 0,
+              "saved_float_below": 1,
+              "saved_float_equal": 0,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            },
+            "test": {
+              "rows_on_grid": 0,
+              "saved_float_above": 0,
+              "saved_float_below": 0,
+              "saved_float_equal": 0,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            }
+          },
+          "test": {
+            "saved": {
+              "reports": 68,
+              "wrong_reports": 8,
+              "false_negative": 7,
+              "false_positive": 1
+            },
+            "exact": {
+              "reports": 68,
+              "wrong_reports": 8,
+              "false_negative": 7,
+              "false_positive": 1
+            },
+            "frozen_float_code_here": {
+              "reports": 68,
+              "wrong_reports": 8,
+              "false_negative": 7,
+              "false_positive": 1
+            },
+            "released_set_identical": true,
+            "frozen_float_code_here_matches_saved": true,
+            "released_set_sha256": {
+              "saved": "eb3899cac282624cba7627314d555810b370a7b26358927321f0222a4369a344",
+              "exact": "eb3899cac282624cba7627314d555810b370a7b26358927321f0222a4369a344"
+            },
+            "flipped_rows": []
+          },
+          "identical": true
+        },
+        "loglinear": {
+          "lambda": {
+            "saved": 0.22,
+            "exact": 0.22,
+            "frozen_float_code_here": 0.22
+          },
+          "corrected_risk": {
+            "saved_float": 0.09999999999999999,
+            "exact": "1/10"
+          },
+          "calibration_curve_points_changed": [],
+          "alpha_boundary_float_vs_exact_disagreements": [],
+          "grid_ties": {
+            "calibration": {
+              "rows_on_grid": 3,
+              "saved_float_above": 0,
+              "saved_float_below": 3,
+              "saved_float_equal": 0,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            },
+            "test": {
+              "rows_on_grid": 0,
+              "saved_float_above": 0,
+              "saved_float_below": 0,
+              "saved_float_equal": 0,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            }
+          },
+          "test": {
+            "saved": {
+              "reports": 58,
+              "wrong_reports": 3,
+              "false_negative": 3,
+              "false_positive": 0
+            },
+            "exact": {
+              "reports": 58,
+              "wrong_reports": 3,
+              "false_negative": 3,
+              "false_positive": 0
+            },
+            "frozen_float_code_here": {
+              "reports": 58,
+              "wrong_reports": 3,
+              "false_negative": 3,
+              "false_positive": 0
+            },
+            "released_set_identical": true,
+            "frozen_float_code_here_matches_saved": true,
+            "released_set_sha256": {
+              "saved": "802e366c2a5689966ea2dce74093549d5ebfeb90ea4eda70665ca7d063140d42",
+              "exact": "802e366c2a5689966ea2dce74093549d5ebfeb90ea4eda70665ca7d063140d42"
+            },
+            "flipped_rows": []
+          },
+          "identical": true
+        },
+        "measured_only": {
+          "lambda": {
+            "saved": 0.22,
+            "exact": 0.22,
+            "frozen_float_code_here": 0.22
+          },
+          "corrected_risk": {
+            "saved_float": 0.09999999999999999,
+            "exact": "1/10"
+          },
+          "calibration_curve_points_changed": [],
+          "alpha_boundary_float_vs_exact_disagreements": [],
+          "grid_ties": {
+            "calibration": {
+              "rows_on_grid": 3,
+              "saved_float_above": 0,
+              "saved_float_below": 3,
+              "saved_float_equal": 0,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            },
+            "test": {
+              "rows_on_grid": 0,
+              "saved_float_above": 0,
+              "saved_float_below": 0,
+              "saved_float_equal": 0,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            }
+          },
+          "test": {
+            "saved": {
+              "reports": 58,
+              "wrong_reports": 3,
+              "false_negative": 3,
+              "false_positive": 0
+            },
+            "exact": {
+              "reports": 58,
+              "wrong_reports": 3,
+              "false_negative": 3,
+              "false_positive": 0
+            },
+            "frozen_float_code_here": {
+              "reports": 58,
+              "wrong_reports": 3,
+              "false_negative": 3,
+              "false_positive": 0
+            },
+            "released_set_identical": true,
+            "frozen_float_code_here_matches_saved": true,
+            "released_set_sha256": {
+              "saved": "802e366c2a5689966ea2dce74093549d5ebfeb90ea4eda70665ca7d063140d42",
+              "exact": "802e366c2a5689966ea2dce74093549d5ebfeb90ea4eda70665ca7d063140d42"
+            },
+            "flipped_rows": []
+          },
+          "identical": true
+        }
+      },
+      "calls_identical": true,
+      "max_abs_saved_float_minus_exact": 2.220446049250313e-16,
+      "frozen_float_recomputed_here_bitwise_equal_to_saved": "675/675"
+    },
+    {
+      "analysis": "batch_heldout_common_scale",
+      "arm": "A",
+      "regime": "R2",
+      "fold": 4,
+      "inputs_sha256": {
+        "training_rules.json": "9f0fb37c9dd866d605f6e32401735b392ba2d946778f1d4de98a4843fbdd2d2e",
+        "calibration_design_decisions.json": "0314b68e78336589095a3337a3ed6b870c8ad82b798fc292ee447a62fe8dba60",
+        "calibration.json": "ba961af8779db057220a641c1b64b4cab56dc193874fe02676daf263a93e898e",
+        "design_decisions.json": "963ee5662460fe2a17dcd5ea78452b47ef868dd6e6e0213cf64c59dd251fdb47"
+      },
+      "calibration_rows": 150,
+      "test_rows": 75,
+      "calibration_identities": 29,
+      "test_identities": 15,
+      "rank_lattice_denominator": 11580,
+      "methods": {
+        "anchorboost": {
+          "lambda": {
+            "saved": 0.13,
+            "exact": 0.13,
+            "frozen_float_code_here": 0.13
+          },
+          "corrected_risk": {
+            "saved_float": 0.1,
+            "exact": "1/10"
+          },
+          "calibration_curve_points_changed": [],
+          "alpha_boundary_float_vs_exact_disagreements": [],
+          "grid_ties": {
+            "calibration": {
+              "rows_on_grid": 0,
+              "saved_float_above": 0,
+              "saved_float_below": 0,
+              "saved_float_equal": 0,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            },
+            "test": {
+              "rows_on_grid": 0,
+              "saved_float_above": 0,
+              "saved_float_below": 0,
+              "saved_float_equal": 0,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            }
+          },
+          "test": {
+            "saved": {
+              "reports": 46,
+              "wrong_reports": 9,
+              "false_negative": 0,
+              "false_positive": 9
+            },
+            "exact": {
+              "reports": 46,
+              "wrong_reports": 9,
+              "false_negative": 0,
+              "false_positive": 9
+            },
+            "frozen_float_code_here": {
+              "reports": 46,
+              "wrong_reports": 9,
+              "false_negative": 0,
+              "false_positive": 9
+            },
+            "released_set_identical": true,
+            "frozen_float_code_here_matches_saved": true,
+            "released_set_sha256": {
+              "saved": "5f5749c302de5161cea6f3ea1abdd0d9f15c92a774ca03b685c5ee87fb73074c",
+              "exact": "5f5749c302de5161cea6f3ea1abdd0d9f15c92a774ca03b685c5ee87fb73074c"
+            },
+            "flipped_rows": []
+          },
+          "identical": true
+        },
+        "loglinear": {
+          "lambda": {
+            "saved": 0.17,
+            "exact": 0.17,
+            "frozen_float_code_here": 0.17
+          },
+          "corrected_risk": {
+            "saved_float": 0.08000000000000002,
+            "exact": "2/25"
+          },
+          "calibration_curve_points_changed": [
+            {
+              "lambda": 0.2,
+              "saved": {
+                "loss_sum": 1.0,
+                "corrected": 0.06666666666666667,
+                "released_designs": 90
+              },
+              "exact": {
+                "loss_sum": 1.0,
+                "corrected": 0.06666666666666667,
+                "released_designs": 87
+              }
+            }
+          ],
+          "alpha_boundary_float_vs_exact_disagreements": [],
+          "grid_ties": {
+            "calibration": {
+              "rows_on_grid": 3,
+              "saved_float_above": 3,
+              "saved_float_below": 0,
+              "saved_float_equal": 0,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            },
+            "test": {
+              "rows_on_grid": 0,
+              "saved_float_above": 0,
+              "saved_float_below": 0,
+              "saved_float_equal": 0,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            }
+          },
+          "test": {
+            "saved": {
+              "reports": 31,
+              "wrong_reports": 9,
+              "false_negative": 9,
+              "false_positive": 0
+            },
+            "exact": {
+              "reports": 31,
+              "wrong_reports": 9,
+              "false_negative": 9,
+              "false_positive": 0
+            },
+            "frozen_float_code_here": {
+              "reports": 31,
+              "wrong_reports": 9,
+              "false_negative": 9,
+              "false_positive": 0
+            },
+            "released_set_identical": true,
+            "frozen_float_code_here_matches_saved": true,
+            "released_set_sha256": {
+              "saved": "780faece9496aaab24bb4c5b4cd21a528194eaab3f04328aae3470c9d512f044",
+              "exact": "780faece9496aaab24bb4c5b4cd21a528194eaab3f04328aae3470c9d512f044"
+            },
+            "flipped_rows": []
+          },
+          "identical": true
+        },
+        "measured_only": {
+          "lambda": {
+            "saved": 0.17,
+            "exact": 0.17,
+            "frozen_float_code_here": 0.17
+          },
+          "corrected_risk": {
+            "saved_float": 0.08000000000000002,
+            "exact": "2/25"
+          },
+          "calibration_curve_points_changed": [
+            {
+              "lambda": 0.2,
+              "saved": {
+                "loss_sum": 1.0,
+                "corrected": 0.06666666666666667,
+                "released_designs": 90
+              },
+              "exact": {
+                "loss_sum": 1.0,
+                "corrected": 0.06666666666666667,
+                "released_designs": 87
+              }
+            }
+          ],
+          "alpha_boundary_float_vs_exact_disagreements": [],
+          "grid_ties": {
+            "calibration": {
+              "rows_on_grid": 3,
+              "saved_float_above": 3,
+              "saved_float_below": 0,
+              "saved_float_equal": 0,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            },
+            "test": {
+              "rows_on_grid": 0,
+              "saved_float_above": 0,
+              "saved_float_below": 0,
+              "saved_float_equal": 0,
+              "on_chosen_lambda": 0,
+              "on_chosen_lambda_saved_float_above": 0,
+              "on_chosen_lambda_saved_float_below": 0
+            }
+          },
+          "test": {
+            "saved": {
+              "reports": 32,
+              "wrong_reports": 10,
+              "false_negative": 10,
+              "false_positive": 0
+            },
+            "exact": {
+              "reports": 32,
+              "wrong_reports": 10,
+              "false_negative": 10,
+              "false_positive": 0
+            },
+            "frozen_float_code_here": {
+              "reports": 32,
+              "wrong_reports": 10,
+              "false_negative": 10,
+              "false_positive": 0
+            },
+            "released_set_identical": true,
+            "frozen_float_code_here_matches_saved": true,
+            "released_set_sha256": {
+              "saved": "856b19aa2820fd81908ccb1c2220bedb7791ae9f9b0cb3d3a0dee174515d6697",
+              "exact": "856b19aa2820fd81908ccb1c2220bedb7791ae9f9b0cb3d3a0dee174515d6697"
+            },
+            "flipped_rows": []
+          },
+          "identical": true
+        }
+      },
+      "calls_identical": true,
+      "max_abs_saved_float_minus_exact": 2.7755575615628914e-16,
+      "frozen_float_recomputed_here_bitwise_equal_to_saved": "675/675"
+    }
+  ],
+  "runtime": {
+    "seconds": 5.34,
+    "peak_rss_bytes": 188710912
+  }
+}

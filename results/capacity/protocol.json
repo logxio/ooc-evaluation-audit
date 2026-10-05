@@ -1,0 +1,407 @@
+{
+  "schema": "paper.capacity.protocol.v1",
+  "frozen_at": "2026-10-04T15:35:10.518631+00:00",
+  "evidence_status": "post-development retrospective re-evaluation for BOTH Yuan2025 and Ewart2022",
+  "decision": "Does training-only nested selection of residual capacity improve sparse-dose prediction compared with fixed50 and interpolation?",
+  "prediction_before_run": "Yuan selected MAE relative to interpolation: -10% to +10%; Ewart: -10% to +15%. All five endpoints reported without selecting by outer results.",
+  "source_protocol_sha256": "322bcf169f4d275ef8aa1ff35f14222b169718b23c05a54c98177176921cb27e",
+  "source_manifest_sha256": "bd5a4c6a7483f277d6408979e71abace9f83ff2b32f2115ddc3423f58ce8cca2",
+  "inputs": [
+    {
+      "path": "runs/chip-evidence-s1/expand/ewart/normalized.csv",
+      "sha256": "5b4ee4796c6e50d1eae75a4073ef8b251aff44b16f42a3ed38371191c85e275b"
+    },
+    {
+      "path": "runs/chip-evidence-s1/expand/yuan_normalized.csv",
+      "sha256": "f76a6492175070a475ee0c32a5015eb92dbdb8c1a88251998bd2df3f3b6c8b13"
+    }
+  ],
+  "model_source_sha256": "3d02dd3a1bc57e8c53f701a6005c8d5e9d8ad6a15a57cdec3f22b27066015897",
+  "evaluator_sha256": "711d059feb45bea2f1d299b5a9e934f8183165bf8af437e185c7c6e50d974d9b",
+  "model_parameters": {
+    "loss": "absolute_error",
+    "max_iter": 600,
+    "learning_rate": 0.05,
+    "max_leaf_nodes": 127,
+    "min_samples_leaf": 50,
+    "early_stopping": false,
+    "random_state": 0
+  },
+  "candidates": [
+    {
+      "id": "interpolation",
+      "rule": "none",
+      "alpha": 0.0
+    },
+    {
+      "id": "fixed50_a0.25",
+      "rule": "fixed50",
+      "alpha": 0.25
+    },
+    {
+      "id": "adaptive10_a0.25",
+      "rule": "adaptive10",
+      "alpha": 0.25
+    },
+    {
+      "id": "fixed5_a0.25",
+      "rule": "fixed5",
+      "alpha": 0.25
+    },
+    {
+      "id": "fixed2_a0.25",
+      "rule": "fixed2",
+      "alpha": 0.25
+    },
+    {
+      "id": "fixed50_a0.5",
+      "rule": "fixed50",
+      "alpha": 0.5
+    },
+    {
+      "id": "adaptive10_a0.5",
+      "rule": "adaptive10",
+      "alpha": 0.5
+    },
+    {
+      "id": "fixed5_a0.5",
+      "rule": "fixed5",
+      "alpha": 0.5
+    },
+    {
+      "id": "fixed2_a0.5",
+      "rule": "fixed2",
+      "alpha": 0.5
+    },
+    {
+      "id": "fixed50_a1",
+      "rule": "fixed50",
+      "alpha": 1.0
+    },
+    {
+      "id": "adaptive10_a1",
+      "rule": "adaptive10",
+      "alpha": 1.0
+    },
+    {
+      "id": "fixed5_a1",
+      "rule": "fixed5",
+      "alpha": 1.0
+    },
+    {
+      "id": "fixed2_a1",
+      "rule": "fixed2",
+      "alpha": 1.0
+    }
+  ],
+  "primary_endpoints": [
+    {
+      "dataset": "Ewart2022",
+      "endpoint": "ALBUMIN",
+      "configuration": "perfused four-cell primary human Liver-Chip; 30 uL/h",
+      "time": "Day 3",
+      "n_drugs": 6,
+      "drugs": [
+        "Clozapine",
+        "Levofloxacin",
+        "Olanzapine",
+        "Pioglitazone",
+        "Troglitazone",
+        "Trovafloxacin"
+      ],
+      "k": 3,
+      "positive_levels": {
+        "Clozapine": [
+          1.0,
+          3.0,
+          10.0,
+          30.0,
+          100.0,
+          300.0
+        ],
+        "Levofloxacin": [
+          1.0,
+          3.0,
+          10.0,
+          15.0,
+          45.0
+        ],
+        "Olanzapine": [
+          1.0,
+          3.0,
+          10.0,
+          30.0,
+          100.0,
+          300.0
+        ],
+        "Pioglitazone": [
+          1.0,
+          3.0,
+          10.0,
+          30.0,
+          100.0,
+          300.0
+        ],
+        "Troglitazone": [
+          0.98,
+          2.95,
+          9.82,
+          29.47,
+          98.2,
+          294.72
+        ],
+        "Trovafloxacin": [
+          1.0,
+          3.0,
+          10.0,
+          30.0,
+          100.0,
+          300.0
+        ]
+      },
+      "n_numeric_values": 68,
+      "exclude_compounds": []
+    },
+    {
+      "dataset": "Ewart2022",
+      "endpoint": "ALT",
+      "configuration": "perfused four-cell primary human Liver-Chip; 30 uL/h",
+      "time": "Day 3",
+      "n_drugs": 6,
+      "drugs": [
+        "Clozapine",
+        "Levofloxacin",
+        "Olanzapine",
+        "Pioglitazone",
+        "Troglitazone",
+        "Trovafloxacin"
+      ],
+      "k": 3,
+      "positive_levels": {
+        "Clozapine": [
+          1.0,
+          3.0,
+          10.0,
+          30.0,
+          100.0,
+          300.0
+        ],
+        "Levofloxacin": [
+          1.0,
+          3.0,
+          10.0,
+          15.0,
+          45.0
+        ],
+        "Olanzapine": [
+          1.0,
+          3.0,
+          10.0,
+          30.0,
+          100.0,
+          300.0
+        ],
+        "Pioglitazone": [
+          1.0,
+          3.0,
+          10.0,
+          30.0,
+          100.0,
+          300.0
+        ],
+        "Troglitazone": [
+          0.98,
+          2.95,
+          9.82,
+          29.47,
+          98.2
+        ],
+        "Trovafloxacin": [
+          1.0,
+          3.0,
+          10.0,
+          30.0,
+          100.0,
+          300.0
+        ]
+      },
+      "n_numeric_values": 68,
+      "exclude_compounds": []
+    },
+    {
+      "dataset": "Ewart2022",
+      "endpoint": "Morphology",
+      "configuration": "perfused four-cell primary human Liver-Chip; 30 uL/h",
+      "time": "Day 3",
+      "n_drugs": 6,
+      "drugs": [
+        "Clozapine",
+        "Levofloxacin",
+        "Olanzapine",
+        "Pioglitazone",
+        "Troglitazone",
+        "Trovafloxacin"
+      ],
+      "k": 3,
+      "positive_levels": {
+        "Clozapine": [
+          1.0,
+          3.0,
+          10.0,
+          30.0,
+          100.0,
+          300.0
+        ],
+        "Levofloxacin": [
+          1.0,
+          3.0,
+          10.0,
+          15.0,
+          45.0
+        ],
+        "Olanzapine": [
+          1.0,
+          3.0,
+          10.0,
+          30.0,
+          100.0,
+          300.0
+        ],
+        "Pioglitazone": [
+          1.0,
+          3.0,
+          10.0,
+          30.0,
+          100.0,
+          300.0
+        ],
+        "Troglitazone": [
+          0.98,
+          2.95,
+          9.82,
+          29.47,
+          98.2
+        ],
+        "Trovafloxacin": [
+          1.0,
+          3.0,
+          10.0,
+          30.0,
+          100.0,
+          300.0
+        ]
+      },
+      "n_numeric_values": 68,
+      "exclude_compounds": []
+    },
+    {
+      "dataset": "Yuan2025",
+      "endpoint": "LDH",
+      "configuration": "Intact Liver Chip",
+      "time": "published_terminal_assay",
+      "n_drugs": 5,
+      "drugs": [
+        "Abacavir",
+        "Acetaminophen",
+        "Allopurinol",
+        "Ethinylestradiol",
+        "Sulfamethoxazole"
+      ],
+      "k": 3,
+      "positive_levels": {
+        "Abacavir": [
+          20.0,
+          40.0,
+          60.0,
+          80.0
+        ],
+        "Acetaminophen": [
+          0.5,
+          1.0,
+          10.0,
+          20.0
+        ],
+        "Allopurinol": [
+          50.0,
+          100.0,
+          150.0,
+          200.0
+        ],
+        "Ethinylestradiol": [
+          50.0,
+          100.0,
+          250.0,
+          500.0
+        ],
+        "Sulfamethoxazole": [
+          250.0,
+          500.0,
+          750.0,
+          1000.0
+        ]
+      },
+      "n_numeric_values": 120,
+      "exclude_compounds": []
+    },
+    {
+      "dataset": "Yuan2025",
+      "endpoint": "ALT",
+      "configuration": "Intact Liver Chip",
+      "time": "published_terminal_assay",
+      "n_drugs": 4,
+      "drugs": [
+        "Abacavir",
+        "Acetaminophen",
+        "Ethinylestradiol",
+        "Sulfamethoxazole"
+      ],
+      "k": 3,
+      "positive_levels": {
+        "Abacavir": [
+          20.0,
+          40.0,
+          60.0,
+          80.0
+        ],
+        "Acetaminophen": [
+          0.5,
+          1.0,
+          10.0,
+          20.0
+        ],
+        "Ethinylestradiol": [
+          50.0,
+          100.0,
+          250.0,
+          500.0
+        ],
+        "Sulfamethoxazole": [
+          250.0,
+          500.0,
+          750.0,
+          1000.0
+        ]
+      },
+      "n_numeric_values": 64,
+      "exclude_compounds": []
+    }
+  ],
+  "capacity_rules": {
+    "fixed50": 50,
+    "fixed5": 5,
+    "fixed2": 2,
+    "adaptive10": "max(2, min(50, floor(training_target_rows / 10)))"
+  },
+  "selection": "For each outer drug, leave each remaining drug out internally; minimize equally weighted mean drug MAE over fixed contexts. Exact/numerical ties within 1e-12 use candidate order.",
+  "design": "k=3; training enumerates all C(L,3) designs. Evaluation: original five seeded lowest-anchored Ewart designs, all three lowest-anchored Yuan designs.",
+  "preprocessing": "Author units, positive doses, source concentration units preserved, within-dose means as original. No learned preprocessing from held-out drugs.",
+  "isolation": "Selector accepts outer-training tasks only. Every inner analog/profile/model fit excludes inner validation and outer test. Prediction receives three-dose-only Task and query dose metadata. Selection saved before outer prediction; all outer predictions saved before outer scoring.",
+  "comparisons": [
+    "selected_minus_loglinear",
+    "selected_minus_fixed50",
+    "fixed50_minus_loglinear"
+  ],
+  "statistics": "Drug-macro MAE; 10000 paired drug bootstrap draws, seed 0; exact sign-flip and Holm over five endpoints per contrast are descriptive because CV fits overlap and these data were used in development.",
+  "fit_budget": "352 unique model fits at most with per-endpoint training-set cache; finite local run; 295-second alarm; 4 GB measured-RSS ceiling checked after every fit.",
+  "source_legacy_folds_sha256": "ff9c6b0913d54510fd834171baa1a7deee537ad659e22616e976bec01db211df"
+}

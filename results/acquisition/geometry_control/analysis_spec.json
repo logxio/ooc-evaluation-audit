@@ -1,0 +1,26 @@
+{
+  "schema": "paper.acquisition.geometry.posthoc.v1",
+  "created_utc": "2026-10-04T16:11:10.708509+00:00",
+  "origin": "Post hoc control explicitly requested after first-fold acquisition results were available. Original experiment and all scores remain frozen.",
+  "decision": "Does model disagreement improve on always acquiring the highest unobserved concentration, or does high-dose geometry account for its advantage over random/maximin?",
+  "rule": "argmax log10 concentration among original unobserved candidates, independent of responses, shared across all four predictors. Reuse saved complete random branches.",
+  "expected_result": "Direction unknown; preserve every positive, negative and zero estimate.",
+  "predictors": [
+    "interpolation",
+    "anchorboost_all",
+    "anchorboost_five",
+    "cnp"
+  ],
+  "comparators": [
+    "model_disagreement",
+    "uniform_random",
+    "fixed_maximin"
+  ],
+  "target": "Original fixed target outside initial K3, including acquired measured cells; final budget K4; original context reconditioning and frozen parameters.",
+  "strata": "Original top_dose_initially_measured flag True/False, independently checked from initial and candidate concentration geometry. No new response-based conditions.",
+  "population": "Local fold1 49 separately; canonical folds1-4 all194, plus common identity-clean193 for four-predictor inference using original CNP identity overlap exclusions.",
+  "statistics": "Mean available stratum designs per drug, equal drug weighting, paired percentile bootstrap10000 seed0, exact two-sided sign test with 1e-12 tie tolerance. Negative highest-minus-comparator favors highest. Same drug may contribute to both strata. Exploratory multiple contrasts without adjustment.",
+  "mechanism": "Algebraic saved-score decomposition into measurement-only (K3 forecasts otherwise unchanged) and context reconditioning. This supports a retrospective mechanism diagnostic, not biological causation.",
+  "runtime_budget": "Local single process under4GB and300s, finish finite CSV/NPZ reaggregation. Zero model refits, zero new wet measurements.",
+  "original_protocol_sha256": "fdccd3fe3e96e4da1a817549339a432d63807b2feaed85821ed9d72acfb5425d"
+}
