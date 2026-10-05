@@ -404,34 +404,49 @@ python clinical_external.py score
 
 Patient entries include `chip_release.py`, `blind2_predict.py`, `blind2_score.py`, `blind3_score.py`, `tiriac_reproduce.py`, `lung_reproduce.py` and `liver_chip_release.py`. `python horizon_attrition.py` reproduces the schedule/attrition analyses from publisher originals. Source files with restricted redistribution terms are downloaded at runtime.
 
-## D.2. Nested, acquisition and capacity artifacts awaiting release
+## D.2. Nested, acquisition and capacity artifacts
 
-The nested reporting, acquisition/geometry and capacity experiments are complete locally and await a versioned public code-and-result archive. Their local entries and saved outputs are:
+Release [v1.0.0](https://github.com/logxio/ooc-evaluation-audit/releases/tag/v1.0.0) of the public repository contains the code and saved outputs of the nested reporting, acquisition/geometry and capacity experiments.
 
-| Experiment | Local code entry | Recorded result files |
+| Experiment | Public code | Saved files in `results/` |
 |:--|:--|:--|
-| Drug-disjoint report-or-measure | `paper_nested_decision.py` | `results.md`, `summary.json`, `drug_decisions.csv`, `design_decisions.csv` |
-| Data-flow and arithmetic verification | `paper_nested_decision_check.py` | `verification.json`, `data_flow.md` |
-| Prediction export | `paper_nested_decision_export.py` | `point_predictions.csv.gz` |
-| Full acquisition | `paper_acquisition.py` | `summary.json`, per-design and per-drug results, `completion.json` |
-| Highest-dose control | `paper_acquisition_geometry.py` | `results.md`, `contrasts.csv`, `choices.jsonl` |
-| Capacity selection / external replay | `paper_capacity.py`, `paper_capacity_independent.py` | selected fits, `scores.json`, `score_audit.json`, prediction freeze |
+| Drug-disjoint report-or-measure | `paper_nested_decision.py` | `nested/`: protocol, splits, identities, summary, `drug_decisions.csv`, `design_decisions.csv`; per fold: fitted model, rules, calibration, freezes, test decisions |
+| Verification and point export | `paper_nested_decision_check.py`, `paper_nested_decision_export.py` | `nested/verification.json`; the export writes `point_predictions.csv.gz` (358,360 rows) |
+| Fourth-concentration acquisition | `paper_acquisition.py`, `paper_acquisition_verify.py` | `acquisition/`: protocol, summary, verification; per fold: choices and design results |
+| Highest-dose control | `paper_acquisition_geometry.py` | `acquisition/geometry_control/`: analysis specification and four-fold results, contrasts, budgets and selection overlap |
+| Capacity selection and Bircsak replay | `paper_capacity.py`, `paper_capacity_independent.py`, `paper_capacity_verify.py`, `paper_capacity_score_audit.py` | `capacity/`: protocols, selections and predictions before scoring; `bircsak_run_v1/` prediction manifest and scores; `bircsak_packet/` |
 
-The nested output also contains `protocol.json`, `splits.json`, `identities.json`, per-fold `pretest_freeze.json` and `prediction_freeze.json`, and all fitted-stage artifacts. Its completed export contains 358,360 point rows. Protocol SHA-256:
+The commands below fit no model. They recompute Tables 3–6 and the nested point export from these files and check the recorded SHA-256 hashes. After `pip install -r requirements-d2.txt` and `python chip_forecast.py --check` (Appendix D.1), which downloads the pinned NeuroChip Twin bundle, run from the repository root:
+
+```sh
+python paper_nested_decision.py summarize --out results/nested
+python paper_nested_decision_check.py --out results/nested
+python paper_nested_decision_export.py --out results/nested
+python paper_acquisition.py summarize --out results/acquisition \
+  --data .cache/neurochip_twin/nfa_tasks.npz \
+  --identities benchmarks/screen_out_neural/identities.json
+python paper_acquisition_verify.py --out results/acquisition \
+  --data .cache/neurochip_twin/nfa_tasks.npz \
+  --historical benchmarks/strong_baseline/nfa
+python paper_acquisition_geometry.py --source results/acquisition \
+  --out results/acquisition/geometry_control/full_four_fold \
+  --folds 1 2 3 4 \
+  --spec results/acquisition/geometry_control/analysis_spec.json
+python paper_capacity_verify.py --out results/capacity \
+  --inputs results/capacity/inputs
+python paper_capacity_score_audit.py --run results/capacity/bircsak_run_v1 \
+  --packet results/capacity/bircsak_packet
+```
+
+`summarize` rebuilds Table 4 and the paired drug effects. The check, which downloads the pinned EPA source file on first use, re-verifies drug-disjoint splits, the five fitted models, freeze hashes, calibration arithmetic and hidden-response invariance. The export writes 358,360 point rows. The acquisition commands reproduce Table 3, its paired contrasts and the exposure-well budgets; the capacity commands reproduce Tables 5 and 6. In our runs each command finished within 10 seconds and 0.5 GB of memory, including a run from a clean copy of the release that downloaded the EPA source file.
+
+Nine published files are redacted copies. Eight result files recorded absolute local paths; each path is replaced by `<local-input>/` and its file name. The Bircsak runner renames one session environment variable. `results/REDACTIONS.json` lists each file's frozen and published SHA-256, the changed lines and the replacement rule. The verification code accepts a listed file only when its hash equals the published value and then uses the frozen hash, so the pretest, prediction and manifest records keep their original links. The frozen SHA-256 of the nested protocol is:
 
 ```text
 d15f70d8ba11f111516a13a087d3970ea270bb2e9711547db8aaf6b6f71ff20d
 ```
 
-With that experiment directory supplied, the working-copy summary and verification commands are:
-
-```sh
-python paper_nested_decision.py summarize --out RESULTS_DIR
-python paper_nested_decision_check.py --out RESULTS_DIR
-python paper_nested_decision_export.py --out RESULTS_DIR
-```
-
-`RESULTS_DIR` denotes the saved experiment artifact directory. Acquisition geometry uses the complete four-fold prediction archive and its recorded `analysis_spec.json`; those inputs accompany the forthcoming experiment package. Bircsak includes the original prediction freeze and the reconciled post-reveal scores in Appendix C; `paper_capacity_score_audit.py` checks its curve and point-level results.
+The public nested code compares release margins in exact rational arithmetic and reads frozen inputs from repository copies. `exact_rule_receipt.json` re-judges the saved calibration and test decisions in exact arithmetic and finds all 42 fold–method calibrations and release sets unchanged. `paper_nested_decision_amendments.json` maps the frozen code hash to the public one.
 
 ## D.3. Compute requirements and recorded executions
 
@@ -477,7 +492,7 @@ The pre-existing EPA measurements, NeuroChip Twin code and evaluation protocol, 
 
 Yan Su is responsible for methods, code, computational experiments and the report. Ziyang Liu is responsible for biological review, participant recruitment for trial use and presentation collaboration.
 
-The present research stage comprises retrospective assay analyses and published-cohort replays. Independent participant sessions completed: **0**. Prospective wet-laboratory validation, measured staff-time savings and real laboratory well-use savings remain to be established.
+The present research stage comprises retrospective assay analyses, published-cohort replays and one independent participant session. In that self-serve, screen-recorded session, a participant with no laboratory experience and no prior use of the tool worked through the frozen tasks without assistance. Measured from task release to the first correct export, the workbench action lists matched the sealed answers for 3 of 3 chemicals in 23 seconds and 6 of 6 patients in 57 seconds. Having no screening rule of their own, the participant made no call on the matched current-method tasks, so the session has no comparator; the risk-comprehension answers scored 0 of 3. The participant's package omitted the workbench version lock, so the session used the live build `5ea7998` instead of the locked `eaeb887`; both exports still matched the sealed answers. Prospective wet-laboratory validation, measured staff-time savings and real laboratory well-use savings remain to be established.
 
 **Table F1. Data and external artifacts.** Code licenses and source-data terms are recorded separately.
 
