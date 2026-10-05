@@ -1,0 +1,190 @@
+{
+ "schema": "three_point.lock.v1",
+ "created_utc": "2026-10-05T19:27:33+00:00",
+ "inputs": {
+  "epa_dnt_three_point.csv": "8d07ccbf0084f7f21e94521d07a5f59b82648bb73463d1c2fa200bcd5ab484b6"
+ },
+ "output": {
+  "forecast.csv": "4b05b47ce641fae587421f543eac3c6fc6ad960393e78986057bba7aa376305a",
+  "summary.md": "61f4aa69d31cfe176da5a7b50028a92ae8188a5fb30e999639d017a420066c48"
+ },
+ "models": {
+  "hN2_NOG_BPCount": {
+   "file": "model_hN2_NOG_BPCount.pkl",
+   "sha256": "d66b5ebd9e1ec4d607c593aea3e9aff294db544492b8badf2d3b77423ccaadad"
+  },
+  "hN2_NOG_NeuriteCount": {
+   "file": "model_hN2_NOG_NeuriteCount.pkl",
+   "sha256": "0dec41fed92ca9f8ecffbf8dff018e6ff11fb74cd8cda4ae9a60eadbc0fb5da3"
+  },
+  "hN2_NOG_NeuriteLength": {
+   "file": "model_hN2_NOG_NeuriteLength.pkl",
+   "sha256": "5335aeefbe23a47ce0585babf41c546e8ec5e8f90ff884ca63baf19aedaeb000"
+  },
+  "hN2_NOG_NeuronCount": {
+   "file": "model_hN2_NOG_NeuronCount.pkl",
+   "sha256": "3e500794abc1e562bbef3904d72410e2e5c5614bda9286fee0006144fbd92ea0"
+  },
+  "hNP1_Caspase_Apop": {
+   "file": "model_hNP1_Caspase_Apop.pkl",
+   "sha256": "0e60f79226042bb1b7e82783f3764326d66a7d417154df50875d5d3aad8c0fc1"
+  },
+  "hNP1_CellTiter_Lum": {
+   "file": "model_hNP1_CellTiter_Lum.pkl",
+   "sha256": "d3c15121687ae3cc8b0195e4d74e424881ec58a34d36b9d22cd547b181be701a"
+  },
+  "hNP1_Pro_MeanAvgInten": {
+   "file": "model_hNP1_Pro_MeanAvgInten.pkl",
+   "sha256": "598cbfa281eb645ead63947d73991df732911726f498a3f5ec2056b01cc18fcb"
+  },
+  "hNP1_Pro_ObjectCount": {
+   "file": "model_hNP1_Pro_ObjectCount.pkl",
+   "sha256": "c53798f49670e1403d129ddfd046d75050102f8d4a61de6d315f162a881d3424"
+  },
+  "hNP1_Pro_ResponderAvgInten": {
+   "file": "model_hNP1_Pro_ResponderAvgInten.pkl",
+   "sha256": "3257f42e5a671e54edb18306cb74c1a1630a1278d6ba09bdb1d38d51fb33c140"
+  }
+ },
+ "protocol_sha256": "59090cd92c6f604c01c12225ec6c1b7b670b0936669b3af72d18f166730ef712",
+ "code": {
+  "three_point.py": "91a327c5bdc8f8a083fe767086f0fdd9bf801d4cb074de78304f979c41fb1064",
+  "chip_forecast.py": "3d02dd3a1bc57e8c53f701a6005c8d5e9d8ad6a15a57cdec3f22b27066015897",
+  "chip_forecast_intervals.py": "ad4825c2d0f1f6ccd5698cfe8b21e1d8fb31847f41338ef0ad1bf055fada05d4",
+  "chip_forecast_selfcheck.py": "5c16d9cd82513c876ce3b98132338fb4b40bb9b7322c3b05e62ad1be96c23818",
+  "paper_nested_decision.py": "22de67e35239a390a03e93d1df2c557671837944afc341e1eb2f5d46a9c094d7"
+ },
+ "settings": {
+  "hN2_NOG_BPCount": {
+   "training_compounds": 27,
+   "calibration_compounds": 27,
+   "training_rows": 31868,
+   "release_margin": 0.42,
+   "calibration_feasible": true,
+   "interval_quantile": 1.1332,
+   "cutoff": 2.3786,
+   "baseline": {
+    "median": 0.11,
+    "sd": 0.177912,
+    "wells": 330
+   }
+  },
+  "hN2_NOG_NeuriteCount": {
+   "training_compounds": 27,
+   "calibration_compounds": 27,
+   "training_rows": 33528,
+   "release_margin": 0.35,
+   "calibration_feasible": true,
+   "interval_quantile": 1.1632,
+   "cutoff": 2.016,
+   "baseline": {
+    "median": 0.06,
+    "sd": 0.214977,
+    "wells": 330
+   }
+  },
+  "hN2_NOG_NeuriteLength": {
+   "training_compounds": 28,
+   "calibration_compounds": 28,
+   "training_rows": 34484,
+   "release_margin": 0.33,
+   "calibration_feasible": true,
+   "interval_quantile": 1.1195,
+   "cutoff": 2.153,
+   "baseline": {
+    "median": 3.215,
+    "sd": 12.742947,
+    "wells": 342
+   }
+  },
+  "hN2_NOG_NeuronCount": {
+   "training_compounds": 28,
+   "calibration_compounds": 28,
+   "training_rows": 34848,
+   "release_margin": 0.24,
+   "calibration_feasible": true,
+   "interval_quantile": 1.0696,
+   "cutoff": 2.0101,
+   "baseline": {
+    "median": 7.04,
+    "sd": 12.461253,
+    "wells": 342
+   }
+  },
+  "hNP1_Caspase_Apop": {
+   "training_compounds": 28,
+   "calibration_compounds": 28,
+   "training_rows": 32372,
+   "release_margin": 0.23,
+   "calibration_feasible": true,
+   "interval_quantile": 1.215,
+   "cutoff": 2.1836,
+   "baseline": {
+    "median": 393.0,
+    "sd": 5192.8065,
+    "wells": 336
+   }
+  },
+  "hNP1_CellTiter_Lum": {
+   "training_compounds": 17,
+   "calibration_compounds": 16,
+   "training_rows": 22440,
+   "release_margin": 0.4,
+   "calibration_feasible": true,
+   "interval_quantile": 1.2416,
+   "cutoff": 2.8984,
+   "baseline": {
+    "median": 54350.0,
+    "sd": 38555.7543,
+    "wells": 198
+   }
+  },
+  "hNP1_Pro_MeanAvgInten": {
+   "training_compounds": 28,
+   "calibration_compounds": 28,
+   "training_rows": 33524,
+   "release_margin": 0.47,
+   "calibration_feasible": true,
+   "interval_quantile": 1.1288,
+   "cutoff": 1.8224,
+   "baseline": {
+    "median": 15.66,
+    "sd": 26.108586,
+    "wells": 336
+   }
+  },
+  "hNP1_Pro_ObjectCount": {
+   "training_compounds": 28,
+   "calibration_compounds": 28,
+   "training_rows": 35184,
+   "release_margin": 0.2,
+   "calibration_feasible": true,
+   "interval_quantile": 1.0903,
+   "cutoff": 2.1855,
+   "baseline": {
+    "median": 26.75,
+    "sd": 35.21175,
+    "wells": 336
+   }
+  },
+  "hNP1_Pro_ResponderAvgInten": {
+   "training_compounds": 28,
+   "calibration_compounds": 28,
+   "training_rows": 34848,
+   "release_margin": 0.35,
+   "calibration_feasible": true,
+   "interval_quantile": 1.0915,
+   "cutoff": 2.1312,
+   "baseline": {
+    "median": 5.55,
+    "sd": 7.301805,
+    "wells": 336
+   }
+  }
+ },
+ "runtime": {
+  "seconds": 60.7,
+  "peak_rss_mb": 145,
+  "largest_worker_peak_rss_mb": 189
+ }
+}

@@ -4,6 +4,19 @@ From three measured concentrations, AnchorBoost reports an activity call for **9
 
 [Technical report](technical_report.pdf) · [Interactive workbench](https://logxio.github.io/ooc-evaluation-audit/workbench/)
 
+## Run three concentrations, get the whole curve
+
+Measure three concentrations of each compound, the highest among them, list the concentrations you have not run yet with an empty value, and drop the table in:
+
+```sh
+python -m pip install -r requirements.txt
+python three_point.py my_plates.csv
+```
+
+`my_plates.csv` has one row per well and endpoint, with the columns `compound, concentration, unit, endpoint, value, plate, date`; vehicle wells have concentration 0, and completed compounds of the same endpoint in the file train the model. Each unfinished compound comes back with a forecast and a 90% interval at every concentration still to run and one next step: report the active or inactive call, add one named concentration, or complete the series. `forecast.csv`, a one-page `summary.md` and `lock.json` (SHA-256 of input, output, model, protocol and code, plus the UTC time) fix the forecast before the plates are read; `--reconcile` then checks it against the finished series, concentration by concentration. A table of completed series is replayed instead: calls made, wrong calls and wells saved against the full series. Viability, albumin, MEA and imaging readouts all work, from chips, organoids or well plates.
+
+On a screen none of our models was trained on, the US EPA human neural-cell screen of Harrill et al. (`python three_point.py --example epa_dnt` writes it in this format), forecasts for 107 unfinished series (15 compounds, 9 endpoints) came back in about a minute on a laptop CPU. Revealed after the lock, **2,318 of 2,520 hidden wells (92.0%) fell inside the 90% intervals**; 53 series were called before they were finished, 2 of them wrong, and the next steps used **35.6% fewer wells** than running every series to the end ([summary](three_point_example/forecast/summary.md), [check against the finished series](three_point_example/forecast/reconcile.md)). Replaying viability and neurite length (71 compounds, 545 three-concentration designs) takes about a minute: 172 early calls with 16 wrong, against 39 wrong for the same calibrated rule reading the measured concentrations alone ([replay](three_point_example/replay/summary.md)).
+
 ## Forecast the concentrations a chip screen has not measured yet
 
 A neurotoxicity laboratory screens each new chemical on 48-well microelectrode-array plates of rat cortical neurons and records 17 network features on development days 5, 7, 9 and 12. A full series costs seven concentrations in triplicate. **AnchorBoost** takes the concentrations already measured and forecasts every unmeasured concentration for all 68 day-by-feature outputs with a calibrated 90% interval, and returns a per-chemical error table against the strongest published baselines. Its training principle is **exhaustive design supervision**: every sparse design a laboratory could run on a training chemical is a supervised example.
