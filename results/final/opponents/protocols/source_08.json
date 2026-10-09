@@ -1,0 +1,208 @@
+{
+  "schema": "sota_baselines_3.protocol.v1",
+  "created_utc": "2026-10-06T05:15:00Z",
+  "decision": "Do any of three 2025-2026 tabular foundation-model opponents (LimiX-2, TabImpute, TabPFN-3.5 long table with compound-structure embeddings) beat AnchorBoost on sparse three-point concentration-response completion? A win (k = 3, 194-chemical cohort, mean paired difference against AnchorBoost below zero) is reported as the headline and sent to the controller to be merged into the method; a loss is reported as measured.",
+  "status": "Retrospective benchmark on public data. Each opponent's configuration is chosen on development fold 0 only and frozen in this file (amendments) before any fold 1-4 prediction is made.",
+  "task": {
+    "kit": "<local-input>/kit (README, score.py). 243 chemicals x 35 concentrations x 68 outputs; five fixed designs per chemical and k; curve MAE; read-only.",
+    "folds": "Fold 0 (49 chemicals) for development; folds 1-4 (194 chemicals) for reporting; to predict fold f, train on every chemical with fold != f.",
+    "allowed_inputs": "All cells of the training chemicals, the revealed cells of the one test design, and the test chemical's own structure (SMILES). No other test chemical enters a prediction.",
+    "scoring": "kit score.py --versus all. Primary interval: identity groups (189 in the 194 cohort), 4,000 resamples, seed 0; chemical interval alongside. Comparators: AnchorBoost, interpolation, TabPFN-3.5 (S1), CNP, GP and Hill-EB on the 193 cohort.",
+    "references_k3": {
+      "AnchorBoost": 1.161,
+      "CNP_193": 1.192,
+      "GP_193": 1.322,
+      "loglinear_interp": 1.345,
+      "Hill_EB_193": 1.36,
+      "kNN_example": 1.407,
+      "TabPFN-3.5_S1": 1.182
+    },
+    "fold0_references_k3": {
+      "AnchorBoost": 1.0625,
+      "loglinear_interp": 1.2443,
+      "TabPFN-3.5_S1_E1": 1.078
+    }
+  },
+  "shared_feeding": {
+    "source": "Feature blocks reuse S1's definitions (sota_baselines/tabpfn/tabpfn_run.py, read-only, copied with attribution into s3_features.py) on the release chip_forecast.py sha256 3d02dd3a1bc57e8c53f701a6005c8d5e9d8ad6a15a57cdec3f22b27066015897 and nfa_tasks.npz sha256 e1f056ef33f568052fb8dfdba6e095f7b575c7f78d96768e34469918559008d2.",
+    "row": "One (chemical, design, unmeasured tested concentration, output) cell with valid truth.",
+    "ab22": "The 22 AnchorBoost features; target = response minus the interpolation anchor.",
+    "raw_long": "Long table of the task file: log10 query concentration, the k revealed log10 concentrations, the k revealed readings of the same output, DIV index, feature index (categorical); target = response.",
+    "context": "Pooled 10,000 cells sampled without replacement from the full design enumeration of the training chemicals with numpy default_rng(1000 * k + fold) (S1 rule, so the no-structure ab22 table equals S1's E1 context row for row).",
+    "structure": "Per-chemical vector -> PCA (16 components) fitted on the fold's training chemicals that have a structure, applied to every chemical; chemicals without a usable structure get NaN. Embeddings: Morgan radius 2, 2048 bits (RDKit); CheMeleon (MIT, Burns et al. 2025, chemprop foundation model, 2048-d); Monroe (MIT, Banaszewski & Fitzgibbon, arXiv 2608.18982, 720-d); KANO (S2's embeddings_kano.npz, 300-d). MotiL embeddings are not on disk (S2 kept only predictions) and are not added. Structures: sota_baselines_2/structures/structures.json (237 of 243 resolved)."
+  },
+  "opponents": {
+    "LimiX-2": {
+      "source": "github.com/limix-ldm-ai/LimiX commit 516bf396333feb3198cf7aff8a6c10421f218e24 (StableAI License v1.0, Apache-2.0-derived code); weights huggingface.co/stable-ai/LimiX-2 revision de07b679e74a41b50b9de18251a8fa245e537440, LimiX-2.ckpt (StableAI LimiX Non-Commercial License); arXiv 2609.17488.",
+      "settings": "LimiXPredictor(device cuda, inference_config config/reg_default_noretrieval_v2.json, mix_precision True, seed 0, categorical_features_indices = DIV and feature index), Kaggle T4. No flash-attn on T4 (SDPA path).",
+      "candidates": {
+        "LX-A": "ab22, pooled 10k context, library mean output",
+        "LX-B": "ab22, pooled 10k, median of the member-averaged bucket distribution (same logits, decoded at the 0.5 quantile; the library's affine de-standardisation is kept)",
+        "LX-C": "raw_long, pooled 10k, mean",
+        "LX-D": "ab22 + CheMeleon PCA-16, pooled 10k, mean",
+        "LX-E": "ab22, pooled 30,000-row context (same seed rule), mean; 45-minute cap on one T4, recorded as not completed if it overruns"
+      }
+    },
+    "TabImpute": {
+      "source": "pip tabimpute 0.0.4 (source jacobf18/tabular), weights huggingface.co/Tabimpute/TabImpute revision 96d7a0f160184cfb361a03559430baf1cf31aec5 (apache-2.0): tabimpute_001.ckpt (v1, entry-wise features, ImputePFN) and tabimputev2.ckpt (v2, cell-grid axial attention, TabImputeV2); arXiv 2510.02625.",
+      "layout_note": "The task file's literal layout (one row per chemical, 35 x 68 = 2,380 columns, test row holding only the k revealed cells) gives v1 an entry-wise feature matrix of about 464,000 rows x 2,577 features per design, beyond any GPU; v1 is therefore run on per-output tables and v2, which reads the cell grid directly, runs the literal layout as TI-D.",
+      "settings": "Matrix per test design: rows = chemicals, test row holds only its k revealed cells, training rows hold all their measured cells, NaN elsewhere; package normalisation and median decoding; float32 on T4 (T4 has no bfloat16 tensor cores).",
+      "candidates": {
+        "TI-A": "v1, one table per output: test row + 49 training rows drawn at random (4 draws, seed from task_id and output), columns = the test chemical's tested concentrations in ascending order; prediction = mean of the 4 imputations",
+        "TI-B": "v2, one table per output: test row + all training chemicals, columns = the test chemical's tested concentrations",
+        "TI-C": "v2, one table per design: test row + all training chemicals, columns = tested concentrations x 68 outputs",
+        "TI-D": "v2, literal layout: test row + all training chemicals, columns = 35 concentrations x 68 outputs; 60-minute cap for fold 0 on one T4, recorded as not completed if it overruns"
+      }
+    },
+    "TabPFN-3.5 long table + structure": {
+      "source": "tabpfn 9.1.0, ModelVersion.V3_5, tabpfn-v3.5-20260909.safetensors sha256 ece4d67eadfea42eb0e610df5189bea60cb7f31073d81e9c7a019b76eacf0be3 (TABPFN-3.5 Non-Commercial License v1.0, accepted by the host 2026-10-06 04:17 JST); S1's Kaggle environment and weights dataset <redacted-local-metadata>/sota-tabpfn35-weights.",
+      "settings": "TabPFNRegressor.create_default_for_version(V3_5, n_estimators=8, random_state=0, fit_mode='fit_with_cache'), DIV and feature index categorical, as S1's frozen E1.",
+      "control": "P0 = ab22 without structure = S1's frozen E1; it must reproduce S1's fold-0 1.078 before any structure candidate is read.",
+      "candidates": {
+        "P1": "ab22 + Morgan PCA-16",
+        "P2": "ab22 + CheMeleon PCA-16",
+        "P3": "ab22 + Monroe PCA-16",
+        "P4": "ab22 + KANO PCA-16",
+        "P5": "raw_long + CheMeleon PCA-16 (the task file's long table)",
+        "P6": "raw_long + Morgan PCA-16",
+        "P7": "ab22 + CheMeleon PCA-16, output_type median"
+      }
+    }
+  },
+  "selection": "Per opponent, the lowest fold-0 k = 3 MAE among its candidates (development_fold0 cohort, 49 chemicals); a candidate within 0.002 of the lowest wins if it is cheaper (fewer context rows, then fewer columns). Every candidate run is recorded; none is dropped. The choice is written to amendments with a UTC time before the opponent's first fold 1-4 run.",
+  "readouts": "Folds 1-4: k = 3 first for every opponent, then k = 1, 2, 4 for LimiX-2 and TabPFN-3.5 + structure, and for TabImpute when its frozen layout costs under one GPU hour per k. Predictions in kit format (predictions/<opponent>_k{k}.npz), scored with kit score.py.",
+  "expected_before_run": {
+    "controller_verbatim": {
+      "LimiX-2": "<redacted-local-metadata>",
+      "TabImpute": "<redacted-local-metadata>",
+      "TabPFN-3.5 long table + structure": "<redacted-local-metadata>",
+      "source": "<redacted-local-metadata>"
+    },
+    "writer_S3": {
+      "LimiX-2": "k = 3, 194 cohort: 1.165 to 1.195 with the ab22 feeding (TabPFN-2/3.5 and TabICLv2 with the same feeding landed at 1.182-1.189); beating AnchorBoost 1.161 is possible but below even odds; raw_long on fold 0 about 0.04-0.07 worse than ab22.",
+      "TabImpute": "1.40 to 1.65; it has no notion that columns are ordered concentrations, so it should sit near SoftImpute (1.462) and behind interpolation (1.345).",
+      "TabPFN-3.5 long table + structure": "ab22 + structure 1.175 to 1.190 (structure added at most 0.7% to AnchorBoost in S2); raw_long + structure on fold 0 about 0.04-0.07 worse than ab22 + structure; no structure variant beats AnchorBoost."
+    }
+  },
+  "amendments": [
+    {
+      "utc": "2026-10-06T06:10:00Z",
+      "before_any_reading": "yes: no fold-0 or fold 1-4 prediction of any S3 opponent has been scored",
+      "change": "Compute placement and TabImpute dtype. TabPFN-3.5 candidates run on Kaggle T4 x2 (kernel <redacted-local-metadata>/sota3-dev, S1 environment). TabImpute and LimiX-2 run on one rented Vast.ai A100 SXM4 40 GB (controller relayed the host authorisation, 2026-10-06 14:0x JST, Vast preferred over AWS). TabImpute therefore runs in bfloat16, the package dtype, instead of float32. LimiX-2 is called once per test design because its regression preprocessing fits on context plus query rows together; a 10-minute LimiX probe on the Kaggle T4 records the per-call time.",
+      "prelaunch_cost": {
+        "expected_hours": "4 to 6",
+        "expected_cost_usd": "1.6 to 2.4 plus disk, cap 4.0 (account credit 4.36)",
+        "destroy": "right after the last pull; actual charges recorded in results.md"
+      },
+      "checks": [
+        "batched TabImpute imputation equals the package impute() on single tables to 2e-16 (v1) and 2e-15 (v2) in bfloat16 on CPU",
+        "TabImpute v2 gives different imputations for column-major input (up to 0.27 normalised units); s3_run feeds C-contiguous arrays as the package does"
+      ]
+    },
+    {
+      "utc": "2026-10-06T06:35:00Z",
+      "readings_seen": "TabPFN-3.5 fold-0 k=3 MAE of P0-P7 (development/summary.json): P0 1.0781 (= S1 E1 1.0781, predictions identical, context identical row for row), P1 1.0766, P2 1.0677, P3 1.0497, P4 1.0797, P5 1.1870, P6 1.1997, P7 1.0512. LimiX-2 T4 probe: 100.9 s per design call (6 of 245 designs in 636 s), so fold 0 alone needs about 6.9 T4 hours.",
+      "change": "Add TabPFN-3.5 candidate P8 = ab22 + Monroe PCA-16 with median output, combining the two choices that helped on fold 0 (Monroe the best embedding, median decoding -0.0165 for CheMeleon). Selection among P1-P8 with the protocol rule; no fold 1-4 prediction exists for any candidate."
+    },
+    {
+      "utc": "2026-10-06T06:45:00Z",
+      "frozen_tabpfn35": "P8",
+      "rule": "lowest fold-0 k=3 MAE among P1-P8 (P0 is the no-structure control)",
+      "fold0": {
+        "P0": 1.0781,
+        "P1": 1.0766,
+        "P2": 1.0677,
+        "P3": 1.0497,
+        "P4": 1.0797,
+        "P5": 1.187,
+        "P6": 1.1997,
+        "P7": 1.0512,
+        "P8": 1.025
+      },
+      "p8_versus_anchorboost": {
+        "mean_diff": -0.0375,
+        "ci95_identity": [
+          -0.0804,
+          -0.0008
+        ],
+        "lower": 25,
+        "of": 49
+      },
+      "next": "folds 1-4, k = 3 then 1, 2, 4, on Kaggle T4 x2 (kernel <redacted-local-metadata>/sota3-final-tabpfn), same settings; nothing else is chosen after this point.",
+      "note": "The fold-0 lead is a selected maximum over eight candidates; folds 1-4 decide."
+    },
+    {
+      "utc": "2026-10-06T06:45:30Z",
+      "change": "Box swap: Vast instance 54441072 (A100 SXM4, offer 53396356) delivered 0.3 MB/s from download.pytorch.org and 0 bytes from huggingface.co in 136 s, so it could not fetch torch and the 2.6 GB of pinned weights; destroyed after $0.165. Replacement instance 54444679 (A100 PCIE 40 GB, offer 53415047, Estonia, quoted $0.544/h) measured 25.7 MB/s from Hugging Face and 173 MB/s from PyTorch before setup. Expected 4 to 5 hours, about $2.2 to $2.7 plus disk; the controller requested a $20 top-up at 15:23 JST."
+    },
+    {
+      "utc": "2026-10-06T06:47:00Z",
+      "before_any_limix_reading": "yes: only the T4 probe timing exists (6 designs, predictions not scored)",
+      "change": "LimiX-2 candidates. Added LX-F = ab22 + Monroe PCA-16 (Monroe was the best TabPFN-3.5 embedding on fold 0); LX-D and LX-F decode both mean (LX-D, LX-F) and median (LX-Dm, LX-Fm) from the same forward pass, as LX-A/LX-B do. Dropped LX-E (30,000-row context): per-design calls cost 100.9 s on a T4 at 10,000 rows and grow with context, so 245 calls at three times the rows cannot finish inside the protocol cap of 45 minutes. Run order on the A100: LX-AB, LX-F, LX-D, LX-C; selection among LX-A, LX-B, LX-C, LX-D, LX-Dm, LX-F, LX-Fm by the protocol rule."
+    },
+    {
+      "utc": "2026-10-06T07:00:00Z",
+      "before_any_limix_reading": "yes: no LimiX-2 fold-0 prediction has been scored",
+      "measured": "A100-PCIE per-design LimiX-2 call 39.6-43.5 s with the GPU at 100% (GPU-bound); one fold-0 pass = 245 calls = about 2.6 A100-hours, folds 1-4 at one k = 970 calls = about 10 A100-hours.",
+      "change": "LimiX-2: fold-0 candidates are LX-A, LX-B (one pass) and LX-F, LX-Fm (one pass). LX-C (raw_long) and LX-D/LX-Dm (CheMeleon) are not run: on the same fold TabPFN-3.5 with raw_long was 0.11-0.13 worse than with ab22 (P5, P6 vs P0, P2) and CheMeleon was 0.018 worse than Monroe (P2 vs P3), and each LimiX pass costs about 2.6 A100-hours. LimiX-2 reports k = 3 on folds 1-4; k = 1, 2, 4 would add about 30 A100-hours and are not run. Passes are sharded by design over GPUs (s3_run.py --shard/--nshards), which changes no prediction: every call still holds one design.",
+      "prelaunch_cost": {
+        "expected_hours": "3 to 4",
+        "expected_cost_usd": "7 to 9 for the 4-GPU box plus about 2 for the single box",
+        "credit_after_topup": 22.55,
+        "destroy": "right after the last pull; actual charges recorded in results.md"
+      }
+    },
+    {
+      "utc": "2026-10-06T07:05:00Z",
+      "kind": "secondary analysis after the TabPFN-3.5 freeze, not a selection",
+      "change": "Ablation of the frozen P8 on folds 1-4 at k = 3: P3 (Monroe embedding, mean output) and P9 (no structure, median output), same feeding and settings, to split the P8 gain between the structure embedding and the median decoding for the controller's merge decision. Reported as an ablation; the TabPFN-3.5 readout stays P8."
+    },
+    {
+      "utc": "2026-10-06T07:16:00Z",
+      "frozen_tabimpute": "TI-A",
+      "fold0": {
+        "TI-A": 1.2717,
+        "TI-B": 1.288,
+        "TI-C": 1.477,
+        "TI-D": 1.4449
+      },
+      "rule": "lowest fold-0 k=3 MAE among TI-A..TI-D",
+      "readout": "TI-A on folds 1-4 at k = 3 (box 1, one process per fold). Fold 0 cost 962 s on a shared A100 for 245 designs, about 1.05 GPU-hours per k on folds 1-4, at the protocol cut-off; every TabImpute layout is above interpolation on fold 0 (+0.027 to +0.233), so k = 1, 2, 4 cannot change the decision and are not run."
+    },
+    {
+      "utc": "2026-10-06T08:03:00Z",
+      "frozen_limix2": "LX-Fm",
+      "fold0": {
+        "LX-A": 1.0751,
+        "LX-B": 1.0713,
+        "LX-F": 1.0413,
+        "LX-Fm": 1.0323
+      },
+      "rule": "lowest fold-0 k=3 MAE among LX-A, LX-B, LX-F, LX-Fm",
+      "cost": "245 per-design calls per pass; LX-F pass 27.5 s per call on A100 SXM4 (38 columns), LX-AB 18.3 s (22 columns)",
+      "next": "folds 1-4 at k = 3: the LX-F job (writes LX-F and LX-Fm from one forward pass), one call per design, sharded over GPUs."
+    },
+    {
+      "utc": "2026-10-06T08:30:00Z",
+      "finding": "TabImpute v1 on CUDA is batch dependent: on one design (68 per-output matrices) the package impute() equals s3_run.impute_batch with one matrix per forward exactly (max difference 0.0), while 17 matrices per forward (the setting of every TI run so far) differ by mean 0.033, max 1.47 per imputed cell in bfloat16 and mean 0.026 in float32 (typical |prediction| 1.26). Three fold 1-4 designs re-imputed with the package API differ from the frozen TI-A predictions by mean 0.017 to 0.041 per cell.",
+      "change": "The TabImpute readout becomes the frozen TI-A on folds 1-4 at k = 3 with one matrix per forward (--ti-batch 1, equal to the package API); the 17-per-forward run is kept as a sensitivity row. The fold-0 selection is not redone: TI-A leads TI-B by 0.016 and TI-C/TI-D by 0.17 or more."
+    },
+    {
+      "utc": "2026-10-06T08:25:00Z",
+      "source": "<redacted-local-metadata>",
+      "change": "Every Monroe-based result (P8, P3, LX-F/LX-Fm, AnchorBoost + Monroe) is reported with the label \"leakage risk\". Clean counterparts: TabPFN-3.5 P7 (ab22 + CheMeleon PCA-16, median; fold 0 1.0512, second-lowest TabPFN candidate) on folds 1-4 at k = 1-4 (Kaggle); LimiX-2 LX-Dm (ab22 + CheMeleon PCA-16, median, decoded from the LX-D pass) on folds 1-4 at k = 3 once the 4-GPU box is free. Both are fixed configurations named by the controller, not fold-0 selections. The running LX-F folds 1-4 job finishes as planned."
+    },
+    {
+      "utc": "2026-10-06T08:45:00Z",
+      "source": "<redacted-local-metadata>",
+      "change": "LimiX-2 clean LX-Dm on folds 1-4 at k = 1, 2, 3, 4 (k = 3 on box 54445594 after the LX-F job; k = 1, 2, 4 on two more 4 x A100 boxes, folds split by GPU, k = 4 sharded in two halves).",
+      "prelaunch_cost": {
+        "machines": "Vast offers 50213966 (4 x A100 SXM4, US, $2.25/h) and 53674878 (4 x A100 PCIE, Estonia, $2.36/h)",
+        "expected_hours": "about 2.7 each",
+        "expected_cost_usd": "about 12.5 for the two, plus about 4.4 on 54445594",
+        "credit": 14.15,
+        "note": "controller requests host top-up when needed"
+      }
+    }
+  ]
+}

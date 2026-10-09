@@ -1,0 +1,29 @@
+{
+  "schema": "final.statistics.provenance.v1",
+  "code_sources": [
+    {
+      "source": "scale_A/headline/summarize_headline.py",
+      "original_sha256": "e3465bf9db18e9e203f6f8597da50283b00ba0406b2d7e3cdfa0d31de62c217d",
+      "functions": [
+        "group_arrays",
+        "summarize",
+        "change"
+      ]
+    },
+    {
+      "source": "release:paper_nested_decision.py",
+      "original_sha256": "22de67e35239a390a03e93d1df2c557671837944afc341e1eb2f5d46a9c094d7",
+      "functions": [
+        "apply_rule"
+      ]
+    }
+  ],
+  "adaptation": "Statistics functions extracted with equivalent arithmetic; repository-relative input readers and public hash checks replace local loaders. Fitting and data acquisition functions are omitted.",
+  "unit": "identity group",
+  "bootstrap": {
+    "replicates": 4000,
+    "seed": 0,
+    "draw": "first draw, sorted identity groups"
+  },
+  "verification_scope": "Saved inputs and public file hashes; aggregate counts and paired intervals are recomputed. Predictor fitting is outside this command."
+}

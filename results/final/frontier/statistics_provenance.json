@@ -1,0 +1,35 @@
+{
+  "schema": "final.statistics.provenance.v1",
+  "code_sources": [
+    {
+      "source": "scale_A/frontier/run_frontier_scale.py",
+      "original_sha256": "26d851a5b65ff2c50060fcde86319739ce95f78666dd27b85aef625a09cd4bd0",
+      "functions": [
+        "scores",
+        "thresholds",
+        "arrays_for",
+        "select",
+        "matched"
+      ]
+    },
+    {
+      "source": "nested/frontier/matched/matched.py",
+      "original_sha256": "8d322643841dc09f518a7e2dae39f70f851a4777de5212345172bebc2ad92231",
+      "functions": [
+        "clean",
+        "interval",
+        "flat",
+        "ranges"
+      ]
+    }
+  ],
+  "adaptation": "Statistics functions extracted with equivalent arithmetic; repository-relative input readers and public hash checks replace local loaders. Fitting and data acquisition functions are omitted.",
+  "unit": "identity group",
+  "bootstrap": {
+    "replicates": 4000,
+    "seed": 0,
+    "draw": "first draw, sorted identity groups"
+  },
+  "verification_scope": "Saved inputs and public file hashes; aggregate counts and paired intervals are recomputed. Predictor fitting is outside this command.",
+  "interpretation": "Retrospective threshold frontier on test decisions, not a deployable threshold selected using test labels."
+}

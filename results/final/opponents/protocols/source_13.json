@@ -1,0 +1,374 @@
+{
+  "schema": "sota_baselines_5.protocol.v1",
+  "created_jst": "2026-10-06T14:05:00+09:00",
+  "decision": "Do nearest-neighbour matrix completion (N2 family, SNN) or the Large Perturbation Model, adapted to dose, beat AnchorBoost (k = 3 MAE 1.161, 194 chemicals) on the three-point completion kit? A win goes to the controller to merge into the method; a loss enters the supplementary competitor table as measured.",
+  "expectations_before_running": {
+    "controller_verbatim": {
+      "N2_and_SNN": "<redacted-local-metadata>",
+      "LPM": "<redacted-local-metadata>"
+    },
+    "writer": {
+      "N2_best_variant_k3": "1.28 to 1.40; the doubly robust form (test chemical's own revealed value plus a neighbour's change between columns) most likely wins fold 0",
+      "SNN_k3": "1.35 to 1.55; principal-component regression on three revealed concentrations extrapolates poorly to far concentrations",
+      "LPM_k3": "1.22 to 1.40",
+      "any_beats_AnchorBoost": "probability under 0.1"
+    }
+  },
+  "task": {
+    "kit": "<local-input>/kit (read only; README, score.py, data/matrix.npz, data/wells.npz, tasks/k{1..4}_designs.csv and _queries.csv)",
+    "matrix": "rows = 243 chemicals, columns = 35 concentrations x 68 outputs flattened (2,380), cell = level mean over valid wells, NaN = not measured",
+    "folds": "fold 0 (49 chemicals) chooses and freezes every setting; folds 1-4 (194 chemicals) report. To predict fold f, train on every chemical with fold != f, fold 0 included.",
+    "allowed_inputs": "all cells and wells of training chemicals; for the test chemical only the revealed cells of the design (k concentrations x 68 outputs) and the plate labels of its wells at the revealed concentrations (design metadata, used only by LPM's context)",
+    "per_task_matrix": "each (test chemical, design) is completed from the training rows plus that one test row holding only its revealed cells; no other test chemical and no other design enters",
+    "fallback": "a query cell a method leaves undefined (no neighbour, no anchor, unseen column) gets log-linear interpolation of the test chemical's revealed values, as in kit/example_knn.py; the fallback rate is reported per method",
+    "score": "kit/score.py unchanged, written to this directory: primary_194 (identity-group 95% interval, 189 groups, 4,000 resamples, seed 0, primary) with the chemical interval beside it; common_193 for CNP, Gaussian process and Hill-EB",
+    "k": "k = 3 is the headline and the selection target; the frozen setting is also run at k = 1, 2, 4"
+  },
+  "methods": {
+    "N2": {
+      "source": "Khubchandani et al., N2-Bench, arXiv 2506.04166 (v3, 2026-09-13); library nsquared 1.1.0, github.com/aashish-khub/NearestNeighbors commit 092bb9c5db5c3dcffc299c75c5427c6253d7efa8, MIT, vendored unchanged in vendor/NearestNeighbors",
+      "variants": {
+        "RowNN": "average of training rows' values at the target column over rows whose mean squared distance to the test row (over shared revealed columns) is within the eta_row quantile",
+        "ColNN": "average of the test row's revealed values over columns whose mean squared distance to the target column (over training rows observing both) is within the eta_col quantile",
+        "TSNN": "average of every observed value in the row-neighbour x column-neighbour block, test row and target column included (nsquared TSEstimator, allow_self_neighbor=True)",
+        "DRNN": "average over neighbour triplets of Z[i,s] + Z[j,t] - Z[j,s] (nsquared DREstimator); no triplet falls back to the row-neighbour mean, then the column-neighbour mean, as in the library",
+        "AutoNN": "(1 - alpha) * DRNN + alpha * TSNN with shared thresholds (nsquared AutoEstimator convention)",
+        "AWNN": "adaptive simplex weights over all training rows observed at the target column (nsquared AWNNEstimator closed form), noise variance by the library's fixed-point iteration"
+      },
+      "thresholds": "percentile mode, the library default (is_percentile=True): eta is a quantile of the finite distances, numpy.quantile linear",
+      "grid_fold0": {
+        "eta_row": [
+          0.02,
+          0.05,
+          0.1,
+          0.2,
+          0.3,
+          0.5,
+          0.75,
+          1.0
+        ],
+        "eta_col": [
+          0.0005,
+          0.001,
+          0.002,
+          0.005,
+          0.01,
+          0.02,
+          0.05,
+          0.1
+        ],
+        "alpha_AutoNN": [
+          0.25,
+          0.5,
+          0.75
+        ],
+        "AWNN_delta": [
+          0.1,
+          0.5,
+          1.0
+        ],
+        "scale": [
+          "raw (library default)",
+          "zscore: each output divided by its training standard deviation before distances and averaging, multiplied back after"
+        ]
+      },
+      "implementation": "n2_run.py re-implements the six estimators vectorised over a design's query cells (the library loops one entry at a time and imputes the full matrix for AWNN); verify.py checks sampled entries against the vendored library itself",
+      "adaptations": [
+        "hyperparameters are chosen by fold-0 completion MAE instead of the library's leave-block-out HyperOpt search, which is the kit's frozen-selection rule",
+        "AWNN noise variance is iterated on the fold's training matrix once per fold rather than on each training-plus-test matrix (one test row changes it by under 1%)"
+      ]
+    },
+    "SNN": {
+      "source": "Agarwal, Dahleh, Shah, Shen, Synthetic Nearest Neighbors, arXiv 2609.13586 (2026-09-11; earlier COLT 2023 / arXiv 2109.15154); reference code github.com/deshen24/syntheticNN commit a95b511385d93717d535bd0342d0d6150634ff30 (snn.py; the repository carries no licence file), vendored unchanged in vendor/syntheticNN",
+      "estimator": "for target (test row i, column t = (concentration, output)): anchor rows = training rows observed at t, anchor columns = the test row's revealed valid columns, peeled to a fully observed block; principal-component regression of the test row's anchor-column values on the anchor block (snn.py _pcr), prediction = beta' Z[anchor rows, t]",
+      "anchor_discovery": "the anchor block is made fully observed by greedy peeling (repeatedly drop the row or column with the largest missing fraction). snn.py enumerates maximal cliques with networkx on the bipartite graph, which is exponential and calls nx.from_numpy_matrix, removed in networkx 3; when the block is already complete both give the same anchors",
+      "grid_fold0": {
+        "rank_rule": [
+          "universal (Donoho-Gavish, snn.py default)",
+          "energy 0.90",
+          "energy 0.95",
+          "energy 0.99",
+          "fixed 2",
+          "fixed 4",
+          "fixed 8",
+          "fixed 16"
+        ],
+        "n_neighbors": [
+          1,
+          2,
+          4
+        ],
+        "weights": [
+          "uniform",
+          "distance (1 / (train error + subspace inclusion))"
+        ],
+        "preprocess": [
+          "raw (paper)",
+          "column-centred by training means",
+          "zscore by output"
+        ],
+        "clip": [
+          "none (snn.py default)",
+          "to the training range of the target column"
+        ]
+      }
+    },
+    "LPM": {
+      "source": "Miladinovic et al., In silico biological discovery with large perturbation models, Nature Computational Science 5, 1029-1040 (2025), doi 10.1038/s43588-025-00870-1; code perturblib github.com/perturblib/perturblib commit 9e79ae328ab532aa9de76a3586be93554d72fb4f, Apache-2.0, vendored unchanged in vendor/perturblib",
+      "architecture": "as perturb_lib/models/collection/lpm.py: context nn.Embedding, perturbation nn.EmbeddingBag (mean of the sample's perturbation symbols), readout nn.Embedding, concatenated (3 x embedding_dim) into an MLP of num_layers Linear+ReLU+Dropout layers and a scalar head, Xavier-uniform init with ReLU gain, MSE loss, AdamW with exponential learning-rate decay per epoch, fixed epochs without early stopping; re-implemented in plain PyTorch (lpm_run.py) because the library's Lightning/polars data path is not needed",
+      "adaptations": [
+        "perturbation = the bag {compound symbol, dose symbol}; the paper's compound perturbations are a single dose (perturb_lib/data/collection/lincs.py, dosages = ['10uM'])",
+        "readouts = the 68 outputs (17 network features x DIV 5, 7, 9, 12)",
+        "context = plate (169 plates, label carries the recording date), or recording date, or one constant context; training samples are single wells of training chemicals (valid outputs only)",
+        "dose embedding = a lookup per concentration index (doses never seen in training borrow the nearest seen concentration), or a continuous embedding (Fourier features of log10 concentration through one linear layer)",
+        "a test chemical's compound embedding is fitted from its revealed cells only: inference-time optimisation (decoder frozen, Adam, Gaussian prior toward the mean training embedding with weight lambda) or an amortised encoder trained on random revealed subsets of training chemicals; fold 0 decides",
+        "a test chemical's level mean at a query concentration = the decoder output averaged over the plates of its revealed wells (one value for the constant context)"
+      ],
+      "grid_fold0": {
+        "arch": [
+          "LINCS paper config (embedding 128, hidden 256, 2 layers, dropout 0.1, batch 1000, lr 0.002, decay 0.97, 50 epochs)",
+          "Replogle paper config (embedding 32, hidden 512, 2 layers, dropout 0, batch 5000, lr 0.002, decay 0.99, 50 epochs)"
+        ],
+        "context": [
+          "plate",
+          "date",
+          "none"
+        ],
+        "dose_embedding": [
+          "lookup",
+          "continuous"
+        ],
+        "inference": [
+          "optimisation lambda 0.01",
+          "optimisation lambda 0.1",
+          "optimisation lambda 1",
+          "encoder"
+        ],
+        "seeds": "13, 14, 15 (the paper's first three); prediction = mean over seeds, in selection and in reporting"
+      },
+      "compute": "one training is first timed on a minimal batch; local CPU when one training stays under 5 minutes and 4 GB, otherwise Kaggle GPU, then AWS spot (host authorisation relayed by the controller 2026-10-06 14:0x)"
+    }
+  },
+  "selection_rule": "per method family, the fold-0 k = 3 MAE over 49 chemicals (five designs each, kit curve error) picks the setting; ties within 0.001 go to the simpler setting; the choice is written into this file under frozen before folds 1-4 run. The family winner is the headline row. For N2, each of the other variants' own fold-0 best setting also runs on folds 1-4 as a secondary row, so the table shows every nearest-neighbour form, not only the winner.",
+  "frozen": {
+    "N2": {
+      "jst": "2026-10-06T14:20:30+09:00",
+      "headline": "AutoNN",
+      "settings": {
+        "AutoNN": {
+          "variant": "AutoNN",
+          "scale": "raw",
+          "eta_row": 0.02,
+          "eta_col": 0.2,
+          "alpha": 0.25
+        },
+        "DRNN": {
+          "variant": "DRNN",
+          "scale": "raw",
+          "eta_row": 0.05,
+          "eta_col": 0.3
+        },
+        "AWNN": {
+          "variant": "AWNN",
+          "scale": "raw",
+          "delta": 1.0
+        },
+        "RowNN": {
+          "variant": "RowNN",
+          "scale": "raw",
+          "eta_row": 0.03
+        },
+        "TSNN": {
+          "variant": "TSNN",
+          "scale": "raw",
+          "eta_row": 0.05,
+          "eta_col": 0.0005
+        },
+        "ColNN": {
+          "variant": "ColNN",
+          "scale": "raw",
+          "eta_col": 0.2
+        }
+      },
+      "fold0": {
+        "AutoNN": {
+          "mae_fold0": 1.2236,
+          "fallback": 0.0713,
+          "unrestricted_best": {
+            "variant": "AutoNN",
+            "scale": "raw",
+            "eta_row": 0.02,
+            "eta_col": 0.2,
+            "alpha": 0.25,
+            "mae_fold0": 1.2236,
+            "fallback": 0.0713
+          }
+        },
+        "DRNN": {
+          "mae_fold0": 1.2319,
+          "fallback": 0.0531,
+          "unrestricted_best": {
+            "variant": "DRNN",
+            "scale": "raw",
+            "eta_row": 0.05,
+            "eta_col": 0.3,
+            "mae_fold0": 1.2319,
+            "fallback": 0.0531
+          }
+        },
+        "AWNN": {
+          "mae_fold0": 1.2482,
+          "fallback": 0.0515,
+          "unrestricted_best": {
+            "variant": "AWNN",
+            "scale": "raw",
+            "delta": 1.0,
+            "mae_fold0": 1.2482,
+            "fallback": 0.0515
+          }
+        },
+        "RowNN": {
+          "mae_fold0": 1.2575,
+          "fallback": 0.113,
+          "unrestricted_best": {
+            "variant": "RowNN",
+            "scale": "raw",
+            "eta_row": 0.005,
+            "mae_fold0": 1.2348,
+            "fallback": 0.9937
+          }
+        },
+        "TSNN": {
+          "mae_fold0": 1.2725,
+          "fallback": 0.0921,
+          "unrestricted_best": {
+            "variant": "TSNN",
+            "scale": "raw",
+            "eta_row": 0.05,
+            "eta_col": 0.0005,
+            "mae_fold0": 1.2725,
+            "fallback": 0.0921
+          }
+        },
+        "ColNN": {
+          "mae_fold0": 1.3313,
+          "fallback": 0.1227,
+          "unrestricted_best": {
+            "variant": "ColNN",
+            "scale": "zscore",
+            "eta_col": 0.0005,
+            "mae_fold0": 1.2617,
+            "fallback": 0.9562
+          }
+        }
+      },
+      "reference_fold0": {
+        "AnchorBoost": 1.0625,
+        "interpolation": 1.2443
+      }
+    },
+    "SNN": {
+      "jst": "2026-10-06T14:31:30+09:00",
+      "preprocess": "raw",
+      "rank_rule": "fixed16",
+      "n_neighbors": 6,
+      "weights": "distance",
+      "clip": "range",
+      "mae_fold0": 1.216,
+      "fallback_fold0": 0.0863,
+      "runner_up": {
+        "preprocess": "zscore",
+        "rank_rule": "energy0.90",
+        "n_neighbors": 4,
+        "weights": "distance",
+        "clip": "range",
+        "mae_fold0": 1.2173
+      },
+      "settings_compared": 352
+    },
+    "LPM": {
+      "jst": "2026-10-06T15:25:30+09:00",
+      "arch": "lincs",
+      "context": "date",
+      "dose": "lookup",
+      "inference": "opt0.1@200",
+      "seeds_headline": [
+        13,
+        14,
+        15
+      ],
+      "mae_fold0_seed_mean": 1.0806,
+      "mae_fold0_single_seeds": [
+        1.1633,
+        1.1561,
+        1.1494
+      ],
+      "settings_compared": 288,
+      "reference_fold0": {
+        "AnchorBoost": 1.0625,
+        "interpolation": 1.2443
+      }
+    }
+  },
+  "revisions": [
+    {
+      "id": 1,
+      "jst": "2026-10-06T14:18:00+09:00",
+      "before": "N2 folds 1-4 not yet run; nothing frozen",
+      "what": "N2 fold-0 grid extended at its edge: the best AutoNN setting (raw, eta_row 0.02, eta_col 0.1, alpha 0.25, fold-0 MAE 1.2407) sat on three grid boundaries. Added eta_row 0.005, 0.01, 0.03 and eta_col 0.2, 0.3, 0.5, 1.0 for TSNN, DRNN and AutoNN (raw scale, the winning scale), alpha 0 and 0.1 for AutoNN, eta_row 0.005, 0.01, 0.03, 0.04 for RowNN. Selection is over the union of both grids.",
+      "why": "a competitor's fold-0 optimum on the grid edge may sit outside the grid; widening it only gives the competitor more room",
+      "fallback_note": "fold-0 fallback to interpolation covers 5.2% of scored cells even with every training row as neighbour: those are concentrations no training chemical was tested at (columns with no training data) or test designs sharing no revealed concentration with any training chemical; matrix completion over absolute-concentration columns cannot fill them"
+    },
+    {
+      "id": 2,
+      "jst": "2026-10-06T14:20:30+09:00",
+      "before": "N2 folds 1-4 not yet run",
+      "what": "ColNN grid widened to eta_col 0.2, 0.3, 0.5, 1.0 (raw and zscore). A variant's secondary row uses its best fold-0 setting among settings whose interpolation fallback covers at most 15% of its query cells.",
+      "why": "the unrestricted fold-0 bests of RowNN (eta_row 0.005, 99.4% fallback) and ColNN (eta_col 0.0005, 99.95% fallback) are interpolation in disguise: the neighbour set is empty and the fallback fills every cell. The restriction keeps each row a measurement of its own variant; the headline AutoNN setting (7.1% fallback) is unaffected."
+    },
+    {
+      "id": 3,
+      "jst": "2026-10-06T14:28:00+09:00",
+      "before": "SNN folds 1-4 not yet run; nothing frozen for SNN",
+      "what": "SNN fold-0 grid widened at its edge: the best setting (zscore, energy 0.90, 4 synthetic neighbours, distance weights, clipped, fold-0 MAE 1.2173) used the largest neighbour count, and raw's best used the largest fixed rank. Added 6 and 8 synthetic neighbours (uniform and distance), energy 0.80 and 0.85, fixed ranks 24 and 32, for raw and zscore. Selection is over the union of both grids.",
+      "why": "same rule as revision 1"
+    },
+    {
+      "id": 4,
+      "jst": "2026-10-06T14:41:00+09:00",
+      "before": "no LPM fold-0 grid run; one diagnostic model only",
+      "what": "LPM inference grid: optimisation lambda 0.01, 0.1, 1, 10 crossed with 25, 50, 100, 200, 400 Adam steps (lr 0.05, every step count read from one run per lambda); encoder read after 300, 600, 1200, 2400 training steps. Everything else as pre-registered (2 architectures x 3 contexts x 2 dose embeddings x seeds 13-15, seed-mean predictions for selection and reporting).",
+      "why": "a diagnostic model on fold 0 (LINCS config, plate context, dose lookup, seed 13, lambda 0.1) scored 1.170 after 50 steps, 1.171 after 100, 1.201 after 300 and 1.211 after 600: fitting three revealed concentrations longer overfits them, so the step count is a regularisation setting to choose on fold 0, not a fixed constant",
+      "compute": "Vast.ai RTX 4090 (controller relayed host authorisation 2026-10-06 14:0x: Vast preferred, about 0.38 USD per hour from that tier; write machine, hours and amount before starting; destroy right after; report actual spend). Local MPS measured 0.09-0.21 s per optimisation step and about 3-5 minutes per (setting, seed), 2-3 hours for the grid."
+    },
+    {
+      "id": 5,
+      "jst": "2026-10-06T15:08:30+09:00",
+      "before": "N2 ColNN folds 1-4 had run with the old base case; nothing else changed",
+      "what": "ColNN now returns the library's base case for a target column with no finite column distance (no training chemical tested at that concentration): the mean of the test row's revealed values (nsquared RowRowEstimator on the transposed matrix). It previously fell back to interpolation there. ColNN's fold-0 grid was rerun and its secondary setting reselected under the revision-2 rule; ColNN folds 1-4 rerun.",
+      "found_by": "verify.py: sampled fold-4 cells of Rotenone at concentration index 0 differed from the library by up to 3.92"
+    },
+    {
+      "id": 6,
+      "jst": "2026-10-06T15:25:30+09:00",
+      "before": "LPM folds 1-4 not yet run",
+      "what": "A secondary LPM row: the same frozen setting averaged over seeds 13-17 (the five seeds of the paper's configs, perturb_gym lincs_paper_lpm.yaml). The pre-registered 3-seed mean (13-15) stays the headline.",
+      "why": "seed averaging moved the chosen setting's fold-0 MAE from 1.149-1.163 for single seeds to 1.081 for the 3-seed mean, so the paper's own seed count may still lower the error; the competitor gets that room"
+    },
+    {
+      "id": 7,
+      "jst": "2026-10-06T15:47:00+09:00",
+      "before": "LPM 3- and 5-seed rows scored on folds 1-4; nothing else run",
+      "what": "A further LPM sensitivity row: the same frozen setting averaged over 20 seeds (13-32). Headline unchanged (3 seeds).",
+      "why": "folds 1-4, k = 3: 3 seeds 1.208 (AnchorBoost +0.048 [0.016, 0.081]), 5 seeds 1.193 (+0.033 [0.002, 0.064]); the five-seed interval nearly reaches zero and a + b/n through the two points puts the many-seed limit near 1.17, so the measured 20-seed value decides whether AnchorBoost beats or ties an LPM ensemble"
+    },
+    {
+      "id": 8,
+      "jst": "2026-10-06T15:58:00+09:00",
+      "before": "blend not computed",
+      "what": "Blend reading for the controller's merge decision: P = w x LPM + (1 - w) x AnchorBoost (kit/reference/anchorboost.npz, k = 3), w in 0, 0.1, ..., 1 chosen on fold 0, for the 3-seed headline LPM and for the 20-seed LPM; folds 1-4 reported. Not a competitor row.",
+      "why": "the 20-seed LPM ties AnchorBoost at every k (k = 3: +0.015 [-0.015, 0.047]); whether the two combine is the reading the merge decision needs"
+    }
+  ],
+  "timestamps_note": "revision and frozen times corrected at 15:27 JST from the modification times of the files each step wrote; the first versions carried estimated clock times"
+}

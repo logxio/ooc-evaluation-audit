@@ -1,0 +1,259 @@
+{
+  "schema": "final.opponents.v1",
+  "k": 3,
+  "folds": [
+    1,
+    2,
+    3,
+    4
+  ],
+  "baseline": "anchorboost",
+  "baseline_configuration": "Published static AnchorBoost; separate from later v2/v3 models and model ensembles",
+  "primary_cohort": 194,
+  "primary_identity_groups": 189,
+  "common_cohort": 193,
+  "common_cohort_exclusion": "Phenobarbital",
+  "metric": "Equal-chemical mean absolute error; five frozen designs per chemical. Structure-only methods receive zero revealed observations but are scored on the same query cells.",
+  "selection": "Frozen source configurations. Development fold 0; no model fitting or configuration selection in this package.",
+  "bootstrap": {
+    "replicates": 4000,
+    "seed": 0,
+    "unit": "identity_group",
+    "statistic": "chemical-weighted mean of AnchorBoost minus opponent within sampled identity groups",
+    "percentiles": [
+      2.5,
+      97.5
+    ],
+    "quantile_method": "linear"
+  },
+  "classification": {
+    "win": "upper CI bound < 0",
+    "loss": "lower CI bound > 0",
+    "tie": "CI contains zero"
+  },
+  "counts": "Configuration counts keep every listed variant separate. Family counts: loss if any configuration is a loss; win only if all configurations are wins; otherwise tie. Cohorts remain explicit.",
+  "reference_per_chemical": "results/final/opponents/reference_per_chemical.csv",
+  "configurations": [
+    {
+      "key": "tabpfn2",
+      "label": "TabPFN-2",
+      "family": "TabPFN",
+      "cohort": "primary_194",
+      "per_chemical": "results/final/opponents/tabpfn2/per_chemical.csv",
+      "saved_summary": "results/final/opponents/tabpfn2/saved_summary.json"
+    },
+    {
+      "key": "tabpfn35",
+      "label": "TabPFN-3.5",
+      "family": "TabPFN",
+      "cohort": "primary_194",
+      "per_chemical": "results/final/opponents/tabpfn35/per_chemical.csv",
+      "saved_summary": "results/final/opponents/tabpfn35/saved_summary.json"
+    },
+    {
+      "key": "tabicl2",
+      "label": "TabICLv2",
+      "family": "TabICLv2",
+      "cohort": "primary_194",
+      "per_chemical": "results/final/opponents/tabicl2/per_chemical.csv",
+      "saved_summary": "results/final/opponents/tabicl2/saved_summary.json"
+    },
+    {
+      "key": "softimpute",
+      "label": "SoftImpute",
+      "family": "SoftImpute",
+      "cohort": "primary_194",
+      "per_chemical": "results/final/opponents/softimpute/per_chemical.csv",
+      "saved_summary": "results/final/opponents/softimpute/saved_summary.json"
+    },
+    {
+      "key": "cp_tensor",
+      "label": "CP tensor",
+      "family": "CP tensor",
+      "cohort": "primary_194",
+      "per_chemical": "results/final/opponents/cp_tensor/per_chemical.csv",
+      "saved_summary": "results/final/opponents/cp_tensor/saved_summary.json"
+    },
+    {
+      "key": "tnp",
+      "label": "TNP",
+      "family": "TNP",
+      "cohort": "primary_194",
+      "per_chemical": "results/final/opponents/tnp/per_chemical.csv",
+      "saved_summary": "results/final/opponents/tnp/saved_summary.json"
+    },
+    {
+      "key": "tetnp",
+      "label": "TE-TNP",
+      "family": "TE-TNP",
+      "cohort": "primary_194",
+      "per_chemical": "results/final/opponents/tetnp/per_chemical.csv",
+      "saved_summary": "results/final/opponents/tetnp/saved_summary.json"
+    },
+    {
+      "key": "arcanet_structure",
+      "label": "ARCANet structure-only",
+      "family": "ARCANet",
+      "cohort": "primary_194",
+      "per_chemical": "results/final/opponents/arcanet_structure/per_chemical.csv",
+      "saved_summary": "results/final/opponents/arcanet_structure/saved_summary.json"
+    },
+    {
+      "key": "genra_structure",
+      "label": "GenRA structure-only",
+      "family": "GenRA",
+      "cohort": "primary_194",
+      "per_chemical": "results/final/opponents/genra_structure/per_chemical.csv",
+      "saved_summary": "results/final/opponents/genra_structure/saved_summary.json"
+    },
+    {
+      "key": "tabpfn35_chemeleon",
+      "label": "TabPFN-3.5 CheMeleon median",
+      "family": "TabPFN",
+      "cohort": "primary_194",
+      "per_chemical": "results/final/opponents/tabpfn35_chemeleon/per_chemical.csv",
+      "saved_summary": "results/final/opponents/tabpfn35_chemeleon/saved_summary.json"
+    },
+    {
+      "key": "limix2_chemeleon",
+      "label": "LimiX-2 CheMeleon median",
+      "family": "LimiX-2",
+      "cohort": "primary_194",
+      "per_chemical": "results/final/opponents/limix2_chemeleon/per_chemical.csv",
+      "saved_summary": "results/final/opponents/limix2_chemeleon/saved_summary.json"
+    },
+    {
+      "key": "tabimpute",
+      "label": "TabImpute",
+      "family": "TabImpute",
+      "cohort": "primary_194",
+      "per_chemical": "results/final/opponents/tabimpute/per_chemical.csv",
+      "saved_summary": "results/final/opponents/tabimpute/saved_summary.json"
+    },
+    {
+      "key": "empirical_gp",
+      "label": "Empirical GP",
+      "family": "Empirical GP",
+      "cohort": "primary_194",
+      "per_chemical": "results/final/opponents/empirical_gp/per_chemical.csv",
+      "saved_summary": "results/final/opponents/empirical_gp/saved_summary.json"
+    },
+    {
+      "key": "flownp",
+      "label": "FlowNP three-seed ensemble",
+      "family": "FlowNP",
+      "cohort": "primary_194",
+      "per_chemical": "results/final/opponents/flownp/per_chemical.csv",
+      "saved_summary": "results/final/opponents/flownp/saved_summary.json"
+    },
+    {
+      "key": "lpm3",
+      "label": "LPM three-seed ensemble",
+      "family": "LPM",
+      "cohort": "primary_194",
+      "per_chemical": "results/final/opponents/lpm3/per_chemical.csv",
+      "saved_summary": "results/final/opponents/lpm3/saved_summary.json"
+    },
+    {
+      "key": "lpm20",
+      "label": "LPM twenty-seed ensemble",
+      "family": "LPM",
+      "cohort": "primary_194",
+      "per_chemical": "results/final/opponents/lpm20/per_chemical.csv",
+      "saved_summary": "results/final/opponents/lpm20/saved_summary.json"
+    },
+    {
+      "key": "n2_drnn",
+      "label": "N2 DRNN",
+      "family": "N2",
+      "cohort": "primary_194",
+      "per_chemical": "results/final/opponents/n2_drnn/per_chemical.csv",
+      "saved_summary": "results/final/opponents/n2_drnn/saved_summary.json"
+    },
+    {
+      "key": "snn",
+      "label": "SNN",
+      "family": "SNN",
+      "cohort": "primary_194",
+      "per_chemical": "results/final/opponents/snn/per_chemical.csv",
+      "saved_summary": "results/final/opponents/snn/saved_summary.json"
+    },
+    {
+      "key": "kano_structure",
+      "label": "KANO structure-only official implementation",
+      "family": "KANO",
+      "cohort": "primary_194",
+      "per_chemical": "results/final/opponents/kano_structure/per_chemical.csv",
+      "saved_summary": "results/final/opponents/kano_structure/saved_summary.json"
+    },
+    {
+      "key": "kano_three_points",
+      "label": "KANO structure plus three points official implementation",
+      "family": "KANO",
+      "cohort": "primary_194",
+      "per_chemical": "results/final/opponents/kano_three_points/per_chemical.csv",
+      "saved_summary": "results/final/opponents/kano_three_points/saved_summary.json"
+    },
+    {
+      "key": "motil_structure",
+      "label": "MotiL structure-only official implementation",
+      "family": "MotiL",
+      "cohort": "primary_194",
+      "per_chemical": "results/final/opponents/motil_structure/per_chemical.csv",
+      "saved_summary": "results/final/opponents/motil_structure/saved_summary.json"
+    },
+    {
+      "key": "motil_three_points",
+      "label": "MotiL structure plus three points official implementation",
+      "family": "MotiL",
+      "cohort": "primary_194",
+      "per_chemical": "results/final/opponents/motil_three_points/per_chemical.csv",
+      "saved_summary": "results/final/opponents/motil_three_points/saved_summary.json"
+    },
+    {
+      "key": "cnp",
+      "label": "CNP",
+      "family": "CNP",
+      "cohort": "common_193",
+      "per_chemical": "results/final/opponents/cnp/per_chemical.csv",
+      "saved_summary": "results/final/opponents/cnp/saved_summary.json"
+    },
+    {
+      "key": "gp",
+      "label": "Gaussian process",
+      "family": "Gaussian process",
+      "cohort": "common_193",
+      "per_chemical": "results/final/opponents/gp/per_chemical.csv",
+      "saved_summary": "results/final/opponents/gp/saved_summary.json"
+    },
+    {
+      "key": "hill_eb",
+      "label": "Hill empirical Bayes",
+      "family": "Hill empirical Bayes",
+      "cohort": "common_193",
+      "per_chemical": "results/final/opponents/hill_eb/per_chemical.csv",
+      "saved_summary": "results/final/opponents/hill_eb/saved_summary.json"
+    },
+    {
+      "key": "loglinear_interp",
+      "label": "Log-linear interpolation",
+      "family": "Log-linear interpolation",
+      "cohort": "primary_194",
+      "reference_method": "loglinear_interp"
+    },
+    {
+      "key": "training_knn",
+      "label": "Training-compound nearest neighbor",
+      "family": "Training-compound nearest neighbor",
+      "cohort": "primary_194",
+      "per_chemical": "results/final/opponents/training_knn/per_chemical.csv",
+      "saved_summary": "results/final/opponents/training_knn/saved_summary.json"
+    }
+  ],
+  "excluded": {
+    "monroe_embedding_variants": "Supervised pretraining-label overlap; excluded from clean comparisons.",
+    "anchorboost_v2_v3_and_self_constructed_ensembles": "Different baseline configurations; outside the frozen AnchorBoost 1.161 comparison.",
+    "synthetic_dr_pfn": "Self-constructed comparator rather than a published method."
+  },
+  "distribution": "Saved benchmark errors and protocols only; no third-party model code or weights distributed. LimiX-2 weight restrictions and FlowNP source-license absence do not affect arithmetic on saved errors."
+}

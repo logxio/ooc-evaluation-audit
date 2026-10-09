@@ -1,0 +1,59 @@
+{
+  "schema": "sota_baselines_2.tnp.protocol.v1",
+  "item": "1. next-generation neural processes",
+  "frozen_utc": "2026-10-06T03:38:35+09:00",
+  "decision": "Whether a transformer neural process, the strong successor of the 2018 conditional neural process, overtakes AnchorBoost on three-point reconstruction in the published screens.",
+  "comparators": [
+    "Transformer Neural Process, deterministic variant (TNP-D), Nguyen & Grover, ICML 2022, official code github.com/tung-nd/TNP-pytorch commit 73df9225, MIT",
+    "Translation-equivariant TNP (TE-TNP-D) following Ashman et al., ICML 2024; github.com/cambridge-mlg/tnp main commit 8815cdc4 carries CNP/ANP/ConvCNP/TNP and no translation-equivariant model, so the TE construction is re-implemented here for one-dimensional inputs and is labelled as a re-implementation in every report"
+  ],
+  "training_regime": "Same as the published CNP comparison: fitted within each screen, meta-trained across that screen's training-fold chemicals, episodes sample k ~ U{0..min(5, L-1)} context levels and score the Gaussian NLL of every well, three seeds (0, 1, 2), 4,000 steps, batch 32, AdamW lr 1e-3 wd 1e-4, OneCycle with pct_start 0.1, gradient clipping 1.0, arithmetic mean of the three final-checkpoint predicted means.",
+  "splits": "Unchanged published folds and designs. Network formation: train on every chemical whose fold differs from the test fold (development fold 0 included, as release/chip_forecast.py does), score folds 1-4, five seeded three-level designs per chemical. Acute and human neural: the frozen benchmarks/strong_baseline/external bundle, all five folds, same identity-clean populations and exclusions.",
+  "scoring": "release/chip_forecast.py errors(): mean absolute error over observed held-out concentration-level means, averaged over the five designs within a chemical, then equally across chemicals. Identical metric, designs and masks as Fig. 2 of the manuscript.",
+  "hyperparameters": {
+    "selection": "Five candidate configurations, scored once each on the development partition (fold 0) with models trained on folds 1-4, exactly the procedure that selected AnchorBoost's settings. The best configuration of each family (TNP, TE-TNP) is frozen before any test fold is fitted. No test or calibration response enters selection.",
+    "candidates": [
+      "tnpd_official: official configs/gp/tnpd.yaml sizes (d_model 64, emb_depth 4, feedforward 128, 4 heads, 6 layers, dropout 0)",
+      "tnpd_interp: same sizes plus the interpolation-gated decoder of the selected CNP configuration",
+      "tnpd_wide_interp: d_model 128, feedforward 256, interpolation gate",
+      "tetnpd_interp: translation-equivariant attention with the interpolation gate",
+      "tetnpd_official: translation-equivariant attention without the gate"
+    ],
+    "frozen_before_test": true
+  },
+  "adaptations": [
+    "A token carries [x, y*m, m] because the screens leave single (concentration, output) cells unmeasured; the CNP encoder receives the same block.",
+    "One learned context token is always present so that a zero-context episode has something to attend to; the official mask would make such a row all -inf.",
+    "Scale is 0.02 + softplus(s), the bound of the published CNP, instead of exp(s).",
+    "Output dimension is the screen's output count (68, 43 or 9)."
+  ],
+  "endpoints": [
+    "Three-point reconstruction MAE for TNP and TE-TNP in the network-formation screen (194 chemicals, folds 1-4) and, if they fit in budget, the acute (383 identities) and human neural (69 identities) screens",
+    "Paired chemical-level differences against AnchorBoost, CNP and log-linear interpolation with 10,000-resample percentile intervals (95%, plus 97.5% for the external screens), seed 0, the published convention"
+  ],
+  "expected_before_run": {
+    "nfa_tnp_mae": "1.10 to 1.28; the comparator may win, tie or lose and every result is retained",
+    "nfa_anchorboost_minus_tnp": "-0.05 to +0.05 with an interval that probably crosses zero",
+    "nfa_tnp_versus_interpolation": "10% to 20% lower error than interpolation (1.345)",
+    "tetnp_versus_tnp": "equal or slightly lower error for TE-TNP",
+    "if_the_comparator_wins": "report it as the headline of this item and say so in results.md and in the suggested manuscript sentence"
+  },
+  "verification": "verify_tnp.py recomputes every reported mean and interval from the saved per-design prediction arrays through a separate code path that does not import run_tnp.py, and re-derives the AnchorBoost, CNP and interpolation per-chemical values from the frozen published tables.",
+  "inputs": {
+    "release/.cache/neurochip_twin/nfa_tasks.npz": "e1f056ef33f568052fb8dfdba6e095f7b575c7f78d96768e34469918559008d2",
+    "release/benchmarks/strong_baseline/external/tasks.npz": "363fb65d1506903f4e3701c1d2c931abc490a8a7f58d33ca2b0d184437026f13",
+    "release/chip_forecast.py": "3d02dd3a1bc57e8c53f701a6005c8d5e9d8ad6a15a57cdec3f22b27066015897"
+  },
+  "published_reference_values": {
+    "nfa_anchorboost_194": 1.1606120562951439,
+    "nfa_cnp_194": 1.1939538547673176,
+    "nfa_interpolation_194": "recomputed from runs/strong-baseline-s1/nfa/per_chemical.csv",
+    "source": "runs/strong-baseline-s1/result.json and nfa/per_chemical.csv"
+  },
+  "licenses": {
+    "TNP-pytorch": "MIT, Copyright (c) 2022 Tung Nguyen",
+    "cambridge-mlg/tnp": "MIT, Copyright (c) 2024 cambridge-mlg",
+    "EPA screens": "US Government work, public domain",
+    "NeuroChip Twin v2 bundle and CNP code": "MIT, Copyright (c) 2026 Francisco Angulo de Lafuente"
+  }
+}

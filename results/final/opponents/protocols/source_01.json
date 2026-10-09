@@ -1,0 +1,92 @@
+{
+  "schema": "sota_baselines.kit.v1",
+  "created_utc": "2026-10-05T18:33:00Z",
+  "decision": "Give outside predictors (TabPFN, low-rank completion, published dose-response models) the exact reconstruction task, folds, designs and scoring of manuscript Fig. 2, so every new comparison runs through one scorer that first reproduces the published AnchorBoost and interpolation numbers.",
+  "status": "Retrospective benchmark packaging of previously studied public data. No model is selected from fold 1-4 results in this step.",
+  "task": {
+    "framing": "Matrix completion. Rows are chemicals. Columns are (tested concentration, output) pairs: 35 distinct log10 concentrations in the package x 68 outputs (17 network features x DIV 5, 7, 9, 12). A cell is the mean over valid replicate wells of the vehicle-normalized response distributed with the package. Every cell a training chemical measured is known. A test design reveals k of the test chemical's tested concentrations (all 68 outputs there); the task is to predict all outputs at each of its remaining tested concentrations.",
+    "source": {
+      "repository": "https://github.com/<redacted-local-metadata>/<redacted-local-metadata>",
+      "commit": "f9848800dfab66a8bc005e6b3087153eeaabe9ac",
+      "files": {
+        "data_bundle/nfa_tasks.npz": "e1f056ef33f568052fb8dfdba6e095f7b575c7f78d96768e34469918559008d2",
+        "results/trajectory_cv_per_chemical.csv": "0d013127aef781ca5e1de04088532e2e19223364173a198e0686941c04f93abc"
+      },
+      "licence": "EPA data public domain; bundle and published results MIT"
+    },
+    "chemicals": 243,
+    "wells": 6902,
+    "folds": "Package folds 0-4. Fold 0 (49 labels) is development only. Folds 1-4 (194 labels) are scored. For test fold f, the training chemicals are all labels with fold != f, including fold 0.",
+    "designs": "Five distinct k-level designs per chemical and k: numpy default_rng(int(sha256('<chemical>|<k>').hexdigest()[:8], 16)); up to 20 draws of sorted(rng.choice(levels, size=k, replace=False)); keep the first five distinct (release chip_forecast.designs, unchanged since the package).",
+    "ks": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "targets": "Level means at every tested concentration of the chemical that the design leaves unmeasured, over outputs with at least one valid well.",
+    "metric": "Per design: mean absolute error over its valid (query concentration, output) cells. Per chemical: mean over its five designs. Cohort: mean over chemicals with equal weight. Identical to release chip_forecast.errors curve MAE.",
+    "cohorts": {
+      "primary_194": "Folds 1-4, 194 labels, 189 identity groups (Fig. 2a-d).",
+      "common_193": "primary_194 without Phenobarbital, whose sodium salt is a fold-0 training label; 193 labels, 188 identity groups (CNP, Hill-EB and Gaussian-process comparisons).",
+      "development_fold0": "Fold 0, 49 labels; used only to choose settings of new predictors."
+    }
+  },
+  "bootstrap": {
+    "chemical": {
+      "unit": "chemical label",
+      "replicates": 4000,
+      "seed": 0,
+      "draw": "labels sorted by name; numpy default_rng(0); for each replicate rng.integers(0, n, n); replicate statistic = mean paired difference; numpy percentile 2.5 and 97.5 (linear)",
+      "role": "Published convention of release chip_forecast.paired; reproduces the Fig. 2 intervals."
+    },
+    "identity": {
+      "unit": "identity group: drug_group in <local-input>/identities.json (sha256 ef322cee97084b3b4e01b4d8a164ecb63562ae9981e226cdc4809f0c72acf3b5)",
+      "replicates": 4000,
+      "seed": 0,
+      "draw": "groups sorted by name; numpy default_rng(0); one matrix rng.integers(0, G, (4000, G)); replicate statistic = sum of chemical differences over sampled groups / number of chemicals in sampled groups, keeping chemical-equal weighting; numpy percentile 2.5 and 97.5",
+      "role": "Primary interval for new predictors, as requested. Multi-label groups in primary_194: Allethrin + S-Bioallethrin; Bis(tributyltin)oxide + Tributyltin chloride + Tributyltin methacrylate; DDT + o,p'-DDT; Manganese dichloride + Manganese(II) acetate."
+    }
+  },
+  "references": {
+    "anchorboost": "Static AnchorBoost of release chip_forecast.py, fitted on Kaggle Linux (kernels <redacted-local-metadata>/mea-forecast-fold1..4 and mea-forecast-k12; receipts in <local-input>/f101_primary_receipt.json and f101_kaggle_k12/). k=3: the published element-level predictions release/chip_forecast_runs/decision_fold{0..4}.npz (float32), which reproduce every published per-chemical k=3 error within 8.3e-9. k=1, 2, 4: element-level predictions were never saved; the kit uses the published per-chemical errors of release/chip_forecast_result.csv.",
+    "loglinear_interp": "release chip_forecast.predict_interp (deterministic).",
+    "hill_per_endpoint": "release chip_forecast.predict_hill (published per-output Hill baseline, deterministic).",
+    "analog_knn": "release chip_forecast.Analog, trained on the training chemicals of each fold (deterministic).",
+    "published_neural_process": "Per-chemical MAE of the package's published NeuroTrajectory CNP (results/trajectory_cv_per_chemical.csv, method neurotrajectory), k=1-4, 194 labels; per-chemical values only.",
+    "anchorboost_acquisition": "Broad-coverage AnchorBoost of the acquisition experiment, k=3 rows (branch -1) of acquisition/fold{1..4}/point_predictions.npz; common_193.",
+    "cnp": "Released NeuroTrajectory checkpoints, k=3 rows of acquisition/fold{1..4}/point_predictions.npz; common_193.",
+    "hill_eb": "Hill empirical Bayes, version 3 (amendment 3), branch -1 rows of acquisition/classical_baselines/acquisition/fold{1..4}/predictions.npz (method index 1); common_193.",
+    "gp": "Gaussian process, Matern-1/2 with constant term, branch -1 rows of the same files (method index 0); common_193."
+  },
+  "gate": {
+    "rule": "Score the reference anchorboost and loglinear_interp prediction files with score.py. Every published number below must be reproduced: 4-dp release values equal after rounding to 4 dp; manuscript 3-dp and 1-dp-percent values equal after rounding; full-precision figure means within 1e-7 (k=3 AnchorBoost predictions are stored as float32). On any mismatch, stop and report in the control group.",
+    "published_sources": {
+      "release/chip_forecast_result.json": "summary_folds_1to4.k1..k4: anchorboost, loglinear_interp, versus.loglinear_interp {mean_diff, ci95, rel_change_pct, n_chemicals, frac_chem_improved}; also hill_per_endpoint, analog_knn and their versus entries",
+      "figures/series2/nm_fig2_ab_estimates.csv": "panel a full-precision means k1..k4; panel b network-formation rows",
+      "manuscript.md Results 2": "1.161, 1.345, -0.185, -0.217, -0.154, 88.7%, 13.7%, 19.1%, 26.4%, 1.253, 1.254",
+      "acquisition/classical_baselines/mae_table.csv and contrasts.csv": "common_193 K3 means of anchorboost_all, interpolation, cnp, hill_eb, gp and their paired mean differences (reference alignment check; their intervals use 10,000 vectorized chemical resamples and are recomputed only by verify_kit.py)"
+    }
+  },
+  "expected_before_run": {
+    "gate": "Pass on every listed number. Interpolation is deterministic and already reproduces the published per-chemical k=3 values exactly; the published k=3 AnchorBoost predictions reproduce them within 8.3e-9 (probe on 2026-10-06 03:3x JST).",
+    "regeneration": "Dropped by amendment 1.",
+    "identity_vs_chemical": "Identity-group intervals about 1-3% wider than chemical intervals at the same mean; 5 multi-label groups among 189."
+  },
+  "amendments": [
+    {
+      "id": 1,
+      "at_utc": "2026-10-05T18:41:00Z",
+      "before_gate": true,
+      "change": "Element-level AnchorBoost predictions for k=1, 2, 4 are not regenerated; the kit uses the published per-chemical errors for those k.",
+      "reason": "A probe refit of k=1 fold 1 on this Mac with the release code and venv gave fold mean 1.4832 against the published Kaggle-fitted 1.4705 (median per-chemical gap 0.016, maximum 0.18); gradient-boosted fits differ across platforms, so a Mac refit cannot reproduce the published numbers. The protocol-frozen code (sha256 966f2317...) cannot run k=1 at all (IndexError at M[-2]); the published k=1 errors come from the amended code 3d02dd3a... on Kaggle."
+    },
+    {
+      "id": 2,
+      "at_utc": "2026-10-05T19:02:00Z",
+      "before_gate": false,
+      "change": "Gate check logic only: (a) manuscript tokens are compared with one rounding of the full-precision value, as manuscript_numbers.csv derives them; (b) the 193-chemical alignment checks use |diff| <= 1e-7 instead of 1e-12.",
+      "reason": "(a) The release 4-dp interval bound -0.2165 prints as -0.216 in binary floating point; its full-precision value -0.21652 prints as the published -0.217. (b) The saved interpolation and CNP predictions were scored in float32 arithmetic by the acquisition code; recomputation in float64 differs by 1.1e-9 to 1.3e-9 in the cohort means. No scored quantity changed; first run 63/68, second run 68/68."
+    }
+  ]
+}

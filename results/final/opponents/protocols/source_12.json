@@ -1,0 +1,11 @@
+{
+  "schema": "sota_baselines_4.protocol.amendment.v1",
+  "amends": "implementation of the FlowNP process limits (no registered quantity changes)",
+  "written_local": "2026-10-06T14:58:00+09:00",
+  "folds_touched_before_this_amendment": "FlowNP fold-0 models fnp_interp and fnp_official finished training; no FlowNP prediction on any fold exists",
+  "events": [
+    "14:24 first hosted batch stopped by the job monitor at the 4 GB per-process cap after 2 minutes: the training episode cache was an unbounded dict. Fixed with a 4,000-episode LRU (S2's lru_cache size) and an MPS cache release every 50 steps; measured peak footprint 2.66 GB (default sizes) and 2.48 GB (wide). No artifact came out of that run.",
+    "14:40 two fold-0 jobs trained fnp_interp and fnp_official to 4,000 steps (each paused once at 240 s and resumed), then the predict stage passed the 300 s per-process limit (245 designs x 128 samples x 100 steps under parallel load) and stopped with exit 124 before writing anything."
+  ],
+  "change": "predict now pauses between chunks of 8 designs when its 240 s wall budget runs out, saves the finished designs and resumes in the next process. Each design draws its sampling noise from its own generator seeded by (seed, chemical, design), so a prediction does not depend on chunking or batch composition. Sizes, steps, samples, replicates, sampler and selection rule are unchanged."
+}

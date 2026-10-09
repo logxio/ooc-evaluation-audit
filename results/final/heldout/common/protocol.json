@@ -1,0 +1,277 @@
+{
+  "schema": "paper.common_scale.v1",
+  "frozen_utc": "2026-10-05T06:10:35.003417+00:00",
+  "decision": ":,",
+  "owner": " Series4; current redacted execution and comp job owner",
+  "retrospective": true,
+  "raw": {
+    "path": "<local-input>/9246f32f693c/All_DIV_Data.Rdata",
+    "sha256": "fe8015c789770092b485fb63dd8aa0f643120e366df73c5624665454ee982af6"
+  },
+  "execution_files": {
+    "run_common.py": "86a847e3af4d3086756ed53e1c16c96f901f03fd8e35687c9911374e00f9ba8f",
+    "src/chip_forecast.py": "3ff0a65a484030879081b9163961c10d019b37510fe65229c3b5fbe43713bc5d",
+    "src/paper_nested_decision.py": "9e94f01c6d7c959587e4c77ce6f0792db270e3e7b316cc512a1795012be8c832",
+    "source_protocol.json": "d15f70d8ba11f111516a13a087d3970ea270bb2e9711547db8aaf6b6f71ff20d",
+    "identity_splits.json": "a455fa45a25c0b6f80e6e4b4cb0235dc72da89e6ad6a7eaa240051f7df72aa4c",
+    "strict_splits.json": "a996741f28c403870f73118eb6b80d115312bffce82441f70b55fa97dc45484f",
+    "identities.json": "ef322cee97084b3b4e01b4d8a164ecb63562ae9981e226cdc4809f0c72acf3b5",
+    "global_transform.json": "13adbad70ee474c7a6fd7fe1bb80770465151e49c22cf7f3bb5422e3fbc17eea",
+    "own_control_missingness_audit.json": "f606b8fe24d38bf72267e039f0b652d788dc34d3e20d38a45f616125841a2419"
+  },
+  "environment": {
+    "python": "3.13.14 (main, Jun 10 2026, 12:24:04) [Clang 21.0.0 (clang-2100.0.123.102)]",
+    "executable": "<local-input>/ea354f9b4a2a/python",
+    "platform": "macOS-26.6.2-arm64-arm-64bit-Mach-O",
+    "machine": "arm64",
+    "numpy": "2.5.3",
+    "pandas": "3.0.6",
+    "sklearn": "1.9.1",
+    "rdata": "1.1.0",
+    "threadpools": [
+      {
+        "user_api": "openmp",
+        "internal_api": "openmp",
+        "num_threads": 4,
+        "prefix": "libomp",
+        "filepath": "<local-input>/07b38f00d522/libomp.dylib",
+        "version": null
+      }
+    ],
+    "threads": {
+      "OMP_NUM_THREADS": "4",
+      "OPENBLAS_NUM_THREADS": "1",
+      "VECLIB_MAXIMUM_THREADS": "1"
+    }
+  },
+  "model": {
+    "loss": "absolute_error",
+    "max_iter": 600,
+    "learning_rate": 0.05,
+    "max_leaf_nodes": 127,
+    "min_samples_leaf": 50,
+    "early_stopping": false,
+    "random_state": 0
+  },
+  "n_pca": 0,
+  "primary_population": {
+    "identity_groups": 188,
+    "substance_labels": 193,
+    "designs": 965,
+    "selection": "nested original folds 1-4"
+  },
+  "regimes": {
+    "R1": {
+      "source": "identity_splits.json",
+      "folds": [
+        1,
+        2,
+        3,
+        4
+      ]
+    },
+    "R2": {
+      "source": "strict_splits.json",
+      "folds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ]
+    }
+  },
+  "arms": {
+    "A": {
+      "scale": "c and per-DIV robust SD from all unique vehicle controls, independent of split",
+      "primary": true
+    },
+    "B": {
+      "scale": "c and per-DIV robust SD from training-associated vehicles only, refitted for each inner and outer training cohort",
+      "primary": false
+    }
+  },
+  "center": "Median asinh(vehicle/c) within each own plate/date/DIV, applied identically to train, calibration and test. Only dose=0 responses fit centers. Where all own-board vehicle values of a feature are missing, its normalized exposed values remain undefined (NA), and existing task masks exclude them; no other board or treated value imputes that center. An entirely unscorable compound raises an error.",
+  "scale_estimator": "Inherited estimator: c=positive DIV12 vehicle median/4 (else 1); SD=median across training/all vehicle plate/date within each DIV of 1.4826*MAD, minimum .05, else 1. Physical duplicate controls counted once after agreement check.",
+  "response": "(asinh(raw/c)-own center)/DIV SD; clip each well to [-10,10]; retain inherited missingness and float32 aggregation.",
+  "activity_reference": "inactive=1 iff full-series max absolute masked DIV-mean across concentrations/features <3; equality is active. A reference and continuous scale identical for each design across R1/R2; B references may differ by training cohort.",
+  "hill_tie": {
+    "rule": "lowest flattened C-order grid index among SSE <= minimum SSE + tolerance",
+    "tolerance": "64 * float64 epsilon * max(1, sum(W * Y**2)) per output",
+    "grid": "original AC50-major then slope-minor order",
+    "reason": "Numerically stable resolution of Series3 near-ties; no grid or fitted architecture change."
+  },
+  "rules": "Two group-disjoint inner fits generate training-only out-of-fold scores. Equal-drug weighted balanced accuracy selects cutoff, lowest cutoff breaks ties. Weighted training ECDF gives absolute rank margin. Final predictor trains all and only outer-training drugs.",
+  "risk": {
+    "alpha": 0.1,
+    "unit": "drug_group",
+    "within_drug": "arithmetic mean over all substance/design rows of the group",
+    "loss": "L_g(lambda)=mean_d[1(margin_gd>lambda)*1(call_gd!=truth_gd)] in [0,1]",
+    "selection": "first increasing lambda with (sum_g L_g(lambda)+1)/(n_calibration_drugs+1)<=alpha; otherwise lambda=1 and all fall back",
+    "margin_grid": [
+      -1.0,
+      0.0,
+      0.01,
+      0.02,
+      0.03,
+      0.04,
+      0.05,
+      0.06,
+      0.07,
+      0.08,
+      0.09,
+      0.1,
+      0.11,
+      0.12,
+      0.13,
+      0.14,
+      0.15,
+      0.16,
+      0.17,
+      0.18,
+      0.19,
+      0.2,
+      0.21,
+      0.22,
+      0.23,
+      0.24,
+      0.25,
+      0.26,
+      0.27,
+      0.28,
+      0.29,
+      0.3,
+      0.31,
+      0.32,
+      0.33,
+      0.34,
+      0.35,
+      0.36,
+      0.37,
+      0.38,
+      0.39,
+      0.4,
+      0.41,
+      0.42,
+      0.43,
+      0.44,
+      0.45,
+      0.46,
+      0.47,
+      0.48,
+      0.49,
+      0.5,
+      0.51,
+      0.52,
+      0.53,
+      0.54,
+      0.55,
+      0.56,
+      0.57,
+      0.58,
+      0.59,
+      0.6,
+      0.61,
+      0.62,
+      0.63,
+      0.64,
+      0.65,
+      0.66,
+      0.67,
+      0.68,
+      0.69,
+      0.7,
+      0.71,
+      0.72,
+      0.73,
+      0.74,
+      0.75,
+      0.76,
+      0.77,
+      0.78,
+      0.79,
+      0.8,
+      0.81,
+      0.82,
+      0.83,
+      0.84,
+      0.85,
+      0.86,
+      0.87,
+      0.88,
+      0.89,
+      0.9,
+      0.91,
+      0.92,
+      0.93,
+      0.94,
+      0.95,
+      0.96,
+      0.97,
+      0.98,
+      0.99,
+      1.0
+    ],
+    "scope": "Expected marginal drug loss under independent training and exchangeable calibration/future drug loss functions; no conditional released-error or finite-batch guarantee. Shared batches and legacy stratified folds limit a literal exchangeability claim."
+  },
+  "intervals": "Per-output 90th percentile across training drugs of the maximum absolute inner-held-out level-mean residual over their designs/targets; fixed before calibration, descriptive bands with no interval coverage theorem claimed.",
+  "designs": "Five published SHA-seeded k=3 designs per substance; all C(L,3) training designs; k=3 controls excluded from exposed-well budget.",
+  "cost": "An accepted design costs its measured exposed wells; fallback costs all exposed wells, reusing the initial three levels. Report both full-series and calibrated measured-only fallback denominators, plus the observed-active fallback. This is counterfactual exposed-well replay, excluding controls, repeats, failed assays and overhead.",
+  "fit_reuse": "Only exact identical arm, training names, held-out inner names, stage type and frozen protocol reuse deterministic fitting outputs. Outer R1 folds2/3/4 and R2 folds2/3/4 have identical training cohorts. Inner folds remain as frozen.",
+  "planned_fits": {
+    "nominal_per_arm": 27,
+    "unique_per_arm": 23,
+    "total_A_B_unique": 46,
+    "R3": "optional; no R3 fits scheduled before completing both required arms"
+  },
+  "bootstrap": {
+    "replicates": 4000,
+    "seed": 0,
+    "unit": "identity group",
+    "interval": "paired percentile 95%, frozen fits; all labels/designs travel together",
+    "weight": "equal identities for rates and reconstruction; pooled well-count ratio for savings"
+  },
+  "reconstruction": "Absolute errors averaged over valid scalar targets within each design, then equal designs per identity and equal identities.",
+  "full_reporting_audit": "Wrong full-coverage calls for each learned/fixed rule; always-active errors=inactive count; always-inactive errors=active count.",
+  "execution_order": "A R1 then A R2; publish first A table immediately; B R1 then B R2; finite job ends after final summary.",
+  "expected_before_run": {
+    "A_reference_active_rate": [
+      0.6,
+      0.9
+    ],
+    "R1_AB_minus_interpolation_MAE": [
+      -0.16,
+      0
+    ],
+    "R2_AB_minus_interpolation_MAE": [
+      -0.1,
+      0.3
+    ],
+    "R2_report_rate_gain_pp": [
+      -5,
+      20
+    ],
+    "purpose": "Planning expectations only; all outcomes reported without selection."
+  },
+  "resources": {
+    "single_process_rss_limit_bytes": 4000000000,
+    "compute_stage_seconds": 295,
+    "local_sequential": true,
+    "probe": "8 compounds,12 iterations,no test metrics"
+  },
+  "limitations": [
+    "A uses held-out-board vehicle controls for shared c/SD; it is a common-reference diagnostic, not fully training-only deployment estimation.",
+    "B centers use deployable own-board vehicles, but its c/SD and assay references depend on training cohort.",
+    "Seven independent technical components; identity bootstrap does not represent component-level sampling uncertainty.",
+    "Fold0 composition and training size remain different. Exposure costs exclude control wells and other laboratory overhead."
+  ],
+  "prefit_amendment": {
+    "original_protocol_sha256": "0cc924a497fe511477461157caa45f8d0bd82e4987883bb5d29ea477fc8f9b88",
+    "reason": "Resource-probe task construction encountered all-NA own-board control centers before any model fit or test metric. Undefined normalized values propagate as missing.",
+    "raw_finite_exposed_values": 399717,
+    "values_without_finite_own_center": 628,
+    "fraction": 0.0015711115614297116,
+    "audit": "own_control_missingness_audit.json",
+    "fit_count_before_amendment": 0
+  }
+}

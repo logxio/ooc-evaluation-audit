@@ -1,0 +1,87 @@
+{
+  "schema": "sota_baselines.softimpute.v1",
+  "created_utc": "2026-10-05T19:40:00Z",
+  "trigger": "<redacted-local-metadata>",
+  "decision": "Does standard low-rank matrix completion, the first comparator a machine-learning reviewer asks for once the task is framed as matrix completion, match or beat AnchorBoost and interpolation? Whatever the answer, it is reported as measured.",
+  "method": {
+    "name": "SoftImpute (Mazumder, Hastie and Tibshirani, JMLR 11:2287-2322, 2010), Algorithm 1: Z <- S_lambda(P_Omega(X) + P_Omega_perp(Z)), S_lambda the singular-value soft-threshold, iterated to relative change ||Z_new - Z_old||_F^2 / ||Z_old||_F^2 < 1e-5 or 500 iterations; warm starts along a decreasing lambda path.",
+    "implementation": "numpy only (numpy.linalg.svd, full_matrices=False), softimpute/softimpute_run.py; no third-party completion library.",
+    "matrix": "Rows are chemicals; columns are the 35 package concentrations x 68 outputs flattened (2,380 columns, kit/data/matrix.npz). Observed cells: every measured cell of the fold's training chemicals, plus the revealed cells of the one test design being completed.",
+    "per_task": "Each (test chemical, design) is completed in its own fit: training rows plus that single test row, warm-started from the training-only solution at the same lambda. No other test chemical and no other design of the same chemical enters the fit, so no target cell is ever observed.",
+    "centering": "Column means of the training rows (columns without training data get mean 0) are subtracted before completion and added back; this is the candidate choice C below.",
+    "lambda": "lambda = ratio x the largest singular value of the centered, zero-filled training matrix of the fold."
+  },
+  "task": "The kit (kit/protocol.json): same folds, designs, query cells, curve MAE, cohorts and scorer.",
+  "development": {
+    "test_fold": 0,
+    "training_chemicals": "folds 1-4 (194 labels)",
+    "k": 3,
+    "candidates": [
+      {
+        "id": "S1",
+        "ratio": 0.5,
+        "centering": "column"
+      },
+      {
+        "id": "S2",
+        "ratio": 0.3,
+        "centering": "column"
+      },
+      {
+        "id": "S3",
+        "ratio": 0.2,
+        "centering": "column"
+      },
+      {
+        "id": "S4",
+        "ratio": 0.1,
+        "centering": "column"
+      },
+      {
+        "id": "S5",
+        "ratio": 0.05,
+        "centering": "column"
+      },
+      {
+        "id": "S6",
+        "ratio": 0.025,
+        "centering": "column"
+      },
+      {
+        "id": "S7",
+        "ratio": 0.01,
+        "centering": "column"
+      },
+      {
+        "id": "S8",
+        "ratio": 0.005,
+        "centering": "column"
+      },
+      {
+        "id": "S9",
+        "description": "the best ratio of S1-S8 without centering"
+      }
+    ],
+    "budget": "9 candidates, within the 11 allowed to every comparator family.",
+    "selection": "Lowest fold-0 k = 3 MAE; within 0.002 of the lowest, the larger lambda (lower rank).",
+    "no_test_use": "Fold 1-4 rows enter development only as training rows. No fold 1-4 completion is scored before the freeze is filled in."
+  },
+  "frozen": {
+    "at_utc": "2026-10-05T20:05:00Z",
+    "selected": "S4",
+    "ratio": 0.1,
+    "centering": "column",
+    "fold0_k3_mae": 1.3792829030802654,
+    "selection_sha256": "7a4687a4245a6bd66dd89ef1c2ed2522bde081a748f606cd0fba13a47183fe42",
+    "note": "Selected by the frozen rule before any fold 1-4 completion was made."
+  },
+  "readouts": {
+    "k3": "Folds 1-4: MAE on primary_194 and common_193; paired differences against anchorboost, loglinear_interp, cnp, hill_eb, gp and anchorboost_acquisition with identity-group and chemical intervals (kit score.py).",
+    "k1_k2_k4": "Same frozen settings; against anchorboost (published per-chemical), loglinear_interp and published_neural_process.",
+    "pmf": "Probabilistic matrix factorization only if time remains after SoftImpute and TabPFN; its own protocol entry would be added before it runs."
+  },
+  "expected_before_run": {
+    "controller": "MAE 1.30-1.40 at k = 3, between interpolation (1.345) and the kNN example (1.407); recorded as written by the controller (inference).",
+    "writer": "MAE 1.35-1.50 at k = 3: columns are absolute concentrations, so the method sees no dose-response smoothness and a test chemical tested off the common grid has query columns few training chemicals share. Probability below AnchorBoost (1.161) under 0.02; below interpolation about 0.3."
+  }
+}

@@ -1,0 +1,90 @@
+{
+  "schema": "paper.scale_A.amendment.v1",
+  "amendment": "001",
+  "created_utc": "2026-10-05T23:17:42.251038+00:00",
+  "protocol_sha256": "f3733c15afe272d076da20b4b712a71fe5a14124bafabd4bfd375f27d28da42a",
+  "requested_by": "Host reply \"redacted\" in the submission-package session (10/6 04:4x JST), relayed by redacted S1 in group messages 20261005T194026Z-14a6 and 20261005T195605Z-52ef and by a direct cross-session message to this session; asks every three-point rule and both closed-loop stages to release designs whose measured points already reach the activity line (>= 3) as active, everything else unchanged.",
+  "read_at_that_time": "All original scale_A readouts (results.md of 2026-10-06 04:48 JST); risk_upgrade amendment 004 crc_obs readouts on common_B_R1 and common_A_R1 (B: AnchorBoost 914/84/12,031, measured-only 818/75/13,503, saving 10.90% [7.67, 14.23]; A: 925/83/11,851 and 822/78/13,443); the CNP line reproduction of 914/84/12,031 (group 20261005T214846Z-7ec8). No lane readout of the closed loop, of interpolation, of the frontier or of the matched comparisons had been computed.",
+  "premise": "The complete-series reference is the maximum over all concentrations of the same masked DIV-mean effect, so a design whose measured three points (or measured four points after the added dose) already give effect >= 3 is reference-active (equality active). Releasing it as active cannot be wrong. Gate: every calibration and test design with measured_only >= 3 and every branch with measured4 >= 3 has truth active (0); otherwise the run stops.",
+  "definitions": {
+    "three_point_rules": "anchorboost, measured_only, loglinear: crc_obs of risk_upgrade amendment 004. A design with measured_only >= 3 is released with call active; any other design is released iff its exact margin > lambda; lambda is the first grid value with (sum_g L_g + 1)/(n_cal + 1) <= 1/10 for L_g(lambda) = (1/D_g) * sum over the group designs with measured_only < 3 of 1(margin > lambda) 1(call != truth); exact rational arithmetic.",
+    "observed_active": "unchanged; it equals the lane-only policy.",
+    "joint": "Stage 1: measured_only >= 3 -> report active; else report the three-point call iff exact m3 > lambda. Otherwise the policy fourth dose (choices already committed, unchanged). Stage 2: measured4 >= 3 -> report active; else report the four-point call iff exact m4 > lambda; else complete. Envelope U_d(lambda) = 0 if measured_only >= 3, else max{e3*1(m3 > lambda), max_c e4c*1(m4c > lambda)*1(measured4c < 3)}, a pointwise upper bound of every policy wrong report under the lane; lambda reselected per arm and fold by the same exact CRC rule. Wells: stage-1 lane charges the three measured concentrations, stage-2 lane adds the fourth-dose wells.",
+    "classical_rules": "same saved fourth-dose choices and the same lane joint margin.",
+    "frontier": "For each three-point rule the family is lane plus {exact margin > t}: lane designs are reported at every threshold. Scans over every unique non-lane exact margin (common margin, with grid and endpoints) and every unique adjusted margin (calibrated offset around the lane lambda). Operating points are the crc_obs lambdas. Matched comparisons, caps, budgets, tie rules and seed-0 bootstrap unchanged; the loop is the lane joint loop.",
+    "figure_data": "Same file formats, from the lane outputs; the original no-lane outputs stay in place as the old comparator for the supplement."
+  },
+  "outputs": "headline/lane/, joint/{B,A}/lane/, frontier/{B,A}/lane/, figure_data/lane/; original files unchanged.",
+  "prediction_before_computation": {
+    "B": {
+      "three_point_reproduction": "AnchorBoost 914/84/12,031 and measured-only 818/75/13,503 with fold lambdas equal to the no-lane lambdas, saving 10.90% [7.67, 14.23] equal to risk_upgrade to 1e-12",
+      "joint_lambda": "lane joint lambda <= no-lane joint lambda in every fold (0.08, 0.07, 0.09, 0.04)",
+      "loop": {
+        "reports": [
+          895,
+          935
+        ],
+        "wrong_reports": [
+          60,
+          80
+        ],
+        "wells": [
+          11900,
+          12600
+        ]
+      },
+      "loop_vs_measured_only": {
+        "reports_difference": [
+          75,
+          125
+        ],
+        "well_saving_fraction": [
+          0.05,
+          0.13
+        ]
+      },
+      "loop_vs_three_point_anchorboost": {
+        "wrong_reports_difference": [
+          -20,
+          -3
+        ],
+        "wells_difference": [
+          -200,
+          600
+        ]
+      },
+      "frontier": {
+        "anchor_budget_measured_only_wrong_reports": [
+          85,
+          115
+        ],
+        "loss_cap_8pct_saving_fraction": [
+          0.02,
+          0.15
+        ]
+      }
+    },
+    "A": {
+      "three_point_reproduction": "AnchorBoost 925/83/11,851 and measured-only 822/78/13,443, saving 11.84% [8.40, 15.36]",
+      "loop": {
+        "reports": [
+          895,
+          935
+        ],
+        "wrong_reports": [
+          60,
+          80
+        ],
+        "wells": [
+          11800,
+          12600
+        ]
+      }
+    },
+    "interpretation": "Planning ranges recorded before the lane readouts; not acceptance criteria."
+  },
+  "input_sha256": {
+    "<local-input>/7b054f249db5/protocol_amendment_004.json": "b69e02537dbd0928deeca504492b50502b881b71faea3d3eec91b8d6f18abcd2",
+    "<local-input>/0823ac5e46bf/summary.json": "a78d57299574a95b2f6d886f0d6f0c621c63a4070ac0b664732c105f83365d9e"
+  }
+}

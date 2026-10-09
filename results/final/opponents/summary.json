@@ -1,0 +1,528 @@
+{
+  "schema": "final.opponents.summary.v1",
+  "k": 3,
+  "baseline_mae": 1.1606120564138427,
+  "baseline_n_compounds": 194,
+  "configuration_counts": {
+    "win": 23,
+    "tie": 4,
+    "loss": 0
+  },
+  "family_counts": {
+    "win": 18,
+    "tie": 4,
+    "loss": 0
+  },
+  "family_outcomes": {
+    "ARCANet": "win",
+    "CNP": "tie",
+    "CP tensor": "win",
+    "Empirical GP": "win",
+    "FlowNP": "win",
+    "Gaussian process": "win",
+    "GenRA": "win",
+    "Hill empirical Bayes": "win",
+    "KANO": "win",
+    "LPM": "tie",
+    "LimiX-2": "tie",
+    "Log-linear interpolation": "win",
+    "MotiL": "win",
+    "N2": "win",
+    "SNN": "win",
+    "SoftImpute": "win",
+    "TE-TNP": "win",
+    "TNP": "win",
+    "TabICLv2": "win",
+    "TabImpute": "win",
+    "TabPFN": "tie",
+    "Training-compound nearest neighbor": "win"
+  },
+  "comparisons": [
+    {
+      "key": "tabpfn2",
+      "label": "TabPFN-2",
+      "family": "TabPFN",
+      "cohort": "primary_194",
+      "n_compounds": 194,
+      "n_identity_groups": 189,
+      "anchorboost_mae": 1.1606120564138425,
+      "opponent_mae": 1.1825445417447458,
+      "paired_difference": -0.021932485330903483,
+      "ci95": [
+        -0.032990119099916074,
+        -0.010957090568507806
+      ],
+      "relative_difference_pct": -1.8546857692602372,
+      "compounds_anchorboost_better": 136,
+      "outcome": "win"
+    },
+    {
+      "key": "tabpfn35",
+      "label": "TabPFN-3.5",
+      "family": "TabPFN",
+      "cohort": "primary_194",
+      "n_compounds": 194,
+      "n_identity_groups": 189,
+      "anchorboost_mae": 1.1606120564138425,
+      "opponent_mae": 1.1824245180246953,
+      "paired_difference": -0.02181246161085285,
+      "ci95": [
+        -0.03926943066387863,
+        -0.005195055452191841
+      ],
+      "relative_difference_pct": -1.8447233864273853,
+      "compounds_anchorboost_better": 119,
+      "outcome": "win"
+    },
+    {
+      "key": "tabicl2",
+      "label": "TabICLv2",
+      "family": "TabICLv2",
+      "cohort": "primary_194",
+      "n_compounds": 194,
+      "n_identity_groups": 189,
+      "anchorboost_mae": 1.1606120564138425,
+      "opponent_mae": 1.189316326324448,
+      "paired_difference": -0.028704269910605436,
+      "ci95": [
+        -0.04354839067067854,
+        -0.013825873262024417
+      ],
+      "relative_difference_pct": -2.4135101213413304,
+      "compounds_anchorboost_better": 130,
+      "outcome": "win"
+    },
+    {
+      "key": "softimpute",
+      "label": "SoftImpute",
+      "family": "SoftImpute",
+      "cohort": "primary_194",
+      "n_compounds": 194,
+      "n_identity_groups": 189,
+      "anchorboost_mae": 1.1606120564138425,
+      "opponent_mae": 1.4619768137329572,
+      "paired_difference": -0.3013647573191147,
+      "ci95": [
+        -0.3584773985424598,
+        -0.25320194942009566
+      ],
+      "relative_difference_pct": -20.613511410596256,
+      "compounds_anchorboost_better": 176,
+      "outcome": "win"
+    },
+    {
+      "key": "cp_tensor",
+      "label": "CP tensor",
+      "family": "CP tensor",
+      "cohort": "primary_194",
+      "n_compounds": 194,
+      "n_identity_groups": 189,
+      "anchorboost_mae": 1.1606120564138425,
+      "opponent_mae": 1.5462680095659826,
+      "paired_difference": -0.3856559531521402,
+      "ci95": [
+        -0.43407169553356983,
+        -0.3409989513714929
+      ],
+      "relative_difference_pct": -24.941080767776395,
+      "compounds_anchorboost_better": 183,
+      "outcome": "win"
+    },
+    {
+      "key": "tnp",
+      "label": "TNP",
+      "family": "TNP",
+      "cohort": "primary_194",
+      "n_compounds": 194,
+      "n_identity_groups": 189,
+      "anchorboost_mae": 1.1606120564138425,
+      "opponent_mae": 1.201284820545915,
+      "paired_difference": -0.040672764132072436,
+      "ci95": [
+        -0.0715985080994277,
+        -0.01427215940453715
+      ],
+      "relative_difference_pct": -3.3857719199006446,
+      "compounds_anchorboost_better": 120,
+      "outcome": "win"
+    },
+    {
+      "key": "tetnp",
+      "label": "TE-TNP",
+      "family": "TE-TNP",
+      "cohort": "primary_194",
+      "n_compounds": 194,
+      "n_identity_groups": 189,
+      "anchorboost_mae": 1.1606120564138425,
+      "opponent_mae": 1.2624210559068272,
+      "paired_difference": -0.10180899949298468,
+      "ci95": [
+        -0.12582439197558806,
+        -0.07811310137437995
+      ],
+      "relative_difference_pct": -8.064583445960732,
+      "compounds_anchorboost_better": 160,
+      "outcome": "win"
+    },
+    {
+      "key": "arcanet_structure",
+      "label": "ARCANet structure-only",
+      "family": "ARCANet",
+      "cohort": "primary_194",
+      "n_compounds": 194,
+      "n_identity_groups": 189,
+      "anchorboost_mae": 1.1606120564138425,
+      "opponent_mae": 1.6285653649184524,
+      "paired_difference": -0.46795330850460987,
+      "ci95": [
+        -0.5546160445036695,
+        -0.3875766876410948
+      ],
+      "relative_difference_pct": -28.734082069100236,
+      "compounds_anchorboost_better": 171,
+      "outcome": "win"
+    },
+    {
+      "key": "genra_structure",
+      "label": "GenRA structure-only",
+      "family": "GenRA",
+      "cohort": "primary_194",
+      "n_compounds": 194,
+      "n_identity_groups": 189,
+      "anchorboost_mae": 1.1606120564138425,
+      "opponent_mae": 1.6484193325755327,
+      "paired_difference": -0.48780727616169006,
+      "ci95": [
+        -0.5821478734942195,
+        -0.4078285814009274
+      ],
+      "relative_difference_pct": -29.592426303295497,
+      "compounds_anchorboost_better": 183,
+      "outcome": "win"
+    },
+    {
+      "key": "tabpfn35_chemeleon",
+      "label": "TabPFN-3.5 CheMeleon median",
+      "family": "TabPFN",
+      "cohort": "primary_194",
+      "n_compounds": 194,
+      "n_identity_groups": 189,
+      "anchorboost_mae": 1.1606120564138425,
+      "opponent_mae": 1.1568898022526228,
+      "paired_difference": 0.0037222541612193707,
+      "ci95": [
+        -0.01623155186799151,
+        0.02467209172947739
+      ],
+      "relative_difference_pct": 0.3217466481225465,
+      "compounds_anchorboost_better": 90,
+      "outcome": "tie"
+    },
+    {
+      "key": "limix2_chemeleon",
+      "label": "LimiX-2 CheMeleon median",
+      "family": "LimiX-2",
+      "cohort": "primary_194",
+      "n_compounds": 194,
+      "n_identity_groups": 189,
+      "anchorboost_mae": 1.1606120564138425,
+      "opponent_mae": 1.1424461113728417,
+      "paired_difference": 0.018165945041000713,
+      "ci95": [
+        -0.0044918403967876075,
+        0.04037550583174928
+      ],
+      "relative_difference_pct": 1.5900920717539373,
+      "compounds_anchorboost_better": 82,
+      "outcome": "tie"
+    },
+    {
+      "key": "tabimpute",
+      "label": "TabImpute",
+      "family": "TabImpute",
+      "cohort": "primary_194",
+      "n_compounds": 194,
+      "n_identity_groups": 189,
+      "anchorboost_mae": 1.1606120564138425,
+      "opponent_mae": 1.3453607071743319,
+      "paired_difference": -0.18474865076048955,
+      "ci95": [
+        -0.2421935081386259,
+        -0.13489328502845185
+      ],
+      "relative_difference_pct": -13.732276390657944,
+      "compounds_anchorboost_better": 161,
+      "outcome": "win"
+    },
+    {
+      "key": "empirical_gp",
+      "label": "Empirical GP",
+      "family": "Empirical GP",
+      "cohort": "primary_194",
+      "n_compounds": 194,
+      "n_identity_groups": 189,
+      "anchorboost_mae": 1.1606120564138425,
+      "opponent_mae": 1.281440043761287,
+      "paired_difference": -0.12082798734744443,
+      "ci95": [
+        -0.15096791283508834,
+        -0.09575848581881254
+      ],
+      "relative_difference_pct": -9.429078475867644,
+      "compounds_anchorboost_better": 165,
+      "outcome": "win"
+    },
+    {
+      "key": "flownp",
+      "label": "FlowNP three-seed ensemble",
+      "family": "FlowNP",
+      "cohort": "primary_194",
+      "n_compounds": 194,
+      "n_identity_groups": 189,
+      "anchorboost_mae": 1.1606120564138425,
+      "opponent_mae": 1.2098123540059202,
+      "paired_difference": -0.04920029759207798,
+      "ci95": [
+        -0.08227925707289815,
+        -0.021189428073729564
+      ],
+      "relative_difference_pct": -4.066770968999149,
+      "compounds_anchorboost_better": 122,
+      "outcome": "win"
+    },
+    {
+      "key": "lpm3",
+      "label": "LPM three-seed ensemble",
+      "family": "LPM",
+      "cohort": "primary_194",
+      "n_compounds": 194,
+      "n_identity_groups": 189,
+      "anchorboost_mae": 1.1606120564138425,
+      "opponent_mae": 1.2083152962152015,
+      "paired_difference": -0.04770323980135914,
+      "ci95": [
+        -0.08142127553622436,
+        -0.016454601898088783
+      ],
+      "relative_difference_pct": -3.9479132599562137,
+      "compounds_anchorboost_better": 118,
+      "outcome": "win"
+    },
+    {
+      "key": "lpm20",
+      "label": "LPM twenty-seed ensemble",
+      "family": "LPM",
+      "cohort": "primary_194",
+      "n_compounds": 194,
+      "n_identity_groups": 189,
+      "anchorboost_mae": 1.1606120564138425,
+      "opponent_mae": 1.1758593804290716,
+      "paired_difference": -0.015247324015229045,
+      "ci95": [
+        -0.04686019095971038,
+        0.015429416153455852
+      ],
+      "relative_difference_pct": -1.2966962095131893,
+      "compounds_anchorboost_better": 104,
+      "outcome": "tie"
+    },
+    {
+      "key": "n2_drnn",
+      "label": "N2 DRNN",
+      "family": "N2",
+      "cohort": "primary_194",
+      "n_compounds": 194,
+      "n_identity_groups": 189,
+      "anchorboost_mae": 1.1606120564138425,
+      "opponent_mae": 1.386738319742471,
+      "paired_difference": -0.2261262633286288,
+      "ci95": [
+        -0.2567362176054118,
+        -0.19651252225234722
+      ],
+      "relative_difference_pct": -16.306339855858486,
+      "compounds_anchorboost_better": 185,
+      "outcome": "win"
+    },
+    {
+      "key": "snn",
+      "label": "SNN",
+      "family": "SNN",
+      "cohort": "primary_194",
+      "n_compounds": 194,
+      "n_identity_groups": 189,
+      "anchorboost_mae": 1.1606120564138425,
+      "opponent_mae": 1.362494705097706,
+      "paired_difference": -0.2018826486838637,
+      "ci95": [
+        -0.23696858497784642,
+        -0.16900017818628446
+      ],
+      "relative_difference_pct": -14.817132714610182,
+      "compounds_anchorboost_better": 173,
+      "outcome": "win"
+    },
+    {
+      "key": "kano_structure",
+      "label": "KANO structure-only official implementation",
+      "family": "KANO",
+      "cohort": "primary_194",
+      "n_compounds": 194,
+      "n_identity_groups": 189,
+      "anchorboost_mae": 1.1606120564138425,
+      "opponent_mae": 1.704607945934608,
+      "paired_difference": -0.5439958895207656,
+      "ci95": [
+        -0.6351847875633292,
+        -0.4613946599023353
+      ],
+      "relative_difference_pct": -31.91325552706501,
+      "compounds_anchorboost_better": 180,
+      "outcome": "win"
+    },
+    {
+      "key": "kano_three_points",
+      "label": "KANO structure plus three points official implementation",
+      "family": "KANO",
+      "cohort": "primary_194",
+      "n_compounds": 194,
+      "n_identity_groups": 189,
+      "anchorboost_mae": 1.1606120564138425,
+      "opponent_mae": 1.3208150478807852,
+      "paired_difference": -0.16020299146694264,
+      "ci95": [
+        -0.19027201797514087,
+        -0.1304592059773653
+      ],
+      "relative_difference_pct": -12.129101021674787,
+      "compounds_anchorboost_better": 164,
+      "outcome": "win"
+    },
+    {
+      "key": "motil_structure",
+      "label": "MotiL structure-only official implementation",
+      "family": "MotiL",
+      "cohort": "primary_194",
+      "n_compounds": 194,
+      "n_identity_groups": 189,
+      "anchorboost_mae": 1.1606120564138425,
+      "opponent_mae": 1.8200988163887784,
+      "paired_difference": -0.6594867599749359,
+      "ci95": [
+        -0.7360472258844227,
+        -0.5844212757839692
+      ],
+      "relative_difference_pct": -36.23356897090952,
+      "compounds_anchorboost_better": 191,
+      "outcome": "win"
+    },
+    {
+      "key": "motil_three_points",
+      "label": "MotiL structure plus three points official implementation",
+      "family": "MotiL",
+      "cohort": "primary_194",
+      "n_compounds": 194,
+      "n_identity_groups": 189,
+      "anchorboost_mae": 1.1606120564138425,
+      "opponent_mae": 1.3465057386359767,
+      "paired_difference": -0.18589368222213437,
+      "ci95": [
+        -0.21858872263636253,
+        -0.15380678129755218
+      ],
+      "relative_difference_pct": -13.8056360911203,
+      "compounds_anchorboost_better": 169,
+      "outcome": "win"
+    },
+    {
+      "key": "cnp",
+      "label": "CNP",
+      "family": "CNP",
+      "cohort": "common_193",
+      "n_compounds": 193,
+      "n_identity_groups": 188,
+      "anchorboost_mae": 1.1620874435488835,
+      "opponent_mae": 1.1919588191232813,
+      "paired_difference": -0.029871375574397823,
+      "ci95": [
+        -0.06526561415735824,
+        0.0028451740567236082
+      ],
+      "relative_difference_pct": -2.5060744629054423,
+      "compounds_anchorboost_better": 104,
+      "outcome": "tie"
+    },
+    {
+      "key": "gp",
+      "label": "Gaussian process",
+      "family": "Gaussian process",
+      "cohort": "common_193",
+      "n_compounds": 193,
+      "n_identity_groups": 188,
+      "anchorboost_mae": 1.1620874435488835,
+      "opponent_mae": 1.322384100473099,
+      "paired_difference": -0.1602966569242153,
+      "ci95": [
+        -0.19524761617785538,
+        -0.12641146168486914
+      ],
+      "relative_difference_pct": -12.121792516022179,
+      "compounds_anchorboost_better": 159,
+      "outcome": "win"
+    },
+    {
+      "key": "hill_eb",
+      "label": "Hill empirical Bayes",
+      "family": "Hill empirical Bayes",
+      "cohort": "common_193",
+      "n_compounds": 193,
+      "n_identity_groups": 188,
+      "anchorboost_mae": 1.1620874435488835,
+      "opponent_mae": 1.3603217115257804,
+      "paired_difference": -0.19823426797689678,
+      "ci95": [
+        -0.23292971397521584,
+        -0.16657134912359248
+      ],
+      "relative_difference_pct": -14.572601929182683,
+      "compounds_anchorboost_better": 169,
+      "outcome": "win"
+    },
+    {
+      "key": "loglinear_interp",
+      "label": "Log-linear interpolation",
+      "family": "Log-linear interpolation",
+      "cohort": "primary_194",
+      "n_compounds": 194,
+      "n_identity_groups": 189,
+      "anchorboost_mae": 1.1606120564138425,
+      "opponent_mae": 1.3452855818239133,
+      "paired_difference": -0.18467352541007107,
+      "ci95": [
+        -0.215258606781358,
+        -0.1545391384893973
+      ],
+      "relative_difference_pct": -13.727458905765875,
+      "compounds_anchorboost_better": 172,
+      "outcome": "win"
+    },
+    {
+      "key": "training_knn",
+      "label": "Training-compound nearest neighbor",
+      "family": "Training-compound nearest neighbor",
+      "cohort": "primary_194",
+      "n_compounds": 194,
+      "n_identity_groups": 189,
+      "anchorboost_mae": 1.1606120564138425,
+      "opponent_mae": 1.4073348425784655,
+      "paired_difference": -0.2467227861646228,
+      "ci95": [
+        -0.2862353860861194,
+        -0.2118578103818234
+      ],
+      "relative_difference_pct": -17.531207122861158,
+      "compounds_anchorboost_better": 184,
+      "outcome": "win"
+    }
+  ]
+}

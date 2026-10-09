@@ -1,0 +1,104 @@
+{
+  "schema": "paper.external_labels.v1",
+  "frozen_utc": "2026-10-05T16:55:00Z",
+  "owner": "external label analysis",
+  "question": "How often do the nested study's activity calls (full-series reference, three-point forecasts, and the calibrated release chain) agree with expert DNT reference labels that EPA ships with the same public NFA package?",
+  "decision": "Whether the manuscript's limitation sentence 'the screening reference is an assay-derived activity label' (manuscript.md line 147) becomes a quantified result, and whether three-point reporting loses agreement with expert labels relative to the full series.",
+  "prior_exposure": "Before this protocol, the panorama note (<local-input>/16ab6f73c309/prior_exploration.md section 3.8) recorded an unsaved exploratory look on all 96 labeled substances: full-series agreement 0.708, kappa 0.243; three-point baseline agreement 0.75; with the call encoding inverted, anchorboost 0.745, loglinear and measured_only 0.687. Those numbers were not saved and are not reused; this protocol fixes the rules before any saved computation.",
+  "upstream_verification": {
+    "repository": "https://github.com/USEPA/CompTox-DNT-NFA-Refinement",
+    "commit": "01adf3e1a0068c87fe221d60df36b9f96c4b4b1d",
+    "label_file": "output/annotate_dnt_ref_chems.csv, sha256 664de5d0c26671f1f45bd8bfe3e1ae44c100c5249f6b2dc1aa1a288d7a045875, byte-identical to the local copy in <local-input>/7390f344535d/",
+    "derivation": [
+      "Manuscript_April2026.Rmd line 1946 reads source_files/dnt_ref_oecd_culbreth_curate.xlsx (274 rows: Chemical, DTXSID, Class, 'Appendix A', 'Martin et al 2022'; Appendix A = positive 126, Negative 49, blank 99).",
+      "Line 1948 left-joins it to the assay chemicals by DTXSID; Class, Appendix.A and Martin.et.al.2022 columns of the CSV come from this sheet.",
+      "Line 1949 overrides one label: DTXSID00880006 (loperamide hydrochloride) set to Positive, author comment 'martin paper classified as negative but no BBB present in NAMs and is used as an assay positive control'.",
+      "Line 1955 normalizes case: 'positive' -> 'Positive'.",
+      "Checked here: all 460 CSV rows equal the xlsx 'Appendix A' column after case normalization except exactly that loperamide row (xlsx Negative, CSV Positive); Class equals the xlsx Class for all 218 matched rows.",
+      "The xlsx file name names OECD and a curator (Culbreth); the column header 'Appendix A' is read here as the reference-chemical appendix of OECD (2023) Series on Testing and Assessment No. 377 (inference: the OECD page returned HTTP 403, the appendix itself was not read).",
+      "Upstream uses Appendix.A for heatmap and UMAP annotation (lines 1963, 2096). Its own sensitivity/specificity tables use two other lists: source_files/dnt_ref_tbl2.xlsx (column ref; identical label set to the public nfa_tasks.npz label, 79/19 on our 243) and source_files/Compare_ref_chems_23mar26_edit.xlsx (column ref, 'revised list based off mundy 2024', line 3008-3009; 100/18 on our 243), written to output/Results_sens_spec_BA_refine.csv and output/Results_sens_spec_BA_refine_ref2.csv (line 3484-3485)."
+    ],
+    "consequence": "Appendix.A is a literature/regulatory curation with one assay-informed override (loperamide, a fold-1 primary substance). It is an external label, not a biological ground truth either; the three lists disagree among themselves."
+  },
+  "inputs": {
+    "design_decisions": {
+      "path": "<local-input>/506f9c18ee5b/design_decisions.csv",
+      "sha256": "cfec1e65d3e8a608c94f81fd3b1dd6911185f8428a34e5ba8ea2ca3a101e6d5d",
+      "note": "byte-identical to release/results/nested/design_decisions.csv"
+    },
+    "identities": {
+      "path": "<local-input>/07a579f1e831/identities.json",
+      "sha256": "ef322cee97084b3b4e01b4d8a164ecb63562ae9981e226cdc4809f0c72acf3b5"
+    },
+    "label_appendix_a": {
+      "path": "inputs/upstream/annotate_dnt_ref_chems.csv",
+      "sha256": "664de5d0c26671f1f45bd8bfe3e1ae44c100c5249f6b2dc1aa1a288d7a045875",
+      "column": "Appendix.A"
+    },
+    "label_appendix_a_original": {
+      "path": "inputs/upstream/dnt_ref_oecd_culbreth_curate.xlsx",
+      "sha256": "244c019745477bbb7b0fe1557bae171c413cb9aac8d96c551fbd76d54f43e751",
+      "column": "Appendix A"
+    },
+    "label_oecd_tbl2": {
+      "path": "inputs/upstream/dnt_ref_tbl2.xlsx",
+      "sha256": "0ef673dd117f77a15915c914245244b93556121e69ef09fdec9216170487652e",
+      "column": "ref"
+    },
+    "label_mundy_revised": {
+      "path": "inputs/upstream/Compare_ref_chems_23mar26_edit.xlsx",
+      "sha256": "7aa976761e7cda2bbf5363941caf0971ab475a96c1608e004dced4586861cf1a",
+      "column": "ref"
+    },
+    "upstream_context": {
+      "path": "inputs/upstream/Results_sens_spec_BA_refine_ref2.csv",
+      "sha256": "4209b59473b2d4b438335f9e528c3fdcad86fe6b9c85c18a8d267958749c93e6",
+      "use": "copied as published context, not recomputed; unit is EPA sample id over their own chemical set"
+    }
+  },
+  "frozen_rules": {
+    "join": "Substance = key of identities.json (243). Label = row of the label file whose DTXSID equals identities[substance].dtxsid by exact string match. No salt/parent propagation: each substance keeps its own label or none. A DTXSID with two different labels in one file aborts the run.",
+    "label_values": "Case-folded first letter capitalized: Positive or Negative; anything else (blank, NA, 'na') = unlabeled and excluded from that label set.",
+    "call_encoding": "In design_decisions.csv every *_call and truth is 1 = inactive (endpoint below the training cutoff), 0 = active (paper_nested_decision.py protocol endpoint text and apply_rule: int(x <= cutoff)). Expert Positive is matched by active (0), Negative by inactive (1).",
+    "readouts": {
+      "full_series": "truth (full-series reference call; constant within substance)",
+      "forecast_<m>": "<m>_call on every design, m in anchorboost, loglinear, measured_only (three-point call before any release decision)",
+      "chain_<m>": "reported call of the deployed chain: <m>_call where <m>_release is True, else truth (the design falls back to the full series)",
+      "chain_observed_active_fallback": "observed_active_fallback_call where observed_active_fallback_release, else truth"
+    },
+    "folding": "Primary: design-level scoring; every substance has exactly 5 designs, so each substance carries weight 1 and the 2x2 table counts designs/5 per substance. Secondary: per-substance majority over its 5 designs (>=3 inactive -> inactive). full_series is the same under both.",
+    "metrics": "sensitivity = share of Positive-substance designs called active; specificity = share of Negative-substance designs called inactive; balanced accuracy = mean of the two; agreement = share of all labeled designs matching; Cohen's kappa on the design-count 2x2 table.",
+    "sets": {
+      "primary": "outer folds 1-4, Appendix.A labeled substances (expected 55 Positive / 19 Negative = 74)",
+      "sensitivity_all_folds": "all five outer folds incl. development fold 0 (expected 72/24 = 96)",
+      "sensitivity_no_override": "primary set with loperamide set back to the original xlsx Negative",
+      "sensitivity_oecd_tbl2": "folds 1-4 labeled by dnt_ref_tbl2.xlsx ref",
+      "sensitivity_mundy_revised": "folds 1-4 labeled by Compare_ref_chems_23mar26_edit.xlsx ref"
+    },
+    "intervals": "Stratified drug-group bootstrap, 4000 replicates, numpy default_rng(20261006). Unit = drug_group from identities.json restricted to labeled substances. Strata in order Positive, Negative, mixed (a group whose labeled substances carry both labels); groups sorted by drug_group string within stratum; each replicate draws rng.integers(0, n_s, n_s) per stratum in that order and pools the selected groups' substances with multiplicity. 95% percentile interval via numpy.quantile default. Paired differences (readout minus full_series) use the same replicate draws. Negatives number 14-24 in every set: results quote intervals, never a lone point value, for specificity, balanced accuracy and kappa.",
+    "table2_release": "Released designs only (chain readouts): count released, count whose released call disagrees with the expert label, and the full-series disagreement on the same released designs; paired difference with the same bootstrap.",
+    "table3_class": "Class = 'Class' column of annotate_dnt_ref_chems.csv joined by DTXSID; 'Food Additive' and 'Food additive' merged by case-folding to 'Food additive'; missing -> 'Not annotated'; no other merging. Per class over folds 1-4 substances: substances, designs, Appendix.A Positive/Negative counts, anchorboost released wrong reports versus the full series (the paper's error definition), disagreements with Appendix.A for full_series and chain_anchorboost. Descriptive counts only, no intervals.",
+    "context_row": "Upstream's own NFA readouts versus the revised Mundy list (Results_sens_spec_BA_refine_ref2.csv): balanced accuracy range across their 12 readouts, quoted as published; different unit (sample id) and chemical set, so no paired comparison."
+  },
+  "outputs": [
+    "analyze.py",
+    "results.json",
+    "results.md",
+    "table1_agreement.csv",
+    "table2_release.csv",
+    "table3_class.csv",
+    "supplementary_table_external_labels.csv",
+    "verify.py",
+    "verification.json"
+  ],
+  "resource_limit": "single process < 4 GB, seconds of CPU",
+  "amendments": [
+    {
+      "amendment": 1,
+      "utc": "2026-10-06T00:30:00Z",
+      "requested_by": "analysis coordinator cross-session message relaying the host decision measured-activity amendment (10/6 04:4x JST) and scale_A/protocol_amendment_001.json: every three-point rule releases designs with measured_only >= 3 as active.",
+      "change": "Score the lane decisions of common_scale arms B (headline) and A (side by side), regime R1. lane/make_lane_decisions.py derives them without refits: measured_only >= 3 -> released, call active; other designs keep the saved release because the lane lambdas equal the saved calibration margins for every arm, fold and rule. Reports, wrong reports and wells match scale_A/headline/lane/headline_table.csv for all three rules in both arms.",
+      "unchanged": "Every frozen rule of this protocol (join, encoding, readouts, folding, sets, bootstrap, tables). Earlier outputs stay as the no-lane supplement."
+    }
+  ]
+}

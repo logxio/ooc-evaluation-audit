@@ -1,0 +1,27 @@
+{
+  "schema": "sota_baselines_2.arcanet.protocol.v1",
+  "item": "4. ARCANet as a zero-measurement deep comparator",
+  "frozen_utc": "2026-10-06T04:11:06+09:00",
+  "decision": "Whether a deep dose-response model that reads only the drug reaches useful accuracy on this screen, and where it stands against structural read-across and against three measured concentrations.",
+  "comparator": "ARCANet, Alonso Campana, Prasse & Scheffer, ICML 2024, 'Predicting Dose-Response Curves with Deep Neural Networks'; github.com/alonsocampana/ARCANet (MIT).",
+  "feasibility_judgement": "Adaptable within a day and therefore run. The published model multiplies a drug embedding by a cell-line transcriptome and reads one viability per concentration, without any measurement of the same drug in the same cell line. This screen has a single biological system and no transcriptome, so the drug branch (GATRes: GATv2 layers over the molecular graph) and the LatentHillFusionModule over log concentration are imported from the authors' file unchanged, the cell-line branch is dropped, and the linear head widens from 1 to 68 outputs. Pooling uses torch-geometric's AttentionalAggregation, the current name of the GlobalAttention layer their GatedAttnPooling is built on, with the same gate and value networks; their variant adds the cell-line node set before pooling, which here would be zero.",
+  "training": "Authors' optimizer and scheduler: Adam with ReduceLROnPlateau (factor 0.5, patience 4) on the training loss, batch 32 chemicals, targets are the measured concentration-level means with the screen's masks. Three seeds (0, 1, 2) per fold and the arithmetic mean of their predictions, the convention of the published neural-process comparison. Training chemicals are those whose fold differs from the test fold.",
+  "selection": "Loss (their MSE or L1), model size (their sizes or a smaller variant) and the epoch budget are chosen once on the development partition (fold 0, trained on folds 1-4) by zero-measurement target MAE, then frozen.",
+  "structures": "The same EPA CompTox batch-search SMILES as item 2. A chemical without a SMILES, or whose graph has no bond (inorganic salts and single-atom species), cannot enter a graph model; those chemicals are named in the report.",
+  "scoring": "Zero measurements, scored on the same held-out cells as the three-point designs of Fig. 2, with release/chip_forecast.py's curve MAE; an offset variant and a 0.75 interpolation blend show what the three measured concentrations add, mirroring item 2.",
+  "endpoints": [
+    "Zero-measurement MAE with paired chemical-level differences against GenRA, interpolation, AnchorBoost and the CNP (10,000 resamples, seed 0, 95%)",
+    "The structure-plus-three-points variants against interpolation"
+  ],
+  "expected_before_run": {
+    "arcanet_zero_mae": "1.4 to 1.9, that is at or above GenRA's zero-measurement error and far above AnchorBoost",
+    "versus_genra": "-0.2 to +0.2; a graph network trained on 180-odd chemicals may or may not beat a similarity-weighted neighbour average",
+    "if_the_comparator_wins": "report it as the headline of this item"
+  },
+  "verification": "verify_arcanet.py recomputes the ensemble means and every interval from the saved per-design tables through a separate code path.",
+  "licenses": {
+    "ARCANet": "MIT, Copyright (c) 2024 Pedro A. Campana",
+    "torch-geometric": "MIT",
+    "EPA screen and structures": "US Government work, public domain"
+  }
+}

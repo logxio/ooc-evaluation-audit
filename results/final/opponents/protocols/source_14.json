@@ -1,0 +1,536 @@
+{
+  "task": "<redacted-local-metadata>",
+  "lane": "<redacted-local-metadata>",
+  "written_before_any_run": true,
+  "written_at": "2026-10-06T14:40:00+09:00",
+  "why_this_round_exists": "<redacted-local-metadata>",
+  "stage1_reproduction": {
+    "rule": "<redacted-local-metadata>",
+    "pass_rule": "<redacted-local-metadata>",
+    "targets": {
+      "motil_esol_rmse": {
+        "value": 0.644053,
+        "sd": 0.014347,
+        "source": "<redacted-local-metadata>",
+        "official_command": "python train.py --data_path ./data/esol.csv --dataset_type regression --epochs 100 --num_runs 3 --batch_size 64 --seed 2024 --init_lr 1e-3 --final_lr 1e-6 --wd 1e-5 --warmup_epochs 0.0 --split_type scaffold_balanced --exp_name scaffold_balanced --exp_id esol --metric rmse --checkpoint_path ./dumped/pre-train/1-model/original_CMPN_0707_0800_12000th_epoch.pkl",
+        "seeds": [
+          2024,
+          2025,
+          2026
+        ],
+        "per_seed_official": [
+          0.651202,
+          0.624034,
+          0.656923
+        ],
+        "______": "<redacted-local-metadata>"
+      },
+      "motil_bbbp_auc": {
+        "value": 0.969073,
+        "sd": 0.002829,
+        "source": "<redacted-local-metadata>",
+        "official_command": "<redacted-local-metadata>",
+        "______": "<redacted-local-metadata>"
+      },
+      "kano_esol_rmse": {
+        "value": 0.67,
+        "sd": 0.019,
+        "status": "fetched_before_run",
+        "fetch_rule": "<redacted-local-metadata>",
+        "source": "KANO Nature Machine Intelligence 2023 Table 2; publisher PDF page 5",
+        "source_url": "https://www.nature.com/articles/s42256-023-00654-0/tables/2",
+        "source_pdf_url": "https://www.nature.com/articles/s42256-023-00654-0.pdf"
+      },
+      "kano_bbbp_auc": {
+        "value": 0.96,
+        "sd": 0.016,
+        "status": "fetched_before_run",
+        "fetch_rule": "<redacted-local-metadata>",
+        "official_command": "<redacted-local-metadata>",
+        "source": "KANO Nature Machine Intelligence 2023 Table 1; publisher PDF page 5",
+        "source_url": "https://www.nature.com/articles/s42256-023-00654-0/tables/1",
+        "source_pdf_url": "https://www.nature.com/articles/s42256-023-00654-0.pdf"
+      }
+    },
+    "tasks_required": [
+      "esol",
+      "bbbp"
+    ],
+    "tasks_optional_if_cheap": [
+      "bace",
+      "clintox"
+    ]
+  },
+  "stage2_our_task": {
+    "cohort": "<redacted-local-metadata>",
+    "arm1_structure_only": {
+      "input": "<redacted-local-metadata>",
+      "output": "<redacted-local-metadata>",
+      "concentration_fusion": "<redacted-local-metadata>",
+      "measured_points": 0
+    },
+    "arm2_structure_plus_three": {
+      "measured_points": 3,
+      "note": "<redacted-local-metadata>"
+    },
+    "arm2_third_variant_anchorboost_features": {
+      "what": "<redacted-local-metadata>",
+      "constraint": "<redacted-local-metadata>",
+      "k_for_neighbors": "<redacted-local-metadata>"
+    },
+    "scoring": {
+      "scorer": "<local-input>/score.py",
+      "command": "python score.py <preds>.npz --versus all --out results/<name>",
+      "config_freeze": "<redacted-local-metadata>",
+      "interval": "<redacted-local-metadata>",
+      "reference_anchors_from_kit": {
+        "anchorboost_k3_243": 1.1408,
+        "anchorboost_acquisition_k3_194": 1.1586,
+        "loglinear_interp_k3_243": 1.3249,
+        "published_neural_process_k3_243": 1.1797,
+        "chemical_mean_k3_243": 1.622
+      },
+      "s2_same_cohort_numbers": {
+        "loglinear_interp_187": 1.342,
+        "anchorboost_187": 1.1585,
+        "kano_structure_only_187": 1.7039,
+        "motil_structure_only_187": 1.7982,
+        "genra_structure_only_187": 1.6375,
+        "arcanet_structure_only_187": 1.6056
+      }
+    }
+  },
+  "prior_expectations_written_before_running": {
+    "source": "<redacted-local-metadata>",
+    "e1_reproduction": "<redacted-local-metadata>",
+    "e2_arm1": "<redacted-local-metadata>",
+    "e3_anchorboost_injection": "<redacted-local-metadata>",
+    "escalation": "<redacted-local-metadata>",
+    "note": "<redacted-local-metadata>"
+  },
+  "forbidden": [
+    "<redacted-local-metadata>",
+    "<redacted-local-metadata>",
+    "<redacted-local-metadata>",
+    "<redacted-local-metadata>"
+  ],
+  "reusable_from_s2": {
+    "note": "<redacted-local-metadata>",
+    "paths": [
+      "<redacted-local-metadata>",
+      "<redacted-local-metadata>",
+      "<redacted-local-metadata>",
+      "<redacted-local-metadata>",
+      "<redacted-local-metadata>",
+      "<redacted-local-metadata>"
+    ]
+  },
+  "amendment": [
+    {
+      "at": "2026-10-06T05:36:57.628959+00:00",
+      "phase": "before_training",
+      "kano_targets": {
+        "esol_rmse": {
+          "value": 0.67,
+          "sd": 0.019,
+          "table": 2,
+          "url": "https://www.nature.com/articles/s42256-023-00654-0/tables/2"
+        },
+        "bbbp_auc": {
+          "value": 0.96,
+          "sd": 0.016,
+          "table": 1,
+          "url": "https://www.nature.com/articles/s42256-023-00654-0/tables/1"
+        }
+      },
+      "actual_resource": {
+        "instance_id": 54437429,
+        "offer_id": 53960898,
+        "gpu": "RTX 4090 24GB",
+        "cpu_cores_effective": 32,
+        "allocated_ram_mb_offer": 64466,
+        "disk_gb": 100,
+        "hourly_usd": 0.42777777777777776,
+        "image": "nvidia/cuda:11.8.0-cudnn8-devel-ubuntu20.04",
+        "expected_hours": 6,
+        "expected_rental_usd": 2.5666666666666664,
+        "release_guard_job": "s7-vast-release-50519cea"
+      },
+      "source_observations": [
+        "MotiL train.py:31-32 keeps split seed 2024 for all three runs, while lines 44-48 print incremented labels. Preserve upstream execution and record both labels and actual seeds.",
+        "MotiL ESOL official command omits --step; official log and parser default are pretrain. BBBP explicitly uses finetune. Preserve the task-specific original commands.",
+        "KANO repository provides only the BBBP finetune command. ESOL uses the same published 100 epochs, batch 256, 3 runs, seed 51, learning-rate defaults and published_adaptation_step; changes data_path and dataset_type as README instructs. The paper does not enumerate a separate ESOL seed in its implementation section.",
+        "Only observational options added: absolute input/output paths, GPU index mapped to 0, save_smiles_splits. Vendor source bytes remain unchanged."
+      ],
+      "portable_requirements": "MotiL author-local wheel URLs use same-version official PyG CUDA wheels. Other unversioned file URLs become public package names; full realized versions will be saved. Tensorflow and paddlepaddle install failures may be recorded as unused-micromolecule exceptions."
+    },
+    {
+      "at": "2026-10-06T05:43:53.465388+00:00",
+      "phase": "environment_installation",
+      "dependency_source_resolution": {
+        "package": "owl2vec-star==0.2.1",
+        "pypi_observation": "Only 0.2.0 is published; version 0.2.1 endpoint returns HTTP 404",
+        "official_source": "https://github.com/KRR-Oxford/OWL2Vec-Star",
+        "commit": "e7cdc4d9c023061c9518c3e25856b25d4c15b34f",
+        "installation": "Official source via pip --no-deps, preserving KANO README nltk 3.4.5 and all other explicit pins",
+        "source_changes": false
+      },
+      "local_controller_runtime": "/opt/homebrew/bin/python3.13; macOS system Python 3.9 launch failed before any cloud command, then corrected",
+      "cloud_training_python": "3.7 in separate conda environments"
+    },
+    {
+      "at": "2026-10-06T05:52:35.565333+00:00",
+      "phase": "stage2_adapter_preparation_before_any_chip_run",
+      "execution_condition": "All four official reproductions pass their frozen source intervals with independently recomputed test metrics",
+      "curve_adapter": {
+        "source_files_changed": false,
+        "loop": "Unchanged upstream run_training, train, evaluate, predict, optimizer and NoamLR via a runtime model factory",
+        "head": "S2 BatchNorm + unchanged ARCANet LatentHillFusionModule + residual FC + LayerNorm + 68 outputs",
+        "training_unit": "one chemical/concentration row; official missing-target masks and per-output regression scaler",
+        "epochs": 100,
+        "learning_parameters": "Each family uses its ESOL reproduction settings; KANO published_adaptation_step, MotiL finetune for the chip regression head",
+        "checkpoint_selection": "MAE on a deterministic 20 percent chemical-identity holdout within each outer training fold; upstream per-epoch test logging also sees this inner holdout",
+        "development_candidates": {
+          "head_dropout": [
+            0.0,
+            0.2
+          ],
+          "interpolation_blend_weight": [
+            0.0,
+            0.25,
+            0.5,
+            0.75,
+            1.0
+          ]
+        },
+        "development_fold": 0,
+        "development_seeds": [
+          0
+        ],
+        "test_folds": [
+          1,
+          2,
+          3,
+          4
+        ],
+        "test_seeds": [
+          0,
+          1,
+          2
+        ],
+        "choice": "choose dose-head dropout by structure-covered chemical mean MAE; choose three-point blend weight on fold 0 for the selected head; freeze before folds 1-4",
+        "unresolved_structures": "Same S2 training-only structure-free Analog mean fallback; explicitly report structure-covered cohort alongside complete kit cohort"
+      },
+      "anchor_adapter": {
+        "public_script_sha256": "3d02dd3a1bc57e8c53f701a6005c8d5e9d8ad6a15a57cdec3f22b27066015897",
+        "public_script_changes": false,
+        "runtime_changes": "wrap features in try/finally; add and no_analog replace variants",
+        "development_candidates": {
+          "neighbours": [
+            3,
+            10
+          ],
+          "cosine_weight_power": [
+            0,
+            1,
+            2
+          ]
+        },
+        "power_zero": "uniform weights",
+        "splits": "S2 frozen acquisition_splits from acquisition/classical_baselines/protocol.json",
+        "selection": "fold 0 chemical mean MAE separately for each family and variant; freeze before folds 1-4"
+      },
+      "verifier_check": {
+        "source": "results/independent_verifier_check.json",
+        "comparisons": 65,
+        "maximum_absolute_difference": 0.0
+      }
+    },
+    {
+      "at": "2026-10-06T06:02:00.652066+00:00",
+      "phase": "official_environments_verified",
+      "environments": {
+        "kano": {
+          "name": "kano",
+          "versions": {
+            "torch": "1.13.1+cu117",
+            "rdkit": "2018.09.3",
+            "numpy": "1.20.3",
+            "gensim": "4.2.0",
+            "nltk": "3.4.5",
+            "owl2vec-star": "0.2.1",
+            "Owlready2": "0.37",
+            "torch-scatter": "2.0.9"
+          },
+          "python": "3.7.16 (default, Jan 17 2023, 22:20:44) \n[GCC 11.2.0]",
+          "cuda": "11.7",
+          "device": "NVIDIA GeForce RTX 4090",
+          "scatter_cuda_forward_backward": true,
+          "peak_memory_bytes": 3072,
+          "time": 1791266387.8533092
+        },
+        "motil": {
+          "name": "motil",
+          "versions": {
+            "torch": "1.12.1+cu116",
+            "rdkit": "2022.09.1",
+            "torch-scatter": "2.0.9",
+            "torch-geometric": "2.3.0",
+            "scikit-learn": "0.24.2",
+            "dgl": "0.9.1",
+            "tensorboardX": "1.8"
+          },
+          "python": "3.7.12 | packaged by conda-forge | (default, Oct 26 2021, 06:08:21) \n[GCC 9.4.0]",
+          "cuda": "11.6",
+          "device": "NVIDIA GeForce RTX 4090",
+          "scatter_cuda_forward_backward": true,
+          "peak_memory_bytes": 3072,
+          "time": 1791266390.5527463
+        }
+      },
+      "optional_dependencies": [
+        "installed tensorflow==1.13.1",
+        "installation failed; unused in micromolecule path: paddlepaddle==2.5.1"
+      ],
+      "deployment_correction": "19 upstream tracked bytecode files were omitted by archive cache exclusion; original bytes supplied in tracked_bytecode.tar.gz. PYTHONDONTWRITEBYTECODE=1 keeps the tracked files unchanged. All training-source bytes remain original.",
+      "active_training_job": "s7-four-official-tasks-984b400f"
+    },
+    {
+      "at": "2026-10-06T06:13:13.186619+00:00",
+      "phase": "stage2_split_resolution_before_any_chip_run",
+      "source": "<local-input>/README.md; <local-input>/acquisition_protocol.json",
+      "finding": "The copied acquisition_splits define only folds 1-4. The kit says predict fold f by training on folds other than f, with fold 0 as development.",
+      "fold0_anchor_training": "Use folds 1-4 excluding any identity group present in fold 0; score all 49 fold-0 chemicals.",
+      "outer_anchor_training": "Reuse exact acquisition_splits[fold].train; evaluate every outer chemical including Phenobarbital, whose sodium parent is already excluded from fold-4 training. This supplies both primary_194 and common_193 kit cohorts.",
+      "curve_training": "Exclude outer-test identity groups from outer training before its inner validation split. This removes the Phenobarbital/sodium cross-fold overlap consistently with the acquisition baseline.",
+      "original_expectations_changed": false
+    },
+    {
+      "at": "2026-10-06T07:09:13.508693+00:00",
+      "phase": "stage2_gate_kano",
+      "kano_stage2_allowed": true,
+      "decided_by": "<redacted-local-metadata>",
+      "written_by": "<redacted-local-metadata>",
+      "rationale": [
+        "<redacted-local-metadata>",
+        "<redacted-local-metadata>",
+        "<redacted-local-metadata>"
+      ],
+      "unchanged": {
+        "four_task_pass_rule": "<redacted-local-metadata>",
+        "kano_esol_recorded_as_is": {
+          "value": 0.80323,
+          "sd": 0.083313,
+          "seeds": [
+            51,
+            52,
+            53
+          ],
+          "note": "<redacted-local-metadata>"
+        },
+        "prior_expectations": "<redacted-local-metadata>"
+      },
+      "open_items": {
+        "si_table5_split": "<redacted-local-metadata>",
+        "lr_search_running": "<redacted-local-metadata>"
+      }
+    },
+    {
+      "at": "2026-10-06T07:30:47.149322+00:00",
+      "phase": "kano_esol_root_cause_controller_run",
+      "run_by": "<redacted-local-metadata>",
+      "why": "<redacted-local-metadata>",
+      "lr_search": {
+        "fixed": {
+          "epochs": 100,
+          "batch_size": 256,
+          "seeds": [
+            51,
+            52,
+            53
+          ],
+          "split_type": "scaffold_balanced",
+          "step": "published_adaptation_step",
+          "metric": "rmse"
+        },
+        "swept": "<redacted-local-metadata>",
+        "results": {
+          "1e-4": {
+            "test_rmse": 0.80323,
+            "sd": 0.083313
+          },
+          "2e-4": {
+            "test_rmse": 0.797466,
+            "sd": 0.058848,
+            "val_best": [
+              0.626339,
+              0.693795,
+              0.713295
+            ],
+            "val_mean": 0.67781
+          },
+          "3e-4": {
+            "test_rmse": 0.809108,
+            "sd": 0.100806,
+            "val_best": [
+              0.637,
+              0.696878,
+              0.713168
+            ],
+            "val_mean": 0.682349
+          },
+          "5e-4": {
+            "test_rmse": 0.796423,
+            "sd": 0.077165,
+            "val_best": [
+              0.620873,
+              0.744698,
+              0.766023
+            ],
+            "val_mean": 0.710531
+          },
+          "1e-3": {
+            "test_rmse": 0.79805,
+            "sd": 0.108594,
+            "val_best": [
+              0.613684,
+              0.714077,
+              0.753812
+            ],
+            "val_mean": 0.693858
+          }
+        },
+        "selected_by_validation": {
+          "init_lr": "2e-4",
+          "val_mean": 0.67781,
+          "test_rmse": 0.797466,
+          "sd": 0.058848
+        },
+        "finding": "<redacted-local-metadata>"
+      },
+      "split_sensitivity": {
+        "control": "<redacted-local-metadata>",
+        "seeds_51_52_53": {
+          "test_rmse": 0.80323,
+          "sd": 0.083313
+        },
+        "seeds_43_44_45": {
+          "test_rmse": 0.737167,
+          "sd": 0.056316,
+          "note": "<redacted-local-metadata>"
+        },
+        "delta": -0.066063,
+        "finding": "<redacted-local-metadata>"
+      },
+      "conclusion": "<redacted-local-metadata>",
+      "default_hyperparameter_control": {
+        "epochs": 30,
+        "batch_size": 50,
+        "warmup_epochs": 2.0,
+        "init_lr": 0.0001,
+        "max_lr": 0.001,
+        "final_lr": 0.0001,
+        "test_rmse": 0.80741,
+        "sd": 0.089968,
+        "per_seed": [
+          0.892265,
+          0.847087,
+          0.682877
+        ]
+      }
+    },
+    {
+      "at": "2026-10-06T08:24:33.857912+00:00",
+      "phase": "stage2_final_readings_and_closeout",
+      "scored_by": "<redacted-local-metadata>",
+      "k3_primary_194": {
+        "kano": {
+          "structure": 1.7046,
+          "three_points": 1.3208,
+          "anchor_add": 1.1515,
+          "anchor_replace": 1.1609
+        },
+        "motil": {
+          "structure": 1.8201,
+          "three_points": 1.3465,
+          "anchor_add": 1.1564,
+          "anchor_replace": 1.1643
+        },
+        "anchorboost_reference": 1.1606
+      },
+      "k3_common_193": {
+        "kano": {
+          "structure": 1.7062,
+          "three_points": 1.3231,
+          "anchor_add": 1.1529,
+          "anchor_replace": 1.1623
+        },
+        "motil": {
+          "structure": 1.8165,
+          "three_points": 1.348,
+          "anchor_add": 1.1577,
+          "anchor_replace": 1.1656
+        },
+        "anchorboost_reference": 1.1621
+      },
+      "identity_ci_vs_anchorboost_194": {
+        "kano_anchor_add": [
+          -0.0229,
+          0.0039
+        ],
+        "kano_anchor_replace": [
+          -0.0155,
+          0.0147
+        ],
+        "motil_anchor_add": [
+          -0.0118,
+          0.0036
+        ],
+        "motil_anchor_replace": [
+          -0.0048,
+          0.0123
+        ],
+        "verdict": "<redacted-local-metadata>"
+      },
+      "frozen_config_fold0": {
+        "curve": {
+          "epochs": 50,
+          "batch": 32,
+          "lr": 0.001,
+          "encoder_lr": 0.0001,
+          "dropout": 0.0,
+          "loss": "l1",
+          "freeze_encoder": false,
+          "blend_weight": 0.75
+        },
+        "anchor": {
+          "neighbors": 10,
+          "power": 2
+        },
+        "fold0_dev_mae": {
+          "kano_add": 1.054376,
+          "motil_add": 1.055567,
+          "anchorboost_baseline": 1.0625
+        },
+        "note": "<redacted-local-metadata>"
+      },
+      "prior_expectation_reconciliation": {
+        "arm1_expected": "<redacted-local-metadata>",
+        "arm1_observed": {
+          "kano": 1.7046,
+          "motil": 1.8201
+        },
+        "arm1_verdict": "<redacted-local-metadata>",
+        "injection_expected": "<redacted-local-metadata>",
+        "injection_observed": [
+          -0.0091,
+          -0.0042,
+          0.0003,
+          0.0037
+        ],
+        "injection_verdict": "<redacted-local-metadata>"
+      },
+      "headline_finding": "<redacted-local-metadata>"
+    }
+  ]
+}

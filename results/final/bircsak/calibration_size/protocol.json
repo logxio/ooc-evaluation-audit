@@ -1,0 +1,432 @@
+{
+  "schema": "calibration-size-v1",
+  "frozen_at": "2026-10-05T02:18:45.111349+00:00",
+  "question": "How many calibration drugs resolve the twelve previously frozen Bircsak calls at 90% and 80% nominal simultaneous coverage?",
+  "prediction_before_analysis": "Quantile finite-size inflation may decrease but residual-tail floor may leave some or all calls unresolved even at n=200. All endpoints and methods retained.",
+  "evidence_status": "post-reveal retrospective empirical-resampling extrapolation; not a new prospective test",
+  "historical_split": {
+    "training_drugs": [
+      "Troglitazone",
+      "Nimesulide",
+      "Nifedipine",
+      "Nefazodone",
+      "Aflatoxin B1",
+      "Iproniazid"
+    ],
+    "calibration_drugs": [
+      "Chlorpheniramine",
+      "Meloxicam",
+      "Amiodarone",
+      "Tolcapone",
+      "Fluoxetine",
+      "Fluphenazine",
+      "Azathioprine",
+      "Nitrofurantoin",
+      "Nevirapine"
+    ],
+    "test_drugs": [
+      "Theophylline",
+      "Ketoconazole",
+      "Glafenine",
+      "Dexamethasone",
+      "Chlorpromazine",
+      "Tamoxifen"
+    ]
+  },
+  "outer_drugs": [
+    "Aflatoxin B1",
+    "Amiodarone",
+    "Azathioprine",
+    "Chlorpheniramine",
+    "Chlorpromazine",
+    "Dexamethasone",
+    "Fluoxetine",
+    "Fluphenazine",
+    "Glafenine",
+    "Iproniazid",
+    "Ketoconazole",
+    "Meloxicam",
+    "Nefazodone",
+    "Nevirapine",
+    "Nifedipine",
+    "Nimesulide",
+    "Nitrofurantoin",
+    "Tamoxifen",
+    "Theophylline",
+    "Tolcapone",
+    "Troglitazone"
+  ],
+  "endpoints": [
+    "ALBUMIN",
+    "VIABILITY"
+  ],
+  "methods": [
+    "selected",
+    "fixed50",
+    "interpolation"
+  ],
+  "primary_method": "selected",
+  "candidate_family": [
+    {
+      "id": "interpolation",
+      "rule": "none",
+      "alpha": 0.0
+    },
+    {
+      "id": "fixed50_a0.25",
+      "rule": "fixed50",
+      "alpha": 0.25
+    },
+    {
+      "id": "adaptive10_a0.25",
+      "rule": "adaptive10",
+      "alpha": 0.25
+    },
+    {
+      "id": "fixed5_a0.25",
+      "rule": "fixed5",
+      "alpha": 0.25
+    },
+    {
+      "id": "fixed2_a0.25",
+      "rule": "fixed2",
+      "alpha": 0.25
+    },
+    {
+      "id": "fixed50_a0.5",
+      "rule": "fixed50",
+      "alpha": 0.5
+    },
+    {
+      "id": "adaptive10_a0.5",
+      "rule": "adaptive10",
+      "alpha": 0.5
+    },
+    {
+      "id": "fixed5_a0.5",
+      "rule": "fixed5",
+      "alpha": 0.5
+    },
+    {
+      "id": "fixed2_a0.5",
+      "rule": "fixed2",
+      "alpha": 0.5
+    },
+    {
+      "id": "fixed50_a1",
+      "rule": "fixed50",
+      "alpha": 1.0
+    },
+    {
+      "id": "adaptive10_a1",
+      "rule": "adaptive10",
+      "alpha": 1.0
+    },
+    {
+      "id": "fixed5_a1",
+      "rule": "fixed5",
+      "alpha": 1.0
+    },
+    {
+      "id": "fixed2_a1",
+      "rule": "fixed2",
+      "alpha": 1.0
+    }
+  ],
+  "cross_fitting": {
+    "outer": "Leave one drug out, fit on the other 20 drugs. Both endpoints share membership.",
+    "inner": "Within the 20 outer-training drugs, leave one drug out (19 fit drugs), select each endpoint by equal-drug mean MAE among the frozen 13 candidates; tie tolerance 1e-12 and original candidate order.",
+    "training_designs": "All combinations of three distinct concentrations as in existing model.",
+    "evaluation_context": "For L sorted distinct positive doses, use indices [0, floor((L-1)/3), floor(2*(L-1)/3)] per curve; each endpoint uses exactly three observed concentrations. Expose candidate dose metadata, conceal other responses.",
+    "isolation": "Outer-held-out responses never enter that fold selection, fitting, analog pools, epsilon or membership. Historic test drugs become retrospective cross-fit observations in other folds. Original 6/9/6 predictions and candidate selections remain frozen and unmodified.",
+    "fit_reuse": "Identical training subsets and effective leaf sizes reuse predictions. A pair of excluded drugs shares one fitted model; both are predicted. No approximation to original estimator.",
+    "model_parameters": {
+      "loss": "absolute_error",
+      "max_iter": 600,
+      "learning_rate": 0.05,
+      "max_leaf_nodes": 127,
+      "early_stopping": false,
+      "random_state": 0
+    }
+  },
+  "score": "For each drug and method, maximum absolute query residual across both endpoints divided by endpoint max(abs(lowest-context response), 1e-6*median(abs(outer-training endpoint responses)), 1e-12).",
+  "resampling": {
+    "unit": "drug-level joint-endpoint maximum score",
+    "n": [
+      5,
+      6,
+      7,
+      8,
+      9,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      16,
+      17,
+      18,
+      19,
+      20,
+      21,
+      22,
+      23,
+      24,
+      25,
+      26,
+      27,
+      28,
+      29,
+      30,
+      31,
+      32,
+      33,
+      34,
+      35,
+      36,
+      37,
+      38,
+      39,
+      40,
+      41,
+      42,
+      43,
+      44,
+      45,
+      46,
+      47,
+      48,
+      49,
+      50,
+      51,
+      52,
+      53,
+      54,
+      55,
+      56,
+      57,
+      58,
+      59,
+      60,
+      61,
+      62,
+      63,
+      64,
+      65,
+      66,
+      67,
+      68,
+      69,
+      70,
+      71,
+      72,
+      73,
+      74,
+      75,
+      76,
+      77,
+      78,
+      79,
+      80,
+      81,
+      82,
+      83,
+      84,
+      85,
+      86,
+      87,
+      88,
+      89,
+      90,
+      91,
+      92,
+      93,
+      94,
+      95,
+      96,
+      97,
+      98,
+      99,
+      100,
+      101,
+      102,
+      103,
+      104,
+      105,
+      106,
+      107,
+      108,
+      109,
+      110,
+      111,
+      112,
+      113,
+      114,
+      115,
+      116,
+      117,
+      118,
+      119,
+      120,
+      121,
+      122,
+      123,
+      124,
+      125,
+      126,
+      127,
+      128,
+      129,
+      130,
+      131,
+      132,
+      133,
+      134,
+      135,
+      136,
+      137,
+      138,
+      139,
+      140,
+      141,
+      142,
+      143,
+      144,
+      145,
+      146,
+      147,
+      148,
+      149,
+      150,
+      151,
+      152,
+      153,
+      154,
+      155,
+      156,
+      157,
+      158,
+      159,
+      160,
+      161,
+      162,
+      163,
+      164,
+      165,
+      166,
+      167,
+      168,
+      169,
+      170,
+      171,
+      172,
+      173,
+      174,
+      175,
+      176,
+      177,
+      178,
+      179,
+      180,
+      181,
+      182,
+      183,
+      184,
+      185,
+      186,
+      187,
+      188,
+      189,
+      190,
+      191,
+      192,
+      193,
+      194,
+      195,
+      196,
+      197,
+      198,
+      199,
+      200
+    ],
+    "nominal_coverage": [
+      0.9,
+      0.8
+    ],
+    "rule": "k=ceil((n+1)*coverage), integer arithmetic; q=kth smallest in n iid draws with replacement from 21 scores; k>n means +infinity.",
+    "distribution": "Exact empirical bootstrap order-statistic distribution via binomial survival P(q<=s_j)=P[Binomial(n,j/21)>=k]; no Monte Carlo approximation.",
+    "quantiles": [
+      0.1,
+      0.5,
+      0.9
+    ],
+    "quantile_definition": "left-continuous inverse empirical CDF (smallest value with cumulative probability at least target)",
+    "extrapolation": "n>21 is extrapolation from the same 21 drugs; repeated draws are not additional independent evidence. Bands quantify calibration-sample variability conditional on this empirical distribution, not population-distribution uncertainty.",
+    "asymptotic": "Report empirical population coverage quantiles as n tends to infinity; prediction residual floor does not shrink as 1/sqrt(n)."
+  },
+  "widths": {
+    "normalized_halfwidth": "q",
+    "endpoint_halfwidth": "q * mean lowest-context scale over six original test drugs for endpoint",
+    "full_width": "2*halfwidth",
+    "anchor": {
+      "n": 9,
+      "coverage": 0.9,
+      "viability_full_width_rounded": 174.81,
+      "albumin_full_width_rounded": 2847.03,
+      "procedure": "Recompute original nine selected scores and q=max from original calibration predictions; frozen full widths must match to rounding. Cross-fit n=9 is a different distribution and is not forced to equal anchor."
+    }
+  },
+  "decisions": {
+    "prediction_centers": "Original frozen six-test-drug predictions for all three methods; use only original three observations, predicted means, concentrations and scale.",
+    "rule": "Per endpoint flag a 50% response reduction relative to its lowest observed dose. If an observed context value or any upper prediction bound is <= 0.5*lowest response, output report_reduction. If all observed contexts and all lower bounds are > threshold, output report_no_reduction. Otherwise output measure_next. If lowest context <=0, output measure_next and preserve the curve in MAE analysis. This is a research threshold, separate from validated clinical toxicity classification.",
+    "counts": "ALBUMIN six, VIABILITY six, joint twelve. At least one >=1, strict majority >=4 of6 (>=7 of12), all >=6 (>=12).",
+    "threshold_reporting": "Minimum n with bootstrap probability of achieving target >=0.5; also >=0.8 and sustained threshold through n=200. Report unavailable thresholds as not attained within 5..200. Quantile sawtooth is retained.",
+    "revealed_outcomes": "Used only in cross-fit residual computation and post-hoc call correctness audit, never to alter original frozen centers or thresholds; prospective validity is not asserted."
+  },
+  "resources": {
+    "owner": "paper-capacity-series2",
+    "local_rss_limit_bytes": 4000000000,
+    "local_process_wall_seconds": 295,
+    "large_fit_route": "private Kaggle CPU notebook, no GPU",
+    "termination": "finite prescribed leave-one-out fits and n=5..200 grid; all launched local processes terminate; remote notebook auto-terminates at complete/error"
+  },
+  "inputs": {
+    "training.csv": {
+      "sha256": "fa67152ff259f1d670d677d783f73992800d298adc6f481e41cabef8ade67c35"
+    },
+    "calibration.csv": {
+      "sha256": "0934dc3a113229cecac85ffb2cbd4b9e53eb9d12cf02e6e7700041c6de2bad81"
+    },
+    "reference_reveal.csv": {
+      "sha256": "7acf9090ef664218f3b927241f6156e776c73d5f16df9e8a520fedfd257a2128"
+    },
+    "test_contexts.csv": {
+      "sha256": "d281e602d65c8712e9adaf57035ba7abcb101ff956a29240324950afc92170f4"
+    },
+    "frozen_predictions.csv": {
+      "sha256": "a870e254f0086766a124d844e35bb381087786de8e9f03c9573fb5bda32b5187"
+    },
+    "frozen_choices.csv": {
+      "sha256": "33638760668389f608423de8bdbc0a4c0cb675bcf11120a50aa71eda63248973"
+    },
+    "original_calibration.json": {
+      "sha256": "d329ec66128f20c0fe9f4f29ebeba87646ced8bad7f69c8c4c23aed089126ea2"
+    },
+    "figure_source_data.csv": {
+      "sha256": "a1b52956b04274a0bbffe7a5a7495d70db3dfb99380609afc436491bd1456c4f"
+    }
+  },
+  "frozen_source_code": {
+    "paper_capacity.py": "711d059feb45bea2f1d299b5a9e934f8183165bf8af437e185c7c6e50d974d9b",
+    "paper_capacity_independent.py": "de1b8c1870050b3fee74f62e2515aaca3f69126b8ba95993df8015af627a4d7d",
+    "chip_forecast.py": "3d02dd3a1bc57e8c53f701a6005c8d5e9d8ad6a15a57cdec3f22b27066015897"
+  },
+  "limitations": [
+    "21 drug score support",
+    "Overlapping cross-fit training sets induce dependence; simple score bootstrap is a planning heuristic, not a coverage guarantee.",
+    "Cross-fit models use 20 training drugs, while original frozen test centers used six; changes in both training support and calibration sampling separate this curve from a causal calibration-size experiment.",
+    "Digitized published mean responses, no new donor/batch/chip replicates.",
+    "Original test responses were revealed before this protocol."
+  ]
+}

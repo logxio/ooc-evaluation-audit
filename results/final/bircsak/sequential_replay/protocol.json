@@ -1,0 +1,112 @@
+{
+  "schema": "bircsak.sequential_replay.v1",
+  "frozen_at_utc": "2026-10-05T06:09:52.705457+00:00",
+  "status": "analysis protocol frozen before this replay; historical references already revealed",
+  "decision": "Measurements required for each frozen liver-chip decision and differences between acquisition policies.",
+  "prediction_before_run": "Known seven threshold-positive curves stop after their sealed first request. If remaining five curves stay ambiguous until completion, selected uses 25/46 hidden measurements and seven early reports. Comparator totals remain to be computed.",
+  "inputs": {
+    "input/choices.csv": {
+      "origin": "<local-input>/bb950cab8a0d/choices.csv",
+      "sha256": "33638760668389f608423de8bdbc0a4c0cb675bcf11120a50aa71eda63248973"
+    },
+    "input/predictions.csv": {
+      "origin": "<local-input>/4275a4708662/predictions.csv",
+      "sha256": "a870e254f0086766a124d844e35bb381087786de8e9f03c9573fb5bda32b5187"
+    },
+    "input/scored_predictions.csv": {
+      "origin": "<local-input>/0295f9125d8d/scored_predictions.csv",
+      "sha256": "2538cb94c9b71c4453083d9502bd423137e4c0c07e956960b5361afa6512c8a8"
+    },
+    "input/calibration.json": {
+      "origin": "<local-input>/149e46b1adaf/calibration.json",
+      "sha256": "d329ec66128f20c0fe9f4f29ebeba87646ced8bad7f69c8c4c23aed089126ea2"
+    },
+    "input/calibration_predictions.csv": {
+      "origin": "<local-input>/c3c242c70d11/calibration_predictions.csv",
+      "sha256": "4352763e3795d4cd38bc658808dab3d7b7d58e4b3ce6d5b55f302204a89a237c"
+    },
+    "input/selection.json": {
+      "origin": "<local-input>/12d538c4928a/selection.json",
+      "sha256": "5ed45da975f5f5df110bab2eb7dea275ed4d02279a59cb2aefa42ff673e6611e"
+    },
+    "input/prediction_manifest.json": {
+      "origin": "<local-input>/7e4bd9150c86/prediction_manifest.json",
+      "sha256": "6e74e84ec97a5536390e9917897eab6898fafee46cc450edb987ebb09e30652e"
+    },
+    "input/model_ALBUMIN_fixed50.joblib": {
+      "origin": "<local-input>/e849b19dcc6e/model_ALBUMIN_fixed50.joblib",
+      "sha256": "b4333f24e02654341ce36f55267a3d40ce7bde756b3388aadb07990920b72901"
+    },
+    "input/model_VIABILITY_fixed50.joblib": {
+      "origin": "<local-input>/6e102408437a/model_VIABILITY_fixed50.joblib",
+      "sha256": "e94ec7721fd57c3015fd2a2e0bc227f581810294e127c3a81fa1b0d823ad8d8b"
+    },
+    "input/model_VIABILITY_adaptive10.joblib": {
+      "origin": "<local-input>/f5c5b93cddcd/model_VIABILITY_adaptive10.joblib",
+      "sha256": "e94ec7721fd57c3015fd2a2e0bc227f581810294e127c3a81fa1b0d823ad8d8b"
+    },
+    "input/test_contexts.csv": {
+      "origin": "<local-input>/01a0da9bf71f/test_contexts.csv",
+      "sha256": "d281e602d65c8712e9adaf57035ba7abcb101ff956a29240324950afc92170f4"
+    },
+    "input/reference_reveal.csv": {
+      "origin": "<local-input>/0bd183c64772/reference_reveal.csv",
+      "sha256": "7acf9090ef664218f3b927241f6156e776c73d5f16df9e8a520fedfd257a2128"
+    },
+    "input/original_protocol.json": {
+      "origin": "<local-input>/5d6392b1d3e6/independent_protocol.json",
+      "sha256": "8213c89526adfad2ef5f5702634520b931010436ff8317bf5c5ded3e06a286fb"
+    },
+    "source/chip_forecast.py": {
+      "origin": "<local-input>/8bd8526fe330/chip_forecast.py",
+      "sha256": "3d02dd3a1bc57e8c53f701a6005c8d5e9d8ad6a15a57cdec3f22b27066015897"
+    },
+    "source/paper_capacity_independent.py": {
+      "origin": "<local-input>/984a716478ab/paper_capacity_independent.py",
+      "sha256": "de1b8c1870050b3fee74f62e2515aaca3f69126b8ba95993df8015af627a4d7d"
+    },
+    "joint_reference": {
+      "origin": "<local-input>/58046856c8c5/run_joint.py",
+      "sha256": "ff621e49c102b3caebc305545afd2579f65001fdf8bd6df1395db97f024341ef"
+    }
+  },
+  "primary_method": "selected",
+  "methods": [
+    "selected",
+    "interpolation",
+    "fixed50"
+  ],
+  "initial_context": "Exactly the three sealed point IDs per drug and endpoint in choices.csv; endpoint-specific original dose grid.",
+  "threshold": "Fixed 0.5 times response at INITIAL LOWEST CONCENTRATION, not minimum observed response. Preserve throughout replay. Equality counts as reduction.",
+  "calibration": "Use original nine-drug q for each method and original epsilon; halfwidth=q*max(abs(initial lowest-dose response),epsilon). No new calibration or fitting.",
+  "predictor": "Use pinned capacity_frozen_forecast module ND=NF=D=1 and original joblib estimators. Rebuild Task from measured rows ONLY, boolean keep of current length; query remaining concentration metadata ONLY. Recondition frozen predictor on k>=3 as in joint/run_joint.py. Preserve float32 inputs and original residual mixing. Training-selected ALBUMIN interpolation; VIABILITY adaptive10 alpha .25.",
+  "decision_order": [
+    "If any measured value <= fixed threshold: report_reduction / observed_reduction.",
+    "Otherwise if any remaining upper bound <= threshold: report_reduction / upper_bound_below_threshold.",
+    "Otherwise if all measured values and all remaining lower bounds > threshold: report_no_reduction.",
+    "Otherwise: measure_next. Full grid exhausted: exact observed full-series call."
+  ],
+  "policies": {
+    "frozen_action": "Original priority tuple (interval contains threshold inclusive, minimum absolute log10 distance to measured doses, concentration); Python exact max. Initial chosen point must equal sealed choices.csv.",
+    "uniform_random": "Uniform over remaining candidates at EACH continuing step. Enumerate all stopped-prefix branches with exact Fraction probabilities. No Monte Carlo. Shared states can cache frozen predictions.",
+    "log_maximin": "Maximize minimum absolute log10 distance to measured concentrations. Exact ties use larger concentration, matching original action tie rule.",
+    "lowest_unmeasured": "Smallest remaining concentration.",
+    "highest_unmeasured": "Additional literal-highest diagnostic: largest remaining concentration every step; distinguish initial highest-dose requests from original adaptive priority."
+  },
+  "comparison_design": "Change acquisition policy only. Preserve model, q, threshold, starting context and stopping rule. Evaluate all three original prediction methods; primary selected.",
+  "step_semantics": "step0 is initial three-point state; step k is after k additional observations, including terminal state. Record revealed point, next requested point, predictions/intervals, observed IDs, call and reason. Random prefix rows have exact reach probability; terminal probabilities sum to one per curve.",
+  "truth": "Any full-reference digitized response <= frozen threshold; full grid of positive published concentrations only.",
+  "cost_unit": "One endpoint-specific concentration response (published aggregate mean); 12 curves, 36 initial and 46 hidden values, 82 total. Early means stopping strictly before that curve full grid. No physical chip/well/replicate cost inference or cross-endpoint sharing.",
+  "zero_width_counterfactual": "Use original selected three-point predictions with q=0; evaluate same rule and truth. Prior known: 12 no-reduction calls, 5 correct, 7 wrong. Keep separately from actual replay.",
+  "evidence_status": "The original next-dose requests were sealed before reveal at original manifest time. This protocol, all reconditioned predictions and subsequent sequential decisions are post-reveal retrospective replay. An observed reduction directly satisfies reference definition. Original 90% calibration was for k=3; reused q at k>=4 supplies no new sequential coverage guarantee.",
+  "resource_limits": {
+    "new_fits": 0,
+    "process_rss_bytes": 4000000000,
+    "process_seconds": 295,
+    "threads": 1,
+    "gpu": false,
+    "owner": "capacity replay analysis",
+    "end_condition": "all 12 curves x three methods x five specified policies exhaust terminal branches; independent verification completes"
+  },
+  "verification": "Separate implementation loads pinned inputs and models, independently computes frozen inference and decisions; enumerate all complete permutations for random, stop them, then compare exact expected cost/probability and all logged states. Verify input/protocol hashes and original k=3 predictions."
+}

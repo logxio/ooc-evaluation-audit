@@ -1,0 +1,10 @@
+{
+  "schema": "sota_baselines_4.protocol.amendment.v1",
+  "amends": "protocol.json, flownp.prediction (number of joint samples per design)",
+  "written_utc": "2026-10-06T05:24:00Z",
+  "written_local": "2026-10-06T14:24:00+09:00",
+  "folds_touched_before_this_amendment": "none for FlowNP: only the resource probe on 12 training chemicals (results/flownp_probe.json) and the equivalence check have run; no fold-0 outcome exists",
+  "reason": "The probe measured 0.19-0.33 s per design at 64 samples. The point prediction is a Monte-Carlo average, and its sampling noise inflates MAE by roughly SE^2 times the error density at zero; doubling the samples halves that variance for about one extra minute per fold and seed. This favours the opponent and costs no decision.",
+  "change": "128 joint samples per design (was 64); everything else unchanged (3 replicate tokens per query concentration, 100 steps, the repository's stochastic Euler sampler, mean or median chosen on fold 0, three-seed average).",
+  "process_limit": "A fit stops at 240 s of wall time, saves model, optimiser, scheduler and both random-number states, and the next process resumes it, so no process exceeds 5 minutes; the resumed run draws the same episodes and noise as an uninterrupted one."
+}

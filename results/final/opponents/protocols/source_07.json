@@ -1,0 +1,48 @@
+{
+  "schema": "sota_baselines_2.genra.protocol.v1",
+  "item": "2. structural read-across",
+  "frozen_utc": "2026-10-06T03:42:35+09:00",
+  "decision": "How far chemical structure alone reaches on this screen, and how much the three measured concentrations add on top of structure.",
+  "comparator": "Generalized Read-Across (GenRA), the EPA data-gap-filling standard; package github.com/USEPA/genra-py (MIT, commit recorded in vendor/commits.txt). Prediction is the similarity-weighted mean over the k nearest training chemicals, with similarity = 1 - Jaccard distance on a binary structural fingerprint, exactly the GenRAPredValue formula.",
+  "structures": {
+    "source": "EPA CompTox Chemicals Dashboard public batch-search API (https://comptox.epa.gov/dashboard-api/batchsearch/export/), DTXSIDs taken from the frozen nested/identities.json of the reporting experiment",
+    "resolved": "237 of 243 chemical labels",
+    "unresolved": [
+      "Emamectin benzoate",
+      "Tris(methylphenyl) phosphate",
+      "Triphenyl phosphates isopropylated",
+      "Firemaster 550",
+      "Abamectin",
+      "Clove leaf oil"
+    ],
+    "unresolved_reason": "Mixtures and multi-component substances carry no single SMILES in DSSTox; a structural method cannot represent them, and they are named in every table rather than silently dropped.",
+    "descriptor_note": "GenRA's published descriptor is ToxPrint chemotypes, which require the ChemoTyper desktop application and have no public API; this round uses the Morgan and MACCS fingerprints that genra-py also supports, and says so."
+  },
+  "predictors": {
+    "genra_zero": "No measured concentration. For a test chemical, each training chemical's complete curve is interpolated in log concentration (flat outside its range, the published interpolation helper) at the query concentrations, and the k structurally nearest neighbours are averaged with similarity weights.",
+    "genra_offset": "Structure plus the three measured concentrations: the GenRA curve shifted per output by the mean residual at the measured level means.",
+    "genra_blend": "Structure plus the three measured concentrations: w * log-concentration interpolation of the measured points + (1 - w) * genra_offset."
+  },
+  "selection": "Descriptor (morgan, maccs), k (5, 10, 20) and w (0.25, 0.5, 0.75) are chosen once on the development partition (fold 0 chemicals, neighbours from folds 1-4) by three-point-design target MAE, then frozen before any test fold is scored.",
+  "splits": "Unchanged published folds and the five seeded three-level designs. Neighbours of a test chemical come only from chemicals whose fold differs from the test fold; a chemical is never its own neighbour.",
+  "scoring": {
+    "primary": "The same held-out target cells as the three-point evaluation of Fig. 2: for each design, mean absolute error over the observed level means of the concentrations that design leaves unmeasured, averaged over five designs within a chemical, then equally across chemicals. genra_zero sees no measurement and is scored on the same cells, so the comparison with interpolation and AnchorBoost is like for like.",
+    "secondary": "genra_zero scored on every concentration of the chemical, which no three-point method can be compared against.",
+    "activity": "Descriptive: a design is called active when the largest absolute DIV-mean predicted response over all concentrations and features reaches 3 in the public-package scale, and the same rule is applied to the measured reference curve. This is not the calibrated reporting endpoint of the manuscript, which lives in the training-control scale."
+  },
+  "intervals": "Paired chemical-level percentile bootstrap, 10,000 resamples, seed 0, 95%, the published convention.",
+  "expected_before_run": {
+    "genra_zero_mae": "1.3 to 1.9; structure alone is expected at or above interpolation from three points (1.345) and above AnchorBoost (1.161)",
+    "genra_offset_or_blend": "1.15 to 1.40; the hybrid may or may not beat interpolation, and is unlikely to beat AnchorBoost",
+    "three_points_over_structure": "the gap genra_zero minus the best three-point method is the quantity this item reports; expected between 0.1 and 0.7",
+    "activity_accuracy_zero_points": "0.5 to 0.8 with low sensitivity, because a similarity-weighted mean of neighbours flattens extreme responses",
+    "if_the_comparator_wins": "report it as the headline of this item"
+  },
+  "verification": "verify_genra.py recomputes the similarities with a separate Jaccard implementation, checks them against genra-py's own kneighbors_sim, rebuilds every reported mean from the saved per-design table and re-derives the intervals.",
+  "known_package_defect": "genra-py GenRAPredValue.predict() normalises by np.sum(neigh_sim[j]) where j is the output index rather than the query row, so it is correct only for a single query with a single output. This round calls the package's kneighbors_sim and applies the documented similarity-weighted mean per query row.",
+  "licenses": {
+    "genra-py": "MIT, Copyright (c) 2021 patlewig",
+    "EPA structures and screen": "US Government work, public domain",
+    "RDKit": "BSD-3-Clause"
+  }
+}

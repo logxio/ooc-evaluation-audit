@@ -1,0 +1,91 @@
+{
+  "schema": "paper.scale_A.r2_lane.v1",
+  "created_utc": "2026-10-05T23:39:31.867447+00:00",
+  "owner": "A Series1 (redacted Code session 7b4d3b97-ad4e-4e1c-85de-5b15b380e5b4)",
+  "requested_by": " (cross-session message, 10/6): one ruler for the whole paper; the host \"\" covers every three-point rule, technical isolation included; the no-lane version moves to the supplement.",
+  "decision": "Technical-isolation section (strict split R2): replace reports, wrong reports, wells and paired differences by the observed-active lane version; reconstruction error is unaffected and is cited unchanged.",
+  "read_at_that_time": "common_scale R2 no-lane readouts (results.md, exact_recheck of B/R2/fold0: 662 vs 542, loss gap 4.64 [1.59, 7.68]); risk_upgrade common_B_R2 crc and crc_obs readouts (pooled AnchorBoost 862/83/12,809 vs measured-only 749/52/14,638, saving 12.49%; fold units). No A-arm R2 lane readout had been computed anywhere.",
+  "definition": "amendment 001 three-point lane (crc_obs) on every R2 fold 0-4 of arms B and A: measured_only >= 3 released as active; other designs exact margin > lambda; lambda by exact CRC (alpha 1/10, grid, (sum+1)/(n+1)) on calibration identities with the lane loss. Zero refit. Population: primary designs (common_scale primary_population == 1), 188 groups / 965 designs pooled; fold 0 small archive 138 / 710; folds 1-4 large archive 50 / 255.",
+  "statistics": "summarize_common definitions: totals, identity-equal rates, AnchorBoost minus comparator (release rate, wrong-report loss, error if all reported), cost saving 1 - sum AB / sum comparator; 4,000 identity bootstrap with default_rng(0).integers(0, n, (4000, n)) over the sorted groups of each subgroup (n = 188, 138, 50), first draw.",
+  "cross_checks": "no-lane exact recomputation equals common_scale summary (A, B folds 1-4) and B/R2/fold0/exact_recheck.json; lane equals risk_upgrade common_B_R2 crc_obs pooled, per-fold units and fold0_primary_subset bit for bit; any mismatch stops the run.",
+  "prediction_before_computation": {
+    "B_pooled": "AnchorBoost 862/83/12,809, measured-only 749/52/14,638, saving 12.49% [9.17, 15.86], loss difference +3.19 [0.21, 5.96]",
+    "B_fold0": "AnchorBoost 667/61/9,583 vs measured-only 571/28/11,185; loss difference unchanged at 4.64 [1.59, 7.68] because the lane adds no error and keeps lambda; saving about 14%",
+    "B_folds1to4": "AnchorBoost 195/22/3,226 vs measured-only 178/24/3,453, saving about 6.6%",
+    "A_fold0": {
+      "anchorboost_reports": [
+        520,
+        640
+      ],
+      "measured_only_reports": [
+        560,
+        640
+      ],
+      "saving_fraction": [
+        -0.2,
+        0.05
+      ]
+    },
+    "A_folds1to4": {
+      "saving_fraction": [
+        0.0,
+        0.12
+      ]
+    },
+    "lambdas": "lane lambda equals the exact no-lane lambda in every arm and fold"
+  },
+  "outputs": [
+    "r2_lane/summary.json",
+    "r2_lane/table.csv",
+    "results.md section"
+  ],
+  "input_sha256": {
+    "<local-input>/d10781981df3/design_decisions.csv": "6e70092707d63579f75cd96763e255a3cd4554b6c7a2c747338d916113c17864",
+    "<local-input>/3b83275e2494/summary.json": "f4c7595d3c1d1ae2755684d3d321790e4e69f5044be20266f1806c446e795e19",
+    "<local-input>/8f4924a12edc/exact_recheck.json": "2af80e32442d8292fa4112bfbcd380d3b3f82ceb9002c6d04e69357c917c4cac",
+    "<local-input>/0823ac5e46bf/summary.json": "a78d57299574a95b2f6d886f0d6f0c621c63a4070ac0b664732c105f83365d9e",
+    "<local-input>/7b054f249db5/protocol_amendment_004.json": "b69e02537dbd0928deeca504492b50502b881b71faea3d3eec91b8d6f18abcd2",
+    "<local-input>/9e05c6fa3101/paper_nested_decision.py": "22de67e35239a390a03e93d1df2c557671837944afc341e1eb2f5d46a9c094d7",
+    "protocol_amendment_001.json": "a9253064ea534a28f69f4c935fbd24a05db6d1e307dd152d5da05a643d4a64f4",
+    "<local-input>/43653ea96fa4/training_rules.json": "29de8da1fec72c10e72259eeee2efc01d063d1417935bd06af51f07a1245a6b9",
+    "<local-input>/46e487ad35d4/calibration.json": "c7d8c9e10935e49931ff6b886cc5cf343e9c7a9e828d840806defa5b2591b094",
+    "<local-input>/95de95f8b7f3/calibration_design_decisions.json": "bc2ff0311efc824f27ef7b5879f90521571561f05fb93423990281138804b476",
+    "<local-input>/11fed448e94f/design_decisions.json": "383582c5049549a043cf6077c4f867a222398ec079d11bd8a3d372542cd1eb49",
+    "<local-input>/24edb87c33ee/training_rules.json": "2a3d1e44d533007820c733ce9a35772fd3ec7a29ab54b6c582a28a4247c362f8",
+    "<local-input>/94bb31dd918e/calibration.json": "4204cb634f24228d6cd3b1b96810c5fe7f0246aae33a349fcf453b03dc376d8b",
+    "<local-input>/97580368a0ae/calibration_design_decisions.json": "4814b0852109b5c3da095b43e1f9176717ae839a623a0465754778b0bef71b57",
+    "<local-input>/f5c90ba67042/design_decisions.json": "0999d4623328a93681f2b331f73c7875c430a348e4377e6a1c92780b894a923c",
+    "<local-input>/805d745d5557/training_rules.json": "3f5d5ac4db3ee61e8c1196149a620b0cb82303034884c21ca5466a981b0c10a6",
+    "<local-input>/ffc3612926f2/calibration.json": "de3c4e248ed1ff7d9c3c8c7d0a477222e2f9ae87ce04c4930e9f738c68d9b1da",
+    "<local-input>/3a9ee16de3e7/calibration_design_decisions.json": "5d01a77f830e0b27f33273ff4aff74119a6844151ef627d67442ac5c50b803ad",
+    "<local-input>/fa3a7062898c/design_decisions.json": "0a03f67984f2fd6a98f80d84bdc17c3562af3beefcb5642dfb662bc4e1267423",
+    "<local-input>/a7e82a44005f/training_rules.json": "bd2358ce285a874425fb94d3df09c17b9415d7489c60be228ec50d193e8b3063",
+    "<local-input>/1a834b7446fa/calibration.json": "a9114de6c1e3eedcb664dd9c67709789b6c00e5b843d49bccb0a820ef98634b7",
+    "<local-input>/8bfbe357ec60/calibration_design_decisions.json": "fb1d902800d97450b56fd26c7b58c25d25bc8614b29e067130af7169e21bcb07",
+    "<local-input>/0e58dc3870d9/design_decisions.json": "8530adb6a0bbfdb56b5357318d72f07834efa739c32c3eab8c4d5d2432b4ab8f",
+    "<local-input>/ee867b142928/training_rules.json": "70ee0974e3daf7275c09367ee5d3c6a3f023055fc94cdc7d9a845c79516e1f26",
+    "<local-input>/63d365449f2b/calibration.json": "9e3c21a064b138a1786d2306eb4e842cd0749a826fb42e1490879303d699af46",
+    "<local-input>/771874994f8b/calibration_design_decisions.json": "520e3cee7e60a71a39665f936147260cff3c9c82eb368ddc14015bd3321c33a8",
+    "<local-input>/51d42ec273f1/design_decisions.json": "9661b6d966881d4096c0b3b383dbe69a995991ef48318f9d790aeb2366c8136f",
+    "<local-input>/a4fefe452b86/training_rules.json": "78bd3f2aa7076640922781c7e737ec8607cbae502759866e50a4ccfa5c5fa36b",
+    "<local-input>/10ebed111bdf/calibration.json": "7523cee287abac81bdfa84f3dda1e48be7f4ec5ec3a6aae4b0a18ce911ffe291",
+    "<local-input>/94a40b2365cd/calibration_design_decisions.json": "6dea74cdfcf0b0cc6bc2e2c4201580bf5e601caeb1c4fc7ac9d4d5a107bd5aa9",
+    "<local-input>/2f914f6bb451/design_decisions.json": "254c585603faf1906f62c89b250b77c2f8df60979049c0cfe2819baf3e3eb56d",
+    "<local-input>/30f890a16749/training_rules.json": "aa77c685b4445052e44eb3db604865eb9062985a6eb0a4d532675da731cd7f91",
+    "<local-input>/25a1292767a2/calibration.json": "b414f320c6837dcc715ebe7ce6b4ceb00273aab24ad6bd3b1534a28a595cbc4a",
+    "<local-input>/025a2e780aac/calibration_design_decisions.json": "f44e67a81da687a746625727e539be2b30b935b39dc650c35746f2071a7cc194",
+    "<local-input>/d2351d7cb053/design_decisions.json": "a407c09e30fe7705a4620d876b16cd7f2c7d86b4adaf7a8d2a261257e9959761",
+    "<local-input>/a6682ec6df04/training_rules.json": "e5da54892f4547ef1022037f76bea128889be9c4d9a54141dcced6402f427eb3",
+    "<local-input>/6dcb35113a3f/calibration.json": "8b5bdf8c094518038161b6bce238160a036552c20a00b5b11e92194e631d35e4",
+    "<local-input>/31751f461b1e/calibration_design_decisions.json": "a2a9fd2bbf13deb910733a1869f8883a5854bb105980a9a58baa889165954d16",
+    "<local-input>/3008ba28a069/design_decisions.json": "9d97c4fbd775d496fa037896ca1d576335fedd26987821d92c84abe13079c0b3",
+    "<local-input>/c865038ff39e/training_rules.json": "499a395b207384db3aac9911fe221776884de2075c6b2664823b2f92ba9d0a38",
+    "<local-input>/d02c2d75d6c2/calibration.json": "cd6d1a0397c46d1d7d6e2e2b879d5c46253b84359f08ddf246c5ff3593fc7a65",
+    "<local-input>/f84673713169/calibration_design_decisions.json": "b769c3307160d86c892952c6cce09fc3775b95d7890f1ae1fea85833d1b10545",
+    "<local-input>/5b858ab29ef1/design_decisions.json": "15701569fcd777cb452303c9a1d792621ea3b4805408ec79c9d5d8efc63b6c4b",
+    "<local-input>/d297a63f4992/training_rules.json": "9f0fb37c9dd866d605f6e32401735b392ba2d946778f1d4de98a4843fbdd2d2e",
+    "<local-input>/ba3e749ab609/calibration.json": "ba961af8779db057220a641c1b64b4cab56dc193874fe02676daf263a93e898e",
+    "<local-input>/60d22b63f47a/calibration_design_decisions.json": "0314b68e78336589095a3337a3ed6b870c8ad82b798fc292ee447a62fe8dba60",
+    "<local-input>/6e5718b50569/design_decisions.json": "963ee5662460fe2a17dcd5ea78452b47ef868dd6e6e0213cf64c59dd251fdb47"
+  }
+}

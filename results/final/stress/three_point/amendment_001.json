@@ -1,0 +1,318 @@
+{
+  "schema": "paper.stress_test.amendment.v1",
+  "amendment": "001",
+  "created_utc": "2026-10-05T23:46:05.006206+00:00",
+  "parent_protocol_sha256": "0c2251b73976073067a17aec44c4b6412c0f2356eabe991259e36b23259384f1",
+  "requested_by": "Host reply \"\" (10/6 04:4x JST): every three-point rule gains the observed-active lane. Relayed by  S1 (group message 20261005T233526Z-7444, item 2: stress_test calibration paragraph and Extended Data Fig. 3) and by the paper-line controller (cross-session message from local_1d2e6219-ffcf-46d9-b9aa-b2139d75e996).",
+  "read_at_that_time": "All readouts of the original stress ladder on nested (stress_test/results.md). The scale_A lane headline: B AnchorBoost 914/84/12,031, measured-only 818/75/13,503, saving 10.90% [7.67, 14.23]; A 925/83/11,851 and 822/78/13,443; lane lambdas equal to the no-lane lambdas in every fold. Published common_scale R1 test decisions: 583 (B) and 585 (A) of 965 test designs have measured_only >= 3, all reference-active; 58.9% (B) and 59.2% (A) of the remaining designs are inactive. Training-only inputs: per-output residual scales (fold medians 1.70-1.76, range 0.74-2.84), AnchorBoost cutoffs 2.67-3.01 and rank-reference maxima 10.03-11.17. No corrupted rung of either arm had been computed.",
+  "sources": {
+    "B": {
+      "name": "common_scale_B_R1",
+      "description": "Arm B of batch_heldout/common_scale, identity split R1, primary folds 1-4. Read-only source of the lane stress ladder.",
+      "root": "<local-input>/ab3fc7f5362b/R1",
+      "fold_dir": "fold{fold}",
+      "protocol": "<local-input>/18fd4341f824/source_protocol.json",
+      "splits": "<local-input>/f0347ac0fce3/identity_splits.json",
+      "identities": "<local-input>/6b6ca7f64cae/identities.json",
+      "code_dir": "<local-input>/4d37a00fbb81/src",
+      "task_builder": {
+        "kind": "module",
+        "path": "<local-input>/19f9f02cbfad/run_common.py",
+        "function": "make_tasks",
+        "missing_center": "mask"
+      },
+      "primary_folds": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "development_folds": [],
+      "published_decisions": "<local-input>/d10781981df3/design_decisions.csv"
+    },
+    "A": {
+      "name": "common_scale_A_R1",
+      "description": "Arm A of batch_heldout/common_scale, identity split R1, primary folds 1-4. Read-only source of the lane stress ladder.",
+      "root": "<local-input>/56cd16d6d70c/R1",
+      "fold_dir": "fold{fold}",
+      "protocol": "<local-input>/18fd4341f824/source_protocol.json",
+      "splits": "<local-input>/f0347ac0fce3/identity_splits.json",
+      "identities": "<local-input>/6b6ca7f64cae/identities.json",
+      "code_dir": "<local-input>/4d37a00fbb81/src",
+      "task_builder": {
+        "kind": "module",
+        "path": "<local-input>/19f9f02cbfad/run_common.py",
+        "function": "make_tasks",
+        "missing_center": "mask"
+      },
+      "primary_folds": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "development_folds": [],
+      "published_decisions": "<local-input>/d10781981df3/design_decisions.csv"
+    }
+  },
+  "population": {
+    "arms": [
+      "B",
+      "A"
+    ],
+    "headline_arm": "B",
+    "side_by_side_arm": "A",
+    "regime": "R1",
+    "primary_folds": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "development_folds": "None: the common_scale arms have no fold-0 run.",
+    "primary": "965 test designs, 193 substances, 188 identity groups per arm"
+  },
+  "lane": {
+    "definition": "As scale_A protocol amendment 001 (three_point_rules, crc_obs of risk_upgrade amendment 004): a design with measured_only >= 3 is released with call active; any other design is released iff its exact margin > lambda; lambda is the first grid value with (sum_g L_g + 1)/(n_cal + 1) <= 1/10 for L_g(lambda) = (1/D_g) * sum over the group designs with measured_only < 3 of 1(margin > lambda) 1(call != truth); exact rational arithmetic.",
+    "gate": "Every calibration and test design with measured_only >= 3 has truth active (0); otherwise the run stops.",
+    "corruption": "The lane reads measured_only, which no rung corrupts. Corruption therefore reaches only the scores, calls and margins of designs outside the lane; lane designs are released as active on every rung.",
+    "implementation": "Imported, not copied: summarize_headline.lane_lambdas and lane_rows define the lane at s = 0 and are compared row by row with the stress path. On every rung the stress path passes lane designs to run_start.single with call active; under the gate they carry zero loss, so the exact selection equals the lane rule with D_g over all designs of the group. Release = lane or (exact block > selected grid index). run_start.ExactRule margins are compared with the exact twin of release paper_nested_decision.apply_rule at s = 0.",
+    "wells": "A lane design charges its measured wells, as the headline."
+  },
+  "ladder": "Unchanged from the parent protocol: noise levels, seeds, random streams, sigma definition (from each arm's own inner points), shrink, amplify and shuffle definitions.",
+  "risk_calibration": "Unchanged alpha 1/10 and grid; lambda reselected per arm, rung, fold and seed on calibration identities with the lane.",
+  "statistics": {
+    "bootstrap": "4,000 identity-group resamples over the 188 sorted primary groups: the first draw of numpy default_rng(0), which equals the shared scale_A counts file bootstrap_identity_counts_seed0.npz (checked). One matrix for every readout, contrast and rung, so s = 0 reproduces the lane headline intervals. This replaces the parent choice of the nested draws for the same reason: the s = 0 row matches the intervals the manuscript prints.",
+    "interval": "95% percentile interval, fixed decisions, no refitting uncertainty, no multiplicity correction.",
+    "seeds": "As the parent protocol."
+  },
+  "readouts": {
+    "parent": "All parent readouts, now with lane designs released as correct active calls.",
+    "added": "lane_test and lane_cal (designs in the lane), nonlane_reports and cal_nonlane_reports (released designs outside the lane), cal_releases_nothing = calibration releases no design outside the lane, the paired well saving against measured-only cost_savings = 1 - sum wells_used / sum measured-only wells_used, and the rank-ceiling counts among calibration designs outside the lane (cal_nonlane_rows, cal_nonlane_above_reference_max, cal_nonlane_inactive_above_reference_max) next to the parent counts over all calibration designs.",
+    "horizontal_lines": "Measured-only and interpolation with the lane, and observed-active, from the published common_scale decisions through the imported lane_rows; interpolation is cited, not rerun."
+  },
+  "reading": {
+    "sentence_1": "Exposed wells: noise-ladder medians non-decreasing from s = 0 to s = 8 (decreases listed), the s = 8 level against the lane floor (observed-active wells, every design outside the lane measured in full), and how many fold x seed units release nothing outside the lane at s = 4 and s = 8.",
+    "sentence_2": "As the parent protocol.",
+    "sentence_3": "As the parent protocol, with \"a fold releases nothing\" read as \"releases nothing outside the lane\".",
+    "property": "As the parent protocol."
+  },
+  "expected_before_run": {
+    "B": {
+      "s_0": "914/84/12,031 (wells 42.85%), wrong_loss 8.78% [6.49, 11.22], lambdas 0.04/0.03/0.08/-1; measured-only 818/75/13,503; cost_savings 10.90% [7.67, 14.23].",
+      "floor": "Lane only: 583 reports, 0 wrong, wells 17,653/28,080 = 62.87%.",
+      "wells_ratio": {
+        "0.25": [
+          0.42,
+          0.46
+        ],
+        "0.5": [
+          0.42,
+          0.48
+        ],
+        "1": [
+          0.45,
+          0.56
+        ],
+        "2": [
+          0.5,
+          0.63
+        ],
+        "4": [
+          0.6,
+          0.6287
+        ],
+        "8": [
+          0.6287,
+          0.6287
+        ]
+      },
+      "at_s8": "Every non-lane score exceeds the rank reference maximum, all non-lane margins tie, 59% of them are inactive, so no design outside the lane is released in any fold or seed: wells equal the lane floor and wrong_loss is 0.",
+      "wrong_loss": "Medians <= 0.10 on every rung, upper bounds up to 0.13, no lower bound above 0.10.",
+      "error_among_reports": "Diluted by the always-correct lane reports: 5-12% at s = 1-2.",
+      "crossover": "AnchorBoost wells exceed measured-only with the lane (13,503/28,080 = 48.09%) between s = 1 and s = 2.",
+      "shrink_t_1": "Close to measured-only with the lane: reports 790-850, wells 0.46-0.50, fn_loss 0.05-0.10; valve first.",
+      "amplify_t_1": "fp_loss 0.02-0.09, reports 850-940; valve first.",
+      "shuffle": "wells 0.50-0.6287, wrong_loss medians <= 0.10, error among reports <= 0.12."
+    },
+    "A": {
+      "s_0": "925/83/11,851 (wells 42.20%); measured-only 822/78/13,443; cost_savings 11.84% [8.40, 15.36].",
+      "floor": "585 reports, 0 wrong, wells 17,605/28,080 = 62.70%.",
+      "rest": "Same ranges as B."
+    },
+    "interpretation": "Planning ranges recorded before any corrupted lane rung; not acceptance criteria."
+  },
+  "headline_rows_read": {
+    "B": {
+      "anchorboost": {
+        "reports": "914.0",
+        "wrong_reports": "84.0",
+        "wells_used": "12031.0"
+      },
+      "measured_only": {
+        "reports": "818.0",
+        "wrong_reports": "75.0",
+        "wells_used": "13503.0"
+      },
+      "observed_active_fallback": {
+        "reports": "583.0",
+        "wrong_reports": "0.0",
+        "wells_used": "17653.0"
+      }
+    },
+    "A": {
+      "anchorboost": {
+        "reports": "925.0",
+        "wrong_reports": "83.0",
+        "wells_used": "11851.0"
+      },
+      "measured_only": {
+        "reports": "822.0",
+        "wrong_reports": "78.0",
+        "wells_used": "13443.0"
+      },
+      "observed_active_fallback": {
+        "reports": "585.0",
+        "wrong_reports": "0.0",
+        "wells_used": "17605.0"
+      }
+    }
+  },
+  "outputs": [
+    "lane/protocol_amendment_001.json",
+    "lane/protocol_amendment_001.sha256",
+    "lane/{B,A}/ladder.csv",
+    "lane/{B,A}/curve.csv",
+    "lane/{B,A}/summary.json",
+    "lane/verification.json",
+    "results.md: section  first"
+  ],
+  "input_sha256": {
+    "<local-input>/56766bf6961e/protocol.json": "0c2251b73976073067a17aec44c4b6412c0f2356eabe991259e36b23259384f1",
+    "<local-input>/66e5687e4a4b/protocol.sha256": "a033e08d9ce5341b3bff61cdf7664b6a4c5e3130803302a0e1c4acd6feacce5d",
+    "<local-input>/45da74cb2829/run_stress.py": "737b532d2db5ed6a0ebdf393cdfcbc081e9a0ba27c3f73a784ef6bbbfc1d0697",
+    "<local-input>/b41b27060126/run_start.py": "560881875da908a5703559e4077696632341f53ba79fe52d393b2f384cf8c242",
+    "<local-input>/191a908e76cd/summarize_headline.py": "e3465bf9db18e9e203f6f8597da50283b00ba0406b2d7e3cdfa0d31de62c217d",
+    "<local-input>/e91bf7033915/protocol_amendment_001.json": "a9253064ea534a28f69f4c935fbd24a05db6d1e307dd152d5da05a643d4a64f4",
+    "<local-input>/eecb7166c6f8/protocol_amendment_001.sha256": "b9406028404a9bb66316c2cd2513fd9d75cd81c900353f47a46f3a3903f5e896",
+    "<local-input>/41e27804a704/headline_table.csv": "e048b9fbdb8b5759244bb8018f1d72a7764de087c9d70a6234fedabd47ca670f",
+    "<local-input>/3149862b9b3a/headline.json": "656258bb18010bd03df3c34059e5f036aa4c6f7055f1ac12590b3ace0c6c2a32",
+    "<local-input>/bdbbce135b22/three_point_lambdas.json": "9970dcae3c14ad1526def812d687325015592b9f87a20afd77162d9d0cf8538c",
+    "<local-input>/b5ae54facaba/bootstrap_identity_counts_seed0.npz": "30eb1a4efe3ed16ec224ac2944315046b7ef9881d2afbd447f850231dd864bf2",
+    "<local-input>/9e05c6fa3101/paper_nested_decision.py": "22de67e35239a390a03e93d1df2c557671837944afc341e1eb2f5d46a9c094d7",
+    "<local-input>/768f3a10b31e/chip_forecast.py": "3d02dd3a1bc57e8c53f701a6005c8d5e9d8ad6a15a57cdec3f22b27066015897",
+    "<local-input>/5855f37c74e7/paper_nested_decision.py": "9e94f01c6d7c959587e4c77ce6f0792db270e3e7b316cc512a1795012be8c832",
+    "<local-input>/860e383f40a6/chip_forecast.py": "3ff0a65a484030879081b9163961c10d019b37510fe65229c3b5fbe43713bc5d",
+    "<local-input>/19f9f02cbfad/run_common.py": "86a847e3af4d3086756ed53e1c16c96f901f03fd8e35687c9911374e00f9ba8f",
+    "<local-input>/18fd4341f824/source_protocol.json": "d15f70d8ba11f111516a13a087d3970ea270bb2e9711547db8aaf6b6f71ff20d",
+    "<local-input>/f0347ac0fce3/identity_splits.json": "a455fa45a25c0b6f80e6e4b4cb0235dc72da89e6ad6a7eaa240051f7df72aa4c",
+    "<local-input>/6b6ca7f64cae/identities.json": "ef322cee97084b3b4e01b4d8a164ecb63562ae9981e226cdc4809f0c72acf3b5",
+    "<local-input>/d10781981df3/design_decisions.csv": "6e70092707d63579f75cd96763e255a3cd4554b6c7a2c747338d916113c17864",
+    "<local-input>/c0384c71743b/source_B_R1.json": "2ad636bf51be45e0dd71e726447887b4fe7ce5d7db594f92a5f08cb74b5a9364",
+    "<local-input>/50a7e924fd92/source_A_R1.json": "29cccfa998e426d8df067bf4e42ef05ff0bd237859add9cd352f458d707a5ecc",
+    "<local-input>/294ac5dcd0e1/outer_model.joblib": "81cee2da186aa4564c586317f490da0751c11e253014bfd288897d4249b24181",
+    "<local-input>/308e01c8c64f/outer_transform.json": "81490fee28da6d61f4b23705eb254ac52fb2025dd5179e4d0489cb6070cc08d1",
+    "<local-input>/bbda704a983a/training_rules.json": "c54ad74ce740b4a96c461d790669f2c5756d561680e79052976a1729d7543fed",
+    "<local-input>/c578d9823961/calibration.json": "37b0c9e179498df287637e924306da958622fe61f7274fd3e159a4c7780cb408",
+    "<local-input>/4677b5f519bf/pretest_freeze.json": "0ed6acf50a2131fa6886659e898a37a3f425488f18cfc833824e9cc9a14a394e",
+    "<local-input>/fe07bca94dbf/calibration_predictions.npz": "cf3571868cff821085678a72b563ccdb0d11f354d754b8b3e457bc64a65c0efa",
+    "<local-input>/0a53c2fa62c0/calibration_design_decisions.json": "c13a2c7beeeaa7fd49332b909d6cb5a99a8f774c84b4bd8521393a89c4467867",
+    "<local-input>/4ad7b9857f99/test_predictions.npz": "14f8f14ad131d53a5d0b137b77534dafcf93e722b9a31976de27ef75cc9fc102",
+    "<local-input>/3fc5721b718e/test_decisions_frozen.json": "a7d6becb0e44e46113fd05861b2cbe73c6ac46ef912af7fdd84387c913b85647",
+    "<local-input>/6ba6474a4efd/prediction_freeze.json": "64c9b022bdd3efd65ec5402eacb7be50cb32daa17ed9ad60c2a8d21fdbfde936",
+    "<local-input>/95636c252d5d/design_decisions.json": "7efbbf7e565339d418cf8eef87be3fe44f5c937df10490d454db6037e23f456e",
+    "<local-input>/c9f600d42684/inner0_points.npz": "65a09404bd467b72077afa33cfe45a353a234fce973250d4e8472d786026343b",
+    "<local-input>/69ca07fff918/inner1_points.npz": "190c318c20d13e3c623457b99f36f330baf4732af5933f418b1a0dedeabaca87",
+    "<local-input>/c0fe99d9bb62/outer_model.joblib": "dfb514912b672310d2588dada04b47d416aff6b1516deeb30ac21e4d9387883f",
+    "<local-input>/76b51c1074da/outer_transform.json": "78c223ffbfd7bea011b9e96dbc3098202f91672c261e2da8e5e5f9cbee2402ce",
+    "<local-input>/a1b0b3982f28/training_rules.json": "ad09014a9ff6499c4d5926caebea005bec09c56a47495224e4ac49467db4248a",
+    "<local-input>/9f5c50d9fa9a/calibration.json": "4fff2d012109a9a00cc2ce1931ce8966f881a633fedd84e9738af7cf128ed6d7",
+    "<local-input>/bceb93587dd6/pretest_freeze.json": "2713c9e8f7e8485c7ea39687b87d40255d8e27161e7a56d5a996e280310cd77e",
+    "<local-input>/f4fadcdf8e56/calibration_predictions.npz": "76bc32a6ffc5e19331bb33727b2547733e64125884600e40034c06b7ef2c3ce5",
+    "<local-input>/5b9a9aca1982/calibration_design_decisions.json": "1d4f67bb2456b099e33b97d669460291e6580058f502ed4d0e358bdc8922177f",
+    "<local-input>/e9b84305ea8c/test_predictions.npz": "8a524a129be75cb875e15a2aa98ca153fa214983bd6064698bddce27ee748080",
+    "<local-input>/4fbe8ee93596/test_decisions_frozen.json": "95a5e2690a7e40f018c82fc5e877763f593a1ef67cd0cc9405a817db232d5b25",
+    "<local-input>/d593dd7f8171/prediction_freeze.json": "267505d39b33a659c2ac31b3279993d08297d383ae53ad0cd84ca03ae0d0e882",
+    "<local-input>/aba579285b97/design_decisions.json": "c3a243039d42af96588a4dae162c7480fba97591eb795c094689628cf89d992f",
+    "<local-input>/26f2f3bea1e0/inner0_points.npz": "e0d9db07dc2e983e6402e387a8703714acd95392a90141831f11f7273c217e15",
+    "<local-input>/db237b8f1497/inner1_points.npz": "8fce0abcab48eb580cc16cea5d721935e9553f589e3ec27594f871f2c918011d",
+    "<local-input>/bfc844507e86/outer_model.joblib": "dfb514912b672310d2588dada04b47d416aff6b1516deeb30ac21e4d9387883f",
+    "<local-input>/767f63eb69d6/outer_transform.json": "78c223ffbfd7bea011b9e96dbc3098202f91672c261e2da8e5e5f9cbee2402ce",
+    "<local-input>/a9d7026f4054/training_rules.json": "84e39f16e029bd58372d6b2eae928b5f40c9d4d5a4a90579cc05de116c70f87e",
+    "<local-input>/5d7d4315b329/calibration.json": "606f926ed92e98c872d0d940ae01e4364ce51388fa7a4fd1e1eb913303f4ea11",
+    "<local-input>/0325c49ec57a/pretest_freeze.json": "46e5cc51809a3258154417cc5635b3d4a17f2483a34f8be19a964cc980528340",
+    "<local-input>/ca4f674b7203/calibration_predictions.npz": "ca458369d23ddc6c65611e382613f8c3f9db65b31e521a869dab0c543c3050b2",
+    "<local-input>/9b9c6e8212c2/calibration_design_decisions.json": "35aa7dc3bbbd35193ea12d7f6a7887f9d7ef96ac579b1a58214b4f6dd4f7b07c",
+    "<local-input>/b419f9e2250f/test_predictions.npz": "3830e08a9b33e8e3a0f95aefc6ddc06504a1afe5d68e1fc9a117a381c772e9ed",
+    "<local-input>/4cae575a0e0e/test_decisions_frozen.json": "df82e004dfeb52c1504da208e755ce8ff1cd530a0b964650fbcf48bdd3594bd7",
+    "<local-input>/298ed2c59c43/prediction_freeze.json": "d9e9f81746efaec573a71ba93f45546170dc888856c082acfe8e704338b78ac6",
+    "<local-input>/b78f1e1c6d27/design_decisions.json": "8c7055e2f3e0bfa35edb6a1f96fc4ea38a85ba27cfd915041767f0951c520a8f",
+    "<local-input>/2050be73d55e/inner0_points.npz": "c4443f45e37d12de923785e98621eee5b50d182c3388cb6fc290f190dd4bc24e",
+    "<local-input>/2e427fb65b7f/inner1_points.npz": "f5487fdfe8eb5e6ec7ce1ec2bf2690e28a48808129053b03d944c5a72c7fe7d3",
+    "<local-input>/f1a1537b7de5/outer_model.joblib": "dfb514912b672310d2588dada04b47d416aff6b1516deeb30ac21e4d9387883f",
+    "<local-input>/d3b2fd0afe9e/outer_transform.json": "78c223ffbfd7bea011b9e96dbc3098202f91672c261e2da8e5e5f9cbee2402ce",
+    "<local-input>/91905e4bd389/training_rules.json": "d9b4884e990f9c64c5cc6688ff0ae756de3fb1d0576b91bd31c6681a3c7d7261",
+    "<local-input>/35036c300f54/calibration.json": "0e8ca525ab2b64d44185a511c51de69fe7a21e7cdcf78cebac4276feabdae792",
+    "<local-input>/964cc84f5d65/pretest_freeze.json": "1fa0d352cb0d00477a7bf01cc2ad78e6c06413a17eb4de02ccca91fa4755febe",
+    "<local-input>/ced56fbf6b52/calibration_predictions.npz": "a47d05c2a526c2b76f96b15af6b05ca3f18d6a65087f5ae89a1198b38d406c29",
+    "<local-input>/d188bc4ad08d/calibration_design_decisions.json": "dd760b63976a3a56458f3e6d871003f49bf45b8e4b086213e78adcc3b4b27d24",
+    "<local-input>/af5a60f10bf6/test_predictions.npz": "63d17e776e57ace87e6dbf980e2830731ffed7851b9707567d87b753efdbdbac",
+    "<local-input>/9692770f2614/test_decisions_frozen.json": "11dde9384b65f54ea3e5cc7f6813d8b01b57fe95105963a3fd1c2356450cd284",
+    "<local-input>/acd05b13da67/prediction_freeze.json": "e8b5ca34ba425d284c9d08fd5835337adfd143af394b39a97d7c5b9864b456b6",
+    "<local-input>/d9dbc2b12844/design_decisions.json": "342ed068e032d41b8180f87b25348fd9b3879269b5976987f38eccf905529f76",
+    "<local-input>/c4ee2c9d9f7a/inner0_points.npz": "e904f787d67b613986d8c36b3d251f4ee5e0c52ab37d39fe284dff6adfcdfb6a",
+    "<local-input>/d0d0e4446ba9/inner1_points.npz": "eb1d36982d4ff8143204aa1e10f9919c5e2092b1e93d928500da136f8ca200fa",
+    "<local-input>/44650808d3e1/outer_model.joblib": "3d3c416f5de8a3ea7ef2ad61d1daebae83309346649f533fa46e506ef783c823",
+    "<local-input>/37fd48322891/outer_transform.json": "c28aef3e7cc80420a5bc56e8261ae7d1c67f021d476af415960072380e4986d3",
+    "<local-input>/1e40420023c2/training_rules.json": "c3ea44465212d9ac1e1495998114b160b701f308649d78e349499a15cf5eb62b",
+    "<local-input>/cd1f91d23a6f/calibration.json": "97f79652bc1a8f5bbf24a8d47f47765c0c934402b9f3387c2da8441f6965d315",
+    "<local-input>/12e4aa1340ee/pretest_freeze.json": "4cf1c134b337dce92eac94ced915d55db42077de938621e07658bd08ce87bcf5",
+    "<local-input>/76db3694e463/calibration_predictions.npz": "85570f1579c4a9579d5bb48ee7493e5acdf88d53c5ec44d2e17c1fb55f8c5c35",
+    "<local-input>/df680e6f7353/calibration_design_decisions.json": "2a89b4bfbedfa3b3f77c72ffceac26b2a01481020f0e3b0b524d81aefd7e3cdb",
+    "<local-input>/262ad3931be9/test_predictions.npz": "0736a72a675c0778ef0c79ddcd49d8fabc6b227a0bfa4b5c45f136ac72d57939",
+    "<local-input>/6448d12c6ee0/test_decisions_frozen.json": "b5d1987521ded770ccce17e78072545b00780d46601e516e5e61ffac1b938a80",
+    "<local-input>/39c14b227d2b/prediction_freeze.json": "0dd2dec69d961831820f960a47ecf870d4eddb72744f8768bbdb97c396d605d5",
+    "<local-input>/6999fd34b06d/design_decisions.json": "302954d0ca577651c9fc9a3ba629ea271713036144a5fbaa611b059fbc6ce554",
+    "<local-input>/5c4523fad530/inner0_points.npz": "dd40e2e2d35f6f63174bdc8d992def4225bcef519a0b8f772e9cd93bddae6b51",
+    "<local-input>/7e6f7b71f9cd/inner1_points.npz": "2eb0d508f84df0b799ffde84b1ad553e5ea322fcd5586890b99a955eb9d7f7b1",
+    "<local-input>/71dab11446c2/outer_model.joblib": "6eab7390db2eba5ba31e24192a819d9a1a4d4b294bbee2c4684b51f9af4ca1a7",
+    "<local-input>/f469b1de01cd/outer_transform.json": "04424334337f26c31018354f37a7cab2e8c7925e72317c1dba833e5d4c64cbbe",
+    "<local-input>/ee5df5bcd7b7/training_rules.json": "ef25773f111a552e74c34d55d4624d291a3663d8248be04f0e4a205b0bf3c51b",
+    "<local-input>/65aae9a2a95e/calibration.json": "168fd80e2a8399470f93267daa84420896dbe851aab5e98a94cb4fa91703d3fa",
+    "<local-input>/d290a51da40f/pretest_freeze.json": "52b9f14e3e47c6b171e8a076110b21d879849feffd2c0fe4539d712a58431c8c",
+    "<local-input>/58035cafe3b6/calibration_predictions.npz": "7cb16741d5032b505ead0e425d136f303f8a8c18507963061b3a995e1c12a506",
+    "<local-input>/e7f5032c6b44/calibration_design_decisions.json": "24acc2af5e50d17e031074d79156203c6a309bc9ebd5ab2cd898149909238786",
+    "<local-input>/62d9445f8ae2/test_predictions.npz": "1c1892ec753fca059a13a7e3e0bd50c4e06a3b5bc8c1beeee9a47de4d6f91afd",
+    "<local-input>/60319c2304ea/test_decisions_frozen.json": "940fe6fbe5b8ac5797f43a8b04821596b40a5dc39ad68e68b1fe742a833e4e15",
+    "<local-input>/a82e71392e2f/prediction_freeze.json": "2534be84992e68b63814ed5379028258bf10b5eee099faab421aac3d26ca8abd",
+    "<local-input>/bdb0d8e41c2b/design_decisions.json": "706e232d27de7be3f63e3cbaaafb85b80f1631101e9c3a01de3ffb47e02f7f9a",
+    "<local-input>/bbfc7542544d/inner0_points.npz": "cf609ca814f0eca6a2e24449763c2becdf7810924d589f914cb7f310fad09a00",
+    "<local-input>/94e829676ee7/inner1_points.npz": "d15f88468d858253863fe985c772da54a6634eb8ae7edc04660bad870ddc5fb0",
+    "<local-input>/e25b3318c69e/outer_model.joblib": "6eab7390db2eba5ba31e24192a819d9a1a4d4b294bbee2c4684b51f9af4ca1a7",
+    "<local-input>/ac6bff922fa9/outer_transform.json": "04424334337f26c31018354f37a7cab2e8c7925e72317c1dba833e5d4c64cbbe",
+    "<local-input>/71f17f9041f1/training_rules.json": "96c545e9b2016dce2825f64f6e7b802ac70ffcdec0eabc3da3b88186198f9a4c",
+    "<local-input>/9beda926eb8b/calibration.json": "37a8ecf76144b19ea8a12d21970a5a174b4132e1b987bcba2b6a00c335c604c7",
+    "<local-input>/f07d81ef5183/pretest_freeze.json": "86bcf93306e9bb2c0311c750194c51b0b1380197e88249f3d45fb0f5792eda75",
+    "<local-input>/0088755f1aa2/calibration_predictions.npz": "9c24938a1616700fd81a96d91d8dd75a66c9712ca90e2b21a9c30cb7a392cb73",
+    "<local-input>/7004e7cfa886/calibration_design_decisions.json": "f09715decfb9c5f8f0e2bca2ba1f4a34f7c20a852901a129a4656fe0c5d5f591",
+    "<local-input>/df8e35cd9d2e/test_predictions.npz": "dbe47f326af81344d3501fa867d0cac812aa1c5f4b7f5ef9d355154ead0d73fb",
+    "<local-input>/76f600eb775a/test_decisions_frozen.json": "a44a6319fa8c4b48d3ec39b8f82a3dbc4c9dfd079025d9d7a95df9527fa127ea",
+    "<local-input>/6e3690564d4a/prediction_freeze.json": "b1afc54e67dce89186933ac75e586da6ca4b43e2845cdc65b7098419b42b6fc7",
+    "<local-input>/ca9da6b783b8/design_decisions.json": "f09bd536fa56b6526890e4e15c6d46493f2ee4d4f832ad5771784a6283dcf372",
+    "<local-input>/4f808c0eca8f/inner0_points.npz": "2f55465b4eff3d7e1223c959b4c828a7acc0396c5c9e8fa02dcc65682a905c60",
+    "<local-input>/2d8685eec6cd/inner1_points.npz": "05b43343e84d0d107153acf2a0ebc24ae1dc15bcbe6085e6e09538681ca03da9",
+    "<local-input>/b3c376f562bd/outer_model.joblib": "6eab7390db2eba5ba31e24192a819d9a1a4d4b294bbee2c4684b51f9af4ca1a7",
+    "<local-input>/f1867c6c49e5/outer_transform.json": "04424334337f26c31018354f37a7cab2e8c7925e72317c1dba833e5d4c64cbbe",
+    "<local-input>/1cb3ab09d87c/training_rules.json": "549b4fa3953fb57df9f2f90ef4e9ce670e76eca5ffa2e210cdd2e512821f9b29",
+    "<local-input>/54145742fc99/calibration.json": "7e3a608100c72864c315707997344525b3560e6e5ad5dd4e20e5a30715c875a1",
+    "<local-input>/2bafef9b34c5/pretest_freeze.json": "21a79dafe051c958e12033d989a46305207515c61606ea2c4d9de983e01cbdc3",
+    "<local-input>/bcb5cf5bc8f0/calibration_predictions.npz": "db0fc8b0883eb707157f3dabae2caa1b2269b6756e39e500fde8327bd04ac421",
+    "<local-input>/623596b061d9/calibration_design_decisions.json": "7dc1082c462be610ee0a08f116e9260260b8cdb8841bb91f2ffbdfe7c67eee50",
+    "<local-input>/925b8d44a1f1/test_predictions.npz": "57903b27d764cd842b6c6e351a528130dd0641de9486af9be0af726d930fa708",
+    "<local-input>/03fe3e771f10/test_decisions_frozen.json": "4b095d158d8c2ff318050a6c8b8274c120546de8c835e623391a034a4a0c9334",
+    "<local-input>/efc536801dce/prediction_freeze.json": "ca4c5fbd04ded16ae0fc42d798a23fa6e511987ba440f7fe624da862fdc0805d",
+    "<local-input>/99a7d8010be9/design_decisions.json": "1c62c74e1cfc6613911a209858e709f621661f9fb29887f105a49b947c5d8283",
+    "<local-input>/6db1a927de9c/inner0_points.npz": "71afa32992c912090f11c9b9c93d742d5fc83e56538bc0a9a3fc4609348531e8",
+    "<local-input>/d8c4afcefc50/inner1_points.npz": "26e62a2c0d5e496f75b168f8165941041c48105f3a050c7b7d92704a01815b95"
+  }
+}

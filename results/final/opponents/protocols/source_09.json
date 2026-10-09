@@ -1,0 +1,82 @@
+{
+  "schema": "sota_baselines_4.protocol.v1",
+  "item": "Paper opponents S4: Empirical GP (ICML 2026) and Flow Matching Neural Processes (NeurIPS 2025) on three-point completion",
+  "frozen_utc": "2026-10-06T05:02:15Z",
+  "frozen_local": "2026-10-06T14:02:15+09:00",
+  "decision": "Whether either curve-library probabilistic opponent beats AnchorBoost on k = 3 completion. A win is the headline of this item and goes to the controller to be merged into the method; a tie or loss is reported as measured.",
+  "win_rule": "Opponent minus AnchorBoost on the 194-chemical cohort, kit score.py, identity-group 95% interval (189 groups, 4,000 resamples, seed 0) as primary. Win: interval entirely below 0. Tie: interval contains 0. Loss: interval entirely above 0. The chemical-resample interval is reported beside it.",
+  "benchmark": {
+    "kit": "<local-input>/kit",
+    "task": "243 chemicals x 35 concentrations x 68 outputs; k = 3 revealed concentrations, all 68 outputs at each; predict every other tested concentration. Five fixed designs per chemical (tasks/k3_designs.csv).",
+    "folds": "Fold 0 (49 chemicals) only selects and freezes each opponent's configuration, with models trained on folds 1-4. Folds 1-4 (194 chemicals) are reported; to predict fold f, train on every chemical with fold != f, fold 0 included.",
+    "allowed_inputs": "All cells of the training chemicals plus the revealed cells of the test design. Responses of the test chemical at other concentrations are targets only.",
+    "metric": "kit score.py: per design MAE over valid query cells, mean over the five designs, equal weight over chemicals.",
+    "cohorts": "primary_194 (folds 1-4) headline; common_193 (drops Phenobarbital) for the CNP, Gaussian-process and Hill-EB contrasts.",
+    "prediction_files": "One .npz per opponent with key k3 aligned to tasks/k3_queries.csv, so an outsider reproduces every number with `python score.py <file> --versus all`."
+  },
+  "references_k3": {
+    "AnchorBoost_194": 1.161,
+    "CNP_193": 1.192,
+    "Gaussian_process_per_output_193": 1.322,
+    "loglinear_interpolation_194": 1.345,
+    "Hill_EB_193": 1.36,
+    "kNN_example_194": 1.407,
+    "S2_TNP_194": "1.2013 (three-seed ensemble, kit-scored; TNP minus AnchorBoost +0.0407, identity interval [+0.0143, +0.0716]); sota_baselines_2/results/kit/tnp.npz",
+    "S2_TNP_interim_reading_in_task_book": "folds 1-2, three-seed mean 1.244, same folds AnchorBoost 1.185 (interim reading before folds 3-4 finished)"
+  },
+  "expected_before_run": {
+    "source": "<redacted-local-metadata>",
+    "empirical_gp_k3_mae": "<redacted-local-metadata>",
+    "flownp_k3_mae": "<redacted-local-metadata>",
+    "if_an_opponent_wins": "headline of results.md and of the group done message, controller tagged directly"
+  },
+  "empirical_gp": {
+    "paper": "Lin, Ament, Tiao, Eriksson, Balandat, Bakshy. Empirical Gaussian Processes. ICML 2026, arXiv 2602.12082. Code not released; written here from Sections 3.4-3.5.",
+    "sample_paths": "Each (training chemical, output) curve of level means over log10 concentration is one historical sample path, observed at the chemical's own 7-13 tested concentrations.",
+    "reference_set": "Z = the 35 tested log10 concentrations of the kit (the union of all observation locations). Every observation and every query lies on Z, so the paper's kernel-interpolation weights W_i = k(X_i, Z) k(Z, Z)^-1 are exact selection matrices and no residual interpolation is needed at prediction time.",
+    "estimation": "The paper's closed-form EM (E-step: Gaussian posterior of the latent values on Z given each sample's observed entries; M-step: mu = mean of posterior means, Sigma = mean of posterior covariances plus centred outer products). Initialisation: per-output constant mean; base kernel Matern-5/2 in log10 concentration with lengthscale 1.0 and the pooled marginal variance. Observation noise fixed at 1e-3 times the marginal variance (on Z the predictive mean at a tested concentration does not depend on how the observed variance splits into latent and noise parts). Stop when the largest change of mu and Sigma, relative to the marginal standard deviation and variance, falls below 1e-6, at most 500 iterations.",
+    "prediction": "Condition each output on its valid revealed values: mean_Q = mu_Q + Sigma_QR (Sigma_RR + s2 I)^-1 (y_R - mu_R); an output with no valid revealed value gets mu_Q. Predictive variance of the observed level mean: Sigma_QQ - Sigma_QR (Sigma_RR + s2 I)^-1 Sigma_RQ + s2.",
+    "selection_on_fold_0": [
+      "per_output: one mu_o (35) and Sigma_o (35 x 35) per output, EM over that output's training curves",
+      "shared: one mu_o (35) per output, a fixed per-output scale s_o (SD of the output's training level means) and one concentration covariance Sigma shared by all 68 outputs on the standardised residuals, EM over every (chemical, output) curve"
+    ],
+    "frozen_choice": "the variant with the lower fold-0 MAE, frozen before folds 1-4 are touched",
+    "interval_report": "90% interval mean +- 1.6449 sd per query cell; coverage over the valid target cells of folds 1-4 (cell-level and mean per chemical), nominal 0.90.",
+    "secondary": "k = 1, 2 and 4 on folds 1-4 with the frozen variant, scored by the kit against AnchorBoost and interpolation; this says whether the empirical prior gains or loses relative to AnchorBoost as the number of measured concentrations changes."
+  },
+  "flownp": {
+    "paper": "Hussen Abu Hamad, Dan Rosenbaum. Flow Matching Neural Processes. NeurIPS 2025, arXiv 2512.23853.",
+    "code": "github.com/danrsm/flowNP commit f3403b6479dad33a7b93ba6edcf93c53d40f8e65, cloned to vendor/flownp. The repository has no LICENSE file: it is used only locally for this comparison and no FlowNP code enters the public baseline package.",
+    "port": "code/flownp_model.py follows models/fnp.py: sinusoidal encodings of x and flow time t (dim_posenc 20, i.e. 10 frequencies per scalar), MLP embedder (emb_depth 4), nn.TransformerEncoder with full self-attention over context and target tokens, two-layer velocity head, per-token flow time t ~ U[0,1], conditional-OT path y_t = t y1 + (1 - t) y0, squared-error loss on y1 - y0, and the repository's predict(): 100 Euler steps from N(0, I) with alpha_t = 1 + t(1 - t) and sigma_t = 0.2 sqrt(t(1 - t)). An equivalence check loads the authors' FNP class (stand-ins for the flow_matching and attrdictionary imports, which the velocity path does not use) and compares velocities with the port on identical weights.",
+    "official_sizes": "configs/gp/fnp.yaml: d_model 64, emb_depth 4, dim_feedforward 128, nhead 4, dropout 0, num_layers 6, dim_posenc 20, timesteps 100.",
+    "adaptations": [
+      "Data, folds, designs and episodes come from release/chip_forecast.py exactly as S2's TNP: wells as tokens, context = wells of k ~ U{0..min(5, L-1)} sampled levels, targets = every well of the chemical.",
+      "A context token carries [enc(x), enc(1), y*m, m] and a target token [enc(x), enc(t), y_t, 1], because single (concentration, output) cells are unmeasured; the loss is averaged over valid target cells only. Padded tokens are removed by a key-padding mask.",
+      "Responses are standardised per output with the mean and SD of the training-fold wells; predictions are transformed back.",
+      "x is the dose scaling of S2 and the published CNP, (log10 c + 0.5) / 1.5."
+    ],
+    "training_regime": "S2's TNP regime: 4,000 steps, batch 32, AdamW lr 1e-3 wd 1e-4, OneCycle pct_start 0.1, gradient clipping 1.0, seeds 0, 1, 2.",
+    "prediction": "Per design: context wells as context tokens; target tokens at every context well and 3 replicate tokens at each query concentration; 64 joint samples; a level-mean sample is the mean of the 3 replicate draws. Point prediction per seed: mean or median over the 64 level-mean samples (chosen on fold 0); the reported prediction is the arithmetic mean of the three seeds' point predictions, as for S2's TNP and CNP.",
+    "selection_on_fold_0": [
+      "fnp_official: official sizes, no interpolation features",
+      "fnp_interp: official sizes; every token also carries S2's interpolation block (standardised log-linear interpolation of the context level means at the token's concentration plus the distance to the nearest context level), as S2's selected TNP",
+      "fnp_interp_resid: as fnp_interp, with the flow run on the residual y - interpolation (the flow form of the interpolation-gated decoder)",
+      "fnp_wide_interp: fnp_interp with d_model 128 and dim_feedforward 256"
+    ],
+    "frozen_choice": "the (candidate, point estimator) pair with the lowest fold-0 MAE, one seed (0), frozen before any test fold is fitted",
+    "secondary": "FlowNP minus S2's TNP and minus AnchorBoost, paired identity-group intervals on the 194 cohort; 90% sample-quantile interval coverage of the level means as a by-product of the 64 samples."
+  },
+  "inputs_sha256": {
+    "kit/data/matrix.npz": "41aa26f121816daba68c7ebda49e8360d18145baaa0166dc2eb2d1d4033a9bcf",
+    "kit/data/chemicals.csv": "afc06a49b5c03c6aaf34e4074d39dbc0acff0b7280222e81e1d5121ca9f95f9d",
+    "kit/tasks/k3_designs.csv": "edfdb99e23acb03646b3ea3ca65a7307878579474a10ca71a48546c06b48c014",
+    "kit/tasks/k3_queries.csv": "ddbc553bb3952cba810dd9e8431e58943bbfff55a6f9b7f1f91b731c2268ac50",
+    "kit/score.py": "0669f0ddc169ef6f281984778b3de4f0e88ce4e535e44da8cf7c4a19ada5e7c6",
+    "kit/reference/per_chemical_mae.csv": "f2f976b8445595016ea896a2252304a7d4ebdd518c9bea7e0c3b300867ec3a80",
+    "release/chip_forecast.py": "3d02dd3a1bc57e8c53f701a6005c8d5e9d8ad6a15a57cdec3f22b27066015897",
+    "release/.cache/neurochip_twin/nfa_tasks.npz": "e1f056ef33f568052fb8dfdba6e095f7b575c7f78d96768e34469918559008d2",
+    "sota_baselines_2/results/kit/tnp.npz": "c4973dbb9dffdab87d880160731dd8cc1ab05b5f6d5d2e073a5a3a4553e8c753",
+    "vendor/flownp/models/fnp.py": "00e0153a8f720fb9bad10c70fc2c62789c3a231cda374bf73e2a3eeeca61ea5c",
+    "vendor/flownp/configs/gp/fnp.yaml": "ea904c063d10b59c31ce90270246d8c62bb7a6cc04be2e3e35c48a9eb0c0e5ca"
+  }
+}

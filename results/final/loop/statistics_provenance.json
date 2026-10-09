@@ -1,0 +1,21 @@
+{
+  "schema": "final.statistics.provenance.v1",
+  "code_sources": [
+    {
+      "source": "scale_A/joint/run_joint_scale.py",
+      "original_sha256": "dd48d4b369f00e63b31870ecd0955b0a55362574c7807e9db6be9f422b3689ae",
+      "functions": [
+        "aggregate",
+        "bootstraps"
+      ]
+    }
+  ],
+  "adaptation": "Statistics functions extracted with equivalent arithmetic; repository-relative input readers and public hash checks replace local loaders. Fitting and data acquisition functions are omitted.",
+  "unit": "identity group",
+  "bootstrap": {
+    "replicates": 4000,
+    "seed": 0,
+    "draw": "first draw, sorted identity groups"
+  },
+  "verification_scope": "Saved inputs and public file hashes; aggregate counts and paired intervals are recomputed. Predictor fitting is outside this command."
+}

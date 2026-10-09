@@ -1,0 +1,2539 @@
+{
+  "schema": "baseline_methods.v1",
+  "cohort": {
+    "chemicals": 194,
+    "identity_groups": 189,
+    "folds": [
+      1,
+      2,
+      3,
+      4
+    ]
+  },
+  "references": [
+    "anchorboost_public",
+    "anchorboost_single",
+    "anchorboost_team"
+  ],
+  "methods": [
+    {
+      "id": "anchorboost_public",
+      "name": "AnchorBoost (public)",
+      "year": 2026,
+      "venue": "Competition implementation",
+      "family": "gradient_boosting",
+      "role": "ours",
+      "answer_seen": false,
+      "source_url": "https://github.com/logxio/ooc-evaluation-audit",
+      "code_license": "MIT",
+      "weights_license": "self_trained_or_not_applicable",
+      "commercial_use": true,
+      "result_source_directory": "sota_baselines/kit/reference",
+      "source_files": [
+        {
+          "path": "sota_baselines/kit/reference/per_chemical_mae.csv",
+          "sha256": "f2f976b8445595016ea896a2252304a7d4ebdd518c9bea7e0c3b300867ec3a80"
+        }
+      ],
+      "available_k": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "bootstrap_replicates": 4000,
+      "bootstrap_seed": 0,
+      "notes": "Frozen public AnchorBoost results, k=3 MAE 1.160612.",
+      "paper_url": null,
+      "license_checked_date": "2026-10-09",
+      "components": [
+        {
+          "name": "own",
+          "code_license": "MIT",
+          "weights_license": "self_trained_or_not_applicable",
+          "commercial_use": true,
+          "source_url": "https://github.com/logxio/ooc-evaluation-audit",
+          "license_evidence_url": "https://github.com/logxio/ooc-evaluation-audit/blob/main/LICENSE"
+        }
+      ],
+      "publication_status": "task_specific_adaptation",
+      "comparable": true,
+      "protocol": "standard_194",
+      "csv_sha256": {
+        "1": "8474b5263662f16a3d8f31fbb3c7bfe1e81c0894068d30cbb0088cdbc80d76be",
+        "2": "4106db1a0d2d0b7adfec36b45f9ad8f4087f99d8669369e05d4bd08aa9ef6940",
+        "3": "0efd9534178a2e1ffb4141bd45c6561188d9bfb804d449d06c3c8ceb00f6c8ca",
+        "4": "5ef3fdb91f6c7699db114d058202a32b842c4bd96ca3d4fbc095e1d92385cff6"
+      }
+    },
+    {
+      "id": "tabpfn2",
+      "name": "TabPFN-2 + AnchorBoost features",
+      "year": 2025,
+      "venue": "Nature",
+      "family": "tabular_foundation",
+      "role": "opponent",
+      "answer_seen": false,
+      "source_url": "https://github.com/PriorLabs/TabPFN",
+      "code_license": "Apache-2.0",
+      "weights_license": "Prior Labs License 1.1 (attribution)",
+      "commercial_use": true,
+      "result_source_directory": "sota_baselines/kit/reference",
+      "source_files": [
+        {
+          "path": "sota_baselines/kit/reference/per_chemical_mae.csv",
+          "sha256": "f2f976b8445595016ea896a2252304a7d4ebdd518c9bea7e0c3b300867ec3a80"
+        }
+      ],
+      "available_k": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "bootstrap_replicates": 4000,
+      "bootstrap_seed": 0,
+      "notes": "",
+      "paper_url": "https://doi.org/10.1038/s41586-024-08328-6",
+      "license_checked_date": "2026-10-09",
+      "components": [
+        {
+          "name": "tabpfn2",
+          "code_license": "Apache-2.0",
+          "weights_license": "Prior Labs License 1.1 (attribution)",
+          "commercial_use": true,
+          "source_url": "https://github.com/PriorLabs/TabPFN",
+          "license_evidence_url": "https://huggingface.co/Prior-Labs/TabPFN-v2-reg/blob/main/LICENSE.txt"
+        }
+      ],
+      "publication_status": "published_method_or_preprint",
+      "comparable": true,
+      "protocol": "standard_194",
+      "csv_sha256": {
+        "1": "0015fcdac8a30fa0170d640958565f3ea34cfbebfaeecb87c4661b6eb59e97f1",
+        "2": "3dd3ae9034caadc9573813dcad7aed392f2a9bccf652e3b3b42d8fe0c5754528",
+        "3": "ac35cee5e7b79349156e46940812932f18aee4050fd7713de18c6b259adb6e94",
+        "4": "7e24b4b8d114f21583e41be755eb7a982e0dae0623919289f900261bc0c49e86"
+      }
+    },
+    {
+      "id": "tabpfn35",
+      "name": "TabPFN-3.5 + AnchorBoost features",
+      "year": 2026,
+      "venue": "arXiv",
+      "family": "tabular_foundation",
+      "role": "opponent",
+      "answer_seen": false,
+      "source_url": "https://github.com/PriorLabs/TabPFN",
+      "code_license": "Apache-2.0",
+      "weights_license": "TABPFN-3.5 Non-Commercial License v1.0",
+      "commercial_use": false,
+      "result_source_directory": "sota_baselines/kit/reference",
+      "source_files": [
+        {
+          "path": "sota_baselines/kit/reference/per_chemical_mae.csv",
+          "sha256": "f2f976b8445595016ea896a2252304a7d4ebdd518c9bea7e0c3b300867ec3a80"
+        }
+      ],
+      "available_k": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "bootstrap_replicates": 4000,
+      "bootstrap_seed": 0,
+      "notes": "",
+      "paper_url": "https://arxiv.org/abs/2609.17895",
+      "license_checked_date": "2026-10-09",
+      "components": [
+        {
+          "name": "tabpfn35",
+          "code_license": "Apache-2.0",
+          "weights_license": "TABPFN-3.5 Non-Commercial License v1.0",
+          "commercial_use": false,
+          "source_url": "https://github.com/PriorLabs/TabPFN",
+          "license_evidence_url": "https://huggingface.co/Prior-Labs/tabpfn_3_5/blob/main/LICENSE"
+        }
+      ],
+      "publication_status": "published_method_or_preprint",
+      "comparable": true,
+      "protocol": "standard_194",
+      "csv_sha256": {
+        "1": "4fbd8e56dbb217ccca4d43b5f89766d5d664d7cb9b3cd4b94a37f0c33257aac0",
+        "2": "5aee01517afcd6ecc41122817ec592ce67a12d906a0c643b4b1f4a48d57d305d",
+        "3": "9f4543aaa063b2fbc4ee12da6e47545f76f6e3cc6608bb22d6e6b7e6963d2998",
+        "4": "d8591c6909e4050118cd13abc9d3f973f9d9ec868f55f0e0983d4cb17689e5a1"
+      }
+    },
+    {
+      "id": "tabicl2",
+      "name": "TabICLv2",
+      "year": 2026,
+      "venue": "ICML",
+      "family": "tabular_foundation",
+      "role": "opponent",
+      "answer_seen": false,
+      "source_url": "https://github.com/soda-inria/tabicl",
+      "code_license": "BSD-3-Clause",
+      "weights_license": "BSD-3-Clause",
+      "commercial_use": true,
+      "result_source_directory": "sota_baselines/kit/reference",
+      "source_files": [
+        {
+          "path": "sota_baselines/kit/reference/per_chemical_mae.csv",
+          "sha256": "f2f976b8445595016ea896a2252304a7d4ebdd518c9bea7e0c3b300867ec3a80"
+        }
+      ],
+      "available_k": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "bootstrap_replicates": 4000,
+      "bootstrap_seed": 0,
+      "notes": "",
+      "paper_url": "https://arxiv.org/abs/2602.11139",
+      "license_checked_date": "2026-10-09",
+      "components": [
+        {
+          "name": "tabicl2",
+          "code_license": "BSD-3-Clause",
+          "weights_license": "BSD-3-Clause",
+          "commercial_use": true,
+          "source_url": "https://github.com/soda-inria/tabicl",
+          "license_evidence_url": "https://huggingface.co/jingang/TabICL/raw/main/README.md"
+        }
+      ],
+      "publication_status": "published_method_or_preprint",
+      "comparable": true,
+      "protocol": "standard_194",
+      "csv_sha256": {
+        "1": "43ee97ed71cc4def02c6b0f4f18681b06d9ae3c010d9fca12cd336c9dd9f393d",
+        "2": "e23722dd8997a2274ea2569fef4d27a2954129163f1d977ab5637a68f771cd40",
+        "3": "79d94f8073a16e81ae5599d3d94a2709380daac1a5998fdda0457c79812359dc",
+        "4": "ce11d0dad4f652338812561c7af759688a260f2a15a548e1e4cd6fd52b573603"
+      }
+    },
+    {
+      "id": "gp",
+      "name": "Gaussian process",
+      "year": null,
+      "venue": "Classical method; evaluated implementation 2026",
+      "family": "curve_fitting",
+      "role": "opponent",
+      "answer_seen": false,
+      "source_url": "https://github.com/logxio/ooc-evaluation-audit",
+      "code_license": "MIT",
+      "weights_license": "self_trained_or_not_applicable",
+      "commercial_use": true,
+      "result_source_directory": "sota_baselines/kit/reference",
+      "source_files": [
+        {
+          "path": "sota_baselines/kit/reference/per_chemical_mae.csv",
+          "sha256": "f2f976b8445595016ea896a2252304a7d4ebdd518c9bea7e0c3b300867ec3a80"
+        }
+      ],
+      "available_k": [
+        3
+      ],
+      "bootstrap_replicates": 4000,
+      "bootstrap_seed": 0,
+      "notes": "",
+      "paper_url": null,
+      "license_checked_date": "2026-10-09",
+      "components": [
+        {
+          "name": "own",
+          "code_license": "MIT",
+          "weights_license": "self_trained_or_not_applicable",
+          "commercial_use": true,
+          "source_url": "https://github.com/logxio/ooc-evaluation-audit",
+          "license_evidence_url": "https://github.com/logxio/ooc-evaluation-audit/blob/main/LICENSE"
+        }
+      ],
+      "publication_status": "classical_baseline",
+      "comparable": true,
+      "protocol": "standard_194",
+      "csv_sha256": {
+        "3": "1b20169fd5bcdc03acf5c27561830685fc57e2bc53d9b127a7e12229d26b3b69"
+      }
+    },
+    {
+      "id": "hill_eb",
+      "name": "Hill empirical Bayes",
+      "year": null,
+      "venue": "Classical method; evaluated implementation 2026",
+      "family": "curve_fitting",
+      "role": "opponent",
+      "answer_seen": false,
+      "source_url": "https://github.com/logxio/ooc-evaluation-audit",
+      "code_license": "MIT",
+      "weights_license": "self_trained_or_not_applicable",
+      "commercial_use": true,
+      "result_source_directory": "sota_baselines/kit/reference",
+      "source_files": [
+        {
+          "path": "sota_baselines/kit/reference/per_chemical_mae.csv",
+          "sha256": "f2f976b8445595016ea896a2252304a7d4ebdd518c9bea7e0c3b300867ec3a80"
+        }
+      ],
+      "available_k": [
+        3
+      ],
+      "bootstrap_replicates": 4000,
+      "bootstrap_seed": 0,
+      "notes": "",
+      "paper_url": null,
+      "license_checked_date": "2026-10-09",
+      "components": [
+        {
+          "name": "own",
+          "code_license": "MIT",
+          "weights_license": "self_trained_or_not_applicable",
+          "commercial_use": true,
+          "source_url": "https://github.com/logxio/ooc-evaluation-audit",
+          "license_evidence_url": "https://github.com/logxio/ooc-evaluation-audit/blob/main/LICENSE"
+        }
+      ],
+      "publication_status": "classical_baseline",
+      "comparable": true,
+      "protocol": "standard_194",
+      "csv_sha256": {
+        "3": "9e47569ec921b1e0dadba0216042dc43c8c15a4067d48986b5a64347173b5f72"
+      }
+    },
+    {
+      "id": "interpolation",
+      "name": "Log-linear interpolation",
+      "year": null,
+      "venue": "Classical method; evaluated implementation 2026",
+      "family": "interpolation",
+      "role": "opponent",
+      "answer_seen": false,
+      "source_url": "https://github.com/logxio/ooc-evaluation-audit",
+      "code_license": "MIT",
+      "weights_license": "self_trained_or_not_applicable",
+      "commercial_use": true,
+      "result_source_directory": "sota_baselines/kit/reference",
+      "source_files": [
+        {
+          "path": "sota_baselines/kit/reference/per_chemical_mae.csv",
+          "sha256": "f2f976b8445595016ea896a2252304a7d4ebdd518c9bea7e0c3b300867ec3a80"
+        }
+      ],
+      "available_k": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "bootstrap_replicates": 4000,
+      "bootstrap_seed": 0,
+      "notes": "",
+      "paper_url": null,
+      "license_checked_date": "2026-10-09",
+      "components": [
+        {
+          "name": "own",
+          "code_license": "MIT",
+          "weights_license": "self_trained_or_not_applicable",
+          "commercial_use": true,
+          "source_url": "https://github.com/logxio/ooc-evaluation-audit",
+          "license_evidence_url": "https://github.com/logxio/ooc-evaluation-audit/blob/main/LICENSE"
+        }
+      ],
+      "publication_status": "classical_baseline",
+      "comparable": true,
+      "protocol": "standard_194",
+      "csv_sha256": {
+        "1": "ca4b5e85bacabc59c28930e2a42faef270185f79608c881a9630df6138505afe",
+        "2": "bdf668a29508e5f3401bbb7061236faaff2de1728503af84797eb0be52f92a80",
+        "3": "eceafd2d3f51535b1e72a6c44c68cd63c5d45da2e00d05f068c46e9c914ef5db",
+        "4": "8f2870ef074c34fdcdefdad756ff9de4416df2255f53afb2764a97246a756ce9"
+      }
+    },
+    {
+      "id": "analog_knn",
+      "name": "Analog nearest neighbors",
+      "year": null,
+      "venue": "Classical method; evaluated implementation 2026",
+      "family": "neighbors",
+      "role": "opponent",
+      "answer_seen": false,
+      "source_url": "https://github.com/logxio/ooc-evaluation-audit",
+      "code_license": "MIT",
+      "weights_license": "self_trained_or_not_applicable",
+      "commercial_use": true,
+      "result_source_directory": "sota_baselines/kit/reference",
+      "source_files": [
+        {
+          "path": "sota_baselines/kit/reference/per_chemical_mae.csv",
+          "sha256": "f2f976b8445595016ea896a2252304a7d4ebdd518c9bea7e0c3b300867ec3a80"
+        }
+      ],
+      "available_k": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "bootstrap_replicates": 4000,
+      "bootstrap_seed": 0,
+      "notes": "",
+      "paper_url": null,
+      "license_checked_date": "2026-10-09",
+      "components": [
+        {
+          "name": "own",
+          "code_license": "MIT",
+          "weights_license": "self_trained_or_not_applicable",
+          "commercial_use": true,
+          "source_url": "https://github.com/logxio/ooc-evaluation-audit",
+          "license_evidence_url": "https://github.com/logxio/ooc-evaluation-audit/blob/main/LICENSE"
+        }
+      ],
+      "publication_status": "classical_baseline",
+      "comparable": true,
+      "protocol": "standard_194",
+      "csv_sha256": {
+        "1": "b1d2d276af8caba220db339a1e54706d041077b0431365bca1576a7802b6c5e9",
+        "2": "dad7f8f745da667e80657f5d8e2256f3ca4985a2332cce2331e94b350927cbc8",
+        "3": "d3b2df63289c3b4b1cfa9cce966e2cdbaff719ee31a17d6544a645234fcd9f81",
+        "4": "5c94d068fd3ff1822946d543d047fa95ab20d403044e81212b83af920d1c284b"
+      }
+    },
+    {
+      "id": "softimpute",
+      "name": "SoftImpute",
+      "year": 2010,
+      "venue": "JMLR",
+      "family": "matrix_completion",
+      "role": "opponent",
+      "answer_seen": false,
+      "source_url": "https://github.com/logxio/ooc-evaluation-audit",
+      "code_license": "MIT (own NumPy implementation)",
+      "weights_license": "not_applicable",
+      "commercial_use": true,
+      "result_source_directory": "sota_baselines/kit/reference",
+      "source_files": [
+        {
+          "path": "sota_baselines/kit/reference/per_chemical_mae.csv",
+          "sha256": "f2f976b8445595016ea896a2252304a7d4ebdd518c9bea7e0c3b300867ec3a80"
+        }
+      ],
+      "available_k": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "bootstrap_replicates": 4000,
+      "bootstrap_seed": 0,
+      "notes": "",
+      "paper_url": "https://www.jmlr.org/papers/v11/mazumder10a.html",
+      "license_checked_date": "2026-10-09",
+      "components": [
+        {
+          "name": "softimpute",
+          "code_license": "MIT (own NumPy implementation)",
+          "weights_license": "not_applicable",
+          "commercial_use": true,
+          "source_url": "https://github.com/logxio/ooc-evaluation-audit",
+          "license_evidence_url": "https://github.com/logxio/ooc-evaluation-audit/blob/main/LICENSE"
+        }
+      ],
+      "publication_status": "published_method_or_preprint",
+      "comparable": true,
+      "protocol": "standard_194",
+      "csv_sha256": {
+        "1": "ab2a5bcc2de6c481c30d83937e477760f78cce83121fbcba16faeac4732d374f",
+        "2": "a6e22769d724d678c71fbe2881922940f817df0deecec04d37564360b62a7da8",
+        "3": "a1400cb95d2c8f3f04e849cdb82adaeb7ecc9d5f6523207856166512d047d4e9",
+        "4": "677da5d883dc9236049be8421525ccc7ad3f335953bcc2ab85e913b99fdb0cfc"
+      }
+    },
+    {
+      "id": "cp_tensor",
+      "name": "CP tensor",
+      "year": 2025,
+      "venue": "arXiv (tensor completion comparator)",
+      "family": "tensor_completion",
+      "role": "opponent",
+      "answer_seen": false,
+      "source_url": "https://github.com/logxio/ooc-evaluation-audit",
+      "code_license": "MIT (own NumPy implementation)",
+      "weights_license": "not_applicable",
+      "commercial_use": true,
+      "result_source_directory": "sota_baselines/kit/reference",
+      "source_files": [
+        {
+          "path": "sota_baselines/kit/reference/per_chemical_mae.csv",
+          "sha256": "f2f976b8445595016ea896a2252304a7d4ebdd518c9bea7e0c3b300867ec3a80"
+        }
+      ],
+      "available_k": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "bootstrap_replicates": 4000,
+      "bootstrap_seed": 0,
+      "notes": "",
+      "paper_url": "https://arxiv.org/abs/2507.03024",
+      "license_checked_date": "2026-10-09",
+      "components": [
+        {
+          "name": "cp_tensor",
+          "code_license": "MIT (own NumPy implementation)",
+          "weights_license": "not_applicable",
+          "commercial_use": true,
+          "source_url": "https://github.com/logxio/ooc-evaluation-audit",
+          "license_evidence_url": "https://github.com/logxio/ooc-evaluation-audit/blob/main/LICENSE"
+        }
+      ],
+      "publication_status": "published_method_or_preprint",
+      "comparable": true,
+      "protocol": "standard_194",
+      "csv_sha256": {
+        "1": "8c841550624bee965b8920cfae53a921ade8974a75bef61df2354e96765bed68",
+        "2": "a5bccdc0957cbb05078539abfe7b137dc65e9f67defcbf77350f8fad1dd9a4d6",
+        "3": "8aa7dadf4f50d98173106bb407210a9c98752103d543f01bca215d8496374ed7",
+        "4": "66c689c8f423da04ee85985d3e957cbd08afab843c790e08290335eb926ff62f"
+      }
+    },
+    {
+      "id": "cnp_checkpoint",
+      "name": "CNP (released checkpoints; identity-clean subset)",
+      "year": 2018,
+      "venue": "ICML",
+      "family": "neural_process",
+      "role": "opponent",
+      "answer_seen": false,
+      "source_url": "https://github.com/Agnuxo1/neurochip-twin",
+      "code_license": "MIT",
+      "weights_license": "MIT (released repository checkpoints)",
+      "commercial_use": true,
+      "result_source_directory": "sota_baselines/kit/reference",
+      "source_files": [
+        {
+          "path": "sota_baselines/kit/reference/per_chemical_mae.csv",
+          "sha256": "f2f976b8445595016ea896a2252304a7d4ebdd518c9bea7e0c3b300867ec3a80"
+        }
+      ],
+      "available_k": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "bootstrap_replicates": 4000,
+      "bootstrap_seed": 0,
+      "notes": "Phenobarbital excluded because its salt occurs in training; paired cohort is 193 chemicals. Source checkpoint predictions retain their original split.",
+      "paper_url": "https://proceedings.mlr.press/v80/garnelo18a.html",
+      "license_checked_date": "2026-10-09",
+      "components": [
+        {
+          "name": "cnp",
+          "code_license": "MIT",
+          "weights_license": "MIT (repository checkpoint) / self-trained",
+          "commercial_use": true,
+          "source_url": "https://github.com/Agnuxo1/neurochip-twin",
+          "license_evidence_url": "https://github.com/Agnuxo1/neurochip-twin"
+        }
+      ],
+      "publication_status": "published_method_or_preprint",
+      "comparable": true,
+      "protocol": "standard_194",
+      "csv_sha256": {
+        "1": "cfcb119c8668d8ba302c9ed8732c51e7664c242538fdb753901a763f15a0d1af",
+        "2": "0463d68aa0508d3368b2ac6cd213bc53781d214c6c28d539a15552fe4e409d59",
+        "3": "d803430312326d3b490556cf86a63633091bd7eb038020053023fd66dc0eaa7b",
+        "4": "5e6cc399673d9927e309e093bfc7200298ab8e77b30620f23ba2437d2a7c9718"
+      }
+    },
+    {
+      "id": "tabpfn35_chemeleon",
+      "name": "TabPFN-3.5 + AnchorBoost + CheMeleon (P7)",
+      "year": 2026,
+      "venue": "arXiv",
+      "family": "tabular_foundation",
+      "role": "opponent",
+      "answer_seen": false,
+      "source_url": "https://github.com/PriorLabs/TabPFN",
+      "code_license": "Apache-2.0; MIT",
+      "weights_license": "TABPFN-3.5 Non-Commercial License v1.0; MIT",
+      "commercial_use": false,
+      "result_source_directory": "sota_baselines_3/results/tabpfn35_chemeleon_median",
+      "source_files": [
+        {
+          "path": "sota_baselines_3/results/tabpfn35_chemeleon_median/per_chemical.csv",
+          "sha256": "e293564f78a8c3c131d64741ccc1e026f271910b573c4b0fb3e7d8f508561911"
+        }
+      ],
+      "available_k": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "bootstrap_replicates": 4000,
+      "bootstrap_seed": 0,
+      "notes": "",
+      "paper_url": "https://arxiv.org/abs/2609.17895",
+      "license_checked_date": "2026-10-09",
+      "components": [
+        {
+          "name": "tabpfn35",
+          "code_license": "Apache-2.0",
+          "weights_license": "TABPFN-3.5 Non-Commercial License v1.0",
+          "commercial_use": false,
+          "source_url": "https://github.com/PriorLabs/TabPFN",
+          "license_evidence_url": "https://huggingface.co/Prior-Labs/tabpfn_3_5/blob/main/LICENSE"
+        },
+        {
+          "name": "chemeleon",
+          "code_license": "MIT",
+          "weights_license": "MIT",
+          "commercial_use": true,
+          "source_url": "https://github.com/JacksonBurns/chemeleon",
+          "license_evidence_url": "https://zenodo.org/api/records/15460715"
+        }
+      ],
+      "publication_status": "published_method_or_preprint",
+      "comparable": true,
+      "protocol": "standard_194",
+      "csv_sha256": {
+        "1": "c82085b0b4360bd8cf48da7790cded1ea864dc132e1c3a5856b664756dd22002",
+        "2": "beb09784512b086058a626a6fd381d96248fe4f5adc87268ad6f1276705c69ff",
+        "3": "f4bfde5311b6dcc77aacf8a749b2cd60f856c5d81bf2177259a09a33f7bc4c36",
+        "4": "6c5adba081697f61056c6b4730213a63db3ccaf799da1b2302e8a4072db40beb"
+      }
+    },
+    {
+      "id": "limix2_chemeleon",
+      "name": "LimiX-2 + AnchorBoost + CheMeleon",
+      "year": 2026,
+      "venue": "arXiv",
+      "family": "tabular_foundation",
+      "role": "opponent",
+      "answer_seen": false,
+      "source_url": "https://github.com/limix-ldm-ai/LimiX",
+      "code_license": "Stable AI Technology License v1.0; MIT",
+      "weights_license": "StableAI LimiX Non-Commercial License v1.0; MIT",
+      "commercial_use": false,
+      "result_source_directory": "sota_baselines_3/results/limix2_chemeleon_median",
+      "source_files": [
+        {
+          "path": "sota_baselines_3/results/limix2_chemeleon_median/per_chemical.csv",
+          "sha256": "b2d9ba6e8c6bb592c0c4e6bea10a8e7d915acd3ec58b6843dc2fd0a42a0a314f"
+        }
+      ],
+      "available_k": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "bootstrap_replicates": 4000,
+      "bootstrap_seed": 0,
+      "notes": "",
+      "paper_url": "https://arxiv.org/abs/2609.17488",
+      "license_checked_date": "2026-10-09",
+      "components": [
+        {
+          "name": "limix2",
+          "code_license": "Stable AI Technology License v1.0",
+          "weights_license": "StableAI LimiX Non-Commercial License v1.0",
+          "commercial_use": false,
+          "source_url": "https://github.com/limix-ldm-ai/LimiX",
+          "license_evidence_url": "https://huggingface.co/stable-ai/LimiX-2"
+        },
+        {
+          "name": "chemeleon",
+          "code_license": "MIT",
+          "weights_license": "MIT",
+          "commercial_use": true,
+          "source_url": "https://github.com/JacksonBurns/chemeleon",
+          "license_evidence_url": "https://zenodo.org/api/records/15460715"
+        }
+      ],
+      "publication_status": "published_method_or_preprint",
+      "comparable": true,
+      "protocol": "standard_194",
+      "csv_sha256": {
+        "1": "15bed2e414600977a6e2dcb5d50268a7b3ea86d6dbff11d81e79f9061ffb31bd",
+        "2": "eff7fb1cd6aeb24b666dd8e00eba82e6c071a14d3f11a5905709a5e945f58600",
+        "3": "ce9ea10634cfb3abd4b3fb6f5daa36509794e4ce9aeef4fd5f7afe921188d2d0",
+        "4": "551e8be74200457d2287e80f2f8d010cb5ba27a53e0e5a51fd494213f38893b2"
+      }
+    },
+    {
+      "id": "tnp",
+      "name": "TNP",
+      "year": 2022,
+      "venue": "ICML",
+      "family": "neural_process",
+      "role": "opponent",
+      "answer_seen": false,
+      "source_url": "https://github.com/tung-nd/TNP-pytorch",
+      "code_license": "MIT",
+      "weights_license": "self_trained",
+      "commercial_use": true,
+      "result_source_directory": "sota_baselines_2/results/kit/tnp",
+      "source_files": [
+        {
+          "path": "sota_baselines_2/results/kit/tnp/per_chemical.csv",
+          "sha256": "0ab1dfde46a8fe2dfcdb49197cd05d676f738f249748e0957b575739bc7da5d8"
+        }
+      ],
+      "available_k": [
+        3
+      ],
+      "bootstrap_replicates": 10000,
+      "bootstrap_seed": 0,
+      "notes": " Original evaluation used 10000 chemical resamples; this scoreboard preserves that replicate count and uses identity-cluster resampling as specified.",
+      "paper_url": null,
+      "license_checked_date": "2026-10-09",
+      "components": [
+        {
+          "name": "tnp",
+          "code_license": "MIT",
+          "weights_license": "self_trained",
+          "commercial_use": true,
+          "source_url": "https://github.com/tung-nd/TNP-pytorch",
+          "license_evidence_url": "https://github.com/tung-nd/TNP-pytorch"
+        }
+      ],
+      "publication_status": "published_method_or_preprint",
+      "comparable": true,
+      "protocol": "standard_194",
+      "csv_sha256": {
+        "3": "c8b458ddc465a422fdd047207c5b1d332e5aeeee34e83d4ca967fd8a61e2a0ed"
+      }
+    },
+    {
+      "id": "tetnp",
+      "name": "TE-TNP",
+      "year": 2024,
+      "venue": "ICML",
+      "family": "neural_process",
+      "role": "opponent",
+      "answer_seen": false,
+      "source_url": "https://github.com/cambridge-mlg/tnp",
+      "code_license": "MIT (own implementation; reference framework MIT)",
+      "weights_license": "self_trained",
+      "commercial_use": true,
+      "result_source_directory": "sota_baselines_2/results/kit/tetnp",
+      "source_files": [
+        {
+          "path": "sota_baselines_2/results/kit/tetnp/per_chemical.csv",
+          "sha256": "aff93e2724ab5bc4722e9653d986eb2fd642dc54a1d58c51f049536b5b8ed0f3"
+        }
+      ],
+      "available_k": [
+        3
+      ],
+      "bootstrap_replicates": 10000,
+      "bootstrap_seed": 0,
+      "notes": " Original evaluation used 10000 chemical resamples; this scoreboard preserves that replicate count and uses identity-cluster resampling as specified.",
+      "paper_url": null,
+      "license_checked_date": "2026-10-09",
+      "components": [
+        {
+          "name": "tetnp",
+          "code_license": "MIT (own implementation; reference framework MIT)",
+          "weights_license": "self_trained",
+          "commercial_use": true,
+          "source_url": "https://github.com/cambridge-mlg/tnp",
+          "license_evidence_url": "https://github.com/cambridge-mlg/tnp"
+        }
+      ],
+      "publication_status": "published_method_or_preprint",
+      "comparable": true,
+      "protocol": "standard_194",
+      "csv_sha256": {
+        "3": "1eed51f3fcb1d0716089b7b46d85d6cf2af9f43140f0e25819883d10e2d49b13"
+      }
+    },
+    {
+      "id": "flownp",
+      "name": "FlowNP (three seeds)",
+      "year": 2025,
+      "venue": "NeurIPS",
+      "family": "neural_process",
+      "role": "opponent",
+      "answer_seen": false,
+      "source_url": "https://github.com/danrsm/flowNP",
+      "code_license": "unknown (author repository has no license)",
+      "weights_license": "self_trained",
+      "commercial_use": null,
+      "result_source_directory": "sota_baselines_4/results/kit/flownp",
+      "source_files": [
+        {
+          "path": "sota_baselines_4/results/kit/flownp/per_chemical.csv",
+          "sha256": "aabfc302a4cc599a04e555da941b87a77a1be3370e646454f874b3a94d37b528"
+        }
+      ],
+      "available_k": [
+        3
+      ],
+      "bootstrap_replicates": 4000,
+      "bootstrap_seed": 0,
+      "notes": "",
+      "paper_url": "https://arxiv.org/abs/2512.23853",
+      "license_checked_date": "2026-10-09",
+      "components": [
+        {
+          "name": "flownp",
+          "code_license": "unknown (author repository has no license)",
+          "weights_license": "self_trained",
+          "commercial_use": null,
+          "source_url": "https://github.com/danrsm/flowNP",
+          "license_evidence_url": "https://github.com/danrsm/flowNP"
+        }
+      ],
+      "publication_status": "published_method_or_preprint",
+      "comparable": true,
+      "protocol": "standard_194",
+      "csv_sha256": {
+        "3": "d6fe23f5fe80271ba05209c6a68a9a781f7796271cf2ec69cff6c4fdef170da7"
+      }
+    },
+    {
+      "id": "egp",
+      "name": "Empirical GP",
+      "year": 2026,
+      "venue": "ICML",
+      "family": "gaussian_process",
+      "role": "opponent",
+      "answer_seen": false,
+      "source_url": "https://github.com/logxio/ooc-evaluation-audit",
+      "code_license": "MIT (own NumPy implementation)",
+      "weights_license": "not_applicable",
+      "commercial_use": true,
+      "result_source_directory": "sota_baselines_4/results/kit/egp",
+      "source_files": [
+        {
+          "path": "sota_baselines_4/results/kit/egp/per_chemical.csv",
+          "sha256": "764ad6b2c6d94e533fc3f2446db4d32849e52611f73056d98d48d6b8bc6c7a79"
+        }
+      ],
+      "available_k": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "bootstrap_replicates": 4000,
+      "bootstrap_seed": 0,
+      "notes": "",
+      "paper_url": "https://arxiv.org/abs/2602.12082",
+      "license_checked_date": "2026-10-09",
+      "components": [
+        {
+          "name": "egp",
+          "code_license": "MIT (own NumPy implementation)",
+          "weights_license": "not_applicable",
+          "commercial_use": true,
+          "source_url": "https://github.com/logxio/ooc-evaluation-audit",
+          "license_evidence_url": "https://github.com/logxio/ooc-evaluation-audit/blob/main/LICENSE"
+        }
+      ],
+      "publication_status": "published_method_or_preprint",
+      "comparable": true,
+      "protocol": "standard_194",
+      "csv_sha256": {
+        "1": "b82de4c931dd5a324bd808e8ad31326ed22690de53283ca458507a8eb9237753",
+        "2": "2f241c546ba91502ea6c7f40b8f63f5cf892224e69d4bf84bf2b2709896b4421",
+        "3": "dc8a78f64836459b4545900fef94a3012bab015fdf8e85140bb2f0522852ad9b",
+        "4": "0b1ac9ca0756fe48e2a3e675bf867220cd1351bcd87db6035de4a84f4de8bf82"
+      }
+    },
+    {
+      "id": "lpm3",
+      "name": "LPM (three seeds)",
+      "year": 2025,
+      "venue": "Nature Computational Science",
+      "family": "latent_phenotype",
+      "role": "opponent",
+      "answer_seen": false,
+      "source_url": "https://github.com/perturblib/perturblib",
+      "code_license": "Apache-2.0",
+      "weights_license": "self_trained",
+      "commercial_use": true,
+      "result_source_directory": "sota_baselines_5/results/lpm",
+      "source_files": [
+        {
+          "path": "sota_baselines_5/results/lpm/per_chemical.csv",
+          "sha256": "926948d3452b3aa4d7af2136016877fb0538d7736c3bb8e4973394143686208b"
+        }
+      ],
+      "available_k": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "bootstrap_replicates": 4000,
+      "bootstrap_seed": 0,
+      "notes": "",
+      "paper_url": "https://doi.org/10.1038/s43588-025-00870-1",
+      "license_checked_date": "2026-10-09",
+      "components": [
+        {
+          "name": "lpm",
+          "code_license": "Apache-2.0",
+          "weights_license": "self_trained",
+          "commercial_use": true,
+          "source_url": "https://github.com/perturblib/perturblib",
+          "license_evidence_url": "https://github.com/perturblib/perturblib"
+        }
+      ],
+      "publication_status": "published_method_or_preprint",
+      "comparable": true,
+      "protocol": "standard_194",
+      "csv_sha256": {
+        "1": "910ea209c04b24840fb12bd0a353405e41756d90be91f0494310cb3cfff8b3df",
+        "2": "4d6c9382a122ba16edb1b8df4104c70e0f83903cc0480620c57205f4e03eaed6",
+        "3": "4a6387cf074458b2f33aaa4079fd42e77071575f5fee0c4455ab922117967a3e",
+        "4": "91ee50cc7d06493af7866782cc8f9ad994447e9340ca435769b9cb86ce8d054e"
+      }
+    },
+    {
+      "id": "lpm20",
+      "name": "LPM (20 seeds)",
+      "year": 2025,
+      "venue": "Nature Computational Science",
+      "family": "latent_phenotype",
+      "role": "opponent",
+      "answer_seen": false,
+      "source_url": "https://github.com/perturblib/perturblib",
+      "code_license": "Apache-2.0",
+      "weights_license": "self_trained",
+      "commercial_use": true,
+      "result_source_directory": "sota_baselines_5/results/lpm_20seeds",
+      "source_files": [
+        {
+          "path": "sota_baselines_5/results/lpm_20seeds/per_chemical.csv",
+          "sha256": "3290de63fed8b8bd61e5d63560ea559ca0c564c1eee13d6e4fbd064d7f049bd8"
+        }
+      ],
+      "available_k": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "bootstrap_replicates": 4000,
+      "bootstrap_seed": 0,
+      "notes": "",
+      "paper_url": "https://doi.org/10.1038/s43588-025-00870-1",
+      "license_checked_date": "2026-10-09",
+      "components": [
+        {
+          "name": "lpm",
+          "code_license": "Apache-2.0",
+          "weights_license": "self_trained",
+          "commercial_use": true,
+          "source_url": "https://github.com/perturblib/perturblib",
+          "license_evidence_url": "https://github.com/perturblib/perturblib"
+        }
+      ],
+      "publication_status": "published_method_or_preprint",
+      "comparable": true,
+      "protocol": "standard_194",
+      "csv_sha256": {
+        "1": "0969388a224a1dad7a0ac9a58490d710f6f9cde8daec2ad3cdff56203af6f939",
+        "2": "8ccefa7db208e0c5fdb380ce0f052cfd0170d3746ed666edd486de512eaaab1c",
+        "3": "4f056ba1a32b420aadac17e7338308bd5e50febd69bae1dd48e2073e306a28d8",
+        "4": "1bb30c35070b4906744bdf3734f35968d50ae9686660eea3ab8a9bf094666c5b"
+      }
+    },
+    {
+      "id": "snn",
+      "name": "SNN",
+      "year": 2026,
+      "venue": "arXiv (earlier version COLT 2023)",
+      "family": "neighbors",
+      "role": "opponent",
+      "answer_seen": false,
+      "source_url": "https://github.com/deshen24/syntheticNN",
+      "code_license": "unknown (reference repository has no license)",
+      "weights_license": "not_applicable",
+      "commercial_use": null,
+      "result_source_directory": "sota_baselines_5/results/snn",
+      "source_files": [
+        {
+          "path": "sota_baselines_5/results/snn/per_chemical.csv",
+          "sha256": "28bdbc7f2087e3e57f3bb2bffe72ba2fd37d8a9c373736181089805f7bb2ada9"
+        }
+      ],
+      "available_k": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "bootstrap_replicates": 4000,
+      "bootstrap_seed": 0,
+      "notes": "",
+      "paper_url": "https://arxiv.org/abs/2609.13586",
+      "license_checked_date": "2026-10-09",
+      "components": [
+        {
+          "name": "snn",
+          "code_license": "unknown (reference repository has no license)",
+          "weights_license": "not_applicable",
+          "commercial_use": null,
+          "source_url": "https://github.com/deshen24/syntheticNN",
+          "license_evidence_url": "https://github.com/deshen24/syntheticNN"
+        }
+      ],
+      "publication_status": "published_method_or_preprint",
+      "comparable": true,
+      "protocol": "standard_194",
+      "csv_sha256": {
+        "1": "143087a99cb02280eade31cdd6e608c59903e4e5d38878bf290aefb0f9f9a25f",
+        "2": "69be90f39e29b9abccf38e54c7b32a45ee1ea7118ab124bffba9d38146700024",
+        "3": "8dd315632b009083e8c1d651539eaf456fa717045750aafc785ddd143c3adf0d",
+        "4": "5143cbeb4468a5f6f9a13e07a656efcb88eca28f4ec7d54458278a85cfecb90a"
+      }
+    },
+    {
+      "id": "n2_drnn",
+      "name": "N2 (DRNN)",
+      "year": 2025,
+      "venue": "arXiv (revised 2026)",
+      "family": "neighbors",
+      "role": "opponent",
+      "answer_seen": false,
+      "source_url": "https://github.com/aashish-khub/NearestNeighbors",
+      "code_license": "MIT",
+      "weights_license": "not_applicable",
+      "commercial_use": true,
+      "result_source_directory": "sota_baselines_5/results/n2_DRNN",
+      "source_files": [
+        {
+          "path": "sota_baselines_5/results/n2_DRNN/per_chemical.csv",
+          "sha256": "7fb05a772e8b66b7366939c2c5a0f4a277bb2c7a9e0176e90d9246ba7186f909"
+        }
+      ],
+      "available_k": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "bootstrap_replicates": 4000,
+      "bootstrap_seed": 0,
+      "notes": "",
+      "paper_url": "https://arxiv.org/abs/2506.04166",
+      "license_checked_date": "2026-10-09",
+      "components": [
+        {
+          "name": "n2",
+          "code_license": "MIT",
+          "weights_license": "not_applicable",
+          "commercial_use": true,
+          "source_url": "https://github.com/aashish-khub/NearestNeighbors",
+          "license_evidence_url": "https://github.com/aashish-khub/NearestNeighbors"
+        }
+      ],
+      "publication_status": "published_method_or_preprint",
+      "comparable": true,
+      "protocol": "standard_194",
+      "csv_sha256": {
+        "1": "eeac1ae86eddec0a3ee2b884dc77dd6165ff1fec319c4c1ad515d280cb76b531",
+        "2": "4390c041256063fb94be9d2fe74a7a5e29793de792f1f3d7ff75d14790ddb177",
+        "3": "2c523cbffd54e9e87ab5eb817d7698ab3586738c686d43ef2b4236860657178d",
+        "4": "09b46bcaaa2550e9422c5f44eaa61f4abd8d355f81b050e5dc7758e43013c373"
+      }
+    },
+    {
+      "id": "n2_autonn",
+      "name": "N2 (AutoNN)",
+      "year": 2025,
+      "venue": "arXiv (revised 2026)",
+      "family": "neighbors",
+      "role": "opponent",
+      "answer_seen": false,
+      "source_url": "https://github.com/aashish-khub/NearestNeighbors",
+      "code_license": "MIT",
+      "weights_license": "not_applicable",
+      "commercial_use": true,
+      "result_source_directory": "sota_baselines_5/results/n2_AutoNN",
+      "source_files": [
+        {
+          "path": "sota_baselines_5/results/n2_AutoNN/per_chemical.csv",
+          "sha256": "c8fc4d9713793f8adc0b518b8aaa6888c3ec3ed90ebc7d42db3ede46ea59df9c"
+        }
+      ],
+      "available_k": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "bootstrap_replicates": 4000,
+      "bootstrap_seed": 0,
+      "notes": "",
+      "paper_url": "https://arxiv.org/abs/2506.04166",
+      "license_checked_date": "2026-10-09",
+      "components": [
+        {
+          "name": "n2",
+          "code_license": "MIT",
+          "weights_license": "not_applicable",
+          "commercial_use": true,
+          "source_url": "https://github.com/aashish-khub/NearestNeighbors",
+          "license_evidence_url": "https://github.com/aashish-khub/NearestNeighbors"
+        }
+      ],
+      "publication_status": "published_method_or_preprint",
+      "comparable": true,
+      "protocol": "standard_194",
+      "csv_sha256": {
+        "1": "edd7256f4f961dbc7ad9fc0cb8347a038b9fe5cecdbd1b1265b529871327346d",
+        "2": "34f3732d0eb9ce2ac6c7ab2fdc5302e76da12acbb05d4a82d8a49f1b41d2c2ca",
+        "3": "60e11f67cb433cbb05289d9c0c8eeadde39816f5647d7b057e8cad74e271214b",
+        "4": "66864d8cb214a8f3bc836fe2f92b49ca3fb1a45bb36b1d13a5a0576e504e16d4"
+      }
+    },
+    {
+      "id": "arcanet",
+      "name": "ARCANet (structure only)",
+      "year": 2024,
+      "venue": "ICML",
+      "family": "molecular",
+      "role": "opponent",
+      "answer_seen": false,
+      "source_url": "https://github.com/alonsocampana/ARCANet",
+      "code_license": "MIT",
+      "weights_license": "self_trained",
+      "commercial_use": true,
+      "result_source_directory": "sota_baselines_2/results/kit/arcanet_zero",
+      "source_files": [
+        {
+          "path": "sota_baselines_2/results/kit/arcanet_zero/per_chemical.csv",
+          "sha256": "7dad2e88c484929591c1ef3f9d1f00e1096748af04ccdd157d7c0f5d9ad926b1"
+        }
+      ],
+      "available_k": [
+        3
+      ],
+      "bootstrap_replicates": 10000,
+      "bootstrap_seed": 0,
+      "notes": " Original evaluation used 10000 chemical resamples; this scoreboard preserves that replicate count and uses identity-cluster resampling as specified. Standard 194-chemical export includes fallback predictions for compounds without usable structures; original structure-only subset results are not pooled with this cohort.",
+      "paper_url": null,
+      "license_checked_date": "2026-10-09",
+      "components": [
+        {
+          "name": "arcanet",
+          "code_license": "MIT",
+          "weights_license": "self_trained",
+          "commercial_use": true,
+          "source_url": "https://github.com/alonsocampana/ARCANet",
+          "license_evidence_url": "https://github.com/alonsocampana/ARCANet"
+        }
+      ],
+      "publication_status": "published_method_or_preprint",
+      "comparable": true,
+      "protocol": "standard_194",
+      "csv_sha256": {
+        "3": "fc94367fa3ba13883917f8e0856b8e8232e3e3f3b145789bcc0c7af46d193832"
+      }
+    },
+    {
+      "id": "genra",
+      "name": "GenRA (structure only)",
+      "year": 2019,
+      "venue": "Regulatory Toxicology and Pharmacology",
+      "family": "molecular",
+      "role": "opponent",
+      "answer_seen": false,
+      "source_url": "https://github.com/USEPA/genra-py",
+      "code_license": "MIT",
+      "weights_license": "not_applicable",
+      "commercial_use": true,
+      "result_source_directory": "sota_baselines_2/results/kit/genra_zero",
+      "source_files": [
+        {
+          "path": "sota_baselines_2/results/kit/genra_zero/per_chemical.csv",
+          "sha256": "07bb236a94f4a87bb0d7a1356798cf195fa3b363414bbdcebf97c6046228052b"
+        }
+      ],
+      "available_k": [
+        3
+      ],
+      "bootstrap_replicates": 10000,
+      "bootstrap_seed": 0,
+      "notes": " Original evaluation used 10000 chemical resamples; this scoreboard preserves that replicate count and uses identity-cluster resampling as specified. Standard 194-chemical export includes fallback predictions for compounds without usable structures; original structure-only subset results are not pooled with this cohort.",
+      "paper_url": "https://doi.org/10.1016/j.yrtph.2019.104480",
+      "license_checked_date": "2026-10-09",
+      "components": [
+        {
+          "name": "genra",
+          "code_license": "MIT",
+          "weights_license": "not_applicable",
+          "commercial_use": true,
+          "source_url": "https://github.com/USEPA/genra-py",
+          "license_evidence_url": "https://github.com/USEPA/genra-py"
+        }
+      ],
+      "publication_status": "published_method_or_preprint",
+      "comparable": true,
+      "protocol": "standard_194",
+      "csv_sha256": {
+        "3": "a9dc52eeeb857f61735eb4bfb18e79448d678108a683b5d0175d73272032301b"
+      }
+    },
+    {
+      "id": "drpfn",
+      "name": "DR-PFN (synthetic prior)",
+      "year": 2026,
+      "venue": "Task-specific adaptation of NeurIPS 2023 LC-PFN",
+      "family": "synthetic_prior",
+      "role": "opponent",
+      "answer_seen": false,
+      "source_url": "https://github.com/automl/lcpfn",
+      "code_license": "MIT",
+      "weights_license": "self_trained",
+      "commercial_use": true,
+      "result_source_directory": "pfn_prior/kit_scores/pfn",
+      "source_files": [
+        {
+          "path": "pfn_prior/kit_scores/pfn/per_chemical.csv",
+          "sha256": "f4c23f2af5ce0ef1f3340b4a9eb8872af04dc83bfc719cdc5492b92b21ddbd31"
+        }
+      ],
+      "available_k": [
+        3
+      ],
+      "bootstrap_replicates": 4000,
+      "bootstrap_seed": 0,
+      "notes": "",
+      "paper_url": null,
+      "license_checked_date": "2026-10-09",
+      "components": [
+        {
+          "name": "drpfn",
+          "code_license": "MIT",
+          "weights_license": "self_trained",
+          "commercial_use": true,
+          "source_url": "https://github.com/automl/lcpfn",
+          "license_evidence_url": "https://github.com/automl/lcpfn"
+        }
+      ],
+      "publication_status": "task_specific_adaptation",
+      "comparable": true,
+      "protocol": "standard_194",
+      "csv_sha256": {
+        "3": "92161ad558a71dbe9ccb1a5febc1a569324ba87b4c564131c713831607627dc8"
+      }
+    },
+    {
+      "id": "drpfn_finetuned",
+      "name": "DR-PFN (fine-tuned)",
+      "year": 2026,
+      "venue": "Task-specific adaptation of NeurIPS 2023 LC-PFN",
+      "family": "synthetic_prior",
+      "role": "opponent",
+      "answer_seen": false,
+      "source_url": "https://github.com/automl/lcpfn",
+      "code_license": "MIT",
+      "weights_license": "self_trained",
+      "commercial_use": true,
+      "result_source_directory": "pfn_prior/kit_scores/finetuned",
+      "source_files": [
+        {
+          "path": "pfn_prior/kit_scores/finetuned/per_chemical.csv",
+          "sha256": "55861a09d09f41a770efd9406a01edec491aec51ac0fa3f64fb9301bb65f3cd9"
+        }
+      ],
+      "available_k": [
+        3
+      ],
+      "bootstrap_replicates": 4000,
+      "bootstrap_seed": 0,
+      "notes": "",
+      "paper_url": null,
+      "license_checked_date": "2026-10-09",
+      "components": [
+        {
+          "name": "drpfn",
+          "code_license": "MIT",
+          "weights_license": "self_trained",
+          "commercial_use": true,
+          "source_url": "https://github.com/automl/lcpfn",
+          "license_evidence_url": "https://github.com/automl/lcpfn"
+        }
+      ],
+      "publication_status": "task_specific_adaptation",
+      "comparable": true,
+      "protocol": "standard_194",
+      "csv_sha256": {
+        "3": "6ae8187ad41ee126db0140aea0bb0bf9e310fa2e884f466d23484b79da052660"
+      }
+    },
+    {
+      "id": "tabimpute",
+      "name": "TabImpute",
+      "year": 2025,
+      "venue": "arXiv",
+      "family": "matrix_completion",
+      "role": "opponent",
+      "answer_seen": false,
+      "source_url": "https://github.com/jacobf18/tabular",
+      "code_license": "unknown (no repository or package license statement)",
+      "weights_license": "Apache-2.0",
+      "commercial_use": null,
+      "result_source_directory": "sota_baselines_3/results/tabimpute_v1_per_output",
+      "source_files": [
+        {
+          "path": "sota_baselines_3/results/tabimpute_v1_per_output/per_chemical.csv",
+          "sha256": "f3c818771982c236b7e53bccbe60cded647dd315c431e18fdedc7bb008b0ae03"
+        }
+      ],
+      "available_k": [
+        3
+      ],
+      "bootstrap_replicates": 4000,
+      "bootstrap_seed": 0,
+      "notes": "",
+      "paper_url": "https://arxiv.org/abs/2510.02625",
+      "license_checked_date": "2026-10-09",
+      "components": [
+        {
+          "name": "tabimpute",
+          "code_license": "unknown (no repository or package license statement)",
+          "weights_license": "Apache-2.0",
+          "commercial_use": null,
+          "source_url": "https://github.com/jacobf18/tabular",
+          "license_evidence_url": "https://huggingface.co/Tabimpute/TabImpute/raw/main/README.md"
+        }
+      ],
+      "publication_status": "published_method_or_preprint",
+      "comparable": true,
+      "protocol": "standard_194",
+      "csv_sha256": {
+        "3": "6eeb9d7aef502e2cd2165dc1ad83f8c7c265d2ebc7f8e3ac71bffed0390971fa"
+      }
+    },
+    {
+      "id": "kano_structure",
+      "name": "KANO (structure only)",
+      "year": 2023,
+      "venue": "Nature Machine Intelligence",
+      "family": "molecular",
+      "role": "opponent",
+      "answer_seen": false,
+      "source_url": "https://github.com/HICAI-ZJU/KANO",
+      "code_license": "MIT",
+      "weights_license": "MIT (repository checkpoint)",
+      "commercial_use": true,
+      "result_source_directory": "sota_baselines_7/results/kit/kano_structure",
+      "source_files": [
+        {
+          "path": "sota_baselines_7/results/kit/kano_structure/per_chemical.csv",
+          "sha256": "d8a840fa72c5f6fa014a317e5983374b0c6ca5c48256843123b4d305885fafcf"
+        }
+      ],
+      "available_k": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "bootstrap_replicates": 4000,
+      "bootstrap_seed": 0,
+      "notes": "The structure + k points row uses the requested k, including three points at k=3.",
+      "paper_url": "https://www.nature.com/articles/s42256-023-00654-0",
+      "license_checked_date": "2026-10-09",
+      "components": [
+        {
+          "name": "kano",
+          "code_license": "MIT",
+          "weights_license": "MIT (repository checkpoint)",
+          "commercial_use": true,
+          "source_url": "https://github.com/HICAI-ZJU/KANO",
+          "license_evidence_url": "https://github.com/HICAI-ZJU/KANO"
+        }
+      ],
+      "publication_status": "published_method_or_preprint",
+      "comparable": true,
+      "protocol": "standard_194",
+      "csv_sha256": {
+        "1": "5b50eda076ef800eb949a98e62022d5183000682d8ded14dd96d467b15b953cb",
+        "2": "f12e6ff023f988ccad894398260dcc07e6d24c538d8630ad83ccbc68f917cc39",
+        "3": "835f19abc05e5553798307dd4727be7c9f6a92edd9027362c18d1b43a04ec7ec",
+        "4": "2ca9538f7ade491183b4355a9333297b2afc3fbf4b6c56960cd06328d7db05c9"
+      }
+    },
+    {
+      "id": "kano_three_points",
+      "name": "KANO (structure + k points)",
+      "year": 2023,
+      "venue": "Nature Machine Intelligence",
+      "family": "molecular",
+      "role": "opponent",
+      "answer_seen": false,
+      "source_url": "https://github.com/HICAI-ZJU/KANO",
+      "code_license": "MIT",
+      "weights_license": "MIT (repository checkpoint)",
+      "commercial_use": true,
+      "result_source_directory": "sota_baselines_7/results/kit/kano_three_points",
+      "source_files": [
+        {
+          "path": "sota_baselines_7/results/kit/kano_three_points/per_chemical.csv",
+          "sha256": "f38ac908145070790bce376b8cc95fc7fc9c322d927bf0b14997a2729b7ca150"
+        }
+      ],
+      "available_k": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "bootstrap_replicates": 4000,
+      "bootstrap_seed": 0,
+      "notes": "The structure + k points row uses the requested k, including three points at k=3.",
+      "paper_url": "https://www.nature.com/articles/s42256-023-00654-0",
+      "license_checked_date": "2026-10-09",
+      "components": [
+        {
+          "name": "kano",
+          "code_license": "MIT",
+          "weights_license": "MIT (repository checkpoint)",
+          "commercial_use": true,
+          "source_url": "https://github.com/HICAI-ZJU/KANO",
+          "license_evidence_url": "https://github.com/HICAI-ZJU/KANO"
+        }
+      ],
+      "publication_status": "published_method_or_preprint",
+      "comparable": true,
+      "protocol": "standard_194",
+      "csv_sha256": {
+        "1": "a85baca0ed07639f1a80cb29677c61b517720e1a97cd3bc8f220b876417becb3",
+        "2": "2b38b388f58051a5ac8316dd34cc5256a3d43427788e791b3924af292eb76e00",
+        "3": "9e657b72dc2c628475f0b8ab18db95dca51fda79caed0ad6aca5fa5ce02b9d10",
+        "4": "9c459eefb3f0cd732e71cfb1cb1dda238ed1751043d79cc8b4e8749260301cd6"
+      }
+    },
+    {
+      "id": "kano_anchor_add",
+      "name": "KANO (embedding added to AnchorBoost)",
+      "year": 2023,
+      "venue": "Nature Machine Intelligence",
+      "family": "hybrid",
+      "role": "opponent",
+      "answer_seen": false,
+      "source_url": "https://github.com/HICAI-ZJU/KANO",
+      "code_license": "MIT",
+      "weights_license": "MIT (repository checkpoint); self_trained_or_not_applicable",
+      "commercial_use": true,
+      "result_source_directory": "sota_baselines_7/results/kit/kano_anchor_add",
+      "source_files": [
+        {
+          "path": "sota_baselines_7/results/kit/kano_anchor_add/per_chemical.csv",
+          "sha256": "0ad9f89c3481ef6c7a1475354a853a04e7eba2bc8e972d22bba826294cbf59c9"
+        }
+      ],
+      "available_k": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "bootstrap_replicates": 4000,
+      "bootstrap_seed": 0,
+      "notes": "The structure + k points row uses the requested k, including three points at k=3.",
+      "paper_url": "https://www.nature.com/articles/s42256-023-00654-0",
+      "license_checked_date": "2026-10-09",
+      "components": [
+        {
+          "name": "kano",
+          "code_license": "MIT",
+          "weights_license": "MIT (repository checkpoint)",
+          "commercial_use": true,
+          "source_url": "https://github.com/HICAI-ZJU/KANO",
+          "license_evidence_url": "https://github.com/HICAI-ZJU/KANO"
+        },
+        {
+          "name": "own",
+          "code_license": "MIT",
+          "weights_license": "self_trained_or_not_applicable",
+          "commercial_use": true,
+          "source_url": "https://github.com/logxio/ooc-evaluation-audit",
+          "license_evidence_url": "https://github.com/logxio/ooc-evaluation-audit/blob/main/LICENSE"
+        }
+      ],
+      "publication_status": "published_method_or_preprint",
+      "comparable": true,
+      "protocol": "standard_194",
+      "csv_sha256": {
+        "1": "2cfc2cd5fdcd5d14ed888b2636eaf4c0e62eb2ef362c967b944c48427af06075",
+        "2": "4281db0723bc11d523101100f8e65b123b4283acd71375899f5d79a689dfd2cf",
+        "3": "333cf3f7d37b787e2778b24a304b1e11cb01ebff89655d45bdcc81188e8a3d87",
+        "4": "9321b0aab6620c626057859946af38c12f29a2706d0cc0f47f3c82da88ef2a23"
+      }
+    },
+    {
+      "id": "motil_structure",
+      "name": "MotiL (structure only)",
+      "year": 2025,
+      "venue": "Nature Communications",
+      "family": "molecular",
+      "role": "opponent",
+      "answer_seen": false,
+      "source_url": "https://github.com/Young0222/MotiL",
+      "code_license": "MIT",
+      "weights_license": "MIT (repository checkpoint)",
+      "commercial_use": true,
+      "result_source_directory": "sota_baselines_7/results/kit/motil_structure",
+      "source_files": [
+        {
+          "path": "sota_baselines_7/results/kit/motil_structure/per_chemical.csv",
+          "sha256": "90f2d990c0b692782cee5076c3152f8b71a93798d9c69082641e281190e93001"
+        }
+      ],
+      "available_k": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "bootstrap_replicates": 4000,
+      "bootstrap_seed": 0,
+      "notes": "The structure + k points row uses the requested k, including three points at k=3.",
+      "paper_url": "https://www.nature.com/articles/s41467-025-66685-w",
+      "license_checked_date": "2026-10-09",
+      "components": [
+        {
+          "name": "motil",
+          "code_license": "MIT",
+          "weights_license": "MIT (repository checkpoint)",
+          "commercial_use": true,
+          "source_url": "https://github.com/Young0222/MotiL",
+          "license_evidence_url": "https://github.com/Young0222/MotiL"
+        }
+      ],
+      "publication_status": "published_method_or_preprint",
+      "comparable": true,
+      "protocol": "standard_194",
+      "csv_sha256": {
+        "1": "3b222223f9828eea71466915ff9eb60d0bbe2d3e7dc26ae212c3150db22ec506",
+        "2": "40e61fd93dc4599fa4b86dc558231988f28ce4bc4970d04a119e49f4836cd918",
+        "3": "fe55099bd260a025d250c4f007eae0265e63afc2ce1094fc137cfdd496510a3a",
+        "4": "b7df7c478c9a6ce78e497359b9bad7b20d4ca44993966b83bd28e9c4a95a1d7e"
+      }
+    },
+    {
+      "id": "motil_three_points",
+      "name": "MotiL (structure + k points)",
+      "year": 2025,
+      "venue": "Nature Communications",
+      "family": "molecular",
+      "role": "opponent",
+      "answer_seen": false,
+      "source_url": "https://github.com/Young0222/MotiL",
+      "code_license": "MIT",
+      "weights_license": "MIT (repository checkpoint)",
+      "commercial_use": true,
+      "result_source_directory": "sota_baselines_7/results/kit/motil_three_points",
+      "source_files": [
+        {
+          "path": "sota_baselines_7/results/kit/motil_three_points/per_chemical.csv",
+          "sha256": "9a86e5b95b98865f05548d585f754d76386f9a68bb7544058a211ec49c115cb3"
+        }
+      ],
+      "available_k": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "bootstrap_replicates": 4000,
+      "bootstrap_seed": 0,
+      "notes": "The structure + k points row uses the requested k, including three points at k=3.",
+      "paper_url": "https://www.nature.com/articles/s41467-025-66685-w",
+      "license_checked_date": "2026-10-09",
+      "components": [
+        {
+          "name": "motil",
+          "code_license": "MIT",
+          "weights_license": "MIT (repository checkpoint)",
+          "commercial_use": true,
+          "source_url": "https://github.com/Young0222/MotiL",
+          "license_evidence_url": "https://github.com/Young0222/MotiL"
+        }
+      ],
+      "publication_status": "published_method_or_preprint",
+      "comparable": true,
+      "protocol": "standard_194",
+      "csv_sha256": {
+        "1": "c7fb1e0b43507078141a244d07b05dcf1436762fdeec2f8930c897f1d4a5d586",
+        "2": "78e4dafef763aa972513151e41260073f31a94253a9599e50899d724eadda29c",
+        "3": "13bc0b79c27a8dc7a380690e505d1f992e81e34a5f14e0788b58073353d76082",
+        "4": "db6f2598253d6df7a4a456cecf65f70189d3648816f2d77831f918c6cf1b8fbc"
+      }
+    },
+    {
+      "id": "motil_anchor_add",
+      "name": "MotiL (embedding added to AnchorBoost)",
+      "year": 2025,
+      "venue": "Nature Communications",
+      "family": "hybrid",
+      "role": "opponent",
+      "answer_seen": false,
+      "source_url": "https://github.com/Young0222/MotiL",
+      "code_license": "MIT",
+      "weights_license": "MIT (repository checkpoint); self_trained_or_not_applicable",
+      "commercial_use": true,
+      "result_source_directory": "sota_baselines_7/results/kit/motil_anchor_add",
+      "source_files": [
+        {
+          "path": "sota_baselines_7/results/kit/motil_anchor_add/per_chemical.csv",
+          "sha256": "faaab3fcbdf7aed6b645bafef95e01d027525bc1dea02449b4c99a4b7a348fd6"
+        }
+      ],
+      "available_k": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "bootstrap_replicates": 4000,
+      "bootstrap_seed": 0,
+      "notes": "The structure + k points row uses the requested k, including three points at k=3.",
+      "paper_url": "https://www.nature.com/articles/s41467-025-66685-w",
+      "license_checked_date": "2026-10-09",
+      "components": [
+        {
+          "name": "motil",
+          "code_license": "MIT",
+          "weights_license": "MIT (repository checkpoint)",
+          "commercial_use": true,
+          "source_url": "https://github.com/Young0222/MotiL",
+          "license_evidence_url": "https://github.com/Young0222/MotiL"
+        },
+        {
+          "name": "own",
+          "code_license": "MIT",
+          "weights_license": "self_trained_or_not_applicable",
+          "commercial_use": true,
+          "source_url": "https://github.com/logxio/ooc-evaluation-audit",
+          "license_evidence_url": "https://github.com/logxio/ooc-evaluation-audit/blob/main/LICENSE"
+        }
+      ],
+      "publication_status": "published_method_or_preprint",
+      "comparable": true,
+      "protocol": "standard_194",
+      "csv_sha256": {
+        "1": "93c53cd71e9291a6b81058bf7e8b7127d60c5ef3a5b89cdb87c72821ebf1af08",
+        "2": "88710944c9dcb54edd4beb0009ffd906aadb35fb7bef6b0029b020aff334f45d",
+        "3": "ccfe2ff42f72f226e98be8dac01eb1b92e825bc5f98055cb787f343f31a3fb98",
+        "4": "93aa1a8957218fe5395bb4200e1e28bd7fa81c814a982b8300e59fa2125cb2e7"
+      }
+    },
+    {
+      "id": "tabpfn35_monroe",
+      "name": "TabPFN-3.5 + AnchorBoost + Monroe (P8)",
+      "year": 2026,
+      "venue": "arXiv",
+      "family": "label_overlap",
+      "role": "opponent",
+      "answer_seen": true,
+      "source_url": "https://github.com/PriorLabs/TabPFN",
+      "code_license": "Apache-2.0; MIT",
+      "weights_license": "TABPFN-3.5 Non-Commercial License v1.0; MIT (repository encoder checkpoint)",
+      "commercial_use": false,
+      "result_source_directory": "sota_baselines_3/results/tabpfn35_monroe_median",
+      "source_files": [
+        {
+          "path": "sota_baselines_3/results/tabpfn35_monroe_median/per_chemical.csv",
+          "sha256": "c223acd4eb9597f8df729306db3c9d2dde6527f530b75e469155709b2f0d9a62"
+        }
+      ],
+      "available_k": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "bootstrap_replicates": 4000,
+      "bootstrap_seed": 0,
+      "notes": "Monroe pretraining contains supervised bioassay labels for overlapping compounds, not the target MEA endpoint; excluded from clean win counts.",
+      "paper_url": "https://arxiv.org/abs/2609.17895",
+      "license_checked_date": "2026-10-09",
+      "components": [
+        {
+          "name": "tabpfn35",
+          "code_license": "Apache-2.0",
+          "weights_license": "TABPFN-3.5 Non-Commercial License v1.0",
+          "commercial_use": false,
+          "source_url": "https://github.com/PriorLabs/TabPFN",
+          "license_evidence_url": "https://huggingface.co/Prior-Labs/tabpfn_3_5/blob/main/LICENSE"
+        },
+        {
+          "name": "monroe",
+          "code_license": "MIT",
+          "weights_license": "MIT (repository encoder checkpoint)",
+          "commercial_use": true,
+          "source_url": "https://github.com/blazejba/monroe",
+          "license_evidence_url": "https://github.com/blazejba/monroe"
+        }
+      ],
+      "publication_status": "published_method_or_preprint",
+      "comparable": true,
+      "protocol": "standard_194",
+      "csv_sha256": {
+        "1": "4c831e0d6fbf62c844288bbed904ea4b60f9562d054121c75381574b4deca77f",
+        "2": "738229b355b8ce5e40f4272b7b10dfcb893381cf4a446a7e25d52e26225fde1b",
+        "3": "f321b47946152e7a1a559c46c76312da88ec9b0bb666ab7cfae9caf03b63c4a2",
+        "4": "30f5cc1a1120948f74b5bca82f4de59f23580d0fd082a0ce397062eb9b7ce46f"
+      }
+    },
+    {
+      "id": "limix2_monroe",
+      "name": "LimiX-2 + AnchorBoost + Monroe",
+      "year": 2026,
+      "venue": "arXiv",
+      "family": "label_overlap",
+      "role": "opponent",
+      "answer_seen": true,
+      "source_url": "https://github.com/limix-ldm-ai/LimiX",
+      "code_license": "Stable AI Technology License v1.0; MIT",
+      "weights_license": "StableAI LimiX Non-Commercial License v1.0; MIT (repository encoder checkpoint)",
+      "commercial_use": false,
+      "result_source_directory": "sota_baselines_3/results/limix2_monroe_median",
+      "source_files": [
+        {
+          "path": "sota_baselines_3/results/limix2_monroe_median/per_chemical.csv",
+          "sha256": "cf02be49fe38cf5da88872715c78a8a7648e6bf0c422e209b6a733bbe5a579f5"
+        }
+      ],
+      "available_k": [
+        3
+      ],
+      "bootstrap_replicates": 4000,
+      "bootstrap_seed": 0,
+      "notes": "Monroe pretraining contains supervised bioassay labels for overlapping compounds, not the target MEA endpoint; excluded from clean win counts.",
+      "paper_url": "https://arxiv.org/abs/2609.17488",
+      "license_checked_date": "2026-10-09",
+      "components": [
+        {
+          "name": "limix2",
+          "code_license": "Stable AI Technology License v1.0",
+          "weights_license": "StableAI LimiX Non-Commercial License v1.0",
+          "commercial_use": false,
+          "source_url": "https://github.com/limix-ldm-ai/LimiX",
+          "license_evidence_url": "https://huggingface.co/stable-ai/LimiX-2"
+        },
+        {
+          "name": "monroe",
+          "code_license": "MIT",
+          "weights_license": "MIT (repository encoder checkpoint)",
+          "commercial_use": true,
+          "source_url": "https://github.com/blazejba/monroe",
+          "license_evidence_url": "https://github.com/blazejba/monroe"
+        }
+      ],
+      "publication_status": "published_method_or_preprint",
+      "comparable": true,
+      "protocol": "standard_194",
+      "csv_sha256": {
+        "3": "7f1b9ba263a50c019a743ee050ded042b3b84064d186bd0caa5333e925b095f6"
+      }
+    },
+    {
+      "id": "anchorboost_monroe",
+      "name": "AnchorBoost + Monroe",
+      "year": 2026,
+      "venue": "Competition implementation",
+      "family": "label_overlap",
+      "role": "opponent",
+      "answer_seen": true,
+      "source_url": "https://github.com/logxio/ooc-evaluation-audit",
+      "code_license": "MIT",
+      "weights_license": "self_trained_or_not_applicable; MIT (repository encoder checkpoint)",
+      "commercial_use": true,
+      "result_source_directory": "sota_baselines_3/ab_structure/results/ab_monroe8",
+      "source_files": [
+        {
+          "path": "sota_baselines_3/ab_structure/results/ab_monroe8/per_chemical.csv",
+          "sha256": "dfdf2a858f5634cdf454747842bfe7a3151037cc73df0936f793a04e4ca6bc11"
+        }
+      ],
+      "available_k": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "bootstrap_replicates": 4000,
+      "bootstrap_seed": 0,
+      "notes": "Monroe pretraining contains supervised bioassay labels for overlapping compounds, not the target MEA endpoint; excluded from clean win counts.",
+      "paper_url": null,
+      "license_checked_date": "2026-10-09",
+      "components": [
+        {
+          "name": "own",
+          "code_license": "MIT",
+          "weights_license": "self_trained_or_not_applicable",
+          "commercial_use": true,
+          "source_url": "https://github.com/logxio/ooc-evaluation-audit",
+          "license_evidence_url": "https://github.com/logxio/ooc-evaluation-audit/blob/main/LICENSE"
+        },
+        {
+          "name": "monroe",
+          "code_license": "MIT",
+          "weights_license": "MIT (repository encoder checkpoint)",
+          "commercial_use": true,
+          "source_url": "https://github.com/blazejba/monroe",
+          "license_evidence_url": "https://github.com/blazejba/monroe"
+        }
+      ],
+      "publication_status": "task_specific_adaptation",
+      "comparable": true,
+      "protocol": "standard_194",
+      "csv_sha256": {
+        "1": "fd10b04f70d3a11aa39085365af79a69df9cb6c2dcea6d7a4ca5b021132dacad",
+        "2": "b7955062952adec359929c3d1f0e8681b86dbebd34f0a147f07035ce78b05561",
+        "3": "be93b4029efe1591b67316a53b0d9fb1cb920efa6981abbd52551259009e90b1",
+        "4": "8a3a93bbaa708f31d99bc37ea216ff6256767e7bdf3cb72f6d260ad42204cc3c"
+      }
+    },
+    {
+      "id": "anchorboost_dws",
+      "name": "AnchorBoost-v2 DWS + Monroe",
+      "year": 2026,
+      "venue": "Competition implementation",
+      "family": "label_overlap",
+      "role": "opponent",
+      "answer_seen": true,
+      "source_url": "https://github.com/logxio/ooc-evaluation-audit",
+      "code_license": "MIT",
+      "weights_license": "self_trained_or_not_applicable; MIT (repository encoder checkpoint)",
+      "commercial_use": true,
+      "result_source_directory": "ab_v2/predictions",
+      "source_files": [
+        {
+          "path": "ab_v2/predictions/DWS.npz",
+          "sha256": "490b648f43d1ec6b5d85aa90db28c71aa1baff223744f306e60d924130aa203c"
+        }
+      ],
+      "available_k": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "bootstrap_replicates": 4000,
+      "bootstrap_seed": 0,
+      "notes": "Monroe pretraining contains supervised bioassay labels for overlapping compounds, not the target MEA endpoint; excluded from clean win counts.",
+      "paper_url": null,
+      "license_checked_date": "2026-10-09",
+      "components": [
+        {
+          "name": "own",
+          "code_license": "MIT",
+          "weights_license": "self_trained_or_not_applicable",
+          "commercial_use": true,
+          "source_url": "https://github.com/logxio/ooc-evaluation-audit",
+          "license_evidence_url": "https://github.com/logxio/ooc-evaluation-audit/blob/main/LICENSE"
+        },
+        {
+          "name": "monroe",
+          "code_license": "MIT",
+          "weights_license": "MIT (repository encoder checkpoint)",
+          "commercial_use": true,
+          "source_url": "https://github.com/blazejba/monroe",
+          "license_evidence_url": "https://github.com/blazejba/monroe"
+        }
+      ],
+      "publication_status": "task_specific_adaptation",
+      "comparable": true,
+      "protocol": "standard_194",
+      "csv_sha256": {
+        "1": "98830312badc51496abf6125ec86adf30804e8d3e1ef369cc207409e693095c0",
+        "2": "28f92dae7aafeb33c8fdf974a1caf6434d9d56705c0b64f0ada619bf80219ae1",
+        "3": "cf12f621a3d049e86d404325607274bc7aa7f418123859e871de3119d1f28158",
+        "4": "e3c8d04aae45ed82dcbdf8b11a48ce920f7c80c48efc66d54160ed0f4540e55e"
+      }
+    },
+    {
+      "id": "anchorboost_v2_merged",
+      "name": "AnchorBoost-v2 merged",
+      "year": 2026,
+      "venue": "Competition implementation",
+      "family": "ensemble",
+      "role": "control",
+      "answer_seen": false,
+      "source_url": "https://github.com/logxio/ooc-evaluation-audit",
+      "code_license": "MIT; Apache-2.0",
+      "weights_license": "self_trained_or_not_applicable; Prior Labs License 1.1 (attribution); self_trained; MIT",
+      "commercial_use": true,
+      "result_source_directory": "ab_v2/predictions",
+      "source_files": [
+        {
+          "path": "ab_v2/predictions/ABv2.npz",
+          "sha256": "ed51c252c854edeeac964e646cac4240874ff94f9340a1d4792157dfc22c05ef"
+        }
+      ],
+      "available_k": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "bootstrap_replicates": 4000,
+      "bootstrap_seed": 0,
+      "notes": "",
+      "paper_url": null,
+      "license_checked_date": "2026-10-09",
+      "components": [
+        {
+          "name": "own",
+          "code_license": "MIT",
+          "weights_license": "self_trained_or_not_applicable",
+          "commercial_use": true,
+          "source_url": "https://github.com/logxio/ooc-evaluation-audit",
+          "license_evidence_url": "https://github.com/logxio/ooc-evaluation-audit/blob/main/LICENSE"
+        },
+        {
+          "name": "tabpfn2",
+          "code_license": "Apache-2.0",
+          "weights_license": "Prior Labs License 1.1 (attribution)",
+          "commercial_use": true,
+          "source_url": "https://github.com/PriorLabs/TabPFN",
+          "license_evidence_url": "https://huggingface.co/Prior-Labs/TabPFN-v2-reg/blob/main/LICENSE.txt"
+        },
+        {
+          "name": "lpm",
+          "code_license": "Apache-2.0",
+          "weights_license": "self_trained",
+          "commercial_use": true,
+          "source_url": "https://github.com/perturblib/perturblib",
+          "license_evidence_url": "https://github.com/perturblib/perturblib"
+        },
+        {
+          "name": "chemeleon",
+          "code_license": "MIT",
+          "weights_license": "MIT",
+          "commercial_use": true,
+          "source_url": "https://github.com/JacksonBurns/chemeleon",
+          "license_evidence_url": "https://zenodo.org/api/records/15460715"
+        }
+      ],
+      "publication_status": "task_specific_adaptation",
+      "comparable": true,
+      "protocol": "standard_194",
+      "csv_sha256": {
+        "1": "da19e03009e379ec41ffd9a782d86fe9f661d0a347d748b11a3dd6a55921c6b5",
+        "2": "c96c5a0f7c6fbd1e9d85d7f053e47c83956e2d46868d77ecf850f16484903e70",
+        "3": "9bee7a573e330636221aebb1ac3f4bfb5088e17c5c41b28ac36e086e170ca77c",
+        "4": "d08c996534ec61792e218f416a663db1726fd352a0be013f0d8a54c873dc3383"
+      }
+    },
+    {
+      "id": "team_tl",
+      "name": "T+L (AnchorBoost representation; no GBM member)",
+      "year": 2026,
+      "venue": "Competition implementation",
+      "family": "ensemble",
+      "role": "control",
+      "answer_seen": false,
+      "source_url": "https://github.com/logxio/ooc-evaluation-audit",
+      "code_license": "MIT; Apache-2.0",
+      "weights_license": "self_trained_or_not_applicable; Prior Labs License 1.1 (attribution); self_trained; MIT",
+      "commercial_use": true,
+      "result_source_directory": "ab_v3/predictions",
+      "source_files": [
+        {
+          "path": "ab_v3/predictions/team_TL.npz",
+          "sha256": "a23cad7b0778b861329a6a5b7a5e35faa75d7a9cf2243521fc3f51d35681967d"
+        }
+      ],
+      "available_k": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "bootstrap_replicates": 4000,
+      "bootstrap_seed": 0,
+      "notes": "",
+      "paper_url": null,
+      "license_checked_date": "2026-10-09",
+      "components": [
+        {
+          "name": "own",
+          "code_license": "MIT",
+          "weights_license": "self_trained_or_not_applicable",
+          "commercial_use": true,
+          "source_url": "https://github.com/logxio/ooc-evaluation-audit",
+          "license_evidence_url": "https://github.com/logxio/ooc-evaluation-audit/blob/main/LICENSE"
+        },
+        {
+          "name": "tabpfn2",
+          "code_license": "Apache-2.0",
+          "weights_license": "Prior Labs License 1.1 (attribution)",
+          "commercial_use": true,
+          "source_url": "https://github.com/PriorLabs/TabPFN",
+          "license_evidence_url": "https://huggingface.co/Prior-Labs/TabPFN-v2-reg/blob/main/LICENSE.txt"
+        },
+        {
+          "name": "lpm",
+          "code_license": "Apache-2.0",
+          "weights_license": "self_trained",
+          "commercial_use": true,
+          "source_url": "https://github.com/perturblib/perturblib",
+          "license_evidence_url": "https://github.com/perturblib/perturblib"
+        },
+        {
+          "name": "chemeleon",
+          "code_license": "MIT",
+          "weights_license": "MIT",
+          "commercial_use": true,
+          "source_url": "https://github.com/JacksonBurns/chemeleon",
+          "license_evidence_url": "https://zenodo.org/api/records/15460715"
+        }
+      ],
+      "publication_status": "task_specific_adaptation",
+      "comparable": true,
+      "protocol": "standard_194",
+      "csv_sha256": {
+        "1": "a9b0daf3de720b4059516b006a3542fed60b872449fa5aace0d74ff287eb86d0",
+        "2": "675c7cbf5da54b3398bf836dbb76b6b31cc8c1a4ab69a951a42411874f3e4110",
+        "3": "8100a0546bb239be45bee7b2b71973248cd1b63edf70f9fdd3a2b19b5c84777a",
+        "4": "4202b34431a778ca2699f3020b6abe21e813ea0597caac826c6d85962d2639a9"
+      }
+    },
+    {
+      "id": "team_atl",
+      "name": "A+T+L",
+      "year": 2026,
+      "venue": "Competition implementation",
+      "family": "ensemble",
+      "role": "control",
+      "answer_seen": false,
+      "source_url": "https://github.com/logxio/ooc-evaluation-audit",
+      "code_license": "MIT; Apache-2.0",
+      "weights_license": "self_trained_or_not_applicable; Prior Labs License 1.1 (attribution); self_trained; MIT",
+      "commercial_use": true,
+      "result_source_directory": "ab_v3/predictions",
+      "source_files": [
+        {
+          "path": "ab_v3/predictions/team_ATL.npz",
+          "sha256": "42f441b02e3a2f0a8dcc20fe3a3ee1adbbe12bfec03cba35c19cfc909a516799"
+        }
+      ],
+      "available_k": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "bootstrap_replicates": 4000,
+      "bootstrap_seed": 0,
+      "notes": "",
+      "paper_url": null,
+      "license_checked_date": "2026-10-09",
+      "components": [
+        {
+          "name": "own",
+          "code_license": "MIT",
+          "weights_license": "self_trained_or_not_applicable",
+          "commercial_use": true,
+          "source_url": "https://github.com/logxio/ooc-evaluation-audit",
+          "license_evidence_url": "https://github.com/logxio/ooc-evaluation-audit/blob/main/LICENSE"
+        },
+        {
+          "name": "tabpfn2",
+          "code_license": "Apache-2.0",
+          "weights_license": "Prior Labs License 1.1 (attribution)",
+          "commercial_use": true,
+          "source_url": "https://github.com/PriorLabs/TabPFN",
+          "license_evidence_url": "https://huggingface.co/Prior-Labs/TabPFN-v2-reg/blob/main/LICENSE.txt"
+        },
+        {
+          "name": "lpm",
+          "code_license": "Apache-2.0",
+          "weights_license": "self_trained",
+          "commercial_use": true,
+          "source_url": "https://github.com/perturblib/perturblib",
+          "license_evidence_url": "https://github.com/perturblib/perturblib"
+        },
+        {
+          "name": "chemeleon",
+          "code_license": "MIT",
+          "weights_license": "MIT",
+          "commercial_use": true,
+          "source_url": "https://github.com/JacksonBurns/chemeleon",
+          "license_evidence_url": "https://zenodo.org/api/records/15460715"
+        }
+      ],
+      "publication_status": "task_specific_adaptation",
+      "comparable": true,
+      "protocol": "standard_194",
+      "csv_sha256": {
+        "1": "a1f813a0d64fb76954fca0c1e816713afabba9ead64d53749db78ea0bef7740c",
+        "2": "dcaede8d4cdb598790bfc5306c3e814acd10411f7fe508c79fd7c13ba4308c3e",
+        "3": "9690abe76c421a34fda06bcd10fcaea01f1ec7b9b1c400932754bc9fa0420354",
+        "4": "33e00c6754ceb62a1be6c22e6714a94d935e6e584c86606e98d81a5d5b36caca"
+      }
+    },
+    {
+      "id": "anchorboost_lpm",
+      "name": "AnchorBoost + LPM (20 seeds)",
+      "year": 2026,
+      "venue": "Competition implementation",
+      "family": "ensemble",
+      "role": "control",
+      "answer_seen": false,
+      "source_url": "https://github.com/logxio/ooc-evaluation-audit",
+      "code_license": "MIT; Apache-2.0",
+      "weights_license": "self_trained_or_not_applicable; self_trained",
+      "commercial_use": true,
+      "result_source_directory": "sota_baselines_5/results/blend_ab_lpm_20seeds",
+      "source_files": [
+        {
+          "path": "sota_baselines_5/results/blend_ab_lpm_20seeds/per_chemical.csv",
+          "sha256": "279b314378c98d92d6c36962e07d5e272fe7335fb85f08b9076b9cf2a9abdf65"
+        }
+      ],
+      "available_k": [
+        3
+      ],
+      "bootstrap_replicates": 4000,
+      "bootstrap_seed": 0,
+      "notes": "",
+      "paper_url": null,
+      "license_checked_date": "2026-10-09",
+      "components": [
+        {
+          "name": "own",
+          "code_license": "MIT",
+          "weights_license": "self_trained_or_not_applicable",
+          "commercial_use": true,
+          "source_url": "https://github.com/logxio/ooc-evaluation-audit",
+          "license_evidence_url": "https://github.com/logxio/ooc-evaluation-audit/blob/main/LICENSE"
+        },
+        {
+          "name": "lpm",
+          "code_license": "Apache-2.0",
+          "weights_license": "self_trained",
+          "commercial_use": true,
+          "source_url": "https://github.com/perturblib/perturblib",
+          "license_evidence_url": "https://github.com/perturblib/perturblib"
+        }
+      ],
+      "publication_status": "task_specific_adaptation",
+      "comparable": true,
+      "protocol": "standard_194",
+      "csv_sha256": {
+        "3": "d3395fb199f3c81b0cee3a0ee3bb4ecbee9c3938c098032e998d1e1f1d8d2b65"
+      }
+    },
+    {
+      "id": "anchorboost_single",
+      "name": "AnchorBoost (CPU single-model selection)",
+      "year": 2026,
+      "venue": "Competition implementation",
+      "family": "gradient_boosting",
+      "role": "ours",
+      "answer_seen": false,
+      "source_url": "https://github.com/logxio/ooc-evaluation-audit",
+      "code_license": "MIT; Apache-2.0",
+      "weights_license": "self_trained_or_not_applicable; Prior Labs License 1.1 (attribution); self_trained; MIT",
+      "commercial_use": true,
+      "result_source_directory": "ab_v3/predictions",
+      "source_files": [
+        {
+          "path": "ab_v3/predictions/ABv3_single.npz",
+          "sha256": "94ecb249dc4b4e48f85d1289e2d9039c49fb0d29a7131c6279aaa374e561c4af"
+        },
+        {
+          "path": "ab_v2/predictions/DWC_bag5.npz",
+          "sha256": "f8dc93b041faf0aef0a2cd45d59830db75e157491604ef4cc0ecc360f471e5b6"
+        }
+      ],
+      "available_k": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "bootstrap_replicates": 4000,
+      "bootstrap_seed": 0,
+      "notes": "k=1,2: v3 distilled; k=3,4: v2 DWC five bags, as fixed in the comparison specification.",
+      "paper_url": null,
+      "license_checked_date": "2026-10-09",
+      "components": [
+        {
+          "name": "own",
+          "code_license": "MIT",
+          "weights_license": "self_trained_or_not_applicable",
+          "commercial_use": true,
+          "source_url": "https://github.com/logxio/ooc-evaluation-audit",
+          "license_evidence_url": "https://github.com/logxio/ooc-evaluation-audit/blob/main/LICENSE"
+        },
+        {
+          "name": "tabpfn2",
+          "code_license": "Apache-2.0",
+          "weights_license": "Prior Labs License 1.1 (attribution)",
+          "commercial_use": true,
+          "source_url": "https://github.com/PriorLabs/TabPFN",
+          "license_evidence_url": "https://huggingface.co/Prior-Labs/TabPFN-v2-reg/blob/main/LICENSE.txt"
+        },
+        {
+          "name": "lpm",
+          "code_license": "Apache-2.0",
+          "weights_license": "self_trained",
+          "commercial_use": true,
+          "source_url": "https://github.com/perturblib/perturblib",
+          "license_evidence_url": "https://github.com/perturblib/perturblib"
+        },
+        {
+          "name": "chemeleon",
+          "code_license": "MIT",
+          "weights_license": "MIT",
+          "commercial_use": true,
+          "source_url": "https://github.com/JacksonBurns/chemeleon",
+          "license_evidence_url": "https://zenodo.org/api/records/15460715"
+        }
+      ],
+      "publication_status": "task_specific_adaptation",
+      "comparable": true,
+      "protocol": "standard_194",
+      "csv_sha256": {
+        "1": "4e2c2e1b6e800df3be41f67c7a22f898121fc1ba4960d1053a1f2c10c6aa4293",
+        "2": "265eea0f948eed67c5fe618251c704a4293b0de1344c78e6c98a0b0b4dbaf526",
+        "3": "afe9e097c044a4f7557679f1b731ae9a21847e27a7f5fc3dd8bb85e02ff395af",
+        "4": "8b08c1b8795e6c4d688a4a9e89bcdcec56c4429484a90016797d361d46d93a6d"
+      }
+    },
+    {
+      "id": "anchorboost_team",
+      "name": "AnchorBoost residual stack (commercial configuration)",
+      "year": 2026,
+      "venue": "Competition implementation",
+      "family": "ensemble",
+      "role": "ours",
+      "answer_seen": false,
+      "source_url": "https://github.com/logxio/ooc-evaluation-audit",
+      "code_license": "MIT; Apache-2.0",
+      "weights_license": "self_trained_or_not_applicable; Prior Labs License 1.1 (attribution); self_trained; MIT",
+      "commercial_use": true,
+      "result_source_directory": "ab_v3/predictions",
+      "source_files": [
+        {
+          "path": "ab_v3/predictions/ABv3_resid.npz",
+          "sha256": "6979dbdfba1fe8e4562629a3e708ed8c7622e7412c0bea9c80a2c1fb467b0bb3"
+        }
+      ],
+      "available_k": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "bootstrap_replicates": 4000,
+      "bootstrap_seed": 0,
+      "notes": " Source residual-stack k=2 MAE is 1.193188; the 1.1927 inventory value belongs to the T+L control.",
+      "paper_url": null,
+      "license_checked_date": "2026-10-09",
+      "components": [
+        {
+          "name": "own",
+          "code_license": "MIT",
+          "weights_license": "self_trained_or_not_applicable",
+          "commercial_use": true,
+          "source_url": "https://github.com/logxio/ooc-evaluation-audit",
+          "license_evidence_url": "https://github.com/logxio/ooc-evaluation-audit/blob/main/LICENSE"
+        },
+        {
+          "name": "tabpfn2",
+          "code_license": "Apache-2.0",
+          "weights_license": "Prior Labs License 1.1 (attribution)",
+          "commercial_use": true,
+          "source_url": "https://github.com/PriorLabs/TabPFN",
+          "license_evidence_url": "https://huggingface.co/Prior-Labs/TabPFN-v2-reg/blob/main/LICENSE.txt"
+        },
+        {
+          "name": "lpm",
+          "code_license": "Apache-2.0",
+          "weights_license": "self_trained",
+          "commercial_use": true,
+          "source_url": "https://github.com/perturblib/perturblib",
+          "license_evidence_url": "https://github.com/perturblib/perturblib"
+        },
+        {
+          "name": "chemeleon",
+          "code_license": "MIT",
+          "weights_license": "MIT",
+          "commercial_use": true,
+          "source_url": "https://github.com/JacksonBurns/chemeleon",
+          "license_evidence_url": "https://zenodo.org/api/records/15460715"
+        }
+      ],
+      "publication_status": "task_specific_adaptation",
+      "comparable": true,
+      "protocol": "standard_194",
+      "csv_sha256": {
+        "1": "716016219636b08b3adccf66c5d77409326e8f3acee75e0cfdea2f8a56ff53d5",
+        "2": "1bd24eea35acdf193269d75dea40771f8970888dca22564d2ea0c090f9950292",
+        "3": "c18ccd7afa4862a7ad08c469f1da84d48ba5f7a6379b124379f8a9a38dbc63bb",
+        "4": "7cb0d98b94446b4a746a94b1ad807d2bcb167d2382ff30cfeae93440dd4b3897"
+      }
+    },
+    {
+      "id": "research_team",
+      "name": "Research committee (noncommercial LimiX-2)",
+      "year": 2026,
+      "venue": "Competition implementation",
+      "family": "ensemble",
+      "role": "research",
+      "answer_seen": false,
+      "source_url": "https://github.com/logxio/ooc-evaluation-audit",
+      "code_license": "MIT; Apache-2.0; Stable AI Technology License v1.0",
+      "weights_license": "self_trained_or_not_applicable; Prior Labs License 1.1 (attribution); self_trained; MIT; StableAI LimiX Non-Commercial License v1.0",
+      "commercial_use": false,
+      "result_source_directory": "ab_v3/predictions",
+      "source_files": [
+        {
+          "path": "ab_v3/predictions/teamRRX_TL.npz",
+          "sha256": "2cd1e3d04f81ccce975fb5e536825061fadd273644012252f9f5329b22d32993"
+        },
+        {
+          "path": "ab_v3/predictions/ABv3_resid.npz",
+          "sha256": "6979dbdfba1fe8e4562629a3e708ed8c7622e7412c0bea9c80a2c1fb467b0bb3"
+        }
+      ],
+      "available_k": [
+        1,
+        2,
+        3,
+        4
+      ],
+      "bootstrap_replicates": 4000,
+      "bootstrap_seed": 0,
+      "notes": "k=1..3: T, retrieval T and LimiX-2 committee + LPM; k=4: commercial residual stack.",
+      "paper_url": null,
+      "license_checked_date": "2026-10-09",
+      "components": [
+        {
+          "name": "own",
+          "code_license": "MIT",
+          "weights_license": "self_trained_or_not_applicable",
+          "commercial_use": true,
+          "source_url": "https://github.com/logxio/ooc-evaluation-audit",
+          "license_evidence_url": "https://github.com/logxio/ooc-evaluation-audit/blob/main/LICENSE"
+        },
+        {
+          "name": "tabpfn2",
+          "code_license": "Apache-2.0",
+          "weights_license": "Prior Labs License 1.1 (attribution)",
+          "commercial_use": true,
+          "source_url": "https://github.com/PriorLabs/TabPFN",
+          "license_evidence_url": "https://huggingface.co/Prior-Labs/TabPFN-v2-reg/blob/main/LICENSE.txt"
+        },
+        {
+          "name": "lpm",
+          "code_license": "Apache-2.0",
+          "weights_license": "self_trained",
+          "commercial_use": true,
+          "source_url": "https://github.com/perturblib/perturblib",
+          "license_evidence_url": "https://github.com/perturblib/perturblib"
+        },
+        {
+          "name": "chemeleon",
+          "code_license": "MIT",
+          "weights_license": "MIT",
+          "commercial_use": true,
+          "source_url": "https://github.com/JacksonBurns/chemeleon",
+          "license_evidence_url": "https://zenodo.org/api/records/15460715"
+        },
+        {
+          "name": "limix2",
+          "code_license": "Stable AI Technology License v1.0",
+          "weights_license": "StableAI LimiX Non-Commercial License v1.0",
+          "commercial_use": false,
+          "source_url": "https://github.com/limix-ldm-ai/LimiX",
+          "license_evidence_url": "https://huggingface.co/stable-ai/LimiX-2"
+        }
+      ],
+      "publication_status": "task_specific_adaptation",
+      "comparable": true,
+      "protocol": "standard_194",
+      "csv_sha256": {
+        "1": "f1a92495213f2f9eb53ab4d842e38741a2b117f1351b35f10f8b42b93bebb0a4",
+        "2": "b58322e7910b237a22ec9d7362a2f81cb07b233d422dc432a1072594784528a6",
+        "3": "f59c040307d8583b2036517ac9398d177537c923e2da2f2154f434114d7b4156",
+        "4": "c38e901e054bd6819d69a21aca5aba3888dcfa9c496a6608aec2876cc429f488"
+      }
+    },
+    {
+      "id": "cnp_retrained",
+      "name": "CNP (retrained, R1 B scale)",
+      "year": 2018,
+      "venue": "ICML",
+      "family": "neural_process",
+      "role": "opponent",
+      "answer_seen": false,
+      "source_url": "https://github.com/Agnuxo1/neurochip-twin",
+      "code_license": "MIT",
+      "weights_license": "self_trained",
+      "commercial_use": true,
+      "result_source_directory": "cnp_decision/runs/B",
+      "source_files": [
+        {
+          "path": "cnp_decision/runs/B/fold1/outer_test_points.npz",
+          "sha256": "3728393e88fe1763b0d9377a34fa53572a215e623541f212ab07c70179947744"
+        },
+        {
+          "path": "cnp_decision/runs/B/fold2/outer_test_points.npz",
+          "sha256": "3340194f320b95d70f5bd943d6be0c294832e803f6c7fcd92ec103ac51c0e75b"
+        },
+        {
+          "path": "cnp_decision/runs/B/fold3/outer_test_points.npz",
+          "sha256": "cf9d7751888e89c3858a2e4e203557a119c02a98c3c69e90eddfe55aaecdc4aa"
+        },
+        {
+          "path": "cnp_decision/runs/B/fold4/outer_test_points.npz",
+          "sha256": "c6205635a9ed00baf418a2ea8a4b5498590a34ef25a0a1878d401b2525c74a44"
+        }
+      ],
+      "available_k": [
+        3
+      ],
+      "bootstrap_replicates": 4000,
+      "bootstrap_seed": 0,
+      "comparable": false,
+      "protocol": "R1_B_193",
+      "notes": "Saved five-design predictions use a different training-only normalization protocol. MAE is chemical-weighted; no comparison to standard-scale references is valid. Other k values and standard-scale predictions are unavailable.",
+      "paper_url": "https://proceedings.mlr.press/v80/garnelo18a.html",
+      "license_checked_date": "2026-10-09",
+      "components": [
+        {
+          "name": "cnp",
+          "code_license": "MIT",
+          "weights_license": "MIT (repository checkpoint) / self-trained",
+          "commercial_use": true,
+          "source_url": "https://github.com/Agnuxo1/neurochip-twin",
+          "license_evidence_url": "https://github.com/Agnuxo1/neurochip-twin"
+        }
+      ],
+      "publication_status": "published_method_or_preprint",
+      "csv_sha256": {
+        "3": "a842178d31cbff1a16a034e3b54a02dc7d5d24d517caf6ec7b1fc1771cd899f3"
+      }
+    },
+    {
+      "id": "anchorboost_s",
+      "name": "AnchorBoost-v2 S + Monroe (R1 B scale)",
+      "year": 2026,
+      "venue": "Competition implementation",
+      "family": "label_overlap",
+      "role": "opponent",
+      "answer_seen": true,
+      "source_url": "https://github.com/logxio/ooc-evaluation-audit",
+      "code_license": "MIT",
+      "weights_license": "self_trained_or_not_applicable; MIT (repository encoder checkpoint)",
+      "commercial_use": true,
+      "result_source_directory": "ab_v2/pipeline/S/B",
+      "source_files": [
+        {
+          "path": "ab_v2/pipeline/S/B/fold1/outer_test_points.npz",
+          "sha256": "43a7be163abecb7792cf61406cd510e0bf0804fd22467e9915507c63d5b404d7"
+        },
+        {
+          "path": "ab_v2/pipeline/S/B/fold2/outer_test_points.npz",
+          "sha256": "d42d8e1f790e4191ba373d1e630ef0b3adcbe41658171175197a06cca8825707"
+        },
+        {
+          "path": "ab_v2/pipeline/S/B/fold3/outer_test_points.npz",
+          "sha256": "0401b2ad76c910927b6c6383ece71138b36b08fc2fb0c0a4de3a80a91a678760"
+        },
+        {
+          "path": "ab_v2/pipeline/S/B/fold4/outer_test_points.npz",
+          "sha256": "debc1e66e7a44887bc803a4891f9d20d121f47aefc714a49228707de4d303d6d"
+        }
+      ],
+      "available_k": [
+        3
+      ],
+      "bootstrap_replicates": 4000,
+      "bootstrap_seed": 0,
+      "comparable": false,
+      "protocol": "R1_B_193",
+      "notes": "Saved five-design predictions use a different training-only normalization protocol. MAE is chemical-weighted; no comparison to standard-scale references is valid. Other k values and standard-scale predictions are unavailable.",
+      "paper_url": null,
+      "license_checked_date": "2026-10-09",
+      "components": [
+        {
+          "name": "own",
+          "code_license": "MIT",
+          "weights_license": "self_trained_or_not_applicable",
+          "commercial_use": true,
+          "source_url": "https://github.com/logxio/ooc-evaluation-audit",
+          "license_evidence_url": "https://github.com/logxio/ooc-evaluation-audit/blob/main/LICENSE"
+        },
+        {
+          "name": "monroe",
+          "code_license": "MIT",
+          "weights_license": "MIT (repository encoder checkpoint)",
+          "commercial_use": true,
+          "source_url": "https://github.com/blazejba/monroe",
+          "license_evidence_url": "https://github.com/blazejba/monroe"
+        }
+      ],
+      "publication_status": "task_specific_adaptation",
+      "csv_sha256": {
+        "3": "c7009cd5ab506223074605365c29299aad6d9cb83378bd2a6b00df7e62d48c71"
+      }
+    }
+  ],
+  "pretraining_overlap": {
+    "monroe": {
+      "answer_seen": true,
+      "meaning": "Supervised bioassay labels on overlapping compounds; not the target MEA endpoint.",
+      "pcba_overlap_243": 229,
+      "pcba_overlap_194": 181,
+      "tox21_overlap_243": 220,
+      "ache_overlap_243": 215,
+      "ache_positive_243": 47,
+      "source": "pretrain_overlap/results.md"
+    },
+    "chemeleon": {
+      "structure_overlap_243": 210,
+      "structure_overlap_194": 164,
+      "objective": "Calculated molecular descriptors; no experimental labels"
+    },
+    "kano_motil": {
+      "zinc_structure_overlap": 0
+    },
+    "tabular_priors": {
+      "models": [
+        "TabPFN-2",
+        "TabPFN-3.5",
+        "TabICLv2",
+        "LimiX-2"
+      ],
+      "training": "Synthetic priors; no target compound labels"
+    },
+    "cnp": {
+      "excluded_chemical": "Phenobarbital",
+      "reason": "Salt identity in checkpoint training fold",
+      "remaining_chemicals": 193
+    }
+  },
+  "license_notes": [
+    "Commercial-use flags concern the implementation and weights used, including listed components; they do not redistribute model weights.",
+    "Unknown code licenses are retained explicitly for FlowNP, SNN and TabImpute.",
+    "CheMeleon official weight MD5 6a80b54fdb7de37ef0374d302f01e8ce matches the evaluated file and Zenodo metadata declares MIT."
+  ]
+}

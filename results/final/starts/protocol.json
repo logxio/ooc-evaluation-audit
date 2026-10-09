@@ -1,0 +1,563 @@
+{
+  "schema": "paper.start_design.lane.protocol.v1",
+  "created_utc": "2026-10-05T23:46:12.023944+00:00",
+  "source": {
+    "name": "common_scale_B_R1",
+    "description": "Headline scale: every plate centered on its own vehicle controls; asinh c and per-DIV robust SD from the training-associated vehicles of each outer fit (arm B), identity split R1 (batch_heldout/common_scale/B/R1).",
+    "root": "<local-input>/ab3fc7f5362b/R1",
+    "fold_dir": "fold{fold}",
+    "protocol": "<local-input>/18fd4341f824/source_protocol.json",
+    "splits": "<local-input>/f0347ac0fce3/identity_splits.json",
+    "identities": "<local-input>/6b6ca7f64cae/identities.json",
+    "code_dir": "<local-input>/4d37a00fbb81/src",
+    "task_builder": {
+      "kind": "module",
+      "path": "<local-input>/19f9f02cbfad/run_common.py",
+      "function": "make_tasks"
+    },
+    "primary_folds": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "development_folds": [],
+    "published_design_csv_rows": {
+      "path": "<local-input>/d10781981df3/design_decisions.csv",
+      "filter": {
+        "arm": "B",
+        "regime": "R1",
+        "primary_population": "1"
+      }
+    },
+    "lane_headline": "<local-input>/3149862b9b3a/headline.json",
+    "lane_joint_root": "<local-input>/6b1f62c08129/lane"
+  },
+  "question": [
+    "Q1: after stratifying the 965 published test designs by whether the starting three concentrations contain the highest tested concentration, how much of the AnchorBoost advantage over measured-only remains in each stratum?",
+    "Q2: when every three-concentration start is recalibrated on its own, what does the start chosen from training and calibration identities deliver on test identities, and how does it differ from the published random starts and from the conventional lowest/middle/highest start?",
+    "Q3: when reports of \"inactive\" and reports of \"active\" get separate margins, so missed activity is controlled on its own, what are the report, missed-activity and false-activity counts?"
+  ],
+  "status": "Retrospective analysis of previously studied public data on frozen fitted pipelines. A same-day quick look (counts only, no protocol, no intervals) already showed the Q1 strata counts listed under prior_knowledge; Q1 is a formal reproduction of it. No start-design family inference, per-start calibration or two-margin calibration existed when this file was written.",
+  "decisions_fed": [
+    "Whether the reporting section (Fig. 4) gains a subsection on how to choose the starting concentrations.",
+    "Whether the release rule changes from one margin on total wrong reports to separate control of missed activity."
+  ],
+  "encoding": "truth=1 means inactive: the full-series maximum absolute masked DIV-mean response over all concentrations and 17 features is strictly below 3 in the outer-training scale of that fold. call uses the same encoding. Missed activity (FN) = reported, call=1, truth=0. False activity (FP) = reported, call=0, truth=1.",
+  "frozen_components": {
+    "rule": "No predictor, transform, activity cutoff or rank reference is fitted. Each outer fold uses outer_model.joblib, outer_transform.json and training_rules.json of the source run after their SHA-256 equal that fold pretest_freeze.json and the list in input_sha256.",
+    "new_predictor_fits": 0,
+    "new_cutoff_or_rank_fits": 0,
+    "what_is_selected": "Only release margins and, for the recommended arms, the start design. Every selection reads training-frozen objects and calibration identities only.",
+    "training_coverage_claim_to_verify": "chip_forecast.AnchorBoost enumerates all C(L,3) contexts of every training substance (design = all_designs unless ablation == five_designs; the nested fit passes no ablation). The verifier recounts the training rows implied by all_designs and compares with the saved model.",
+    "known_limit": "The cutoff and rank reference were fitted on inner-held-out scores of the five name-seeded random designs per training substance. They stay fixed for every start; a start-specific cutoff would need refitting inner models and is outside this analysis."
+  },
+  "identity_chain": {
+    "roles": "Within each outer fold the training, calibration and test identity groups are pairwise disjoint (source splits.json). Selections happen per outer fold. Nothing is pooled across folds before test scoring, because calibration identities of one fold are test identities of another.",
+    "mechanical_guard": "Every calibration or selection call receives rows, asserts that their chemicals and identity groups have empty intersection with the test chemicals and groups of that fold, and appends the counts to the selection log. The verifier repeats the check from saved files.",
+    "test_truth": "Test full-series labels are computed once per fold, by the score stage, after test predictions and all release decisions are saved and hashed (test_prediction_freeze.json). Calibration labels are used by the select stage.",
+    "order": [
+      "protocol.json + protocol.sha256",
+      "calibration inference (context-only) and hash receipt",
+      "all margin and start selections from calibration identities; pretest_freeze.json",
+      "test inference (context-only) and every release decision; test_prediction_freeze.json",
+      "reveal test labels and score",
+      "summaries, intervals, independent verification"
+    ]
+  },
+  "context_isolation": {
+    "construction": "As in nested forecast(): a new Task holding only the wells of the three selected concentrations is passed to the predictor and to log-linear interpolation; query concentrations are design metadata.",
+    "sentinel_check": "For every evaluated context the forward function is run again on a task whose hidden responses are replaced by 12345 and whose hidden masks are inverted, with the chemical name replaced by a blind token; the context hash, the three scores and both prediction arrays must be bit-identical. A second variant (hidden responses -999, masks unchanged) must give the same context hash."
+  },
+  "reference_and_cost": "Same as nested. Label: full-series endpoint under the fold outer transform, threshold 3, equality is active. Exposed wells: a reported design costs the wells of its three starting concentrations; an unreported design costs the full series. Vehicle controls, repeats and overhead are excluded for every arm.",
+  "methods": {
+    "anchorboost": "score = max(measured three-point endpoint, max |DIV-mean AnchorBoost prediction| over unmeasured concentrations)",
+    "measured_only": "score = measured three-point endpoint",
+    "loglinear": "score = max(measured endpoint, max |DIV-mean log-linear interpolation| over unmeasured concentrations); called interpolation in tables"
+  },
+  "populations": {
+    "published_random": "Primary folds 1-4, published five name-seeded designs per substance: 965 designs, 193 substances, 188 identity groups. Used for Q1, Q3 and for bit-for-bit reproduction of published numbers.",
+    "seven": "MAIN population of Q2: test substances with exactly seven tested concentrations, where the 35 starts are all C(7,3) triples. Expected from concentration metadata (no responses read): 169 substances in 166 identity groups (per fold 45/46/41/37 substances, 45/44/40/37 groups). One parent group holds an 11-level and a 7-level member; only its 7-level member enters. Calibration uses the seven-level calibration substances of the same fold (expected 78/78/83/87 substances, 77/77/81/84 groups).",
+    "all": "SENSITIVITY population of Q2: all 193 test substances (188 groups); substances with more than seven concentrations use the rank-position mapping below. Calibration uses all calibration substances of the fold.",
+    "denominator_rule": "Every table states designs, substances and identity groups. Numbers from seven and from published_random/all are never placed in one sentence as if they shared a denominator.",
+    "development_fold": "Outer fold 0 is run first as a pipeline exercise and reported separately. Its test identities are training identities of folds 1-4. It enters no primary number."
+  },
+  "start_family": {
+    "positions": "Seven relative rank positions 0..6 (0 = lowest tested concentration, 3 = middle rank, 6 = highest). A start is a triple a<b<c of positions, id \"abc\"; 35 starts in lexicographic order.",
+    "ids": [
+      "012",
+      "013",
+      "014",
+      "015",
+      "016",
+      "023",
+      "024",
+      "025",
+      "026",
+      "034",
+      "035",
+      "036",
+      "045",
+      "046",
+      "056",
+      "123",
+      "124",
+      "125",
+      "126",
+      "134",
+      "135",
+      "136",
+      "145",
+      "146",
+      "156",
+      "234",
+      "235",
+      "236",
+      "245",
+      "246",
+      "256",
+      "345",
+      "346",
+      "356",
+      "456"
+    ],
+    "level_mapping": "For a substance with L sorted concentrations, position j uses level index floor(j*(L-1)/6 + 1/2), computed as (2*j*(L-1)+6)//12. Identity for L=7; strictly increasing for L>7.",
+    "mapping_table": {
+      "7": [
+        0,
+        1,
+        2,
+        3,
+        4,
+        5,
+        6
+      ],
+      "8": [
+        0,
+        1,
+        2,
+        4,
+        5,
+        6,
+        7
+      ],
+      "9": [
+        0,
+        1,
+        3,
+        4,
+        5,
+        7,
+        8
+      ],
+      "10": [
+        0,
+        2,
+        3,
+        5,
+        6,
+        8,
+        9
+      ],
+      "11": [
+        0,
+        2,
+        3,
+        5,
+        7,
+        8,
+        10
+      ],
+      "12": [
+        0,
+        2,
+        4,
+        6,
+        7,
+        9,
+        11
+      ],
+      "13": [
+        0,
+        2,
+        4,
+        6,
+        8,
+        10,
+        12
+      ]
+    },
+    "contains_top": "Position 6 in the triple, i.e. the highest tested concentration is measured at the start. 15 of 35 starts contain it.",
+    "conventional": "036 (lowest, middle, highest)",
+    "published_random": "chip_forecast.designs(task, 3): five distinct name-seeded triples per substance. For seven-level substances each is one of the 35 starts."
+  },
+  "risk_calibration": {
+    "alpha": 0.1,
+    "alpha_exact": "1/10",
+    "grid": [
+      -1.0,
+      0.0,
+      0.01,
+      0.02,
+      0.03,
+      0.04,
+      0.05,
+      0.06,
+      0.07,
+      0.08,
+      0.09,
+      0.1,
+      0.11,
+      0.12,
+      0.13,
+      0.14,
+      0.15,
+      0.16,
+      0.17,
+      0.18,
+      0.19,
+      0.2,
+      0.21,
+      0.22,
+      0.23,
+      0.24,
+      0.25,
+      0.26,
+      0.27,
+      0.28,
+      0.29,
+      0.3,
+      0.31,
+      0.32,
+      0.33,
+      0.34,
+      0.35,
+      0.36,
+      0.37,
+      0.38,
+      0.39,
+      0.4,
+      0.41,
+      0.42,
+      0.43,
+      0.44,
+      0.45,
+      0.46,
+      0.47,
+      0.48,
+      0.49,
+      0.5,
+      0.51,
+      0.52,
+      0.53,
+      0.54,
+      0.55,
+      0.56,
+      0.57,
+      0.58,
+      0.59,
+      0.6,
+      0.61,
+      0.62,
+      0.63,
+      0.64,
+      0.65,
+      0.66,
+      0.67,
+      0.68,
+      0.69,
+      0.7,
+      0.71,
+      0.72,
+      0.73,
+      0.74,
+      0.75,
+      0.76,
+      0.77,
+      0.78,
+      0.79,
+      0.8,
+      0.81,
+      0.82,
+      0.83,
+      0.84,
+      0.85,
+      0.86,
+      0.87,
+      0.88,
+      0.89,
+      0.9,
+      0.91,
+      0.92,
+      0.93,
+      0.94,
+      0.95,
+      0.96,
+      0.97,
+      0.98,
+      0.99,
+      1.0
+    ],
+    "loss": "L_g(lambda) = mean over all rows of identity group g in the arm of 1(margin > lambda) * 1(call != truth).",
+    "selection": "Smallest grid lambda with (sum_g L_g(lambda) + 1)/(n_groups + 1) <= alpha; if none, lambda = 1 and nothing is reported.",
+    "arithmetic": "New calibrations evaluate the inequality in exact integer arithmetic (group losses are ratios of counts), so the result cannot depend on floating-point summation order. For the published random arm the source float computation is reproduced bit-for-bit, and every grid value where float and exact evaluation disagree is listed.",
+    "per_start": "Each start d, method m, population and fold gets its own lambda from the calibration substances measured at d (one row per substance). The published lambda was calibrated on the within-drug mean over five random starts and carries no guarantee for a single fixed start.",
+    "monotone_check": "Group loss counts must be nonincreasing along the grid for every calibration; a violation stops the run.",
+    "scope": "Expected marginal identity-group loss under exchangeability of calibration and future identities, for a start fixed before looking at calibration outcomes. Shared technical batches and earlier exploration remain. No conditional or per-fold guarantee."
+  },
+  "arms": {
+    "random_published": "Published five random starts with the published margin of the source run (calibrated on all calibration substances). Quoted, not recalibrated. Restricted to the population when used in Q2.",
+    "random_recal7": "Bridging row, population seven only: published five random starts, margin recalibrated on the seven-level calibration substances.",
+    "uniform35": "Bridging row: all 35 starts per substance with equal weight; one margin calibrated on the within-group mean over all 35 starts. Exact-expectation counterpart of a uniformly random start.",
+    "conventional": "Start 036 with its own margin.",
+    "recommended": "PRIMARY recommended start. Per fold and method, among the 35 starts (each at its own calibrated margin; the risk constraint is satisfied by construction) choose by, in order: (1) most calibration designs reported, (2) smallest calibration loss sum (rounded to 9 decimals), (3) fewest calibration exposed wells, (4) smallest position id. Evaluated once on test identities with the margin of that start. If folds choose different starts each fold keeps its own; the pooled readout evaluates the per-fold selection procedure and the per-fold starts are listed.",
+    "recommended_wells": "Sensitivity to the objective (the wording first proposed for this analysis): (1) fewest calibration exposed wells, (2) most calibration designs reported, (3) smallest position id.",
+    "recommended_split": "Sensitivity that keeps the risk statement after selection: calibration groups are ordered by sha256 of [\"start-design-split-v1\", fold, group]; even ranks form half A, odd ranks half B. Half A selects the start with the primary objective computed on A; the margin is then calibrated on half B only.",
+    "recommended_at_other_method": "For same-start model contrasts: both methods at the start recommended for AnchorBoost, and both at the start recommended for measured-only, each with its own margin at that start.",
+    "per_design": "All 35 starts with their own margins. On test this table is descriptive; no start is picked from it.",
+    "top15_per_design / nontop20_per_design": "Descriptive class averages: all starts with / without position 6, each at its own margin, equal weight.",
+    "selection_note": "recommended and recommended_wells reuse the calibration identities for choosing the start and its margin, so the finite-sample risk statement is not carried through the choice; the single test evaluation is the check. recommended_split carries it."
+  },
+  "effects": {
+    "unit": "Identity group of the population; a group value is the mean over all its substance/design rows in the arm (wells: sum over its substances of the mean over that substance designs, i.e. one screening per substance).",
+    "metrics": [
+      "report_rate",
+      "wrong_report_loss",
+      "fn_loss",
+      "fp_loss",
+      "exposed wells per screening (total difference and relative saving)"
+    ],
+    "start_effect": "Same method: recommended minus random_published; conventional minus random_published; recommended minus conventional.",
+    "model_effect": "Same start arm: AnchorBoost minus measured-only, for random_published, conventional, recommended (each method at its own recommended start), and for the two same-start variants.",
+    "interaction": "Difference in differences: model_effect(recommended) minus model_effect(random_published); model_effect(conventional) minus model_effect(random_published).",
+    "reported_for": "Population seven (main) and population all (sensitivity). AnchorBoost minus loglinear is tabulated as a secondary model contrast."
+  },
+  "q1_stratification": {
+    "strata": "contains_top = the published start includes the highest tested concentration of that substance (level index L-1); otherwise not.",
+    "tables": "Per stratum and method (anchorboost, measured_only, loglinear): designs, substances, identity groups with at least one design in the stratum, reports, FN, FP, exposed wells used and full, identity-equal report rate, wrong-report loss, FN loss, FP loss. AnchorBoost minus measured-only (and minus loglinear) paired differences per stratum, and the between-strata difference of that contrast.",
+    "closed_loop": "Same strata for the four fourth-concentration policies of joint/ (model_disagreement, highest_unmeasured, fixed_maximin, uniform_random as exact expectation) with their joint threshold, plus contrasts against both published three-point rules. Inputs: joint/fold*/test_scored.json, test_branches.json, calibration.json.",
+    "group_values": "Within a stratum a group value is the mean over its designs in that stratum; groups without a design there do not enter that stratum.",
+    "computation": "No fitting and no inference: read from the published decision files."
+  },
+  "q3_asymmetric": {
+    "rule": "Two margins. A design called inactive is reported iff margin > lambda_I; a design called active is reported iff margin > lambda_A.",
+    "losses": "L_FN_g(lambda_I) = share of the group rows with call=1, margin > lambda_I, truth=0. L_FP_g(lambda_A) = share with call=0, margin > lambda_A, truth=1. Denominator: all rows of the group in the arm.",
+    "selection": "lambda_I = smallest grid value with (sum_g L_FN_g + 1)/(n+1) <= alpha_FN; lambda_A likewise with alpha_FP. Exact integer arithmetic. Each loss is bounded, right-continuous and nonincreasing in its own margin; the monotone check is run for both before any selection.",
+    "settings": {
+      "fn05_fp05": {
+        "alpha_fn": "1/20",
+        "alpha_fp": "1/20",
+        "role": "PRIMARY; expected total wrong-report loss bound 0.10, the manuscript level"
+      },
+      "fn05_fpfree": {
+        "alpha_fn": "1/20",
+        "alpha_fp": null,
+        "lambda_A": -1.0,
+        "role": "Sensitivity: only missed activity is controlled, every active call is reported"
+      }
+    },
+    "primary_population": "published_random (965 designs, 188 groups): margins from the source calibration rows of the five random starts; compared with the published single-margin rule of the same method by identity-paired differences.",
+    "secondary_population": "Population seven: conventional start, and the start chosen with the primary objective under the two-margin rule (per fold, method and setting; reports, then total FN+FP calibration loss sum, then wells, then position id), each evaluated once on test.",
+    "methods": "All three methods.",
+    "contrasts": "Two-margin rule minus the published single-margin rule of the same method; AnchorBoost minus measured-only (and minus loglinear) under the same setting. Identity-paired, same bootstrap."
+  },
+  "statistics": {
+    "bootstrap": "4,000 identity-group resamples, numpy default_rng(0).integers(0, n, (4000, n)) over the sorted group ids of the population; one index matrix per population reused for every statistic; all rows of a drawn group are kept.",
+    "replicate_statistics": "Group mean: sum of drawn group values / n. Total: sum of drawn group values. Ratio (relative well saving, error among reports): ratio of drawn sums. Stratum mean: drawn sum over groups present in the stratum / number of drawn groups present.",
+    "interval": "95% percentile interval (numpy quantile, linear interpolation) at fixed fitted pipelines, fixed margins and fixed selected starts. No refitting or reselection uncertainty; no multiplicity correction.",
+    "published_reproduction": "In the runner code path the published random-start numbers must equal nested/summary.json (primary_folds_1_to_4 methods and primary_paired_drug_bootstrap) and joint/summary.json (methods, paired_contrasts, identity_bootstrap_intervals) with exact float equality, using the original draw order of each summary. Per-design scores, calls and margins of the random starts are compared with the saved source rows. The manuscript headline (946 vs 806 reports, 77 vs 75 wrong, 15.24% fewer wells) is neither changed nor recomputed under another definition.",
+    "verification": "verify_start.py imports no function of the runner. It rebuilds responses from the raw table and the frozen transform, regenerates designs and contexts, reruns inference, and recomputes scores, margins, calibrations, selections, decisions, tables and intervals (index-array bootstrap against the runner frequency-matrix bootstrap)."
+  },
+  "source_entry": "run_start.py --source <spec.json> --out <dir>. The spec names where model, transform, rules, calibration records, splits, identities, raw table and task builder are read. This run uses sources/nested.json. After the normalization choice (group message 20261005T064320Z-9437) the same code reruns on batch_heldout/common_scale/A/R1 with another spec and its own protocol.",
+  "outputs": [
+    "protocol.json",
+    "protocol.sha256",
+    "fold{f}/ inference, lane calibration and decision files",
+    "summary.json",
+    "stratified.csv",
+    "start_designs.csv",
+    "asymmetric.csv",
+    "recommended.json",
+    "ceiling/"
+  ],
+  "resource": {
+    "max_rss_bytes": 4000000000,
+    "stage_max_seconds": 295,
+    "owner": " Series1 / start_design",
+    "fits": 0,
+    "termination": "Each stage is a finite foreground process; nothing is left running.",
+    "probe_before_freeze": "Three calibration substances of fold 1: 126 contexts in 1.16 s, peak RSS 476 MB; their five published random-start scores were bit-identical to the saved source rows. No outcome summary was read from the probe."
+  },
+  "amendments": {
+    "001": "96efef274cc85c68dcc99456471ad7219cb9b4764326f5a3c8c645e294216816",
+    "002": "ed515e1f1ee566aa48560405bfc6afa5d7a65650be54eed709810c0e06dfb755"
+  },
+  "expected_before_run": {
+    "q1": {
+      "designs": [
+        406,
+        559
+      ],
+      "report_rate_gain_pp": {
+        "contains_top": [
+          0,
+          8
+        ],
+        "not_contains_top": [
+          10,
+          22
+        ]
+      }
+    },
+    "q2_seven": {
+      "recommended_start": "contains the highest concentration in every fold for both AnchorBoost and measured-only (probability 0.85)",
+      "recommended_reports": "each method reports at least 160 of 169",
+      "model_gain_at_recommended_pp": [
+        -3,
+        3
+      ],
+      "start_effect_measured_only_pp": [
+        8,
+        20
+      ],
+      "start_effect_anchorboost_pp": [
+        -2,
+        6
+      ],
+      "model_gain_random_pp": [
+        6,
+        16
+      ],
+      "interaction_recommended_pp": [
+        -16,
+        -5
+      ]
+    },
+    "ceiling": {
+      "rank7_gain_pp": [
+        -1,
+        1
+      ],
+      "rank6_gain_pp": [
+        0,
+        8
+      ],
+      "rank_le5_gain_pp": [
+        10,
+        28
+      ],
+      "monotone_ranks_4_to_7": "probability 0.6"
+    },
+    "q3": {
+      "anchorboost_reports": [
+        820,
+        900
+      ],
+      "anchorboost_fn": [
+        20,
+        45
+      ],
+      "lambda_A_all_minus_one": "probability 0.6",
+      "report_rate_change_vs_single_pp": [
+        -12,
+        -2
+      ]
+    },
+    "headline_reproduction": "Q3 single cells equal 914/84/12,031 and 818/75/13,503 exactly"
+  },
+  "input_sha256": {
+    "<local-input>/9892deaae8f9/B_R1.json": "4a0ad6b74bb70259fe06a67e352729c74601f7e942525f0bf6b4a2c56abc1394",
+    "<local-input>/18fd4341f824/source_protocol.json": "d15f70d8ba11f111516a13a087d3970ea270bb2e9711547db8aaf6b6f71ff20d",
+    "<local-input>/f0347ac0fce3/identity_splits.json": "a455fa45a25c0b6f80e6e4b4cb0235dc72da89e6ad6a7eaa240051f7df72aa4c",
+    "<local-input>/6b6ca7f64cae/identities.json": "ef322cee97084b3b4e01b4d8a164ecb63562ae9981e226cdc4809f0c72acf3b5",
+    "<local-input>/9246f32f693c/All_DIV_Data.Rdata": "fe8015c789770092b485fb63dd8aa0f643120e366df73c5624665454ee982af6",
+    "<local-input>/5855f37c74e7/paper_nested_decision.py": "9e94f01c6d7c959587e4c77ce6f0792db270e3e7b316cc512a1795012be8c832",
+    "<local-input>/860e383f40a6/chip_forecast.py": "3ff0a65a484030879081b9163961c10d019b37510fe65229c3b5fbe43713bc5d",
+    "<local-input>/19f9f02cbfad/run_common.py": "86a847e3af4d3086756ed53e1c16c96f901f03fd8e35687c9911374e00f9ba8f",
+    "<local-input>/d10781981df3/design_decisions.csv": "6e70092707d63579f75cd96763e255a3cd4554b6c7a2c747338d916113c17864",
+    "<local-input>/3149862b9b3a/headline.json": "656258bb18010bd03df3c34059e5f036aa4c6f7055f1ac12590b3ace0c6c2a32",
+    "<local-input>/e91bf7033915/protocol_amendment_001.json": "a9253064ea534a28f69f4c935fbd24a05db6d1e307dd152d5da05a643d4a64f4",
+    "<local-input>/191a908e76cd/summarize_headline.py": "e3465bf9db18e9e203f6f8597da50283b00ba0406b2d7e3cdfa0d31de62c217d",
+    "<local-input>/bdbbce135b22/three_point_lambdas.json": "9970dcae3c14ad1526def812d687325015592b9f87a20afd77162d9d0cf8538c",
+    "<local-input>/b5ae54facaba/bootstrap_identity_counts_seed0.npz": "30eb1a4efe3ed16ec224ac2944315046b7ef9881d2afbd447f850231dd864bf2",
+    "<local-input>/9e05c6fa3101/paper_nested_decision.py": "22de67e35239a390a03e93d1df2c557671837944afc341e1eb2f5d46a9c094d7",
+    "<local-input>/7d7208d627fd/design_decisions.csv": "4afc99c90448ae4c846c1b0a38f586113eece08af2d7c64aeaa53dd56955fb94",
+    "<local-input>/c0dc3e898d2d/branch_decisions.csv": "938f3eab8e99194481090c614f1f2a0059566c7b93a95075fb04a92ca01db56c",
+    "<local-input>/97175e9a9273/summary.json": "904d09781859684d1537bdd813c8af19d64cfba464d4a00708b5ab3b6aa5c5ec",
+    "<local-input>/393c3d6bf977/protocol.json": "d86ec0201fa41501cb2988b45abc1b8575da894b6b1e42c34509c9f3eb9d8a58",
+    "<local-input>/8ed3b588548e/protocol_amendment_001.json": "96efef274cc85c68dcc99456471ad7219cb9b4764326f5a3c8c645e294216816",
+    "<local-input>/2464c7d1701f/protocol_amendment_002.json": "ed515e1f1ee566aa48560405bfc6afa5d7a65650be54eed709810c0e06dfb755",
+    "<local-input>/b41b27060126/run_start.py": "560881875da908a5703559e4077696632341f53ba79fe52d393b2f384cf8c242",
+    "<local-input>/e309f9dd38f6/protocol.json": "d9a2e2a5d92c51f3c386cd3c5eaf41ea577698fed1e436a431d28fc5f75893e2",
+    "<local-input>/a96504800a4c/results.json": "6af37ad7561b130779a96527e83023138a4f6d89d13f29a154a23fb9dc1227a9",
+    "<local-input>/012dd4b57344/per_design.csv": "9e1f95b447a5c23cc21102c2fc0ff6d786d1a09d882d01fce991cbc19619e1de",
+    "<local-input>/f7dadfcc432d/rank_classes.csv": "52bbe408e663fa7bfcfcd37bf4375eec18e83bf6e7372042092851241192a2cd",
+    "<local-input>/464c38e02457/span_classes.csv": "721827547715445385bb74370f4d6cb6f6898284f44a43b7cd2e0094e0096685",
+    "<local-input>/ac56daae9008/adjacent_contrasts.csv": "0c8b9bc35e5a49749f868e3bf668e7f57124469065a356cf9fe7fa3ab36db848",
+    "<local-input>/a64dceb8b049/test_scored.json": "e8689f783514f67879248fc7bc90df1e3f46defd8289aea6c138e8cdbf9a77ee",
+    "<local-input>/e852b70332e4/score_receipt.json": "00f26097216ef81186182b15baec8d6c9dff5b4fcb11897b8cc300eda350a769",
+    "<local-input>/0fb09945fb22/test_scored.json": "fb9624c95825c41cdd51360ea6389420fe0cdb8e4357b4296567330326ff1010",
+    "<local-input>/4a1aae1be3e5/score_receipt.json": "444702978528bfbe114e935ef8b1218782efad634d7524aefa74b994393e8f33",
+    "<local-input>/9a9ed2a81ea0/test_scored.json": "fba5324f645a21fcca888866c870f1794b2d9e7a2172ccd386c40b0b80dbc3b4",
+    "<local-input>/f10f67e2e3f9/score_receipt.json": "feb789adc9d4f93eaba9df1c86d9c9b9e81682a51d33110a56e8115297a4681c",
+    "<local-input>/15e54fae8a32/test_scored.json": "1b1a80893ee83aa3ea2d1a1e7959d8161aa4b478d6d9131b6eff32d2e18020d7",
+    "<local-input>/39ef62d890f9/score_receipt.json": "147967c7cb7d03b90d02ec03555d8443fa5146f70a60b29f9bc598c2e4b10204",
+    "<local-input>/294ac5dcd0e1/outer_model.joblib": "81cee2da186aa4564c586317f490da0751c11e253014bfd288897d4249b24181",
+    "<local-input>/308e01c8c64f/outer_transform.json": "81490fee28da6d61f4b23705eb254ac52fb2025dd5179e4d0489cb6070cc08d1",
+    "<local-input>/bbda704a983a/training_rules.json": "c54ad74ce740b4a96c461d790669f2c5756d561680e79052976a1729d7543fed",
+    "<local-input>/c578d9823961/calibration.json": "37b0c9e179498df287637e924306da958622fe61f7274fd3e159a4c7780cb408",
+    "<local-input>/4677b5f519bf/pretest_freeze.json": "0ed6acf50a2131fa6886659e898a37a3f425488f18cfc833824e9cc9a14a394e",
+    "<local-input>/0a53c2fa62c0/calibration_design_decisions.json": "c13a2c7beeeaa7fd49332b909d6cb5a99a8f774c84b4bd8521393a89c4467867",
+    "<local-input>/3fc5721b718e/test_decisions_frozen.json": "a7d6becb0e44e46113fd05861b2cbe73c6ac46ef912af7fdd84387c913b85647",
+    "<local-input>/95636c252d5d/design_decisions.json": "7efbbf7e565339d418cf8eef87be3fe44f5c937df10490d454db6037e23f456e",
+    "<local-input>/e365c4a1d585/summary.json": "8aeb3baf499650fc7bf39579c5f4a904462e6d2d339c088bbeeb13a2c1257a62",
+    "<local-input>/c0fe99d9bb62/outer_model.joblib": "dfb514912b672310d2588dada04b47d416aff6b1516deeb30ac21e4d9387883f",
+    "<local-input>/76b51c1074da/outer_transform.json": "78c223ffbfd7bea011b9e96dbc3098202f91672c261e2da8e5e5f9cbee2402ce",
+    "<local-input>/a1b0b3982f28/training_rules.json": "ad09014a9ff6499c4d5926caebea005bec09c56a47495224e4ac49467db4248a",
+    "<local-input>/9f5c50d9fa9a/calibration.json": "4fff2d012109a9a00cc2ce1931ce8966f881a633fedd84e9738af7cf128ed6d7",
+    "<local-input>/bceb93587dd6/pretest_freeze.json": "2713c9e8f7e8485c7ea39687b87d40255d8e27161e7a56d5a996e280310cd77e",
+    "<local-input>/5b9a9aca1982/calibration_design_decisions.json": "1d4f67bb2456b099e33b97d669460291e6580058f502ed4d0e358bdc8922177f",
+    "<local-input>/4fbe8ee93596/test_decisions_frozen.json": "95a5e2690a7e40f018c82fc5e877763f593a1ef67cd0cc9405a817db232d5b25",
+    "<local-input>/aba579285b97/design_decisions.json": "c3a243039d42af96588a4dae162c7480fba97591eb795c094689628cf89d992f",
+    "<local-input>/f55c734f3f73/summary.json": "6921f7ebacef7bf05cdcdcc8ac462e3fa251a59da605f58154ffaef42a5227fa",
+    "<local-input>/bfc844507e86/outer_model.joblib": "dfb514912b672310d2588dada04b47d416aff6b1516deeb30ac21e4d9387883f",
+    "<local-input>/767f63eb69d6/outer_transform.json": "78c223ffbfd7bea011b9e96dbc3098202f91672c261e2da8e5e5f9cbee2402ce",
+    "<local-input>/a9d7026f4054/training_rules.json": "84e39f16e029bd58372d6b2eae928b5f40c9d4d5a4a90579cc05de116c70f87e",
+    "<local-input>/5d7d4315b329/calibration.json": "606f926ed92e98c872d0d940ae01e4364ce51388fa7a4fd1e1eb913303f4ea11",
+    "<local-input>/0325c49ec57a/pretest_freeze.json": "46e5cc51809a3258154417cc5635b3d4a17f2483a34f8be19a964cc980528340",
+    "<local-input>/9b9c6e8212c2/calibration_design_decisions.json": "35aa7dc3bbbd35193ea12d7f6a7887f9d7ef96ac579b1a58214b4f6dd4f7b07c",
+    "<local-input>/4cae575a0e0e/test_decisions_frozen.json": "df82e004dfeb52c1504da208e755ce8ff1cd530a0b964650fbcf48bdd3594bd7",
+    "<local-input>/b78f1e1c6d27/design_decisions.json": "8c7055e2f3e0bfa35edb6a1f96fc4ea38a85ba27cfd915041767f0951c520a8f",
+    "<local-input>/d350df2614b3/summary.json": "eb81dec731e43ec9ab4ae0b91d893fc8b812d584a7b091b70ea5a2f678d6032d",
+    "<local-input>/f1a1537b7de5/outer_model.joblib": "dfb514912b672310d2588dada04b47d416aff6b1516deeb30ac21e4d9387883f",
+    "<local-input>/d3b2fd0afe9e/outer_transform.json": "78c223ffbfd7bea011b9e96dbc3098202f91672c261e2da8e5e5f9cbee2402ce",
+    "<local-input>/91905e4bd389/training_rules.json": "d9b4884e990f9c64c5cc6688ff0ae756de3fb1d0576b91bd31c6681a3c7d7261",
+    "<local-input>/35036c300f54/calibration.json": "0e8ca525ab2b64d44185a511c51de69fe7a21e7cdcf78cebac4276feabdae792",
+    "<local-input>/964cc84f5d65/pretest_freeze.json": "1fa0d352cb0d00477a7bf01cc2ad78e6c06413a17eb4de02ccca91fa4755febe",
+    "<local-input>/d188bc4ad08d/calibration_design_decisions.json": "dd760b63976a3a56458f3e6d871003f49bf45b8e4b086213e78adcc3b4b27d24",
+    "<local-input>/9692770f2614/test_decisions_frozen.json": "11dde9384b65f54ea3e5cc7f6813d8b01b57fe95105963a3fd1c2356450cd284",
+    "<local-input>/d9dbc2b12844/design_decisions.json": "342ed068e032d41b8180f87b25348fd9b3879269b5976987f38eccf905529f76",
+    "<local-input>/9ff8e0d1e717/summary.json": "428b9654c870a6de61c9b2ede696938581d035b1689f7f59a57702a2f890aa6a"
+  },
+  "arm": "B",
+  "role": "headline",
+  "lane": {
+    "rule": "Observed-active lane of scale_A amendment 001 (crc_obs of risk_upgrade amendment 004), applied to every three-point arm of this protocol: a design whose measured three-point endpoint measured_only >= 3 is released with call active at every margin; any other design is released iff its exact margin > lambda.",
+    "gate": "Every calibration and test design with measured_only >= 3 must have truth active (0); otherwise the run stops. The reference is the maximum over all concentrations of the same masked DIV-mean effect, so such a release cannot be wrong.",
+    "implementation": "A row transformation applied before every calibration, selection and release: for lane rows the call of every method becomes 0 (active) and the block (number of grid values the design clears) becomes the grid length, so the row is released at every grid value including lambda = 1 and never counts as an error. Non-lane rows are untouched. The runner functions single, two_margin, choose, release_keys and build then apply unchanged.",
+    "single_margin_loss": "L_g(lambda) = (1/D_g) * sum over non-lane rows of group g in the arm of 1(exact margin > lambda) * 1(call != truth); D_g counts all rows of the group in the arm; lambda = first grid value with (sum_g L_g + 1)/(n_groups + 1) <= 1/10, else 1 (lane rows still released). Exact rational arithmetic.",
+    "two_margin_loss": "L_FN_g(lambda_I) and L_FP_g(lambda_A) over non-lane rows, denominators D_g as above; lambda_I and lambda_A by the protocol rule with alpha_FN = 1/20 and alpha_FP = 1/20 (primary) or alpha_FP unset (lambda_A = -1). Lane rows are released as active under both margins.",
+    "imported_reference": "scale_A/headline/summarize_headline.py functions lane_lambdas and lane_rows are imported (not copied) in a separate crosscheck process; the lane lambdas of the published random starts and every lane release of the published test rows must equal theirs exactly."
+  },
+  "q1_lane": "The 965 published random designs under the lane rule of the arm, stratified by whether the start contains the highest tested concentration. Closed loop: lane joint design and branch decisions of scale_A/joint/<arm>/lane (four fourth-dose policies; baselines nested_measured_only and nested_anchorboost of that file are the lane three-point rules of the same arm and must equal this run's lane rows design by design). Missed and false calls of a policy come from its branch rows: call = call3 if stage 1 reported, else call4.",
+  "ceiling_rule": "zero_fit/start_rule definitions on the lane per_design arm of population seven (each start with its own lane margin): top_rank = 1-based rank of the highest measured level (3..7), span, class gain = identity-group mean of the per-group report-rate difference with rows of all starts in the class pooled within group, adjacent contrasts on the same bootstrap draw, pooled rank <= 5 (10 starts), nontop20 and top15, per-start gains, variance explained by top_rank and by span; comparators measured_only and loglinear; wrong-report-loss differences likewise; bootstrap default_rng(0).integers(0, G, (4000, G)) over the sorted G groups of the population. The code path must first reproduce zero_fit/start_rule results.json, rank_classes.csv, span_classes.csv, adjacent_contrasts.csv and per_design.csv from the old start_design rows within 1e-9.",
+  "reproduction_targets": [
+    "predict: every published random design of the arm reproduced from the source fold files (context, wells, scores bit-equal, calls, exact margin within 1e-12 of the saved float)",
+    "select: the source no-lane calibration of each fold and method reproduced bit-for-bit by the source float mirror",
+    "lane lambdas of the published random starts equal scale_A/headline/lane/three_point_lambdas.json and lane_lambdas() (imported) exactly",
+    "lane releases of every published test row equal lane_rows() (imported) applied to batch_heldout/common_scale/design_decisions.csv",
+    "Q3 single-margin lane cells (965 designs) equal scale_A/headline/lane/headline.json reports, wrong reports, wells, report rate and loss with intervals within 1e-9",
+    "closed loop: per design, the lane baselines of scale_A/joint/<arm>/lane equal this run's lane three-point rows; policy totals equal that summary.json"
+  ],
+  "base_protocol_sha256": "d86ec0201fa41501cb2988b45abc1b8575da894b6b1e42c34509c9f3eb9d8a58"
+}

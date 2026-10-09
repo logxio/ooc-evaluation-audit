@@ -1,0 +1,31 @@
+{
+  "schema": "sota_baselines.cp_tensor.v1",
+  "created_utc": "2026-10-05T19:55:00Z",
+  "decision": "The 2023-2026 scan found one method family that does this task's completion and can be built and run within a day: tensor completion of compound x dose x endpoint arrays (Cong et al. ToxiCompl, bioRxiv 2024; Completion of the DrugMatrix toxicogenomics database using 3-dimensional tensors, arXiv 2507.03024, 2025). The 2025 paper publishes no code, so its CP family is implemented here. Does it match or beat AnchorBoost, interpolation or SoftImpute?",
+  "method": {
+    "model": "T[i, c, o] = mu[c, o] + sum_r A[i, r] B[c, r] C[o, r]: chemicals i, 35 package concentrations c, 68 outputs o; mu = training-chemical mean of each (c, o) cell (0 where no training chemical measured it).",
+    "fit": "Alternating ridge least squares on the observed cells of the fold's training chemicals: each row of A, B and C solved in closed form with penalty lam; factors initialised by numpy default_rng(0) normal(0, 0.1); 200 sweeps or relative change of the training loss below 1e-7.",
+    "test_design": "B and C fixed; the test chemical's factor a solves the ridge problem on the design's revealed cells only (penalty lam); predictions mu + a (B * C) at its query cells. No other test chemical or design enters.",
+    "implementation": "numpy only, literature/cp_run.py."
+  },
+  "task": "The kit: same folds, designs, query cells, curve MAE, cohorts and scorer.",
+  "development": {
+    "test_fold": 0,
+    "training_chemicals": "folds 1-4",
+    "k": 3,
+    "candidates": "rank R in {2, 4, 8, 16, 32} x lam in {1, 10}: 10 candidates, C1-C10 in that order (R-major)",
+    "selection": "Lowest fold-0 k = 3 MAE; within 0.002, the lower rank, then the larger lam.",
+    "no_test_use": "Fold 1-4 rows enter development only as training rows."
+  },
+  "frozen": {
+    "at_utc": "2026-10-05T20:05:00Z",
+    "selected": "C8",
+    "rank": 16,
+    "lam": 10,
+    "fold0_k3_mae": 1.3732667434923294,
+    "selection_sha256": "f8c0783c175088bb2a810c3fabf59f3fa5667ec5d4073222d885d1d3a2eb973f",
+    "note": "Selected by the frozen rule before any fold 1-4 completion was made."
+  },
+  "readouts": "Folds 1-4, k = 3 (k = 1, 2, 4 with the frozen settings): MAE and paired differences against anchorboost, loglinear_interp, cnp, hill_eb, gp with identity-group and chemical intervals (kit score.py).",
+  "expected_before_run": "MAE 1.33-1.45 at k = 3, close to the best SoftImpute fold-0 setting (1.379 on fold 0 against interpolation 1.244): the outer-product structure shares information across outputs and concentrations, but absolute-concentration columns still carry no dose-response smoothness. Probability below interpolation about 0.25; below AnchorBoost under 0.02."
+}

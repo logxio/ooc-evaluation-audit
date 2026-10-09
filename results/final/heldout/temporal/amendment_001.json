@@ -1,0 +1,76 @@
+{
+  "schema": "paper.temporal_replay.amendment.v1",
+  "amendment": "001",
+  "created_utc": "2026-10-05T23:42:32.716994+00:00",
+  "protocol_sha256": "2280fe282b73dd1a93ceceadd59cd7cfcbc81c678dea5c00a2ba6777b911d03a",
+  "requested_by": "Host reply \"\" (2026-10-06 04:4x JST): every three-point rule gets the observed-active lane. The paper controller (redacted session local_1d2e6219-ffcf-46d9-b9aa-b2139d75e996, cross-session message of 2026-10-06) decided the temporal replay gets it too, one ruler for the whole paper with the no-lane version in the supplement, relaying the submission-package request in group message 20261005T233526Z-7444.",
+  "read_at_that_time": "Every readout of the frozen temporal replay (results.md, summary.json, verification.json of 2026-10-05, including the exact-arithmetic tie sensitivity); the text and planning ranges of scale_A amendment 001 and risk_upgrade amendment 004; the scale_A lane code. Not read: any lane readout of this replay, the risk_upgrade temporal_B_H readouts (summary.json, results.md, units.csv), any scale_A lane output.",
+  "premise": "The complete-series reference is the maximum over all concentrations of the same masked DIV-mean effect, so a design whose measured three points already give effect >= 3 is reference-active (equality active). Releasing it as active cannot be wrong. Gate: every calibration and test design of every fitted cell with measured_only >= 3 has truth 0 (active); otherwise the run stops.",
+  "definitions": {
+    "lane_rules": "full (AnchorBoost slot, alpha = 1), one_se (the alpha-scaled AnchorBoost of choices.json), measured_only and interpolation: crc_obs of risk_upgrade amendment 004 as written in scale_A amendment 001. A design with measured_only >= 3 is released with call active (0); any other design is released iff its exact margin > lambda; lambda is the first grid value of -1, 0, 0.01, ..., 1 with (sum_g L_g + 1)/(n_cal + 1) <= 1/10 for L_g(lambda) = (1/D_g) * sum over the group designs with measured_only < 3 of 1(margin > lambda) 1(call != truth); exact rational arithmetic; lambda = 1 when no grid value qualifies (lane designs are still released).",
+    "exact_margin": "release/paper_nested_decision.apply_rule (integer-count ranks, Margin compared with grid values exactly), the implementation scale_A imports; the saved float margins and calls must agree within 1e-12 and exactly.",
+    "one_se_rule": "The multiplier frozen in choices.json; the alpha-scaled rule and calibration and test scores rebuilt from the saved inner, calibration and test arrays with the Series5 helpers (summarize_selection.archive, rescored, prediction, nd.fit_rules), as in summarize_selection.pipeline; no refit. Its lane lambda is reselected on its own calibration margins.",
+    "observed_active": "unchanged; it equals the lane-only policy.",
+    "cells_and_units": "B/H primary, A/H scale sensitivity, B/R split sensitivity: the 15 fitted cells and the 31 units of protocol.json; zero refits.",
+    "readouts": "Reports, wrong reports (missed and false actives), exposure wells, identity-equal report rate and wrong-report loss, paired differences against measured-only with the identity bootstrap (4,000, seed 0) of protocol.json, through the same summarize_replay.decisions function. Reconstruction is untouched by the lane and copied from summary.json. Readings: sentence 1 unchanged; sentences 2 and 3 recomputed on the lane outputs by the frozen reading rules."
+  },
+  "cross_check": "risk_upgrade amendment 004 crc_obs on temporal_B_H (six half-year blocks, AnchorBoost and measured-only): lambda per block, reports, wrong reports (missed, false), wells used and complete, identity-equal rates must agree with the lane B/H rolling units. Any difference stops the delivery and is reported.",
+  "independent_verification": "lane/verify_lane.py imports neither lane/summarize_lane.py, nor scale_A/headline/summarize_headline.py, nor release apply_rule: margins from its own rational ranks with weights 1/k, its own CRC loop, releases, every unit readout through verify_replay.unit_readouts and the readings.",
+  "outputs": "lane/: this amendment and its SHA256, summarize_lane.py, verify_lane.py, lambdas.json, summary.json, block_results.csv, growth_curve.csv, verification.json. results.md gets a lane section first; every original section stays below as the no-lane supplement.",
+  "prediction_before_computation": {
+    "lane_lambda_vs_no_lane": "lane lambda <= exact no-lane lambda in every cell and rule (lane loss <= no-lane loss at every grid value)",
+    "B_H_2016": {
+      "full_reports": [
+        300,
+        420
+      ],
+      "measured_only_reports": [
+        330,
+        380
+      ],
+      "full_well_saving_vs_measured_only": [
+        -0.15,
+        0.1
+      ],
+      "one_se_well_saving_vs_measured_only": [
+        -0.02,
+        0.1
+      ]
+    },
+    "B_H_2017": {
+      "full_reports": [
+        283,
+        310
+      ],
+      "measured_only_reports": [
+        241,
+        270
+      ],
+      "full_well_saving_vs_measured_only": [
+        0.03,
+        0.16
+      ],
+      "one_se_well_saving_vs_measured_only": [
+        0.03,
+        0.15
+      ]
+    },
+    "sentence_3_full": "supported, with the upper end of the archive bracket at most 102 identity groups",
+    "sentence_3_one_se": "open",
+    "risk_upgrade_cross_check": "bit-identical",
+    "interpretation": "Planning ranges recorded before any lane readout; not acceptance criteria."
+  },
+  "input_sha256": {
+    "<local-input>/26b0d74b3c12/protocol.json": "2280fe282b73dd1a93ceceadd59cd7cfcbc81c678dea5c00a2ba6777b911d03a",
+    "<local-input>/950d0dda4fac/choices.json": "e31364ab523b4e5f273e445f7fade2696bedff27c126f4b90ff5c377aa9843e9",
+    "<local-input>/41533aaa41c6/summary.json": "4d2d1b18d0161c7bca4a039cf8f80727ac2ee13809735f5ed5176031364a6f89",
+    "<local-input>/5cad383782ad/verification.json": "0ffadee91c4bb533e8948fd44bb0c6598f3039c88ac60c5ede7d6d935ed8ea45",
+    "<local-input>/ff62bc9fbad7/summarize_replay.py": "8a7f21cb3128f61e5569187b987dd0ca68dd8ecf8ce2fb4b39ee5b2e1d2f3255",
+    "<local-input>/e8ec95e3f6b7/verify_replay.py": "266c4fa63a12af82d77e5ad04f6fa1e3041cb8a63ba0be05bfd7b27773cd5119",
+    "<local-input>/e91bf7033915/protocol_amendment_001.json": "a9253064ea534a28f69f4c935fbd24a05db6d1e307dd152d5da05a643d4a64f4",
+    "<local-input>/191a908e76cd/summarize_headline.py": "e3465bf9db18e9e203f6f8597da50283b00ba0406b2d7e3cdfa0d31de62c217d",
+    "<local-input>/7b054f249db5/protocol_amendment_004.json": "b69e02537dbd0928deeca504492b50502b881b71faea3d3eec91b8d6f18abcd2",
+    "<local-input>/9e05c6fa3101/paper_nested_decision.py": "22de67e35239a390a03e93d1df2c557671837944afc341e1eb2f5d46a9c094d7",
+    "<local-input>/525ba0f5fbbb/summarize_selection.py": "14ef6c8adcc559d1afd57f574c9dd1b7ed9511c747475a91e18d76a0d24b6d4d"
+  }
+}

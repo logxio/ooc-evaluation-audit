@@ -1,0 +1,60 @@
+{
+  "predictions": "reference/hill_eb.npz",
+  "summary": {
+    "k3": {
+      "primary_194": {
+        "scored": false,
+        "chemicals_missing": 1
+      },
+      "common_193": {
+        "scored": true,
+        "n_chemicals": 193,
+        "mae": 1.3603217115257804,
+        "versus": {
+          "anchorboost": {
+            "n_chemicals": 193,
+            "n_identity_groups": 188,
+            "reference_mae": 1.1620874435488835,
+            "mean_diff": 0.19823426797689678,
+            "rel_change_pct": 17.058463980258814,
+            "frac_chem_improved": 0.12435233160621761,
+            "lower": 24,
+            "ties": 0,
+            "higher": 169,
+            "ci95_chemical": [
+              0.16655864680710916,
+              0.2316948793790209
+            ],
+            "ci95_identity": [
+              0.1665713491235925,
+              0.23292971397521584
+            ]
+          },
+          "loglinear_interp": {
+            "n_chemicals": 193,
+            "n_identity_groups": 188,
+            "reference_mae": 1.3475896286149809,
+            "mean_diff": 0.012732082910799025,
+            "rel_change_pct": 0.9448041629620394,
+            "frac_chem_improved": 0.45077720207253885,
+            "lower": 87,
+            "ties": 0,
+            "higher": 106,
+            "ci95_chemical": [
+              -0.023142236479020528,
+              0.05224967146406252
+            ],
+            "ci95_identity": [
+              -0.024712672623632807,
+              0.05245180600562044
+            ]
+          }
+        }
+      },
+      "development_fold0": {
+        "scored": false,
+        "chemicals_missing": 49
+      }
+    }
+  }
+}

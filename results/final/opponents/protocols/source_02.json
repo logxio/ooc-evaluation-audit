@@ -1,0 +1,211 @@
+{
+  "schema": "sota_baselines.tabpfn.v1",
+  "created_utc": "2026-10-05T19:22:00Z",
+  "decision": "Does TabPFN, the tabular foundation model of Hollmann et al. (Nature 2025), given the same sparse-design reconstruction task and training chemicals, match or beat AnchorBoost? Whatever the answer, it is reported as measured.",
+  "status": "Retrospective benchmark on previously studied public data. Feeding is chosen on development fold 0 only and frozen here before any fold 1-4 prediction is scored.",
+  "model": {
+    "primary": "TabPFN-2 regressor, tabpfn 9.1.0, ModelVersion.V2 (the Nature 2025 model).",
+    "weights": {
+      "file": "weights/tabpfn-v2-regressor.ckpt",
+      "sha256": "2ab5a07d5c41dfe6db9aa7ae106fc6de898326c2765be66505a07e2868c10736",
+      "source": "https://huggingface.co/Prior-Labs/TabPFN-v2-reg, revision 4972a65a1b30806315c6f92499959ffbfc69a673",
+      "license": "Prior Labs License 1.1 (Apache 2.0 plus paragraph 10: when the weights or a product containing them is distributed, include the licence and display 'Built with PriorLabs-TabPFN'; internal benchmarking is exempt)",
+      "license_file": "weights/LICENSE_TabPFN-v2-reg.txt",
+      "license_sha256": "08b1851b4b6136b5fb0cb124d3258e0d91e3e1623f1be5904b77e4d270d112d8"
+    },
+    "secondary": "TabPFN-3.5 (ModelVersion.V3_5, tabpfn-v3.5-20260909.safetensors, TABPFN-3.5 License v1.0, non-commercial and non-production use). It needs the host's one-time licence acceptance (host-call 20261005T191459Z-394e). Once accepted it runs with the frozen TabPFN-2 feeding; its documented row limit is 1,000,000, so its context cap is a separate fold-0 choice recorded before its fold 1-4 run.",
+    "settings": "TabPFNRegressor.create_default_for_version(version, n_estimators=8, random_state=0, fit_mode='fit_with_cache'); every other argument at its default (inference_precision 'auto', ignore_pretraining_limits False). Fit-with-cache gave the same MAE as the default fit mode in the resource probe (0.2398, 10,000 x 5,000 rows).",
+    "secondary_weights": {
+      "file": "weights/tabpfn-v3.5-20260909.safetensors",
+      "sha256": "ece4d67eadfea42eb0e610df5189bea60cb7f31073d81e9c7a019b76eacf0be3",
+      "revision": "06bf2ba35c80a92a3b9abb436b99cf49e7a0365e",
+      "license": "TABPFN-3.5 Non-Commercial License v1.0 (weights/LICENSE_TabPFN-3.5.txt)"
+    },
+    "citations": {
+      "TabPFN-2": "Hollmann et al., Accurate predictions on small data with a tabular foundation model, Nature 637, 319-326 (2025)",
+      "TabPFN-3.5": "Prior Labs Team, TabPFN-3.5: Technical Report, arXiv:2609.17895 (2026)",
+      "TabICLv2": "Qu, Holzmueller, Varoquaux, Le Morvan, TabICLv2: A better, faster, scalable, and open tabular foundation model, ICML 2026, arXiv:2602.11139"
+    },
+    "third": {
+      "name": "TabICLv2 regressor",
+      "package": "tabicl 2.2.0 (BSD-3-Clause)",
+      "checkpoint": "tabicl-regressor-v2-20260212.ckpt",
+      "source": "https://huggingface.co/jingang/TabICL revision 4dcd344ece2c00be9e831fdd35bed57b5ad83e19 (bsd-3-clause, not gated)",
+      "sha256": "0db9cb538f114e79026bf08f45f41ad8dd7ad2de2aaca9a5ca8cd3bd9748ae7a",
+      "venv": "sota_baselines/tabicl/.venv (requirements.lock)"
+    }
+  },
+  "task": "The kit (kit/protocol.json): same folds, five designs per chemical and k, query cells, curve MAE, cohorts and scorer.",
+  "feeding": {
+    "row": "One (chemical, design, unmeasured tested concentration, output) cell. Only cells with valid truth are predicted, which are the only cells the scorer reads; a TabPFN prediction depends on the context rows and its own row only.",
+    "feature_sets": {
+      "raw": "q, x_1..x_k, r_1..r_k, div, feature: log10 query concentration; sorted log10 revealed concentrations; revealed level means of the same output (NaN where that output is invalid); DIV index 0-3; feature index 0-16. Target: the response.",
+      "anchor": "raw plus a, above, below, gap: the log-linear interpolation anchor of release chip_forecast (constant beyond the revealed range), max(q - x_k, 0), max(x_1 - q, 0), and the width of the revealed interval containing q (0 outside). Target: response minus anchor.",
+      "ab22": "The 22 AnchorBoost features of release chip_forecast.features (anchor, slopes, extrapolation distances, chemical summaries, Hill and analog deviations, DIV and feature index); training rows use the analog pool without the chemical itself, test rows the full training pool, as AnchorBoost does. Target: response minus anchor."
+    },
+    "context_enumeration": "Training chemicals of the fold (fold != test fold). Every C(L, k) design of every training chemical (release chip_forecast.all_designs), every unmeasured tested concentration and output with valid truth: the AnchorBoost training enumeration (2.5-2.7 million cells at k = 3).",
+    "context_modes": {
+      "pooled": "One model. N cells sampled without replacement from the whole enumeration with numpy default_rng(1000 * k + fold). DIV and feature index are passed to TabPFN as categorical features.",
+      "per_output": "68 models, one per output. N cells per model sampled without replacement from that output's cells with default_rng(100000 + 1000 * k + 100 * fold + output). DIV and feature index are dropped (constant within a model)."
+    },
+    "context_cap_tabpfn2": "10,000 rows per model, the TabPFN-2 limit without ignore_pretraining_limits."
+  },
+  "development": {
+    "test_fold": 0,
+    "training_chemicals": "folds 1-4 (194 labels), as in AnchorBoost's development",
+    "k": 3,
+    "fold0_references": {
+      "anchorboost": 1.0625,
+      "loglinear_interp": 1.2443,
+      "example_knn": 1.2439
+    },
+    "candidates": [
+      {
+        "id": "D1",
+        "features": "raw",
+        "context": "pooled",
+        "n": 10000
+      },
+      {
+        "id": "D2",
+        "features": "anchor",
+        "context": "pooled",
+        "n": 10000
+      },
+      {
+        "id": "D3",
+        "features": "ab22",
+        "context": "pooled",
+        "n": 10000
+      },
+      {
+        "id": "D4",
+        "features": "raw",
+        "context": "per_output",
+        "n": 2000
+      },
+      {
+        "id": "D5",
+        "features": "anchor",
+        "context": "per_output",
+        "n": 2000
+      },
+      {
+        "id": "D6",
+        "features": "ab22",
+        "context": "per_output",
+        "n": 2000
+      },
+      {
+        "id": "D7a",
+        "features": "raw",
+        "context": "per_output",
+        "n": 5000
+      },
+      {
+        "id": "D7b",
+        "features": "anchor",
+        "context": "per_output",
+        "n": 5000
+      },
+      {
+        "id": "D7c",
+        "features": "ab22",
+        "context": "per_output",
+        "n": 5000
+      }
+    ],
+    "budget": "9 candidate feedings (D1-D6, D7a-c), within the 11 configuration families of AnchorBoost's development log and of each classical family. Every candidate run is recorded in development/; none is dropped.",
+    "selection": "Lowest fold-0 k = 3 MAE. A candidate within 0.002 of the lowest wins if it uses fewer context rows per model, then fewer features.",
+    "no_test_use": "Fold 1-4 responses enter development only as context rows (training role). No fold 1-4 prediction is made or scored before the freeze below is filled in."
+  },
+  "frozen": {
+    "at_utc": "2026-10-05T20:12:00Z",
+    "selected": "D3",
+    "features": "ab22",
+    "context": "pooled",
+    "n": 10000,
+    "fit_mode": "fit_with_cache",
+    "device": "cuda (Kaggle T4)",
+    "fold0_k3_mae": 1.0821011204281388,
+    "fold0_minus_anchorboost": 0.019620201696745398,
+    "fold0_minus_interpolation": -0.1622314942222791,
+    "selection_sha256": "6cd370b4abc6485e70aa2df26c84ecb478be70707348c74ae81803d64213ad33",
+    "platform_check": "D4 on this Mac (MPS) 1.16688 against Kaggle T4 (CUDA) 1.16732 on fold 0",
+    "note": "Selected by the frozen rule from 9 fold-0 candidates before any fold 1-4 prediction was made."
+  },
+  "readouts": {
+    "k3": "Folds 1-4 with the frozen feeding. MAE on primary_194 and common_193; paired differences against anchorboost (static, published), anchorboost_acquisition, cnp, loglinear_interp, hill_eb and gp, each with the identity-group interval (4,000 resamples, seed 0) and the chemical interval of Fig. 2.",
+    "k1_k2_k4": "Same feeding, folds 1-4: against anchorboost (published per-chemical), loglinear_interp, published_neural_process, hill_per_endpoint and analog_knn.",
+    "external_screens": "Optional after the network-formation readout: acute neuronal (384 labels) and human neural (71 labels) screens loaded with the release loaders, same frozen feeding, compared with the release AnchorBoost per-chemical errors."
+  },
+  "expected_before_run": {
+    "fold0": "raw pooled near interpolation (1.20-1.35); anchor or ab22 with residual target lower (1.08-1.20); per-output contexts at least as good as pooled for the same features.",
+    "folds1_4_k3": "Frozen TabPFN-2 MAE 1.20 on primary_194 (plausible range 1.16-1.30); difference from AnchorBoost +0.04 (AnchorBoost lower); probability TabPFN-2 is lower than AnchorBoost about 0.15, because its context holds at most 10,000 of the 2.6 million training cells AnchorBoost learns from. Lower than interpolation (1.345) with probability about 0.85.",
+    "tabpfn35": "With a larger context, closer to AnchorBoost; probability lower than AnchorBoost about 0.3."
+  },
+  "amendments": [
+    {
+      "id": 1,
+      "at_utc": "2026-10-05T19:50:00Z",
+      "before_any_development_readout": true,
+      "change": "(a) Development runs on a Kaggle T4 GPU (CUDA, two candidates in parallel), the platform of the fold 1-4 runs, instead of this Mac's GPU; fit_mode fit_with_cache for every candidate (16 GB GPU). (b) The conditional D7 is replaced by three fixed candidates D7a-c (per-output, n = 5,000, each feature set), so no candidate depends on another's readout.",
+      "reason": "This Mac's load average reached 65 on 10 cores from other lines' jobs; the local development batch slowed several-fold. Running development and test folds on one platform also removes an MPS-versus-CUDA difference from the comparison. The local D4 run (MPS) completed while this amendment was being written; its score was not read before the amendment was saved, and it is kept only as an MPS-versus-CUDA cross-check. The local batch was stopped during D5."
+    },
+    {
+      "id": 2,
+      "at_utc": "2026-10-05T20:28:00Z",
+      "before_any_tabpfn35_run": true,
+      "change": "TabPFN-3.5 run, as the protocol's secondary model: weights tabpfn-v3.5-20260909.safetensors (Prior-Labs/tabpfn_3_5 revision 06bf2ba35c80a92a3b9abb436b99cf49e7a0365e, LFS sha256 ece4d67eadfea42eb0e610df5189bea60cb7f31073d81e9c7a019b76eacf0be3), TABPFN-3.5 Non-Commercial License v1.0 accepted by the host on 2026-10-06 04:17 JST; outputs used only for the paper's comparison and supplement (non-commercial research), not for the competition repository. Feeding fixed to the frozen D3 (ab22 features, pooled context, residual target), n_estimators 8, random_state 0, fit_with_cache, Kaggle T4. Only the context size is chosen on fold 0, k = 3: E1 n = 10,000; E2 n = 50,000; E3 n = 200,000. Selection: lowest fold-0 MAE; within 0.002 the smaller n. A candidate that fails on the 16 GB T4 is recorded as failed and not selectable. The TabPFN-2 freeze (D3) and its fold 1-4 run are unchanged.",
+      "reason": "The TabPFN-2 fold-0 gap to AnchorBoost was 0.020 with 10,000 of about 2.6 million training cells in context; TabPFN-3.5 accepts up to 1,000,000 rows, so the larger context is the direct test of whether the gap closes."
+    },
+    {
+      "id": 3,
+      "at_utc": "2026-10-05T20:44:00Z",
+      "before_any_tabpfn35_run": true,
+      "change": "TabPFN-3.5 fit mode per candidate: E1 (10,000 rows) fit_with_cache; E2 (50,000) and E3 (200,000) fit_preprocessors, letting TabPFN's automatic memory saving batch the test rows, so the 16 GB T4 holds the larger contexts. Test batch 4,000 rows.",
+      "reason": "A local probe of TabPFN-3.5 with a 10,000-row, 22-feature random context used 4.6 GB (cache) and 5.5 GB (default) of GPU memory; a cached 50,000- or 200,000-row context would not fit a T4. The two modes gave predictions within 7.5e-8 of each other in the TabPFN-2 probe, so the choice changes memory and time, not the readout. The local probe exceeded this Mac's 4 GB per-process cap once; no further TabPFN-3.5 work runs locally."
+    },
+    {
+      "id": 4,
+      "at_utc": "2026-10-05T22:18:00Z",
+      "before_any_tabpfn35_readout": true,
+      "change": "TabPFN-3.5 fold 1-4 scope: k = 3 always runs with the selected context size. k = 1, 2 and 4 run only if the selected candidate's fold-0 wall time t satisfies 18 x t / 2 <= 11 h (the 1,124,784 fold 1-4 cells of k = 1-4 are 18 times the 62,638 fold-0 cells; two T4s; one 12-hour Kaggle session); otherwise k = 1, 2, 4 are not run for TabPFN-3.5 and the TabPFN-2 readouts stand for them.",
+      "reason": "The development kernel had run 82 minutes without finishing, so the 200,000-row candidate may cost far more GPU time than the others; the scope rule is fixed on cost alone before any fold-0 TabPFN-3.5 error is seen."
+    },
+    {
+      "id": 5,
+      "at_utc": "2026-10-05T22:48:00Z",
+      "before_any_tabpfn35_readout": true,
+      "change": "E1 and E2 are re-executed with identical settings in a second kernel (<redacted-local-metadata>/sota-tabpfn35-dev12) because the first kernel (<redacted-local-metadata>/sota-tabpfn35-dev, all three candidates on two T4s) was still running after 1 h 54 min and releases no output before it ends. Selection uses the second kernel's E1 and E2; E3 enters selection only if the first kernel finishes; if both kernels finish, the duplicate E1/E2 readouts are reported as a repeatability check.",
+      "reason": "Output of a Kaggle kernel is available only after the whole kernel ends; the 200,000-row candidate holds the first kernel. No TabPFN-3.5 error had been seen when this was written."
+    },
+    {
+      "id": 6,
+      "at_utc": "2026-10-05T23:56:00Z",
+      "before_any_E3_readout": true,
+      "change": "TabPFN-3.5 selection is made now among the completed candidates E1 and E2. E3 (200,000 rows) had run 3 h 14 min in the first kernel without finishing; if it finishes, its fold-0 readout is reported as development information and does not change the selection.",
+      "reason": "A fold 1-4 run at E3's cost (over 3 h per fold on a T4) would take more than 12 GPU-hours for k = 3 alone, beyond one Kaggle session; E2 (50,000 rows, 1.0853) was already above E1 (10,000 rows, 1.0781) on fold 0. Decided without any E3 readout."
+    },
+    {
+      "id": 7,
+      "at_utc": "2026-10-06T00:24:00Z",
+      "before_any_tabicl_run": true,
+      "change": "TabICLv2 is added beside the two TabPFN versions, at the paper controller's request (2026-10-06 09:1x JST). It runs the frozen D3 feeding unchanged: the 22 AnchorBoost features, residual target and the identical sampled 10,000-row pooled context (same cached rows per fold and k). Settings: n_estimators 8, random_state 0, kv_cache on, every other TabICLRegressor argument at its default. TabICL has no categorical-feature argument, so DIV and feature index enter as numbers. No fold-0 selection: fold 0 runs once as a reference readout; folds 1-4 run for k = 1-4 on a Kaggle T4. Context size note: the tabpfn CPU ceiling of 5,000 rows for TabPFN-3.5 does not bind because every TabPFN and TabICL readout here ran on GPU (Kaggle T4); the frozen 10,000-row context stands.",
+      "reason": "A reviewer may name the second open tabular foundation model; the same feeding and context keep the three models directly comparable."
+    }
+  ],
+  "frozen35": {
+    "at_utc": "2026-10-05T23:56:00Z",
+    "selected": "E1",
+    "features": "ab22",
+    "context": "pooled",
+    "n": 10000,
+    "fit_mode": "fit_with_cache",
+    "fold0_k3_mae": 1.078143202740889,
+    "fold0_minus_anchorboost": 0.01566228400949553,
+    "fold0_wall_seconds": 122.4,
+    "scope": "k = 3, 1, 2, 4 (amendment 4: 18 x 122 s / 2 = 18 min <= 11 h)",
+    "selection_sha256": "ceb757f3c7d0a98adfb4a16ba9a53dee2b033f147c969c7626a6f0f801bcd760"
+  }
+}

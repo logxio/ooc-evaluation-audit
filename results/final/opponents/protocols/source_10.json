@@ -1,0 +1,38 @@
+{
+  "schema": "sota_baselines_4.protocol.amendment.v1",
+  "amends": "protocol.json, empirical_gp.estimation (EM stopping rule)",
+  "written_utc": "2026-10-06T05:20:00Z",
+  "written_local": "2026-10-06T14:20:00+09:00",
+  "folds_touched_before_this_amendment": "fold 0 only; folds 1-4 not predicted",
+  "reason": "The registered rule (tolerance 1e-6, at most 500 iterations) stopped both variants at the cap, short of the EM fixed point: final changes 3.0e-2 (per-output, worst output) and 3.9e-3 (shared). 14 of the 35 concentrations have zero or one training chemical in folds 1-4, so EM moves slowly along those directions. The paper's estimator is the maximum-likelihood fixed point of its EM, and an iteration cap that stops early acts as an unregistered regulariser.",
+  "change": "Tolerance 1e-4 on the same relative change (largest change of mu over the output SD and of the standardised Sigma), at most 20,000 iterations. The iteration count is not a tuning knob: no early stopping is selected. Both variants are re-scored on fold 0 at this rule and the lower fold-0 MAE is frozen.",
+  "readings_already_seen": {
+    "registered_rule_500_iterations": {
+      "per_output": 1.18449,
+      "shared": 1.18052
+    },
+    "shared_by_iterations": {
+      "20": 1.18638,
+      "100": 1.18521,
+      "500": 1.18052,
+      "3000": 1.17731
+    },
+    "per_output_by_iterations": {
+      "20": 1.17574,
+      "100": 1.18152,
+      "500": 1.18449,
+      "1500": 1.1871
+    },
+    "fold0_reference_same_chemicals": {
+      "AnchorBoost": 1.0625,
+      "loglinear_interpolation": 1.2443
+    },
+    "fold0_split_at_500_iterations": "40 main-grid chemicals: Empirical GP 1.134 (shared) / 1.136 (per-output), AnchorBoost 1.017, interpolation 1.191; 9 chemicals with rare concentrations: 1.369 / 1.414, AnchorBoost 1.267, interpolation 1.480",
+    "per_output_iterations_to_1e-4": {
+      "output 0": 2582,
+      "output 30": 9567,
+      "output 67": 5668
+    }
+  },
+  "consequence_for_the_decision": "The fold-0 gap to AnchorBoost (about +0.12) is about 40 times the largest change any iteration rule produced (0.003), so the stopping rule cannot change whether the Empirical GP beats AnchorBoost; it is fixed for faithfulness to the paper's estimator."
+}

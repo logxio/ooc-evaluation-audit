@@ -1,0 +1,524 @@
+{
+  "schema": "paper.scale_A.v1",
+  "created_utc": "2026-10-05T18:41:51.490048+00:00",
+  "owner": "redactedA Series1 (local Code session 7b4d3b97-ad4e-4e1c-85de-5b15b380e5b4)",
+  "decision": "Host decision 2026-10-06: every plate is centered on its own vehicle controls, one response scale for the whole paper; headline arm B (asinh c and per-DIV robust SD from training-plate vehicles of each fit), arm A (from all 4,112 unique vehicle records) beside it in every section. This run moves the three blocks still on the old training-control scale: the joint closed loop with classical fourth-dose rules, the risk-cost frontier with matched comparisons and operating points, and the data tables of Fig. 4, Fig. 5, Extended Data Fig. 1 (old numbering; now ED Fig. 4) and Extended Data Fig. 6c (old numbering; now ED Fig. 2c). The identity-separated headline table is summarized from the common_scale R1 decisions already on disk; no reporting model is refitted.",
+  "arm_order": [
+    "B",
+    "A"
+  ],
+  "arms": {
+    "B": {
+      "source": "<local-input>/ab3fc7f5362b/R1",
+      "scale": "own-plate vehicle centers; c and per-DIV robust SD from training-associated vehicles of each outer fit",
+      "role": "headline"
+    },
+    "A": {
+      "source": "<local-input>/56cd16d6d70c/R1",
+      "scale": "own-plate vehicle centers; c and per-DIV robust SD from all unique vehicle controls",
+      "role": "side by side"
+    }
+  },
+  "population": {
+    "regime": "R1 identity-separated, outer folds 1-4",
+    "identity_groups": 188,
+    "substance_labels": 193,
+    "designs": 965,
+    "complete_series_wells": 28080,
+    "split_file": "<local-input>/f0347ac0fce3/identity_splits.json"
+  },
+  "frozen_configuration": {
+    "predictor": "common_scale R1 outer_model.joblib of each arm and fold; AnchorBoost not refitted or tuned; four-point predictions recondition the same three-point model on the expanded context (22 features recomputed).",
+    "activity_rule": "training_rules.json cutoff and weighted rank reference of each arm and fold; unchanged.",
+    "joint_margin": "one margin per arm and fold from calibration identities; envelope loss U_d(l)=max{e3*1(m3>l), max_c e4c*1(m4c>l)}, mean within identity group; first grid value with (sum_g U_g + 1)/(n_cal + 1) <= 1/10, else complete every design.",
+    "alpha": 0.1,
+    "margin_grid": [
+      -1.0,
+      0.0,
+      0.01,
+      0.02,
+      0.03,
+      0.04,
+      0.05,
+      0.06,
+      0.07,
+      0.08,
+      0.09,
+      0.1,
+      0.11,
+      0.12,
+      0.13,
+      0.14,
+      0.15,
+      0.16,
+      0.17,
+      0.18,
+      0.19,
+      0.2,
+      0.21,
+      0.22,
+      0.23,
+      0.24,
+      0.25,
+      0.26,
+      0.27,
+      0.28,
+      0.29,
+      0.3,
+      0.31,
+      0.32,
+      0.33,
+      0.34,
+      0.35,
+      0.36,
+      0.37,
+      0.38,
+      0.39,
+      0.4,
+      0.41,
+      0.42,
+      0.43,
+      0.44,
+      0.45,
+      0.46,
+      0.47,
+      0.48,
+      0.49,
+      0.5,
+      0.51,
+      0.52,
+      0.53,
+      0.54,
+      0.55,
+      0.56,
+      0.57,
+      0.58,
+      0.59,
+      0.6,
+      0.61,
+      0.62,
+      0.63,
+      0.64,
+      0.65,
+      0.66,
+      0.67,
+      0.68,
+      0.69,
+      0.7,
+      0.71,
+      0.72,
+      0.73,
+      0.74,
+      0.75,
+      0.76,
+      0.77,
+      0.78,
+      0.79,
+      0.8,
+      0.81,
+      0.82,
+      0.83,
+      0.84,
+      0.85,
+      0.86,
+      0.87,
+      0.88,
+      0.89,
+      0.9,
+      0.91,
+      0.92,
+      0.93,
+      0.94,
+      0.95,
+      0.96,
+      0.97,
+      0.98,
+      0.99,
+      1.0
+    ],
+    "finite_sample_correction": "(sum of group losses + 1)/(calibration groups + 1)",
+    "exact_arithmetic": "Every release comparison (three-point, four-point, joint calibration, frontier thresholds, matched selections) uses exact rationals: margins from release/paper_nested_decision.py apply_rule (Margin num/den), grid values j/100, group losses as integer fractions. Code SHA256 22de67e35239a390a03e93d1df2c557671837944afc341e1eb2f5d46a9c094d7 (exact_rule/verification.json: 230 checks, 0 failures).",
+    "policies": [
+      "model_disagreement",
+      "highest_unmeasured",
+      "fixed_maximin",
+      "uniform_random"
+    ],
+    "classical_rules": {
+      "gp_ivr": "frozen classical rule",
+      "hill_var": "frozen classical rule",
+      "gp_var": "descriptive row from the same saved scores",
+      "definitions": "<local-input>/290b91f79bf3/protocol.json and Online Methods \"Classical predictors and their acquisition rules\"",
+      "configurations": "selected_configs.json (GP config 3: Matern-1/2 with constant term; Hill-EB config with prior scale 2.0, full covariance); no reselection",
+      "fits": "GP hyperparameters and Hill-EB Laplace-EM prior refitted on each outer fold training identities in that arm and fold training transform (outer_transform.json), as the manuscript specifies for the closed loop; they only choose the fourth dose."
+    },
+    "choice_order": "For every test design all seven K3 choices are written and fsynced before any candidate branch is evaluated; calibration choices likewise for the four original policies.",
+    "baselines": "three-point measured-only and three-point AnchorBoost of the same arm, from its frozen design_decisions.json release flags",
+    "well_account": "report at three points: wells of the three measured concentrations; continuing design: plus fourth-dose wells; completion: remaining wells of the series; random is the exact expectation over candidates."
+  },
+  "frontier": {
+    "methods": [
+      "anchorboost",
+      "measured_only",
+      "loglinear"
+    ],
+    "scans": {
+      "common_margin": "report iff exact margin > t; t runs over every unique exact margin, the grid and the endpoints 1 and -1",
+      "calibrated_offset": "report iff exact margin - fold lambda > d; d runs over every unique adjusted margin, 0 and min - 1"
+    },
+    "matched": {
+      "loss_caps": [
+        0.01,
+        0.015,
+        0.02,
+        0.025,
+        0.03,
+        0.035,
+        0.04,
+        0.045,
+        0.05,
+        0.055,
+        0.06,
+        0.065,
+        0.07,
+        0.075,
+        0.08,
+        0.085,
+        0.09,
+        0.095,
+        0.1
+      ],
+      "wells_fraction_grid": [
+        0.41,
+        0.42,
+        0.43,
+        0.44,
+        0.45,
+        0.46,
+        0.47,
+        0.48,
+        0.49,
+        0.5,
+        0.51,
+        0.52,
+        0.53,
+        0.54,
+        0.55,
+        0.56,
+        0.57,
+        0.58,
+        0.59,
+        0.6,
+        0.61,
+        0.62,
+        0.63,
+        0.64,
+        0.65,
+        0.66,
+        0.67,
+        0.68,
+        0.69,
+        0.7,
+        0.71,
+        0.72,
+        0.73,
+        0.74,
+        0.75,
+        0.76,
+        0.77,
+        0.78,
+        0.79,
+        0.8
+      ],
+      "named_budgets": "AnchorBoost three-point operating point of the arm, and the arm joint disagreement loop, in the same resample",
+      "selection": "equal loss: fewest wells with resampled loss <= cap, ties smaller loss then earliest threshold row; equal wells: lowest loss with wells <= budget, ties fewer wells then earliest row; comparisons in exact integer arithmetic",
+      "loop": "arm joint model_disagreement loop against each three-point frontier at equal wells and equal loss"
+    }
+  },
+  "bootstrap": {
+    "replicates": 4000,
+    "seed": 0,
+    "draw": "first draw: numpy.random.default_rng(0).integers(0, 188, (4000, 188)) over lexicographically sorted drug_group ids; bincount counts shared by every block, method, threshold and contrast",
+    "interval": "pointwise 2.5 and 97.5 percentiles (numpy quantile, linear); conditional on fitted models and selected margins",
+    "note": "The old frontier curve.csv used seed 20261005; here every interval uses seed 0, the caliber of the published matched comparisons and the joint loop."
+  },
+  "figure_data": {
+    "format": "Same file names, columns and JSON keys that figure-design/yinfang-study/src/draw_final.py (via draw_yf.fig4), draw_fig6.py, figures/extended/src/draw_ed4.py and draw_ed2.py read; CSV tables plus sketch PNGs for shape checking. Formal figures belong to the submission-package relay session.",
+    "figures": {
+      "Fig. 4": "three-point reporting, arm B primary, arm A beside",
+      "Fig. 5": "joint loop",
+      "ED Fig. 1 (old) = ED Fig. 4 (current)": "risk-cost frontier and matched comparisons",
+      "ED Fig. 6c (old) = ED Fig. 2c (current)": "closed-loop outcomes of every fourth-dose rule"
+    }
+  },
+  "prediction_before_computation": {
+    "B": {
+      "joint_lambda_vs_three_point_lambda": "joint lambda >= three-point AnchorBoost lambda in every fold (0.04, 0.03, 0.08, -1.0), by construction of the envelope",
+      "disagreement_loop": {
+        "reports": [
+          820,
+          880
+        ],
+        "wrong_reports": [
+          60,
+          80
+        ],
+        "wells": [
+          12600,
+          13800
+        ]
+      },
+      "loop_vs_measured_only": {
+        "reports_difference": [
+          130,
+          190
+        ],
+        "well_saving_fraction": [
+          0.1,
+          0.18
+        ],
+        "wrong_report_loss_difference_pp": [
+          -2.0,
+          1.0
+        ]
+      },
+      "loop_vs_three_point_anchorboost": {
+        "reports_difference": [
+          -60,
+          -10
+        ],
+        "wrong_reports_difference": [
+          -20,
+          -3
+        ],
+        "wells_difference": [
+          100,
+          1300
+        ]
+      },
+      "disagreement_vs_highest": "reports and wrong reports within 3, wells within 60",
+      "classical_rules": "each within 10 reports and 6 wrong reports of disagreement; none lowers loss by more than 1 point",
+      "frontier": {
+        "anchor_budget_measured_only_wrong_reports": [
+          100,
+          140
+        ],
+        "anchor_budget_loss_difference_pp": [
+          -6.5,
+          -2.5
+        ],
+        "loss_cap_8pct_saving_fraction": [
+          0.12,
+          0.25
+        ],
+        "loop_equal_loss_vs_measured_only_saving_fraction": [
+          0.1,
+          0.25
+        ],
+        "loop_equal_wells_vs_anchorboost_loss_difference_pp": [
+          -1.5,
+          1.5
+        ]
+      }
+    },
+    "A": {
+      "disagreement_loop": {
+        "reports": [
+          840,
+          900
+        ],
+        "wrong_reports": [
+          60,
+          80
+        ],
+        "wells": [
+          12300,
+          13500
+        ]
+      },
+      "loop_vs_measured_only": {
+        "reports_difference": [
+          170,
+          230
+        ],
+        "well_saving_fraction": [
+          0.12,
+          0.21
+        ]
+      },
+      "frontier": {
+        "loss_cap_8pct_saving_fraction": [
+          0.15,
+          0.28
+        ],
+        "anchor_budget_loss_difference_pp": [
+          -7.0,
+          -3.0
+        ]
+      }
+    },
+    "headline_reproduction": "R1 counts, losses, wells and intervals equal common_scale/summary.json (B 884/690 reports, 84/75 wrong, 12,414/15,389 wells; A 904/669, 83/78, 12,115/15,808) to 1e-12.",
+    "resources": "AnchorBoost inference <= 30 s per fold and role, classical fit <= 120 s per fold, peak RSS < 1 GB"
+  },
+  "outputs": [
+    "headline/headline.json",
+    "headline/headline_table.csv",
+    "joint/{B,A}/summary.json",
+    "joint/{B,A}/joint_extension.csv",
+    "joint/{B,A}/identity_totals.csv",
+    "joint/{B,A}/design_decisions.csv",
+    "frontier/{B,A}/curve.csv",
+    "frontier/{B,A}/operating_points.json",
+    "frontier/{B,A}/matched_loss.csv",
+    "frontier/{B,A}/matched_wells.csv",
+    "frontier/{B,A}/loop_vs_frontier.json",
+    "frontier/{B,A}/summary.json",
+    "figure_data/",
+    "verification.json",
+    "results.md"
+  ],
+  "resources": {
+    "execution": "local CPU, sequential foreground stages, one process at a time, single thread",
+    "single_process_limit_bytes": 4000000000,
+    "stage_timeout_seconds": 295,
+    "end_condition": "every stage exits after its outputs are written; no process outlives the session turn"
+  },
+  "write_scope": "<local-input>/c2520ccd6c19/ and every existing result directory are read-only.",
+  "input_sha256": {
+    "<local-input>/9246f32f693c/All_DIV_Data.Rdata": "fe8015c789770092b485fb63dd8aa0f643120e366df73c5624665454ee982af6",
+    "<local-input>/d312f6b515d5/protocol.json": "dad65d34bc87dac274c7ab2b7c63f15f418c5989e3c38b8e25504ec39b398e0c",
+    "<local-input>/8be767f19ffe/protocol.sha256": "d8891105517ab10697e9556f01af3b5ed6d85ee5a3d4489da0a012f1f7e62105",
+    "<local-input>/6b6ca7f64cae/identities.json": "ef322cee97084b3b4e01b4d8a164ecb63562ae9981e226cdc4809f0c72acf3b5",
+    "<local-input>/f0347ac0fce3/identity_splits.json": "a455fa45a25c0b6f80e6e4b4cb0235dc72da89e6ad6a7eaa240051f7df72aa4c",
+    "<local-input>/d10781981df3/design_decisions.csv": "6e70092707d63579f75cd96763e255a3cd4554b6c7a2c747338d916113c17864",
+    "<local-input>/3b83275e2494/summary.json": "f4c7595d3c1d1ae2755684d3d321790e4e69f5044be20266f1806c446e795e19",
+    "<local-input>/19f9f02cbfad/run_common.py": "86a847e3af4d3086756ed53e1c16c96f901f03fd8e35687c9911374e00f9ba8f",
+    "<local-input>/5855f37c74e7/paper_nested_decision.py": "9e94f01c6d7c959587e4c77ce6f0792db270e3e7b316cc512a1795012be8c832",
+    "<local-input>/860e383f40a6/chip_forecast.py": "3ff0a65a484030879081b9163961c10d019b37510fe65229c3b5fbe43713bc5d",
+    "<local-input>/8c2a51245556/global_transform.json": "13adbad70ee474c7a6fd7fe1bb80770465151e49c22cf7f3bb5422e3fbc17eea",
+    "<local-input>/8f4924a12edc/exact_recheck.json": "2af80e32442d8292fa4112bfbcd380d3b3f82ceb9002c6d04e69357c917c4cac",
+    "<local-input>/9e05c6fa3101/paper_nested_decision.py": "22de67e35239a390a03e93d1df2c557671837944afc341e1eb2f5d46a9c094d7",
+    "<local-input>/09abe7cb9556/exact_rule_receipt.json": "48c1277e78d2dc3c2de376be6639af805903d987f5aac070103623e96b3aa461",
+    "<local-input>/4cddeb668412/verification.json": "33efbe09653583b233e8f50262839859a96f2fe84818ada5201d920714f90c9f",
+    "<local-input>/e52179404f50/gp_model.py": "e718e38711fe5c386e8574290d47af271443d45bf0ca8ed638f01b4e96f2b618",
+    "<local-input>/14495be38fff/hill_eb.py": "16ea41096c75044689cecd2808856c8f47039c8044bb84632ced259ecc66323f",
+    "<local-input>/4614233348dc/selected_configs.json": "092ec807ba60ce792de91a4c6e7c1adcbd71d83040d75f5d3593fe04bec7bfa5",
+    "<local-input>/67994fb2fbff/protocol.json": "2f38643d16f7cc8bc3c02ad42ed74fc8defecdfa15c6e0797a07a4d4c73083ab",
+    "<local-input>/5fd648b72cd5/amendment_01.json": "84abfb729483e857a32400aec0afe23cd9668392bfb1060e1ee2c19fb0f28241",
+    "<local-input>/ccfeaa9affa9/amendment_02.json": "52391bb70c59cc444afb95be802776410b9f82f64065d96260eeddb7b0a48022",
+    "<local-input>/48da923ac26e/amendment_03.json": "bfeb3c574c64cf6ce9120dcaa0de10a7201f35a7cf8897bf0e9c813c35eac885",
+    "<local-input>/506f9c18ee5b/design_decisions.csv": "cfec1e65d3e8a608c94f81fd3b1dd6911185f8428a34e5ba8ea2ca3a101e6d5d",
+    "<local-input>/5d8b8e86cc66/summary.json": "f8a0b63cc80a219ff7b112d10e16766d7b0c02af9378a7cb109be851eafe4b3e",
+    "<local-input>/07a579f1e831/identities.json": "ef322cee97084b3b4e01b4d8a164ecb63562ae9981e226cdc4809f0c72acf3b5",
+    "<local-input>/0febbcb8723c/splits.json": "a455fa45a25c0b6f80e6e4b4cb0235dc72da89e6ad6a7eaa240051f7df72aa4c",
+    "<local-input>/557539d981c0/summary.json": "eacaaec82a3776daa1ae21315f2df71ddbe449f6b652966cac9dcf20f4ee76bf",
+    "<local-input>/3372f058188c/identity_totals.csv": "d8e7ee4bc8941397616681e509d62e6d54c39f7fcb4de242c17243a8f00bc546",
+    "<local-input>/474b6522d9e1/protocol.json": "fb8a0586da74274103c286aeca71d443d941c743991df4c1b4bf36a8ff3333cb",
+    "<local-input>/58046856c8c5/run_joint.py": "ff621e49c102b3caebc305545afd2579f65001fdf8bd6df1395db97f024341ef",
+    "<local-input>/956884ca0cd3/joint_extension.csv": "a85d2af8762abfaa1eba3b5fb5c9ef9d55632b645e714892b483c5c45e79d867",
+    "<local-input>/251b137e67ad/operating_points.json": "8d0a582bedc4217d32f6beb20fcf7cde32cc3af158392eb40e3fc7ac770404a4",
+    "<local-input>/14aaaa0baf57/curve.csv": "f36c1564c94f02b02d13fcb04d0b976f42a80199cc2fd1ed1c24d3acb1e6272c",
+    "<local-input>/9eebae8b2ac1/frontier.py": "903007fd22bcb6e20622ed7813add23af44937f463475ba2f1cb7a3d7fbb11fc",
+    "<local-input>/2c2ef8840309/matched.py": "8d322643841dc09f518a7e2dae39f70f851a4777de5212345172bebc2ad92231",
+    "<local-input>/1d98179c7ef3/summary.json": "963e882004a527d75e61ceb992be0d99a6e235f6d8f959064e7cca8ebeeb8975",
+    "<local-input>/eab99034dbcb/loop_vs_frontier.json": "3b551a5c0e63cea5e0334dea701fd1830bbe375abd63bcd0e3a64b7adafd45d7",
+    "<local-input>/1aa7250359ed/bootstrap_identity_counts_seed0.npz": "30eb1a4efe3ed16ec224ac2944315046b7ef9881d2afbd447f850231dd864bf2",
+    "<local-input>/355d22ea7770/reporting_pair_analysis.json": "462eb34a3aacfed290cf68ff7999ff5b5785b3a81569e088385ca3c4cb512759",
+    "<local-input>/aa8f2fedfdee/nm_figure_data.json": "756411e73c8ba5d0aa0772acb34ea319734a9a0a1f02fb7470b42258a7ee516b",
+    "<local-input>/b0018e9fc7b8/draw_final.py": "59f4e8c72ca1ac28ca73bce823ceaf7869e516d86d5ea298f659b57802ec58b0",
+    "<local-input>/bcbee2da40a4/draw_yf.py": "f43979a82b09a76795c8bf061af276acac547359ed64c450dc3e9506e91a6a65",
+    "<local-input>/81162f1bb345/draw_fig6.py": "ef90852dd5e937f618067e9fb24fe7c52a52f03579e65e4366c4e7d5842b676c",
+    "<local-input>/fad8fdfc1fae/draw_ed2.py": "0d1225eafa354d3fd0140b4d296e985d6b6a68c48a2ad834728c95892d474204",
+    "<local-input>/ee33aeff677b/draw_ed4.py": "4f6e7ca491ebc42fe011c602eb70b3728ece4dd68acea063e7f2ab26a4295d3e",
+    "<local-input>/db6017fbc575/protocol.json": "dad65d34bc87dac274c7ab2b7c63f15f418c5989e3c38b8e25504ec39b398e0c",
+    "<local-input>/294ac5dcd0e1/outer_model.joblib": "81cee2da186aa4564c586317f490da0751c11e253014bfd288897d4249b24181",
+    "<local-input>/308e01c8c64f/outer_transform.json": "81490fee28da6d61f4b23705eb254ac52fb2025dd5179e4d0489cb6070cc08d1",
+    "<local-input>/bbda704a983a/training_rules.json": "c54ad74ce740b4a96c461d790669f2c5756d561680e79052976a1729d7543fed",
+    "<local-input>/c578d9823961/calibration.json": "37b0c9e179498df287637e924306da958622fe61f7274fd3e159a4c7780cb408",
+    "<local-input>/0a53c2fa62c0/calibration_design_decisions.json": "c13a2c7beeeaa7fd49332b909d6cb5a99a8f774c84b4bd8521393a89c4467867",
+    "<local-input>/3fc5721b718e/test_decisions_frozen.json": "a7d6becb0e44e46113fd05861b2cbe73c6ac46ef912af7fdd84387c913b85647",
+    "<local-input>/95636c252d5d/design_decisions.json": "7efbbf7e565339d418cf8eef87be3fe44f5c937df10490d454db6037e23f456e",
+    "<local-input>/4677b5f519bf/pretest_freeze.json": "0ed6acf50a2131fa6886659e898a37a3f425488f18cfc833824e9cc9a14a394e",
+    "<local-input>/6ba6474a4efd/prediction_freeze.json": "64c9b022bdd3efd65ec5402eacb7be50cb32daa17ed9ad60c2a8d21fdbfde936",
+    "<local-input>/e365c4a1d585/summary.json": "8aeb3baf499650fc7bf39579c5f4a904462e6d2d339c088bbeeb13a2c1257a62",
+    "<local-input>/b81bec6e80bc/test_scored_points.npz": "80cad3e0a8ae39a9980dc4c16bf722fbc9751cd55b9eb1ea614c2630e35acdd6",
+    "<local-input>/c0fe99d9bb62/outer_model.joblib": "dfb514912b672310d2588dada04b47d416aff6b1516deeb30ac21e4d9387883f",
+    "<local-input>/76b51c1074da/outer_transform.json": "78c223ffbfd7bea011b9e96dbc3098202f91672c261e2da8e5e5f9cbee2402ce",
+    "<local-input>/a1b0b3982f28/training_rules.json": "ad09014a9ff6499c4d5926caebea005bec09c56a47495224e4ac49467db4248a",
+    "<local-input>/9f5c50d9fa9a/calibration.json": "4fff2d012109a9a00cc2ce1931ce8966f881a633fedd84e9738af7cf128ed6d7",
+    "<local-input>/5b9a9aca1982/calibration_design_decisions.json": "1d4f67bb2456b099e33b97d669460291e6580058f502ed4d0e358bdc8922177f",
+    "<local-input>/4fbe8ee93596/test_decisions_frozen.json": "95a5e2690a7e40f018c82fc5e877763f593a1ef67cd0cc9405a817db232d5b25",
+    "<local-input>/aba579285b97/design_decisions.json": "c3a243039d42af96588a4dae162c7480fba97591eb795c094689628cf89d992f",
+    "<local-input>/bceb93587dd6/pretest_freeze.json": "2713c9e8f7e8485c7ea39687b87d40255d8e27161e7a56d5a996e280310cd77e",
+    "<local-input>/d593dd7f8171/prediction_freeze.json": "267505d39b33a659c2ac31b3279993d08297d383ae53ad0cd84ca03ae0d0e882",
+    "<local-input>/f55c734f3f73/summary.json": "6921f7ebacef7bf05cdcdcc8ac462e3fa251a59da605f58154ffaef42a5227fa",
+    "<local-input>/6c77a8b6b7a0/test_scored_points.npz": "ff2a5009e69d0741cce97f86b3c92710146cd5ffcf1f5d293fa402f0f6dc4ed1",
+    "<local-input>/bfc844507e86/outer_model.joblib": "dfb514912b672310d2588dada04b47d416aff6b1516deeb30ac21e4d9387883f",
+    "<local-input>/767f63eb69d6/outer_transform.json": "78c223ffbfd7bea011b9e96dbc3098202f91672c261e2da8e5e5f9cbee2402ce",
+    "<local-input>/a9d7026f4054/training_rules.json": "84e39f16e029bd58372d6b2eae928b5f40c9d4d5a4a90579cc05de116c70f87e",
+    "<local-input>/5d7d4315b329/calibration.json": "606f926ed92e98c872d0d940ae01e4364ce51388fa7a4fd1e1eb913303f4ea11",
+    "<local-input>/9b9c6e8212c2/calibration_design_decisions.json": "35aa7dc3bbbd35193ea12d7f6a7887f9d7ef96ac579b1a58214b4f6dd4f7b07c",
+    "<local-input>/4cae575a0e0e/test_decisions_frozen.json": "df82e004dfeb52c1504da208e755ce8ff1cd530a0b964650fbcf48bdd3594bd7",
+    "<local-input>/b78f1e1c6d27/design_decisions.json": "8c7055e2f3e0bfa35edb6a1f96fc4ea38a85ba27cfd915041767f0951c520a8f",
+    "<local-input>/0325c49ec57a/pretest_freeze.json": "46e5cc51809a3258154417cc5635b3d4a17f2483a34f8be19a964cc980528340",
+    "<local-input>/298ed2c59c43/prediction_freeze.json": "d9e9f81746efaec573a71ba93f45546170dc888856c082acfe8e704338b78ac6",
+    "<local-input>/d350df2614b3/summary.json": "eb81dec731e43ec9ab4ae0b91d893fc8b812d584a7b091b70ea5a2f678d6032d",
+    "<local-input>/dc324fba1cf5/test_scored_points.npz": "33b5cf82ee3f4e86ca23b9c35b11915dca1098a455c9175956ce5bb827947204",
+    "<local-input>/f1a1537b7de5/outer_model.joblib": "dfb514912b672310d2588dada04b47d416aff6b1516deeb30ac21e4d9387883f",
+    "<local-input>/d3b2fd0afe9e/outer_transform.json": "78c223ffbfd7bea011b9e96dbc3098202f91672c261e2da8e5e5f9cbee2402ce",
+    "<local-input>/91905e4bd389/training_rules.json": "d9b4884e990f9c64c5cc6688ff0ae756de3fb1d0576b91bd31c6681a3c7d7261",
+    "<local-input>/35036c300f54/calibration.json": "0e8ca525ab2b64d44185a511c51de69fe7a21e7cdcf78cebac4276feabdae792",
+    "<local-input>/d188bc4ad08d/calibration_design_decisions.json": "dd760b63976a3a56458f3e6d871003f49bf45b8e4b086213e78adcc3b4b27d24",
+    "<local-input>/9692770f2614/test_decisions_frozen.json": "11dde9384b65f54ea3e5cc7f6813d8b01b57fe95105963a3fd1c2356450cd284",
+    "<local-input>/d9dbc2b12844/design_decisions.json": "342ed068e032d41b8180f87b25348fd9b3879269b5976987f38eccf905529f76",
+    "<local-input>/964cc84f5d65/pretest_freeze.json": "1fa0d352cb0d00477a7bf01cc2ad78e6c06413a17eb4de02ccca91fa4755febe",
+    "<local-input>/acd05b13da67/prediction_freeze.json": "e8b5ca34ba425d284c9d08fd5835337adfd143af394b39a97d7c5b9864b456b6",
+    "<local-input>/9ff8e0d1e717/summary.json": "428b9654c870a6de61c9b2ede696938581d035b1689f7f59a57702a2f890aa6a",
+    "<local-input>/b4884bfa0012/test_scored_points.npz": "c5ad075039e7d245d354f8e23053cd49614d6c856b03e6c02b8068e824269195",
+    "<local-input>/e1aad99f8335/protocol.json": "dad65d34bc87dac274c7ab2b7c63f15f418c5989e3c38b8e25504ec39b398e0c",
+    "<local-input>/44650808d3e1/outer_model.joblib": "3d3c416f5de8a3ea7ef2ad61d1daebae83309346649f533fa46e506ef783c823",
+    "<local-input>/37fd48322891/outer_transform.json": "c28aef3e7cc80420a5bc56e8261ae7d1c67f021d476af415960072380e4986d3",
+    "<local-input>/1e40420023c2/training_rules.json": "c3ea44465212d9ac1e1495998114b160b701f308649d78e349499a15cf5eb62b",
+    "<local-input>/cd1f91d23a6f/calibration.json": "97f79652bc1a8f5bbf24a8d47f47765c0c934402b9f3387c2da8441f6965d315",
+    "<local-input>/df680e6f7353/calibration_design_decisions.json": "2a89b4bfbedfa3b3f77c72ffceac26b2a01481020f0e3b0b524d81aefd7e3cdb",
+    "<local-input>/6448d12c6ee0/test_decisions_frozen.json": "b5d1987521ded770ccce17e78072545b00780d46601e516e5e61ffac1b938a80",
+    "<local-input>/6999fd34b06d/design_decisions.json": "302954d0ca577651c9fc9a3ba629ea271713036144a5fbaa611b059fbc6ce554",
+    "<local-input>/12e4aa1340ee/pretest_freeze.json": "4cf1c134b337dce92eac94ced915d55db42077de938621e07658bd08ce87bcf5",
+    "<local-input>/39c14b227d2b/prediction_freeze.json": "0dd2dec69d961831820f960a47ecf870d4eddb72744f8768bbdb97c396d605d5",
+    "<local-input>/eacd7448f5e3/summary.json": "863b90c91bf539943b071c71af0e7993dcd8dd5d9933b2a574a237ade6849fb8",
+    "<local-input>/ef129e985a5e/test_scored_points.npz": "e1a3142ac5d65d798787a9345b77608ededa366d804cb4320360a12b27921df3",
+    "<local-input>/71dab11446c2/outer_model.joblib": "6eab7390db2eba5ba31e24192a819d9a1a4d4b294bbee2c4684b51f9af4ca1a7",
+    "<local-input>/f469b1de01cd/outer_transform.json": "04424334337f26c31018354f37a7cab2e8c7925e72317c1dba833e5d4c64cbbe",
+    "<local-input>/ee5df5bcd7b7/training_rules.json": "ef25773f111a552e74c34d55d4624d291a3663d8248be04f0e4a205b0bf3c51b",
+    "<local-input>/65aae9a2a95e/calibration.json": "168fd80e2a8399470f93267daa84420896dbe851aab5e98a94cb4fa91703d3fa",
+    "<local-input>/e7f5032c6b44/calibration_design_decisions.json": "24acc2af5e50d17e031074d79156203c6a309bc9ebd5ab2cd898149909238786",
+    "<local-input>/60319c2304ea/test_decisions_frozen.json": "940fe6fbe5b8ac5797f43a8b04821596b40a5dc39ad68e68b1fe742a833e4e15",
+    "<local-input>/bdb0d8e41c2b/design_decisions.json": "706e232d27de7be3f63e3cbaaafb85b80f1631101e9c3a01de3ffb47e02f7f9a",
+    "<local-input>/d290a51da40f/pretest_freeze.json": "52b9f14e3e47c6b171e8a076110b21d879849feffd2c0fe4539d712a58431c8c",
+    "<local-input>/a82e71392e2f/prediction_freeze.json": "2534be84992e68b63814ed5379028258bf10b5eee099faab421aac3d26ca8abd",
+    "<local-input>/d395627f2c4b/summary.json": "80518a8269f37e54230c5439d3f9b3410ddf286cde0c0928c33c5fa6c16010f2",
+    "<local-input>/5d4c6b76ce60/test_scored_points.npz": "0892ba2b3136c8e7180649ae9558518e5a056b79e9e06000973a60a353301d20",
+    "<local-input>/e25b3318c69e/outer_model.joblib": "6eab7390db2eba5ba31e24192a819d9a1a4d4b294bbee2c4684b51f9af4ca1a7",
+    "<local-input>/ac6bff922fa9/outer_transform.json": "04424334337f26c31018354f37a7cab2e8c7925e72317c1dba833e5d4c64cbbe",
+    "<local-input>/71f17f9041f1/training_rules.json": "96c545e9b2016dce2825f64f6e7b802ac70ffcdec0eabc3da3b88186198f9a4c",
+    "<local-input>/9beda926eb8b/calibration.json": "37a8ecf76144b19ea8a12d21970a5a174b4132e1b987bcba2b6a00c335c604c7",
+    "<local-input>/7004e7cfa886/calibration_design_decisions.json": "f09715decfb9c5f8f0e2bca2ba1f4a34f7c20a852901a129a4656fe0c5d5f591",
+    "<local-input>/76f600eb775a/test_decisions_frozen.json": "a44a6319fa8c4b48d3ec39b8f82a3dbc4c9dfd079025d9d7a95df9527fa127ea",
+    "<local-input>/ca9da6b783b8/design_decisions.json": "f09bd536fa56b6526890e4e15c6d46493f2ee4d4f832ad5771784a6283dcf372",
+    "<local-input>/f07d81ef5183/pretest_freeze.json": "86bcf93306e9bb2c0311c750194c51b0b1380197e88249f3d45fb0f5792eda75",
+    "<local-input>/6e3690564d4a/prediction_freeze.json": "b1afc54e67dce89186933ac75e586da6ca4b43e2845cdc65b7098419b42b6fc7",
+    "<local-input>/4c3cb3c83305/summary.json": "52a908f25bce66770c2d998e009c2c865ee1aae23a2ae31813ba786c37c25058",
+    "<local-input>/f05b8c4219f7/test_scored_points.npz": "03c571c08cbe7d3c20f0a50f8d016bdd7920ba585c4896b4114c77a58ed3de15",
+    "<local-input>/b3c376f562bd/outer_model.joblib": "6eab7390db2eba5ba31e24192a819d9a1a4d4b294bbee2c4684b51f9af4ca1a7",
+    "<local-input>/f1867c6c49e5/outer_transform.json": "04424334337f26c31018354f37a7cab2e8c7925e72317c1dba833e5d4c64cbbe",
+    "<local-input>/1cb3ab09d87c/training_rules.json": "549b4fa3953fb57df9f2f90ef4e9ce670e76eca5ffa2e210cdd2e512821f9b29",
+    "<local-input>/54145742fc99/calibration.json": "7e3a608100c72864c315707997344525b3560e6e5ad5dd4e20e5a30715c875a1",
+    "<local-input>/623596b061d9/calibration_design_decisions.json": "7dc1082c462be610ee0a08f116e9260260b8cdb8841bb91f2ffbdfe7c67eee50",
+    "<local-input>/03fe3e771f10/test_decisions_frozen.json": "4b095d158d8c2ff318050a6c8b8274c120546de8c835e623391a034a4a0c9334",
+    "<local-input>/99a7d8010be9/design_decisions.json": "1c62c74e1cfc6613911a209858e709f621661f9fb29887f105a49b947c5d8283",
+    "<local-input>/2bafef9b34c5/pretest_freeze.json": "21a79dafe051c958e12033d989a46305207515c61606ea2c4d9de983e01cbdc3",
+    "<local-input>/efc536801dce/prediction_freeze.json": "ca4c5fbd04ded16ae0fc42d798a23fa6e511987ba440f7fe624da862fdc0805d",
+    "<local-input>/7b036f5f5d41/summary.json": "4acb854bbd3927142e83a3dbbc0cdb847b2c3346904e7d8d14bf3be33b3688e4",
+    "<local-input>/7f3378ed1d87/test_scored_points.npz": "c66a6191fea290d25bd28ea3c335edc78550e9a3a64e66833870493e51dc0c7f"
+  }
+}

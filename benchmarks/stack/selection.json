@@ -1,0 +1,144 @@
+{
+  "schema": "anchorboost_stack_selection.v1",
+  "rule": "Inner cross-validation on training chemicals of each outer fold; report folds 1-4 are held out. Fold-0 T+L weights are a separate control.",
+  "fold0_control_weights": {
+    "k1": {
+      "T": 0.7,
+      "L": 0.3
+    },
+    "k2": {
+      "T": 0.7,
+      "L": 0.3
+    },
+    "k3": {
+      "T": 0.6,
+      "L": 0.4
+    },
+    "k4": {
+      "T": 0.7,
+      "L": 0.3
+    }
+  },
+  "k": {
+    "1": {
+      "1": {
+        "choice": "TL",
+        "weights": {
+          "T": 0.7,
+          "L": 0.3
+        }
+      },
+      "2": {
+        "choice": "TL",
+        "weights": {
+          "T": 0.7,
+          "L": 0.3
+        }
+      },
+      "3": {
+        "choice": "TL",
+        "weights": {
+          "T": 0.7,
+          "L": 0.3
+        }
+      },
+      "4": {
+        "choice": "TL",
+        "weights": {
+          "T": 0.7,
+          "L": 0.3
+        }
+      }
+    },
+    "2": {
+      "1": {
+        "choice": "TL",
+        "weights": {
+          "T": 0.7,
+          "L": 0.3
+        }
+      },
+      "2": {
+        "choice": "TL",
+        "weights": {
+          "T": 0.8,
+          "L": 0.2
+        }
+      },
+      "3": {
+        "choice": "TL",
+        "weights": {
+          "T": 0.8,
+          "L": 0.2
+        }
+      },
+      "4": {
+        "choice": "TL",
+        "weights": {
+          "T": 0.8,
+          "L": 0.2
+        }
+      }
+    },
+    "3": {
+      "1": {
+        "choice": "SBr",
+        "weights": {
+          "T": 0.6,
+          "L": 0.4
+        }
+      },
+      "2": {
+        "choice": "SBZ",
+        "weights": {
+          "T": 0.7,
+          "L": 0.3
+        }
+      },
+      "3": {
+        "choice": "SBZ",
+        "weights": {
+          "T": 0.7,
+          "L": 0.3
+        }
+      },
+      "4": {
+        "choice": "SBr",
+        "weights": {
+          "T": 0.7,
+          "L": 0.3
+        }
+      }
+    },
+    "4": {
+      "1": {
+        "choice": "SBr",
+        "weights": {
+          "T": 0.7,
+          "L": 0.3
+        }
+      },
+      "2": {
+        "choice": "SBZ",
+        "weights": {
+          "T": 0.7,
+          "L": 0.3
+        }
+      },
+      "3": {
+        "choice": "SBr",
+        "weights": {
+          "T": 0.7,
+          "L": 0.3
+        }
+      },
+      "4": {
+        "choice": "SBr",
+        "weights": {
+          "T": 0.7,
+          "L": 0.3
+        }
+      }
+    }
+  }
+}

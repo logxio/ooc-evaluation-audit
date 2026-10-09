@@ -1,0 +1,395 @@
+{
+  "schema": "paper.stress_test.v1",
+  "created_utc": "2026-10-05T10:30:46.288627+00:00",
+  "owner": " Series1 / stress_test",
+  "question": "When the frozen AnchorBoost forecasts are corrupted from s = 0 to useless, does group risk calibration, reselected on calibration identities only, keep the wrong-release loss near alpha = 0.10 by returning more designs to complete measurement?",
+  "decision_fed": "Whether the manuscript sentence \"a worse model only costs wells\" becomes a figure, and whether the safety-valve section gains a subsection on behaviour under model failure. It currently rests on two incidental cases (the 28-identity training fold and the twelve liver-chip curves that were all deferred).",
+  "status": "Retrospective stress test on previously published frozen predictions; no new fit, no change to any published number.",
+  "source": {
+    "name": "nested",
+    "description": "Manuscript scale: training-associated vehicle normalization, drug-disjoint nested run (nested/). Read-only source of the stress ladder.",
+    "root": "<local-input>/9cba3b86cadc/nested",
+    "fold_dir": "fold{fold}",
+    "protocol": "<local-input>/9774603b02bf/protocol.json",
+    "splits": "<local-input>/0febbcb8723c/splits.json",
+    "identities": "<local-input>/07a579f1e831/identities.json",
+    "code_dir": "<local-input>/a6e8d2d8255d/release",
+    "task_builder": {
+      "kind": "nested"
+    },
+    "primary_folds": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "development_folds": [
+      0
+    ],
+    "published_summary": "<local-input>/5d8b8e86cc66/summary.json"
+  },
+  "population": {
+    "primary_folds": [
+      1,
+      2,
+      3,
+      4
+    ],
+    "development_folds": [
+      0
+    ],
+    "primary": "965 test designs, 193 substances, 188 identity groups (nested folds 1-4)",
+    "development": "Fold 0 is the historical development fold. It is used to exercise the code path and is reported separately; it never enters a primary table, curve or reading."
+  },
+  "frozen_components": {
+    "new_fits": 0,
+    "rule": "Activity cutoff and weighted rank reference are the training-frozen training_rules.json of each fold, after their SHA-256 equal pretest_freeze.json (run_start.frozen_fold). They are not refitted on corrupted scores: the corruption models a deployed predictor that went bad after training.",
+    "reselected": "Only the AnchorBoost release margin lambda, per rung, per fold, per seed, on calibration identities only.",
+    "untouched": "Measured-only scores and calls, observed-active fallback, loglinear interpolation, interval bands, labels, wells, identity groups."
+  },
+  "injection": {
+    "point": "forecast() output: the AnchorBoost level-mean forecasts of every unmeasured concentration x 4 DIV x 17 features (key anchorboost of calibration_predictions.npz and test_predictions.npz, outer-transform scale), before effect-style scoring. Nothing else is corrupted: no score, call, margin or lambda is edited directly.",
+    "score": "anchorboost = max(measured_only, max over query levels and features of |mean over DIV of the corrupted forecast|), the operation order of paper_nested_decision.forecast(). At zero corruption this reproduces every saved score bit for bit.",
+    "roles": "Calibration and test identities receive the same rung with independent random draws.",
+    "sigma": "Per fold and per output (DIV x feature): sample standard deviation (ddof = 1) of anchorboost - truth over masked points of inner0_points.npz and inner1_points.npz pooled (training identities, inner-held-out forecasts). Inner points use their inner-fit transform; this is the training-only residual scale of each output."
+  },
+  "ladder": {
+    "noise": {
+      "levels": [
+        0,
+        0.25,
+        0.5,
+        1,
+        2,
+        4,
+        8
+      ],
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "definition": "forecast + (s * sigma[DIV, feature]) * Z, Z standard normal with the shape of the forecast array of one fold and role, drawn once per (seed, fold, role) by numpy default_rng(SeedSequence([20261005, 1, seed, fold, role_code])).standard_normal(shape), role_code calibration 0 / test 1. The same Z is scaled by every s (common random numbers). s = 0 leaves the forecast untouched."
+    },
+    "shrink": {
+      "levels": [
+        0,
+        0.25,
+        0.5,
+        0.75,
+        1
+      ],
+      "definition": "forecast * (1 - t); t = 1 forecasts zero activity at every unmeasured level."
+    },
+    "amplify": {
+      "levels": [
+        0,
+        0.25,
+        0.5,
+        0.75,
+        1
+      ],
+      "definition": "forecast * (1 + t)."
+    },
+    "shuffle": {
+      "seeds": [
+        0,
+        1,
+        2,
+        3,
+        4
+      ],
+      "definition": "Within each fold and role, substance i takes the whole forecast array of substance pi(i), design by design (design index 0-4). pi is the first numpy default_rng(SeedSequence([20261005, 2, seed, fold, role_code])).permutation(n) over the sorted substance names of that role in which no substance receives a forecast from its own identity group (rejection, attempts recorded)."
+    },
+    "interpolation": {
+      "definition": "The published loglinear interpolation arm of nested, cited from its published decisions; not rerun."
+    }
+  },
+  "risk_calibration": {
+    "alpha": 0.1,
+    "alpha_exact": "1/10",
+    "grid": [
+      -1.0,
+      0.0,
+      0.01,
+      0.02,
+      0.03,
+      0.04,
+      0.05,
+      0.06,
+      0.07,
+      0.08,
+      0.09,
+      0.1,
+      0.11,
+      0.12,
+      0.13,
+      0.14,
+      0.15,
+      0.16,
+      0.17,
+      0.18,
+      0.19,
+      0.2,
+      0.21,
+      0.22,
+      0.23,
+      0.24,
+      0.25,
+      0.26,
+      0.27,
+      0.28,
+      0.29,
+      0.3,
+      0.31,
+      0.32,
+      0.33,
+      0.34,
+      0.35,
+      0.36,
+      0.37,
+      0.38,
+      0.39,
+      0.4,
+      0.41,
+      0.42,
+      0.43,
+      0.44,
+      0.45,
+      0.46,
+      0.47,
+      0.48,
+      0.49,
+      0.5,
+      0.51,
+      0.52,
+      0.53,
+      0.54,
+      0.55,
+      0.56,
+      0.57,
+      0.58,
+      0.59,
+      0.6,
+      0.61,
+      0.62,
+      0.63,
+      0.64,
+      0.65,
+      0.66,
+      0.67,
+      0.68,
+      0.69,
+      0.7,
+      0.71,
+      0.72,
+      0.73,
+      0.74,
+      0.75,
+      0.76,
+      0.77,
+      0.78,
+      0.79,
+      0.8,
+      0.81,
+      0.82,
+      0.83,
+      0.84,
+      0.85,
+      0.86,
+      0.87,
+      0.88,
+      0.89,
+      0.9,
+      0.91,
+      0.92,
+      0.93,
+      0.94,
+      0.95,
+      0.96,
+      0.97,
+      0.98,
+      0.99,
+      1.0
+    ],
+    "rule": "Original group CRC: L_g(lambda) = mean over the group designs of 1(margin > lambda) * 1(call != truth); first increasing grid value with (sum_g L_g + 1)/(n_groups + 1) <= alpha; none feasible -> lambda = 1, nothing released. Exact rational arithmetic of run_start.ExactRule and run_start.single (start_design protocol amendment 001); the s = 0 gate shows it equals the published float path.",
+    "release": "Test design released iff its exact margin exceeds the selected lambda (number of grid values cleared > selected grid index)."
+  },
+  "encoding": "truth = 1 inactive. Missed activity (FN, ) = released, call 1, truth 0. False activity (FP, ) = released, call 0, truth 1. Wrong () = FN + FP.",
+  "readouts": {
+    "reports": "released test designs (conclusions from three points)",
+    "fn": "missed-activity releases",
+    "fp": "false-activity releases",
+    "wrong": "fn + fp",
+    "wells_used": "measured wells of released designs + all wells of fallback designs",
+    "wells_ratio": "sum wells_used / sum wells_full",
+    "report_rate": "identity-group equal-weight mean of the released share",
+    "wrong_loss": "identity-group equal-weight mean of wrong / designs: the calibrated loss ()",
+    "fn_loss": "group mean of fn / designs ()",
+    "fp_loss": "group mean of fp / designs ()",
+    "error_among_reports": "sum wrong / sum reports (not controlled by CRC)",
+    "full_measure_share": "1 - sum reports / sum designs",
+    "full_coverage_wrong_loss": "group mean of (call != truth) / designs ignoring release: how wrong the corrupted model is before the valve",
+    "contrasts": "AnchorBoost minus published measured-only on the same groups: report_rate, wrong_loss, fn_loss, fp_loss and wells_ratio",
+    "per_fold": "lambda, grid index, feasibility, corrected calibration risk, calibration releases, whether calibration releases nothing, and test counts and equal-group rates of that fold",
+    "horizontal_lines": "measured-only, observed-active fallback and loglinear interpolation from the published decisions; identical on every rung"
+  },
+  "statistics": {
+    "bootstrap": "4,000 identity-group resamples over the 188 sorted primary groups pooled across folds 1-4, at fixed decisions. numpy default_rng(0) yields three successive integers(0, 188, (4000, 188)) matrices in the order of nested bootstrap() (loglinear, measured_only, observed_active comparators). Single-arm intervals use the third matrix, which produced the published AnchorBoost drug-loss interval [5.85%, 10.64%]; AnchorBoost - measured-only contrasts use the second, which produced the published paired intervals. The same matrix serves every rung, so rungs are paired. Replicate statistics are run_start.Boot (group mean, total, ratio of sums).",
+    "interval": "95% percentile interval (numpy quantile, linear). No refitting uncertainty; no multiplicity correction.",
+    "seeds": "Random rungs: five seeds. Curves report the median over seeds of each point estimate, the seed range, the median of the seed-wise interval bounds and their envelope (smallest lower, largest upper)."
+  },
+  "reading": {
+    "sentence_1": "Exposed wells: are the noise-ladder medians of wells_ratio non-decreasing from s = 0 to s = 8 (each decrease listed with its size), and what wells_ratio and full_measure_share are reached at s = 8.",
+    "sentence_2": "Wrong-release loss: at every rung and seed, point estimate and upper bound of wrong_loss against 0.10. A rung with a point above 0.10 is reported as crossing; a rung whose lower bound exceeds 0.10 is reported as a clear violation. The largest point estimate across all rungs and its upper bound are the headline number.",
+    "sentence_3": "One-directional corruption: for shrink the directional loss is fn_loss, for amplify fp_loss. Valve first means the pooled directional loss point stays <= 0.10 at every t, or a fold releases nothing at a smaller t than the first t whose directional point exceeds 0.10. Directional loss first means the reverse.",
+    "property": "CRC controls expected marginal identity-group loss when calibration and future identities are exchangeable. It does not promise that each fold, each rung or each seed stays below 0.10, and it does not control error among reports. Rungs above the line are reported as they are."
+  },
+  "second_layer": "The closed-loop joint version is not part of this protocol. It is run only after this layer is delivered, under its own amendment.",
+  "expected_before_run": {
+    "written": "Before any corrupted rung of any fold, including development fold 0, was computed. Inputs inspected before writing: per-output training residual scales sigma (fold medians 1.78-1.90, range 0.74-3.04), AnchorBoost cutoffs (2.87-3.00) and rank-reference maxima (10.18-10.54) of folds 1-4, inactive prevalence 13-25% by fold and role, and the bit-exact s = 0 score reconstruction of all calibration and test rows.",
+    "noise": {
+      "s_0": "Identical to nested: 946/965 reports, 77 wrong, wrong_loss 8.09%, wells 11588/28080 = 41.27%.",
+      "wells_ratio": {
+        "0.25": [
+          0.41,
+          0.47
+        ],
+        "0.5": [
+          0.43,
+          0.55
+        ],
+        "1": [
+          0.5,
+          0.75
+        ],
+        "2": [
+          0.65,
+          0.95
+        ],
+        "4": [
+          0.85,
+          1.0
+        ],
+        "8": [
+          0.98,
+          1.0
+        ]
+      },
+      "wrong_loss": "Medians <= 0.10 on every rung; upper bounds 0.08-0.12 for s <= 2; falls toward 0 at s >= 4 as releases vanish. No lower bound above 0.10.",
+      "monotone": "Non-decreasing wells medians; dips of at most 1 percentage point possible at s <= 0.5.",
+      "mechanism": "Additive noise raises max |DIV mean| of inactive compounds above the cutoff, so false activity grows first. At s = 8 the noise maximum (about 2.9 x 8 sigma / 2, near 20) exceeds every rank reference (max about 10.5), all margins tie, any release carries the inactive prevalence as loss, and calibration releases nothing in every fold: wells reach complete measurement.",
+      "error_among_reports": "Rises above 0.10 at s = 1-2 (expected 0.10-0.20) while wrong_loss stays <= 0.10: the valve controls loss over all designs, not error among releases.",
+      "crossover": "AnchorBoost wells exceed measured-only (13671/28080 = 48.69%) somewhere between s = 0.5 and s = 2."
+    },
+    "shrink": {
+      "t_1": "The score collapses to the measured three points under the AnchorBoost cutoff and rank map: reports 70-90%, wells_ratio 0.45-0.60, fn_loss 0.04-0.09, fp_loss <= 0.01.",
+      "first": "Valve first: lambda rises, fn_loss stays <= 0.10, no fold releases nothing."
+    },
+    "amplify": {
+      "t_1": "Reports 55-90%, fp_loss dominant at 0.03-0.09.",
+      "first": "Valve first."
+    },
+    "shuffle": {
+      "wells_ratio": [
+        0.55,
+        0.95
+      ],
+      "wrong_loss": "<= 0.10"
+    },
+    "interpretation": "Planning ranges, not acceptance criteria. Readouts outside them are reported as they are."
+  },
+  "outputs": [
+    "protocol.json",
+    "protocol.sha256",
+    "ladder.csv",
+    "curve.csv",
+    "summary.json",
+    "verification.json",
+    "results.md"
+  ],
+  "resource": {
+    "max_rss_bytes": 4000000000,
+    "stage_max_seconds": 295,
+    "fits": 0,
+    "termination": "Each stage is a finite foreground process; nothing is left running."
+  },
+  "amendments": "Any change to these definitions after the freeze is written to protocol_amendment_NNN.json with its reason and what had been read at that time.",
+  "input_sha256": {
+    "<local-input>/d337ae0b8f12/source.json": "3d92b760a0b310c624a984fab5f77883ab2cca92499bdcc725e0061453d0901f",
+    "<local-input>/9774603b02bf/protocol.json": "d15f70d8ba11f111516a13a087d3970ea270bb2e9711547db8aaf6b6f71ff20d",
+    "<local-input>/0febbcb8723c/splits.json": "a455fa45a25c0b6f80e6e4b4cb0235dc72da89e6ad6a7eaa240051f7df72aa4c",
+    "<local-input>/07a579f1e831/identities.json": "ef322cee97084b3b4e01b4d8a164ecb63562ae9981e226cdc4809f0c72acf3b5",
+    "<local-input>/5d8b8e86cc66/summary.json": "f8a0b63cc80a219ff7b112d10e16766d7b0c02af9378a7cb109be851eafe4b3e",
+    "<local-input>/9e05c6fa3101/paper_nested_decision.py": "9e94f01c6d7c959587e4c77ce6f0792db270e3e7b316cc512a1795012be8c832",
+    "<local-input>/768f3a10b31e/chip_forecast.py": "3d02dd3a1bc57e8c53f701a6005c8d5e9d8ad6a15a57cdec3f22b27066015897",
+    "<local-input>/b41b27060126/run_start.py": "560881875da908a5703559e4077696632341f53ba79fe52d393b2f384cf8c242",
+    "<local-input>/9dc828b93415/outer_model.joblib": "a7b45d59a29c433e72d35b844f8ae92688b86e509d06dcd1736ee47b0aa60e50",
+    "<local-input>/0caa6025aa7e/outer_transform.json": "efd62d5016ed36c8e305c4b0ddaa9d64fcca2b42582a5bb968aad479229af9e1",
+    "<local-input>/0dd04376037c/training_rules.json": "0e65fb28c020b04090b848b4e6dd49841ace3e783a079c119a16855587f14162",
+    "<local-input>/b01363b91f4d/calibration.json": "a1243d26c105a02d8685821ad3e357bccce9690f2a30b3a11bcea87e879edfa6",
+    "<local-input>/5d3a475174a0/pretest_freeze.json": "c86aa876e18bc095d835b8d033642dd052848ef8f8c22c976fe4eadc21dd25d9",
+    "<local-input>/a9d5c071ca83/calibration_predictions.npz": "ee6bc57c13ca7865e1023682d17f0daf355829746d484ae0c8c342dc7cec7126",
+    "<local-input>/b408a43ceca0/calibration_design_decisions.json": "6b2a08729606d3b82e08205c3415c1bb7e4fce706276b4300bf3ac2f8d4ab6a3",
+    "<local-input>/6ebb2ab7cbf7/test_predictions.npz": "1450f376fdf946b67b80ac1035bfb24b2751199aa6d129534869a2312acc5add",
+    "<local-input>/21779b25329a/test_decisions_frozen.json": "20d0bf5623363d3746bd8d03b17519f2bd7f2b7081801666a4b96a09d0824be8",
+    "<local-input>/0d50c1c77669/prediction_freeze.json": "7bb72fdb74b31af1d42c55441eea5836ed5f67bb0ab8d675e209b43901fa6af8",
+    "<local-input>/064b2e404262/design_decisions.json": "d00deba092633015be152517a46889679e08ef25d624bffef11200592f9641cd",
+    "<local-input>/e93032c25554/inner0_points.npz": "7b2a3a48f082604008f06d0f8930f9b587bc7217d17e95ea13a8a86bee31fd26",
+    "<local-input>/39b4ea29c01f/inner1_points.npz": "a8853d61ffa6b2ed645347fc69886aedc232562f862a4fe3d7b94842271e982b",
+    "<local-input>/05f58ad25df6/outer_model.joblib": "bbdb9b3beb619e3e0576671760ea1fb8614f92a744217d4ce84aefbe764d5e1f",
+    "<local-input>/1979651f3059/outer_transform.json": "fbad7affa59672c9330ae4656ce221303aa3f35a8bc60e35d7b00b393d7a20e6",
+    "<local-input>/64827bd6f733/training_rules.json": "4028e1859c4dbe579412cf31d002d8839781d1ee15b1b627eb3a629da4fc2133",
+    "<local-input>/206fbcb46912/calibration.json": "9b0346017ef1a9e6ffdc32c76eaa9a05587adda2c693d1db8f5cf014387de783",
+    "<local-input>/98b7367295b1/pretest_freeze.json": "f1fd57c2b5b6572644f8a505758a637f90b4331706b35ff14a722493a974d48b",
+    "<local-input>/e0463f762b5b/calibration_predictions.npz": "8ec29b2443affb1cafe5d448ccdde1bab141b7deebf74377ac5462f6254d9ee1",
+    "<local-input>/cc29fcbbd679/calibration_design_decisions.json": "c0635a1d604dfd9bad7b5f18ec10c2a06d00b930ed5b050695972dead20fd846",
+    "<local-input>/0d18c0d1242e/test_predictions.npz": "5720f14766c12c3e1cd0336dab54fca6e051daab22c1deae7d72321b1626cf57",
+    "<local-input>/437587c3db53/test_decisions_frozen.json": "e7bb34b267bdfa9e0d77eb99385fe05edd4d57fecfca7b5554bbb337d247bb2d",
+    "<local-input>/42da688265b7/prediction_freeze.json": "fcc6310fa7140fc2f15de98bd7a83c2ce5f5c42adf3859468593ddf1b9412a0d",
+    "<local-input>/06dcfea772f1/design_decisions.json": "d991d361a430f4e0e37e0f256e8352b66d623b48a2b41b49c71355e3a54058b3",
+    "<local-input>/53e16bc2ad31/inner0_points.npz": "8464ee2aac64c24c3966fc893760e2e26a6b462220e9ed28eaeb848f504f68c5",
+    "<local-input>/b93196004971/inner1_points.npz": "502a9fdab2e87c8978d9706856fa558a90fa613f52a333d521c1de9cbac08d3c",
+    "<local-input>/6ddcfab9914c/outer_model.joblib": "9c57fec26ff11de0fe52390803760c16a3f68287c17833cc4fc15b88a12e66b3",
+    "<local-input>/70a7f0a7ded4/outer_transform.json": "dce51b5b72d2a3698e41890026cfdd248e960757a3223999c9ef00863ca62ac9",
+    "<local-input>/e1923c88a5da/training_rules.json": "7142a241b59eaee120b8c6693bcf694906cfff3e6ff79b32917347f0ef634149",
+    "<local-input>/6beddfc36bfe/calibration.json": "ef5d50128971a0d0e252a83b9edb37d7ef055af89d7806171cd985c0de2d572e",
+    "<local-input>/cbbea14a2e4b/pretest_freeze.json": "469a7cd7fb2d9b9f4e530f22eb79b1dc416495d50cf37b417772a4f8c4d88e9d",
+    "<local-input>/af494c495741/calibration_predictions.npz": "5b97e164d8e95ed4699c06630c031b6a3d8f3f938edcba4e850020afebf93485",
+    "<local-input>/25ee44a99d05/calibration_design_decisions.json": "bd16be44f550dc0c0d3a09b405a45cbcc0d667aa25153405cff1aff354a10aab",
+    "<local-input>/b1b34fbda568/test_predictions.npz": "42e9814c78c30e2f539bd26182a2c49eaa0553ad2d61fad26d0aa6b2606748ce",
+    "<local-input>/b4b55db297fc/test_decisions_frozen.json": "8d552836b3536c54e983ede59682286afe715a44e5005fb696d48176f91bc3fb",
+    "<local-input>/55886c88dda7/prediction_freeze.json": "773f776d3d58a03c8002a6426a21ba10118eab54f75a246aa238081abc818125",
+    "<local-input>/8e278b757099/design_decisions.json": "5c4e5ef035f346a254bf32a422521aea920fd6c2d90ed3bcf7d752e0735f6d59",
+    "<local-input>/6ca21adbec10/inner0_points.npz": "fa44664a2ea2495a26f3aca8433e7053afb0a127b13dc06edfc9f2090a44c745",
+    "<local-input>/f72f80ec9d85/inner1_points.npz": "0d6119daa85dd7d2b1c7f235726a599312ac81652df7abf3766e9b2368a7c35e",
+    "<local-input>/9d6e6606d58b/outer_model.joblib": "9c57fec26ff11de0fe52390803760c16a3f68287c17833cc4fc15b88a12e66b3",
+    "<local-input>/1c057642bb55/outer_transform.json": "dce51b5b72d2a3698e41890026cfdd248e960757a3223999c9ef00863ca62ac9",
+    "<local-input>/dfb08830a632/training_rules.json": "b20a236d86a3e3dfb60e25fa303ca4ab5f2cd604783f6777673d765fc074c107",
+    "<local-input>/fa105b031b9d/calibration.json": "ef3357a4ff740b182785fcc2811d03e351eda639f358ba798e9251f5a4945345",
+    "<local-input>/a000f560a3c9/pretest_freeze.json": "922a06fa278e36150f28fc34be63e9e52f0f22f1ecd246d892bfb107d12f16df",
+    "<local-input>/dae070da42b8/calibration_predictions.npz": "34e3f6c00c6a94ce5ff537b5b8a2bde849fe16160224a6a39c92ac5db55a14d8",
+    "<local-input>/fe5196e51d29/calibration_design_decisions.json": "d243caff833845a0cacbf1aa5012d95d526b239e2876fc1fb393be174041f21e",
+    "<local-input>/2d639f2e5603/test_predictions.npz": "84c1452e9c327abd583880bacc5e935726cff2ffbfe4fb0447a513db1742897b",
+    "<local-input>/aa8c146b716d/test_decisions_frozen.json": "60798e886ae200f56b738ab541d48b8915f557956bee48d6818492897a881956",
+    "<local-input>/591317c55695/prediction_freeze.json": "5a3153eae522a7504154d64f3d73fe0cf8e8ed1636e83391d8caedb2782c297f",
+    "<local-input>/e4a38125753d/design_decisions.json": "12c356e48f613be108f49a87330ac80f238e2d63ed8ed32190838f22b8e4f512",
+    "<local-input>/33cc048667d2/inner0_points.npz": "30b214ad706f6a004121e9beed12e1f5f169e942fb5d620f33b7b5a0b916aeae",
+    "<local-input>/418d6c605915/inner1_points.npz": "a7a1a13cd28d267759bfdd286494b64ab8051685248b3e1dac1845a75e7f633f",
+    "<local-input>/4b7e95ec12db/outer_model.joblib": "9c57fec26ff11de0fe52390803760c16a3f68287c17833cc4fc15b88a12e66b3",
+    "<local-input>/5089791cb04b/outer_transform.json": "dce51b5b72d2a3698e41890026cfdd248e960757a3223999c9ef00863ca62ac9",
+    "<local-input>/e49084d116d1/training_rules.json": "f2f2ca173b705825796da84562dad87ab2b7042b84fef8f9764de1db280bc504",
+    "<local-input>/bf60b83cfa22/calibration.json": "2a0db6133195907e4834832977cb1ffaf5a948d751792642e4c0c6c0db65a256",
+    "<local-input>/b832c6c8eecf/pretest_freeze.json": "bf12d2d413f8b457fae1bd9a5fd8a7d004f1e93bea52e1ffc5df6b763a535033",
+    "<local-input>/442ad453781c/calibration_predictions.npz": "ca6312e3311790bb94fbb534a1701322ad99526f8e49101cfcca71ab3f24f739",
+    "<local-input>/f4fd7bbe0a6b/calibration_design_decisions.json": "bbc5a0768ce69353b8ae0fd496097157c1702ef8fc014a8739324e78579332c1",
+    "<local-input>/cbcc6037d706/test_predictions.npz": "453430ddedbbce0cd4682ccb493583b19cd4707ad9a3cd9e28c99a5e07b4208a",
+    "<local-input>/6de0177bbf7d/test_decisions_frozen.json": "291c70ad83523ecd1888bebf6e0527b3aa5d7c16534facbb8631997e2c8e8976",
+    "<local-input>/ae31e69435c5/prediction_freeze.json": "10cd48c7403afb2ab0fe8b032bc971cdd92da904bb01278a431f1a0fd6bf1571",
+    "<local-input>/648f91c1bc88/design_decisions.json": "ad1751aedbd88d8564fb6f561b2767c75ea003dd0ce8ba73a28300a1575e7a7c",
+    "<local-input>/d980e2037b5b/inner0_points.npz": "5768264a1b6a821ae95efb425afe6aab13b64a3fd51ef29680a57d0d77ea33e6",
+    "<local-input>/57f21b0102c9/inner1_points.npz": "f77203aab1995402572eb163a804145413ae3ff07756ab88665cb87fb3bf8023"
+  }
+}
