@@ -8,7 +8,9 @@ Vehicle-control wells, if any, have concentration 0. A row with an empty value n
 Forecast (any series with concentrations still to measure). A series with three measured concentrations, the highest
 among them, gets a forecast and a 90% interval at every concentration still to measure and one next step: report the
 call (active or inactive over the full series), add one named concentration and run this again with its readings, or
-complete the series. With four measured concentrations the step is report or complete. Completed series of the same
+complete the series. Activity is reported only from measurements: a series whose measured concentrations already reach
+the activity threshold is called active, the forecast may report only an inactive call, and a series the forecast
+holds active goes on to the added concentration. With four measured concentrations the step is report or complete. Completed series of the same
 endpoint, in the same table or in --library tables, train and calibrate the model; a compound being forecast never
 trains its own endpoint. The output folder holds forecast.csv, summary.md, one model file per endpoint and lock.json
 with the SHA-256 of input, output, models, protocol and code and the UTC time, to fix the forecast before the series
@@ -20,9 +22,11 @@ wells used, forecast error and interval coverage.
 
 The methods are the published ones of this repository, unchanged: AnchorBoost forecasts (chip_forecast.py), learned-
 width 90% intervals (chip_forecast_intervals.py), the training-only cutoff, rank margin and group calibration with exact
-arithmetic (paper_nested_decision.py), and the joint chain of the paper, which reports from three concentrations, adds
-the concentration where AnchorBoost, interpolation and analog chemicals disagree most, or completes the series under one
-margin calibrated over every candidate fourth concentration. Responses are put on the baseline scale of EPA's ToxCast
+arithmetic (paper_nested_decision.py), and the decision chain of the paper: a series whose measured concentrations reach
+the activity threshold is reported active; otherwise an inactive call is reported when its rank margin clears one margin
+calibrated over every candidate fourth concentration, and any other series adds the concentration where AnchorBoost,
+interpolation and analog chemicals disagree most, then reports (active from its four measured concentrations, inactive
+from the four-concentration margin) or completes the series. Responses are put on the baseline scale of EPA's ToxCast
 pipeline (tcpl): each plate is centred on its vehicle wells when it has them, then the median and robust SD (1.4826 x
 MAD) of the responses at the two lowest concentrations of every completed compound set the baseline, computed from
 training and calibration compounds only, and responses are clipped to +-10 baseline SDs. A series is active when its
@@ -310,8 +314,8 @@ def reveal(records, points, tasks, threshold):
 
 
 def chain_rows(model, rule, tasks, records):
-    """For every design (the paper's joint chain): the three-concentration call and margin, the disagreement choice,
-    and for every candidate fourth concentration the call and margin from the four measured ones."""
+    """For every design (the paper's decision chain): the three-concentration call, margin and measured effect, the
+    disagreement choice, and for every candidate fourth concentration the call, margin and measured effect of the four."""
     by = {(r['chemical'], r['design']): r for r in records}
     rows = []
     for t in tasks:
@@ -324,10 +328,13 @@ def chain_rows(model, rule, tasks, records):
         query = {k: t.levels[~np.isin(t.levels, np.array(k, np.float32))] for k in keys}
         preds = dict(zip(keys, predict_many(model, [(obs[k], query[k]) for k in keys])))
 
-        def scored(k):
+        def measured(k):
             o = obs[k] if k in obs else observed(t, np.array(k, np.float32))
-            measured = nd.effect(o.mu, o.ok)
-            return max(measured, float(np.abs(preds[k].mean(axis=1)).max())) if k in preds else measured
+            return float(nd.effect(o.mu, o.ok))
+
+        def scored(k):
+            m = measured(k)
+            return max(m, float(np.abs(preds[k].mean(axis=1)).max())) if k in preds else m
 
         for di, ctx in enumerate(ctxs):
             k3, cand = tuple(ctx), t.levels[~np.isin(t.levels, ctx)]
@@ -337,18 +344,23 @@ def chain_rows(model, rule, tasks, records):
             call3, margin3 = nd.apply_rule(rule, s3)
             branches = []
             for level in cand:
-                call4, margin4 = nd.apply_rule(rule, scored(tuple(np.sort(np.r_[ctx, level]))))
-                branches.append(dict(level=float(level), wells=int(np.sum(t.logc == level)), call4=call4, margin4=margin4))
+                k4 = tuple(np.sort(np.r_[ctx, level]))
+                call4, margin4 = nd.apply_rule(rule, scored(k4))
+                branches.append(dict(level=float(level), wells=int(np.sum(t.logc == level)), call4=call4, margin4=margin4,
+                                     measured4=measured(k4)))
             rows.append(dict(compound=t.chem, group=t.group, design=di, context=ctx, call3=call3, margin3=margin3,
+                             measured3=measured(k3),
                              choice=disagreement(model, obs[k3], cand, preds[k3]), branches=branches,
                              wells_initial=int(np.isin(t.logc, ctx).sum()), wells_full=len(t.logc)))
     return rows
 
 
-def chain_margin(rows, alpha):
-    """The paper's joint calibration with exact arithmetic: a design's loss at margin m is 1 when the three-concentration call
-    or any candidate four-concentration call clears m and is wrong; group means; the first grid margin with
-    (sum + 1) / (groups + 1) <= alpha, else 1 (every design is completed)."""
+def chain_margin(rows, alpha, threshold):
+    """The paper's chain calibration with exact arithmetic. A design whose three measured concentrations reach the
+    threshold is reported active from its measurements and carries no loss; otherwise its loss at margin m is 1 when the
+    three-concentration call or the call of any candidate fourth concentration whose four measured concentrations stay
+    below the threshold is inactive, clears m and is wrong (an active forecast is never reported, so it cannot be wrong).
+    Group means; the first grid margin with (sum + 1) / (groups + 1) <= alpha, else 1 (every such design goes on)."""
     groups = defaultdict(list)
     for r in rows:
         groups[r['group']].append(r)
@@ -356,12 +368,30 @@ def chain_margin(rows, alpha):
     for margin in nd.MARGIN_GRID:
         total = Fraction(0)
         for rr in groups.values():
-            bad = sum(max([int(r['margin3'] > margin and r['call3'] != r['truth'])] +
-                          [int(b['margin4'] > margin and b['call4'] != r['truth']) for b in r['branches']]) for r in rr)
+            bad = sum(0 if r['measured3'] >= threshold else
+                      max([int(r['call3'] == 1 and r['margin3'] > margin and r['truth'] != 1)] +
+                          [int(b['measured4'] < threshold and b['call4'] == 1 and b['margin4'] > margin and r['truth'] != 1)
+                           for b in r['branches']]) for r in rr)
             total += Fraction(bad, len(rr))
         if (total + 1) / (n + 1) <= level:
             return margin, True
     return nd.MARGIN_GRID[-1], False
+
+
+def two_action_margin(records, method, alpha, threshold):
+    """A three-concentration rule with the measured-active lane, calibrated with exact arithmetic: designs whose three
+    measured concentrations reach the threshold are reported active and carry no loss; any other design is reported
+    with the rule's call when its margin clears m. First grid margin with (sum + 1) / (groups + 1) <= alpha, else 1."""
+    groups = defaultdict(list)
+    for r in records:
+        groups[r['drug_group']].append(r)
+    level, n = Fraction(repr(alpha)), len(groups)
+    for margin in nd.MARGIN_GRID:
+        total = sum(Fraction(sum(int(r['measured_only'] < threshold and r[method + '_margin'] > margin
+                                     and r[method + '_call'] != r['truth']) for r in rr), len(rr)) for rr in groups.values())
+        if (total + 1) / (n + 1) <= level:
+            return margin
+    return nd.MARGIN_GRID[-1]
 
 
 def well_errors(tasks, points):
@@ -407,7 +437,8 @@ def half_width(widths, X):
 def fit(train, cal, key, threshold, alpha):
     """Everything a decision needs, from training and calibration compounds only (paper_nested_decision.py order):
     training-only cutoffs and rank margins from two inner fits, the final AnchorBoost on all training compounds, then on
-    calibration compounds the chain margin, the two-action margins and the interval width models."""
+    calibration compounds the chain margin, the margins of the two three-concentration comparators (each with the same
+    measured-active lane) and the interval width models."""
     if len(train) < 2 or len(cal) < 2:
         raise ValueError(f'needs at least 2 training and 2 calibration compounds; has {len(train)} and {len(cal)}')
     half = deal([t.chem for t in train], ['inner-v1', key], 2)
@@ -426,8 +457,8 @@ def fit(train, cal, key, threshold, alpha):
     reveal(cal_rec, cal_pts, cal, threshold)
     for r in chain:
         r['truth'] = truth(next(t for t in cal if t.chem == r['compound']), threshold)
-    margin, feasible = chain_margin(chain, alpha)
-    two = {m: nd.calibrate(cal_rec, m, alpha)['margin'] for m in ('anchorboost', 'measured_only')}
+    margin, feasible = chain_margin(chain, alpha, threshold)
+    two = {m: two_action_margin(cal_rec, m, alpha, threshold) for m in ('anchorboost', 'measured_only')}
     widths = width_models(well_errors(cal, cal_pts), key, np.random.default_rng(0))
     return dict(model=model, rules=rules, chain_margin=margin, chain_feasible=feasible, two_action=two, widths=widths,
                 training=sorted(t.chem for t in train), calibration=sorted(t.chem for t in cal), threshold=threshold,
@@ -437,19 +468,24 @@ def fit(train, cal, key, threshold, alpha):
 # ---------------------------------------------------------------- forecast mode
 
 def decide_open(f, t, q):
-    """Forecast, 90% well intervals and the next step for one series with concentrations q still to measure."""
+    """Forecast, 90% well intervals and the next step for one series with concentrations q still to measure: active when
+    the measured concentrations reach the threshold, inactive when the forecast's inactive call clears the release
+    margin, otherwise one more concentration (from three) or the full series."""
     k = len(t.levels)
     out = dict(action='', call='', add=None, margin=None, pred=None, half=None)
     if k < K:
         out['action'] = 'measure three concentrations first, the highest among them'
         return out
     s, pred = score(f['model'], t, q)
+    measured = nd.effect(t.mu, t.ok)
     call, margin = nd.apply_rule(f['rules']['methods']['anchorboost'], s)
     pseudo = cf.Task(t.chem, 0, 'unused', np.r_[t.logc, q].astype(np.float32),
                      np.r_[t.y, np.zeros((len(q), 1, 1), np.float32)], np.r_[t.m, np.ones((len(q), 1, 1), bool)])
     out.update(call='inactive' if call else 'active', margin=float(margin), pred=pred.reshape(-1),
                half=half_width(f['widths'], ci.covariates(pseudo, t.levels)[0]))
-    if margin > f['chain_margin']:
+    if measured >= f['threshold']:
+        out.update(action='report the call', call='active')
+    elif call == 1 and margin > f['chain_margin']:
         out['action'] = 'report the call'
     elif k == K and len(q) > 1:
         out['add'] = float(q[disagreement(f['model'], t, q, pred)])
@@ -572,7 +608,8 @@ def summary_forecast(table, settings, notes, args, lock_fields):
               'SDs: the spread of responses at the two lowest concentrations of the completed compounds, after centring '
               'each plate on its vehicle wells when the table has them. A call is '
               f'active when the largest absolute concentration mean of the full series reaches {args.threshold:g} baseline '
-              'SDs. The call is reported when its rank margin clears the release '
+              'SDs. A series whose measured concentrations already reach that line is called active; activity is '
+              'never called from a forecast. An inactive call is reported when its rank margin clears the release '
               f'margin, set on calibration compounds so that the expected share of wrong early calls per compound stays '
               f'at or below {args.alpha:.0%} whichever fourth concentration is added; otherwise the concentration where '
               'the forecasters disagree most is added, and after four measured concentrations the series is reported '
@@ -591,13 +628,18 @@ def summary_forecast(table, settings, notes, args, lock_fields):
 
 # ---------------------------------------------------------------- replay mode
 
-def decide_chain(r, margin):
-    """The paper's joint chain for one test design at the calibrated margin (model_disagreement policy)."""
-    if r['margin3'] > margin:
-        return dict(step='report at three', call=r['call3'], added=None, wells_added=0, complete=0)
+def decide_chain(r, margin, threshold):
+    """The paper's decision chain for one test design at the calibrated margin (model_disagreement policy): active only
+    from measured concentrations at the threshold, inactive when the forecast's inactive call clears the margin."""
+    if r['measured3'] >= threshold:
+        return dict(step='report at three', call=0, added=None, wells_added=0, complete=0)
+    if r['call3'] == 1 and r['margin3'] > margin:
+        return dict(step='report at three', call=1, added=None, wells_added=0, complete=0)
     b = r['branches'][r['choice']]
-    if b['margin4'] > margin:
-        return dict(step='report after one more', call=b['call4'], added=b['level'], wells_added=b['wells'], complete=0)
+    if b['measured4'] >= threshold:
+        return dict(step='report after one more', call=0, added=b['level'], wells_added=b['wells'], complete=0)
+    if b['call4'] == 1 and b['margin4'] > margin:
+        return dict(step='report after one more', call=1, added=b['level'], wells_added=b['wells'], complete=0)
     return dict(step='complete', call=None, added=b['level'], wells_added=b['wells'], complete=1)
 
 
@@ -623,10 +665,12 @@ def replay_fold(curves, ep, f, threshold, alpha):
     for r in chain:
         t = tasks[r['compound']]
         y = truth(t, threshold)
-        d = decide_chain(r, fitted['chain_margin'])
+        d = decide_chain(r, fitted['chain_margin'], threshold)
         n = by[(r['compound'], r['design'])]
-        ab = n['anchorboost_margin'] > fitted['two_action']['anchorboost']
-        mo = n['measured_only_margin'] > fitted['two_action']['measured_only']
+        lane = n['measured_only'] >= threshold
+        ab = lane or n['anchorboost_margin'] > fitted['two_action']['anchorboost']
+        mo = lane or n['measured_only_margin'] > fitted['two_action']['measured_only']
+        ab_call, mo_call = (0, 0) if lane else (n['anchorboost_call'], n['measured_only_call'])
         used = r['wells_initial'] + d['wells_added'] + d['complete'] * (r['wells_full'] - r['wells_initial'] - d['wells_added'])
         rows.append(dict(endpoint=ep, compound=r['compound'], fold=f, design=r['design'],
                          measured=';'.join(f'{10 ** float(v):.4g}' for v in r['context']), unit=unit,
@@ -638,9 +682,9 @@ def replay_fold(curves, ep, f, threshold, alpha):
                          wells_initial=r['wells_initial'], wells_added=d['wells_added'], wells_used=used,
                          wells_full=r['wells_full'], margin3=round(float(r['margin3']), 6),
                          release_margin=fitted['chain_margin'],
-                         two_action_report=int(ab), two_action_wrong=int(ab and n['anchorboost_call'] != y),
+                         two_action_report=int(ab), two_action_wrong=int(ab and ab_call != y),
                          two_action_wells=r['wells_initial'] if ab else r['wells_full'],
-                         measured_only_report=int(mo), measured_only_wrong=int(mo and n['measured_only_call'] != y),
+                         measured_only_report=int(mo), measured_only_wrong=int(mo and mo_call != y),
                          measured_only_wells=r['wells_initial'] if mo else r['wells_full']))
     mae = defaultdict(lambda: defaultdict(lambda: defaultdict(list)))
     for c, d_, p, lp, tr, m in zip(pts['chemical'], pts['design'], pts['anchorboost'], pts['loglinear'], pts['truth'], pts['mask']):
@@ -717,8 +761,10 @@ def summary_replay(per, args, digest_lines):
               f'(the spread of responses at the two lowest concentrations of training and calibration compounds, after '
               f'centring each plate on its vehicle wells when the table has them), per compound over its designs. A call is active when the largest '
               f'absolute concentration mean reaches {args.threshold:g} baseline SDs; the release margin keeps the expected share of wrong early '
-              f'calls per compound at or below {args.alpha:.0%} on the calibration compounds. "Measured concentrations '
-              'only" is the same calibrated rule reading the three measured concentrations without a forecast. Wells '
+              f'calls per compound at or below {args.alpha:.0%} on the calibration compounds. Activity is called only from '
+              'measured concentrations at that line; the forecast reports inactive calls or names the concentration to '
+              'add. "Measured concentrations only" is the calibrated three-concentration rule reading the measured '
+              'concentrations without a forecast, with the same direct report of measured activity. Wells '
               'count exposed wells; vehicle wells are shared and not counted.', '', '**Inputs and code (SHA-256)**', '']
     lines += [f'- {k}: `{v}`' for k, v in digest_lines]
     return '\n'.join(lines) + '\n'
@@ -891,7 +937,9 @@ def protocol(args, mode, files):
                 call='inactive when the largest absolute concentration mean of the full series is below the threshold',
                 model=dict(name='AnchorBoost', params=cf.MODEL, designs='all C(L,3) training designs'),
                 rule='paper_nested_decision: training-only cutoff and weighted rank margin from two inner fits, exact '
-                     'margins; joint chain margin over every candidate fourth concentration; group = compound',
+                     'margins; decision chain: measured concentrations at the threshold report active, a margin '
+                     'reports only an inactive call, one margin calibrated over every candidate fourth concentration; '
+                     'group = compound',
                 intervals=dict(method='chip_forecast_intervals learned width, cross-fitted over calibration parts',
                                parts=PARTS, params=ci.WIDTH, rows=ci.ROWS, floor=ci.FLOOR, level=sc.LEVEL),
                 partition=('forecast: completed compounds split half and half into training and calibration by '
