@@ -1,53 +1,88 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-style="figure">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
 <meta name="description" content="Review paired organoid readouts, choose report or retest per patient, and compare outcomes. A local browser worksheet and timed usability study.">
 <title>Which patients need a retest?</title>
-<link rel="icon" href="data:,"><link rel="stylesheet" href="style.css">
-<script defer src="data.js"></script><script defer src="engine.js"></script><script defer src="app.js"></script>
+<link rel="icon" href="data:,">
+<link rel="preload" href="vendor/fonts/newsreader-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="vendor/fonts/source-sans-3-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css?v=1023d1">
+<script defer src="tip.js?v=1023d1"></script><script defer src="data.js"></script><script defer src="engine.js"></script><script defer src="app.js?v=1023d1"></script>
 </head>
 <body>
-<header><h1>Which patients need a retest?</h1><nav><a href="index.html">Workbench</a><a href="guide.html">2-minute guide</a><button id="export" class="quiet">Export anonymous record</button></nav></header>
-<main class="bench">
-<div class="steps">
-<div class="tabs" role="tablist" aria-label="Workflow"><button id="explore-tab" role="tab" aria-selected="true">Explore a batch</button><button id="study-tab" role="tab" aria-selected="false">Timed study · 6 tasks</button></div>
-<section id="setup" class="sec" hidden>
-  <h2>Study code</h2>
-  <div class="body"><label>Participant code <select id="participant"><option>P01</option><option>P02</option><option>P03</option><option>P04</option><option>P05</option><option>P06</option></select></label><label>Record type <select id="record-type"><option value="researcher">Researcher study</option><option value="agent_self_test">Agent self-test</option><option value="facilitator_pilot">Facilitator pilot</option></select></label><label>Usual manual workflow <select id="workflow"><option value="spreadsheet">Spreadsheet</option><option value="paper">Paper and calculator</option><option value="script">Existing analysis script</option></select></label><button id="begin-study" class="go" aria-description="Six tasks, six different patient batches. Use your usual spreadsheet or paper for the manual tasks; the tool handles the other three. The record holds coded decisions and timing only.">Begin study</button></div>
-</section>
-<section id="study-bar" class="sec taskbar" hidden><div><strong id="task-status"></strong><p id="task-instruction"></p></div><div class="timer"><output id="timer">0:00</output><button id="start-task" class="go">Start task</button><button id="pause" class="quiet" hidden>Pause</button></div></section>
-<div id="error" role="alert" hidden></div>
-<section id="workspace">
-<section class="sec" id="input-panel">
-  <h2><b>1</b>Load</h2>
-  <div class="body"><label class="file" aria-description="Runs in this browser; files stay here">Open input CSV<input type="file" id="input-file" accept=".csv,text/csv"></label><button id="download-input" class="quiet">Download input CSV</button>
-  <div id="example-controls" class="row"><label aria-description="Public rectal-organoid replay: day-24/day-0 size ratios after irradiation and 5-FU; lower values mean more response.">Example <select id="example"></select></label><button id="load-example" class="go">Load example</button></div>
-  <label>Retest cost, relative to one wrong release <input id="cost" type="number" min="0" max="10" step="0.05" value="0.25"></label>
-  <details id="csv-editor"><summary>Edit or paste input CSV</summary><textarea id="csv-text" rows="7" spellcheck="false" aria-label="Patient input CSV"></textarea><button id="apply-input" class="quiet">Apply edited input</button></details>
-  <details id="rule"><summary>Frozen rule and manual worksheet</summary><div id="rule-body" class="small"></div><a href="study/manual.html">Open the printable manual method</a></details></div>
-</section>
-<section class="sec" id="finish-panel" hidden>
-  <h2><b>4</b>Submit your task worksheet</h2><p id="answer-instruction" class="small">Report the risk and cost of your locked actions. A zero-release error rate is undefined; enter NA.</p>
-  <div class="answers"><label>Wrong releases / all patients (%)<input id="answer-overall" inputmode="decimal"></label><label>Wrong releases / released patients (%)<input id="answer-conditional" inputmode="decimal"></label><label>Cost per patient<input id="answer-cost" inputmode="decimal"></label><label>Lowest-cost baseline<select id="answer-baseline"><option value="">Choose a baseline</option></select></label></div>
-  <div class="row"><button id="fill-answers" class="quiet">Use calculated results</button><button id="finish-task" class="go">Finish task</button></div>
-</section>
-</section>
-<section class="sec" id="completion" hidden><h2>Your six tasks are complete.</h2><p>Export the anonymous record and send that JSON file to your facilitator.</p><button id="export-complete" class="go">Export completed record</button><div id="completion-summary"></div></section>
-<footer><a href="https://doi.org/10.1016/j.xcrm.2025.102397">Source paper, CC BY 4.0</a> · <a href="study/protocol.md">Study protocol</a><details><summary>Data and model details</summary><p id="provenance"></p><p>Known historical outcomes power these usability exercises. The study measures workflow behaviour; new clinical validation belongs to a separate patient cohort. Local files can be inspected, so the outcome reveal is a workflow lock rather than secure blinding.</p></details><p id="export-status" role="status">Open files here; export your record before closing this tab.</p></footer>
-</div>
-<div class="obj">
-<section class="sec">
-  <div class="section-head"><h2><b>2</b>Choose patient actions</h2><button id="predict" class="go">Predict actions</button></div>
-  <p id="mode-help" class="small">Review the proposed list and choose a different action when needed.</p>
-  <div class="table-scroll"><table id="patient-table"><thead><tr><th>Patient</th><th>Readout 1</th><th>Readout 2</th><th class="prediction-col">Frozen rule</th><th>Your action</th><th class="truth-col">Outcome</th></tr></thead><tbody></tbody></table></div>
-  <div class="row action-footer"><span id="action-count"></span><button id="download-actions" class="quiet">Download action list</button><label class="file" id="outcome-upload">Load outcome CSV<input type="file" id="outcome-file" accept=".csv,text/csv"></label><button id="reveal" class="go">Lock actions &amp; reveal outcomes</button></div>
-</section>
-<section class="sec" id="results-panel">
-  <div class="section-head"><h2><b>3</b>Read risk and cost</h2><span id="result-status">Outcomes are hidden</span><button id="download-outcomes" class="quiet" hidden>Download revealed worksheet</button></div>
-  <div id="metrics" class="metrics" aria-description="The 10% target concerns expected wrong releases among all patients. Error among released patients is a separate quantity."></div>
-  <h3>Strong baselines on the same patients</h3><p id="baseline-intro" class="small"></p><div class="table-scroll"><table id="baseline-table"><thead><tr><th>Baseline</th><th>Release / retest</th><th>Wrong / all</th><th>Wrong / released</th><th>Cost / patient</th></tr></thead><tbody></tbody></table></div><p id="winner"></p>
-</section>
-</div>
+<header class="bar">
+  <a class="brand" href="index.html"><span class="mark">Chip Forecast</span><span class="team" title="Team Three-Pointer · Yan Su &amp; Ziyang Liu">Team Three-Pointer</span></a>
+  <div class="kpis">
+    <span class="kpi" aria-description="Six patient batches: three with your usual manual worksheet, three with this tool"><b>6</b> <span>timed tasks</span></span>
+    <span class="kpi" aria-description="The 36 task patients are disjoint from training and calibration"><b>36</b> <span>held-out task patients</span></span>
+    <span class="kpi"><b>1</b> <span>frozen two-readout rule</span></span>
+  </div>
+  <nav><a href="index.html">Workbench</a><a href="sample.html">Sample size</a><a href="audits/index.html">Published studies</a><a href="https://github.com/logxio/ooc-evaluation-audit">Source</a><a class="cta" href="index.html#tab=yours">Paste your table</a></nav>
+</header>
+
+<main class="page bench">
+  <div class="side">
+    <section class="card">
+      <div class="head"><h1 class="t3">Which patients need a retest?</h1><div class="tools"><a class="pill" href="guide.html">2-minute guide</a></div></div>
+      <div class="seg wide" role="tablist" aria-label="Workflow"><button type="button" id="explore-tab" role="tab" aria-selected="true">Explore a batch</button><button type="button" id="study-tab" role="tab" aria-selected="false">Timed study · 6 tasks</button></div>
+    </section>
+    <section id="setup" class="card" hidden>
+      <div class="head"><h2 class="t3">Study code</h2></div>
+      <div class="params">
+        <label class="param"><span>Participant code</span><select class="input" id="participant"><option>P01</option><option>P02</option><option>P03</option><option>P04</option><option>P05</option><option>P06</option></select></label>
+        <label class="param"><span>Record type</span><select class="input" id="record-type"><option value="researcher">Researcher study</option><option value="agent_self_test">Agent self-test</option><option value="facilitator_pilot">Facilitator pilot</option></select></label>
+        <label class="param"><span>Usual manual workflow</span><select class="input" id="workflow"><option value="spreadsheet">Spreadsheet</option><option value="paper">Paper and calculator</option><option value="script">Existing analysis script</option></select></label>
+      </div>
+      <div class="row end"><button type="button" id="begin-study" class="btn" aria-description="Six tasks, six different patient batches. Use your usual spreadsheet or paper for the manual tasks; the tool handles the other three. The record holds coded decisions and timing only.">Begin study</button></div>
+    </section>
+    <section id="study-bar" class="card taskbar" hidden><div><strong id="task-status"></strong><p id="task-instruction" class="t1 ink2"></p></div><div class="timer"><output id="timer">0:00</output><button type="button" id="start-task" class="btn">Start task</button><button type="button" id="pause" class="btn quiet" hidden>Pause</button></div></section>
+    <p id="error" class="alert" role="alert" hidden></p>
+    <section id="workspace">
+      <section class="card" id="input-panel">
+        <div class="head"><h2 class="t3">Load a batch</h2><div class="tools"><label class="pill plain file" aria-description="Runs in this browser; files stay here">Open CSV<input type="file" id="input-file" accept=".csv,text/csv"></label><button type="button" id="download-input" class="pill dl">Input CSV</button></div></div>
+        <div class="params">
+          <div class="param" id="example-controls"><label for="example" aria-description="Public rectal-organoid replay: day-24/day-0 size ratios after irradiation and 5-FU; lower values mean more response.">Example</label><span class="tools"><select class="input" id="example"></select><button type="button" id="load-example" class="btn sm">Load</button></span></div>
+          <label class="param" aria-description="One retest costs this fraction of one wrong release"><span>Retest cost</span><input class="input" id="cost" type="number" min="0" max="10" step="0.05" value="0.25"></label>
+        </div>
+        <div class="params">
+          <details id="csv-editor"><summary>Edit or paste input CSV</summary><textarea class="field" id="csv-text" rows="7" spellcheck="false" aria-label="Patient input CSV"></textarea><div class="row end"><button type="button" id="apply-input" class="btn quiet sm">Apply edited input</button></div></details>
+          <details id="rule"><summary>Frozen rule and manual worksheet</summary><div id="rule-body" class="prose"></div><a class="pill" href="study/manual.html">Printable manual method</a></details>
+        </div>
+      </section>
+      <section class="card" id="finish-panel" hidden>
+        <div class="head"><h2 class="t3" id="answer-instruction" aria-description="Report the risk and cost of your locked actions. A zero-release error rate is undefined; enter NA.">Submit your task worksheet</h2></div>
+        <div class="answers"><label>Wrong releases / all patients (%)<input class="input" id="answer-overall" inputmode="decimal"></label><label>Wrong releases / released (%)<input class="input" id="answer-conditional" inputmode="decimal"></label><label>Cost per patient<input class="input" id="answer-cost" inputmode="decimal"></label><label>Lowest-cost baseline<select class="input" id="answer-baseline"><option value="">Choose a baseline</option></select></label></div>
+        <div class="row end"><button type="button" id="fill-answers" class="btn quiet">Use calculated results</button><button type="button" id="finish-task" class="btn">Finish task</button></div>
+      </section>
+    </section>
+    <section class="card" id="risk-panel">
+      <div class="head"><h2 class="t3" aria-description="The 10% target concerns expected wrong releases among all patients. Error among released patients is a separate quantity.">Risk and cost</h2><span id="result-status" class="t1 ink3" style="margin-left:auto;white-space:nowrap">Outcomes are hidden</span></div>
+      <div id="metrics" class="metrics"></div>
+    </section>
+    <section class="card" id="completion" hidden><div class="head"><h2 class="t3" aria-description="Export the anonymous record and send that JSON file to your facilitator.">Your six tasks are complete</h2></div><p id="completion-summary" class="t1 ink2"></p><div class="row end"><button type="button" id="export-complete" class="btn">Export completed record</button></div></section>
+    <section class="card grow">
+      <div class="head"><h2 class="t3">Record</h2><div class="tools"><button type="button" id="export" class="pill dl" aria-description="Coded decisions and timing only, as JSON">Anonymous record</button></div></div>
+      <p id="export-status" class="t1 ink2" role="status">Open files here; export your record before closing this tab.</p>
+      <div class="params">
+        <details><summary>Data and model details</summary><p id="provenance" class="prose"></p><p class="prose">Known historical outcomes power these usability exercises. The study measures workflow behaviour; new clinical validation belongs to a separate patient cohort. Local files can be inspected, so the outcome reveal is a workflow lock rather than secure blinding.</p></details>
+      </div>
+      <p class="foot"><a href="https://doi.org/10.1016/j.xcrm.2025.102397">Source paper, CC BY 4.0</a> · <a href="study/protocol.md">Study protocol</a></p>
+    </section>
+  </div>
+  <div class="main">
+    <section class="card">
+      <div class="head"><h2 class="t3" id="mode-help">Choose patient actions</h2><div class="tools"><button type="button" id="predict" class="btn">Predict actions</button></div></div>
+      <div class="table-scroll"><table class="data" id="patient-table"><thead><tr><th>Patient</th><th class="n">Readout 1</th><th class="n">Readout 2</th><th class="prediction-col">Frozen rule</th><th>Your action</th><th class="truth-col">Outcome</th></tr></thead><tbody></tbody></table></div>
+      <div class="row end"><span id="action-count" class="t1 ink2" style="margin-right:auto"></span><button type="button" id="download-actions" class="pill dl">Action list</button><button type="button" id="download-outcomes" class="pill dl" hidden>Revealed worksheet</button><label class="pill plain file" id="outcome-upload">Load outcome CSV<input type="file" id="outcome-file" accept=".csv,text/csv"></label><button type="button" id="reveal" class="btn">Lock actions &amp; reveal outcomes</button></div>
+    </section>
+    <section class="card grow" id="results-panel">
+      <div class="head"><h2 class="t3" id="baseline-intro">Strong baselines on the same patients</h2></div>
+      <div class="data-wrap"><table class="data" id="baseline-table"><thead><tr><th>Baseline</th><th>Release / retest</th><th>Wrong / all</th><th>Wrong / released</th><th>Cost / patient</th></tr></thead><tbody></tbody></table></div>
+      <p id="winner"></p>
+    </section>
+  </div>
 </main>
-</body></html>
+</body>
+</html>

@@ -1,50 +1,64 @@
 <!doctype html>
-<html lang="en">
+<html lang="en" data-style="figure">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>Published studies | Patient readout workbench</title>
-  <link rel="stylesheet" href="../style.css">
-  <style>
-    .study-search { width: min(100%, 32rem); padding: 10px; border: 1px solid #b9c3cd; border-radius: 4px; margin: 12px 0 20px; }
-    .study-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 14px; }
-    .study-grid .panel { margin: 0; }
-    .study-grid h2 { margin-top: 0; }
-    .study-grid p { margin-bottom: 0; }
-  </style>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Published studies | Chip Forecast</title>
+<meta name="description" content="13 public organ-chip and organoid studies, 12 in Cell or Nature portfolio journals, each with its unit, denominator, source and downloadable records.">
+<link rel="icon" href="data:,">
+<link rel="preload" href="../vendor/fonts/newsreader-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="../vendor/fonts/source-sans-3-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="../style.css?v=1023d1">
+<script defer src="../tip.js?v=1023d1"></script>
 </head>
 <body>
-<header><a class="wordmark" href="../index.html">Patient readout workbench</a><nav><a href="index.html">Published studies</a><a href="../sample.html">Sample size</a><a href="../trial.html">Timed study</a></nav></header>
-<main>
-  <h1>Published studies</h1>
-  <p>13 public studies, including 12 in Cell or Nature portfolio journals. Open each study for its measurement unit, denominator, source, and downloadable records.</p>
-  <input class="study-search" id="study-search" type="search" aria-label="Filter published studies" placeholder="Filter by author, tissue, or journal">
-  <div class="study-grid" id="study-grid">
-    <section class="panel"><h2><a href="dai.html">Dai colorectal chip</a></h2><p>Cell Reports Medicine, 2026. 22 patients with three chip repeats per marker.</p></section>
-    <section class="panel"><h2><a href="rectal.html">Xu rectal organoids</a></h2><p>Cell Reports Medicine, 2025. 127 mapped patient drug responses.</p></section>
-    <section class="panel"><h2><a href="crlm.html">Mo colorectal liver metastasis</a></h2><p>Advanced Science, 2022. 23 evaluable organoids from 25 original cases.</p></section>
-    <section class="panel"><h2><a href="tan.html">Tan colorectal organoids</a></h2><p>Cell Reports Medicine, 2023. 101 patient assay pool, 22 treatment events from 18 patients in the paired analysis.</p></section>
-    <section class="panel"><h2><a href="schuster.html">Schuster perfused organoids</a></h2><p>Nature Communications, 2020. 48 time contrasts from three patients.</p></section>
-    <section class="panel"><h2><a href="steinberg.html">Steinberg spheroid readouts</a></h2><p>Communications Biology, 2023. 49 complete patient and treatment pairs in the workbook.</p></section>
-    <section class="panel"><h2><a href="hu.html">Hu lung organoids</a></h2><p>Nature Communications, 2021. 21 tested lines, 10 linked to clinical comparisons.</p></section>
-    <section class="panel"><h2><a href="petreus.html">Petreus chip to mouse schedules</a></h2><p>Communications Biology, 2021. Three schedules in one cell line with mouse attrition shown.</p></section>
-    <section class="panel"><h2><a href="ren.html">Ren biliary organoids</a></h2><p>Cell Reports Medicine, 2023. 48 patients with gemcitabine and cisplatin AUC.</p></section>
-    <section class="panel"><h2><a href="wang-lung.html">Wang lung organoids</a></h2><p>Cell Reports Medicine, 2023. 54 IC50 entries from 36 patient IDs.</p></section>
-    <section class="panel"><h2><a href="zhai.html">Zhai digital microfluidics</a></h2><p>Nature Communications, 2024. Five patient samples, four drugs and six doses.</p></section>
-    <section class="panel"><h2><a href="zhao.html">Zhao gastric organoids</a></h2><p>Cell Reports Medicine, 2024. 41 screened patients and 12 followed clinically.</p></section>
-    <section class="panel"><h2><a href="gdop.html">Wang GDOP perfusion chip</a></h2><p>Communications Biology, 2026. 840 repeated time points summarized by dose and day.</p></section>
+<header class="bar">
+  <a class="brand" href="../index.html"><span class="mark">Chip Forecast</span><span class="team" title="Team Three-Pointer · Yan Su &amp; Ziyang Liu">Team Three-Pointer</span></a>
+  <div class="kpis">
+    <span class="kpi"><b>13</b> <span>published studies</span></span>
+    <span class="kpi" aria-description="Cell Reports Medicine, Nature Communications and Communications Biology; the 13th is Advanced Science"><b>12</b> <span>in Cell or Nature portfolio journals</span></span>
+    <span class="kpi" aria-description="Rectal, Dai, liver-metastasis and Tan cohorts carry two readouts and clinical outcomes per patient"><b>4</b> <span>cohorts load into the worksheet</span></span>
   </div>
-  <p id="study-count" role="status">13 studies</p>
+  <nav><a href="../index.html">Workbench</a><a href="../sample.html">Sample size</a><a href="index.html" aria-current="page">Published studies</a><a href="https://github.com/logxio/ooc-evaluation-audit">Source</a><a class="cta" href="../index.html#tab=yours">Paste your table</a></nav>
+</header>
+
+<main class="page">
+  <section class="card">
+    <div class="head"><h1 class="t3" aria-description="Open each study for its measurement unit, denominator, source and downloadable records.">13 public studies, each result kept with its denominator</h1><div class="tools"><label class="search"><input id="study-search" type="search" aria-label="Filter published studies" placeholder="Filter by author, tissue or journal"></label><span class="t1 ink3" id="study-count" role="status">13 studies</span></div></div>
+    <div class="data-wrap">
+      <table class="data studies">
+        <thead><tr><th>Study</th><th>Journal</th><th class="n">Year</th><th>Measured</th><th class="n">Units</th><th>Headline</th><th>Worksheet</th></tr></thead>
+        <tbody id="study-grid">
+          <tr data-href="dai.html" aria-description="22 patients with three chip repeats per marker"><td><a href="dai.html">Dai colorectal chip</a></td><td>Cell Reports Medicine</td><td class="n">2026</td><td>Two chip markers, three repeats</td><td class="n">22 patients</td><td>20/22 released · 1 wrong</td><td><a class="pill" href="../worksheet.html?example=dai">Load</a></td></tr>
+          <tr data-href="rectal.html" aria-description="127 mapped patient drug responses"><td><a href="rectal.html">Xu rectal organoids</a></td><td>Cell Reports Medicine</td><td class="n">2025</td><td>Size ratio after irradiation</td><td class="n">127 patients</td><td>84/127 released · 14 wrong</td><td><a class="pill" href="../worksheet.html?example=rectal">Load</a></td></tr>
+          <tr data-href="crlm.html" aria-description="23 evaluable organoids from 25 original cases"><td><a href="crlm.html">Mo colorectal liver metastasis</a></td><td>Advanced Science</td><td class="n">2022</td><td>Paired drug readouts</td><td class="n">23 patients</td><td>11/23 released · 2 wrong</td><td><a class="pill" href="../worksheet.html?example=crlm">Load</a></td></tr>
+          <tr data-href="tan.html" aria-description="101 patient assay pool, 22 treatment events from 18 patients in the paired analysis"><td><a href="tan.html">Tan colorectal organoids</a></td><td>Cell Reports Medicine</td><td class="n">2023</td><td>Paired drug readouts</td><td class="n">18 patients</td><td>6/18 released · 0 wrong</td><td><a class="pill" href="../worksheet.html?example=tan">Load</a></td></tr>
+          <tr data-href="schuster.html" aria-description="48 time contrasts from three patients"><td><a href="schuster.html">Schuster perfused organoids</a></td><td>Nature Communications</td><td class="n">2020</td><td>Temporal versus static contrasts</td><td class="n">48 contrasts</td><td>8 sign changes, 24 to 72 h</td><td></td></tr>
+          <tr data-href="steinberg.html" aria-description="49 complete patient and treatment pairs in the workbook"><td><a href="steinberg.html">Steinberg spheroid readouts</a></td><td>Communications Biology</td><td class="n">2023</td><td>Area and viability</td><td class="n">49 pairs</td><td>Sign disagrees in 14/49</td><td></td></tr>
+          <tr data-href="hu.html" aria-description="21 tested lines, 10 linked to clinical comparisons"><td><a href="hu.html">Hu lung organoids</a></td><td>Nature Communications</td><td class="n">2021</td><td>Clinical linkage of tested lines</td><td class="n">21 lines</td><td>10 linked · 4 exact regimen matches</td><td></td></tr>
+          <tr data-href="petreus.html" aria-description="Three schedules in one cell line with mouse attrition shown"><td><a href="petreus.html">Petreus chip to mouse schedules</a></td><td>Communications Biology</td><td class="n">2021</td><td>Three dosing schedules in mice</td><td class="n">45 mice</td><td>20/45 observed at day 35</td><td></td></tr>
+          <tr data-href="ren.html" aria-description="48 patients with gemcitabine and cisplatin AUC"><td><a href="ren.html">Ren biliary organoids</a></td><td>Cell Reports Medicine</td><td class="n">2023</td><td>Gemcitabine and cisplatin AUC</td><td class="n">48 patients</td><td>7 strictly evaluable follow-ups</td><td></td></tr>
+          <tr data-href="wang-lung.html" aria-description="54 IC50 entries from 36 patient IDs"><td><a href="wang-lung.html">Wang lung organoids</a></td><td>Cell Reports Medicine</td><td class="n">2023</td><td>IC50 per regimen</td><td class="n">36 patients</td><td>54 IC50 records kept verbatim</td><td></td></tr>
+          <tr data-href="zhai.html" aria-description="Five patient samples, four drugs and six doses"><td><a href="zhai.html">Zhai digital microfluidics</a></td><td>Nature Communications</td><td class="n">2024</td><td>Viability over six doses</td><td class="n">5 patients</td><td>120 dose points, 4 drugs</td><td></td></tr>
+          <tr data-href="zhao.html" aria-description="41 screened patients and 12 followed clinically"><td><a href="zhao.html">Zhao gastric organoids</a></td><td>Cell Reports Medicine</td><td class="n">2024</td><td>AUC and IC50, six drugs</td><td class="n">41 patients</td><td>8/12 follow-ups evaluable</td><td></td></tr>
+          <tr data-href="gdop.html" aria-description="840 repeated time points summarized by dose and day"><td><a href="gdop.html">Wang GDOP perfusion chip</a></td><td>Communications Biology</td><td class="n">2026</td><td>Organoid diameter and grayscale</td><td class="n">840 time points</td><td>35 dose and day means</td><td></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="foot">Independent reanalysis of public data. The experimental work and clinical observations belong to the original authors.</p>
+  </section>
 </main>
 <script>
   const search = document.getElementById('study-search');
-  const cards = [...document.querySelectorAll('#study-grid .panel')];
+  const rows = [...document.querySelectorAll('#study-grid tr')];
   search.addEventListener('input', () => {
     const query = search.value.trim().toLocaleLowerCase();
     let shown = 0;
-    cards.forEach(card => { card.hidden = !card.textContent.toLocaleLowerCase().includes(query); if (!card.hidden) shown++; });
-    document.getElementById('study-count').textContent = `${shown} of ${cards.length} studies`;
+    rows.forEach(row => { row.hidden = !row.textContent.toLocaleLowerCase().includes(query); if (!row.hidden) shown++; });
+    document.getElementById('study-count').textContent = shown === rows.length ? `${rows.length} studies` : `${shown} of ${rows.length} studies`;
   });
+  /* the whole row opens its study; links inside the row keep their own target */
+  rows.forEach(row => row.addEventListener('click', e => { if (!e.target.closest('a')) location.href = row.dataset.href; }));
 </script>
 </body>
 </html>

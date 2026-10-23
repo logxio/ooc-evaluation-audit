@@ -1,9 +1,52 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>How many more patients to validate?</title><link rel="icon" href="data:,"><link rel="stylesheet" href="style.css"><script defer src="stats.js"></script><script defer src="sample.js"></script></head><body>
-<header><h1>How many more patients to validate?</h1><nav><a href="index.html">Workbench</a><a href="audits/index.html">Published studies</a><a href="trial.html">Timed study</a></nav></header>
-<main class="bench">
-<div class="steps">
-<section class="sec"><h2><b>1</b>Pilot</h2><div class="body"><label aria-description="Patients whose calls were reported after the rule was frozen. Retests stay out of this count.">Reported calls<input type="number" id="pilot-n" min="0" max="100000" value="17"></label><label>Wrong calls<input type="number" id="pilot-e" min="0" max="10000" value="2"></label><label aria-description="Largest share of wrong calls you accept among reported patients">Target error (%)<input type="number" id="pilot-alpha" min="0.01" max="99.99" step="1" value="10"></label><button id="sample-run" class="go">Calculate</button></div></section>
-<div id="sample-error" role="alert" hidden></div>
-</div>
-<section class="sec obj" id="sample-results" hidden><h2><b>2</b>Plan</h2><p id="sample-answer" aria-description="A minimum at 95% one-sided confidence, assuming zero further wrong calls. Fix the validation size in advance; stopping early changes the coverage. Use independent patients and a rule frozen before their outcomes."></p><div id="sample-metrics" class="metrics"></div><p id="sample-assumption"></p><button id="sample-export" class="quiet">Download calculation</button></section>
-</main></body></html>
+<!doctype html>
+<html lang="en" data-style="figure">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>How many more patients to validate?</title>
+<meta name="description" content="Enter your pilot calls and target error; get the number of further patients a 95% one-sided binomial bound needs. Runs in your browser.">
+<link rel="icon" href="data:,">
+<link rel="preload" href="vendor/fonts/newsreader-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="preload" href="vendor/fonts/source-sans-3-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
+<link rel="stylesheet" href="style.css?v=1023d1">
+<script defer src="tip.js?v=1023d1"></script><script defer src="stats.js"></script><script defer src="sample.js?v=1023d1"></script>
+</head>
+<body>
+<header class="bar">
+  <a class="brand" href="index.html"><span class="mark">Chip Forecast</span><span class="team" title="Team Three-Pointer · Yan Su &amp; Ziyang Liu">Team Three-Pointer</span></a>
+  <div class="kpis">
+    <span class="kpi" aria-description="Clopper-Pearson upper bound on the wrong-call rate at 95% one-sided confidence"><b>95%</b> <span>one-sided binomial bound</span></span>
+    <span class="kpi"><b id="kpi-alpha">10%</b> <span>target error</span></span>
+    <span class="kpi"><b id="kpi-total">61</b> <span>reported patients in total</span></span>
+  </div>
+  <nav><a href="index.html">Workbench</a><a href="sample.html" aria-current="page">Sample size</a><a href="audits/index.html">Published studies</a><a href="https://github.com/logxio/ooc-evaluation-audit">Source</a><a class="cta" href="index.html#tab=yours">Paste your table</a></nav>
+</header>
+
+<main class="page bench">
+  <div class="side">
+    <section class="card grow">
+      <div class="head"><h1 class="t3">How many more patients to validate?</h1></div>
+      <div class="params">
+        <label class="param" aria-description="Patients whose calls were reported after the rule was frozen. Retests stay out of this count."><span>Reported calls</span><input class="input" type="number" id="pilot-n" min="0" max="100000" value="17"></label>
+        <label class="param"><span>Wrong calls</span><input class="input" type="number" id="pilot-e" min="0" max="10000" value="2"></label>
+        <label class="param" aria-description="Largest share of wrong calls you accept among reported patients"><span>Target error, %</span><input class="input" type="number" id="pilot-alpha" min="0.01" max="99.99" step="1" value="10"></label>
+      </div>
+      <div class="params">
+        <div class="param" aria-description="Exact Clopper-Pearson bound on the wrong-call rate, one-sided at 95% confidence"><span>Bound</span><b>95% one-sided</b></div>
+        <div class="param" aria-description="Keeps the wrong calls already seen and counts only correct new calls. The total is a planning minimum, not a power calculation."><span>Further wrong calls</span><b>0</b></div>
+        <div class="param" aria-description="Fix the validation size in advance; stopping early changes the coverage."><span>Validation size</span><b>Fixed in advance</b></div>
+        <div class="param" aria-description="Use independent patients and a rule frozen before their outcomes."><span>Patients</span><b>Independent, rule frozen</b></div>
+      </div>
+      <p id="sample-error" class="alert" role="alert" hidden></p>
+    </section>
+  </div>
+  <div class="main">
+    <section class="card grow" id="sample-results">
+      <div class="head"><h2 class="t3" id="sample-answer" aria-description="A minimum at 95% one-sided confidence, assuming zero further wrong calls. Fix the validation size in advance; stopping early changes the coverage. Use independent patients and a rule frozen before their outcomes."></h2><div class="tools"><button class="pill dl" type="button" id="sample-export">Download calculation</button></div></div>
+      <div class="stats" id="sample-metrics"></div>
+      <div id="plan-chart"></div>
+    </section>
+  </div>
+</main>
+</body>
+</html>

@@ -25,7 +25,7 @@
     document.body.classList.toggle('manual',manual());
     $('patient-table').querySelector('tbody').innerHTML=rows.map((r,i)=>{
       const a=predictions[i];const bad=revealed&&actions[i]!=='retest'&&Number(actions[i])!==truth[r.patient];
-      return `<tr><td>${esc(r.patient)}</td><td>${r.readout1}</td><td>${r.readout2}</td><td class="prediction-cell">${predicted?label(E.action(a)):'—'}</td><td><select aria-label="Action for ${esc(r.patient)}" data-row="${i}" ${locked?'disabled':''}><option value="">Choose action</option>${['1','0','retest'].map(v=>`<option value="${v}" ${actions[i]===v?'selected':''}>${label(v)}</option>`).join('')}</select></td><td class="${bad?'error-cell':''}">${revealed?(truth[r.patient]?'Responder':'Non-responder'):'Hidden'}</td></tr>`;
+      return `<tr><td>${esc(r.patient)}</td><td>${r.readout1}</td><td>${r.readout2}</td><td class="prediction-cell">${predicted?label(E.action(a)):'·'}</td><td><select aria-label="Action for ${esc(r.patient)}" data-row="${i}" ${locked?'disabled':''}><option value="">Choose action</option>${['1','0','retest'].map(v=>`<option value="${v}" ${actions[i]===v?'selected':''}>${label(v)}</option>`).join('')}</select></td><td class="${bad?'error-cell':''}">${revealed?(truth[r.patient]?'Responder':'Non-responder'):'Hidden'}</td></tr>`;
     }).join('');
     $('patient-table').querySelectorAll('select').forEach(s=>s.addEventListener('change',()=>{const i=Number(s.dataset.row);event('action_change',{row:i+1,from:actions[i],to:s.value});actions[i]=s.value;renderMetrics();}));
     const trial=!!study;
@@ -33,7 +33,7 @@
     $('cost').disabled=trial||!!locked;$('outcome-upload').hidden=trial||!!locked;
     $('predict').hidden=manual();$('predict').disabled=!!locked;
     $('reveal').disabled=!!locked;$('download-outcomes').hidden=!revealed;
-    $('mode-help').textContent=manual()?'Manual task: apply the printed frozen rule with your usual worksheet. Choose an action for every patient.':'Run the frozen rule, review each recommendation, and keep or change the patient actions.';
+    $('mode-help').setAttribute('aria-description',manual()?'Manual task: apply the printed frozen rule with your usual worksheet. Choose an action for every patient.':'Run the frozen rule, review each recommendation, and keep or change the patient actions.');
     $('fill-answers').hidden=manual();
     $('rule').open=manual();
     renderMetrics();
@@ -47,12 +47,12 @@
       const m=chosen===n?E.metrics(rows,actions,revealed?truth:null,cost()):null;
       cards=[['Release / retest',`${released} / ${retests}`,`${chosen} of ${n} actions selected`],['Wrong / all',revealed&&m?`${m.wrong_released}/${n} · ${pct(m.overall_wrong_release)}`:'Awaiting outcomes','Denominator: every patient'],['Wrong / released',revealed&&m?`${m.wrong_released}/${m.released} · ${pct(m.released_error_rate)}`:'Awaiting outcomes','Denominator: released patients'],['Cost / patient',revealed&&m?m.loss.toFixed(4):'Awaiting outcomes',`${(cost()*retests).toFixed(2)} retest-cost units${revealed&&m?`; total ${m.total_cost.toFixed(2)}`:''}`]];
     }
-    $('metrics').innerHTML=cards.map(c=>`<div class="metric"><span>${c[0]}</span><strong>${c[1]}</strong><small>${c[2]}</small></div>`).join('');
+    $('metrics').innerHTML=cards.map(c=>`<div class="metric" aria-description="${esc(c[2])}"><strong${/^\d/.test(c[1])?'':' class="text"'}>${c[1]}</strong><span>${c[0]}</span></div>`).join('');
     $('result-status').textContent=revealed?'Actions locked · outcomes revealed':'Outcomes are hidden';
-    $('baseline-intro').textContent=`Readout 2 is the frozen strongest active baseline on calibration (${P.baseline.calibration_errors.readout2}/${P.baseline.calibration_n} errors). All five baselines use the same input and cost. The lowest observed cost after reveal is descriptive.`;
+    $('baseline-intro').setAttribute('aria-description',`Readout 2 is the frozen strongest active baseline on calibration (${P.baseline.calibration_errors.readout2}/${P.baseline.calibration_n} errors). All five baselines use the same input and cost. The lowest observed cost after reveal is descriptive.`);
     let bases=Object.keys(E.names).map(key=>({key,name:E.names[key]}));
     if(revealed&&!manual())bases=E.compare(rows,predictions,truth,cost());
-    $('baseline-table').querySelector('tbody').innerHTML=bases.map(b=>`<tr class="${revealed&&!manual()&&b.loss===bases[0].loss?'baseline-best':''}"><td>${esc(b.name)}</td><td>${revealed&&!manual()?`${b.released} / ${b.retests}`:'—'}</td><td>${revealed&&!manual()?`${b.wrong_released}/${b.patients} · ${pct(b.overall_wrong_release)}`:'—'}</td><td>${revealed&&!manual()?`${b.wrong_released}/${b.released} · ${pct(b.released_error_rate)}`:'—'}</td><td>${revealed&&!manual()?b.loss.toFixed(4):'—'}</td></tr>`).join('');
+    $('baseline-table').querySelector('tbody').innerHTML=bases.map(b=>`<tr class="${revealed&&!manual()&&b.loss===bases[0].loss?'baseline-best':''}"><td>${esc(b.name)}</td><td>${revealed&&!manual()?`${b.released} / ${b.retests}`:'·'}</td><td>${revealed&&!manual()?`${b.wrong_released}/${b.patients} · ${pct(b.overall_wrong_release)}`:'·'}</td><td>${revealed&&!manual()?`${b.wrong_released}/${b.released} · ${pct(b.released_error_rate)}`:'·'}</td><td>${revealed&&!manual()?b.loss.toFixed(4):'·'}</td></tr>`).join('');
     if(revealed&&!manual()){
       const m=E.metrics(rows,actions,truth,cost()); const best=bases[0];
       const relation=m.loss>best.loss+1e-10?'A baseline wins':m.loss<best.loss-1e-10?'Your actions have lower cost':'Your actions tie the best baseline';
