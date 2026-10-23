@@ -12,7 +12,7 @@
   const strokeOf = (r, S) => (wrong(r, S) ? css('wrong') : r.reference ? css('compare') : r.call === null ? css('retest') : css('report'));
   Charts.patientAction = action;
 
-  /* ---------------- 8a. patient decision map ----------------
+  /* 8a. patient decision map
      combined mode: combined-regimen readout against irradiation, one frozen cutoff;
      two-readout mode: readout 1 against readout 2, both frozen cutoffs, disagreement goes to retest */
   Charts.patients = function (el, opt) {
@@ -22,7 +22,8 @@
     const draw = Charts.mount(el, (svg, W, S, patch) => {
       const dur = Charts.dur(patch), rows = S.patients, H1 = opt.height || 260, H = M.t + H1 + M.b, iw = W - M.l - M.r;
       svg.attr('viewBox', `0 0 ${W} ${H}`).attr('height', H);
-      const two = rows.length && rows[0].mode === 'two', cut = two ? (S.patientSource === 'final1009' ? S.patientCutoffs : cert()) : [P.cutoff];
+      const two = rows.length && rows[0].mode === 'two', assayOnly = !!(S.patientCohort && S.patientCohort.assayOnly);
+      const cut = two ? (S.patientSource === 'final1009' ? S.patientCutoffs : cert()) : [P.cutoff];
       const xKey = two ? 'r1' : 'combined';
       const yKey = two ? 'r2' : rows.some(r => r.irr > 0) ? 'irr' : rows.some(r => r.fu > 0) ? 'fu' : null;
       const pos = v => Math.max(0.004, v);
@@ -33,7 +34,7 @@
       const yc = two ? cut[1] : null;
       const y = yKey ? d3.scaleLog().domain([Math.min(d3.min(ys) || 1, yc || Infinity) / 1.4, Math.max(d3.max(ys) || 1, yc || 0) * 1.4]).range([H1, 0]) : d3.scaleLinear().domain([0, shown.length + 1]).range([H1, 0]);
       const g = layer(svg, 'g').attr('transform', `translate(${M.l},${M.t})`);
-      layer(g, 'side').selectAll('rect').data([0]).join('rect').attr('fill', css('band')).attr('opacity', 0.45).attr('x', 0)
+      layer(g, 'side').selectAll('rect').data(assayOnly ? [] : [0]).join('rect').attr('fill', css('band')).attr('opacity', 0.45).attr('x', 0)
         .attr('y', two ? y(yc) : 0).attr('height', two ? H1 - y(yc) : H1).attr('width', x(cut[0]));
       layer(g, 'xax').attr('transform', `translate(0,${H1})`).attr('class', 'xax axis')
         .call(d3.axisBottom(x).ticks(5, '~g').tickSize(4).tickPadding(6)).call(a => a.select('.domain').attr('stroke', css('axis')));
@@ -41,9 +42,9 @@
       const labels = S.patientSource === 'final1009' ? S.patientAxisLabels : ['readout 1', 'readout 2'];
       layer(g, 'xt').selectAll('text').data([two ? labels[0] : 'organoid size, day 24 / day 0, combined regimen']).join('text').attr('class', 'axis-title').attr('x', iw).attr('y', H1 + 34).attr('text-anchor', 'end').text(t => t);
       layer(g, 'yt').selectAll('text').data([two ? labels[1] : yKey === 'irr' ? 'irradiation alone' : yKey === 'fu' ? '5-FU alone' : 'patients']).join('text').attr('class', 'axis-title').attr('x', -M.l).attr('y', -12).text(t => t);
-      layer(g, 'cut').selectAll('line').data([cut[0]]).join('line').attr('class', 'cutoff').attr('y1', 0).attr('y2', H1).attr('x1', v => x(v)).attr('x2', v => x(v));
-      layer(g, 'cuty').selectAll('line').data(two ? [yc] : []).join('line').attr('class', 'cutoff').attr('x1', 0).attr('x2', iw).attr('y1', v => y(v)).attr('y2', v => y(v));
-      const sides = two ? [['report sensitive', 8, H1 - 8, 'start'], ['report resistant', iw - 8, 14, 'end'], ['retest', 8, 14, 'start'], ['retest', iw - 8, H1 - 8, 'end']]
+      layer(g, 'cut').selectAll('line').data(assayOnly ? [] : [cut[0]]).join('line').attr('class', 'cutoff').attr('y1', 0).attr('y2', H1).attr('x1', v => x(v)).attr('x2', v => x(v));
+      layer(g, 'cuty').selectAll('line').data(two && !assayOnly ? [yc] : []).join('line').attr('class', 'cutoff').attr('x1', 0).attr('x2', iw).attr('y1', v => y(v)).attr('y2', v => y(v));
+      const sides = assayOnly ? [] : two ? [['report sensitive', 8, H1 - 8, 'start'], ['report resistant', iw - 8, 14, 'end'], ['retest', 8, 14, 'start'], ['retest', iw - 8, H1 - 8, 'end']]
         : [[`sensitive ≤ ${P.cutoff}`, x(P.cutoff) - 6, 14, 'end'], ['resistant', x(P.cutoff) + 6, 14, 'start']];
       layer(g, 'sides').selectAll('text').data(sides).join('text').attr('class', 'label').attr('x', d => d[1]).attr('y', d => d[2]).attr('text-anchor', d => d[3]).text(d => d[0]);
       const off = rows.length - shown.length;
@@ -77,7 +78,7 @@
     C.tip(ev, `${r.id} · ${r.call === null ? action(r) : 'report ' + action(r)}`, rows);
   };
 
-  /* ---------------- 8b. the same patients as wells, linked by selection ---------------- */
+  /* 8b. the same patients as wells, linked by selection */
   Charts.patientPlate = function (el, opt) {
     opt = opt || {};
     const draw = Charts.mount(el, (svg, W, S, patch) => {
@@ -107,6 +108,10 @@
     C.on((S, p) => {
       if (p && Object.keys(p).length && !('patients' in p || 'reveal' in p)) return;
       const s = C.patientStats(S.patients), rows = S.patients;
+      if (S.patientCohort && S.patientCohort.assayOnly) {
+        el.textContent = `${rows.length} distinct patient assay pairs. Values are AUC (%) from the published drug screen. Clinical follow-up is a separate pool of 13; 7 meet the frozen audit definition, with no individual outcome joined to this view.`;
+        return;
+      }
       const sens = rows.filter(r => r.call === 1).length, res = rows.filter(r => r.call === 0).length;
       const ref = rows.filter(r => r.reference).length, retest = s.retest - ref;
       const unit = S.patientSource === 'final1009' && S.patientCohort ? S.patientCohort.evaluationUnit.replace('assay_patient', 'patient') : 'patient';
@@ -125,7 +130,7 @@
     });
   };
 
-  /* ---------------- 12. agent replay: one external paper, call by call ---------------- */
+  /* 12. agent replay: one external paper, call by call */
   const sentence = (text, needles) => {
     const parts = text.split(/(?<=[.!?])\s+(?=[A-Z(])/);
     return parts.find(s => needles.some(n => s.includes(n))) || parts[0];
@@ -227,7 +232,7 @@
     return { go: i => { at = i; render(); } };
   };
 
-  /* ---------------- 11. what the model did, one band ---------------- */
+  /* 11. what the model did, one band */
   Charts.band = function (el) {
     const m = O.model, iv = O.intervals;
     const items = [
@@ -241,7 +246,7 @@
     items.forEach(([v, k]) => { const s = h('div', 'stat'); s.append(h('div', 'v', v), h('div', 'k', k)); el.appendChild(s); });
   };
 
-  /* ---------------- paste input: plate planner and patient table ---------------- */
+  /* paste input: plate planner and patient table */
   Charts.input = function (el, opt) {
     opt = opt || {};
     const modes = [['series', 'Concentration series'], ['patients', 'Patient table']];
@@ -298,7 +303,7 @@
     return { setMode, run };
   };
 
-  /* ---------------- pickers ---------------- */
+  /* pickers */
   Charts.picker = function (el, opt) {
     opt = opt || {};
     const wrap = h('div', 'picker'), input = h('input', 'field'), list = h('ul', 'picker-list');

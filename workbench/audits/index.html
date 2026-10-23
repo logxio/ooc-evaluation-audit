@@ -1,1 +1,50 @@
-<!doctype html><html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Published studies</title><link rel="stylesheet" href="../style.css"></head><body><header><a class="wordmark" href="../index.html">Patient readout workbench</a><nav><a href="index.html">Published studies</a><a href="../sample.html">Sample size</a><a href="../trial.html">Timed study</a></nav></header><main><h1>A familiar paper. A traceable denominator.</h1><p>Eight public-study reanalyses, with the original authors’ evidence kept separate from each new calculation.</p><section class="panel"><h2><a href="dai.html">Dai colorectal chip · 2026</a></h2><p>Patient-held-out readout concordance: 21/22 and 19/22; agreement releases 20/22, with 1 wrong releases and 2 retests.</p></section><section class="panel"><h2><a href="rectal.html">Rectal organoids · 2025</a></h2><p>Patient-held-out readout concordance: 91/127 and 92/127; agreement releases 84/127, with 14 wrong releases and 43 retests.</p></section><section class="panel"><h2><a href="crlm.html">Colorectal liver-metastasis organoids · 2022</a></h2><p>Patient-held-out readout concordance: 17/23 and 13/23; agreement releases 11/23, with 2 wrong releases and 12 retests.</p></section><section class="panel"><h2><a href="tan.html">Tan colorectal organoids · 2023</a></h2><p>Patient-held-out readout concordance: 12/18 and 12/18; agreement releases 6/18, with 0 wrong releases and 12 retests.</p></section><section class="panel"><h2><a href="schuster.html">Schuster perfused organoids · 2020</a></h2><p>Eight contrasts change sign between 24 and 72 hours. Held-out-patient template MAE .407105 versus persistence .152629.</p></section><section class="panel"><h2><a href="steinberg.html">Steinberg spheroid readouts · 2023</a></h2><p>Area and viability disagree in sign in 14/49 pairs. Area alone misses 12/40 pairs with reduced viability.</p></section><section class="panel"><h2><a href="hu.html">Hu lung organoids · 2021</a></h2><p>The authors report agreement in the 10 linked lines. Eight linked lines have post-collection drug information; four have exact post-regimen text matches. Eleven lines remain outside an evaluable match.</p></section><section class="panel"><h2><a href="petreus.html">Petreus chip-to-mouse schedules · 2021</a></h2><p>The 24-hour-gap schedule leads the two comparators among observed day-35 animals; the advantage depends on the missing-outcome assumptions.</p></section></main></body></html>
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>Published studies | Patient readout workbench</title>
+  <link rel="stylesheet" href="../style.css">
+  <style>
+    .study-search { width: min(100%, 32rem); padding: 10px; border: 1px solid #b9c3cd; border-radius: 4px; margin: 12px 0 20px; }
+    .study-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(270px, 1fr)); gap: 14px; }
+    .study-grid .panel { margin: 0; }
+    .study-grid h2 { margin-top: 0; }
+    .study-grid p { margin-bottom: 0; }
+  </style>
+</head>
+<body>
+<header><a class="wordmark" href="../index.html">Patient readout workbench</a><nav><a href="index.html">Published studies</a><a href="../sample.html">Sample size</a><a href="../trial.html">Timed study</a></nav></header>
+<main>
+  <h1>Published studies</h1>
+  <p>13 public studies, including 12 in Cell or Nature portfolio journals. Open each study for its measurement unit, denominator, source, and downloadable records.</p>
+  <input class="study-search" id="study-search" type="search" aria-label="Filter published studies" placeholder="Filter by author, tissue, or journal">
+  <div class="study-grid" id="study-grid">
+    <section class="panel"><h2><a href="dai.html">Dai colorectal chip</a></h2><p>Cell Reports Medicine, 2026. 22 patients with three chip repeats per marker.</p></section>
+    <section class="panel"><h2><a href="rectal.html">Xu rectal organoids</a></h2><p>Cell Reports Medicine, 2025. 127 mapped patient drug responses.</p></section>
+    <section class="panel"><h2><a href="crlm.html">Mo colorectal liver metastasis</a></h2><p>Advanced Science, 2022. 23 evaluable organoids from 25 original cases.</p></section>
+    <section class="panel"><h2><a href="tan.html">Tan colorectal organoids</a></h2><p>Cell Reports Medicine, 2023. 101 patient assay pool, 22 treatment events from 18 patients in the paired analysis.</p></section>
+    <section class="panel"><h2><a href="schuster.html">Schuster perfused organoids</a></h2><p>Nature Communications, 2020. 48 time contrasts from three patients.</p></section>
+    <section class="panel"><h2><a href="steinberg.html">Steinberg spheroid readouts</a></h2><p>Communications Biology, 2023. 49 complete patient and treatment pairs in the workbook.</p></section>
+    <section class="panel"><h2><a href="hu.html">Hu lung organoids</a></h2><p>Nature Communications, 2021. 21 tested lines, 10 linked to clinical comparisons.</p></section>
+    <section class="panel"><h2><a href="petreus.html">Petreus chip to mouse schedules</a></h2><p>Communications Biology, 2021. Three schedules in one cell line with mouse attrition shown.</p></section>
+    <section class="panel"><h2><a href="ren.html">Ren biliary organoids</a></h2><p>Cell Reports Medicine, 2023. 48 patients with gemcitabine and cisplatin AUC.</p></section>
+    <section class="panel"><h2><a href="wang-lung.html">Wang lung organoids</a></h2><p>Cell Reports Medicine, 2023. 54 IC50 entries from 36 patient IDs.</p></section>
+    <section class="panel"><h2><a href="zhai.html">Zhai digital microfluidics</a></h2><p>Nature Communications, 2024. Five patient samples, four drugs and six doses.</p></section>
+    <section class="panel"><h2><a href="zhao.html">Zhao gastric organoids</a></h2><p>Cell Reports Medicine, 2024. 41 screened patients and 12 followed clinically.</p></section>
+    <section class="panel"><h2><a href="gdop.html">Wang GDOP perfusion chip</a></h2><p>Communications Biology, 2026. 840 repeated time points summarized by dose and day.</p></section>
+  </div>
+  <p id="study-count" role="status">13 studies</p>
+</main>
+<script>
+  const search = document.getElementById('study-search');
+  const cards = [...document.querySelectorAll('#study-grid .panel')];
+  search.addEventListener('input', () => {
+    const query = search.value.trim().toLocaleLowerCase();
+    let shown = 0;
+    cards.forEach(card => { card.hidden = !card.textContent.toLocaleLowerCase().includes(query); if (!card.hidden) shown++; });
+    document.getElementById('study-count').textContent = `${shown} of ${cards.length} studies`;
+  });
+</script>
+</body>
+</html>

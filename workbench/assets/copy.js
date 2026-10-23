@@ -14,7 +14,7 @@
   Copy.bar = [
     [Copy.heroNumber, `fewer exposure wells (${C.int(cl.wells_used)} / ${C.int(cl.wells_full)})`],
     [`${bt.win}W ${bt.tie}T ${bt.loss}L`, `vs ${F.baselines.opponents.length} published models`],
-    [String(O.totalPatients), 'clinical organoid assays']
+    [String(O.totalPatients), 'published patient assays']
   ];
   /* replay of the 965 designs: the closed loop against three measured concentrations alone, every share with its denominator */
   Copy.replay = [
@@ -40,7 +40,7 @@
   Copy.tradeClaim = c => `At 5% wrong calls the forecast leaves ${C.pct(c.a5.saved)} of wells unrun, three measured alone ${C.pct(c.m5.saved)}`;
   Copy.tradeNote = o => `Retrospective best cut at this retest cost: report ${o.k} of ${C.designsAll.length} designs, leave ${C.pct(o.saved)} of wells unrun, ${C.fix(o.wrong * 100, 1)} wrong calls per 100 designs. Cuts along the curves are read from the replay outcomes; the open circles are rules fitted on other folds.`;
 
-  const pc = (x, d) => (Number.isFinite(x) ? C.pct(x, x === 1 ? 0 : d) : '—');
+  const pc = (x, d) => (Number.isFinite(x) ? C.pct(x, x === 1 ? 0 : d) : 'n/a');
   /* two rules, named where they act: the combined-regimen cutoff calls the published cohort, the two-readout rule calls pasted readout1/readout2 tables */
   Copy.patientRule = rows => (rows.length && rows[0].mode === 'two' ? 'the two-readout rule' : `the combined-regimen cutoff ${O.patients.cutoff}`);
   Copy.patientClaim = S => {
@@ -49,6 +49,7 @@
     const reported = s.n - s.retest;
     if (S.patientSource === 'final1009' && S.patientCohort) {
       const name = window.OOCFinal1009.SHORT_LABELS[S.patientCohort.id], ref = S.patients.filter(r => r.reference).length, retest = s.retest - ref;
+      if (S.patientCohort.assayOnly) return `${name}: ${S.patients.length} paired gemcitabine and cisplatin AUC records, no clinical outcomes joined`;
       if (ref === s.n) return `${name}: frozen assays that set Tan’s reference medians`;
       return `${name}: ` + (S.reveal && s.known ? `${s.correct} of ${s.known} reported calls right, ${retest} to retest` : `${reported} reported, ${retest} to retest, outcomes still closed`);
     }
@@ -123,8 +124,8 @@
   Copy.agentSource = () => `${O.agent.title} · ${O.agent.citation.split(';')[0]} · ${O.agent.license}`;
   /* Method details open from four keyboard accessible tabs. */
   Copy.methodBlocks = [
-    ['Data', 'Public EPA neural screens, liver chips, organoid cohorts',
-      'US EPA network formation assay as packaged by NeuroChip Twin (public-domain data, MIT code); EPA acute MEA and human DNT screens (public domain); perfused liver chips of Ewart 2022, Communications Medicine (CC BY 4.0) and Yuan 2025, Communications Biology (error statistics only; source under CC BY-NC-ND 4.0 at its DOI); rectal-organoid cohort, Cell Reports Medicine 2025 (CC BY 4.0); agent replay paper, Mol Cancer 2024 (CC BY).'],
+    ['Data', '13 published studies, 12 in Cell or Nature portfolio journals',
+      'Public EPA neural screens, liver chips and patient organoids. The Published studies library includes Ren biliary AUC, Wang lung IC50, Zhai microfluidic dose response, Zhao gastric AUC and GDOP perfusion time points. Each study page names its journal, DOI, license, observation unit and download. The Patients tab includes the 48-patient Ren assay view. Distinct patients across its eight cohort views total 306, while clinical scoring remains tied to its original evaluable subsets.'],
     ['Model', 'Boosted residuals on log-linear interpolation',
       'Gradient-boosted residuals on log-linear interpolation, one model per held-out fold, trained on every three-concentration layout of the training chemicals. A full retrain of every fold at one to four measured concentrations runs in 65 minutes in one Kaggle notebook session.'],
     ['Validation', 'Held-out folds, rules fitted on other folds',

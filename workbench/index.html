@@ -179,9 +179,9 @@
   <div class="kpis" id="hero">
     <span class="kpi"><b id="hero-num">56.8%</b> <span id="hero-label">fewer exposure wells (12,119 / 28,080)</span></span>
     <span class="kpi"><b>97W 1T 0L</b> <span>vs 32 published models</span></span>
-    <span class="kpi"><b>258</b> <span>clinical organoid assays</span></span>
+    <span class="kpi"><b>306</b> <span>published patient assays</span></span>
   </div>
-  <nav><a href="sample.html">Sample size</a><a href="audits/index.html">Published studies</a><a href="https://github.com/logxio/ooc-evaluation-audit">Source</a><button class="cta" type="button" id="paste-cta">Paste your table</button></nav>
+  <nav><a href="sample.html">Sample size</a><a href="audits/index.html">Published studies (13)</a><a href="https://github.com/logxio/ooc-evaluation-audit">Source</a><button class="cta" type="button" id="paste-cta">Paste your table</button></nav>
 </header>
 
 <main class="page atlas">
@@ -287,6 +287,7 @@
           <div class="tools"><button class="btn quiet" type="button" id="reveal"></button><label class="btn quiet">Add outcomes<input type="file" id="outcomes" accept=".csv,.tsv,.txt,text/csv"></label><button class="btn quiet" type="button" id="download">Download actions</button></div>
         </div>
         <div class="cohorts fit" id="cohort-bar" role="group" aria-label="Patient cohort"></div>
+        <p class="t1 note" id="ren-source-note" hidden>Ren: 48 distinct patients with paired gemcitabine and cisplatin AUC (%). The publication reports 54 screened patients and 13 with clinical follow-up; 7 meet the frozen audit definition. Individual outcomes are not joined here. <a href="audits/ren.html">Open the source table</a>.</p>
         <div class="stats" id="pt-stats" style="grid-template-columns: repeat(4, 1fr)"></div>
       </div>
       <div class="v6 fig-block"><div id="pt-map"></div></div>
@@ -304,7 +305,7 @@
 
 <footer class="page foot" id="method"></footer>
 
-<script src="runtime.js?v=1023v7" defer></script>
+<script src="runtime.js?v=1023cns1" defer></script>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
   const C = Core, O = C.O, K = Charts, $ = id => document.getElementById(id), h = K.h;
@@ -312,7 +313,7 @@ document.addEventListener('DOMContentLoaded', function () {
   kpis.forEach((el, i) => { el.children[0].textContent = Copy.bar[i][0]; el.children[1].textContent = Copy.bar[i][1]; });
   Copy.heroTip([$('hero-num'), $('hero-label'), kpis[1]]);
 
-  /* ---------- index: chemicals, patients, your data ---------- */
+  /* index: chemicals, patients, your data */
   /* typed: a pasted set of names keeps its order until a sort chip is pressed */
   const view = { tab: C.hash.get('tab') || 'chem', page: C.hash.get('page') || 'curve', q: '', sort: 'gain', typed: false, rows: [] };
   const tabLabel = { chem: () => ['Chemicals', O.chems.length], patient: () => ['Patients', C.state.patientSource === 'own' ? C.state.patients.length : O.totalPatients], yours: () => ['Your data'] };
@@ -409,7 +410,7 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   $('paste-cta').onclick = () => setTab('yours');
 
-  /* ---------- canvas ---------- */
+  /* canvas */
   const chemPages = [['curve', 'Curve'], ['plate', 'Plate'], ['evidence', 'Evidence'], ['model', 'Model']];
   function pages() {
     const nav = $('pages'); nav.textContent = '';
@@ -433,12 +434,12 @@ document.addEventListener('DOMContentLoaded', function () {
     } else if (view.tab === 'patient') {
       const r = C.state.patients.find(x => x.id === C.state.patient) || C.state.patients[0];
       const wrap = h('div', 'entity'); wrap.appendChild(h('h2', 'fit', r ? r.id : 'Patients'));
-      const facts = h('div', 'facts'), f = v => (v === null || v === undefined ? '—' : C.fix(v, 3));
+      const facts = h('div', 'facts'), f = v => (v === null || v === undefined ? 'n/a' : C.fix(v, 3));
       if (r) {
         (r.mode === 'two' ? [['Readout 1', f(r.cohort ? r.readout1 : r.r1)], ['Readout 2', f(r.cohort ? r.readout2 : r.r2)]] : [['Combined regimen', f(r.combined)], ['Irradiation', f(r.irr)]])
           .forEach(([k, v]) => facts.appendChild(fact(k, v)));
         facts.append(fact('Action', r.call === null ? K.patientAction(r) : 'report ' + K.patientAction(r)),
-          fact('Clinical', C.state.reveal ? (r.response === 1 ? 'responder' : r.response === 0 ? 'non-responder' : 'not given') : 'closed'));
+          fact('Clinical', r.reference ? 'not linked' : C.state.reveal ? (r.response === 1 ? 'responder' : r.response === 0 ? 'non-responder' : 'not given') : 'closed'));
       }
       wrap.appendChild(facts); el.appendChild(wrap);
     } else {
@@ -454,7 +455,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if ('patient' in p || 'reveal' in p || 'patients' in p) { if ('patient' in p && S.patient && view.tab !== 'patient') { goTab('patient'); view.page = 'patient'; pages(); } list(); entity(); }
   });
 
-  /* ---------- views ---------- */
+  /* views */
   K.keys($('curve-keys'), Copy.curveKeys);
   K.callReadout($('readout'));
   K.curve($('curve-chart'), { height: 300 });
@@ -498,6 +499,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
   Copy.bindPatients($('pt-claim'), $('pt-stats'));
   OOCFinal1009.renderCohortBar($('cohort-bar'));
+  C.on(S => { $('ren-source-note').hidden = !(S.patientCohort && S.patientCohort.id === 'ren-biliary-48'); });
   K.patients($('pt-map'), { height: 300 });
   K.patientPlate($('pt-plate'), { cell: 36 });
   K.patientSummary($('pt-note'));

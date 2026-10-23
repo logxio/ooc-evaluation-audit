@@ -65,6 +65,7 @@ const runtimeFiles = [
   'vendor/d3-lite.js',
   'data/ooc-boot.js',
   'data/ooc-final-boot.js',
+  'data/ren-cohort.js',
   'assets/mount-final-1009.js',
   'engine.js', 'stats.js', 'chain-engine.js', 'result.js',
   'assets/core.js', 'assets/charts-a.js', 'assets/charts-b.js',

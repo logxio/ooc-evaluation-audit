@@ -1,13 +1,17 @@
-/* Attach saved final-report data.
-   Provides cohort switching across the seven clinical organoid cohorts (258 distinct patients, 175 with clinical scores)
-   and the final 10/09 screening and 32-baseline metrics. */
+/* Attach saved final-report data and the Ren assay cohort.
+   The original seven cohorts contain 258 distinct patients and 175 with clinical scores.
+   Ren adds 48 patients with paired assay readouts and no joined clinical outcomes. */
 (function (root) {
   'use strict';
   const packet = root.OOC_FINAL_1009;
   if (!packet || packet.schema !== 'ooc.final.1009.v1') {
     throw new Error('Load data/ooc-final-1009.js before mount-final-1009.js.');
   }
-  const rawCohorts = packet.patients.cohorts, inventory = packet.patients.inventory;
+  const inventory = packet.patients.inventory;
+  const ren = root.REN_BILIARY_COHORT;
+  if (!ren || ren.rows.length !== 48) throw new Error('Load the Ren assay cohort before mounting patient views.');
+  const rawCohorts = [...packet.patients.cohorts, ren];
+  const distinctPatients = inventory.distinctPatientsIncludingAssayPool + ren.patients;
   /* the assay pool supplies reference medians; its rows carry no clinical call */
   const isReference = cohort => cohort.metrics && cohort.metrics.clinicalValidationDenominator === false;
 
@@ -42,7 +46,8 @@
   }
 
   const SHORT_LABELS = {
-    'all-258': `All cohorts (${inventory.distinctPatientsIncludingAssayPool})`,
+    'all-306': `All cohorts (${distinctPatients})`,
+    'ren-biliary-48': 'Ren biliary AUC (48)',
     'rectal-blind-85': 'Rectal blind (85)',
     'rectal-fixed-43': 'Rectal test (43)',
     'crlm-blind-23': 'Liver met blind (23)',
@@ -60,18 +65,19 @@
   }
 
   const allCohort = {
-    id: 'all-258',
-    label: 'All 7 cohorts',
+    id: 'all-306',
+    label: 'All 8 cohorts',
     mode: 'two',
     cutoffs: [1, 1],
     evaluationUnit: 'cohort row',
-    patients: inventory.distinctPatientsIncludingAssayPool,
+    patients: distinctPatients,
     rows: [],
     cases: []
   };
 
   const orderedIds = [
-    'all-258',
+    'all-306',
+    'ren-biliary-48',
     'rectal-blind-85',
     'rectal-fixed-43',
     'crlm-blind-23',
@@ -89,7 +95,7 @@
     if (!root.OOC) throw new Error('Load data/ooc-data.js before mounting final data.');
     root.OOC.final1009 = packet;
     root.OOC.patientCohorts = cohorts;
-    root.OOC.totalPatients = inventory.distinctPatientsIncludingAssayPool;
+    root.OOC.totalPatients = distinctPatients;
     root.OOC.totalScoredPatients = inventory.distinctClinicallyScoredPatients;
     return packet;
   }
@@ -121,7 +127,7 @@
       patientSource: original ? 'published' : 'final1009',
       patientCohort: original ? null : cohort,
       patientCutoffs: original ? null : [1, 1],
-      patientAxisLabels: original ? null : ['readout 1 / frozen cutoff', 'readout 2 / frozen cutoff']
+      patientAxisLabels: original ? null : cohort.assayOnly ? ['Gemcitabine AUC (%)', 'Cisplatin AUC (%)'] : ['readout 1 / frozen cutoff', 'readout 2 / frozen cutoff']
     });
     return cohort;
   }
