@@ -121,7 +121,7 @@
   };
   Copy.agentClaim = () => { const k = O.agent.cohort; return `Hand it a paper and it rebuilds the clinical headline: ${k.audited_passes} of ${k.eligible} studies`; };
   Copy.agentSource = () => `${O.agent.title} · ${O.agent.citation.split(';')[0]} · ${O.agent.license}`;
-  /* methods footnote: four equal cells on the 12-column grid, one label and one line each; the full text is on hover */
+  /* Method details open from four keyboard accessible tabs. */
   Copy.methodBlocks = [
     ['Data', 'Public EPA neural screens, liver chips, organoid cohorts',
       'US EPA network formation assay as packaged by NeuroChip Twin (public-domain data, MIT code); EPA acute MEA and human DNT screens (public domain); perfused liver chips of Ewart 2022, Communications Medicine (CC BY 4.0) and Yuan 2025, Communications Biology (error statistics only; source under CC BY-NC-ND 4.0 at its DOI); rectal-organoid cohort, Cell Reports Medicine 2025 (CC BY 4.0); agent replay paper, Mol Cancer 2024 (CC BY).'],
@@ -135,14 +135,44 @@
   Copy.methods = el => {
     el.textContent = '';
     el.classList.add('methods');
-    Copy.methodBlocks.forEach(([k, short, full]) => {
-      const d = K.h('div', 'cell'); d.tabIndex = 0;
-      d.append(K.h('h4', null, k), K.h('p', null, short));
-      const show = ev => C.tip(ev.clientX !== undefined ? ev : { clientX: d.getBoundingClientRect().left, clientY: d.getBoundingClientRect().top - 8 }, k, [full]);
-      d.addEventListener('pointermove', show); d.addEventListener('focus', show);
-      d.addEventListener('pointerleave', C.untip); d.addEventListener('blur', C.untip);
-      el.appendChild(d);
+    const row = K.h('div', 'method-tabs');
+    row.setAttribute('role', 'tablist');
+    row.setAttribute('aria-label', 'Methods and data');
+    const detail = K.h('div', 'method-detail');
+    detail.id = 'method-detail';
+    detail.setAttribute('role', 'tabpanel');
+    const tabs = [];
+    const select = index => {
+      const [name, , full] = Copy.methodBlocks[index];
+      tabs.forEach((tab, i) => {
+        tab.setAttribute('aria-selected', String(i === index));
+        tab.tabIndex = i === index ? 0 : -1;
+      });
+      detail.setAttribute('aria-labelledby', tabs[index].id);
+      detail.textContent = '';
+      detail.append(K.h('h4', null, name), K.h('p', null, full));
+    };
+    Copy.methodBlocks.forEach(([name, short], index) => {
+      const tab = K.h('button', 'cell');
+      tab.type = 'button';
+      tab.id = `method-tab-${index}`;
+      tab.setAttribute('role', 'tab');
+      tab.setAttribute('aria-controls', detail.id);
+      tab.append(K.h('h4', null, name), K.h('p', null, short));
+      tab.addEventListener('click', () => select(index));
+      tab.addEventListener('keydown', event => {
+        if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
+        event.preventDefault();
+        const target = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 :
+          (index + (event.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
+        select(target);
+        tabs[target].focus();
+      });
+      tabs.push(tab);
+      row.appendChild(tab);
     });
+    el.append(row, detail);
+    select(0);
   };
   /* hero: what 56.8% counts sits in the hover of the figure, one line per fact */
   Copy.heroRecord = [`Closed-loop replay of ${cl.designs} three-concentration designs, EPA’s network formation screen`, [

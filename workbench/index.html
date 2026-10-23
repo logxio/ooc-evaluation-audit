@@ -48,7 +48,7 @@
     document.fonts.ready.then(() => document.querySelectorAll('.fit').forEach(queue));
   })();
 </script>
-<link rel="stylesheet" href="assets/system.css?v=1023v3">
+<link rel="stylesheet" href="assets/system.css?v=1023v4">
 <style>
   /* command bar: brand, three readings, links; one 50 px line on every desktop width */
   .bar { display: flex; align-items: center; justify-content: space-between; gap: var(--s2); height: 50px; padding: 0 24px; background: #121820; color: #f0f4f8; white-space: nowrap; }
@@ -110,6 +110,7 @@
   .pages button { border: 0; background: transparent; padding: 0; cursor: pointer; color: var(--ink-3); font: 600 var(--f2)/var(--l2) var(--sans); transition: color var(--t) var(--ease); }
   .pages button[aria-selected="true"] { color: var(--ink); }
   .pages button[aria-selected="true"]::before { content: ""; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-right: var(--s1); vertical-align: 2px; }
+  #chemical-status:not([hidden]) { margin: 0 0 var(--s2); color: var(--ink-2); font-size: var(--f1); }
   .page-view:not(.on) { display: none; }
   .views { display: grid; align-items: start; grid-template-columns: repeat(9, minmax(0, 1fr)); gap: var(--s3) var(--s2); }
   .v9 { grid-column: span 9; } .v6 { grid-column: span 6; } .v5 { grid-column: span 5; } .v4 { grid-column: span 4; } .v3 { grid-column: span 3; }
@@ -127,7 +128,7 @@
   .links { display: flex; flex-wrap: wrap; gap: var(--s1) var(--s3); margin-top: var(--s2); }
   .foot { padding: var(--s3) 0; }
   /* entry: the command bar paints at once; three measured anchors draw the forecast and its 90% band while the screen data loads */
-  .entry { position: absolute; z-index: 2; top: var(--s3); left: 50%; transform: translateX(-50%); width: min(560px, 100%); display: grid; justify-items: center; gap: var(--s2); padding: var(--s3) var(--s3) 28px; background: var(--surface); border-radius: var(--radius); box-shadow: 0 0 0 1px var(--line), 0 12px 32px rgba(20, 30, 45, .06); transition: opacity 360ms var(--ease), visibility 0s linear 360ms; }
+  .entry { position: absolute; z-index: 2; top: var(--s3); left: 50%; transform: translateX(-50%); width: min(560px, 100%); display: grid; justify-items: center; gap: var(--s2); padding: var(--s3) var(--s3) 28px; background: var(--surface); border-radius: var(--radius); box-shadow: 0 0 0 1px var(--line), 0 12px 32px rgba(20, 30, 45, .06); transition: opacity 120ms var(--ease), visibility 0s linear 120ms; }
   .entry svg { width: 300px; max-width: 100%; height: auto; overflow: visible; }
   .entry .band { fill: #dce8f3; }
   .entry .line { fill: none; stroke: #1F5A8A; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 0; }
@@ -141,14 +142,13 @@
   html[data-entry="loading"] :is(.index, .sheet, .foot),
   html[data-entry="error"] :is(.index, .sheet, .foot) { visibility: hidden; }
   @media (prefers-reduced-motion: no-preference) {
-    html[data-entry="ready"] :is(.index, .sheet, .foot) { animation: enter-content 360ms var(--ease) both; }
-    html[data-entry="ready"] .atlas > .sheet { animation-delay: 60ms; }
+    html[data-entry="ready"] :is(.index, .sheet, .foot) { animation: enter-content 120ms var(--ease) both; }
     .entry .anchor { transform-box: fill-box; transform-origin: center; animation: anchor-in 260ms var(--ease) both; }
     .entry .anchor:nth-of-type(2) { animation-delay: 120ms; }
     .entry .anchor:nth-of-type(3) { animation-delay: 240ms; }
-    .entry .line { animation: draw-line 2400ms var(--ease) 360ms infinite both; }
-    .entry .band { animation: show-band 2400ms var(--ease) 360ms infinite both; }
-    .entry .hit { transform-box: fill-box; transform-origin: center; animation: show-hit 2400ms var(--ease) 360ms infinite both; }
+    .entry .line { animation: draw-line 600ms var(--ease) 120ms 1 both; }
+    .entry .band { animation: show-band 600ms var(--ease) 120ms 1 both; }
+    .entry .hit { transform-box: fill-box; transform-origin: center; animation: show-hit 600ms var(--ease) 120ms 1 both; }
     html[data-entry="error"] .entry * { animation-play-state: paused; }
     @keyframes enter-content { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
     @keyframes anchor-in { from { opacity: 0; transform: scale(.2); } to { opacity: 1; transform: none; } }
@@ -208,6 +208,7 @@
   <article class="sheet">
     <div id="entity"></div>
     <nav class="pages" id="pages" role="tablist"></nav>
+    <p id="chemical-status" role="status" hidden></p>
 
     <section class="page-view views" data-page="curve">
       <div class="v6 fig-block">
@@ -303,19 +304,19 @@
 
 <footer class="page foot" id="method"></footer>
 
-<script src="vendor/d3.v7.9.0.min.js?v=1023v3" defer></script>
-<script src="data/ooc-data.js?v=1023v3" defer></script>
-<script src="data/ooc-final-1009.js?v=1023v3" defer></script>
-<script src="assets/mount-final-1009.js?v=1023v3" defer></script>
-<script src="engine.js?v=1023v3" defer></script>
-<script src="stats.js?v=1023v3" defer></script>
-<script src="chain-engine.js?v=1023v3" defer></script>
-<script src="result.js?v=1023v3" defer></script>
-<script src="assets/core.js?v=1023v3" defer></script>
-<script src="assets/charts-a.js?v=1023v3" defer></script>
-<script src="assets/charts-b.js?v=1023v3" defer></script>
-<script src="assets/charts-c.js?v=1023v3" defer></script>
-<script src="assets/copy.js?v=1023v3" defer></script>
+<script src="vendor/d3.v7.9.0.min.js?v=1023v4" defer></script>
+<script src="data/ooc-boot.js?v=1023v4" defer></script>
+<script src="data/ooc-final-boot.js?v=1023v4" defer></script>
+<script src="assets/mount-final-1009.js?v=1023v4" defer></script>
+<script src="engine.js?v=1023v4" defer></script>
+<script src="stats.js?v=1023v4" defer></script>
+<script src="chain-engine.js?v=1023v4" defer></script>
+<script src="result.js?v=1023v4" defer></script>
+<script src="assets/core.js?v=1023v4" defer></script>
+<script src="assets/charts-a.js?v=1023v4" defer></script>
+<script src="assets/charts-b.js?v=1023v4" defer></script>
+<script src="assets/charts-c.js?v=1023v4" defer></script>
+<script src="assets/copy.js?v=1023v4" defer></script>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
   const C = Core, O = C.O, K = Charts, $ = id => document.getElementById(id), h = K.h;
@@ -535,16 +536,11 @@ document.addEventListener('DOMContentLoaded', function () {
   if (view.tab === 'yours') view.page = 'yours';
   list(); pages(); entity();
   fitLines();
-  document.fonts.ready.then(() => requestAnimationFrame(function enter() {
-    if (document.documentElement.dataset.entry === 'error') return;
-    const charts = [...document.querySelectorAll('.page-view.on svg.chart')];
-    if (charts.some(svg => Math.abs(svg.viewBox.baseVal.width - Math.max(240, svg.parentElement.clientWidth)) > 1)) {
-      requestAnimationFrame(enter);
-      return;
-    }
-    d3.timerFlush();
+  if (document.documentElement.dataset.entry !== 'error') {
     document.documentElement.dataset.entry = 'ready';
-  }));
+    performance.mark('workbench-ready');
+    setTimeout(() => C.hydrateRemaining(), 700);
+  }
 });
 </script>
 </body>

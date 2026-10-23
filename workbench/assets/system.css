@@ -203,12 +203,18 @@ table.mini th { color: var(--ink-3); font-weight: 600; white-space: nowrap; }
 .picker-list { position: absolute; z-index: 20; left: 0; right: 0; top: calc(100% + 4px); margin: 0; padding: 4px; list-style: none; background: var(--raised); border-radius: 6px; box-shadow: 0 6px 24px rgba(20, 18, 14, .12), 0 0 0 1px var(--line); }
 .picker-list li { padding: 4px var(--s1); border-radius: 4px; cursor: pointer; }
 .picker-list li.on, .picker-list li:hover { background: var(--sunk); }
-/* methods footnote: four equal cells with naturally wrapping text */
-.methods { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s2); }
-.methods .cell { min-width: 0; cursor: default; border-radius: 4px; }
+/* Four method tabs reveal the complete text below the row. */
+.methods { display: grid; gap: var(--s2); }
+.method-tabs { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: var(--s2); }
+.methods .cell { min-width: 0; cursor: pointer; border: 1px solid var(--line); border-radius: 4px; background: var(--surface); padding: var(--s2); text-align: left; }
+.methods .cell:hover, .methods .cell[aria-selected="true"] { border-color: var(--accent); background: var(--sunk); }
+.methods .cell[aria-selected="true"] h4 { color: var(--ink); }
+.method-detail { border-top: 1px solid var(--line); padding: var(--s2) 0; }
+.method-detail p { max-width: 90ch; }
 .methods h4 { margin: 0; font: 600 var(--f1)/var(--l1) var(--sans); color: var(--ink-2); }
 .methods p { margin: 0; font: 400 var(--f1)/var(--l1) var(--sans); color: var(--ink-3); overflow-wrap: anywhere; }
 .tip.line { max-width: none; white-space: nowrap; }
-@media (max-width: 960px) { .agent { grid-template-columns: 1fr; } .methods { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 960px) { .agent { grid-template-columns: 1fr; } .method-tabs { grid-template-columns: 1fr 1fr; } }
+@media (max-width: 600px) { .method-tabs { grid-template-columns: 1fr; } }
 
 @media (prefers-reduced-motion: reduce) { * { transition: none !important; } }

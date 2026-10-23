@@ -271,7 +271,7 @@
   const first = chemBy.get(O.examples[0].chemical);
   const state = { chem: first.i, design: 0, output: defaultOutput(first), full: false, truth: true, reveal: false, cost: 0.25, versus: 'loglinear_interp', patient: null, patients: publishedPatients(), patientSource: 'published', layout: null };
   const hash = new URLSearchParams(typeof location !== 'undefined' ? location.hash.slice(1) : '');
-  if (hash.has('chem') && chemBy.has(hash.get('chem'))) { const c = chemBy.get(hash.get('chem')); state.chem = c.i; state.output = defaultOutput(c); }
+  const linkedChemical = hash.has('chem') ? chemBy.get(hash.get('chem')) : null;
   if (hash.has('design')) state.design = Math.max(0, Math.min(4, Number(hash.get('design')) - 1));
   if (hash.has('output')) state.output = Number(hash.get('output'));
   ['reveal', 'full'].forEach(k => { if (hash.has(k)) state[k] = hash.get(k) === '1'; });
@@ -284,13 +284,74 @@
     document.querySelectorAll('[id]').forEach(el => { const r = el.getBoundingClientRect(); if (r.width && r.height) boxes[el.id] = [r.left + scrollX, r.top + scrollY, r.width, r.height].map(Math.round); });
     document.body.dataset.boxes = JSON.stringify(boxes);
   }, 300));
+  const shardLoads = new Map();
+  let chemicalRequest = 0;
+  function loadShard(index) {
+    if (shardLoads.has(index)) return shardLoads.get(index);
+    const promise = new Promise((resolve, reject) => {
+      const script = document.createElement('script');
+      script.src = `data/ooc-detail-${String(index).padStart(2, '0')}.js?v=1023v4`;
+      script.async = true;
+      script.onload = () => {
+        const rows = window.OOC_DETAIL_SHARDS && window.OOC_DETAIL_SHARDS[index];
+        if (!rows) { reject(new Error('Chemical details could not be read.')); return; }
+        rows.forEach(row => {
+          const chemical = O.chems[row.i];
+          row.d.forEach((detail, k) => Object.assign(chemical.d[k], detail));
+          chemical.w.y = row.y;
+        });
+        delete window.OOC_DETAIL_SHARDS[index];
+        script.remove();
+        resolve();
+      };
+      script.onerror = () => { script.remove(); reject(new Error('Chemical details could not load. Retry the chemical.')); };
+      document.head.appendChild(script);
+    }).catch(error => { shardLoads.delete(index); throw error; });
+    shardLoads.set(index, promise);
+    return promise;
+  }
   function set(patch) {
+    if ('chem' in patch && !O.chems[patch.chem].w.y) {
+      const request = ++chemicalRequest;
+      const status = document.getElementById('chemical-status');
+      if (status) { status.hidden = false; status.textContent = `Loading ${O.chems[patch.chem].name}…`; }
+      loadShard(patch.chem % 16).then(() => {
+        if (request !== chemicalRequest) return;
+        if (status) status.hidden = true;
+        set(patch);
+      }).catch(error => {
+        if (request === chemicalRequest && status) status.textContent = error.message;
+      });
+      return;
+    }
+    if ('chem' in patch) {
+      chemicalRequest++;
+      const status = document.getElementById('chemical-status');
+      if (status) status.hidden = true;
+    }
     if ('chem' in patch && !('output' in patch)) patch.output = defaultOutput(O.chems[patch.chem]);
     if ('chem' in patch && !('design' in patch)) patch.design = 0;
     Object.assign(state, patch);
     listeners.forEach(fn => fn(state, patch));
   }
   function on(fn) { listeners.add(fn); fn(state, {}); return () => listeners.delete(fn); }
+  function hydrateRemaining() {
+    let index = 0;
+    const next = () => {
+      if (index === 16) return;
+      const run = () => loadShard(index++).catch(() => {}).finally(next);
+      if ('requestIdleCallback' in window) requestIdleCallback(run, { timeout: 2000 });
+      else setTimeout(run, 50);
+    };
+    next();
+  }
+  if (linkedChemical && linkedChemical.i !== state.chem) {
+    document.addEventListener('DOMContentLoaded', () => {
+      const patch = { chem: linkedChemical.i, design: state.design };
+      if (hash.has('output')) patch.output = state.output;
+      set(patch);
+    }, { once: true });
+  }
 
   /* ---------- formatting ---------- */
   const pct = (x, d = 1) => (100 * x).toFixed(d) + '%';
@@ -329,6 +390,6 @@
     return { scoreGap: worst, risk05: [atRisk(f, 0.05).settled, atRisk(m, 0.05).settled], risk10: [atRisk(f, 0.10).settled, atRisk(m, 0.10).settled], registered: registered('forecast') };
   }
 
-  window.Core = { O, D, NF, ND, dec, chemBy, hash, wells, levelStats, design, track, defaultOutput, frontier, atRisk, registered, optimum, layouts, designsAll, wellsFull,
+  window.Core = { O, D, NF, ND, dec, chemBy, hash, wells, levelStats, design, track, defaultOutput, frontier, atRisk, registered, optimum, layouts, designsAll, wellsFull, hydrateRemaining,
     publishedPatients, callPatients, patientStats, parsePatients, parseSeries, mergeOutcomes, actionsCSV, chemQuery, chemActionsCSV, download, strong, state, set, on, pct, fix, int, uM, outName, tip, untip, selfTest };
 })();
