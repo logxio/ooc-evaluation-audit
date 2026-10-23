@@ -1,4 +1,4 @@
-/* Claims: every sentence with a number is built here from window.OOC, so the three layouts say the same thing. */
+/* Browser claims read the release packet; method panels also link the checked public files. */
 (function () {
   'use strict';
   const C = window.Core, O = C.O, K = window.Charts;
@@ -132,7 +132,74 @@
     ['Privacy', 'Runs in this browser; tables stay local',
       'Every number on this page is computed in this browser from the public release files, and pasted tables never leave your machine. Type: Newsreader, Source Sans 3, Source Code Pro (SIL OFL). Charts: D3 (ISC).']
   ];
-  Copy.methods = el => {
+  const methodLink = (label, href, local = false) => {
+    const a = K.h('a', null, label);
+    a.href = href;
+    if (!local) { a.target = '_blank'; a.rel = 'noopener'; }
+    if (local && label.startsWith('Download')) a.download = '';
+    return a;
+  };
+  const methodSection = (title, note) => {
+    const section = K.h('section', 'method-section');
+    section.append(K.h('h5', null, title), K.h('p', null, note));
+    return section;
+  };
+  const methodLinks = pairs => {
+    const row = K.h('div', 'method-links');
+    pairs.forEach(([label, path, local]) => row.appendChild(methodLink(label, local ? path : Copy.repo + path, local)));
+    return row;
+  };
+  const methodTable = (headers, rows) => {
+    const wrap = K.h('div', 'method-table-wrap'), table = K.h('table', 'method-table');
+    const head = K.h('thead'), headerRow = K.h('tr');
+    headers.forEach(label => headerRow.appendChild(K.h('th', null, label)));
+    head.appendChild(headerRow);
+    const body = K.h('tbody');
+    rows.forEach(cells => {
+      const tr = K.h('tr');
+      cells.forEach(cell => {
+        const td = K.h('td');
+        if (Array.isArray(cell)) td.appendChild(methodLink(cell[0], cell[1], !!cell[2]));
+        else td.textContent = cell;
+        tr.appendChild(td);
+      });
+      body.appendChild(tr);
+    });
+    table.append(head, body); wrap.appendChild(table);
+    return wrap;
+  };
+  const methodCode = (title, code) => {
+    const block = K.h('div', 'method-code'), top = K.h('div', 'method-code-head');
+    const button = K.h('button', 'method-copy', 'Copy'); button.type = 'button';
+    button.setAttribute('aria-label', `Copy ${title} commands`);
+    button.onclick = async () => {
+      try {
+        const fallback = () => {
+          const input = document.createElement('textarea'); input.value = code;
+          input.style.position = 'fixed'; input.style.opacity = '0';
+          document.body.appendChild(input); input.select();
+          const copied = document.execCommand('copy'); input.remove();
+          if (!copied) throw new Error('Copy unavailable');
+        };
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+          try { await navigator.clipboard.writeText(code); }
+          catch (_) { fallback(); }
+        } else fallback();
+        button.textContent = 'Copied';
+        setTimeout(() => { if (button.isConnected) button.textContent = 'Copy'; }, 1800);
+      } catch (_) { button.textContent = 'Select commands'; }
+    };
+    top.append(K.h('span', null, title), button);
+    const pre = K.h('pre'), printed = K.h('code', null, code);
+    pre.appendChild(printed); block.append(top, pre);
+    return block;
+  };
+  const methodAction = (label, callback) => {
+    const button = K.h('button', 'method-action', label);
+    button.type = 'button'; button.onclick = callback;
+    return button;
+  };
+  Copy.methods = (el, actions = {}) => {
     el.textContent = '';
     el.classList.add('methods');
     const row = K.h('div', 'method-tabs');
@@ -151,6 +218,62 @@
       detail.setAttribute('aria-labelledby', tabs[index].id);
       detail.textContent = '';
       detail.append(K.h('h4', null, name), K.h('p', null, full));
+      if (index === 0) {
+        const section = methodSection('Public inputs and study audits', 'Open the original analysis, a local input sample, or a checked result for each source. Source licenses differ by study.');
+        section.appendChild(methodTable(['Dataset or paper', 'What is available', 'Open'], [
+          ['EPA chronic rat MEA, 194 chemicals', 'Five chemical folds and 35 layouts', ['Result CSV', Copy.repo + 'chip_forecast_result.csv']],
+          ['EPA acute rat MEA', 'External screen, per chemical', ['Result CSV', Copy.repo + 'benchmarks/strong_baseline/external/acute/per_chemical.csv']],
+          ['Harrill human neural screen, 2,520 hidden wells', 'Locked forecast and reveal', ['Reconcile', Copy.repo + 'three_point_example/forecast/reconcile.md']],
+          ['Bircsak perfused liver chips', 'Scored predictions', ['Result CSV', Copy.repo + 'results/capacity/bircsak_run_v1/scored_predictions.csv']],
+          ['Ewart, Communications Medicine', 'Normalized liver chip inputs', ['Input CSV', Copy.repo + 'results/capacity/inputs/runs/chip-evidence-s1/expand/ewart/normalized.csv']],
+          ['Yuan, Communications Biology', 'Normalized liver chip inputs', ['Input CSV', Copy.repo + 'results/capacity/inputs/runs/chip-evidence-s1/expand/yuan_normalized.csv']],
+          ['Xu rectal organoids, Cell Reports Medicine', 'Clinical cohort audit', ['Audit', 'audits/rectal.html', true]],
+          ['Dai vascularized chip, Cell Reports Medicine', 'Patient holdout and readout audit', ['Audit', 'audits/dai.html', true]],
+          ['Tan colorectal organoids, Cell Reports Medicine', 'Patient action audit', ['Audit', 'audits/tan.html', true]],
+          ['Hu lung organoids, Nature Communications', 'Clinical linkage audit', ['Audit', 'audits/hu.html', true]],
+          ['Schuster perfused organoids, Nature Communications', 'Schedule horizon audit', ['Audit', 'audits/schuster.html', true]]
+        ]));
+        section.appendChild(methodLinks([['All study audits', 'audits/index.html', true], ['Download sample input CSV', 'examples/T1_input.csv', true]]));
+        detail.appendChild(section);
+      } else if (index === 1) {
+        const run = methodSection('Run the frozen prediction and reconcile after reveal', 'From the repository root, run the same CLI on an unfinished table, then on its completed counterpart. The forecast directory contains a SHA-256 lock for inputs, outputs, code, protocol and models.');
+        run.appendChild(methodCode('Three concentration forecast', 'python three_point.py my_plates.csv\npython three_point.py my_finished_plates.csv --reconcile three_point_my_plates'));
+        detail.appendChild(run);
+        const audit = methodSection('Recompute the browser and paper checks', 'The first command compares browser calculations with the Python CLI. The published model comparison runs separately. The image audit downloads a larger source archive and resumes by stage.');
+        audit.appendChild(methodCode('Verification and full audits', 'python workbench/verify.py --out workbench/verification\npython paper_final_baselines.py\npython run_full_audit.py'));
+        detail.appendChild(audit);
+        const cards = K.h('div', 'method-metrics');
+        [[String(O.model.params.min_samples_leaf), 'frozen minimum leaf size'], [String(C.layouts().length), 'three of seven layouts'], [`${bt.win}W ${bt.tie}T ${bt.loss}L`, `${F.baselines.opponents.length} published models, 98 paired comparisons`], ['about 1 min', 'each screen fold on free Kaggle CPU']].forEach(([value, label]) => {
+          const card = K.h('div', 'method-metric'); card.append(K.h('strong', null, value), K.h('span', null, label)); cards.appendChild(card);
+        });
+        detail.append(cards, methodAction('Open full Model & Agent Replay view ↑', () => actions.openView && actions.openView('model', 'ablation')),
+          methodLinks([['Forecast CLI', 'three_point.py'], ['Browser engine', 'workbench/engine.js'], ['32 model benchmark', 'paper_final_baselines.py'], ['Example SHA-256 lock', 'three_point_example/forecast/lock.json']]));
+      } else if (index === 2) {
+        const section = methodSection('Three checks before a claim leaves the screen', 'Each test chemical or patient is scored outside its own training data. These files let you inspect the heldout rows, frozen receipts and reported totals.');
+        section.appendChild(methodTable(['Control', 'Recorded rule', 'Inspect'], [
+          ['Chemical identity holdout', 'Five folds; test identities stay out of fitting and cutoff selection', ['Heldout script', Copy.repo + 'paper_final_heldout.py']],
+          ['Release risk control', 'Two other folds set the hit cutoff; two more set the release margin at α = 0.10', ['Verification script', Copy.repo + 'paper_final_verify.py']],
+          ['Reveal receipt', 'SHA-256 locks the input, predictions, models, protocol and code before outcomes are reconciled', ['Example lock', Copy.repo + 'three_point_example/forecast/lock.json']]
+        ]));
+        const result = K.h('div', 'method-metrics');
+        [[`${bt.win}W ${bt.tie}T ${bt.loss}L`, '98 paired comparisons across 32 models'], ['2,318 / 2,520', 'Harrill hidden wells inside 90% intervals'], [`${cl.reports} / ${cl.designs}`, 'closed loop designs reported']].forEach(([value, label]) => {
+          const card = K.h('div', 'method-metric'); card.append(K.h('strong', null, value), K.h('span', null, label)); result.appendChild(card);
+        });
+        section.appendChild(result);
+        section.appendChild(methodLinks([['Paper number check', 'paper_final_verify.py'], ['Heldout decisions', 'paper_final_heldout.py'], ['Image audit', 'audit_report.py'], ['Revealed forecast comparison', 'three_point_example/forecast/reconcile.md']]));
+        detail.append(section, methodAction('Open full Evidence & 32-Model Scoreboard ↑', () => actions.openView && actions.openView('evidence', 'replay')));
+      } else {
+        const section = methodSection('Your table stays in this browser', 'Paste or load a CSV to calculate locally. This page sends no table to a server. The downloadable result.json records the published patient rule, reference rows and checks.');
+        section.appendChild(methodTable(['Asset', 'Use', 'Open'], [
+          ['Workbench result.json', 'Frozen published patient rule and reference rows', ['Download JSON', 'result.json', true]],
+          ['MIT code license', 'Repository source code', ['License', Copy.repo + 'LICENSE']],
+          ['EPA public domain inputs', 'Neural screen source and provenance', ['Data guide', Copy.repo + 'README.md']],
+          ['CC BY 4.0 study sources', 'Ewart, rectal, Hu and Schuster; follow each source citation', ['Study audits', 'audits/index.html', true]],
+          ['Other study licenses', 'Yuan and Dai sources have CC BY-NC-ND terms; only permitted analysis is linked', ['Data guide', Copy.repo + 'README.md']]
+        ]));
+        section.appendChild(methodLinks([['Sample CSV', 'examples/T1_input.csv', true], ['Chart library licenses', 'vendor/d3.LICENSE.txt', true]]));
+        detail.append(section, methodAction('Paste your table ↑', () => actions.openPaste && actions.openPaste()));
+      }
     };
     Copy.methodBlocks.forEach(([name, short], index) => {
       const tab = K.h('button', 'cell');

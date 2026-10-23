@@ -304,7 +304,7 @@
 
 <footer class="page foot" id="method"></footer>
 
-<script src="runtime.js?v=1023v6" defer></script>
+<script src="runtime.js?v=1023v7" defer></script>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
   const C = Core, O = C.O, K = Charts, $ = id => document.getElementById(id), h = K.h;
@@ -517,7 +517,14 @@ document.addEventListener('DOMContentLoaded', function () {
   $('download').onclick = () => C.download(C.actionsCSV(C.state.patients, C.state.reveal), 'patient-actions.csv');
 
   K.input($('input'), { rows: 12, mode: C.hash.get('mode') || 'series' });
-  Copy.methods($('method'));
+  const jumpTo = id => requestAnimationFrame(() => {
+    const target = $(id);
+    if (target) target.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'start' });
+  });
+  Copy.methods($('method'), {
+    openView(page, target) { view.page = page; setTab('chem'); jumpTo(target); },
+    openPaste() { setTab('yours'); jumpTo('input'); }
+  });
 
   if (C.state.patient && view.tab === 'chem' && !C.hash.get('tab')) view.tab = 'patient';
   if (view.tab === 'patient') view.page = 'patient';
