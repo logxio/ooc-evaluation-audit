@@ -347,8 +347,9 @@
       c.d.forEach((d, k) => {
         const b = h('button', 'chip'); b.type = 'button'; b.setAttribute('aria-pressed', String(k === S.design));
         const dot = h('i'); dot.style.cssText = `width:8px;height:8px;border-radius:50%;background:${d.act ? 'var(--report)' : 'var(--retest)'}`;
-        b.append(dot, document.createTextNode(`Design ${k + 1}`));
-        b.title = `measures ${d.m.map(l => C.uM(c.w.levels[l])).join(', ')} µM · ${d.act ? 'report call' : 'measure full series'}`;
+        b.append(dot, document.createTextNode(String(k + 1)));
+        b.title = `Design ${k + 1} measures ${d.m.map(l => C.uM(c.w.levels[l])).join(', ')} µM · ${d.act ? 'report call' : 'measure full series'}`;
+        b.setAttribute('aria-label', `Design ${k + 1}`);
         b.onclick = () => C.set({ design: k });
         el.appendChild(b);
       });

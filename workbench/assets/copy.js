@@ -10,7 +10,12 @@
   const mo = { reports: cl.reports - diff.reports_total_difference.estimate, wrong: cl.wrong_reports - diff.wrong_reports_total_difference.estimate, wells: cl.wells_used - diff.wells_used_total_difference.estimate };
   Copy.vision = 'Run three concentrations. Get the whole curve.';
   Copy.heroNumber = F.screening.display.savingVsFull;
-  Copy.heroLabel = 'fewer wells than running every concentration of the series';
+  /* top bar: three readings, value then what it counts */
+  Copy.bar = [
+    [Copy.heroNumber, `fewer exposure wells (${C.int(cl.wells_used)} / ${C.int(cl.wells_full)})`],
+    [`${bt.win}W ${bt.tie}T ${bt.loss}L`, `vs ${F.baselines.opponents.length} published models`],
+    [String(O.totalPatients), 'clinical organoid assays']
+  ];
   /* replay of the 965 designs: the closed loop against three measured concentrations alone, every share with its denominator */
   Copy.replay = [
     [C.pct(cl.reports / cl.designs), `${cl.reports} of ${cl.designs} designs reported: ${cl.stage1_reports} from three concentrations, ${cl.stage2_reports} after one more`],

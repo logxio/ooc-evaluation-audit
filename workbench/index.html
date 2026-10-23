@@ -35,44 +35,58 @@
       queued.add(el);
       frame = frame || requestAnimationFrame(() => { frame = 0; const els = [...queued]; queued.clear(); els.forEach(fit); });
     };
-    const sized = new ResizeObserver(es => es.forEach(e => queue(e.target)));
+    /* the row is watched too: a title already stepped down sits at its own width, so only its row tells it there is room again */
+    const sized = new ResizeObserver(es => es.forEach(e => e.target.classList.contains('fit') ? queue(e.target) : e.target.querySelectorAll(':scope > .fit').forEach(queue)));
     const typed = new MutationObserver(ms => ms.forEach(m => queue((m.target.nodeType === 1 ? m.target : m.target.parentElement).closest('.fit'))));
     window.fitLines = scope => (scope || document).querySelectorAll('.fit').forEach(el => {
       if (el.dataset.fit) return;
       el.dataset.fit = '1';
       sized.observe(el);
+      if (el.parentElement) sized.observe(el.parentElement);
       typed.observe(el, { childList: true, characterData: true, subtree: true });
     });
     document.fonts.ready.then(() => document.querySelectorAll('.fit').forEach(queue));
   })();
 </script>
-<link rel="stylesheet" href="assets/system.css">
+<link rel="stylesheet" href="assets/system.css?v=1023v3">
 <style>
-  .top { display: flex; align-items: center; justify-content: space-between; gap: var(--s3); height: 64px; }
-  .brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
-  .mark { font: 500 var(--f3)/var(--l3) var(--serif); white-space: nowrap; }
-  .team { padding: 1px 8px; border: 1px solid var(--line); border-radius: 4px; font: 500 var(--f1)/var(--l1) var(--sans); color: var(--ink-2); white-space: nowrap; }
-  .top nav { display: flex; align-items: center; gap: var(--s3); }
-  .top nav a { color: var(--ink-2); }
-  .top nav a:hover { color: var(--ink); }
-  /* hero: two blocks of two 56 px rows each; row one and row two share a baseline across the page */
-  .hero { position: relative; display: grid; grid-template-columns: minmax(0, 1fr) auto; grid-template-rows: 56px 56px; align-items: baseline; column-gap: var(--s3); padding: var(--s2) 0 var(--s3); }
-  .hero h1, .hero .figure { display: contents; }
-  .hero h1 span { grid-column: 1; font: 400 var(--f5)/var(--l5) var(--serif); letter-spacing: -.012em; white-space: nowrap; }
-  .hero h1 span:first-child { grid-row: 1; }
-  .hero h1 span:last-child { grid-row: 2; }
-  .hero .num { grid-column: 2; grid-row: 1; justify-self: end; font: 400 var(--f5)/var(--l5) var(--serif); letter-spacing: -.012em; font-variant-numeric: lining-nums proportional-nums; white-space: nowrap; cursor: default; }
-  .hero .lab { grid-column: 2; grid-row: 2; justify-self: end; font: 400 var(--f3)/var(--l3) var(--serif); color: var(--ink-2); white-space: nowrap; cursor: default; }
+  /* command bar: brand, three readings, links; one 50 px line on every desktop width */
+  .bar { display: flex; align-items: center; justify-content: space-between; gap: var(--s2); height: 50px; padding: 0 24px; background: #121820; color: #f0f4f8; white-space: nowrap; }
+  .bar :focus-visible { outline-color: #38bdf8; }
+  .brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
+  .mark { font: 500 18px/24px var(--serif); color: #fff; letter-spacing: -.01em; }
+  .team { padding: 2px 8px; border-radius: 4px; background: rgba(255, 255, 255, .12); color: #e2e8f0; font: 500 11.5px/16px var(--sans); }
+  .kpis { display: flex; align-items: baseline; gap: 18px; min-width: 0; font: 400 var(--f1)/var(--l1) var(--sans); color: #9fb0c4; }
+  .kpi { cursor: default; border-radius: 4px; }
+  .kpi b { margin-right: 2px; color: #fff; font: 700 14px/20px var(--sans); font-variant-numeric: tabular-nums lining-nums; }
+  .bar nav { display: flex; align-items: center; gap: 14px; font-size: 12.5px; }
+  .bar nav a { color: #cbd5e1; font-weight: 500; transition: color var(--t) var(--ease); }
+  .bar nav a:hover { color: #fff; }
+  .cta { border: 0; border-radius: 5px; padding: 5px 11px; background: #38bdf8; color: #0f172a; font: 600 12px/16px var(--sans); cursor: pointer; transition: background var(--t) var(--ease); }
+  .cta:hover { background: #7dd3fc; }
   .fit { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
-  .atlas { position: relative; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--s2); align-items: stretch; }
-  .index { grid-column: span 3; display: flex; flex-direction: column; gap: var(--s1); contain: size; min-width: 0; }
+  .atlas { position: relative; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--s2); align-items: stretch; margin-top: var(--s2); }
+  /* index: tabs, one filter row, the list and its download share one panel */
+  .index { grid-column: span 3; display: flex; flex-direction: column; gap: 0; contain: size; min-width: 0; background: var(--surface); border: 1px solid var(--line); border-radius: var(--radius); overflow: hidden; }
+  .tabs { flex: none; display: grid; grid-template-columns: 1.15fr 1.1fr .85fr; background: #faf9f6; border-bottom: 1px solid var(--line); }
+  .tabs button { border: 0; border-bottom: 2px solid transparent; margin-bottom: -1px; background: transparent; padding: 8px 6px 7px; font: 600 var(--f1)/var(--l1) var(--sans); color: var(--ink-2); cursor: pointer; white-space: nowrap; transition: color var(--t) var(--ease); }
+  .tabs button:hover { color: var(--ink); }
+  .tabs button[aria-pressed="true"] { background: var(--surface); color: var(--ink); border-bottom-color: #1F5A8A; }
+  .tabs .cnt { margin-left: 3px; font-weight: 500; color: var(--ink-3); font-variant-numeric: tabular-nums; }
+  .filter { flex: none; display: flex; align-items: center; gap: 6px; height: 36px; padding: 0 6px 0 10px; border-bottom: 1px solid var(--line); }
+  .filter .glass { color: var(--ink-3); font-size: 14px; line-height: 1; user-select: none; }
+  #search { flex: 1; min-width: 0; }
+  #search input { display: block; width: 100%; border: 0; outline: none; background: transparent; padding: 0; font: 400 13px/20px var(--sans); color: var(--ink); }
+  #search input::placeholder { color: var(--ink-3); }
+  .sort { flex: none; display: inline-flex; gap: 2px; padding: 2px; border-radius: 4px; background: #f2f1ec; }
+  .sort button { border: 0; border-radius: 3px; padding: 2px 6px; background: transparent; font: 600 11px/16px var(--sans); color: var(--ink-2); cursor: pointer; white-space: nowrap; transition: background var(--t) var(--ease), color var(--t) var(--ease); }
+  .sort button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 2px rgba(0, 0, 0, .08); }
   .export { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s1); width: 100%; }
   .export[hidden] { display: none; }
   .export .ink3 { font-weight: 400; font-variant-numeric: tabular-nums; }
-  .index .export { background: var(--surface); } .index .export:hover { background: var(--line); }
-  .index .seg { width: 100%; } .index .seg button { flex: 1; }
-  .list { flex: 0 1 auto; min-height: 0; overflow: auto; margin: 0; padding: 0; list-style: none; border-radius: var(--radius); background: var(--surface); }
-  .list li button { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: var(--s1); width: 100%; border: 0; background: transparent; text-align: left; padding: 6px var(--s2); cursor: pointer; color: var(--ink); }
+  .index .export { flex: none; border-radius: 0; border-top: 1px solid var(--line); padding: 8px 12px; background: var(--surface); } .index .export:hover { background: var(--sunk); }
+  .list { flex: 1 1 auto; min-height: 0; overflow: auto; margin: 0; padding: 4px; list-style: none; }
+  .list li button { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: var(--s1); width: 100%; border: 0; border-radius: 5px; background: transparent; text-align: left; padding: 6px 10px; cursor: pointer; color: var(--ink); }
   .list li button:hover { background: var(--sunk); }
   .list li button[aria-selected="true"] { background: var(--ink); color: var(--surface); }
   .list li button[aria-selected="true"] .meta { color: var(--surface); opacity: .8; }
@@ -82,12 +96,17 @@
   .list .you { font-weight: 600; }
   .sheet { grid-column: span 9; background: var(--surface); border-radius: var(--radius); padding: var(--s3); min-width: 0; }
   .sheet:not([data-tab="chem"]) .views { margin-top: var(--s3); }
-  .index .seg button { white-space: nowrap; }
-  .entity { display: flex; flex-wrap: wrap; align-items: end; justify-content: space-between; gap: var(--s2); }
-  .entity > div:first-child { flex: 1 1 320px; min-width: 0; }
-  .facts { display: flex; flex-wrap: wrap; gap: var(--s1) var(--s3); margin-top: var(--s1); color: var(--ink-2); }
+  /* entity: name, facts and the five designs on one line; the name steps down first */
+  .entity { display: flex; align-items: baseline; gap: var(--s2); min-width: 0; padding-bottom: 12px; border-bottom: 1px solid var(--line); }
+  .entity h2 { flex: 0 1 auto; margin: 0; font: 500 22px/28px var(--serif); letter-spacing: -.006em; }
+  .facts { flex: none; display: flex; gap: 12px; color: var(--ink-2); font-size: var(--f1); line-height: var(--l1); white-space: nowrap; }
   .facts b { color: var(--ink); font-weight: 600; font-variant-numeric: tabular-nums; }
-  .pages { display: flex; gap: var(--s3); margin: var(--s3) 0 var(--s2); }
+  .design { flex: none; display: flex; align-items: center; gap: 6px; margin-left: auto; align-self: center; font-size: var(--f1); color: var(--ink-3); }
+  .design .designs { gap: 2px; padding: 2px; border-radius: 6px; background: #f2f1ec; }
+  .designs .chip { gap: 4px; padding: 1px 8px; border-radius: 4px; background: transparent; color: var(--ink-2); font-weight: 600; font-variant-numeric: tabular-nums; }
+  .designs .chip:hover { background: rgba(27, 36, 48, .06); }
+  .designs .chip[aria-pressed="true"] { background: var(--ink); color: var(--surface); }
+  .pages { display: flex; gap: var(--s3); margin: 12px 0 var(--s2); }
   .pages button { border: 0; background: transparent; padding: 0; cursor: pointer; color: var(--ink-3); font: 600 var(--f2)/var(--l2) var(--sans); transition: color var(--t) var(--ease); }
   .pages button[aria-selected="true"] { color: var(--ink); }
   .pages button[aria-selected="true"]::before { content: ""; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-right: var(--s1); vertical-align: 2px; }
@@ -107,7 +126,7 @@
   .note { margin-top: var(--s1); color: var(--ink-2); }
   .links { display: flex; flex-wrap: wrap; gap: var(--s1) var(--s3); margin-top: var(--s2); }
   .foot { padding: var(--s3) 0; }
-  /* entry: top bar and hero paint at once; three measured anchors draw the forecast and its 90% band while the screen data loads */
+  /* entry: the command bar paints at once; three measured anchors draw the forecast and its 90% band while the screen data loads */
   .entry { position: absolute; z-index: 2; top: var(--s3); left: 50%; transform: translateX(-50%); width: min(560px, 100%); display: grid; justify-items: center; gap: var(--s2); padding: var(--s3) var(--s3) 28px; background: var(--surface); border-radius: var(--radius); box-shadow: 0 0 0 1px var(--line), 0 12px 32px rgba(20, 30, 45, .06); transition: opacity 360ms var(--ease), visibility 0s linear 360ms; }
   .entry svg { width: 300px; max-width: 100%; height: auto; overflow: visible; }
   .entry .band { fill: #dce8f3; }
@@ -122,8 +141,6 @@
   html[data-entry="loading"] :is(.index, .sheet, .foot),
   html[data-entry="error"] :is(.index, .sheet, .foot) { visibility: hidden; }
   @media (prefers-reduced-motion: no-preference) {
-    .hero h1 span, .hero .num, .hero .lab { animation: enter-title 320ms var(--ease) both; }
-    .hero h1 span:last-child, .hero .lab { animation-delay: 40ms; }
     html[data-entry="ready"] :is(.index, .sheet, .foot) { animation: enter-content 360ms var(--ease) both; }
     html[data-entry="ready"] .atlas > .sheet { animation-delay: 60ms; }
     .entry .anchor { transform-box: fill-box; transform-origin: center; animation: anchor-in 260ms var(--ease) both; }
@@ -133,38 +150,39 @@
     .entry .band { animation: show-band 2400ms var(--ease) 360ms infinite both; }
     .entry .hit { transform-box: fill-box; transform-origin: center; animation: show-hit 2400ms var(--ease) 360ms infinite both; }
     html[data-entry="error"] .entry * { animation-play-state: paused; }
-    @keyframes enter-title { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
     @keyframes enter-content { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
     @keyframes anchor-in { from { opacity: 0; transform: scale(.2); } to { opacity: 1; transform: none; } }
     @keyframes draw-line { 0% { stroke-dashoffset: 1; opacity: 1; } 45%, 86% { stroke-dashoffset: 0; opacity: 1; } 100% { stroke-dashoffset: 0; opacity: 0; } }
     @keyframes show-band { 0%, 18% { opacity: 0; } 50%, 86% { opacity: 1; } 100% { opacity: 0; } }
     @keyframes show-hit { 0%, 34% { opacity: 0; transform: scale(.2); } 46% { opacity: 1; transform: scale(1.25); } 54%, 86% { opacity: 1; transform: none; } 100% { opacity: 0; transform: none; } }
   }
-  @media (max-width: 1280px) { .index { grid-column: span 4; } .sheet { grid-column: span 8; } .views > .v6, .views > .v5, .views > .v4, .views > .v3 { grid-column: 1 / -1; } }
+  @media (max-width: 1280px) {
+    .index { grid-column: span 4; } .sheet { grid-column: span 8; } .views > .v6, .views > .v5, .views > .v4, .views > .v3 { grid-column: 1 / -1; }
+    .bar { padding: 0 16px; gap: 12px; } .kpis { gap: 12px; font-size: 11.5px; } .bar nav { gap: 10px; } .facts .conc .k { display: none; }
+  }
   @media (max-width: 960px) {
     .atlas { grid-template-columns: 1fr; } .index, .sheet { grid-column: 1 / -1; } .index { contain: none; } .list { flex: none; max-height: 50vh; } .views > * { grid-column: 1 / -1; }
-    .entity > .row, .fig-block .head, .tools { flex-wrap: wrap; }
-    .hero { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; } .hero h1 span, .hero .num, .hero .lab { grid-column: 1; grid-row: auto; justify-self: stretch; }
-    .top nav a { display: none; }
+    .entity, .facts, .fig-block .head, .tools { flex-wrap: wrap; } .entity { row-gap: var(--s1); }
+    .bar nav a, .team .names, .kpi:nth-child(3) { display: none; }
   }
   /* phones: a claim longer than the screen breaks into two balanced lines instead of shrinking past reading size */
   @media (max-width: 600px) {
-    .top { flex-wrap: wrap; height: auto; padding: 12px 0; row-gap: var(--s1); }
+    .bar { flex-wrap: wrap; height: auto; padding: 10px var(--s2); row-gap: 6px; } .kpis { order: 3; width: 100%; flex-wrap: wrap; row-gap: 2px; }
     :is(.fig-block .head, #entity) > .fit, #entity .fit { white-space: normal; text-wrap: balance; overflow: visible; }
     .entry { padding-inline: var(--s2); } .entry-team { display: none; }
   }
 </style>
 </head>
 <body>
-<header class="page top">
-  <div class="brand"><span class="mark">Chip Forecast</span><span class="team">Team Three-Pointer · Yan Su &amp; Ziyang Liu</span></div>
-  <nav class="t2"><a href="sample.html">Sample size</a><a href="audits/index.html">Published studies</a><a href="https://github.com/logxio/ooc-evaluation-audit">Source</a><button class="btn" type="button" id="paste-cta">Paste your table</button></nav>
+<header class="bar">
+  <div class="brand"><span class="mark">Chip Forecast</span><span class="team" title="Team Three-Pointer · Yan Su &amp; Ziyang Liu">Team Three-Pointer<span class="names"> · Yan Su &amp; Ziyang Liu</span></span></div>
+  <div class="kpis" id="hero">
+    <span class="kpi"><b id="hero-num">56.8%</b> <span id="hero-label">fewer exposure wells (12,119 / 28,080)</span></span>
+    <span class="kpi"><b>97W 1T 0L</b> <span>vs 32 published models</span></span>
+    <span class="kpi"><b>258</b> <span>clinical organoid assays</span></span>
+  </div>
+  <nav><a href="sample.html">Sample size</a><a href="audits/index.html">Published studies</a><a href="https://github.com/logxio/ooc-evaluation-audit">Source</a><button class="cta" type="button" id="paste-cta">Paste your table</button></nav>
 </header>
-
-<section class="page hero" id="hero">
-  <h1><span class="fit">More screening decisions</span> <span class="fit">from fewer measurements</span></h1>
-  <div class="figure"><span class="num" id="hero-num">56.8%</span><span class="lab fit" id="hero-label">fewer wells than running the full series</span></div>
-</section>
 
 <main class="page atlas">
   <div class="entry" role="status">
@@ -181,9 +199,8 @@
   </div>
   <script>fitLines();</script>
   <aside class="index">
-    <div class="seg" id="tabs" role="tablist"></div>
-    <div id="search"></div>
-    <div class="row" id="sort"></div>
+    <div class="tabs" id="tabs" role="tablist"></div>
+    <div class="filter" id="filter"><span class="glass" aria-hidden="true">⌕</span><div id="search"></div><div class="sort" id="sort"></div></div>
     <ul class="list" id="list" role="listbox"></ul>
     <button class="btn quiet export" type="button" id="chem-export"></button>
   </aside>
@@ -286,32 +303,32 @@
 
 <footer class="page foot" id="method"></footer>
 
-<script src="vendor/d3.v7.9.0.min.js" defer></script>
-<script src="data/ooc-data.js" defer></script>
-<script src="data/ooc-final-1009.js" defer></script>
-<script src="assets/mount-final-1009.js" defer></script>
-<script src="engine.js" defer></script>
-<script src="stats.js" defer></script>
-<script src="chain-engine.js" defer></script>
-<script src="result.js" defer></script>
-<script src="assets/core.js" defer></script>
-<script src="assets/charts-a.js" defer></script>
-<script src="assets/charts-b.js" defer></script>
-<script src="assets/charts-c.js" defer></script>
-<script src="assets/copy.js" defer></script>
+<script src="vendor/d3.v7.9.0.min.js?v=1023v3" defer></script>
+<script src="data/ooc-data.js?v=1023v3" defer></script>
+<script src="data/ooc-final-1009.js?v=1023v3" defer></script>
+<script src="assets/mount-final-1009.js?v=1023v3" defer></script>
+<script src="engine.js?v=1023v3" defer></script>
+<script src="stats.js?v=1023v3" defer></script>
+<script src="chain-engine.js?v=1023v3" defer></script>
+<script src="result.js?v=1023v3" defer></script>
+<script src="assets/core.js?v=1023v3" defer></script>
+<script src="assets/charts-a.js?v=1023v3" defer></script>
+<script src="assets/charts-b.js?v=1023v3" defer></script>
+<script src="assets/charts-c.js?v=1023v3" defer></script>
+<script src="assets/copy.js?v=1023v3" defer></script>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
   const C = Core, O = C.O, K = Charts, $ = id => document.getElementById(id), h = K.h;
-  $('hero-num').textContent = Copy.heroNumber;
-  Copy.heroTip([$('hero-num'), $('hero-label')]);
+  const kpis = document.querySelectorAll('.bar .kpi');
+  kpis.forEach((el, i) => { el.children[0].textContent = Copy.bar[i][0]; el.children[1].textContent = Copy.bar[i][1]; });
+  Copy.heroTip([$('hero-num'), $('hero-label'), kpis[1]]);
 
   /* ---------- index: chemicals, patients, your data ---------- */
   /* typed: a pasted set of names keeps its order until a sort chip is pressed */
   const view = { tab: C.hash.get('tab') || 'chem', page: C.hash.get('page') || 'curve', q: '', sort: 'gain', typed: false, rows: [] };
-  const tabLabel = { chem: () => `Chemicals ${O.chems.length}`, patient: () => `Patients ${C.state.patientSource === 'own' ? C.state.patients.length : O.totalPatients}`, yours: () => 'Your data' };
+  const tabLabel = { chem: () => ['Chemicals', O.chems.length], patient: () => ['Patients', C.state.patientSource === 'own' ? C.state.patients.length : O.totalPatients], yours: () => ['Your data'] };
   ['chem', 'patient', 'yours'].forEach(k => { const b = h('button'); b.type = 'button'; b.dataset.k = k; b.onclick = () => setTab(k); $('tabs').appendChild(b); });
-  const search = h('input', 'field'); search.type = 'search'; search.placeholder = 'Filter the list';
-  search.style.cssText = 'font-family: var(--sans); font-size: var(--f2); line-height: var(--l2); padding: 6px var(--s1)';
+  const search = h('input'); search.type = 'search'; search.setAttribute('aria-label', 'Filter the list');
   search.oninput = () => { view.q = search.value; view.typed = view.tab === 'chem' && C.chemQuery(view.q).set; list(); };
   /* a column pasted from a spreadsheet arrives as one name per line; keep the lines as a set */
   search.addEventListener('paste', e => {
@@ -322,8 +339,8 @@ document.addEventListener('DOMContentLoaded', function () {
     search.oninput();
   });
   $('search').appendChild(search);
-  [['gain', 'Largest gain'], ['name', 'A–Z']].forEach(([k, label]) => {
-    const b = h('button', 'chip', label); b.type = 'button'; b.dataset.k = k;
+  [['gain', '↑ Gain', 'Largest gain over interpolation first'], ['name', 'A–Z', 'Alphabetical']].forEach(([k, label, title]) => {
+    const b = h('button', null, label); b.type = 'button'; b.dataset.k = k; b.title = title;
     b.onclick = () => { view.sort = k; view.typed = false; list(); }; $('sort').appendChild(b);
   });
   const gain = c => c.err.loglinear_interp - c.err.anchorboost;
@@ -345,10 +362,15 @@ document.addEventListener('DOMContentLoaded', function () {
   exp.addEventListener('pointerleave', C.untip); exp.addEventListener('blur', C.untip);
   function list() {
     const ul = $('list'); ul.textContent = '';
-    $('tabs').querySelectorAll('button').forEach(b => { b.textContent = tabLabel[b.dataset.k](); b.setAttribute('aria-pressed', String(b.dataset.k === view.tab)); });
+    $('tabs').querySelectorAll('button').forEach(b => {
+      const [t, n] = tabLabel[b.dataset.k](); b.textContent = t;
+      if (n !== undefined) b.appendChild(h('span', 'cnt', String(n)));
+      b.setAttribute('aria-pressed', String(b.dataset.k === view.tab));
+    });
     $('sort').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(!view.typed && b.dataset.k === view.sort)));
     $('sort').style.display = view.tab === 'chem' ? '' : 'none';
-    $('search').style.display = view.tab === 'yours' ? 'none' : '';
+    $('filter').style.display = view.tab === 'yours' ? 'none' : '';
+    search.placeholder = view.tab === 'chem' ? `Filter ${O.chems.length} chemicals` : 'Filter patients by ID';
     if (view.tab === 'chem') {
       const hit = C.chemQuery(view.q).chems;
       const rows = view.rows = view.typed ? hit : hit.slice().sort(view.sort === 'gain' ? (a, b) => gain(b) - gain(a) : (a, b) => a.name.localeCompare(b.name));
@@ -407,23 +429,22 @@ document.addEventListener('DOMContentLoaded', function () {
     document.querySelectorAll('.page-view').forEach(s => s.classList.toggle('on', s.dataset.page === view.page));
     document.querySelector('.sheet').dataset.tab = view.tab;
   }
-  const chipsEl = h('div'); K.designChips(chipsEl);
-  const fact = (k, v) => { const s = h('span'); s.append(document.createTextNode(k + ' '), h('b', null, v)); return s; };
+  const chipsEl = h('div', 'designs'); K.designChips(chipsEl);
+  const designs = h('div', 'design'); designs.append(h('span', null, 'Design'), chipsEl);
+  const fact = (k, v) => { const s = h('span'); s.append(h('span', 'k', k + ' '), h('b', null, v)); return s; };
   function entity() {
     const el = $('entity'); el.textContent = '';
     if (view.tab === 'chem') {
       const c = O.chems[C.state.chem], w = c.w;
-      const wrap = h('div', 'entity'), left = h('div');
-      left.appendChild(h('h2', 't4 fit', c.name));
-      const facts = h('div', 'facts t2');
-      facts.append(fact('Concentrations', `${C.uM(w.levels[0])}–${C.uM(w.levels[w.levels.length - 1])} µM, ${w.levels.length} levels`), fact('Wells', String(w.lv.length)),
-        fact('EPA label', c.label), fact('Held out in fold', String(c.fold)));
-      left.appendChild(facts);
-      wrap.append(left, chipsEl); el.appendChild(wrap);
+      const wrap = h('div', 'entity'), name = h('h2', 'fit', c.name); name.title = c.name;
+      const facts = h('div', 'facts'), conc = fact('Concentrations', `${C.uM(w.levels[0])}–${C.uM(w.levels[w.levels.length - 1])} µM, ${w.levels.length} levels`);
+      conc.classList.add('conc');
+      facts.append(conc, fact('Wells', String(w.lv.length)), fact('EPA label', c.label), fact('Fold', String(c.fold)));
+      wrap.append(name, facts, designs); el.appendChild(wrap);
     } else if (view.tab === 'patient') {
       const r = C.state.patients.find(x => x.id === C.state.patient) || C.state.patients[0];
-      const wrap = h('div'); wrap.appendChild(h('h2', 't4 fit', r ? r.id : 'Patients'));
-      const facts = h('div', 'facts t2'), f = v => (v === null || v === undefined ? '—' : C.fix(v, 3));
+      const wrap = h('div', 'entity'); wrap.appendChild(h('h2', 'fit', r ? r.id : 'Patients'));
+      const facts = h('div', 'facts'), f = v => (v === null || v === undefined ? '—' : C.fix(v, 3));
       if (r) {
         (r.mode === 'two' ? [['Readout 1', f(r.cohort ? r.readout1 : r.r1)], ['Readout 2', f(r.cohort ? r.readout2 : r.r2)]] : [['Combined regimen', f(r.combined)], ['Irradiation', f(r.irr)]])
           .forEach(([k, v]) => facts.appendChild(fact(k, v)));
@@ -432,7 +453,7 @@ document.addEventListener('DOMContentLoaded', function () {
       }
       wrap.appendChild(facts); el.appendChild(wrap);
     } else {
-      el.appendChild(h('h2', 't4 fit', 'Your data stays in this browser'));
+      const wrap = h('div', 'entity'); wrap.appendChild(h('h2', 'fit', 'Your data stays in this browser')); el.appendChild(wrap);
     }
     fitLines(el);
   }
