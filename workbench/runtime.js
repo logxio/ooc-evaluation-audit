@@ -2082,7 +2082,7 @@ window.WORKBENCH_RESULT = {"schema": "workbench.result.v1", "version": "rectal-f
           const card = K.h('div', 'method-metric'); card.append(K.h('strong', null, value), K.h('span', null, label)); cards.appendChild(card);
         });
         detail.append(cards, methodAction('Open full Model & Agent Replay view ↑', () => actions.openView && actions.openView('model', 'ablation')),
-          methodLinks([['Forecast CLI', 'three_point.py'], ['Browser engine', 'workbench/engine.js'], ['32 model benchmark', 'paper_final_baselines.py'], ['Example SHA-256 lock', 'three_point_example/forecast/lock.json']]));
+          methodLinks([['Forecast CLI', 'three_point.py'], ['Saved fold 0 weights', 'results/nested/fold0/outer_model.joblib'], ['Browser engine', 'workbench/engine.js'], ['32 model benchmark', 'paper_final_baselines.py'], ['Example SHA-256 lock', 'three_point_example/forecast/lock.json']]));
       } else if (index === 2) {
         const section = methodSection('Three checks before a claim leaves the screen', 'Each test chemical or patient is scored outside its own training data. These files let you inspect the heldout rows, frozen receipts and reported totals.');
         section.appendChild(methodTable(['Control', 'Recorded rule', 'Inspect'], [
