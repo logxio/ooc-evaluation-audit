@@ -17,6 +17,63 @@ Live: https://logxio.github.io/ooc-evaluation-audit/workbench/
 
 `sample.html` (validation sample size) and `audits/index.html` (published studies) are linked from the header.
 
+## Final report data
+
+`data/ooc-final-1009.js` exports `window.OOC_FINAL_1009`: the 965-design
+reporting and closed-loop results, all 32 comparable predictor configurations at
+k=1–4, twelve Bircsak curves, the locked Harrill human-cell example, and patient
+cohort views. The `screening`, `baselines`, `bircsak`, `harrill` and `patients`
+properties keep their source-specific units and denominators. `sources` records
+relative paths and SHA-256 hashes. `report` identifies the exact report bytes;
+the current report's date field reads 10 October 2026.
+
+From the repository root, using Python 3 with its standard library:
+
+```sh
+python build_final_1009_webdata.py
+python build_final_1009_webdata.py --check
+node -c workbench/data/ooc-final-1009.js
+```
+
+The builder checks report Tables 4, 6 and 7 against saved results, including the
+paired intervals and outcomes. Unrun predictor cells contain `mae: null`,
+`status: "not_run"` and an explicit missing-value label. The report-matched
+Harrill run is preserved in `results/final/harrill_1009/`, with its original
+lock and forecasts, from the commit recorded in `snapshot.json`. Its
+2,244/3,483-well account belongs to that lock; the current `three_point_example/`
+directory holds a later run.
+
+`assets/mount-final-1009.js` attaches the packet as `OOC.final1009` and the
+cohort array as `OOC.patientCohorts`. The existing page loads both scripts and
+keeps its original default view. Select a saved cohort through the browser API:
+
+```js
+OOCFinal1009.selectCohort('rectal-fixed-43');
+OOCFinal1009.selectCohort('rectal-blind-85');
+OOCFinal1009.selectCohort('crlm-blind-23');
+OOCFinal1009.selectCohort('tiriac-primary-7');
+```
+
+Each cohort retains the existing `patients.rows`, `cases`, `rule` and `study`
+shape. The selector reads saved actions, resets outcome reveal and updates the
+existing patient map, plate and export. The two-readout map uses ratios to each
+regimen's frozen cutoffs; tooltips and patient details retain the raw values.
+Source artifacts that preserve calls without raw readouts have `null` readouts
+and remain inspectable in the patient plate and exports.
+
+For a control supplied by an embedding page, set
+`data-ooc-cohort="rectal-blind-85"` on a button or `data-ooc-cohort-select` on
+a select, then call `OOCFinal1009.bind()`. Binding reuses those controls; the
+mount script creates no default interface elements or styles.
+
+The inventory contains 323 cohort-view rows and 258 distinct source patients
+including the assay pool; 175 distinct patients have clinical scores. The
+43-patient fixed view overlaps the 85-patient blind view. Tan contributes 22
+scored treatments in 18 patients and a separate 101-patient assay pool; that
+pool supplies reference medians. Rectal and liver-metastasis formula checks
+use a frozen formula with single-readout accuracies observed after outcome
+access, as described in report Appendix C.1.
+
 ## Files
 
 - `index.html` with `assets/` (design system, charts, claims) and `vendor/` (D3 7.9.0 under ISC; Newsreader, Source Sans 3 and Source Code Pro as woff2 under the SIL Open Font License, licence texts alongside).

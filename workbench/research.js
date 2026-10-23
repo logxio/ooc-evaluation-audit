@@ -95,14 +95,20 @@
 
       const series = result.models.filter(m => m.n).map(m => ({ name: readout(m.key), n: m.n, correct: m.correct, interval: m.interval }));
       if (result.paired && main.n) series.push({ name: 'Agreement releases', consensus: true, ...main });
-      figure = figureSVG(series, true);
-      $('own-plot').innerHTML = series.length ? figureSVG(series, false) : '<p class="t1 ink3">Add a response column to draw clinical concordance.</p>';
+      const plotSeries = series.length ? series : [
+        ...result.models.map(m => { const c = m.calls.filter(Boolean), pos = c.filter(x => x.call === 1).length; return { name: `${readout(m.key)} sensitive`, n: c.length, correct: pos, interval: S.interval(pos, c.length) }; }).filter(m => m.n),
+        ...(result.paired && result.patients ? [{ name: 'Two-readout agreement', consensus: true, n: result.patients, correct: result.releases, interval: S.interval(result.releases, result.patients) }] : [])
+      ];
+      $('own-plot-title').textContent = series.length ? 'Clinical concordance per readout' : 'Assay call split and readout agreement';
+      figure = plotSeries.length ? figureSVG(plotSeries, true) : '';
+      $('own-plot').innerHTML = plotSeries.length ? figureSVG(plotSeries, false) : '<p class="t1 ink3">Add a response column to draw clinical concordance.</p>';
     } catch (e) { fail(e); }
   }
 
   function setExample(id) {
     const s = PUBLIC_STUDIES.find(s => s.id === id && s.input) || PUBLIC_STUDIES.find(s => s.id === 'rectal');
     source = s; $('own-example').value = s.id;
+    if (s.direction) $('own-direction').value = s.direction;
     $('own-input').value = E.toCSV(s.input, ['patient', 'readout1', 'readout2', 'response']);
     log('example_loaded', { id: s.id });
   }

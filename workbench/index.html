@@ -95,13 +95,14 @@
   .lhead button { justify-self: start; display: inline-flex; align-items: center; gap: 3px; border: 0; padding: 0; background: transparent; font: 600 11.5px/16px var(--sans); color: var(--ink-3); cursor: pointer; white-space: nowrap; }
   .lhead button:nth-child(n+2) { justify-self: end; }
   .lhead button:hover, .lhead button[aria-pressed="true"] { color: var(--ink); }
-  .lhead .arr { font-size: 11px; opacity: .4; }
+  .lhead .arr { display: inline-block; font: 600 11px/1 var(--sans); opacity: .4; transition: transform 280ms var(--ease), opacity var(--t) var(--ease), color var(--t) var(--ease); }
+  .lhead .arr.up { transform: rotate(180deg); }
   .lhead button[aria-pressed="true"] .arr { opacity: 1; color: var(--accent-ink); }
   .export { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s1); width: 100%; }
   .export[hidden] { display: none; }
   .export .ink3 { font-weight: 400; font-variant-numeric: tabular-nums; }
   .index .export { flex: none; border-radius: 0; border-top: 1px solid var(--line); padding: 8px 12px; background: var(--surface); } .index .export:hover { background: var(--sunk); }
-  .list { flex: 1 1 auto; min-height: 0; overflow: auto; margin: 0; padding: 4px; list-style: none; overscroll-behavior: contain; }
+  .list { position: relative; flex: 1 1 auto; min-height: 0; overflow: auto; margin: 0; padding: 4px; list-style: none; overscroll-behavior: contain; }
   .list li button { width: 100%; border: 0; border-radius: 5px; background: transparent; text-align: left; padding: 5px 10px; cursor: pointer; color: var(--ink); font: 400 13px/20px var(--sans); }
   .list li button:hover { background: var(--sunk); }
   .list li button[aria-selected="true"] { background: var(--ink); color: var(--surface); }
@@ -422,7 +423,7 @@ document.addEventListener('DOMContentLoaded', function () {
   /* status views with live counts, then the column head; pressing the active column flips it */
   function filterBar() {
     const v = $('views'), hd = $('lhead'), on = view.tab !== 'yours';
-    v.textContent = ''; hd.textContent = '';
+    v.textContent = '';
     $('filter').hidden = v.hidden = hd.hidden = !on;
     if (!on) return;
     const rows = baseRows(), f = view.facet[view.tab];
@@ -432,18 +433,31 @@ document.addEventListener('DOMContentLoaded', function () {
       const b = h('button'); b.type = 'button'; b.setAttribute('aria-pressed', String(f === k));
       b.append(label, h('span', 'n', C.int(n)));
       tip(b, `${label} · ${C.int(n)}`, [why(C.state.design)]);
-      b.onclick = () => { view.facet[view.tab] = f === k && k !== 'all' ? 'all' : k; list(); $('list').scrollTop = 0; };
+      b.onclick = () => { view.facet[view.tab] = f === k && k !== 'all' ? 'all' : k; list(true, true); };
       v.appendChild(b);
     });
-    const st = view.sort[view.tab];
-    Object.entries(SORTS[view.tab]).forEach(([k, [label, def, , what]]) => {
+    const st = view.sort[view.tab], entries = Object.entries(SORTS[view.tab]);
+    if (hd.dataset.tab !== view.tab || hd.children.length !== entries.length) {
+      hd.textContent = ''; hd.dataset.tab = view.tab;
+      entries.forEach(([k, [label, def, , what]]) => {
+        const b = h('button'); b.type = 'button'; b.dataset.k = k;
+        b.append(label, h('span', 'arr', '↓'));
+        tip(b, what, [() => (!view.typed && view.sort[view.tab].k === k) ? `${view.sort[view.tab].dir > 0 ? 'Ascending' : 'Descending'} · press again to flip` : 'Press to sort']);
+        b.onclick = () => {
+          const cur = view.sort[view.tab];
+          if (!view.typed && cur.k === k) cur.dir = -cur.dir; else { cur.k = k; cur.dir = def; }
+          view.typed = false; list(true, true);
+        };
+        hd.appendChild(b);
+      });
+    }
+    entries.forEach(([k, [label, def]]) => {
+      const b = hd.querySelector(`button[data-k="${k}"]`); if (!b) return;
       const active = !view.typed && st.k === k, dir = active ? st.dir : def;
-      const b = h('button'); b.type = 'button'; b.setAttribute('aria-pressed', String(active));
-      b.append(label, h('span', 'arr', active ? (dir > 0 ? '↑' : '↓') : '↕'));
+      b.setAttribute('aria-pressed', String(active));
       b.setAttribute('aria-label', `Sort by ${label.toLowerCase()}, ${dir > 0 ? 'ascending' : 'descending'}`);
-      tip(b, what, [active ? `${dir > 0 ? 'Ascending' : 'Descending'} · press again to flip` : 'Press to sort']);
-      b.onclick = () => { if (active) st.dir = -st.dir; else { st.k = k; st.dir = def; } view.typed = false; list(); $('list').scrollTop = 0; };
-      hd.appendChild(b);
+      const arr = b.querySelector('.arr');
+      if (arr) arr.className = 'arr' + (dir > 0 ? ' up' : '');
     });
   }
   /* the listed chemicals at the open design, one CSV row each */
@@ -458,8 +472,12 @@ document.addEventListener('DOMContentLoaded', function () {
   exp.onclick = () => C.download(C.chemActionsCSV(view.rows, C.state.design), `chemical-actions-design${C.state.design + 1}.csv`);
   tip(exp, () => `Design ${C.state.design + 1} for the ${view.rows.length} listed chemicals`,
     ['CSV: chemical, design, measured µM, action, hit call, EPA label, reason', 'List a set: separate names with ; or a comma and a space, or paste a column']);
-  function list() {
-    const ul = $('list'), hadFocus = ul.contains(document.activeElement); ul.textContent = '';
+  function list(animate, toTop) {
+    const ul = $('list'), hadFocus = ul.contains(document.activeElement);
+    const motion = animate && !matchMedia('(prefers-reduced-motion: reduce)').matches;
+    const before = new Map();
+    if (motion) ul.querySelectorAll('li[data-key]').forEach(li => before.set(li.dataset.key, li.offsetTop));
+    ul.textContent = '';
     document.querySelector('.index').dataset.tab = view.tab;
     $('tabs').querySelectorAll('button').forEach(b => {
       const [t, n] = tabLabel[b.dataset.k](); b.textContent = t;
@@ -484,21 +502,38 @@ document.addEventListener('DOMContentLoaded', function () {
       const li = h('li'), b = h('button'); b.type = 'button'; b.setAttribute('role', 'option'); b.tabIndex = -1;
       if (view.tab === 'chem') {
         const c = x, g = gain(c), sq = h('span', 'sq');
-        b.setAttribute('aria-selected', String(c.i === C.state.chem)); b.dataset.key = c.i;
+        b.setAttribute('aria-selected', String(c.i === C.state.chem)); b.dataset.key = c.i; li.dataset.key = 'chem:' + c.i;
         c.d.forEach((d, k) => { const i = h('i', k === C.state.design ? 'cur' : null); i.style.background = i.style.color = d.act ? 'var(--report)' : 'var(--retest)'; sq.appendChild(i); });
         b.append(h('span', 'name', c.name), sq, h('span', 'g' + (g < 0 ? ' neg' : ''), minus(g)));
         b.title = `${c.name} · error ${C.fix(c.err.anchorboost)} against ${C.fix(c.err.loglinear_interp)} by interpolation · ${settled(c)} of 5 designs reported`;
         b.onclick = () => pick(c.i);
       } else {
         const r = x, s = status(r), v = readout(r);
-        b.setAttribute('aria-selected', String(r.id === C.state.patient)); b.dataset.key = r.id;
+        b.setAttribute('aria-selected', String(r.id === C.state.patient)); b.dataset.key = r.id; li.dataset.key = 'pt:' + r.id;
         b.append(h('span', 'name', r.id), h('span', 'rd', short(v)), h('span', 'call ' + s, s));
         b.title = `${r.id} · ${s}${v === null ? ' · saved call without a raw readout' : ''}`;
         b.onclick = () => pick(r.id);
       }
       li.appendChild(b); ul.appendChild(li);
     });
+    if (toTop) ul.scrollTop = 0;
     if (hadFocus) { const el = ul.querySelector('button[aria-selected="true"]'); if (el) el.focus({ preventScroll: true }); }
+    if (motion) {
+      const top = ul.scrollTop, H = ul.clientHeight || 480;
+      let enterIdx = 0;
+      ul.querySelectorAll('li[data-key]').forEach(li => {
+        const y = li.offsetTop;
+        if (y > top + H + 40 || y < top - 40) return;
+        const old = before.get(li.dataset.key);
+        if (old === undefined) {
+          const d = Math.min(enterIdx++ * 12, 160);
+          li.animate([{ opacity: 0, transform: 'translateY(18px)' }, { opacity: 1, transform: 'none' }], { duration: 280, delay: d, easing: 'cubic-bezier(.2,.7,.2,1)', fill: 'both' });
+          return;
+        }
+        const dy = Math.max(-H, Math.min(H, old - y));
+        if (Math.abs(dy) > 1) li.animate([{ transform: `translateY(${dy}px)` }, { transform: 'none' }], { duration: 340, easing: 'cubic-bezier(.2,.7,.2,1)' });
+      });
+    }
     exportLabel();
   }
   /* keyboard: arrows walk the list and the canvas follows at once */
@@ -540,7 +575,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (k === 'chem' && !['curve', 'plate', 'evidence', 'model'].includes(view.page)) view.page = 'curve';
     if (k === 'patient') view.page = 'patient';
     if (k === 'yours') view.page = 'yours';
-    list(); pages(); entity();
+    list(true, true); pages(); entity();
   }
   $('paste-cta').onclick = () => setTab('yours');
 
@@ -606,10 +641,14 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   C.on((S, p) => {
     if (!p || !Object.keys(p).length) return;
-    if ('chem' in p) { if (view.tab !== 'chem') { goTab('chem'); view.page = 'curve'; pages(); } list(); entity(); }
-    else if ('design' in p) list();
+    if ('chem' in p) { const tc = view.tab !== 'chem'; if (tc) { goTab('chem'); view.page = 'curve'; pages(); } list(tc, tc); entity(); }
+    else if ('design' in p) list(true, false);
     if ('patients' in p && S.patientSource === 'own' && view.tab !== 'patient') { goTab('patient'); view.page = 'patient'; pages(); }
-    if ('patient' in p || 'reveal' in p || 'patients' in p) { if ('patient' in p && S.patient && view.tab !== 'patient') { goTab('patient'); view.page = 'patient'; pages(); } list(); entity(); }
+    if ('patient' in p || 'reveal' in p || 'patients' in p) {
+      const tc = 'patient' in p && S.patient && view.tab !== 'patient';
+      if (tc) { goTab('patient'); view.page = 'patient'; pages(); }
+      list(tc || 'reveal' in p || 'patients' in p, tc || 'patients' in p); entity();
+    }
   });
 
   /* views */

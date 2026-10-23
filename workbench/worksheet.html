@@ -8,8 +8,8 @@
 <link rel="icon" href="data:,">
 <link rel="preload" href="vendor/fonts/newsreader-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="vendor/fonts/source-sans-3-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="stylesheet" href="style.css?v=1023d1">
-<script defer src="tip.js?v=1023d1"></script><script defer src="engine.js"></script><script defer src="stats.js"></script><script defer src="public-data.js"></script><script defer src="research.js?v=1023d1"></script>
+<link rel="stylesheet" href="style.css?v=1023f2">
+<script defer src="tip.js?v=1023f2"></script><script defer src="engine.js"></script><script defer src="stats.js"></script><script defer src="public-data.js?v=1023f2"></script><script defer src="research.js?v=1023f2"></script>
 </head>
 <body>
 <header class="bar">
@@ -17,7 +17,7 @@
   <div class="kpis">
     <span class="kpi" aria-description="Computed in your browser. Your data stays on your computer."><b>100% local</b> <span>in-browser fitting</span></span>
     <span class="kpi" aria-description="Two readouts per patient give release or retest; a single readout stays a review-only prediction"><b>2-readout</b> <span>or single-readout calls</span></span>
-    <span class="kpi"><b>4</b> <span>published cohorts ready to load</span></span>
+    <span class="kpi"><b>13</b> <span>published studies ready to load</span></span>
   </div>
   <nav><a href="index.html">Workbench</a><a href="sample.html">Sample size</a><a href="audits/index.html">Published studies</a><a href="https://github.com/logxio/ooc-evaluation-audit">Source</a><a class="cta" href="#own-input" id="paste-cta">Paste your table</a></nav>
 </header>
@@ -27,7 +27,7 @@
     <section class="card ws-input" id="drop-zone">
       <div class="head"><h1 class="t3" aria-description="One row per coded patient. Columns: patient, readout1, optional readout2, optional response (1 = responder, 0 = non-responder). Drop a CSV anywhere on this card.">Your patient table</h1><div class="tools"><label class="pill plain file" aria-description="Computed in your browser. Your data stays on your computer.">Open CSV<input id="own-file" type="file" accept=".csv,text/csv"></label></div></div>
       <div class="params">
-        <label class="param"><span>Published example</span><select class="input" id="own-example"><option value="rectal">Xu rectal organoids · 127</option><option value="dai">Dai colorectal chip · 22</option><option value="crlm">Mo liver metastasis · 23</option><option value="tan">Tan colorectal organoids · 18</option><option value="">Your own table</option></select></label>
+        <label class="param"><span>Published example</span><select class="input" id="own-example"><option value="rectal">Xu rectal organoids · 127</option><option value="dai">Dai colorectal chip · 22</option><option value="crlm">Mo liver metastasis · 23</option><option value="tan">Tan colorectal organoids · 18</option><option value="schuster">Schuster perfused organoids · 48</option><option value="steinberg">Steinberg spheroid readouts · 49</option><option value="hu">Hu lung organoids · 21</option><option value="petreus">Petreus mouse schedules · 9</option><option value="ren">Ren biliary organoids · 48</option><option value="wang-lung">Wang lung organoids · 54</option><option value="zhai">Zhai digital microfluidics · 20</option><option value="zhao">Zhao gastric organoids · 41</option><option value="gdop">Wang GDOP perfusion chip · 35</option><option value="">Your own table</option></select></label>
         <label class="param"><span>Readout direction</span><select class="input" id="own-direction"><option value="lower">Lower means more sensitive</option><option value="higher">Higher means more sensitive</option></select></label>
       </div>
       <textarea class="field" id="own-input" rows="10" aria-label="Patient table" spellcheck="false" placeholder="patient,readout1,readout2,response&#10;P01,0.6,0.4,1&#10;P02,1.2,0.8,0&#10;P03,0.7,1.1,"></textarea>
