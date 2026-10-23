@@ -62,7 +62,7 @@ shards.forEach((rows, i) => {
 });
 
 const runtimeFiles = [
-  'vendor/d3.v7.9.0.min.js',
+  'vendor/d3-lite.js',
   'data/ooc-boot.js',
   'data/ooc-final-boot.js',
   'assets/mount-final-1009.js',
@@ -70,7 +70,7 @@ const runtimeFiles = [
   'assets/core.js', 'assets/charts-a.js', 'assets/charts-b.js',
   'assets/charts-c.js', 'assets/copy.js'
 ];
-const runtime = '/* D3 ISC license: vendor/d3.LICENSE.txt. Source files are kept beside this bundle. */\n' +
+const runtime = '/* D3 ISC and ease BSD licenses: vendor/d3.LICENSE.txt and vendor/d3-ease.LICENSE.txt. Source files are kept beside this bundle. */\n' +
   runtimeFiles.map(name => fs.readFileSync(path.join(__dirname, name), 'utf8').trimEnd()).join('\n;\n') + '\n';
 const runtimeFile = path.join(__dirname, 'runtime.js');
 if (process.argv.includes('--check')) {
