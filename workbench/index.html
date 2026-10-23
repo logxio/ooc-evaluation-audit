@@ -361,7 +361,7 @@ document.addEventListener('DOMContentLoaded', function () {
   /* typed: a pasted set of names keeps its order until a column head is pressed */
   const view = { tab: C.hash.get('tab') || 'chem', page: C.hash.get('page') || 'curve', q: '', typed: false, rows: [],
     sort: { chem: { k: 'gain', dir: -1 }, patient: { k: 'readout', dir: 1 } }, facet: { chem: 'all', patient: 'all' } };
-  let dock = null;
+  let dock = null, cursor = null;
   const tip = K.hoverTip, nat = new Intl.Collator('en', { numeric: true, sensitivity: 'base' });
   const tabLabel = { chem: () => ['Chemicals', O.chems.length], patient: () => ['Patients', C.state.patientSource === 'own' ? C.state.patients.length : O.totalPatients], yours: () => ['Your data'] };
   ['chem', 'patient', 'yours'].forEach(k => { const b = h('button'); b.type = 'button'; b.dataset.k = k; b.onclick = () => setTab(k); $('tabs').appendChild(b); });
@@ -459,7 +459,7 @@ document.addEventListener('DOMContentLoaded', function () {
   tip(exp, () => `Design ${C.state.design + 1} for the ${view.rows.length} listed chemicals`,
     ['CSV: chemical, design, measured µM, action, hit call, EPA label, reason', 'List a set: separate names with ; or a comma and a space, or paste a column']);
   function list() {
-    const ul = $('list'); ul.textContent = '';
+    const ul = $('list'), hadFocus = ul.contains(document.activeElement); ul.textContent = '';
     document.querySelector('.index').dataset.tab = view.tab;
     $('tabs').querySelectorAll('button').forEach(b => {
       const [t, n] = tabLabel[b.dataset.k](); b.textContent = t;
@@ -484,20 +484,21 @@ document.addEventListener('DOMContentLoaded', function () {
       const li = h('li'), b = h('button'); b.type = 'button'; b.setAttribute('role', 'option'); b.tabIndex = -1;
       if (view.tab === 'chem') {
         const c = x, g = gain(c), sq = h('span', 'sq');
-        b.setAttribute('aria-selected', String(c.i === C.state.chem));
+        b.setAttribute('aria-selected', String(c.i === C.state.chem)); b.dataset.key = c.i;
         c.d.forEach((d, k) => { const i = h('i', k === C.state.design ? 'cur' : null); i.style.background = i.style.color = d.act ? 'var(--report)' : 'var(--retest)'; sq.appendChild(i); });
         b.append(h('span', 'name', c.name), sq, h('span', 'g' + (g < 0 ? ' neg' : ''), minus(g)));
         b.title = `${c.name} · error ${C.fix(c.err.anchorboost)} against ${C.fix(c.err.loglinear_interp)} by interpolation · ${settled(c)} of 5 designs reported`;
-        b.onclick = () => { C.set({ chem: c.i }); focusSelected(); };
+        b.onclick = () => { cursor = null; C.set({ chem: c.i }); focusSelected(); };
       } else {
         const r = x, s = status(r), v = readout(r);
-        b.setAttribute('aria-selected', String(r.id === C.state.patient));
+        b.setAttribute('aria-selected', String(r.id === C.state.patient)); b.dataset.key = r.id;
         b.append(h('span', 'name', r.id), h('span', 'rd', short(v)), h('span', 'call ' + s, s));
         b.title = `${r.id} · ${s}${v === null ? ' · saved call without a raw readout' : ''}`;
-        b.onclick = () => { C.set({ patient: r.id }); focusSelected(); };
+        b.onclick = () => { cursor = null; C.set({ patient: r.id }); focusSelected(); };
       }
       li.appendChild(b); ul.appendChild(li);
     });
+    if (hadFocus) { const el = ul.querySelector('button[aria-selected="true"]'); if (el) el.focus({ preventScroll: true }); }
     exportLabel();
   }
   /* keyboard: arrows walk the list and the canvas follows at once */
@@ -507,18 +508,24 @@ document.addEventListener('DOMContentLoaded', function () {
       if (el) { el.focus({ preventScroll: true }); el.scrollIntoView({ block: 'nearest' }); }
     });
   }
+  /* the keyboard keeps its own cursor: a chemical whose details are still loading is selected once they arrive */
   $('list').addEventListener('keydown', e => {
     if (view.tab === 'yours' || !view.rows.length) return;
-    const keys = view.rows.map(x => (view.tab === 'chem' ? x.i : x.id)), cur = view.tab === 'chem' ? C.state.chem : C.state.patient;
-    let i = keys.indexOf(cur);
+    const keys = view.rows.map(x => (view.tab === 'chem' ? x.i : x.id)), now = view.tab === 'chem' ? C.state.chem : C.state.patient;
+    let i = keys.indexOf(keys.includes(cursor) ? cursor : now);
     const step = { ArrowDown: 1, ArrowUp: -1, PageDown: 10, PageUp: -10 }[e.key];
     if (step !== undefined) i = i < 0 ? 0 : Math.max(0, Math.min(keys.length - 1, i + step));
     else if (e.key === 'Home') i = 0;
     else if (e.key === 'End') i = keys.length - 1;
     else return;
     e.preventDefault();
-    C.set(view.tab === 'chem' ? { chem: keys[i] } : { patient: keys[i] });
-    focusSelected();
+    cursor = keys[i];
+    C.set(view.tab === 'chem' ? { chem: cursor } : { patient: cursor });
+    const el = [...$('list').querySelectorAll('button[data-key]')].find(b => b.dataset.key === String(cursor));
+    if (el) {
+      $('list').querySelectorAll('button[aria-selected="true"]').forEach(b => b.setAttribute('aria-selected', 'false'));
+      el.setAttribute('aria-selected', 'true'); el.focus({ preventScroll: true }); el.scrollIntoView({ block: 'nearest' });
+    }
   });
   /* each list keeps its own filter: switching between chemicals, patients and your data starts from an empty one */
   function goTab(k) {
