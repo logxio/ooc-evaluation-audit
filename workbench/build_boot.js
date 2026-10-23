@@ -60,3 +60,19 @@ shards.forEach((rows, i) => {
   write(`ooc-detail-${String(i).padStart(2, '0')}.js`,
     `window.OOC_DETAIL_SHARDS = window.OOC_DETAIL_SHARDS || {}; window.OOC_DETAIL_SHARDS[${i}] = ${JSON.stringify(rows)};\n`);
 });
+
+const runtimeFiles = [
+  'vendor/d3.v7.9.0.min.js',
+  'data/ooc-boot.js',
+  'data/ooc-final-boot.js',
+  'assets/mount-final-1009.js',
+  'engine.js', 'stats.js', 'chain-engine.js', 'result.js',
+  'assets/core.js', 'assets/charts-a.js', 'assets/charts-b.js',
+  'assets/charts-c.js', 'assets/copy.js'
+];
+const runtime = '/* D3 ISC license: vendor/d3.LICENSE.txt. Source files are kept beside this bundle. */\n' +
+  runtimeFiles.map(name => fs.readFileSync(path.join(__dirname, name), 'utf8').trimEnd()).join('\n;\n') + '\n';
+const runtimeFile = path.join(__dirname, 'runtime.js');
+if (process.argv.includes('--check')) {
+  if (fs.readFileSync(runtimeFile, 'utf8') !== runtime) throw new Error('runtime.js needs rebuilding');
+} else fs.writeFileSync(runtimeFile, runtime);
