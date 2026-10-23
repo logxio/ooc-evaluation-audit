@@ -14,7 +14,7 @@
     return out;
   }
 
-  /* ---------- chemicals, wells, designs ---------- */
+  /* chemicals, wells, designs */
   const order = new Map(O.wells.map((w, i) => [w.name, i]));
   const wellsBy = new Map(O.wells.map(w => [w.name, w]));
   O.chems.forEach((c, i) => { c.i = i; c.w = wellsBy.get(c.name); c.order = order.get(c.name); });
@@ -81,7 +81,7 @@
     return arg;
   }
 
-  /* ---------- decision frontier over the 970 held-out designs ---------- */
+  /* decision frontier over the 970 held-out designs */
   const designsAll = [];
   O.chems.slice().sort((a, b) => a.order - b.order).forEach(c => c.d.forEach((d, k) => designsAll.push({ c, k, d })));
   const N = designsAll.length;
@@ -118,13 +118,13 @@
     return Object.assign({ cost: bv }, best);
   }
 
-  /* ---------- design layouts (7-concentration chemicals) ---------- */
+  /* design layouts (7-concentration chemicals) */
   function layouts() {
     return Object.entries(O.patterns).map(([key, v]) => ({ key, pos: key.split('').map(Number), n: v.n, rep: v.rep, wrong: v.wrong, rate: v.rep / v.n }))
       .sort((a, b) => b.rate - a.rate || b.n - a.n || a.key.localeCompare(b.key));
   }
 
-  /* ---------- patients ---------- */
+  /* patients */
   const P = O.patients;
   /* published cohort: the frozen combined-regimen cutoff; call 1 = sensitive, 0 = resistant, null = retest */
   function publishedPatients() {
@@ -154,7 +154,7 @@
     return s;
   }
 
-  /* ---------- paste parsers ---------- */
+  /* paste parsers */
   function table(text) {
     const lines = text.replace(/^﻿/, '').split(/\r?\n/).map(l => l.trim()).filter(Boolean);
     if (lines.length < 2) throw Error('Add a header row and at least one patient.');
@@ -237,7 +237,7 @@
     return { pts, key: pos.length === 3 ? pos.join('') : null, marked: pos.length };
   }
 
-  /* ---------- window.OOC.strongBaseline: the same five contexts against the published neural process, the matched-budget ablation, perfused liver chips ----------
+  /* window.OOC.strongBaseline: the same five contexts against the published neural process, the matched-budget ablation, perfused liver chips
      every difference is turned into an error reduction, positive when the boosted forecast has the lower error; subgroups appear only where the package has them */
   const strong = (() => {
     const S = O.strongBaseline;
@@ -266,7 +266,7 @@
     };
   })();
 
-  /* ---------- selection store ---------- */
+  /* selection store */
   const listeners = new Set();
   const first = chemBy.get(O.examples[0].chemical);
   const state = { chem: first.i, design: 0, output: defaultOutput(first), full: false, truth: true, reveal: false, cost: 0.25, versus: 'loglinear_interp', patient: null, patients: publishedPatients(), patientSource: 'published', layout: null };
@@ -353,14 +353,14 @@
     }, { once: true });
   }
 
-  /* ---------- formatting ---------- */
+  /* formatting */
   const pct = (x, d = 1) => (100 * x).toFixed(d) + '%';
-  const fix = (x, d = 2) => (x === null || x === undefined || Number.isNaN(x) ? '—' : Number(x).toFixed(d));
+  const fix = (x, d = 2) => (x === null || x === undefined || Number.isNaN(x) ? 'n/a' : Number(x).toFixed(d));
   const int = x => Math.round(x).toLocaleString('en-US');
   const uM = lv => { const v = Math.pow(10, lv); return v >= 100 ? v.toFixed(0) : String(+v.toPrecision(6)); };
   const outName = j => `${O.features[j % NF]} · DIV ${O.divs[Math.floor(j / NF)]}`;
 
-  /* ---------- tooltip ---------- */
+  /* tooltip */
   let tipEl = null;
   function tip(evt, value, rows, opt) {
     if (!tipEl) { tipEl = document.createElement('div'); tipEl.className = 'tip'; document.body.appendChild(tipEl); }
@@ -382,7 +382,7 @@
   }
   function untip() { if (tipEl) tipEl.classList.remove('on'); }
 
-  /* ---------- consistency check against the exported decision scores (run from the console) ---------- */
+  /* consistency check against the exported decision scores (run from the console) */
   function selfTest() {
     let worst = 0;
     O.chems.forEach(c => c.d.forEach((d, k) => { worst = Math.max(worst, Math.abs(track(c, k).score - d.score)); }));

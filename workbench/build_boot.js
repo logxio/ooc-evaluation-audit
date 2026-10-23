@@ -31,6 +31,15 @@ boot.chems.forEach((chemical, i) => {
 });
 boot.wells.forEach(well => { if (well.name !== first) delete well.y; });
 
+/* scoreboard: each published configuration against the team stack at one to four measured concentrations,
+   [mae, stack minus row, 95% low, 95% high, outcome, chemicals closer, chemicals farther] */
+const paired = cfg => Object.fromEntries(Object.entries(cfg.k)
+  .filter(([, x]) => x.status === 'available' && x.paired && x.paired.anchorboost_team)
+  .map(([k, x]) => { const p = x.paired.anchorboost_team; return [k, [x.mae, p.difference, p.ci_low, p.ci_high, p.outcome, p.chemical_wins, p.chemical_losses]]; }));
+const team = final.baselines.references.find(r => r.id === 'anchorboost_team');
+/* receipts for the reproduce dock: the clean-snapshot run and the blind lock, read from the released files */
+const readJSON = rel => JSON.parse(fs.readFileSync(path.join(__dirname, '..', rel), 'utf8'));
+const verification = readJSON('results/final/verification.json'), lock = readJSON('three_point_example/forecast/lock.json');
 const finalBoot = {
   schema: final.schema,
   screening: {
@@ -43,7 +52,14 @@ const finalBoot = {
   },
   baselines: {
     stackTotals: final.baselines.stackTotals,
-    opponents: Array(final.baselines.opponents.length).fill(null)
+    countsByK: final.baselines.countsByK.filter(c => c.reference === 'anchorboost_team'),
+    team: { name: team.name, k: Object.fromEntries(Object.entries(team.k).map(([k, x]) => [k, x.mae])) },
+    opponents: final.baselines.opponents.map(o => ({ name: o.name, family: o.family, url: o.sourceUrl, k: paired(o) }))
+  },
+  receipts: {
+    python: verification.python, numpy: verification.numpy,
+    commands: verification.commands.map(c => [c.command, c.exit_code, c.seconds, c.peak_rss_bytes]),
+    lock: { created: lock.created_utc, input: Object.entries(lock.inputs)[0], output: Object.entries(lock.output)[0], models: Object.keys(lock.models).length }
   },
   patients: final.patients
 };

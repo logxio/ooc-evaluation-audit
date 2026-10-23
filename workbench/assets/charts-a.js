@@ -33,7 +33,7 @@
   const layer = (sel, cls) => { let g = sel.select('g.' + cls); if (g.empty()) g = sel.append('g').attr('class', cls); return g; };
   Charts.layer = layer;
 
-  /* ---------------- 1. concentration-response curve with call track ---------------- */
+  /* 1. concentration-response curve with call track */
   Charts.curve = function (el, opt) {
     opt = opt || {};
     const M = { t: 8, r: 16, b: 32, l: 44 }, GAP = 24, H2 = opt.track || 72;
@@ -133,7 +133,7 @@
             C.tip(ev, `${C.uM(lv[l])} µM · forecast ${C.fix(p.f)}`, [
               { text: `90% interval ${C.fix(p.f - p.h)} to ${C.fix(p.f + p.h)}`, color: css('band') },
               { text: `log-linear ${C.fix(p.ll)}`, color: css('compare') },
-              { text: `held-out wells ${vs || '—'} · ${inside} of ${here.length} inside`, color: css('ink-3') }]);
+              { text: `held-out wells ${vs || 'n/a'} · ${inside} of ${here.length} inside`, color: css('ink-3') }]);
           }
         })
         .on('pointerleave', () => { cross.selectAll('line').remove(); C.untip(); });
@@ -156,7 +156,7 @@
     });
   };
 
-  /* ---------------- 2. per-output error matrix (17 features x 4 recording days) ---------------- */
+  /* 2. per-output error matrix (17 features x 4 recording days) */
   Charts.heat = function (el, opt) {
     opt = opt || {};
     const draw = Charts.mount(el, (svg, W, S, patch) => {
@@ -189,7 +189,7 @@
     return draw;
   };
 
-  /* ---------------- 3. plate map: run wells lit, unrun wells left to the forecast ---------------- */
+  /* 3. plate map: run wells lit, unrun wells left to the forecast */
   const plates = new Map();
   O.wells.forEach(w => w.plate.forEach((p, r) => { if (!plates.has(p)) plates.set(p, []); plates.get(p).push({ name: w.name, r, l: w.lv[r] }); }));
   Charts.plates = plates;
@@ -248,7 +248,7 @@
     return draw;
   };
 
-  /* ---------------- 4. layout matrix: which three of seven concentrations settle the call ---------------- */
+  /* 4. layout matrix: which three of seven concentrations settle the call */
   Charts.layouts = function (el, opt) {
     opt = opt || {};
     const all = C.layouts();

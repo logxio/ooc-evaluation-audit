@@ -182,7 +182,7 @@
     }
     function tableView(s) {
       const wrap = h('div', 'stack1');
-      wrap.append(h('p', 't1 ink3', `${s.args.file} · rows ${s.args.start}–${s.args.start + s.rows.length - 1}`));
+      wrap.append(h('p', 't1 ink3', `${s.args.file} · rows ${s.args.start} to ${s.args.start + s.rows.length - 1}`));
       const t = h('table', 'mini');
       const head = h('tr'); ['Organoid', 'Age', 'Sex', 'Site', 'Clinical stage', 'Pathology', 'Regression grade'].forEach(x => head.appendChild(h('th', null, x)));
       t.appendChild(head);
@@ -244,6 +244,65 @@
     ];
     el.textContent = '';
     items.forEach(([v, k]) => { const s = h('div', 'stat'); s.append(h('div', 'v', v), h('div', 'k', k)); el.appendChild(s); });
+  };
+
+  /* hover and keyboard focus open the same tip, so the trigger itself stays one line */
+  Charts.hoverTip = (el, title, rows, opt) => {
+    const show = ev => {
+      const r = el.getBoundingClientRect();
+      C.tip(ev.clientX !== undefined ? ev : { clientX: r.left, clientY: r.bottom + 8 }, typeof title === 'function' ? title() : title, typeof rows === 'function' ? rows() : rows, opt);
+    };
+    el.addEventListener('pointermove', show); el.addEventListener('focus', show);
+    el.addEventListener('pointerleave', C.untip); el.addEventListener('blur', C.untip);
+    return el;
+  };
+
+  /* 13. scoreboard: the team stack against every published configuration at one to four measured concentrations */
+  const WORDS = ['one', 'two', 'three', 'four'];
+  const signed = (x, d = 4) => (x < 0 ? '−' : '+') + Math.abs(x).toFixed(d);
+  Charts.scoreboardRows = k => {
+    const B = O.final1009.baselines;
+    return B.opponents.filter(o => o.k[k]).map(o => ({ o, x: o.k[k] })).sort((a, b) => a.x[0] - b.x[0]);
+  };
+  Charts.scoreboard = function (el, opt) {
+    opt = opt || {};
+    const B = O.final1009.baselines, view = { k: 3, all: false };
+    const head = h('div', 'sbr sbh');
+    ['Predictor', 'Error, lower is better', 'MAE', 'Stack minus row, 95% interval'].forEach(t => head.append(h('span', null, t)));
+    Charts.hoverTip(head.lastChild, 'Paired 95% identity-cluster bootstrap', ['Chemicals of one identity resample together', 'Negative favours the stack; an interval that excludes 0 is a win']);
+    head.lastChild.tabIndex = 0;
+    const body = h('div', 'sb'), more = h('button', 'btn quiet sb-more'); more.type = 'button';
+    more.onclick = () => { view.all = !view.all; render(); };
+    el.textContent = ''; el.append(head, body, more);
+    const row = (name, mae, lo, hi, me, url, x) => {
+      const r = h('div', 'sbr' + (me ? ' me' : '')), tr = h('span', 'tr'), bar = h('i'), ref = h('b');
+      const pos = v => Math.max(0, Math.min(100, (v - lo) / (hi - lo) * 100));
+      bar.style.width = pos(mae) + '%'; ref.style.left = pos(B.team.k[view.k]) + '%'; tr.append(bar, ref);
+      const nm = url ? h('a', 'nm', name) : h('span', 'nm', name);
+      if (url) { nm.href = url; nm.target = '_blank'; nm.rel = 'noopener'; }
+      const d = h('span', 'd');
+      if (x) { d.append(h('b', x[4], x[4] === 'win' ? 'Win' : x[4] === 'tie' ? 'Tie' : 'Loss'), `${signed(x[1])} [${signed(x[2])}, ${signed(x[3])}]`); }
+      else d.append('reference');
+      r.append(nm, tr, h('span', 'val', mae.toFixed(4)), d);
+      return r;
+    };
+    function render() {
+      const rows = Charts.scoreboardRows(view.k), team = B.team.k[view.k];
+      const maes = rows.map(r => r.x[0]).concat(team), lo = Math.floor(Math.min(...maes) * 10) / 10 - 0.1, hi = Math.max(...maes) * 1.02;
+      body.textContent = '';
+      body.append(row('AnchorBoost stack (ours)', team, lo, hi, true));
+      (view.all ? rows : rows.slice(0, 9)).forEach(({ o, x }) => {
+        const r = row(o.name, x[0], lo, hi, false, o.url, x);
+        Charts.hoverTip(r, o.name, [`${o.family.replace(/_/g, ' ')} · MAE ${x[0].toFixed(4)} at ${WORDS[view.k - 1]} measured concentration${view.k > 1 ? 's' : ''}`,
+          `Stack closer on ${x[5]} of ${x[5] + x[6]} chemicals`, `Stack minus row ${signed(x[1])}, 95% interval ${signed(x[2])} to ${signed(x[3])}`]);
+        body.append(r);
+      });
+      more.hidden = rows.length <= 9;
+      more.textContent = view.all ? 'Show the closest 9' : `Show all ${rows.length}`;
+      if (opt.onK) opt.onK(view.k, rows.length);
+    }
+    render();
+    return { set: k => { view.k = k; render(); } };
   };
 
   /* paste input: plate planner and patient table */

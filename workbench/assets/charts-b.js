@@ -12,7 +12,7 @@
   };
   Charts.VERSUS = VERSUS;
 
-  /* ---------------- 5. waterfall: error reduction per chemical against one comparator ---------------- */
+  /* 5. waterfall: error reduction per chemical against one comparator */
   Charts.waterfall = function (el, opt) {
     opt = opt || {};
     const M = { t: 16, r: 8, b: 24, l: 44 };
@@ -55,7 +55,7 @@
     return draw;
   };
 
-  /* ---------------- 6. interval calibration by recording day and by feature ---------------- */
+  /* 6. interval calibration by recording day and by feature */
   Charts.calibrationRows = (() => {
     const cov = O.coverage;
     const agg = (pick) => {
@@ -100,7 +100,7 @@
     return draw;
   };
 
-  /* ---------------- 7. decision frontier: wells left unrun against wrong calls ---------------- */
+  /* 7. decision frontier: wells left unrun against wrong calls */
   Charts.tradeoff = function (el, opt) {
     opt = opt || {};
     const F = C.frontier('forecast'), Mo = C.frontier('measured');
@@ -163,7 +163,7 @@
     });
   };
 
-  /* ---------------- 9. forest: every held-out fold of three neural screens, rat and human, against two comparators ----------------
+  /* 9. forest: every held-out fold of three neural screens, rat and human, against two comparators
      one label column, two panels: the same folds against log-linear interpolation and against the published neural process
      given the same five three-concentration contexts; reductions are positive when the boosted forecast has the lower error */
   const screens = [
@@ -255,7 +255,7 @@
     return rows;
   };
 
-  /* ---------------- 10. perfused liver chips: five endpoints, each in its own published units ----------------
+  /* 10. perfused liver chips: five endpoints, each in its own published units
      one row per endpoint with its own axis; the point is the error reduction against interpolation with its 95% interval over drugs */
   Charts.CHIP = { Ewart2022: ['Ewart 2022', 'primary human hepatocytes, perfused'], Yuan2025: ['Yuan 2025', 'human cell lines, perfused'] };
   Charts.CHIP_END = { ALBUMIN: 'albumin, normalized', ALT: 'ALT', Morphology: 'morphology score', LDH: 'LDH' };
@@ -309,7 +309,7 @@
     return draw;
   };
 
-  /* ---------------- 11. ablations: what each input is worth, in curve MAE ----------------
+  /* 11. ablations: what each input is worth, in curve MAE
      the layout ablation is matched on training rows times boosting iterations; the anchor row compares residual and direct targets on identical rows */
   Charts.ablationRows = () => {
     const A = O.ablations.ablations, S = C.strong;

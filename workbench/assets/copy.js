@@ -82,7 +82,7 @@
   Copy.calKeys = [['dot', 'var(--forecast)', 'Learned width'], ['ring', 'var(--compare)', 'Plain conformal'], ['dash', 'var(--cutoff)', 'Target']];
   Copy.calibrationClaim = () => {
     const r = K.calibrationRows, lo = Math.min(...r.map(x => x.learned)), hi = Math.max(...r.map(x => x.learned));
-    return `90% intervals cover ${C.fix(lo * 100, 1)}–${C.pct(hi)} on every day and feature`;
+    return `90% intervals cover ${C.fix(lo * 100, 1)} to ${C.pct(hi)} on every day and feature`;
   };
   /* evidence links sit beside the figure they back: the public file in the repository */
   Copy.repo = 'https://github.com/logxio/ooc-evaluation-audit/blob/main/';
@@ -110,7 +110,7 @@
   };
   Copy.chipsNote = () => {
     const leaf = O.model.params.min_samples_leaf, small = C.strong.chips.filter(r => r.rows.every(n => n < leaf));
-    return small.map(r => `${r.rows.join('–')} ${K.CHIP_END[r.endpoint]}`).join(' and ') + ` training rows per fold in ${K.CHIP[small[0].dataset][0]} sit below the frozen minimum leaf of ${leaf}: the trees cannot split, so that forecast is interpolation plus one constant. ` +
+    return small.map(r => `${r.rows.join(' to ')} ${K.CHIP_END[r.endpoint]}`).join(' and ') + ` training rows per fold in ${K.CHIP[small[0].dataset][0]} sit below the frozen minimum leaf of ${leaf}: the trees cannot split, so that forecast is interpolation plus one constant. ` +
       'Differences keep each endpoint’s published units; drugs are the resampling unit.';
   };
   Copy.ablationClaim = () => `Training on every layout lowers error by ${C.fix(K.ablationRows()[0].v, 3)} at a matched budget`;
@@ -122,191 +122,211 @@
   };
   Copy.agentClaim = () => { const k = O.agent.cohort; return `Hand it a paper and it rebuilds the clinical headline: ${k.audited_passes} of ${k.eligible} studies`; };
   Copy.agentSource = () => `${O.agent.title} · ${O.agent.citation.split(';')[0]} · ${O.agent.license}`;
-  /* Method details open from four keyboard accessible tabs. */
-  Copy.methodBlocks = [
-    ['Data', '13 published studies, 12 in Cell or Nature portfolio journals',
-      'Public EPA neural screens, liver chips and patient organoids. The Published studies library includes Ren biliary AUC, Wang lung IC50, Zhai microfluidic dose response, Zhao gastric AUC and GDOP perfusion time points. Each study page names its journal, DOI, license, observation unit and download. The Patients tab includes the 48-patient Ren assay view. Distinct patients across its eight cohort views total 306, while clinical scoring remains tied to its original evaluable subsets.'],
-    ['Model', 'Boosted residuals on log-linear interpolation',
-      'Gradient-boosted residuals on log-linear interpolation, one model per held-out fold, trained on every three-concentration layout of the training chemicals. A full retrain of every fold at one to four measured concentrations runs in 65 minutes in one Kaggle notebook session.'],
-    ['Validation', 'Held-out folds, rules fitted on other folds',
-      'Every chart scores chemicals and patients outside the training of their own model. Each test fold’s hit-call rule takes its cutoff from two other folds and its release margin from two more by conformal risk control at α 0.10; fold 0 was the development fold. Cross-conformal 90% intervals use a learned width model. Paired intervals resample chemicals, never wells or designs.'],
-    ['Privacy', 'Runs in this browser; tables stay local',
-      'Every number on this page is computed in this browser from the public release files, and pasted tables never leave your machine. Type: Newsreader, Source Sans 3, Source Code Pro (SIL OFL). Charts: D3 (ISC).']
+  const hoverTip = K.hoverTip;
+  /* canvas chain: four numbered steps, each with the reading it proves */
+  const ag = O.agent.cohort, outputs = O.features.length * O.divs.length;
+  Copy.chain = [
+    ['curve', 'Curve', String(outputs), 'outputs', `${outputs} day-by-feature outputs forecast at once from three concentrations`],
+    ['plate', 'Plate', Copy.heroNumber, 'fewer wells', `${C.int(cl.wells_used)} of ${C.int(cl.wells_full)} exposure wells across ${C.int(cl.designs)} designs`],
+    ['evidence', 'Evidence', `${bt.win}W ${bt.tie}T ${bt.loss}L`, '', `${bt.win} wins, ${bt.tie} tie, ${bt.loss} losses against ${F.baselines.opponents.length} published configurations at one to four concentrations`],
+    ['model', 'Model', `${ag.audited_passes}/${ag.eligible}`, 'papers', `The paper agent rebuilds ${ag.audited_passes} of ${ag.eligible} external headlines offline`]
   ];
-  const methodLink = (label, href, local = false) => {
-    const a = K.h('a', null, label);
-    a.href = href;
-    if (!local) { a.target = '_blank'; a.rel = 'noopener'; }
-    if (local && label.startsWith('Download')) a.download = '';
-    return a;
+  const WORDS = ['one', 'two', 'three', 'four'];
+  Copy.scoreClaim = k => {
+    const c = F.baselines.countsByK.find(x => x.k === k), mae = F.baselines.team.k[k].toFixed(4), at = `${WORDS[k - 1]} measured concentration${k > 1 ? 's' : ''}`;
+    return c.win === c.opponents ? `Stack ${mae} beats all ${c.opponents} published configurations at ${at}`
+      : `Stack ${mae} at ${at}: ${c.win} wins, ${c.tie} tie${c.tie === 1 ? '' : 's'}, ${c.loss} losses of ${c.opponents}`;
   };
-  const methodSection = (title, note) => {
-    const section = K.h('section', 'method-section');
-    section.append(K.h('h5', null, title), K.h('p', null, note));
-    return section;
+  Copy.scoreKTip = k => { const c = F.baselines.countsByK.find(x => x.k === k); return [`${WORDS[k - 1][0].toUpperCase() + WORDS[k - 1].slice(1)} measured concentration${k > 1 ? 's' : ''}`, [`${c.opponents} published configurations: ${c.win} wins, ${c.tie} tie${c.tie === 1 ? '' : 's'}, ${c.loss} losses`]]; };
+
+  /* reproduce dock: four receipts; every command, ledger line and link is one line, its explanation sits in the tip */
+  const REPO = 'https://github.com/logxio/ooc-evaluation-audit', blob = p => `${REPO}/blob/main/${p}`, tree = p => `${REPO}/tree/main/${p}`;
+  const R = F.receipts, okN = R.commands.filter(c => c[1] === 0).length, peak = Math.max(...R.commands.map(c => c[3])), longest = Math.max(...R.commands.map(c => c[2]));
+  const verifySec = R.commands.find(c => /paper_final_verify/.test(c[0]))[2], k3 = F.baselines.countsByK.find(c => c.k === 3), M = O.model;
+  const lockAt = R.lock.created.replace('T', ' ').replace(/:\d\d\+00:00$/, ' UTC');
+  const CLONE = [`git clone ${REPO} && cd ooc-evaluation-audit`, '', 'Fresh clone; every command below runs from the repository root'];
+  const PIP = ['python -m pip install -r requirements.txt', '', 'Pinned dependencies for the forecast CLI'];
+  const PIPF = ['python -m pip install -r requirements-final.txt', '', 'Pinned dependencies for the paper checks'];
+  Copy.dockKeys = ['data', 'model', 'validation', 'privacy'];
+  /* the receipt that backs each canvas view; the dock follows the canvas */
+  Copy.pageDock = { curve: 'data', plate: 'validation', evidence: 'validation', model: 'model', patient: 'validation', yours: 'privacy' };
+  Copy.receipts = {
+    data: {
+      label: 'Data', reading: '13 studies · 12 Cell/Nature',
+      tip: ['13 published studies, 12 in Cell or Nature portfolio journals', ['EPA neural screens, liver chips and patient organoids, all public', 'Each study page names its journal, DOI, license, observation unit and download']],
+      claim: 'EPA screens download from source and pass SHA-256 before any fit',
+      cmds: [CLONE, PIP,
+        ['python three_point.py --example epa_dnt', '9.86 s', 'EPA human neural-cell screen: download, SHA-256 check, plate table'],
+        ['python chip_forecast.py', '~4 min per fold', 'Network formation screen: two pinned files, SHA-256 check, published baseline errors reproduced, one model per held-out fold on free Kaggle CPU']],
+      ledger: [
+        ['Locked input', 'epa_dnt_three_point.csv', R.lock.input[1]],
+        ['Baseline match', 'log-linear errors within 0.0001, 243 chemicals', null, ['Published log-linear interpolation errors reproduced within 0.0001 for all 243 chemicals at every measured-concentration count']],
+        ['Scope', `${O.chems.length} held-out chemicals · ${outputs} outputs · ${O.totalPatients} patients`]],
+      pills: [['EPA network formation', 'https://github.com/Agnuxo1/neurochip-twin', 'public domain'], ['EPA acute MEA', 'https://doi.org/10.23719/1504294', 'public domain'],
+        ['EPA human neural DNT', 'https://doi.org/10.23719/1407642', 'public domain'], ['Ewart Liver-Chip', 'https://doi.org/10.1038/s43856-022-00209-1', 'CC BY 4.0'],
+        ['Yuan liver chip', 'https://doi.org/10.1038/s42003-025-08928-6', 'error statistics'], ['13 study audits', 'audits/index.html', '12 Cell/Nature']],
+      jump: ['Open Curve ↑', 'curve']
+    },
+    model: {
+      label: 'Model', reading: 'Boosted residuals',
+      tip: ['Gradient-boosted residuals on log-linear interpolation', ['One model per held-out fold, trained on every three-concentration layout of the training chemicals']],
+      claim: 'One frozen model per held-out fold, trained on every layout',
+      cmds: [CLONE, PIP,
+        ['python three_point.py my_plates.csv', '', 'Forecast your own unfinished plate table with the frozen model; writes a SHA-256 lock'],
+        PIPF,
+        ['python benchmarks/stack/reproduce.py', '0.20 to 0.75 s', 'Stack error at one to four concentrations from saved member predictions'],
+        ['python -m contract_agent.replay_agent', 'standard library', `Replay the paper agent offline: ${ag.audited_passes} of ${ag.eligible} headlines rebuilt`]],
+      ledger: [
+        ['Frozen protocol', 'commit 2b4c20e, before folds 1 to 4 were scored'],
+        ['Training', `${C.int(M.designs_enumerated.fold1)} layouts · ${(M.timing.k3_fold1.training_rows / 1e6).toFixed(2)} M rows · ${(M.timing.k3_fold1.seconds / 60).toFixed(1)} min per fold`, null, ['Fold 1 at three measured concentrations, CPU only']],
+        ['Paper agent', `${ag.audited_passes} of ${ag.eligible} external headlines rebuilt`, null, [`${ag.correct_refusals} of ${ag.controls} no-headline controls declined`]]],
+      pills: [['three_point.py', blob('three_point.py')], ['benchmarks/stack', tree('benchmarks/stack')], ['contract_agent', tree('contract_agent')],
+        ['Frozen protocol', `${REPO}/blob/2b4c20e/chip_forecast_protocol.json`], ['Fold 0 weights', blob('results/nested/fold0/outer_model.joblib')]],
+      jump: ['Open Model ↑', 'model']
+    },
+    validation: {
+      label: 'Validation', reading: '5-fold blind lock',
+      tip: ['Every chart scores chemicals and patients outside their own model’s training', ['Each test fold takes its hit cutoff from two other folds and its release margin from two more, by conformal risk control at α 0.10', 'Forecasts lock by SHA-256 before outcomes are read']],
+      claim: 'Forecasts lock by SHA-256 before the plates are read',
+      cmds: [CLONE, PIP,
+        ['python three_point.py --example epa_dnt', '9.86 s', 'Download the EPA human neural screen and check its SHA-256'],
+        ['python three_point.py epa_dnt/epa_dnt_three_point.csv --out epa_dnt/forecast --jobs 9', '26.05 s', 'Lock forecasts for 107 unfinished series; lock.json fixes the SHA-256 of input, output, models, protocol and code'],
+        ['python three_point.py epa_dnt/epa_dnt_human_neural.csv --reconcile epa_dnt/forecast', '1.02 s', '2,318 of 2,520 hidden wells (92.0%) fall inside the 90% intervals'],
+        PIPF,
+        ['python paper_final_baselines.py', '0.54 s', `Rebuild the ${F.baselines.opponents.length}-model scoreboard and every win, tie and loss from per-chemical errors`],
+        ['python paper_final_verify.py verify', `${verifySec.toFixed(2)} s`, 'Verify input hashes and 9,168 indexed values, 3,423 of them intervals']],
+      ledger: [
+        ['Blind lock', `lock.json · ${lockAt}`],
+        ['Locked output', 'forecast.csv', R.lock.output[1]],
+        ['Locked models', `${R.lock.models} endpoint models in the same lock`],
+        ['Clean snapshot', `${okN} of ${R.commands.length} commands exit 0 · peak ${(peak / 1e6).toFixed(1)} MB`, null, [`Longest ${longest.toFixed(2)} s`, `Python ${R.python}, NumPy ${R.numpy}`]]],
+      pills: [['lock.json', blob('three_point_example/forecast/lock.json')], ['reconcile.md', blob('three_point_example/forecast/reconcile.md')],
+        ['scoreboard.csv', blob('results/final/baselines/scoreboard.csv')], ['verification.json', blob('results/final/verification.json')], ['numbers.json', blob('results/final/numbers.json')]],
+      jump: ['Open Evidence ↑', 'evidence']
+    },
+    privacy: {
+      label: 'Privacy', reading: '100% local',
+      tip: ['Every number here is computed in this browser from the public release files', ['Pasted tables never leave your machine']],
+      claim: 'Every number computes in your browser; pasted tables stay here',
+      cmds: [CLONE,
+        ["grep -lE 'fetch\\(|XMLHttp[R]equest|send[B]eacon' workbench/runtime.js workbench/assets/*.js", 'instant', 'Prints nothing: the workbench code makes no network call'],
+        ['cd workbench && python -m http.server 8000', '', 'Run the same workbench offline at localhost:8000']],
+      ledger: [
+        ['Data path', 'plain scripts from this site; pasted tables stay in memory'],
+        ['Code', 'MIT licence'],
+        ['Type and charts', 'SIL OFL 1.1 fonts · D3 ISC', null, ['Newsreader, Source Sans 3, Source Code Pro', 'D3 (ISC) and d3-ease (BSD)']]],
+      pills: [['LICENSE', blob('LICENSE'), 'MIT'], ['workbench source', tree('workbench')], ['D3 licence', 'vendor/d3.LICENSE.txt', 'ISC'], ['result.json', 'result.json', 'frozen patient rule', true]],
+      jump: ['Paste your table ↑', 'yours']
+    }
   };
-  const methodLinks = pairs => {
-    const row = K.h('div', 'method-links');
-    pairs.forEach(([label, path, local]) => row.appendChild(methodLink(label, local ? path : Copy.repo + path, local)));
-    return row;
+  const copyText = async text => {
+    try { await navigator.clipboard.writeText(text); return true; } catch (_) {
+      const back = document.activeElement, ta = document.createElement('textarea'); ta.value = text;
+      ta.style.cssText = 'position:fixed;left:-9999px;opacity:0'; document.body.appendChild(ta); ta.select();
+      let ok = false; try { ok = document.execCommand('copy'); } catch (__) { ok = false; }
+      ta.remove(); if (back && back.focus) back.focus({ preventScroll: true });
+      return ok;
+    }
   };
-  const methodTable = (headers, rows) => {
-    const wrap = K.h('div', 'method-table-wrap'), table = K.h('table', 'method-table');
-    const head = K.h('thead'), headerRow = K.h('tr');
-    headers.forEach(label => headerRow.appendChild(K.h('th', null, label)));
-    head.appendChild(headerRow);
-    const body = K.h('tbody');
-    rows.forEach(cells => {
-      const tr = K.h('tr');
-      cells.forEach(cell => {
-        const td = K.h('td');
-        if (Array.isArray(cell)) td.appendChild(methodLink(cell[0], cell[1], !!cell[2]));
-        else td.textContent = cell;
-        tr.appendChild(td);
-      });
-      body.appendChild(tr);
-    });
-    table.append(head, body); wrap.appendChild(table);
-    return wrap;
-  };
-  const methodCode = (title, code) => {
-    const block = K.h('div', 'method-code'), top = K.h('div', 'method-code-head');
-    const button = K.h('button', 'method-copy', 'Copy'); button.type = 'button';
-    button.setAttribute('aria-label', `Copy ${title} commands`);
-    button.onclick = async () => {
-      try {
-        const fallback = () => {
-          const input = document.createElement('textarea'); input.value = code;
-          input.style.position = 'fixed'; input.style.opacity = '0';
-          document.body.appendChild(input); input.select();
-          const copied = document.execCommand('copy'); input.remove();
-          if (!copied) throw new Error('Copy unavailable');
-        };
-        if (navigator.clipboard && navigator.clipboard.writeText) {
-          try { await navigator.clipboard.writeText(code); }
-          catch (_) { fallback(); }
-        } else fallback();
-        button.textContent = 'Copied';
-        setTimeout(() => { if (button.isConnected) button.textContent = 'Copy'; }, 1800);
-      } catch (_) { button.textContent = 'Select commands'; }
+  /* a copy control reports what happened: Copied, or that the text needs selecting by hand */
+  const copyButton = (cls, label, text) => {
+    const b = K.h('button', cls, label); b.type = 'button';
+    b.onclick = async ev => {
+      ev.stopPropagation();
+      const ok = await copyText(text);
+      b.classList.remove('ok', 'bad'); b.classList.add(ok ? 'ok' : 'bad'); b.textContent = ok ? 'Copied' : 'Select to copy';
+      clearTimeout(b._t); b._t = setTimeout(() => { b.classList.remove('ok', 'bad'); b.textContent = label; }, 1600);
     };
-    top.append(K.h('span', null, title), button);
-    const pre = K.h('pre'), printed = K.h('code', null, code);
-    pre.appendChild(printed); block.append(top, pre);
-    return block;
+    return b;
   };
-  const methodAction = (label, callback) => {
-    const button = K.h('button', 'method-action', label);
-    button.type = 'button'; button.onclick = callback;
-    return button;
+  const hashChip = full => {
+    const b = K.h('button', 'hash', full.slice(0, 8) + '…' + full.slice(-4)); b.type = 'button';
+    hoverTip(b, 'SHA-256', [full, 'Click to copy']);
+    b.onclick = async () => { const ok = await copyText(full); b.textContent = ok ? 'copied' : 'select to copy'; setTimeout(() => { b.textContent = full.slice(0, 8) + '…' + full.slice(-4); }, 1400); };
+    return b;
   };
-  Copy.methods = (el, actions = {}) => {
+  const local = href => !/^https?:/.test(href);
+  Copy.dock = (el, actions = {}) => {
+    const S = { key: '', open: false };
     el.textContent = '';
-    el.classList.add('methods');
-    const row = K.h('div', 'method-tabs');
-    row.setAttribute('role', 'tablist');
-    row.setAttribute('aria-label', 'Methods and data');
-    const detail = K.h('div', 'method-detail');
-    detail.id = 'method-detail';
-    detail.setAttribute('role', 'tabpanel');
-    const tabs = [];
-    const select = index => {
-      const [name, , full] = Copy.methodBlocks[index];
-      tabs.forEach((tab, i) => {
-        tab.setAttribute('aria-selected', String(i === index));
-        tab.tabIndex = i === index ? 0 : -1;
-      });
-      detail.setAttribute('aria-labelledby', tabs[index].id);
-      detail.textContent = '';
-      detail.append(K.h('h4', null, name), K.h('p', null, full));
-      if (index === 0) {
-        const section = methodSection('Public inputs and study audits', 'Open the original analysis, a local input sample, or a checked result for each source. Source licenses differ by study.');
-        section.appendChild(methodTable(['Dataset or paper', 'What is available', 'Open'], [
-          ['EPA chronic rat MEA, 194 chemicals', 'Five chemical folds and 35 layouts', ['Result CSV', Copy.repo + 'chip_forecast_result.csv']],
-          ['EPA acute rat MEA', 'External screen, per chemical', ['Result CSV', Copy.repo + 'benchmarks/strong_baseline/external/acute/per_chemical.csv']],
-          ['Harrill human neural screen, 2,520 hidden wells', 'Locked forecast and reveal', ['Reconcile', Copy.repo + 'three_point_example/forecast/reconcile.md']],
-          ['Bircsak perfused liver chips', 'Scored predictions', ['Result CSV', Copy.repo + 'results/capacity/bircsak_run_v1/scored_predictions.csv']],
-          ['Ewart, Communications Medicine', 'Normalized liver chip inputs', ['Input CSV', Copy.repo + 'results/capacity/inputs/runs/chip-evidence-s1/expand/ewart/normalized.csv']],
-          ['Yuan, Communications Biology', 'Normalized liver chip inputs', ['Input CSV', Copy.repo + 'results/capacity/inputs/runs/chip-evidence-s1/expand/yuan_normalized.csv']],
-          ['Xu rectal organoids, Cell Reports Medicine', 'Clinical cohort audit', ['Audit', 'audits/rectal.html', true]],
-          ['Dai vascularized chip, Cell Reports Medicine', 'Patient holdout and readout audit', ['Audit', 'audits/dai.html', true]],
-          ['Tan colorectal organoids, Cell Reports Medicine', 'Patient action audit', ['Audit', 'audits/tan.html', true]],
-          ['Hu lung organoids, Nature Communications', 'Clinical linkage audit', ['Audit', 'audits/hu.html', true]],
-          ['Schuster perfused organoids, Nature Communications', 'Schedule horizon audit', ['Audit', 'audits/schuster.html', true]]
-        ]));
-        section.appendChild(methodLinks([['All study audits', 'audits/index.html', true], ['Download sample input CSV', 'examples/T1_input.csv', true]]));
-        detail.appendChild(section);
-      } else if (index === 1) {
-        const run = methodSection('Run the frozen prediction and reconcile after reveal', 'From the repository root, run the same CLI on an unfinished table, then on its completed counterpart. The forecast directory contains a SHA-256 lock for inputs, outputs, code, protocol and models.');
-        run.appendChild(methodCode('Three concentration forecast', 'python three_point.py my_plates.csv\npython three_point.py my_finished_plates.csv --reconcile three_point_my_plates'));
-        detail.appendChild(run);
-        const audit = methodSection('Recompute the browser and paper checks', 'The first command compares browser calculations with the Python CLI. The published model comparison runs separately. The image audit downloads a larger source archive and resumes by stage.');
-        audit.appendChild(methodCode('Verification and full audits', 'python workbench/verify.py --out workbench/verification\npython paper_final_baselines.py\npython run_full_audit.py'));
-        detail.appendChild(audit);
-        const cards = K.h('div', 'method-metrics');
-        [[String(O.model.params.min_samples_leaf), 'frozen minimum leaf size'], [String(C.layouts().length), 'three of seven layouts'], [`${bt.win}W ${bt.tie}T ${bt.loss}L`, `${F.baselines.opponents.length} published models, 98 paired comparisons`], ['about 1 min', 'each screen fold on free Kaggle CPU']].forEach(([value, label]) => {
-          const card = K.h('div', 'method-metric'); card.append(K.h('strong', null, value), K.h('span', null, label)); cards.appendChild(card);
-        });
-        detail.append(cards, methodAction('Open full Model & Agent Replay view ↑', () => actions.openView && actions.openView('model', 'ablation')),
-          methodLinks([['Forecast CLI', 'three_point.py'], ['Saved fold 0 weights', 'results/nested/fold0/outer_model.joblib'], ['Browser engine', 'workbench/engine.js'], ['32 model benchmark', 'paper_final_baselines.py'], ['Example SHA-256 lock', 'three_point_example/forecast/lock.json']]));
-      } else if (index === 2) {
-        const section = methodSection('Three checks before a claim leaves the screen', 'Each test chemical or patient is scored outside its own training data. These files let you inspect the heldout rows, frozen receipts and reported totals.');
-        section.appendChild(methodTable(['Control', 'Recorded rule', 'Inspect'], [
-          ['Chemical identity holdout', 'Five folds; test identities stay out of fitting and cutoff selection', ['Heldout script', Copy.repo + 'paper_final_heldout.py']],
-          ['Release risk control', 'Two other folds set the hit cutoff; two more set the release margin at α = 0.10', ['Verification script', Copy.repo + 'paper_final_verify.py']],
-          ['Reveal receipt', 'SHA-256 locks the input, predictions, models, protocol and code before outcomes are reconciled', ['Example lock', Copy.repo + 'three_point_example/forecast/lock.json']]
-        ]));
-        const result = K.h('div', 'method-metrics');
-        [[`${bt.win}W ${bt.tie}T ${bt.loss}L`, '98 paired comparisons across 32 models'], ['2,318 / 2,520', 'Harrill hidden wells inside 90% intervals'], [`${cl.reports} / ${cl.designs}`, 'closed loop designs reported']].forEach(([value, label]) => {
-          const card = K.h('div', 'method-metric'); card.append(K.h('strong', null, value), K.h('span', null, label)); result.appendChild(card);
-        });
-        section.appendChild(result);
-        section.appendChild(methodLinks([['Paper number check', 'paper_final_verify.py'], ['Heldout decisions', 'paper_final_heldout.py'], ['Image audit', 'audit_report.py'], ['Revealed forecast comparison', 'three_point_example/forecast/reconcile.md']]));
-        detail.append(section, methodAction('Open full Evidence & 32-Model Scoreboard ↑', () => actions.openView && actions.openView('evidence', 'replay')));
-      } else {
-        const section = methodSection('Your table stays in this browser', 'Paste or load a CSV to calculate locally. This page sends no table to a server. The downloadable result.json records the published patient rule, reference rows and checks.');
-        section.appendChild(methodTable(['Asset', 'Use', 'Open'], [
-          ['Workbench result.json', 'Frozen published patient rule and reference rows', ['Download JSON', 'result.json', true]],
-          ['MIT code license', 'Repository source code', ['License', Copy.repo + 'LICENSE']],
-          ['EPA public domain inputs', 'Neural screen source and provenance', ['Data guide', Copy.repo + 'README.md']],
-          ['CC BY 4.0 study sources', 'Ewart, rectal, Hu and Schuster; follow each source citation', ['Study audits', 'audits/index.html', true]],
-          ['Other study licenses', 'Yuan and Dai sources have CC BY-NC-ND terms; only permitted analysis is linked', ['Data guide', Copy.repo + 'README.md']]
-        ]));
-        section.appendChild(methodLinks([['Sample CSV', 'examples/T1_input.csv', true], ['Chart library licenses', 'vendor/d3.LICENSE.txt', true]]));
-        detail.append(section, methodAction('Paste your table ↑', () => actions.openPaste && actions.openPaste()));
-      }
-    };
-    Copy.methodBlocks.forEach(([name, short], index) => {
-      const tab = K.h('button', 'cell');
-      tab.type = 'button';
-      tab.id = `method-tab-${index}`;
-      tab.setAttribute('role', 'tab');
-      tab.setAttribute('aria-controls', detail.id);
-      tab.append(K.h('h4', null, name), K.h('p', null, short));
-      tab.addEventListener('click', () => select(index));
-      tab.addEventListener('keydown', event => {
-        if (!['ArrowLeft', 'ArrowRight', 'Home', 'End'].includes(event.key)) return;
-        event.preventDefault();
-        const target = event.key === 'Home' ? 0 : event.key === 'End' ? tabs.length - 1 :
-          (index + (event.key === 'ArrowRight' ? 1 : -1) + tabs.length) % tabs.length;
-        select(target);
-        tabs[target].focus();
-      });
-      tabs.push(tab);
-      row.appendChild(tab);
+    const sheet = K.h('div', 'dsheet'), bar = K.h('div', 'dbar');
+    sheet.id = 'dock-sheet';
+    const ttl = K.h('button', 'dttl'); ttl.type = 'button';
+    ttl.append('Reproduce', K.h('kbd', null, 'R'));
+    hoverTip(ttl, 'Reproduce every number', ['R opens and closes, Esc closes', 'The receipt follows the canvas view']);
+    const tabs = K.h('div', 'dtabs'); tabs.setAttribute('role', 'tablist'); tabs.setAttribute('aria-label', 'Reproduce');
+    const buttons = Copy.dockKeys.map(k => {
+      const r = Copy.receipts[k], b = K.h('button'); b.type = 'button'; b.dataset.k = k;
+      b.setAttribute('role', 'tab'); b.setAttribute('aria-controls', sheet.id);
+      b.append(K.h('b', null, r.label), K.h('span', null, r.reading));
+      hoverTip(b, r.tip[0], r.tip[1]);
+      b.onclick = () => set(k, !(S.open && S.key === k));
+      tabs.appendChild(b); return b;
     });
-    el.append(row, detail);
-    select(0);
+    const stat = K.h('div', 'dstat');
+    [[`${okN}/${R.commands.length}`, 'checks exit 0', 'Clean-snapshot run of the paper checks', [`${okN} of ${R.commands.length} commands exit 0`, `Python ${R.python}, NumPy ${R.numpy}`]],
+      [`${k3.win}/${k3.opponents}`, 'at k=3', `${k3.win} of ${k3.opponents} published configurations beaten`, ['Three measured concentrations, paired identity-cluster bootstrap']],
+      [R.lock.created.slice(0, 10), '', 'Blind lock', [`lock.json written ${lockAt}`, 'before the finished series was read'], 'lock ']]
+      .forEach(([v, k, t, rows, pre]) => { const s = K.h('span'); s.tabIndex = 0; s.append(pre || '', K.h('b', null, v), k ? ' ' + k : ''); stat.appendChild(hoverTip(s, t, rows)); });
+    const chev = K.h('button', 'chev', '⌃'); chev.type = 'button'; chev.onclick = () => set(S.key, !S.open);
+    bar.append(ttl, tabs, stat, chev);
+    ttl.onclick = () => set(S.key, !S.open);
+    el.append(sheet, bar);
+    function drawer() {
+      const r = Copy.receipts[S.key];
+      sheet.textContent = '';
+      const term = K.h('div', 'term'), th = K.h('div', 'term-h');
+      th.append(K.h('span', null, `${r.label} · from a fresh clone, repository root`), copyButton('cpall', 'Copy all', r.cmds.map(c => c[0]).join('\n')));
+      const ol = K.h('ol');
+      r.cmds.forEach(([code, time, tip]) => {
+        const li = K.h('li'), c = K.h('code', null, code);
+        c.tabIndex = 0; hoverTip(c, tip, () => (c.scrollWidth > c.clientWidth + 1 ? [code] : []).concat(time ? [`Recorded ${time}`] : []));
+        li.append(K.h('i', null, '$'), c, K.h('span', 't', time), copyButton('cp', 'Copy', code));
+        ol.appendChild(li);
+      });
+      term.append(th, ol);
+      const top = K.h('div', 'dtop'), claim = K.h('p', 'dclaim', r.claim);
+      const ledger = K.h('div', 'ledger');
+      r.ledger.forEach(([k, v, hash, tip]) => {
+        const row = K.h('div', 'lg'), text = K.h('span', null, v);
+        row.append(K.h('i', null, '✓'), K.h('b', null, k), text);
+        if (hash) row.appendChild(hashChip(hash));
+        if (tip) { text.tabIndex = 0; hoverTip(text, `${k}: ${v}`, tip); }
+        ledger.appendChild(row);
+      });
+      const pills = K.h('div', 'pills');
+      r.pills.forEach(([label, href, small, download]) => {
+        const a = K.h('a', 'pill' + (download ? ' dl' : ''), label); a.href = href;
+        if (download) a.download = ''; else if (!local(href)) { a.target = '_blank'; a.rel = 'noopener'; }
+        if (small) a.appendChild(K.h('small', null, small));
+        pills.appendChild(a);
+      });
+      const jump = K.h('button', 'jump', r.jump[0]); jump.type = 'button';
+      jump.onclick = () => { set(S.key, false); if (actions.open) actions.open(r.jump[1]); };
+      /* claim and jump on top, commands beside the ledger, links along the bottom: every line stays one line */
+      top.append(claim, jump);
+      sheet.append(top, term, ledger, pills);
+    }
+    function set(key, open) {
+      if (key !== S.key) { S.key = key; drawer(); }
+      S.open = open;
+      el.dataset.open = String(open);
+      buttons.forEach(b => { b.setAttribute('aria-selected', String(b.dataset.k === key)); b.setAttribute('aria-expanded', String(open && b.dataset.k === key)); });
+      sheet.inert = !open; sheet.setAttribute('aria-hidden', String(!open));
+      chev.setAttribute('aria-label', open ? 'Close the reproduce drawer' : 'Open the reproduce drawer');
+    }
+    set('data', false);
+    return {
+      follow: page => { const k = Copy.pageDock[page]; if (k && k !== S.key) set(k, S.open); },
+      toggle: () => set(S.key, !S.open),
+      close: () => set(S.key, false),
+      isOpen: () => S.open
+    };
   };
   /* hero: what 56.8% counts sits in the hover of the figure, one line per fact */
   Copy.heroRecord = [`Closed-loop replay of ${cl.designs} three-concentration designs, EPA’s network formation screen`, [
     `${C.int(cl.wells_used)} vs ${C.int(cl.wells_full)} exposure wells across ${cl.designs} designs: ${Copy.heroNumber} fewer than every concentration`,
     `${cl.reports} reports, ${cl.wrong_reports} wrong; ${cl.reports - mo.reports} more reports from ${C.pct(1 - cl.wells_used / mo.wells)} fewer wells than three measured concentrations alone`,
     `${bt.win} wins, ${bt.tie} tie, ${bt.loss} losses against ${F.baselines.opponents.length} published predictor configurations at one to four concentrations`]];
-  Copy.heroTip = els => els.forEach(el => {
-    el.tabIndex = 0;
-    const show = ev => C.tip(ev.clientX !== undefined ? ev : { clientX: el.getBoundingClientRect().left, clientY: el.getBoundingClientRect().bottom + 8 }, Copy.heroRecord[0], Copy.heroRecord[1], { line: true });
-    el.addEventListener('pointermove', show); el.addEventListener('focus', show);
-    el.addEventListener('pointerleave', C.untip); el.addEventListener('blur', C.untip);
-  });
+  Copy.heroTip = els => els.forEach(el => { el.tabIndex = 0; hoverTip(el, Copy.heroRecord[0], Copy.heroRecord[1], { line: true }); });
 })();

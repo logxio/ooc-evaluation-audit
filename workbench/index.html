@@ -48,7 +48,7 @@
     document.fonts.ready.then(() => document.querySelectorAll('.fit').forEach(queue));
   })();
 </script>
-<link rel="stylesheet" href="assets/system.css?v=1023v4">
+<link rel="stylesheet" href="assets/system.css?v=1023f1">
 <style>
   /* command bar: brand, three readings, links; one 50 px line on every desktop width */
   .bar { display: flex; align-items: center; justify-content: space-between; gap: var(--s2); height: 50px; padding: 0 24px; background: #121820; color: #f0f4f8; white-space: nowrap; }
@@ -73,27 +73,57 @@
   .tabs button:hover { color: var(--ink); }
   .tabs button[aria-pressed="true"] { background: var(--surface); color: var(--ink); border-bottom-color: #1F5A8A; }
   .tabs .cnt { margin-left: 3px; font-weight: 500; color: var(--ink-3); font-variant-numeric: tabular-nums; }
-  .filter { flex: none; display: flex; align-items: center; gap: 6px; height: 36px; padding: 0 6px 0 10px; border-bottom: 1px solid var(--line); }
+  /* filter row: search with the / key, then status views with counts, then a sortable three-column head */
+  .filter { flex: none; display: flex; align-items: center; gap: 6px; height: 38px; padding: 0 8px 0 11px; }
+  .filter[hidden], .lviews[hidden], .lhead[hidden] { display: none; }
   .filter .glass { color: var(--ink-3); font-size: 14px; line-height: 1; user-select: none; }
   #search { flex: 1; min-width: 0; }
   #search input { display: block; width: 100%; border: 0; outline: none; background: transparent; padding: 0; font: 400 13px/20px var(--sans); color: var(--ink); }
   #search input::placeholder { color: var(--ink-3); }
-  .sort { flex: none; display: inline-flex; gap: 2px; padding: 2px; border-radius: 4px; background: #f2f1ec; }
-  .sort button { border: 0; border-radius: 3px; padding: 2px 6px; background: transparent; font: 600 11px/16px var(--sans); color: var(--ink-2); cursor: pointer; white-space: nowrap; transition: background var(--t) var(--ease), color var(--t) var(--ease); }
-  .sort button[aria-pressed="true"] { background: var(--surface); color: var(--ink); box-shadow: 0 1px 2px rgba(0, 0, 0, .08); }
+  #search input::-webkit-search-cancel-button { -webkit-appearance: none; }
+  kbd { display: inline-block; min-width: 16px; padding: 0 4px; border-radius: 4px; border: 1px solid var(--line); border-bottom-width: 2px; background: var(--raised); color: var(--ink-3); font: 500 10.5px/14px var(--mono); text-align: center; }
+  .filter:focus-within kbd { visibility: hidden; }
+  .lviews { flex: none; display: flex; gap: 4px; padding: 0 8px 8px; overflow-x: auto; scrollbar-width: none; }
+  .lviews button { flex: none; display: inline-flex; align-items: center; gap: 5px; border: 1px solid var(--line); border-radius: 6px; padding: 1px 4px 1px 7px; background: var(--raised); font: 600 11.5px/18px var(--sans); color: var(--ink-2); cursor: pointer; white-space: nowrap; transition: background var(--t) var(--ease), color var(--t) var(--ease), border-color var(--t) var(--ease); }
+  .lviews button:hover { border-color: var(--axis); }
+  .lviews .n { font: 500 10.5px/16px var(--mono); color: var(--ink-3); background: var(--sunk); border-radius: 4px; padding: 0 4px; }
+  .lviews button[aria-pressed="true"] { background: var(--ink); border-color: var(--ink); color: var(--surface); }
+  .lviews button[aria-pressed="true"] .n { background: rgba(255, 255, 255, .16); color: var(--surface); }
+  .lhead, .list li button { display: grid; grid-template-columns: minmax(0, 1fr) 52px 50px; gap: 8px; align-items: center; }
+  .index[data-tab="patient"] :is(.lhead, .list li button) { grid-template-columns: minmax(0, 1fr) 48px 74px; }
+  .lhead { flex: none; height: 28px; padding: 0 14px; border-top: 1px solid var(--line); border-bottom: 1px solid var(--line); background: #fafbfc; }
+  .lhead button { justify-self: start; display: inline-flex; align-items: center; gap: 3px; border: 0; padding: 0; background: transparent; font: 600 11.5px/16px var(--sans); color: var(--ink-3); cursor: pointer; white-space: nowrap; }
+  .lhead button:nth-child(n+2) { justify-self: end; }
+  .lhead button:hover, .lhead button[aria-pressed="true"] { color: var(--ink); }
+  .lhead .arr { font-size: 11px; opacity: .4; }
+  .lhead button[aria-pressed="true"] .arr { opacity: 1; color: var(--accent-ink); }
   .export { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s1); width: 100%; }
   .export[hidden] { display: none; }
   .export .ink3 { font-weight: 400; font-variant-numeric: tabular-nums; }
   .index .export { flex: none; border-radius: 0; border-top: 1px solid var(--line); padding: 8px 12px; background: var(--surface); } .index .export:hover { background: var(--sunk); }
-  .list { flex: 1 1 auto; min-height: 0; overflow: auto; margin: 0; padding: 4px; list-style: none; }
-  .list li button { display: grid; grid-template-columns: 1fr auto; align-items: center; gap: var(--s1); width: 100%; border: 0; border-radius: 5px; background: transparent; text-align: left; padding: 6px 10px; cursor: pointer; color: var(--ink); }
+  .list { flex: 1 1 auto; min-height: 0; overflow: auto; margin: 0; padding: 4px; list-style: none; overscroll-behavior: contain; }
+  .list li button { width: 100%; border: 0; border-radius: 5px; background: transparent; text-align: left; padding: 5px 10px; cursor: pointer; color: var(--ink); font: 400 13px/20px var(--sans); }
   .list li button:hover { background: var(--sunk); }
   .list li button[aria-selected="true"] { background: var(--ink); color: var(--surface); }
-  .list li button[aria-selected="true"] .meta { color: var(--surface); opacity: .8; }
   .list .name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-  .list .meta { display: flex; align-items: center; gap: 3px; color: var(--ink-3); font-size: var(--f1); font-variant-numeric: tabular-nums; }
-  .list .meta i { width: 6px; height: 6px; border-radius: 50%; display: inline-block; }
   .list .you { font-weight: 600; }
+  .list .meta { grid-column: 2 / -1; justify-self: end; color: var(--ink-3); font-size: var(--f1); }
+  .list .sq { justify-self: end; display: inline-flex; gap: 2px; }
+  .list .sq i { width: 8px; height: 8px; border-radius: 2px; }
+  .list .sq i.cur { box-shadow: 0 0 0 1.5px var(--surface), 0 0 0 2.5px currentColor; }
+  .list .g, .list .rd { justify-self: end; font-size: var(--f1); color: var(--ink-3); font-variant-numeric: tabular-nums; }
+  .list .g.neg { color: var(--wrong); }
+  .list .call { justify-self: end; padding: 0 6px; border-radius: 4px; font: 600 11px/16px var(--sans); white-space: nowrap; }
+  .call.sensitive { background: rgba(3, 90, 119, .1); color: var(--report); }
+  .call.resistant { background: var(--sunk); color: var(--ink-2); }
+  .call.retest { background: rgba(176, 127, 10, .13); color: #8a6408; }
+  .call.reference { background: var(--sunk); color: var(--ink-3); }
+  .call.wrong { background: rgba(191, 47, 74, .12); color: var(--wrong); }
+  .list li button[aria-selected="true"] :is(.g, .rd, .meta) { color: rgba(255, 255, 255, .82); }
+  .list li button[aria-selected="true"] .g.neg { color: #ff9aac; }
+  .list li button[aria-selected="true"] .call { background: rgba(255, 255, 255, .16); color: var(--surface); }
+  .list li button[aria-selected="true"] .sq i.cur { box-shadow: 0 0 0 1.5px var(--ink), 0 0 0 2.5px #fff; }
+  .empty { padding: 28px 12px; text-align: center; color: var(--ink-3); font-size: 13px; }
   .sheet { grid-column: span 9; background: var(--surface); border-radius: var(--radius); padding: var(--s3); min-width: 0; }
   .sheet:not([data-tab="chem"]) .views { margin-top: var(--s3); }
   /* entity: name, facts and the five designs on one line; the name steps down first */
@@ -106,10 +136,18 @@
   .designs .chip { gap: 4px; padding: 1px 8px; border-radius: 4px; background: transparent; color: var(--ink-2); font-weight: 600; font-variant-numeric: tabular-nums; }
   .designs .chip:hover { background: rgba(27, 36, 48, .06); }
   .designs .chip[aria-pressed="true"] { background: var(--ink); color: var(--surface); }
-  .pages { display: flex; gap: var(--s3); margin: 12px 0 var(--s2); }
-  .pages button { border: 0; background: transparent; padding: 0; cursor: pointer; color: var(--ink-3); font: 600 var(--f2)/var(--l2) var(--sans); transition: color var(--t) var(--ease); }
-  .pages button[aria-selected="true"] { color: var(--ink); }
-  .pages button[aria-selected="true"]::before { content: ""; display: inline-block; width: 6px; height: 6px; border-radius: 50%; background: var(--accent); margin-right: var(--s1); vertical-align: 2px; }
+  /* canvas chain: four numbered steps, each with the reading it proves; number keys 1 to 4 switch */
+  .chain { display: flex; align-items: center; margin: 14px 0 var(--s3); }
+  .chain button { flex: none; display: flex; align-items: center; gap: 8px; border: 0; border-radius: 999px; padding: 4px 12px 4px 4px; background: transparent; cursor: pointer; color: var(--ink-2); white-space: nowrap; transition: background var(--t) var(--ease); }
+  .chain button:hover { background: #f6f7f9; }
+  .chain .no { width: 24px; height: 24px; border-radius: 50%; display: grid; place-items: center; font: 700 12px/1 var(--sans); color: var(--ink-3); box-shadow: inset 0 0 0 1.5px var(--axis); transition: background var(--t) var(--ease), color var(--t) var(--ease), box-shadow var(--t) var(--ease); }
+  .chain .lb { font: 600 14px/20px var(--sans); color: var(--ink); }
+  .chain .bd { font: 500 12.5px/20px var(--sans); color: var(--ink-3); font-variant-numeric: tabular-nums; }
+  .chain button[aria-selected="true"] { background: var(--sunk); }
+  .chain button[aria-selected="true"] .no { background: var(--accent); color: #fff; box-shadow: none; }
+  .chain button[aria-selected="true"] .bd { color: var(--accent-ink); font-weight: 600; }
+  .chain .link { flex: 1 1 auto; min-width: 10px; height: 1px; margin: 0 2px; background: var(--axis); position: relative; }
+  .chain .link::after { content: ""; position: absolute; right: -1px; top: -3px; border: 3.5px solid transparent; border-left: 5px solid var(--axis); border-right: 0; }
   #chemical-status:not([hidden]) { margin: 0 0 var(--s2); color: var(--ink-2); font-size: var(--f1); }
   .page-view:not(.on) { display: none; }
   .views { display: grid; align-items: start; grid-template-columns: repeat(9, minmax(0, 1fr)); gap: var(--s3) var(--s2); }
@@ -126,7 +164,6 @@
   .lede { color: var(--ink-2); max-width: 64ch; }
   .note { margin-top: var(--s1); color: var(--ink-2); }
   .links { display: flex; flex-wrap: wrap; gap: var(--s1) var(--s3); margin-top: var(--s2); }
-  .foot { padding: var(--s3) 0; }
   /* entry: the command bar paints at once; three measured anchors draw the forecast and its 90% band while the screen data loads */
   .entry { position: absolute; z-index: 2; top: var(--s3); left: 50%; transform: translateX(-50%); width: min(560px, 100%); display: grid; justify-items: center; gap: var(--s2); padding: var(--s3) var(--s3) 28px; background: var(--surface); border-radius: var(--radius); box-shadow: 0 0 0 1px var(--line), 0 12px 32px rgba(20, 30, 45, .06); transition: opacity 120ms var(--ease), visibility 0s linear 120ms; }
   .entry svg { width: 300px; max-width: 100%; height: auto; overflow: visible; }
@@ -139,10 +176,10 @@
   html[data-entry="error"] .entry p { color: var(--wrong); }
   html:not([data-entry]) .entry, html[data-entry="ready"] .entry { opacity: 0; visibility: hidden; pointer-events: none; }
   html[data-entry="loading"] .atlas, html[data-entry="error"] .atlas { min-height: 380px; }
-  html[data-entry="loading"] :is(.index, .sheet, .foot),
-  html[data-entry="error"] :is(.index, .sheet, .foot) { visibility: hidden; }
+  html[data-entry="loading"] :is(.index, .sheet, .dock),
+  html[data-entry="error"] :is(.index, .sheet, .dock) { visibility: hidden; }
   @media (prefers-reduced-motion: no-preference) {
-    html[data-entry="ready"] :is(.index, .sheet, .foot) { animation: enter-content 120ms var(--ease) both; }
+    html[data-entry="ready"] :is(.index, .sheet, .dock) { animation: enter-content 120ms var(--ease) both; }
     .entry .anchor { transform-box: fill-box; transform-origin: center; animation: anchor-in 260ms var(--ease) both; }
     .entry .anchor:nth-of-type(2) { animation-delay: 120ms; }
     .entry .anchor:nth-of-type(3) { animation-delay: 240ms; }
@@ -156,9 +193,10 @@
     @keyframes show-band { 0%, 18% { opacity: 0; } 50%, 86% { opacity: 1; } 100% { opacity: 0; } }
     @keyframes show-hit { 0%, 34% { opacity: 0; transform: scale(.2); } 46% { opacity: 1; transform: scale(1.25); } 54%, 86% { opacity: 1; transform: none; } 100% { opacity: 0; transform: none; } }
   }
+  @media (max-width: 1366px) { .team .names { display: none; } }
   @media (max-width: 1280px) {
     .index { grid-column: span 4; } .sheet { grid-column: span 8; } .views > .v6, .views > .v5, .views > .v4, .views > .v3 { grid-column: 1 / -1; }
-    .bar { padding: 0 16px; gap: 12px; } .kpis { gap: 12px; font-size: 11.5px; } .bar nav { gap: 10px; } .facts .conc .k { display: none; }
+    .bar { padding: 0 16px; gap: 12px; } .kpis { gap: 12px; font-size: 11.5px; } .bar nav { gap: 10px; } .facts .conc .k { display: none; } .chain .bd small { display: none; } .chain button { padding-right: 10px; }
   }
   @media (max-width: 960px) {
     .atlas { grid-template-columns: 1fr; } .index, .sheet { grid-column: 1 / -1; } .index { contain: none; } .list { flex: none; max-height: 50vh; } .views > * { grid-column: 1 / -1; }
@@ -200,14 +238,16 @@
   <script>fitLines();</script>
   <aside class="index">
     <div class="tabs" id="tabs" role="tablist"></div>
-    <div class="filter" id="filter"><span class="glass" aria-hidden="true">⌕</span><div id="search"></div><div class="sort" id="sort"></div></div>
-    <ul class="list" id="list" role="listbox"></ul>
+    <div class="filter" id="filter"><span class="glass" aria-hidden="true">⌕</span><div id="search"></div><kbd title="Press / to filter">/</kbd></div>
+    <div class="lviews" id="views" role="group" aria-label="Status"></div>
+    <div class="lhead" id="lhead" role="group" aria-label="Sort"></div>
+    <ul class="list" id="list" role="listbox" tabindex="-1"></ul>
     <button class="btn quiet export" type="button" id="chem-export"></button>
   </aside>
 
   <article class="sheet">
     <div id="entity"></div>
-    <nav class="pages" id="pages" role="tablist"></nav>
+    <nav class="chain" id="pages" role="tablist" aria-label="Canvas view"></nav>
     <p id="chemical-status" role="status" hidden></p>
 
     <section class="page-view views" data-page="curve">
@@ -243,6 +283,10 @@
     </section>
 
     <section class="page-view views" data-page="evidence">
+      <div class="v9 fig-block">
+        <div class="head"><h2 class="t3 fit" id="score-claim"></h2><div class="seg" id="score-k" role="group" aria-label="Measured concentrations"></div></div>
+        <div id="scoreboard"></div>
+      </div>
       <div class="v9 fig-block">
         <div class="stats" id="replay"></div>
         <p class="t1 note" id="replay-note"></p>
@@ -303,9 +347,9 @@
   </article>
 </main>
 
-<footer class="page foot" id="method"></footer>
+<footer class="dock" id="dock" aria-label="Reproduce"></footer>
 
-<script src="runtime.js?v=1023cns2" defer></script>
+<script src="runtime.js?v=1023f1" defer></script>
 <script>
 document.addEventListener('DOMContentLoaded', function () {
   const C = Core, O = C.O, K = Charts, $ = id => document.getElementById(id), h = K.h;
@@ -314,11 +358,14 @@ document.addEventListener('DOMContentLoaded', function () {
   Copy.heroTip([$('hero-num'), $('hero-label'), kpis[1]]);
 
   /* index: chemicals, patients, your data */
-  /* typed: a pasted set of names keeps its order until a sort chip is pressed */
-  const view = { tab: C.hash.get('tab') || 'chem', page: C.hash.get('page') || 'curve', q: '', sort: 'gain', typed: false, rows: [] };
+  /* typed: a pasted set of names keeps its order until a column head is pressed */
+  const view = { tab: C.hash.get('tab') || 'chem', page: C.hash.get('page') || 'curve', q: '', typed: false, rows: [],
+    sort: { chem: { k: 'gain', dir: -1 }, patient: { k: 'readout', dir: 1 } }, facet: { chem: 'all', patient: 'all' } };
+  let dock = null;
+  const tip = K.hoverTip, nat = new Intl.Collator('en', { numeric: true, sensitivity: 'base' });
   const tabLabel = { chem: () => ['Chemicals', O.chems.length], patient: () => ['Patients', C.state.patientSource === 'own' ? C.state.patients.length : O.totalPatients], yours: () => ['Your data'] };
   ['chem', 'patient', 'yours'].forEach(k => { const b = h('button'); b.type = 'button'; b.dataset.k = k; b.onclick = () => setTab(k); $('tabs').appendChild(b); });
-  const search = h('input'); search.type = 'search'; search.setAttribute('aria-label', 'Filter the list');
+  const search = h('input'); search.type = 'search'; search.spellcheck = false; search.autocomplete = 'off'; search.setAttribute('aria-label', 'Filter the list');
   search.oninput = () => { view.q = search.value; view.typed = view.tab === 'chem' && C.chemQuery(view.q).set; list(); };
   /* a column pasted from a spreadsheet arrives as one name per line; keep the lines as a set */
   search.addEventListener('paste', e => {
@@ -328,13 +375,77 @@ document.addEventListener('DOMContentLoaded', function () {
     search.setRangeText(t.trim().split(/\s*[\r\n]+\s*/).join('; '), search.selectionStart, search.selectionEnd, 'end');
     search.oninput();
   });
-  $('search').appendChild(search);
-  [['gain', '↑ Gain', 'Largest gain over interpolation first'], ['name', 'A–Z', 'Alphabetical']].forEach(([k, label, title]) => {
-    const b = h('button', null, label); b.type = 'button'; b.dataset.k = k; b.title = title;
-    b.onclick = () => { view.sort = k; view.typed = false; list(); }; $('sort').appendChild(b);
+  search.addEventListener('keydown', e => {
+    if (e.key === 'ArrowDown') { e.preventDefault(); focusSelected(); }
+    else if (e.key === 'Escape') { e.preventDefault(); if (search.value) { search.value = ''; search.oninput(); } else search.blur(); }
   });
+  $('search').appendChild(search);
   const gain = c => c.err.loglinear_interp - c.err.anchorboost;
+  const settled = c => c.d.reduce((n, d) => n + (d.act ? 1 : 0), 0);
   const wrong = r => C.state.reveal && (r.response === 0 || r.response === 1) && r.call !== null && r.call !== r.response;
+  const status = r => (wrong(r) ? 'wrong' : K.patientAction(r));
+  const readout = r => { const v = r.mode === 'two' ? (r.cohort ? r.readout1 : r.r1) : r.combined; return v === null || v === undefined ? null : v; };
+  const short = v => (v === null ? 'n/a' : Math.abs(v) >= 100 ? v.toFixed(0) : Math.abs(v) >= 10 ? v.toFixed(1) : v.toFixed(2));
+  const minus = (x, d = 2) => (x < 0 ? '−' : '+') + Math.abs(x).toFixed(d);
+  const RANK = { sensitive: 0, resistant: 1, wrong: 2, retest: 3, reference: 4 };
+  /* three sortable columns per list: label, default direction, comparison, what the column holds */
+  const SORTS = {
+    chem: {
+      name: ['Chemical', 1, (a, b, d) => d * nat.compare(a.name, b.name), 'Chemical name, A to Z'],
+      designs: ['Designs', -1, (a, b, d) => d * (settled(a) - settled(b)), 'Designs reported from three concentrations, of five'],
+      gain: ['Gain', -1, (a, b, d) => d * (gain(a) - gain(b)), 'Error drop over log-linear interpolation']
+    },
+    patient: {
+      id: ['Patient', 1, (a, b, d) => d * nat.compare(a.id, b.id), 'Patient ID, natural order'],
+      readout: ['Readout', 1, (a, b, d) => (readout(a) === null) - (readout(b) === null) || d * ((readout(a) || 0) - (readout(b) || 0)), 'Readout 1, or the combined-regimen readout; rows without one last'],
+      action: ['Action', 1, (a, b, d) => d * (RANK[status(a)] - RANK[status(b)]), 'Sensitive, resistant, wrong, retest, reference']
+    }
+  };
+  const FACETS = {
+    chem: [['all', 'All', () => 'Every chemical'], ['report', 'Report', k => `Design ${k + 1}: hit call reported from three concentrations`], ['retest', 'Retest', k => `Design ${k + 1}: sent to the full series`]],
+    patient: [['all', 'All', () => 'Every patient in this cohort'], ['sensitive', 'Sensitive', () => 'Called sensitive'], ['resistant', 'Resistant', () => 'Called resistant'],
+      ['retest', 'Retest', () => 'Sent to retest by the frozen rule'], ['reference', 'Reference', () => 'Assay-pool rows that set reference medians'], ['wrong', 'Wrong', () => 'Reported call disagrees with the clinical outcome']]
+  };
+  const facetOk = (x, f) => f === 'all' || (view.tab === 'chem' ? (f === 'report') === !!x.d[C.state.design].act : f === 'wrong' ? wrong(x) : K.patientAction(x) === f);
+  function baseRows() {
+    if (view.tab === 'chem') return C.chemQuery(view.q).chems;
+    const q = view.q.trim().toLowerCase();
+    return view.tab === 'patient' ? C.state.patients.filter(r => r.id.toLowerCase().includes(q)) : [];
+  }
+  function shownRows() {
+    const rows = baseRows().filter(x => facetOk(x, view.facet[view.tab]));
+    if (view.tab === 'chem' && view.typed) return rows;
+    const { k, dir } = view.sort[view.tab], cmp = SORTS[view.tab][k][2];
+    const tie = view.tab === 'chem' ? (a, b) => nat.compare(a.name, b.name) : (a, b) => nat.compare(a.id, b.id);
+    return rows.slice().sort((a, b) => cmp(a, b, dir) || tie(a, b));
+  }
+  /* status views with live counts, then the column head; pressing the active column flips it */
+  function filterBar() {
+    const v = $('views'), hd = $('lhead'), on = view.tab !== 'yours';
+    v.textContent = ''; hd.textContent = '';
+    $('filter').hidden = v.hidden = hd.hidden = !on;
+    if (!on) return;
+    const rows = baseRows(), f = view.facet[view.tab];
+    FACETS[view.tab].forEach(([k, label, why]) => {
+      const n = rows.filter(x => facetOk(x, k)).length;
+      if (k !== 'all' && !n && f !== k) return;
+      const b = h('button'); b.type = 'button'; b.setAttribute('aria-pressed', String(f === k));
+      b.append(label, h('span', 'n', C.int(n)));
+      tip(b, `${label} · ${C.int(n)}`, [why(C.state.design)]);
+      b.onclick = () => { view.facet[view.tab] = f === k && k !== 'all' ? 'all' : k; list(); $('list').scrollTop = 0; };
+      v.appendChild(b);
+    });
+    const st = view.sort[view.tab];
+    Object.entries(SORTS[view.tab]).forEach(([k, [label, def, , what]]) => {
+      const active = !view.typed && st.k === k, dir = active ? st.dir : def;
+      const b = h('button'); b.type = 'button'; b.setAttribute('aria-pressed', String(active));
+      b.append(label, h('span', 'arr', active ? (dir > 0 ? '↑' : '↓') : '↕'));
+      b.setAttribute('aria-label', `Sort by ${label.toLowerCase()}, ${dir > 0 ? 'ascending' : 'descending'}`);
+      tip(b, what, [active ? `${dir > 0 ? 'Ascending' : 'Descending'} · press again to flip` : 'Press to sort']);
+      b.onclick = () => { if (active) st.dir = -st.dir; else { st.k = k; st.dir = def; } view.typed = false; list(); $('list').scrollTop = 0; };
+      hd.appendChild(b);
+    });
+  }
   /* the listed chemicals at the open design, one CSV row each */
   const exp = $('chem-export');
   function exportLabel() {
@@ -345,57 +456,70 @@ document.addEventListener('DOMContentLoaded', function () {
     exp.disabled = !n;
   }
   exp.onclick = () => C.download(C.chemActionsCSV(view.rows, C.state.design), `chemical-actions-design${C.state.design + 1}.csv`);
-  const expTip = ev => C.tip(ev.clientX !== undefined ? ev : { clientX: exp.getBoundingClientRect().left, clientY: exp.getBoundingClientRect().top - 8 },
-    `Design ${C.state.design + 1} for the ${view.rows.length} listed chemicals`,
+  tip(exp, () => `Design ${C.state.design + 1} for the ${view.rows.length} listed chemicals`,
     ['CSV: chemical, design, measured µM, action, hit call, EPA label, reason', 'List a set: separate names with ; or a comma and a space, or paste a column']);
-  exp.addEventListener('pointermove', expTip); exp.addEventListener('focus', expTip);
-  exp.addEventListener('pointerleave', C.untip); exp.addEventListener('blur', C.untip);
   function list() {
     const ul = $('list'); ul.textContent = '';
+    document.querySelector('.index').dataset.tab = view.tab;
     $('tabs').querySelectorAll('button').forEach(b => {
       const [t, n] = tabLabel[b.dataset.k](); b.textContent = t;
       if (n !== undefined) b.appendChild(h('span', 'cnt', String(n)));
       b.setAttribute('aria-pressed', String(b.dataset.k === view.tab));
     });
-    $('sort').querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(!view.typed && b.dataset.k === view.sort)));
-    $('sort').style.display = view.tab === 'chem' ? '' : 'none';
-    $('filter').style.display = view.tab === 'yours' ? 'none' : '';
-    search.placeholder = view.tab === 'chem' ? `Filter ${O.chems.length} chemicals` : 'Filter patients by ID';
-    if (view.tab === 'chem') {
-      const hit = C.chemQuery(view.q).chems;
-      const rows = view.rows = view.typed ? hit : hit.slice().sort(view.sort === 'gain' ? (a, b) => gain(b) - gain(a) : (a, b) => a.name.localeCompare(b.name));
-      rows.forEach(c => {
-        const li = h('li'), b = h('button'); b.type = 'button'; b.setAttribute('role', 'option');
-        b.setAttribute('aria-selected', String(c.i === C.state.chem));
-        const meta = h('span', 'meta');
-        c.d.forEach(d => { const i = h('i'); i.style.background = d.act ? 'var(--report)' : 'var(--retest)'; meta.appendChild(i); });
-        meta.appendChild(document.createTextNode(` ${gain(c) >= 0 ? '+' : ''}${C.fix(gain(c))}`));
-        b.append(h('span', 'name', c.name), meta);
-        b.title = `${c.name} · error ${C.fix(c.err.anchorboost)} against ${C.fix(c.err.loglinear_interp)} by interpolation`;
-        b.onclick = () => { C.set({ chem: c.i }); };
-        li.appendChild(b); ul.appendChild(li);
-      });
-    } else if (view.tab === 'patient') {
-      const q = view.q.trim().toLowerCase();
-      C.state.patients.filter(r => r.id.toLowerCase().includes(q)).forEach(r => {
-        const li = h('li'), b = h('button'); b.type = 'button'; b.setAttribute('role', 'option');
-        b.setAttribute('aria-selected', String(r.id === C.state.patient));
-        const meta = h('span', 'meta'), i = h('i');
-        const tone = wrong(r) ? 'var(--wrong)' : r.reference ? 'var(--compare)' : r.call === null ? 'var(--retest)' : 'var(--report)';
-        i.style.background = wrong(r) || r.call === 1 ? tone : 'transparent';
-        i.style.boxShadow = 'inset 0 0 0 1.5px ' + tone;
-        meta.append(i, document.createTextNode(` ${K.patientAction(r)}`));
-        b.append(h('span', 'name', r.id), meta);
-        b.onclick = () => C.set({ patient: r.id });
-        li.appendChild(b); ul.appendChild(li);
-      });
-    } else {
+    search.placeholder = view.tab === 'chem' ? `Filter ${O.chems.length} chemicals` : `Filter ${C.state.patients.length} patients by ID`;
+    filterBar();
+    if (view.tab === 'yours') {
+      view.rows = [];
       const li = h('li'), b = h('button'); b.type = 'button'; b.setAttribute('aria-selected', 'true');
       b.append(h('span', 'name you', 'Paste a series or a patient table'), h('span', 'meta', 'local'));
       li.appendChild(b); ul.appendChild(li);
+      exportLabel(); return;
     }
+    const rows = view.rows = shownRows();
+    if (!rows.length) {
+      const li = h('li', 'empty', view.q ? `Nothing matches “${view.q}” here` : 'No rows with this status');
+      ul.appendChild(li);
+    }
+    rows.forEach(x => {
+      const li = h('li'), b = h('button'); b.type = 'button'; b.setAttribute('role', 'option'); b.tabIndex = -1;
+      if (view.tab === 'chem') {
+        const c = x, g = gain(c), sq = h('span', 'sq');
+        b.setAttribute('aria-selected', String(c.i === C.state.chem));
+        c.d.forEach((d, k) => { const i = h('i', k === C.state.design ? 'cur' : null); i.style.background = i.style.color = d.act ? 'var(--report)' : 'var(--retest)'; sq.appendChild(i); });
+        b.append(h('span', 'name', c.name), sq, h('span', 'g' + (g < 0 ? ' neg' : ''), minus(g)));
+        b.title = `${c.name} · error ${C.fix(c.err.anchorboost)} against ${C.fix(c.err.loglinear_interp)} by interpolation · ${settled(c)} of 5 designs reported`;
+        b.onclick = () => { C.set({ chem: c.i }); focusSelected(); };
+      } else {
+        const r = x, s = status(r), v = readout(r);
+        b.setAttribute('aria-selected', String(r.id === C.state.patient));
+        b.append(h('span', 'name', r.id), h('span', 'rd', short(v)), h('span', 'call ' + s, s));
+        b.title = `${r.id} · ${s}${v === null ? ' · saved call without a raw readout' : ''}`;
+        b.onclick = () => { C.set({ patient: r.id }); focusSelected(); };
+      }
+      li.appendChild(b); ul.appendChild(li);
+    });
     exportLabel();
   }
+  /* keyboard: arrows walk the list and the canvas follows at once */
+  function focusSelected() {
+    requestAnimationFrame(() => {
+      const el = $('list').querySelector('button[aria-selected="true"]') || $('list').querySelector('button');
+      if (el) { el.focus({ preventScroll: true }); el.scrollIntoView({ block: 'nearest' }); }
+    });
+  }
+  $('list').addEventListener('keydown', e => {
+    if (view.tab === 'yours' || !view.rows.length) return;
+    const keys = view.rows.map(x => (view.tab === 'chem' ? x.i : x.id)), cur = view.tab === 'chem' ? C.state.chem : C.state.patient;
+    let i = keys.indexOf(cur);
+    const step = { ArrowDown: 1, ArrowUp: -1, PageDown: 10, PageUp: -10 }[e.key];
+    if (step !== undefined) i = i < 0 ? 0 : Math.max(0, Math.min(keys.length - 1, i + step));
+    else if (e.key === 'Home') i = 0;
+    else if (e.key === 'End') i = keys.length - 1;
+    else return;
+    e.preventDefault();
+    C.set(view.tab === 'chem' ? { chem: keys[i] } : { patient: keys[i] });
+    focusSelected();
+  });
   /* each list keeps its own filter: switching between chemicals, patients and your data starts from an empty one */
   function goTab(k) {
     if (view.tab !== k) { view.q = ''; view.typed = false; search.value = ''; }
@@ -410,15 +534,38 @@ document.addEventListener('DOMContentLoaded', function () {
   }
   $('paste-cta').onclick = () => setTab('yours');
 
-  /* canvas */
-  const chemPages = [['curve', 'Curve'], ['plate', 'Plate'], ['evidence', 'Evidence'], ['model', 'Model']];
+  /* canvas: the numbered chain, and the reproduce dock follows whichever view is open */
   function pages() {
     const nav = $('pages'); nav.textContent = '';
     nav.style.display = view.tab === 'chem' ? '' : 'none';
-    chemPages.forEach(([k, label]) => { const b = h('button', null, label); b.type = 'button'; b.setAttribute('aria-selected', String(view.page === k)); b.onclick = () => { view.page = k; pages(); }; nav.appendChild(b); });
+    Copy.chain.forEach(([k, label, v, unit, why], i) => {
+      if (i) { const ln = h('span', 'link'); ln.setAttribute('aria-hidden', 'true'); nav.appendChild(ln); }
+      const b = h('button'); b.type = 'button'; b.dataset.k = k; b.setAttribute('role', 'tab');
+      b.setAttribute('aria-selected', String(view.page === k)); b.tabIndex = view.page === k ? 0 : -1;
+      const bd = h('span', 'bd', v); if (unit) bd.appendChild(h('small', null, ' ' + unit));
+      b.append(h('span', 'no', String(i + 1)), h('span', 'lb', label), bd);
+      tip(b, `${label} · press ${i + 1}`, [why]);
+      b.onclick = () => setPage(k);
+      b.onkeydown = e => { const d = { ArrowRight: 1, ArrowLeft: -1 }[e.key]; if (!d) return; e.preventDefault(); setPage(Copy.chain[(i + d + 4) % 4][0], true); };
+      nav.appendChild(b);
+    });
     document.querySelectorAll('.page-view').forEach(s => s.classList.toggle('on', s.dataset.page === view.page));
     document.querySelector('.sheet').dataset.tab = view.tab;
+    if (dock) dock.follow(view.page);
   }
+  function setPage(k, focus) {
+    view.page = k; pages();
+    if (focus) $('pages').querySelector('[aria-selected="true"]').focus();
+  }
+  document.addEventListener('keydown', e => {
+    if (e.metaKey || e.ctrlKey || e.altKey) return;
+    const typing = e.target.matches && e.target.matches('input, textarea, select, [contenteditable]');
+    if (e.key === '/' && !typing) { e.preventDefault(); search.focus(); search.select(); return; }
+    if (typing) return;
+    if (/^[1-4]$/.test(e.key) && view.tab === 'chem') { e.preventDefault(); setPage(Copy.chain[+e.key - 1][0]); return; }
+    if (e.key === 'r' || e.key === 'R') { e.preventDefault(); dock.toggle(); return; }
+    if (e.key === 'Escape' && dock.isOpen()) { e.preventDefault(); dock.close(); }
+  });
   const chipsEl = h('div', 'designs'); K.designChips(chipsEl);
   const designs = h('div', 'design'); designs.append(h('span', null, 'Design'), chipsEl);
   const fact = (k, v) => { const s = h('span'); s.append(h('span', 'k', k + ' '), h('b', null, v)); return s; };
@@ -427,7 +574,7 @@ document.addEventListener('DOMContentLoaded', function () {
     if (view.tab === 'chem') {
       const c = O.chems[C.state.chem], w = c.w;
       const wrap = h('div', 'entity'), name = h('h2', 'fit', c.name); name.title = c.name;
-      const facts = h('div', 'facts'), conc = fact('Concentrations', `${C.uM(w.levels[0])}–${C.uM(w.levels[w.levels.length - 1])} µM, ${w.levels.length} levels`);
+      const facts = h('div', 'facts'), conc = fact('Concentrations', `${C.uM(w.levels[0])} to ${C.uM(w.levels[w.levels.length - 1])} µM, ${w.levels.length} levels`);
       conc.classList.add('conc');
       facts.append(conc, fact('Wells', String(w.lv.length)), fact('EPA label', c.label), fact('Fold', String(c.fold)));
       wrap.append(name, facts, designs); el.appendChild(wrap);
@@ -450,7 +597,7 @@ document.addEventListener('DOMContentLoaded', function () {
   C.on((S, p) => {
     if (!p || !Object.keys(p).length) return;
     if ('chem' in p) { if (view.tab !== 'chem') { goTab('chem'); view.page = 'curve'; pages(); } list(); entity(); }
-    else if ('design' in p) exportLabel();
+    else if ('design' in p) list();
     if ('patients' in p && S.patientSource === 'own' && view.tab !== 'patient') { goTab('patient'); view.page = 'patient'; pages(); }
     if ('patient' in p || 'reveal' in p || 'patients' in p) { if ('patient' in p && S.patient && view.tab !== 'patient') { goTab('patient'); view.page = 'patient'; pages(); } list(); entity(); }
   });
@@ -472,6 +619,11 @@ document.addEventListener('DOMContentLoaded', function () {
   K.tradeoff($('trade'), { height: 240, onClaim: c => { $('trade-claim').textContent = Copy.tradeClaim(c); } });
   K.costSlider($('slider'), $('trade-note'), Copy.tradeNote);
 
+  /* 32-model scoreboard at one to four measured concentrations; k = 3 opens */
+  const kseg = $('score-k');
+  let board = null;
+  [1, 2, 3, 4].forEach(k => { const b = h('button', null, `k=${k}`); b.type = 'button'; b.dataset.k = k; K.hoverTip(b, ...Copy.scoreKTip(k)); b.onclick = () => board.set(k); kseg.appendChild(b); });
+  board = K.scoreboard($('scoreboard'), { onK: k => { $('score-claim').textContent = Copy.scoreClaim(k); kseg.querySelectorAll('button').forEach(b => b.setAttribute('aria-pressed', String(+b.dataset.k === k))); } });
   Copy.replay.forEach(([v, k]) => { const d = h('div', 'stat'); d.append(h('div', 'v', v), h('div', 'k', k)); $('replay').appendChild(d); });
   $('replay-note').textContent = Copy.replayNote;
   Copy.versus($('versus'));
@@ -523,9 +675,11 @@ document.addEventListener('DOMContentLoaded', function () {
     const target = $(id);
     if (target) target.scrollIntoView({ behavior: matchMedia('(prefers-reduced-motion: reduce)').matches ? 'instant' : 'smooth', block: 'start' });
   });
-  Copy.methods($('method'), {
-    openView(page, target) { view.page = page; setTab('chem'); jumpTo(target); },
-    openPaste() { setTab('yours'); jumpTo('input'); }
+  dock = Copy.dock($('dock'), {
+    open(page) {
+      if (page === 'yours') { setTab('yours'); jumpTo('input'); return; }
+      view.page = page; setTab('chem'); jumpTo('pages');
+    }
   });
 
   if (C.state.patient && view.tab === 'chem' && !C.hash.get('tab')) view.tab = 'patient';
