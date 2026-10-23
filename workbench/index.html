@@ -17,11 +17,41 @@
     const status = document.getElementById('entry-status');
     if (status) status.textContent = 'Screening data could not load. Refresh to retry.';
   }, true);
+  /* one line per title: a sentence wider than its column steps its type down until it fits */
+  (function () {
+    const queued = new Set();
+    let frame = 0;
+    const fit = el => {
+      if (!el.isConnected) { sized.unobserve(el); return; }
+      el.style.fontSize = '';
+      const w = el.clientWidth;
+      if (!w || el.scrollWidth <= w) return;
+      let s = Math.max(11, Math.floor(parseFloat(getComputedStyle(el).fontSize) * w / el.scrollWidth * 2) / 2);
+      el.style.fontSize = s + 'px';
+      while (el.scrollWidth > el.clientWidth && s > 11) el.style.fontSize = (s -= 0.5) + 'px';
+    };
+    const queue = el => {
+      if (!el) return;
+      queued.add(el);
+      frame = frame || requestAnimationFrame(() => { frame = 0; const els = [...queued]; queued.clear(); els.forEach(fit); });
+    };
+    const sized = new ResizeObserver(es => es.forEach(e => queue(e.target)));
+    const typed = new MutationObserver(ms => ms.forEach(m => queue((m.target.nodeType === 1 ? m.target : m.target.parentElement).closest('.fit'))));
+    window.fitLines = scope => (scope || document).querySelectorAll('.fit').forEach(el => {
+      if (el.dataset.fit) return;
+      el.dataset.fit = '1';
+      sized.observe(el);
+      typed.observe(el, { childList: true, characterData: true, subtree: true });
+    });
+    document.fonts.ready.then(() => document.querySelectorAll('.fit').forEach(queue));
+  })();
 </script>
 <link rel="stylesheet" href="assets/system.css">
 <style>
   .top { display: flex; align-items: center; justify-content: space-between; gap: var(--s3); height: 64px; }
-  .mark { font: 500 var(--f3)/var(--l3) var(--serif); }
+  .brand { display: flex; align-items: center; gap: 12px; min-width: 0; }
+  .mark { font: 500 var(--f3)/var(--l3) var(--serif); white-space: nowrap; }
+  .team { padding: 1px 8px; border: 1px solid var(--line); border-radius: 4px; font: 500 var(--f1)/var(--l1) var(--sans); color: var(--ink-2); white-space: nowrap; }
   .top nav { display: flex; align-items: center; gap: var(--s3); }
   .top nav a { color: var(--ink-2); }
   .top nav a:hover { color: var(--ink); }
@@ -31,9 +61,10 @@
   .hero h1 span { grid-column: 1; font: 400 var(--f5)/var(--l5) var(--serif); letter-spacing: -.012em; white-space: nowrap; }
   .hero h1 span:first-child { grid-row: 1; }
   .hero h1 span:last-child { grid-row: 2; }
-  .hero .num { grid-column: 2; grid-row: 1; justify-self: end; font: 400 var(--f5)/var(--l5) var(--serif); letter-spacing: -.012em; font-variant-numeric: lining-nums proportional-nums; cursor: default; }
-  .hero .lab { grid-column: 2; grid-row: 2; justify-self: end; font: 400 var(--f3)/var(--l3) var(--serif); color: var(--ink-2); cursor: default; }
-  .atlas { display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--s2); align-items: stretch; }
+  .hero .num { grid-column: 2; grid-row: 1; justify-self: end; font: 400 var(--f5)/var(--l5) var(--serif); letter-spacing: -.012em; font-variant-numeric: lining-nums proportional-nums; white-space: nowrap; cursor: default; }
+  .hero .lab { grid-column: 2; grid-row: 2; justify-self: end; font: 400 var(--f3)/var(--l3) var(--serif); color: var(--ink-2); white-space: nowrap; cursor: default; }
+  .fit { white-space: nowrap; overflow: hidden; text-overflow: ellipsis; min-width: 0; }
+  .atlas { position: relative; display: grid; grid-template-columns: repeat(12, minmax(0, 1fr)); gap: var(--s2); align-items: stretch; }
   .index { grid-column: span 3; display: flex; flex-direction: column; gap: var(--s1); contain: size; min-width: 0; }
   .export { display: flex; justify-content: space-between; align-items: baseline; gap: var(--s1); width: 100%; }
   .export[hidden] { display: none; }
@@ -63,47 +94,92 @@
   .page-view:not(.on) { display: none; }
   .views { display: grid; align-items: start; grid-template-columns: repeat(9, minmax(0, 1fr)); gap: var(--s3) var(--s2); }
   .v9 { grid-column: span 9; } .v6 { grid-column: span 6; } .v5 { grid-column: span 5; } .v4 { grid-column: span 4; } .v3 { grid-column: span 3; }
-  .fig-block .head { display: flex; align-items: baseline; justify-content: space-between; gap: var(--s2); margin-bottom: var(--s2); }
+  /* a title keeps its line; tools and keys move below it when both do not fit */
+  .fig-block .head { display: flex; flex-wrap: wrap; align-items: baseline; justify-content: space-between; gap: var(--s1) var(--s2); margin-bottom: var(--s2); }
+  .fig-block .head > .fit { flex: 0 1 auto; }
+  .fig-block .head > :not(.fit) { margin-left: auto; }
+  /* one row of cohorts: the type steps down with the column, then the row scrolls */
+  .cohorts { display: flex; gap: 4px; margin: calc(-1 * var(--s1)) 0 var(--s2); font-size: var(--f1); overflow-x: auto; scrollbar-width: none; }
+  .cohorts .chip { flex: none; padding: 2px 9px; font-size: inherit; font-variant-numeric: tabular-nums; }
   .tools { display: flex; align-items: center; gap: var(--s1); }
   .tools input[type="file"] { display: none; }
   .lede { color: var(--ink-2); max-width: 64ch; }
   .note { margin-top: var(--s1); color: var(--ink-2); }
   .links { display: flex; flex-wrap: wrap; gap: var(--s1) var(--s3); margin-top: var(--s2); }
   .foot { padding: var(--s3) 0; }
-  .entry-status { position: absolute; left: 0; bottom: var(--s1); color: var(--ink-3); }
-  html:not([data-entry]) .entry-status, html[data-entry="ready"] .entry-status { display: none; }
-  html[data-entry="loading"] :is(.atlas, .foot, .hero .figure),
-  html[data-entry="error"] :is(.atlas, .foot, .hero .figure) { visibility: hidden; }
+  /* entry: top bar and hero paint at once; three measured anchors draw the forecast and its 90% band while the screen data loads */
+  .entry { position: absolute; z-index: 2; top: var(--s3); left: 50%; transform: translateX(-50%); width: min(560px, 100%); display: grid; justify-items: center; gap: var(--s2); padding: var(--s3) var(--s3) 28px; background: var(--surface); border-radius: var(--radius); box-shadow: 0 0 0 1px var(--line), 0 12px 32px rgba(20, 30, 45, .06); transition: opacity 360ms var(--ease), visibility 0s linear 360ms; }
+  .entry svg { width: 300px; max-width: 100%; height: auto; overflow: visible; }
+  .entry .band { fill: #dce8f3; }
+  .entry .line { fill: none; stroke: #1F5A8A; stroke-width: 2.2; stroke-linecap: round; stroke-linejoin: round; stroke-dasharray: 1; stroke-dashoffset: 0; }
+  .entry .cut { stroke: var(--cutoff); stroke-width: 1; stroke-dasharray: 3 3; }
+  .entry .anchor { fill: #1F5A8A; }
+  .entry .hit { fill: var(--surface); stroke: #D4573C; stroke-width: 2; }
+  .entry p { width: 100%; margin: 0; text-align: center; font: 450 var(--f2)/var(--l2) var(--serif); color: var(--ink-2); }
+  html[data-entry="error"] .entry p { color: var(--wrong); }
+  html:not([data-entry]) .entry, html[data-entry="ready"] .entry { opacity: 0; visibility: hidden; pointer-events: none; }
+  html[data-entry="loading"] .atlas, html[data-entry="error"] .atlas { min-height: 380px; }
+  html[data-entry="loading"] :is(.index, .sheet, .foot),
+  html[data-entry="error"] :is(.index, .sheet, .foot) { visibility: hidden; }
   @media (prefers-reduced-motion: no-preference) {
-    .hero h1 span { animation: enter-title 320ms var(--ease) both; }
-    .hero h1 span:last-child { animation-delay: 40ms; }
-    html[data-entry="ready"] :is(.index, .sheet, .hero .num, .hero .lab, .foot) { animation: enter-content 280ms var(--ease) both; }
-    html[data-entry="ready"] .atlas > .sheet { animation-delay: 40ms; }
+    .hero h1 span, .hero .num, .hero .lab { animation: enter-title 320ms var(--ease) both; }
+    .hero h1 span:last-child, .hero .lab { animation-delay: 40ms; }
+    html[data-entry="ready"] :is(.index, .sheet, .foot) { animation: enter-content 360ms var(--ease) both; }
+    html[data-entry="ready"] .atlas > .sheet { animation-delay: 60ms; }
+    .entry .anchor { transform-box: fill-box; transform-origin: center; animation: anchor-in 260ms var(--ease) both; }
+    .entry .anchor:nth-of-type(2) { animation-delay: 120ms; }
+    .entry .anchor:nth-of-type(3) { animation-delay: 240ms; }
+    .entry .line { animation: draw-line 2400ms var(--ease) 360ms infinite both; }
+    .entry .band { animation: show-band 2400ms var(--ease) 360ms infinite both; }
+    .entry .hit { transform-box: fill-box; transform-origin: center; animation: show-hit 2400ms var(--ease) 360ms infinite both; }
+    html[data-entry="error"] .entry * { animation-play-state: paused; }
     @keyframes enter-title { from { opacity: 0; transform: translateY(6px); } to { opacity: 1; transform: none; } }
-    @keyframes enter-content { from { opacity: .15; transform: translateY(6px); } to { opacity: 1; transform: none; } }
+    @keyframes enter-content { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    @keyframes anchor-in { from { opacity: 0; transform: scale(.2); } to { opacity: 1; transform: none; } }
+    @keyframes draw-line { 0% { stroke-dashoffset: 1; opacity: 1; } 45%, 86% { stroke-dashoffset: 0; opacity: 1; } 100% { stroke-dashoffset: 0; opacity: 0; } }
+    @keyframes show-band { 0%, 18% { opacity: 0; } 50%, 86% { opacity: 1; } 100% { opacity: 0; } }
+    @keyframes show-hit { 0%, 34% { opacity: 0; transform: scale(.2); } 46% { opacity: 1; transform: scale(1.25); } 54%, 86% { opacity: 1; transform: none; } 100% { opacity: 0; transform: none; } }
   }
   @media (max-width: 1280px) { .index { grid-column: span 4; } .sheet { grid-column: span 8; } .views > .v6, .views > .v5, .views > .v4, .views > .v3 { grid-column: 1 / -1; } }
   @media (max-width: 960px) {
     .atlas { grid-template-columns: 1fr; } .index, .sheet { grid-column: 1 / -1; } .index { contain: none; } .list { flex: none; max-height: 50vh; } .views > * { grid-column: 1 / -1; }
     .entity > .row, .fig-block .head, .tools { flex-wrap: wrap; }
-    .hero { grid-template-columns: 1fr; grid-template-rows: none; } .hero h1 span, .hero .num, .hero .lab { grid-column: 1; grid-row: auto; justify-self: start; white-space: normal; }
+    .hero { grid-template-columns: minmax(0, 1fr); grid-template-rows: none; } .hero h1 span, .hero .num, .hero .lab { grid-column: 1; grid-row: auto; justify-self: stretch; }
     .top nav a { display: none; }
+  }
+  /* phones: a claim longer than the screen breaks into two balanced lines instead of shrinking past reading size */
+  @media (max-width: 600px) {
+    .top { flex-wrap: wrap; height: auto; padding: 12px 0; row-gap: var(--s1); }
+    :is(.fig-block .head, #entity) > .fit, #entity .fit { white-space: normal; text-wrap: balance; overflow: visible; }
+    .entry { padding-inline: var(--s2); } .entry-team { display: none; }
   }
 </style>
 </head>
 <body>
 <header class="page top">
-  <span class="mark">Chip Forecast</span>
+  <div class="brand"><span class="mark">Chip Forecast</span><span class="team">Team Three-Pointer · Yan Su &amp; Ziyang Liu</span></div>
   <nav class="t2"><a href="sample.html">Sample size</a><a href="audits/index.html">Published studies</a><a href="https://github.com/logxio/ooc-evaluation-audit">Source</a><button class="btn" type="button" id="paste-cta">Paste your table</button></nav>
 </header>
 
 <section class="page hero" id="hero">
-  <h1><span>More screening decisions</span> <span>from fewer measurements</span></h1>
-  <div class="figure"><span class="num" id="hero-num"></span><span class="lab" id="hero-label">fewer wells than running the full series</span></div>
-  <p class="t1 entry-status" id="entry-status" role="status">Loading screening data…</p>
+  <h1><span class="fit">More screening decisions</span> <span class="fit">from fewer measurements</span></h1>
+  <div class="figure"><span class="num" id="hero-num">56.8%</span><span class="lab fit" id="hero-label">fewer wells than running the full series</span></div>
 </section>
 
 <main class="page atlas">
+  <div class="entry" role="status">
+    <svg viewBox="8 4 204 76" aria-hidden="true">
+      <path class="band" d="M16 60.3L20 60.8L24 61.3L28 61.8L32 62.2L36 62.7L40 63.2L44 62.6L48 61.9L52 61.3L56 60.6L60 59.9L64 59.1L68 58.3L72 57.4L76 56.7L80 56.7L84 56.5L88 56.2L92 55.8L96 55.1L100 54.3L104 53.2L108 51.9L112 49.8L116 47L120 44L124 40.8L128 37.5L132 34.3L136 31L140 27.8L144 25.9L148 24.1L152 22.5L156 21.2L160 20.1L164 19.3L168 18.6L172 17.7L176 16.3L180 15.1L184 14.1L188 13.1L192 12.2L196 11.4L200 10.6L204 9.9L204 23.7L200 23.4L196 23.1L192 22.9L188 22.8L184 22.7L180 22.7L176 22.9L172 23.2L168 24.2L164 25.8L160 27.7L156 29.9L152 32.2L148 34.8L144 37.6L140 40.6L136 42.8L132 45L128 47.2L124 49.4L120 51.6L116 53.5L112 55.3L108 57.4L104 59.7L100 61.9L96 63.8L92 65.4L88 66.9L84 68.3L80 69.5L76 70.5L72 70.7L68 70.6L64 70.4L60 70.1L56 69.8L52 69.4L48 69L44 68.6L40 68.2L36 68.8L32 69.3L28 69.9L24 70.4L20 71L16 71.5Z"/>
+      <line class="cut" x1="12" x2="208" y1="41" y2="41"/>
+      <path class="line" pathLength="1" d="M16 65.9L20 65.9L24 65.9L28 65.8L32 65.8L36 65.7L40 65.7L44 65.6L48 65.5L52 65.4L56 65.2L60 65L64 64.8L68 64.5L72 64.1L76 63.6L80 63.1L84 62.4L88 61.6L92 60.6L96 59.4L100 58.1L104 56.5L108 54.6L112 52.6L116 50.3L120 47.8L124 45.1L128 42.4L132 39.6L136 36.9L140 34.2L144 31.7L148 29.4L152 27.4L156 25.5L160 23.9L164 22.6L168 21.4L172 20.4L176 19.6L180 18.9L184 18.4L188 17.9L192 17.5L196 17.2L200 17L204 16.8"/>
+      <circle class="anchor" cx="40" cy="65.7" r="4.5"/>
+      <circle class="anchor" cx="110" cy="53.6" r="4.5"/>
+      <circle class="anchor" cx="170" cy="20.9" r="4.5"/>
+      <circle class="hit" cx="130" cy="41" r="4"/>
+    </svg>
+    <p class="fit" id="entry-status">Reconstructing 68 outputs from 3 concentrations<span class="entry-team"> · Team Three-Pointer</span></p>
+  </div>
+  <script>fitLines();</script>
   <aside class="index">
     <div class="seg" id="tabs" role="tablist"></div>
     <div id="search"></div>
@@ -118,13 +194,13 @@
 
     <section class="page-view views" data-page="curve">
       <div class="v6 fig-block">
-        <div class="head"><h2 class="t3" id="curve-claim"></h2></div>
+        <div class="head"><h2 class="t3 fit" id="curve-claim"></h2></div>
         <div class="keys-head" id="curve-keys" style="justify-content: flex-start; margin-bottom: var(--s2)"></div>
         <div id="readout"></div>
         <div id="curve-chart" style="margin-top: var(--s2)"></div>
       </div>
       <div class="v3 fig-block">
-        <div class="head"><h3 class="t3">68 outputs forecast at once, 17 features across four recording days</h3></div>
+        <div class="head"><h3 class="t3 fit">All 68 outputs, forecast at once</h3></div>
         <div class="keys-head" id="heat-scale" style="justify-content: flex-start; margin-bottom: var(--s1)"></div>
         <div id="heat"></div>
       </div>
@@ -132,16 +208,16 @@
 
     <section class="page-view views" data-page="plate">
       <div class="v5 fig-block">
-        <div class="head"><h2 class="t3" id="plate-claim"></h2></div>
+        <div class="head"><h2 class="t3 fit" id="plate-claim"></h2></div>
         <div class="seg" id="plate-mode" style="margin-bottom: var(--s2)"><button type="button" data-full="0">3 measured</button><button type="button" data-full="1">Full series</button></div>
         <div id="plate-chart"></div>
       </div>
       <div class="v4 fig-block">
-        <div class="head"><h3 class="t3" id="layout-claim"></h3></div>
+        <div class="head"><h3 class="t3 fit" id="layout-claim"></h3></div>
         <div id="layouts"></div>
       </div>
       <div class="v9 fig-block">
-        <div class="head"><h3 class="t3" id="trade-claim"></h3><div class="keys-head" id="trade-keys"></div></div>
+        <div class="head"><h3 class="t3 fit" id="trade-claim"></h3><div class="keys-head" id="trade-keys"></div></div>
         <div id="trade"></div>
         <div id="slider" style="margin-top: var(--s1)"></div>
         <p class="t1 note" id="trade-note"></p>
@@ -154,21 +230,21 @@
         <p class="t1 note" id="replay-note"></p>
       </div>
       <div class="v9 fig-block">
-        <div class="head"><h2 class="t3" id="wf-claim"></h2><div class="seg" id="versus"></div></div>
+        <div class="head"><h2 class="t3 fit" id="wf-claim"></h2><div class="seg" id="versus"></div></div>
         <div id="waterfall"></div>
       </div>
       <div class="v9 fig-block">
-        <div class="head"><h3 class="t3" id="forest-claim"></h3><span class="t1" id="forest-src"></span></div>
+        <div class="head"><h3 class="t3 fit" id="forest-claim"></h3><span class="t1" id="forest-src"></span></div>
         <div id="forest"></div>
         <p class="t1 note" id="forest-note"></p>
       </div>
       <div class="v5 fig-block">
-        <div class="head"><h3 class="t3" id="chips-claim"></h3><span class="t1" id="chips-src"></span></div>
+        <div class="head"><h3 class="t3 fit" id="chips-claim"></h3><span class="t1" id="chips-src"></span></div>
         <div id="chips"></div>
         <p class="t1 note" id="chips-note"></p>
       </div>
       <div class="v4 fig-block">
-        <div class="head"><h3 class="t3" id="cal-claim"></h3></div>
+        <div class="head"><h3 class="t3 fit" id="cal-claim"></h3></div>
         <div class="keys-head" id="cal-keys" style="justify-content: flex-start; margin-bottom: var(--s1)"></div>
         <div id="calibration"></div>
       </div>
@@ -177,20 +253,22 @@
     <section class="page-view views" data-page="model">
       <div class="v9 fig-block"><div class="stats" id="band"></div></div>
       <div class="v9 fig-block">
-        <div class="head"><h2 class="t3" id="abl-claim"></h2><span class="t1" id="abl-src"></span></div>
+        <div class="head"><h2 class="t3 fit" id="abl-claim"></h2><span class="t1" id="abl-src"></span></div>
         <div id="ablation"></div>
+        <p class="t1 note" id="abl-note"></p>
       </div>
       <div class="v9 fig-block">
-        <div class="head"><h3 class="t3" id="agent-claim"></h3><span class="t1 ink3" id="agent-src"></span></div>
+        <div class="head"><h3 class="t3 fit" id="agent-claim"></h3><span class="t1 ink3" id="agent-src"></span></div>
         <div class="agent" id="agent-replay"></div>
       </div>
     </section>
 
     <section class="page-view views" data-page="patient">
       <div class="v9 fig-block">
-        <div class="head"><h2 class="t3" id="pt-claim"></h2>
+        <div class="head"><h2 class="t3 fit" id="pt-claim"></h2>
           <div class="tools"><button class="btn quiet" type="button" id="reveal"></button><label class="btn quiet">Add outcomes<input type="file" id="outcomes" accept=".csv,.tsv,.txt,text/csv"></label><button class="btn quiet" type="button" id="download">Download actions</button></div>
         </div>
+        <div class="cohorts fit" id="cohort-bar" role="group" aria-label="Patient cohort"></div>
         <div class="stats" id="pt-stats" style="grid-template-columns: repeat(4, 1fr)"></div>
       </div>
       <div class="v6 fig-block"><div id="pt-map"></div></div>
@@ -208,19 +286,21 @@
 
 <footer class="page foot" id="method"></footer>
 
-<script src="vendor/d3.v7.9.0.min.js"></script>
-<script src="data/ooc-data.js"></script>
-<script src="engine.js"></script>
-<script src="stats.js"></script>
-<script src="chain-engine.js"></script>
-<script src="result.js"></script>
-<script src="assets/core.js"></script>
-<script src="assets/charts-a.js"></script>
-<script src="assets/charts-b.js"></script>
-<script src="assets/charts-c.js"></script>
-<script src="assets/copy.js"></script>
+<script src="vendor/d3.v7.9.0.min.js" defer></script>
+<script src="data/ooc-data.js" defer></script>
+<script src="data/ooc-final-1009.js" defer></script>
+<script src="assets/mount-final-1009.js" defer></script>
+<script src="engine.js" defer></script>
+<script src="stats.js" defer></script>
+<script src="chain-engine.js" defer></script>
+<script src="result.js" defer></script>
+<script src="assets/core.js" defer></script>
+<script src="assets/charts-a.js" defer></script>
+<script src="assets/charts-b.js" defer></script>
+<script src="assets/charts-c.js" defer></script>
+<script src="assets/copy.js" defer></script>
 <script>
-(function () {
+document.addEventListener('DOMContentLoaded', function () {
   const C = Core, O = C.O, K = Charts, $ = id => document.getElementById(id), h = K.h;
   $('hero-num').textContent = Copy.heroNumber;
   Copy.heroTip([$('hero-num'), $('hero-label')]);
@@ -228,7 +308,7 @@
   /* ---------- index: chemicals, patients, your data ---------- */
   /* typed: a pasted set of names keeps its order until a sort chip is pressed */
   const view = { tab: C.hash.get('tab') || 'chem', page: C.hash.get('page') || 'curve', q: '', sort: 'gain', typed: false, rows: [] };
-  const tabLabel = { chem: () => `Chemicals ${O.chems.length}`, patient: () => `Patients ${C.state.patients.length}`, yours: () => 'Your data' };
+  const tabLabel = { chem: () => `Chemicals ${O.chems.length}`, patient: () => `Patients ${C.state.patientSource === 'own' ? C.state.patients.length : O.totalPatients}`, yours: () => 'Your data' };
   ['chem', 'patient', 'yours'].forEach(k => { const b = h('button'); b.type = 'button'; b.dataset.k = k; b.onclick = () => setTab(k); $('tabs').appendChild(b); });
   const search = h('input', 'field'); search.type = 'search'; search.placeholder = 'Filter the list';
   search.style.cssText = 'font-family: var(--sans); font-size: var(--f2); line-height: var(--l2); padding: 6px var(--s1)';
@@ -289,10 +369,10 @@
         const li = h('li'), b = h('button'); b.type = 'button'; b.setAttribute('role', 'option');
         b.setAttribute('aria-selected', String(r.id === C.state.patient));
         const meta = h('span', 'meta'), i = h('i');
-        const tone = wrong(r) ? 'var(--wrong)' : r.call === null ? 'var(--retest)' : 'var(--report)';
+        const tone = wrong(r) ? 'var(--wrong)' : r.reference ? 'var(--compare)' : r.call === null ? 'var(--retest)' : 'var(--report)';
         i.style.background = wrong(r) || r.call === 1 ? tone : 'transparent';
         i.style.boxShadow = 'inset 0 0 0 1.5px ' + tone;
-        meta.append(i, document.createTextNode(` ${r.call === null ? 'retest' : r.call === 1 ? 'sensitive' : 'resistant'}`));
+        meta.append(i, document.createTextNode(` ${K.patientAction(r)}`));
         b.append(h('span', 'name', r.id), meta);
         b.onclick = () => C.set({ patient: r.id });
         li.appendChild(b); ul.appendChild(li);
@@ -334,7 +414,7 @@
     if (view.tab === 'chem') {
       const c = O.chems[C.state.chem], w = c.w;
       const wrap = h('div', 'entity'), left = h('div');
-      left.appendChild(h('h2', 't4', c.name));
+      left.appendChild(h('h2', 't4 fit', c.name));
       const facts = h('div', 'facts t2');
       facts.append(fact('Concentrations', `${C.uM(w.levels[0])}–${C.uM(w.levels[w.levels.length - 1])} µM, ${w.levels.length} levels`), fact('Wells', String(w.lv.length)),
         fact('EPA label', c.label), fact('Held out in fold', String(c.fold)));
@@ -342,18 +422,19 @@
       wrap.append(left, chipsEl); el.appendChild(wrap);
     } else if (view.tab === 'patient') {
       const r = C.state.patients.find(x => x.id === C.state.patient) || C.state.patients[0];
-      const wrap = h('div'); wrap.appendChild(h('h2', 't4', r ? r.id : 'Patients'));
+      const wrap = h('div'); wrap.appendChild(h('h2', 't4 fit', r ? r.id : 'Patients'));
       const facts = h('div', 'facts t2'), f = v => (v === null || v === undefined ? '—' : C.fix(v, 3));
       if (r) {
-        (r.mode === 'two' ? [['Readout 1', f(r.r1)], ['Readout 2', f(r.r2)]] : [['Combined regimen', f(r.combined)], ['Irradiation', f(r.irr)]])
+        (r.mode === 'two' ? [['Readout 1', f(r.cohort ? r.readout1 : r.r1)], ['Readout 2', f(r.cohort ? r.readout2 : r.r2)]] : [['Combined regimen', f(r.combined)], ['Irradiation', f(r.irr)]])
           .forEach(([k, v]) => facts.appendChild(fact(k, v)));
-        facts.append(fact('Action', r.call === null ? 'retest' : r.call === 1 ? 'report sensitive' : 'report resistant'),
+        facts.append(fact('Action', r.call === null ? K.patientAction(r) : 'report ' + K.patientAction(r)),
           fact('Clinical', C.state.reveal ? (r.response === 1 ? 'responder' : r.response === 0 ? 'non-responder' : 'not given') : 'closed'));
       }
       wrap.appendChild(facts); el.appendChild(wrap);
     } else {
-      el.appendChild(h('h2', 't4', 'Your data stays in this browser'));
+      el.appendChild(h('h2', 't4 fit', 'Your data stays in this browser'));
     }
+    fitLines(el);
   }
   C.on((S, p) => {
     if (!p || !Object.keys(p).length) return;
@@ -400,11 +481,13 @@
   $('abl-claim').textContent = Copy.ablationClaim();
   Copy.source($('abl-src'), C.strong.ablation.source);
   K.ablation($('ablation'), { labelWidth: 176 });
+  $('abl-note').textContent = Copy.ablationNote();
   $('agent-claim').textContent = Copy.agentClaim();
   $('agent-src').textContent = Copy.agentSource();
   K.agent($('agent-replay'));
 
   Copy.bindPatients($('pt-claim'), $('pt-stats'));
+  OOCFinal1009.renderCohortBar($('cohort-bar'));
   K.patients($('pt-map'), { height: 300 });
   K.patientPlate($('pt-plate'), { cell: 36 });
   K.patientSummary($('pt-note'));
@@ -430,6 +513,7 @@
   if (view.tab === 'patient') view.page = 'patient';
   if (view.tab === 'yours') view.page = 'yours';
   list(); pages(); entity();
+  fitLines();
   document.fonts.ready.then(() => requestAnimationFrame(function enter() {
     if (document.documentElement.dataset.entry === 'error') return;
     const charts = [...document.querySelectorAll('.page-view.on svg.chart')];
@@ -440,7 +524,7 @@
     d3.timerFlush();
     document.documentElement.dataset.entry = 'ready';
   }));
-})();
+});
 </script>
 </body>
 </html>

@@ -7,9 +7,10 @@
   const h = (tag, cls, text) => { const e = document.createElement(tag); if (cls) e.className = cls; if (text !== undefined) e.textContent = text; return e; };
   Charts.h = h;
   const wrong = (r, S) => S.reveal && (r.response === 0 || r.response === 1) && r.call !== null && r.call !== r.response;
-  const action = r => (r.call === null ? 'retest' : r.call === 1 ? 'sensitive' : 'resistant');
+  const action = r => (r.reference ? 'reference' : r.call === null ? 'retest' : r.call === 1 ? 'sensitive' : 'resistant');
   const fillOf = (r, S) => (wrong(r, S) ? css('wrong') : r.call === 1 ? css('report') : css('surface'));
-  const strokeOf = (r, S) => (wrong(r, S) ? css('wrong') : r.call === null ? css('retest') : css('report'));
+  const strokeOf = (r, S) => (wrong(r, S) ? css('wrong') : r.reference ? css('compare') : r.call === null ? css('retest') : css('report'));
+  Charts.patientAction = action;
 
   /* ---------------- 8a. patient decision map ----------------
      combined mode: combined-regimen readout against irradiation, one frozen cutoff;
@@ -21,7 +22,7 @@
     const draw = Charts.mount(el, (svg, W, S, patch) => {
       const dur = Charts.dur(patch), rows = S.patients, H1 = opt.height || 260, H = M.t + H1 + M.b, iw = W - M.l - M.r;
       svg.attr('viewBox', `0 0 ${W} ${H}`).attr('height', H);
-      const two = rows.length && rows[0].mode === 'two', cut = two ? cert() : [P.cutoff];
+      const two = rows.length && rows[0].mode === 'two', cut = two ? (S.patientSource === 'final1009' ? S.patientCutoffs : cert()) : [P.cutoff];
       const xKey = two ? 'r1' : 'combined';
       const yKey = two ? 'r2' : rows.some(r => r.irr > 0) ? 'irr' : rows.some(r => r.fu > 0) ? 'fu' : null;
       const pos = v => Math.max(0.004, v);
@@ -37,13 +38,18 @@
       layer(g, 'xax').attr('transform', `translate(0,${H1})`).attr('class', 'xax axis')
         .call(d3.axisBottom(x).ticks(5, '~g').tickSize(4).tickPadding(6)).call(a => a.select('.domain').attr('stroke', css('axis')));
       layer(g, 'yax').attr('class', 'yax axis').call(yKey ? d3.axisLeft(y).ticks(4, '~g').tickSize(4).tickPadding(6) : d3.axisLeft(y).ticks(0)).call(a => a.select('.domain').remove());
-      layer(g, 'xt').selectAll('text').data([two ? 'readout 1' : 'organoid size, day 24 / day 0, combined regimen']).join('text').attr('class', 'axis-title').attr('x', iw).attr('y', H1 + 34).attr('text-anchor', 'end').text(t => t);
-      layer(g, 'yt').selectAll('text').data([two ? 'readout 2' : yKey === 'irr' ? 'irradiation alone' : yKey === 'fu' ? '5-FU alone' : 'patients']).join('text').attr('class', 'axis-title').attr('x', -M.l).attr('y', -12).text(t => t);
+      const labels = S.patientSource === 'final1009' ? S.patientAxisLabels : ['readout 1', 'readout 2'];
+      layer(g, 'xt').selectAll('text').data([two ? labels[0] : 'organoid size, day 24 / day 0, combined regimen']).join('text').attr('class', 'axis-title').attr('x', iw).attr('y', H1 + 34).attr('text-anchor', 'end').text(t => t);
+      layer(g, 'yt').selectAll('text').data([two ? labels[1] : yKey === 'irr' ? 'irradiation alone' : yKey === 'fu' ? '5-FU alone' : 'patients']).join('text').attr('class', 'axis-title').attr('x', -M.l).attr('y', -12).text(t => t);
       layer(g, 'cut').selectAll('line').data([cut[0]]).join('line').attr('class', 'cutoff').attr('y1', 0).attr('y2', H1).attr('x1', v => x(v)).attr('x2', v => x(v));
       layer(g, 'cuty').selectAll('line').data(two ? [yc] : []).join('line').attr('class', 'cutoff').attr('x1', 0).attr('x2', iw).attr('y1', v => y(v)).attr('y2', v => y(v));
       const sides = two ? [['report sensitive', 8, H1 - 8, 'start'], ['report resistant', iw - 8, 14, 'end'], ['retest', 8, 14, 'start'], ['retest', iw - 8, H1 - 8, 'end']]
         : [[`sensitive ≤ ${P.cutoff}`, x(P.cutoff) - 6, 14, 'end'], ['resistant', x(P.cutoff) + 6, 14, 'start']];
       layer(g, 'sides').selectAll('text').data(sides).join('text').attr('class', 'label').attr('x', d => d[1]).attr('y', d => d[2]).attr('text-anchor', d => d[3]).text(d => d[0]);
+      const off = rows.length - shown.length;
+      layer(g, 'off').selectAll('text').data(off ? [off] : []).join('text').attr('class', 'label')
+        .attr('x', shown.length ? 0 : iw - 8).attr('y', shown.length ? H1 + 34 : H1 * 0.7).attr('text-anchor', shown.length ? 'start' : 'end')
+        .text(n => (shown.length ? `${n} more without numerical readouts, in the plate` : `No readouts in this source; ${n} calls in the plate`));
       const pts = shown.map((r, i) => ({ r, cx: x(xs[i]), cy: yKey ? y(ys[i]) : y(i + 1) }));
       layer(g, 'pts').selectAll('circle').data(pts, p => p.r.id).join(
         e => e.append('circle').attr('cx', p => p.cx).attr('cy', p => p.cy).attr('r', 5),
@@ -64,11 +70,11 @@
   Charts.patientTip = function (ev, r, S) {
     const out = r.response === 1 ? 'responder' : r.response === 0 ? 'non-responder' : 'outcome not given';
     const f = v => (v === null || v === undefined ? null : C.fix(v, 3));
-    const rows = (r.mode === 'two' ? [['readout 1', r.r1], ['readout 2', r.r2]] : [['combined regimen', r.combined], ['irradiation', r.irr], ['5-FU', r.fu]])
+    const rows = (r.mode === 'two' ? [['readout 1', r.cohort ? r.readout1 : r.r1], ['readout 2', r.cohort ? r.readout2 : r.r2]] : [['combined regimen', r.combined], ['irradiation', r.irr], ['5-FU', r.fu]])
       .filter(([, v]) => f(v) !== null).map(([k, v]) => `${k} ${f(v)}`);
     rows.push(r.reason);
     rows.push(S.reveal ? { text: `clinical: ${out}`, color: wrong(r, S) ? css('wrong') : css('ink-3') } : 'clinical outcome hidden until reveal');
-    C.tip(ev, `${r.id} · ${r.call === null ? 'retest' : 'report ' + action(r)}`, rows);
+    C.tip(ev, `${r.id} · ${r.call === null ? action(r) : 'report ' + action(r)}`, rows);
   };
 
   /* ---------------- 8b. the same patients as wells, linked by selection ---------------- */
@@ -102,9 +108,15 @@
       if (p && Object.keys(p).length && !('patients' in p || 'reveal' in p)) return;
       const s = C.patientStats(S.patients), rows = S.patients;
       const sens = rows.filter(r => r.call === 1).length, res = rows.filter(r => r.call === 0).length;
+      const ref = rows.filter(r => r.reference).length, retest = s.retest - ref;
+      const unit = S.patientSource === 'final1009' && S.patientCohort ? S.patientCohort.evaluationUnit.replace('assay_patient', 'patient') : 'patient';
       el.textContent = '';
+      if (ref === rows.length) {
+        el.textContent = `${ref} patients whose frozen assays set the reference medians; their scored treatments are under Tan clinical.`;
+        return;
+      }
       if (!S.reveal || !s.known) {
-        el.textContent = `${rows.length} patients called before any outcome is opened: ${sens} sensitive, ${res} resistant` + (s.retest ? `, ${s.retest} to retest.` : '.');
+        el.textContent = `${rows.length - ref} ${unit}s called before any outcome is opened: ${sens} sensitive, ${res} resistant` + (retest ? `, ${retest} to retest` : '') + (ref ? `; ${ref} reference assays.` : '.');
         return;
       }
       const miss = rows.filter(r => wrong(r, S)).map(r => r.id);
