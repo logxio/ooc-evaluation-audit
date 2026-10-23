@@ -488,13 +488,13 @@ document.addEventListener('DOMContentLoaded', function () {
         c.d.forEach((d, k) => { const i = h('i', k === C.state.design ? 'cur' : null); i.style.background = i.style.color = d.act ? 'var(--report)' : 'var(--retest)'; sq.appendChild(i); });
         b.append(h('span', 'name', c.name), sq, h('span', 'g' + (g < 0 ? ' neg' : ''), minus(g)));
         b.title = `${c.name} · error ${C.fix(c.err.anchorboost)} against ${C.fix(c.err.loglinear_interp)} by interpolation · ${settled(c)} of 5 designs reported`;
-        b.onclick = () => { cursor = null; C.set({ chem: c.i }); focusSelected(); };
+        b.onclick = () => pick(c.i);
       } else {
         const r = x, s = status(r), v = readout(r);
         b.setAttribute('aria-selected', String(r.id === C.state.patient)); b.dataset.key = r.id;
         b.append(h('span', 'name', r.id), h('span', 'rd', short(v)), h('span', 'call ' + s, s));
         b.title = `${r.id} · ${s}${v === null ? ' · saved call without a raw readout' : ''}`;
-        b.onclick = () => { cursor = null; C.set({ patient: r.id }); focusSelected(); };
+        b.onclick = () => pick(r.id);
       }
       li.appendChild(b); ul.appendChild(li);
     });
@@ -519,14 +519,17 @@ document.addEventListener('DOMContentLoaded', function () {
     else if (e.key === 'End') i = keys.length - 1;
     else return;
     e.preventDefault();
-    cursor = keys[i];
-    C.set(view.tab === 'chem' ? { chem: cursor } : { patient: cursor });
-    const el = [...$('list').querySelectorAll('button[data-key]')].find(b => b.dataset.key === String(cursor));
-    if (el) {
-      $('list').querySelectorAll('button[aria-selected="true"]').forEach(b => b.setAttribute('aria-selected', 'false'));
-      el.setAttribute('aria-selected', 'true'); el.focus({ preventScroll: true }); el.scrollIntoView({ block: 'nearest' });
-    }
+    pick(keys[i]);
   });
+  /* click and keys pick the same way: the row lights at once, the canvas follows when its details are in */
+  function pick(key) {
+    cursor = key;
+    C.set(view.tab === 'chem' ? { chem: key } : { patient: key });
+    const ul = $('list'), el = [...ul.querySelectorAll('button[data-key]')].find(b => b.dataset.key === String(key));
+    if (!el) return;
+    ul.querySelectorAll('button[aria-selected="true"]').forEach(b => b.setAttribute('aria-selected', 'false'));
+    el.setAttribute('aria-selected', 'true'); el.focus({ preventScroll: true }); el.scrollIntoView({ block: 'nearest' });
+  }
   /* each list keeps its own filter: switching between chemicals, patients and your data starts from an empty one */
   function goTab(k) {
     if (view.tab !== k) { view.q = ''; view.typed = false; search.value = ''; }
