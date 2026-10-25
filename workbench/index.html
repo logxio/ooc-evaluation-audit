@@ -50,16 +50,16 @@
 </script>
 <link rel="stylesheet" href="assets/system.css?v=1023f1">
 <style>
-  /* command bar: brand, three readings, links; one 50 px line on every desktop width */
-  .bar { display: flex; align-items: center; justify-content: space-between; gap: var(--s2); height: 50px; padding: 0 24px; background: #121820; color: #f0f4f8; white-space: nowrap; }
+  /* command bar: brand and links above three frozen readings */
+  .bar { display: flex; align-items: center; justify-content: space-between; gap: var(--s2); flex-wrap: wrap; min-height: 50px; padding: 10px 24px; background: #121820; color: #f0f4f8; white-space: nowrap; }
   .bar :focus-visible { outline-color: #38bdf8; }
   .brand { display: flex; align-items: center; gap: 10px; min-width: 0; }
   .mark { font: 500 18px/24px var(--serif); color: #fff; letter-spacing: -.01em; }
   .team { padding: 2px 8px; border-radius: 4px; background: rgba(255, 255, 255, .12); color: #e2e8f0; font: 500 11.5px/16px var(--sans); }
-  .kpis { display: flex; align-items: baseline; gap: 18px; min-width: 0; font: 400 var(--f1)/var(--l1) var(--sans); color: #9fb0c4; }
-  .kpi { cursor: default; border-radius: 4px; }
+  .kpis { display: flex; align-items: baseline; order: 3; width: 100%; flex-wrap: wrap; gap: 4px 18px; min-width: 0; font: 400 var(--f1)/var(--l1) var(--sans); color: #9fb0c4; }
+  .kpi { cursor: default; border-radius: 4px; white-space: normal; }
   .kpi b { margin-right: 2px; color: #fff; font: 700 14px/20px var(--sans); font-variant-numeric: tabular-nums lining-nums; }
-  .bar nav { display: flex; align-items: center; gap: 14px; font-size: 12.5px; }
+  .bar nav { display: flex; align-items: center; margin-left: auto; gap: 14px; font-size: 12.5px; }
   .bar nav a { color: #cbd5e1; font-weight: 500; transition: color var(--t) var(--ease); }
   .bar nav a:hover { color: #fff; }
   .cta { border: 0; border-radius: 5px; padding: 5px 11px; background: #38bdf8; color: #0f172a; font: 600 12px/16px var(--sans); cursor: pointer; transition: background var(--t) var(--ease); }
@@ -202,7 +202,7 @@
   @media (max-width: 960px) {
     .atlas { grid-template-columns: 1fr; } .index, .sheet { grid-column: 1 / -1; } .index { contain: none; } .list { flex: none; max-height: 50vh; } .views > * { grid-column: 1 / -1; }
     .entity, .facts, .fig-block .head, .tools { flex-wrap: wrap; } .entity { row-gap: var(--s1); }
-    .bar nav a, .team .names, .kpi:nth-child(3) { display: none; }
+    .bar nav a, .team .names { display: none; }
   }
   /* phones: a claim longer than the screen breaks into two balanced lines instead of shrinking past reading size */
   @media (max-width: 600px) {
@@ -216,11 +216,11 @@
 <header class="bar">
   <div class="brand"><span class="mark">Chip Forecast</span><span class="team" title="Team Three-Pointer · Yan Su &amp; Ziyang Liu">Team Three-Pointer<span class="names"> · Yan Su &amp; Ziyang Liu</span></span></div>
   <div class="kpis" id="hero">
-    <span class="kpi"><b id="hero-num">56.8%</b> <span id="hero-label">fewer exposure wells (12,119 / 28,080)</span></span>
+    <span class="kpi"><b id="hero-num">56.8%</b> <span id="hero-label">fewer exposure wells (57.00% on 240 3D PDO curves)</span></span>
     <span class="kpi"><b>97W 1T 0L</b> <span>vs 32 published models</span></span>
-    <span class="kpi"><b>306</b> <span>published patient assays</span></span>
+    <span class="kpi"><b>248</b> <span>matched clinical patients (AUC 0.9502)</span></span>
   </div>
-  <nav><a href="sample.html">Sample size</a><a href="audits/index.html">Published studies (13)</a><a href="https://github.com/logxio/ooc-evaluation-audit">Source</a><button class="cta" type="button" id="paste-cta">Paste your table</button></nav>
+  <nav><a href="sample.html">Sample size</a><a href="audits/index.html">Published studies (40)</a><a href="https://github.com/logxio/ooc-evaluation-audit">Source</a><button class="cta" type="button" id="paste-cta">Paste your table</button></nav>
 </header>
 
 <main class="page atlas">
@@ -354,9 +354,23 @@
 <script>
 document.addEventListener('DOMContentLoaded', function () {
   const C = Core, O = C.O, K = Charts, $ = id => document.getElementById(id), h = K.h;
+  /* frozen audit totals are distinct from the selectable demonstration cohorts */
+  Copy.bar = [
+    ['56.8%', 'fewer exposure wells (57.00% on 240 3D PDO curves)'],
+    ['97W 1T 0L', 'vs 32 published models'],
+    ['248', 'matched clinical patients (AUC 0.9502)']
+  ];
+  Copy.heroRecord = ['Frozen four-axis evidence, 25 October 2026', [
+    'EPA neural screen: 12,119 / 28,080 exposure wells, 925 calls and 69 wrong; 56.8% fewer wells',
+    'JCI human 3D PDO: 240 curves, 3,096 / 7,200 wells, 57.00% saving; 204 fewer wells than measured-only, 1/240 missed',
+    '32 published models, k=1 to 4: 97 wins, 1 tie, 0 losses in 98 paired comparisons',
+    'Clinical audit: 248 matched patients across 8 study clusters, 243 with numerical sensitivity; within-study weighted AUC 0.9502',
+    'Corpus: 34 strict PDO studies / 13,444 curves; 40 qualified human 3D studies / 13,585 curves',
+    'Literature survey: 399 papers from 17,386 PubMed records, 12,144 evidence checks; aligned coding alpha 0.8054 to 1.0000'
+  ]];
   const kpis = document.querySelectorAll('.bar .kpi');
   kpis.forEach((el, i) => { el.children[0].textContent = Copy.bar[i][0]; el.children[1].textContent = Copy.bar[i][1]; });
-  Copy.heroTip([$('hero-num'), $('hero-label'), kpis[1]]);
+  Copy.heroTip([$('hero-num'), $('hero-label'), kpis[1], kpis[2]]);
 
   /* index: chemicals, patients, your data */
   /* typed: a pasted set of names keeps its order until a column head is pressed */

@@ -1,0 +1,3199 @@
+{
+  "schema": "s58.expanded_loso.v2",
+  "status": "computed_cluster_target_met",
+  "study_class_gate": ">=2 independent favourable and >=2 independent unfavourable patients",
+  "matched_patients": 248,
+  "numeric_patients": 243,
+  "qualifying_clusters": 8,
+  "target_clusters": 6,
+  "cluster_target_met": true,
+  "new_matched_patients": 71,
+  "ren_occluded_curve_patients": [
+    "ECC20T"
+  ],
+  "by_study": {
+    "10.1002/advs.202204097": {
+      "n": 23,
+      "favourable": 13,
+      "unfavourable": 10,
+      "auc": 0.8769230769230769,
+      "passes_2_per_class": true
+    },
+    "10.1016/j.xcrm.2023.101335": {
+      "n": 13,
+      "favourable": 3,
+      "unfavourable": 10,
+      "auc": 0.75,
+      "passes_2_per_class": true
+    },
+    "10.1016/j.xcrm.2025.102397": {
+      "n": 127,
+      "favourable": 58,
+      "unfavourable": 69,
+      "auc": 0.9662668665667167,
+      "passes_2_per_class": true
+    },
+    "doi:10.1371/journal.pone.0339416": {
+      "n": 1,
+      "favourable": 1,
+      "unfavourable": 0,
+      "auc": null,
+      "passes_2_per_class": false
+    },
+    "10.1016/j.xcrm.2023.101277": {
+      "n": 9,
+      "favourable": 6,
+      "unfavourable": 3,
+      "auc": 0.8333333333333334,
+      "passes_2_per_class": true
+    },
+    "10.1038/s41467-021-22676-1": {
+      "n": 9,
+      "favourable": 6,
+      "unfavourable": 3,
+      "auc": 1.0,
+      "passes_2_per_class": true
+    },
+    "10.1002/advs.202101176": {
+      "n": 14,
+      "favourable": 8,
+      "unfavourable": 6,
+      "auc": 0.8333333333333334,
+      "passes_2_per_class": true
+    },
+    "10.1186/s12885-025-15495-x": {
+      "n": 7,
+      "favourable": 3,
+      "unfavourable": 4,
+      "auc": 0.8333333333333334,
+      "passes_2_per_class": true
+    },
+    "10.1002/1878-0261.13296": {
+      "n": 40,
+      "favourable": 36,
+      "unfavourable": 4,
+      "auc": 0.6701388888888888,
+      "passes_2_per_class": true
+    }
+  },
+  "pooled_study_stratified_auc": {
+    "replicates": 10000,
+    "seed": 20261024,
+    "ci95": [
+      0.6848788561010275,
+      0.9774581052729114
+    ],
+    "method": "resample studies, then independent patients separately by class; within-study pair weighting",
+    "mean_bootstrap_auc": 0.8983205710263724,
+    "auc": 0.9502498864152658
+  },
+  "loso": {
+    "10.1002/advs.202204097": {
+      "n": 23,
+      "favourable": 13,
+      "auc_within": 0.8769230769230769,
+      "heldout_prediction_auc": 0.8769230769230769,
+      "training_studies": [
+        "10.1016/j.xcrm.2023.101335",
+        "10.1016/j.xcrm.2025.102397",
+        "10.1016/j.xcrm.2023.101277",
+        "10.1038/s41467-021-22676-1",
+        "10.1002/advs.202101176",
+        "10.1186/s12885-025-15495-x",
+        "10.1002/1878-0261.13296"
+      ],
+      "R_rank_threshold": 0.452755905511811,
+      "sensitivity": 0.6923076923076923,
+      "specificity": 0.9,
+      "accuracy": 0.782608695652174,
+      "training_logistic_coefficients": [
+        3.2510162441353843,
+        5.876582029686514
+      ],
+      "calibration_intercept": 0.11321899124251929,
+      "calibration_slope": 1.1242800815701541,
+      "brier": 0.1375333234224758,
+      "brier_decomposition": {
+        "squared_mean_bias": 0.00030334416200043514,
+        "forecast_variance": 0.09534134715498933,
+        "outcome_variance": 0.24574669187145554,
+        "minus_twice_forecast_outcome_covariance": -0.20385805976596955,
+        "sum": 0.13753332342247576
+      },
+      "R_abs": {
+        "status": "not_transferable",
+        "reason": "heterogeneous assay units and regimens; no shared physical scale"
+      },
+      "predictions": [
+        {
+          "patient": "P2",
+          "percentile": 0.10869565217391304,
+          "p_favourable": 0.9316462864034412,
+          "y": 1
+        },
+        {
+          "patient": "P3",
+          "percentile": 0.8478260869565217,
+          "p_favourable": 0.15042094894188335,
+          "y": 0
+        },
+        {
+          "patient": "P4",
+          "percentile": 0.06521739130434782,
+          "p_favourable": 0.9462295378523626,
+          "y": 1
+        },
+        {
+          "patient": "P5",
+          "percentile": 0.15217391304347827,
+          "p_favourable": 0.9134695574728339,
+          "y": 1
+        },
+        {
+          "patient": "P6",
+          "percentile": 0.5,
+          "p_favourable": 0.5775503189277994,
+          "y": 0
+        },
+        {
+          "patient": "P7",
+          "percentile": 0.9347826086956522,
+          "p_favourable": 0.09601481792646838,
+          "y": 0
+        },
+        {
+          "patient": "P8",
+          "percentile": 0.8043478260869565,
+          "p_favourable": 0.18606268274470936,
+          "y": 1
+        },
+        {
+          "patient": "P9",
+          "percentile": 0.6739130434782609,
+          "p_favourable": 0.3297559561098859,
+          "y": 0
+        },
+        {
+          "patient": "P10",
+          "percentile": 0.9782608695652174,
+          "p_favourable": 0.0760115687413825,
+          "y": 0
+        },
+        {
+          "patient": "P11",
+          "percentile": 0.41304347826086957,
+          "p_favourable": 0.6950280421596208,
+          "y": 1
+        },
+        {
+          "patient": "P12",
+          "percentile": 0.2826086956521739,
+          "p_favourable": 0.8306502974145253,
+          "y": 1
+        },
+        {
+          "patient": "P13",
+          "percentile": 0.021739130434782608,
+          "p_favourable": 0.9578422458459678,
+          "y": 1
+        },
+        {
+          "patient": "P14",
+          "percentile": 0.2391304347826087,
+          "p_favourable": 0.8636269345540446,
+          "y": 1
+        },
+        {
+          "patient": "P15",
+          "percentile": 0.32608695652173914,
+          "p_favourable": 0.7916235222577522,
+          "y": 1
+        },
+        {
+          "patient": "P16",
+          "percentile": 0.3695652173913043,
+          "p_favourable": 0.7463493627290194,
+          "y": 1
+        },
+        {
+          "patient": "P17",
+          "percentile": 0.8913043478260869,
+          "p_favourable": 0.12059509004660227,
+          "y": 0
+        },
+        {
+          "patient": "P18",
+          "percentile": 0.1956521739130435,
+          "p_favourable": 0.8910246317531689,
+          "y": 0
+        },
+        {
+          "patient": "P19",
+          "percentile": 0.7608695652173914,
+          "p_favourable": 0.22788433439714456,
+          "y": 0
+        },
+        {
+          "patient": "P21",
+          "percentile": 0.717391304347826,
+          "p_favourable": 0.2759196626861824,
+          "y": 0
+        },
+        {
+          "patient": "P22",
+          "percentile": 0.6304347826086957,
+          "p_favourable": 0.3884611144533685,
+          "y": 0
+        },
+        {
+          "patient": "P23",
+          "percentile": 0.45652173913043476,
+          "p_favourable": 0.6383543786569879,
+          "y": 1
+        },
+        {
+          "patient": "P24",
+          "percentile": 0.5869565217391305,
+          "p_favourable": 0.450591296298178,
+          "y": 1
+        },
+        {
+          "patient": "P25",
+          "percentile": 0.5434782608695652,
+          "p_favourable": 0.5143015135995032,
+          "y": 1
+        }
+      ]
+    },
+    "10.1016/j.xcrm.2023.101335": {
+      "n": 13,
+      "favourable": 3,
+      "auc_within": 0.75,
+      "heldout_prediction_auc": 0.75,
+      "training_studies": [
+        "10.1002/advs.202204097",
+        "10.1016/j.xcrm.2025.102397",
+        "10.1016/j.xcrm.2023.101277",
+        "10.1038/s41467-021-22676-1",
+        "10.1002/advs.202101176",
+        "10.1186/s12885-025-15495-x",
+        "10.1002/1878-0261.13296"
+      ],
+      "R_rank_threshold": 0.45652173913043476,
+      "sensitivity": 0.6666666666666666,
+      "specificity": 0.6,
+      "accuracy": 0.6153846153846154,
+      "training_logistic_coefficients": [
+        3.667752901945288,
+        6.395876588952711
+      ],
+      "calibration_intercept": -1.718644127137323,
+      "calibration_slope": 0.5483189907486155,
+      "brier": 0.3261786299468967,
+      "brier_decomposition": {
+        "squared_mean_bias": 0.11340672379837789,
+        "forecast_variance": 0.10255231052481394,
+        "outcome_variance": 0.17751479289940827,
+        "minus_twice_forecast_outcome_covariance": -0.06729519727570343,
+        "sum": 0.32617862994689667
+      },
+      "R_abs": {
+        "status": "not_transferable",
+        "reason": "heterogeneous assay units and regimens; no shared physical scale"
+      },
+      "predictions": [
+        {
+          "patient": "WCB087",
+          "percentile": 0.5769230769230769,
+          "p_favourable": 0.49445625234237794,
+          "y": 0
+        },
+        {
+          "patient": "WCB139",
+          "percentile": 0.7692307692307693,
+          "p_favourable": 0.2223278108525968,
+          "y": 0
+        },
+        {
+          "patient": "WCB150",
+          "percentile": 0.9615384615384616,
+          "p_favourable": 0.07712057872897901,
+          "y": 0
+        },
+        {
+          "patient": "WCB217",
+          "percentile": 0.7692307692307693,
+          "p_favourable": 0.2223278108525968,
+          "y": 1
+        },
+        {
+          "patient": "WCB251",
+          "percentile": 0.6538461538461539,
+          "p_favourable": 0.37421733168176374,
+          "y": 0
+        },
+        {
+          "patient": "WCB272",
+          "percentile": 0.8846153846153846,
+          "p_favourable": 0.12024227125155028,
+          "y": 0
+        },
+        {
+          "patient": "WCB281",
+          "percentile": 0.4230769230769231,
+          "p_favourable": 0.7234830734802152,
+          "y": 0
+        },
+        {
+          "patient": "WCB259",
+          "percentile": 0.5,
+          "p_favourable": 0.6153398755268795,
+          "y": 0
+        },
+        {
+          "patient": "WCB015",
+          "percentile": 0.19230769230769232,
+          "p_favourable": 0.9196629721597132,
+          "y": 0
+        },
+        {
+          "patient": "WCB123",
+          "percentile": 0.038461538461538464,
+          "p_favourable": 0.9683776393465608,
+          "y": 1
+        },
+        {
+          "patient": "WCB221",
+          "percentile": 0.11538461538461539,
+          "p_favourable": 0.9492984685640415,
+          "y": 1
+        },
+        {
+          "patient": "WCB250",
+          "percentile": 0.3076923076923077,
+          "p_favourable": 0.8455074199604707,
+          "y": 0
+        },
+        {
+          "patient": "WCB311",
+          "percentile": 0.3076923076923077,
+          "p_favourable": 0.8455074199604707,
+          "y": 0
+        }
+      ]
+    },
+    "10.1016/j.xcrm.2025.102397": {
+      "n": 127,
+      "favourable": 58,
+      "auc_within": 0.9662668665667167,
+      "heldout_prediction_auc": 0.9662668665667167,
+      "training_studies": [
+        "10.1002/advs.202204097",
+        "10.1016/j.xcrm.2023.101335",
+        "10.1016/j.xcrm.2023.101277",
+        "10.1038/s41467-021-22676-1",
+        "10.1002/advs.202101176",
+        "10.1186/s12885-025-15495-x",
+        "10.1002/1878-0261.13296"
+      ],
+      "R_rank_threshold": 0.6071428571428571,
+      "sensitivity": 0.9655172413793104,
+      "specificity": 0.6956521739130435,
+      "accuracy": 0.8188976377952756,
+      "training_logistic_coefficients": [
+        2.5826262250470027,
+        3.600395988115004
+      ],
+      "calibration_intercept": -3.636469427566551,
+      "calibration_slope": 3.8740993562542494,
+      "brier": 0.16544276520480708,
+      "brier_decomposition": {
+        "squared_mean_bias": 0.038092240932495296,
+        "forecast_variance": 0.04243565997036737,
+        "outcome_variance": 0.24812449624899258,
+        "minus_twice_forecast_outcome_covariance": -0.1632096319470481,
+        "sum": 0.16544276520480714
+      },
+      "R_abs": {
+        "status": "not_transferable",
+        "reason": "heterogeneous assay units and regimens; no shared physical scale"
+      },
+      "predictions": [
+        {
+          "patient": "Patient-1",
+          "percentile": 0.2795275590551181,
+          "p_favourable": 0.8286679893660772,
+          "y": 1
+        },
+        {
+          "patient": "Patient-2",
+          "percentile": 0.5,
+          "p_favourable": 0.6862032172007388,
+          "y": 0
+        },
+        {
+          "patient": "Patient-3",
+          "percentile": 0.7519685039370079,
+          "p_favourable": 0.46885085159287,
+          "y": 0
+        },
+        {
+          "patient": "Patient-4",
+          "percentile": 0.19291338582677164,
+          "p_favourable": 0.8685343625119285,
+          "y": 1
+        },
+        {
+          "patient": "Patient-5",
+          "percentile": 0.65748031496063,
+          "p_favourable": 0.5536518327226807,
+          "y": 0
+        },
+        {
+          "patient": "Patient-6",
+          "percentile": 0.2874015748031496,
+          "p_favourable": 0.8246054104073643,
+          "y": 1
+        },
+        {
+          "patient": "Patient-7",
+          "percentile": 0.5236220472440944,
+          "p_favourable": 0.6676065192590058,
+          "y": 0
+        },
+        {
+          "patient": "Patient-8",
+          "percentile": 0.35039370078740156,
+          "p_favourable": 0.7893596965740062,
+          "y": 1
+        },
+        {
+          "patient": "Patient-9",
+          "percentile": 0.9409448818897638,
+          "p_favourable": 0.3089254001859842,
+          "y": 0
+        },
+        {
+          "patient": "Patient-10",
+          "percentile": 0.6496062992125984,
+          "p_favourable": 0.5606465141877199,
+          "y": 0
+        },
+        {
+          "patient": "Patient-11",
+          "percentile": 0.9645669291338582,
+          "p_favourable": 0.29106924189861527,
+          "y": 0
+        },
+        {
+          "patient": "Patient-12",
+          "percentile": 0.17716535433070865,
+          "p_favourable": 0.8748742351079217,
+          "y": 1
+        },
+        {
+          "patient": "Patient-13",
+          "percentile": 0.484251968503937,
+          "p_favourable": 0.6982814004084551,
+          "y": 0
+        },
+        {
+          "patient": "Patient-14",
+          "percentile": 0.7204724409448819,
+          "p_favourable": 0.49716006532062884,
+          "y": 0
+        },
+        {
+          "patient": "Patient-15",
+          "percentile": 0.6968503937007874,
+          "p_favourable": 0.5184138842094388,
+          "y": 0
+        },
+        {
+          "patient": "Patient-16",
+          "percentile": 0.41338582677165353,
+          "p_favourable": 0.749185604940034,
+          "y": 1
+        },
+        {
+          "patient": "Patient-17",
+          "percentile": 0.1141732283464567,
+          "p_favourable": 0.8976661197726977,
+          "y": 1
+        },
+        {
+          "patient": "Patient-18",
+          "percentile": 0.38976377952755903,
+          "p_favourable": 0.764825925471035,
+          "y": 1
+        },
+        {
+          "patient": "Patient-19",
+          "percentile": 0.421259842519685,
+          "p_favourable": 0.7438209966628185,
+          "y": 1
+        },
+        {
+          "patient": "Patient-20",
+          "percentile": 0.6811023622047244,
+          "p_favourable": 0.5325508996503421,
+          "y": 0
+        },
+        {
+          "patient": "Patient-21",
+          "percentile": 0.5708661417322834,
+          "p_favourable": 0.6288489725067041,
+          "y": 0
+        },
+        {
+          "patient": "Patient-22",
+          "percentile": 0.09055118110236221,
+          "p_favourable": 0.905218843826381,
+          "y": 1
+        },
+        {
+          "patient": "Patient-23",
+          "percentile": 0.2637795275590551,
+          "p_favourable": 0.8365686379089103,
+          "y": 1
+        },
+        {
+          "patient": "Patient-24",
+          "percentile": 0.6259842519685039,
+          "p_favourable": 0.5814758960981586,
+          "y": 1
+        },
+        {
+          "patient": "Patient-25",
+          "percentile": 0.5551181102362205,
+          "p_favourable": 0.6419829668433311,
+          "y": 0
+        },
+        {
+          "patient": "Patient-26",
+          "percentile": 0.15354330708661418,
+          "p_favourable": 0.8838915307300826,
+          "y": 1
+        },
+        {
+          "patient": "Patient-27",
+          "percentile": 0.8464566929133859,
+          "p_favourable": 0.385811481004976,
+          "y": 0
+        },
+        {
+          "patient": "Patient-28",
+          "percentile": 0.9566929133858267,
+          "p_favourable": 0.29695357759262747,
+          "y": 0
+        },
+        {
+          "patient": "Patient-29",
+          "percentile": 0.9724409448818898,
+          "p_favourable": 0.28525419813649544,
+          "y": 0
+        },
+        {
+          "patient": "Patient-30",
+          "percentile": 0.06692913385826772,
+          "p_favourable": 0.9122686199946705,
+          "y": 1
+        },
+        {
+          "patient": "Patient-31",
+          "percentile": 0.011811023622047244,
+          "p_favourable": 0.9269057282475277,
+          "y": 1
+        },
+        {
+          "patient": "Patient-32",
+          "percentile": 0.05905511811023622,
+          "p_favourable": 0.9145112057110775,
+          "y": 1
+        },
+        {
+          "patient": "Patient-33",
+          "percentile": 0.24803149606299213,
+          "p_favourable": 0.8441734721569338,
+          "y": 1
+        },
+        {
+          "patient": "Patient-34",
+          "percentile": 0.7283464566929134,
+          "p_favourable": 0.49007394538480104,
+          "y": 0
+        },
+        {
+          "patient": "Patient-35",
+          "percentile": 0.1062992125984252,
+          "p_favourable": 0.9002411561274192,
+          "y": 1
+        },
+        {
+          "patient": "Patient-36",
+          "percentile": 0.27165354330708663,
+          "p_favourable": 0.8326555652437019,
+          "y": 1
+        },
+        {
+          "patient": "Patient-37",
+          "percentile": 0.4763779527559055,
+          "p_favourable": 0.7042204337759558,
+          "y": 0
+        },
+        {
+          "patient": "Patient-38",
+          "percentile": 0.03543307086614173,
+          "p_favourable": 0.920930192669711,
+          "y": 1
+        },
+        {
+          "patient": "Patient-39",
+          "percentile": 0.3661417322834646,
+          "p_favourable": 0.7797776334947202,
+          "y": 1
+        },
+        {
+          "patient": "Patient-40",
+          "percentile": 0.20866141732283464,
+          "p_favourable": 0.861923958789076,
+          "y": 1
+        },
+        {
+          "patient": "Patient-41",
+          "percentile": 0.8858267716535433,
+          "p_favourable": 0.3528121272342142,
+          "y": 0
+        },
+        {
+          "patient": "Patient-42",
+          "percentile": 0.21653543307086615,
+          "p_favourable": 0.8585153003160144,
+          "y": 1
+        },
+        {
+          "patient": "Patient-43",
+          "percentile": 0.18503937007874016,
+          "p_favourable": 0.871737703281724,
+          "y": 1
+        },
+        {
+          "patient": "Patient-44",
+          "percentile": 0.38188976377952755,
+          "p_favourable": 0.7698867508091118,
+          "y": 1
+        },
+        {
+          "patient": "Patient-45",
+          "percentile": 0.051181102362204724,
+          "p_favourable": 0.9167017008240792,
+          "y": 1
+        },
+        {
+          "patient": "Patient-46",
+          "percentile": 0.7834645669291339,
+          "p_favourable": 0.44074071243118157,
+          "y": 0
+        },
+        {
+          "patient": "Patient-47",
+          "percentile": 0.7677165354330708,
+          "p_favourable": 0.45475973922896024,
+          "y": 0
+        },
+        {
+          "patient": "Patient-48",
+          "percentile": 0.562992125984252,
+          "p_favourable": 0.6354411832850234,
+          "y": 0
+        },
+        {
+          "patient": "Patient-49",
+          "percentile": 0.3346456692913386,
+          "p_favourable": 0.7986325010817753,
+          "y": 1
+        },
+        {
+          "patient": "Patient-50",
+          "percentile": 0.20078740157480315,
+          "p_favourable": 0.8652633839272804,
+          "y": 0
+        },
+        {
+          "patient": "Patient-51",
+          "percentile": 0.07480314960629922,
+          "p_favourable": 0.9099729968791208,
+          "y": 1
+        },
+        {
+          "patient": "Patient-52",
+          "percentile": 0.42913385826771655,
+          "p_favourable": 0.7383817145023873,
+          "y": 1
+        },
+        {
+          "patient": "Patient-53",
+          "percentile": 0.6732283464566929,
+          "p_favourable": 0.5396012769128539,
+          "y": 0
+        },
+        {
+          "patient": "Patient-54",
+          "percentile": 0.40551181102362205,
+          "p_favourable": 0.7544749554335062,
+          "y": 1
+        },
+        {
+          "patient": "Patient-55",
+          "percentile": 0.7913385826771654,
+          "p_favourable": 0.43376505902569606,
+          "y": 0
+        },
+        {
+          "patient": "Patient-56",
+          "percentile": 0.9803149606299213,
+          "p_favourable": 0.27950952466681306,
+          "y": 0
+        },
+        {
+          "patient": "Patient-57",
+          "percentile": 0.39763779527559057,
+          "p_favourable": 0.7596885401301113,
+          "y": 1
+        },
+        {
+          "patient": "Patient-58",
+          "percentile": 0.8937007874015748,
+          "p_favourable": 0.3463662349638735,
+          "y": 0
+        },
+        {
+          "patient": "Patient-59",
+          "percentile": 0.6338582677165354,
+          "p_favourable": 0.5745611874792698,
+          "y": 0
+        },
+        {
+          "patient": "Patient-60",
+          "percentile": 0.3188976377952756,
+          "p_favourable": 0.8075965972773265,
+          "y": 1
+        },
+        {
+          "patient": "Patient-61",
+          "percentile": 0.5787401574803149,
+          "p_favourable": 0.6222084281780201,
+          "y": 0
+        },
+        {
+          "patient": "Patient-62",
+          "percentile": 0.9015748031496063,
+          "p_favourable": 0.3399762450171206,
+          "y": 0
+        },
+        {
+          "patient": "Patient-63",
+          "percentile": 0.7598425196850394,
+          "p_favourable": 0.461797665444108,
+          "y": 0
+        },
+        {
+          "patient": "Patient-64",
+          "percentile": 0.4448818897637795,
+          "p_favourable": 0.7272818513316651,
+          "y": 1
+        },
+        {
+          "patient": "Patient-65",
+          "percentile": 0.6181102362204725,
+          "p_favourable": 0.5883587371744268,
+          "y": 0
+        },
+        {
+          "patient": "Patient-66",
+          "percentile": 0.9488188976377953,
+          "p_favourable": 0.30290604467137927,
+          "y": 0
+        },
+        {
+          "patient": "Patient-67",
+          "percentile": 0.46062992125984253,
+          "p_favourable": 0.7158922510867618,
+          "y": 0
+        },
+        {
+          "patient": "Patient-68",
+          "percentile": 0.23228346456692914,
+          "p_favourable": 0.8514872573146555,
+          "y": 1
+        },
+        {
+          "patient": "Patient-69",
+          "percentile": 0.32677165354330706,
+          "p_favourable": 0.8031530664888503,
+          "y": 1
+        },
+        {
+          "patient": "Patient-70",
+          "percentile": 0.515748031496063,
+          "p_favourable": 0.6738673501234718,
+          "y": 0
+        },
+        {
+          "patient": "Patient-71",
+          "percentile": 0.610236220472441,
+          "p_favourable": 0.5952071846016767,
+          "y": 0
+        },
+        {
+          "patient": "Patient-72",
+          "percentile": 0.8622047244094488,
+          "p_favourable": 0.3724659739779081,
+          "y": 0
+        },
+        {
+          "patient": "Patient-73",
+          "percentile": 0.2952755905511811,
+          "p_favourable": 0.8204673709236376,
+          "y": 0
+        },
+        {
+          "patient": "Patient-74",
+          "percentile": 0.547244094488189,
+          "p_favourable": 0.6484723016207256,
+          "y": 0
+        },
+        {
+          "patient": "Patient-75",
+          "percentile": 0.3425196850393701,
+          "p_favourable": 0.7940347441758655,
+          "y": 1
+        },
+        {
+          "patient": "Patient-76",
+          "percentile": 0.3110236220472441,
+          "p_favourable": 0.811963305873184,
+          "y": 0
+        },
+        {
+          "patient": "Patient-77",
+          "percentile": 0.08267716535433071,
+          "p_favourable": 0.9076233878898851,
+          "y": 1
+        },
+        {
+          "patient": "Patient-78",
+          "percentile": 0.9330708661417323,
+          "p_favourable": 0.3150103187538533,
+          "y": 0
+        },
+        {
+          "patient": "Patient-79",
+          "percentile": 0.6417322834645669,
+          "p_favourable": 0.5676171865875539,
+          "y": 0
+        },
+        {
+          "patient": "Patient-80",
+          "percentile": 0.6889763779527559,
+          "p_favourable": 0.5254874990070718,
+          "y": 0
+        },
+        {
+          "patient": "Patient-81",
+          "percentile": 0.35826771653543305,
+          "p_favourable": 0.7846073188665279,
+          "y": 1
+        },
+        {
+          "patient": "Patient-82",
+          "percentile": 0.3031496062992126,
+          "p_favourable": 0.8162534580852038,
+          "y": 1
+        },
+        {
+          "patient": "Patient-83",
+          "percentile": 0.8385826771653543,
+          "p_favourable": 0.3925505885379539,
+          "y": 0
+        },
+        {
+          "patient": "Patient-84",
+          "percentile": 0.16929133858267717,
+          "p_favourable": 0.8779448052199738,
+          "y": 1
+        },
+        {
+          "patient": "Patient-85",
+          "percentile": 0.6653543307086615,
+          "p_favourable": 0.5466358423599008,
+          "y": 0
+        },
+        {
+          "patient": "Patient-86",
+          "percentile": 0.16141732283464566,
+          "p_favourable": 0.8809502774832423,
+          "y": 1
+        },
+        {
+          "patient": "Patient-87",
+          "percentile": 0.22440944881889763,
+          "p_favourable": 0.8550366455576993,
+          "y": 1
+        },
+        {
+          "patient": "Patient-88",
+          "percentile": 0.6023622047244095,
+          "p_favourable": 0.6020187649466885,
+          "y": 0
+        },
+        {
+          "patient": "Patient-89",
+          "percentile": 0.43700787401574803,
+          "p_favourable": 0.7328684195613214,
+          "y": 1
+        },
+        {
+          "patient": "Patient-90",
+          "percentile": 0.8307086614173228,
+          "p_favourable": 0.3993308753500711,
+          "y": 0
+        },
+        {
+          "patient": "Patient-91",
+          "percentile": 0.9173228346456693,
+          "p_favourable": 0.3273711324884112,
+          "y": 0
+        },
+        {
+          "patient": "Patient-92",
+          "percentile": 0.8070866141732284,
+          "p_favourable": 0.41989481948846086,
+          "y": 0
+        },
+        {
+          "patient": "Patient-93",
+          "percentile": 0.7362204724409449,
+          "p_favourable": 0.48299181212030057,
+          "y": 0
+        },
+        {
+          "patient": "Patient-94",
+          "percentile": 0.9881889763779528,
+          "p_favourable": 0.273836218055219,
+          "y": 0
+        },
+        {
+          "patient": "Patient-95",
+          "percentile": 0.01968503937007874,
+          "p_favourable": 0.9249616033069211,
+          "y": 1
+        },
+        {
+          "patient": "Patient-96",
+          "percentile": 0.0984251968503937,
+          "p_favourable": 0.902758415767017,
+          "y": 1
+        },
+        {
+          "patient": "Patient-97",
+          "percentile": 0.14566929133858267,
+          "p_favourable": 0.8867694571453509,
+          "y": 1
+        },
+        {
+          "patient": "Patient-98",
+          "percentile": 0.04330708661417323,
+          "p_favourable": 0.9188410495490724,
+          "y": 1
+        },
+        {
+          "patient": "Patient-99",
+          "percentile": 0.027559055118110236,
+          "p_favourable": 0.9229700667354659,
+          "y": 1
+        },
+        {
+          "patient": "Patient-100",
+          "percentile": 0.13385826771653545,
+          "p_favourable": 0.8909695892647193,
+          "y": 1
+        },
+        {
+          "patient": "Patient-101",
+          "percentile": 0.24015748031496062,
+          "p_favourable": 0.847866426102416,
+          "y": 1
+        },
+        {
+          "patient": "Patient-102",
+          "percentile": 0.003937007874015748,
+          "p_favourable": 0.9288033610605018,
+          "y": 1
+        },
+        {
+          "patient": "Patient-103",
+          "percentile": 0.9094488188976378,
+          "p_favourable": 0.33364396711415445,
+          "y": 0
+        },
+        {
+          "patient": "Patient-104",
+          "percentile": 0.468503937007874,
+          "p_favourable": 0.7100910987364388,
+          "y": 0
+        },
+        {
+          "patient": "Patient-105",
+          "percentile": 0.7047244094488189,
+          "p_favourable": 0.511332880830968,
+          "y": 1
+        },
+        {
+          "patient": "Patient-106",
+          "percentile": 0.531496062992126,
+          "p_favourable": 0.6612859107637339,
+          "y": 0
+        },
+        {
+          "patient": "Patient-107",
+          "percentile": 0.37401574803149606,
+          "p_favourable": 0.7748707267655183,
+          "y": 1
+        },
+        {
+          "patient": "Patient-108",
+          "percentile": 0.1220472440944882,
+          "p_favourable": 0.8950323651844861,
+          "y": 1
+        },
+        {
+          "patient": "Patient-110",
+          "percentile": 0.7992125984251969,
+          "p_favourable": 0.4268155515948933,
+          "y": 0
+        },
+        {
+          "patient": "Patient-111",
+          "percentile": 0.8700787401574803,
+          "p_favourable": 0.36586399593213637,
+          "y": 0
+        },
+        {
+          "patient": "Patient-112",
+          "percentile": 0.8543307086614174,
+          "p_favourable": 0.3791158614037101,
+          "y": 0
+        },
+        {
+          "patient": "Patient-113",
+          "percentile": 0.8228346456692913,
+          "p_favourable": 0.4061499712066088,
+          "y": 0
+        },
+        {
+          "patient": "Patient-114",
+          "percentile": 0.13385826771653545,
+          "p_favourable": 0.8909695892647193,
+          "y": 1
+        },
+        {
+          "patient": "Patient-115",
+          "percentile": 0.9251968503937008,
+          "p_favourable": 0.3211593927159095,
+          "y": 0
+        },
+        {
+          "patient": "Patient-116",
+          "percentile": 0.7755905511811023,
+          "p_favourable": 0.44773984155807706,
+          "y": 0
+        },
+        {
+          "patient": "Patient-117",
+          "percentile": 0.8149606299212598,
+          "p_favourable": 0.4130054473076721,
+          "y": 0
+        },
+        {
+          "patient": "Patient-118",
+          "percentile": 0.4921259842519685,
+          "p_favourable": 0.692275225210465,
+          "y": 0
+        },
+        {
+          "patient": "Patient-119",
+          "percentile": 0.452755905511811,
+          "p_favourable": 0.7216228287464349,
+          "y": 1
+        },
+        {
+          "patient": "Patient-120",
+          "percentile": 0.2559055118110236,
+          "p_favourable": 0.8404077474782347,
+          "y": 1
+        },
+        {
+          "patient": "Patient-121",
+          "percentile": 0.594488188976378,
+          "p_favourable": 0.6087910607908996,
+          "y": 0
+        },
+        {
+          "patient": "Patient-122",
+          "percentile": 0.9960629921259843,
+          "p_favourable": 0.26823519363371545,
+          "y": 0
+        },
+        {
+          "patient": "Patient-123",
+          "percentile": 0.7125984251968503,
+          "p_favourable": 0.5042473262922621,
+          "y": 0
+        },
+        {
+          "patient": "Patient-124",
+          "percentile": 0.5393700787401575,
+          "p_favourable": 0.6549072401386485,
+          "y": 1
+        },
+        {
+          "patient": "Patient-125",
+          "percentile": 0.5866141732283464,
+          "p_favourable": 0.6155217138948763,
+          "y": 0
+        },
+        {
+          "patient": "Patient-126",
+          "percentile": 0.8779527559055118,
+          "p_favourable": 0.359312035002747,
+          "y": 0
+        },
+        {
+          "patient": "Patient-127",
+          "percentile": 0.7440944881889764,
+          "p_favourable": 0.4759165047610595,
+          "y": 0
+        },
+        {
+          "patient": "Patient-128",
+          "percentile": 0.5078740157480315,
+          "p_favourable": 0.6800667677210609,
+          "y": 0
+        }
+      ]
+    },
+    "10.1016/j.xcrm.2023.101277": {
+      "n": 9,
+      "favourable": 6,
+      "auc_within": 0.8333333333333334,
+      "heldout_prediction_auc": 0.8333333333333334,
+      "training_studies": [
+        "10.1002/advs.202204097",
+        "10.1016/j.xcrm.2023.101335",
+        "10.1016/j.xcrm.2025.102397",
+        "10.1038/s41467-021-22676-1",
+        "10.1002/advs.202101176",
+        "10.1186/s12885-025-15495-x",
+        "10.1002/1878-0261.13296"
+      ],
+      "R_rank_threshold": 0.45652173913043476,
+      "sensitivity": 0.6666666666666666,
+      "specificity": 1.0,
+      "accuracy": 0.7777777777777778,
+      "training_logistic_coefficients": [
+        3.2916819214731055,
+        5.987915128393743
+      ],
+      "calibration_intercept": 0.778272179973354,
+      "calibration_slope": 0.8918025413174404,
+      "brier": 0.15458623896576193,
+      "brier_decomposition": {
+        "squared_mean_bias": 0.014804607699673887,
+        "forecast_variance": 0.09725812507155768,
+        "outcome_variance": 0.2222222222222222,
+        "minus_twice_forecast_outcome_covariance": -0.17969871602769188,
+        "sum": 0.1545862389657619
+      },
+      "R_abs": {
+        "status": "not_transferable",
+        "reason": "heterogeneous assay units and regimens; no shared physical scale"
+      },
+      "predictions": [
+        {
+          "patient": "ECC8T-P",
+          "percentile": 0.7222222222222222,
+          "p_favourable": 0.2625177252771981,
+          "y": 0
+        },
+        {
+          "patient": "ECC21T-P",
+          "percentile": 0.9444444444444444,
+          "p_favourable": 0.08599308466076107,
+          "y": 1
+        },
+        {
+          "patient": "ICC65T-P",
+          "percentile": 0.3888888888888889,
+          "p_favourable": 0.723731702363229,
+          "y": 1
+        },
+        {
+          "patient": "ECC27T-P",
+          "percentile": 0.2777777777777778,
+          "p_favourable": 0.8359465194605313,
+          "y": 1
+        },
+        {
+          "patient": "ICC63T-P",
+          "percentile": 0.6111111111111112,
+          "p_favourable": 0.40912118300343436,
+          "y": 0
+        },
+        {
+          "patient": "ECC17T-P",
+          "percentile": 0.5,
+          "p_favourable": 0.5738861230178528,
+          "y": 1
+        },
+        {
+          "patient": "ICC50T-P",
+          "percentile": 0.8333333333333334,
+          "p_favourable": 0.15469430961103872,
+          "y": 0
+        },
+        {
+          "patient": "ICC71T-P",
+          "percentile": 0.16666666666666666,
+          "p_favourable": 0.9083536025206506,
+          "y": 1
+        },
+        {
+          "patient": "ICC69T-P",
+          "percentile": 0.05555555555555555,
+          "p_favourable": 0.950688070134158,
+          "y": 1
+        }
+      ]
+    },
+    "10.1038/s41467-021-22676-1": {
+      "n": 9,
+      "favourable": 6,
+      "auc_within": 1.0,
+      "heldout_prediction_auc": 1.0,
+      "training_studies": [
+        "10.1002/advs.202204097",
+        "10.1016/j.xcrm.2023.101335",
+        "10.1016/j.xcrm.2025.102397",
+        "10.1016/j.xcrm.2023.101277",
+        "10.1002/advs.202101176",
+        "10.1186/s12885-025-15495-x",
+        "10.1002/1878-0261.13296"
+      ],
+      "R_rank_threshold": 0.45652173913043476,
+      "sensitivity": 0.6666666666666666,
+      "specificity": 1.0,
+      "accuracy": 0.7777777777777778,
+      "training_logistic_coefficients": [
+        3.1937918964220535,
+        5.804651733936409
+      ],
+      "calibration_intercept": 20.38367674885104,
+      "calibration_slope": 30.41588438849396,
+      "brier": 0.08399872841203476,
+      "brier_decomposition": {
+        "squared_mean_bias": 0.014802645184554828,
+        "forecast_variance": 0.09401078257986656,
+        "outcome_variance": 0.2222222222222222,
+        "minus_twice_forecast_outcome_covariance": -0.24703692157460885,
+        "sum": 0.08399872841203473
+      },
+      "R_abs": {
+        "status": "not_transferable",
+        "reason": "heterogeneous assay units and regimens; no shared physical scale"
+      },
+      "predictions": [
+        {
+          "patient": "LC96",
+          "percentile": 0.9444444444444444,
+          "p_favourable": 0.09208997570173744,
+          "y": 0
+        },
+        {
+          "patient": "LC97",
+          "percentile": 0.8333333333333334,
+          "p_favourable": 0.1620005271943764,
+          "y": 0
+        },
+        {
+          "patient": "LC127",
+          "percentile": 0.7222222222222222,
+          "p_favourable": 0.26924498473277453,
+          "y": 0
+        },
+        {
+          "patient": "LC134",
+          "percentile": 0.16666666666666666,
+          "p_favourable": 0.9025909150213731,
+          "y": 1
+        },
+        {
+          "patient": "LC133",
+          "percentile": 0.3888888888888889,
+          "p_favourable": 0.7183774308067774,
+          "y": 1
+        },
+        {
+          "patient": "LC124",
+          "percentile": 0.05555555555555555,
+          "p_favourable": 0.946409890909212,
+          "y": 1
+        },
+        {
+          "patient": "LC125",
+          "percentile": 0.6111111111111112,
+          "p_favourable": 0.41253508356189517,
+          "y": 1
+        },
+        {
+          "patient": "LC126",
+          "percentile": 0.2777777777777778,
+          "p_favourable": 0.8294010929435822,
+          "y": 1
+        },
+        {
+          "patient": "LC128",
+          "percentile": 0.5,
+          "p_favourable": 0.5723550032721566,
+          "y": 1
+        }
+      ]
+    },
+    "10.1002/advs.202101176": {
+      "n": 14,
+      "favourable": 8,
+      "auc_within": 0.8333333333333334,
+      "heldout_prediction_auc": 0.8333333333333334,
+      "training_studies": [
+        "10.1002/advs.202204097",
+        "10.1016/j.xcrm.2023.101335",
+        "10.1016/j.xcrm.2025.102397",
+        "10.1016/j.xcrm.2023.101277",
+        "10.1038/s41467-021-22676-1",
+        "10.1186/s12885-025-15495-x",
+        "10.1002/1878-0261.13296"
+      ],
+      "R_rank_threshold": 0.45652173913043476,
+      "sensitivity": 0.625,
+      "specificity": 0.8333333333333334,
+      "accuracy": 0.7142857142857143,
+      "training_logistic_coefficients": [
+        3.3121454472023806,
+        5.98672452953114
+      ],
+      "calibration_intercept": 0.15545283470688392,
+      "calibration_slope": 0.8751022801566686,
+      "brier": 0.14061230551567197,
+      "brier_decomposition": {
+        "squared_mean_bias": 0.0005430645324514242,
+        "forecast_variance": 0.09718563282258441,
+        "outcome_variance": 0.24489795918367346,
+        "minus_twice_forecast_outcome_covariance": -0.20201435102303728,
+        "sum": 0.140612305515672
+      },
+      "R_abs": {
+        "status": "not_transferable",
+        "reason": "heterogeneous assay units and regimens; no shared physical scale"
+      },
+      "predictions": [
+        {
+          "patient": "Pat039",
+          "percentile": 0.03571428571428571,
+          "p_favourable": 0.956823965946003,
+          "y": 0
+        },
+        {
+          "patient": "Pat057",
+          "percentile": 0.8214285714285714,
+          "p_favourable": 0.16721137461092397,
+          "y": 0
+        },
+        {
+          "patient": "Pat058",
+          "percentile": 0.9642857142857143,
+          "p_favourable": 0.0786547004657598,
+          "y": 0
+        },
+        {
+          "patient": "Pat059",
+          "percentile": 0.39285714285714285,
+          "p_favourable": 0.7231654409156153,
+          "y": 1
+        },
+        {
+          "patient": "Pat062",
+          "percentile": 0.8928571428571429,
+          "p_favourable": 0.11576666637529232,
+          "y": 0
+        },
+        {
+          "patient": "Pat063",
+          "percentile": 0.5357142857142857,
+          "p_favourable": 0.5262188269298043,
+          "y": 1
+        },
+        {
+          "patient": "Pat065",
+          "percentile": 0.4642857142857143,
+          "p_favourable": 0.6300880979201583,
+          "y": 1
+        },
+        {
+          "patient": "Pat081",
+          "percentile": 0.25,
+          "p_favourable": 0.8600209902035235,
+          "y": 1
+        },
+        {
+          "patient": "Pat084",
+          "percentile": 0.32142857142857145,
+          "p_favourable": 0.8002473688466688,
+          "y": 1
+        },
+        {
+          "patient": "Pat086",
+          "percentile": 0.17857142857142858,
+          "p_favourable": 0.9040526065576756,
+          "y": 1
+        },
+        {
+          "patient": "Pat105",
+          "percentile": 0.6785714285714286,
+          "p_favourable": 0.3207614329251258,
+          "y": 0
+        },
+        {
+          "patient": "Pat132",
+          "percentile": 0.75,
+          "p_favourable": 0.2354303609034362,
+          "y": 0
+        },
+        {
+          "patient": "Pat138",
+          "percentile": 0.6071428571428571,
+          "p_favourable": 0.42002967166521626,
+          "y": 1
+        },
+        {
+          "patient": "Pat148",
+          "percentile": 0.10714285714285714,
+          "p_favourable": 0.935276065306335,
+          "y": 1
+        }
+      ]
+    },
+    "10.1186/s12885-025-15495-x": {
+      "n": 7,
+      "favourable": 3,
+      "auc_within": 0.8333333333333334,
+      "heldout_prediction_auc": 0.8333333333333334,
+      "training_studies": [
+        "10.1002/advs.202204097",
+        "10.1016/j.xcrm.2023.101335",
+        "10.1016/j.xcrm.2025.102397",
+        "10.1016/j.xcrm.2023.101277",
+        "10.1038/s41467-021-22676-1",
+        "10.1002/advs.202101176",
+        "10.1002/1878-0261.13296"
+      ],
+      "R_rank_threshold": 0.45652173913043476,
+      "sensitivity": 0.6666666666666666,
+      "specificity": 0.75,
+      "accuracy": 0.7142857142857143,
+      "training_logistic_coefficients": [
+        3.3417553021531736,
+        5.980599970946962
+      ],
+      "calibration_intercept": -0.7506336001025498,
+      "calibration_slope": 0.8901846557220142,
+      "brier": 0.19887485236036,
+      "brier_decomposition": {
+        "squared_mean_bias": 0.015529135976408872,
+        "forecast_variance": 0.09639904011592772,
+        "outcome_variance": 0.24489795918367344,
+        "minus_twice_forecast_outcome_covariance": -0.15795128291565003,
+        "sum": 0.19887485236036
+      },
+      "R_abs": {
+        "status": "not_transferable",
+        "reason": "heterogeneous assay units and regimens; no shared physical scale"
+      },
+      "predictions": [
+        {
+          "patient": "P1",
+          "percentile": 0.07142857142857142,
+          "p_favourable": 0.948561982203585,
+          "y": 1
+        },
+        {
+          "patient": "P5",
+          "percentile": 0.9285714285714286,
+          "p_favourable": 0.09870838575342882,
+          "y": 0
+        },
+        {
+          "patient": "P14",
+          "percentile": 0.21428571428571427,
+          "p_favourable": 0.8869740377617802,
+          "y": 1
+        },
+        {
+          "patient": "P16",
+          "percentile": 0.5,
+          "p_favourable": 0.5869704448779349,
+          "y": 0
+        },
+        {
+          "patient": "P20",
+          "percentile": 0.7857142857142857,
+          "p_favourable": 0.20468150305545846,
+          "y": 0
+        },
+        {
+          "patient": "P25",
+          "percentile": 0.6428571428571429,
+          "p_favourable": 0.3768556177740888,
+          "y": 1
+        },
+        {
+          "patient": "P26",
+          "percentile": 0.35714285714285715,
+          "p_favourable": 0.7695597061546411,
+          "y": 0
+        }
+      ]
+    },
+    "10.1002/1878-0261.13296": {
+      "n": 40,
+      "favourable": 36,
+      "auc_within": 0.6701388888888888,
+      "heldout_prediction_auc": 0.6701388888888888,
+      "training_studies": [
+        "10.1002/advs.202204097",
+        "10.1016/j.xcrm.2023.101335",
+        "10.1016/j.xcrm.2025.102397",
+        "10.1016/j.xcrm.2023.101277",
+        "10.1038/s41467-021-22676-1",
+        "10.1002/advs.202101176",
+        "10.1186/s12885-025-15495-x"
+      ],
+      "R_rank_threshold": 0.4642857142857143,
+      "sensitivity": 0.5,
+      "specificity": 0.75,
+      "accuracy": 0.525,
+      "training_logistic_coefficients": [
+        3.9497675251866533,
+        8.236767845141749
+      ],
+      "calibration_intercept": 2.401030665325596,
+      "calibration_slope": 0.2714824765774283,
+      "brier": 0.3578092229386926,
+      "brier_decomposition": {
+        "squared_mean_bias": 0.17537844138496733,
+        "forecast_variance": 0.1313053651035549,
+        "outcome_variance": 0.09,
+        "minus_twice_forecast_outcome_covariance": -0.03887458354982955,
+        "sum": 0.35780922293869266
+      },
+      "R_abs": {
+        "status": "not_transferable",
+        "reason": "heterogeneous assay units and regimens; no shared physical scale"
+      },
+      "predictions": [
+        {
+          "patient": "021",
+          "percentile": 0.4875,
+          "p_favourable": 0.4835916941778707,
+          "y": 1
+        },
+        {
+          "patient": "023",
+          "percentile": 0.925,
+          "p_favourable": 0.024861896588051113,
+          "y": 1
+        },
+        {
+          "patient": "027",
+          "percentile": 0.375,
+          "p_favourable": 0.7028652767228774,
+          "y": 1
+        },
+        {
+          "patient": "028",
+          "percentile": 0.6625,
+          "p_favourable": 0.18137028143040698,
+          "y": 1
+        },
+        {
+          "patient": "029",
+          "percentile": 0.2125,
+          "p_favourable": 0.9002005013555043,
+          "y": 1
+        },
+        {
+          "patient": "032",
+          "percentile": 0.7375,
+          "p_favourable": 0.1067050090836221,
+          "y": 1
+        },
+        {
+          "patient": "033",
+          "percentile": 0.575,
+          "p_favourable": 0.3129477747640389,
+          "y": 0
+        },
+        {
+          "patient": "034",
+          "percentile": 0.7375,
+          "p_favourable": 0.1067050090836221,
+          "y": 0
+        },
+        {
+          "patient": "036",
+          "percentile": 0.375,
+          "p_favourable": 0.7028652767228774,
+          "y": 1
+        },
+        {
+          "patient": "037",
+          "percentile": 0.0875,
+          "p_favourable": 0.9619129760145287,
+          "y": 1
+        },
+        {
+          "patient": "038",
+          "percentile": 0.375,
+          "p_favourable": 0.7028652767228774,
+          "y": 1
+        },
+        {
+          "patient": "042",
+          "percentile": 0.375,
+          "p_favourable": 0.7028652767228774,
+          "y": 0
+        },
+        {
+          "patient": "043",
+          "percentile": 0.0875,
+          "p_favourable": 0.9619129760145287,
+          "y": 1
+        },
+        {
+          "patient": "044",
+          "percentile": 0.375,
+          "p_favourable": 0.7028652767228774,
+          "y": 1
+        },
+        {
+          "patient": "047",
+          "percentile": 0.375,
+          "p_favourable": 0.7028652767228774,
+          "y": 1
+        },
+        {
+          "patient": "050",
+          "percentile": 0.2125,
+          "p_favourable": 0.9002005013555043,
+          "y": 1
+        },
+        {
+          "patient": "056",
+          "percentile": 0.0875,
+          "p_favourable": 0.9619129760145287,
+          "y": 1
+        },
+        {
+          "patient": "057",
+          "percentile": 0.0875,
+          "p_favourable": 0.9619129760145287,
+          "y": 1
+        },
+        {
+          "patient": "062",
+          "percentile": 0.375,
+          "p_favourable": 0.7028652767228774,
+          "y": 1
+        },
+        {
+          "patient": "064",
+          "percentile": 0.0875,
+          "p_favourable": 0.9619129760145287,
+          "y": 1
+        },
+        {
+          "patient": "065",
+          "percentile": 0.575,
+          "p_favourable": 0.3129477747640389,
+          "y": 1
+        },
+        {
+          "patient": "068",
+          "percentile": 0.7375,
+          "p_favourable": 0.1067050090836221,
+          "y": 1
+        },
+        {
+          "patient": "076",
+          "percentile": 0.0875,
+          "p_favourable": 0.9619129760145287,
+          "y": 1
+        },
+        {
+          "patient": "086",
+          "percentile": 0.925,
+          "p_favourable": 0.024861896588051113,
+          "y": 0
+        },
+        {
+          "patient": "089",
+          "percentile": 0.575,
+          "p_favourable": 0.3129477747640389,
+          "y": 1
+        },
+        {
+          "patient": "105",
+          "percentile": 0.2625,
+          "p_favourable": 0.8566347381817128,
+          "y": 1
+        },
+        {
+          "patient": "106",
+          "percentile": 0.575,
+          "p_favourable": 0.3129477747640389,
+          "y": 1
+        },
+        {
+          "patient": "110",
+          "percentile": 0.7375,
+          "p_favourable": 0.1067050090836221,
+          "y": 1
+        },
+        {
+          "patient": "111",
+          "percentile": 0.925,
+          "p_favourable": 0.024861896588051113,
+          "y": 1
+        },
+        {
+          "patient": "116",
+          "percentile": 0.7375,
+          "p_favourable": 0.1067050090836221,
+          "y": 1
+        },
+        {
+          "patient": "119",
+          "percentile": 0.925,
+          "p_favourable": 0.024861896588051113,
+          "y": 1
+        },
+        {
+          "patient": "121",
+          "percentile": 0.375,
+          "p_favourable": 0.7028652767228774,
+          "y": 1
+        },
+        {
+          "patient": "130",
+          "percentile": 0.825,
+          "p_favourable": 0.0549109721399647,
+          "y": 1
+        },
+        {
+          "patient": "134",
+          "percentile": 0.825,
+          "p_favourable": 0.0549109721399647,
+          "y": 1
+        },
+        {
+          "patient": "139",
+          "percentile": 0.925,
+          "p_favourable": 0.024861896588051113,
+          "y": 1
+        },
+        {
+          "patient": "160",
+          "percentile": 0.2125,
+          "p_favourable": 0.9002005013555043,
+          "y": 1
+        },
+        {
+          "patient": "B014",
+          "percentile": 0.0875,
+          "p_favourable": 0.9619129760145287,
+          "y": 1
+        },
+        {
+          "patient": "B015",
+          "percentile": 0.575,
+          "p_favourable": 0.3129477747640389,
+          "y": 1
+        },
+        {
+          "patient": "B018",
+          "percentile": 0.575,
+          "p_favourable": 0.3129477747640389,
+          "y": 1
+        },
+        {
+          "patient": "B021",
+          "percentile": 0.925,
+          "p_favourable": 0.024861896588051113,
+          "y": 1
+        }
+      ]
+    }
+  },
+  "clinical_prediction_RMSE": 0.4464513414886927,
+  "all_numeric_including_nonqualifying_studies_auc": 0.9502498864152658,
+  "source_audit": [
+    {
+      "study": "Vlachogiannis2018",
+      "donors_in_table": 21,
+      "matched_new": 4,
+      "numeric_auc_cluster": false,
+      "reason": "Four pre-index monotherapy cases contain 1 favourable and 3 unfavourable; numerical Fig2B/E absent. Regorafenib benefit is vascular PDO-xenograft, not epithelial PDO sensitivity. TAS102 cases need per-episode labelled numeric Fig4 data.",
+      "sources": [
+        {
+          "source_name": "vlacho-tables.xlsx",
+          "file_sha256": "82f8d88a330a2a131cdf975475017707f2829f06f86021cdb17382f58718a9ea",
+          "locator": "Table S1 rows 3:31; Table S6; Table S7"
+        },
+        {
+          "source_name": "vlacho-supp.pdf",
+          "file_sha256": "2d99c95b988ef6a7576713c5bbebf81a5b80143258bcacc524eb78a7d3a6cc7a",
+          "locator": "FigS11; no per-patient numeric TableS7"
+        }
+      ]
+    },
+    {
+      "study": "Tiriac2018",
+      "clinical_donors": 9,
+      "single_agent_candidates": [
+        "hF50"
+      ],
+      "numeric_auc_cluster": false,
+      "reason": "8/9 clinical regimens are combinations represented by separate single-agent pharmacotypes; hF50 is the only single-5FU candidate, insufficient for the >=2/2 class gate.",
+      "sources": [
+        {
+          "source_name": "tiriac_clinical_unlabelled.csv",
+          "file_sha256": "7b7e8a02e93324ef387dc083dcd729556049f87fee387f4995ecccfded307a16",
+          "locator": "all rows; regimen and five single-agent AUC columns"
+        },
+        {
+          "source_name": "PMC6125219.html",
+          "file_sha256": "0606377758a5f50b9a43b5238a0ea0cf9cc132076c10f59ac6ccc087c19b6b8c",
+          "locator": "Clinical correlation and Supplementary FigS6"
+        }
+      ]
+    },
+    {
+      "study": "Ganesh2019",
+      "materials_in_table": 65,
+      "numeric_auc_cluster": false,
+      "reason": "Table has assay completion flags and therapy prior to derivation, not matched response values. Seven published chemotherapy associations use PFS among progressors; no preregistered binary responder cutoff. Radiotherapy examples include earlier treatment. No new >=2/2 complete pre-index binary cohort.",
+      "sources": [
+        {
+          "source_name": "ganesh_supplementary_table1.xlsx",
+          "file_sha256": "34eaec3f4a5066adb9c017673af052ca0b3e8dcfe2f99cb66743924d88f69694",
+          "locator": "Sheet1 all RC-MSK rows, therapy prior to derivation column"
+        },
+        {
+          "source_name": "PMC7385919.txt",
+          "file_sha256": "7f04504ca6d94a3666645c29b1639f02a3afb46773a9991715801053ac9ee82e",
+          "locator": "Fig2 caption; Statistics PFS paragraph; Extended Data Fig7"
+        }
+      ]
+    },
+    {
+      "study": "Ooft2019",
+      "monotherapy_published_n": 10,
+      "published_favourable": 5,
+      "published_unfavourable": 5,
+      "numeric_auc_cluster": false,
+      "reason": "SN38 is the active metabolite of irinotecan. Bevacizumab was allowed in all clinical regimens; patient-specific Table S3 is absent. P27/P28 were sampled after progression. The supplied main manuscript does not close full-regimen and chronology eligibility case by case.",
+      "sources": [
+        {
+          "source_name": "ooft_manuscript.txt",
+          "file_sha256": "e0c8c34c8e09db446e868695f44b2bfd7abf9145b2038e10b7da46d998d030c7",
+          "locator": "lines 82:94, 176:204, 504:520; Fig1C and Fig2"
+        }
+      ]
+    },
+    {
+      "study": "Narasimhan2020",
+      "numeric_auc_cluster": false,
+      "reason": "Table S2 closes pre/post regimens. SAHMRI FOLFOX contains leucovorin, SEngine FOLFOX omits it. Per-patient numeric FigS4 and site-to-assay identity are absent from valid local files; old Figure_S4.pdf is an HTML error. Individual gemcitabine signal cannot represent gemcitabine-capecitabine clinical treatment.",
+      "sources": [
+        {
+          "source_name": "narasimhan_10780432ccr200073-sup-235232_3_supp_6260912_q9h304.pdf",
+          "file_sha256": "599ebdc3124794b1b21bae6f096b253f2dc8b40451b34de998c8c1d8809b2ced",
+          "locator": "Table S2, treatment before/after sampling"
+        },
+        {
+          "source_name": "narasimhan_10780432ccr200073-sup-235232_3_supp_6267271_q9lnqx.docx",
+          "file_sha256": "83a4028c32f0b2b60670cef0537d6efb9b567ce347a22b3f6d78876ba91163c7",
+          "locator": "SEngine and SAHMRI Drug testing paragraphs"
+        },
+        {
+          "source_name": "PMC8366292.txt",
+          "file_sha256": "da57dc69066da2684b64d8527f812125e0090ea7e24eeb159c88c394907f42dd",
+          "locator": "FOLFOX/FOLFIRI clinical correlation and patient19 treatment"
+        }
+      ]
+    },
+    {
+      "study": "Yao2020",
+      "numeric_auc_cluster": false,
+      "reason": "Source overlap audit finds 79/80 irradiation and 78/80 two-channel matches to Xu2025; same biobank is one LOSO cluster.",
+      "two_channel_matches": 78,
+      "sources": [
+        {
+          "source_name": "yao_overlap.json",
+          "file_sha256": "b9e0031b84fe1a42e4712d2f7e60a49d845954b24dbe9bb6d12aed8ebd4f9e01",
+          "locator": "summary and per-patient matches"
+        }
+      ]
+    },
+    {
+      "study": "Cartry2023_cart_pdo",
+      "clinical_rows": 11,
+      "single_agent_rows": [
+        "CGR0023",
+        "CGR0025"
+      ],
+      "numeric_auc_cluster": false,
+      "reason": "Both single-agent clinical cases CGR0023/CGR0025 relapsed. Combination cases have separate single-agent scores, not a combined exposure. Complete matched cohort lacks >=2 favourable and >=2 unfavourable.",
+      "sources": [
+        {
+          "source_name": "cartry.xlsx",
+          "file_sha256": "3f9159f9d644e89274c25b95e321ffbefbaa98dfaa98a86c660c32e11b559ffc",
+          "locator": "Sup Table3 rows 4:14; Sup Table1 treatment histories"
+        }
+      ]
+    },
+    {
+      "study": "10.1038/s41467-021-22676-1",
+      "matched_numeric": 9,
+      "sources": [
+        {
+          "source_name": "41467_2021_22676_MOESM5_ESM.xlsx",
+          "file_sha256": "a9ba00bc14e3a4b0ecac6161243aff41ff192e1295622beeccd6003d105b91b7",
+          "locator": "Sheet1!A3:N3"
+        },
+        {
+          "source_name": "41467_2021_22676_MOESM9_ESM.xlsx",
+          "file_sha256": "3a67ab0b240e74d5e9e62114bafb8e0dca6efd18fd1e1a7cd008e366c23ff462",
+          "locator": "Drug responses of LCOs; panel row 48; columns 2:4"
+        },
+        {
+          "source_name": "41467_2021_22676_MOESM5_ESM.xlsx",
+          "file_sha256": "a9ba00bc14e3a4b0ecac6161243aff41ff192e1295622beeccd6003d105b91b7",
+          "locator": "Sheet1!A14:N14"
+        },
+        {
+          "source_name": "41467_2021_22676_MOESM9_ESM.xlsx",
+          "file_sha256": "3a67ab0b240e74d5e9e62114bafb8e0dca6efd18fd1e1a7cd008e366c23ff462",
+          "locator": "Drug responses of LCOs; panel row 72; columns 2:4"
+        },
+        {
+          "source_name": "41467_2021_22676_MOESM5_ESM.xlsx",
+          "file_sha256": "a9ba00bc14e3a4b0ecac6161243aff41ff192e1295622beeccd6003d105b91b7",
+          "locator": "Sheet1!A10:N10"
+        },
+        {
+          "source_name": "41467_2021_22676_MOESM9_ESM.xlsx",
+          "file_sha256": "3a67ab0b240e74d5e9e62114bafb8e0dca6efd18fd1e1a7cd008e366c23ff462",
+          "locator": "Drug responses of LCOs; panel row 48; columns 17:19"
+        },
+        {
+          "source_name": "41467_2021_22676_MOESM5_ESM.xlsx",
+          "file_sha256": "a9ba00bc14e3a4b0ecac6161243aff41ff192e1295622beeccd6003d105b91b7",
+          "locator": "Sheet1!A8:N8"
+        },
+        {
+          "source_name": "41467_2021_22676_MOESM9_ESM.xlsx",
+          "file_sha256": "3a67ab0b240e74d5e9e62114bafb8e0dca6efd18fd1e1a7cd008e366c23ff462",
+          "locator": "Drug responses of LCOs; panel row 72; columns 5:7"
+        },
+        {
+          "source_name": "41467_2021_22676_MOESM5_ESM.xlsx",
+          "file_sha256": "a9ba00bc14e3a4b0ecac6161243aff41ff192e1295622beeccd6003d105b91b7",
+          "locator": "Sheet1!A7:N7"
+        },
+        {
+          "source_name": "41467_2021_22676_MOESM9_ESM.xlsx",
+          "file_sha256": "3a67ab0b240e74d5e9e62114bafb8e0dca6efd18fd1e1a7cd008e366c23ff462",
+          "locator": "Drug responses of LCOs; panel row 1; columns 23:25"
+        },
+        {
+          "source_name": "41467_2021_22676_MOESM5_ESM.xlsx",
+          "file_sha256": "a9ba00bc14e3a4b0ecac6161243aff41ff192e1295622beeccd6003d105b91b7",
+          "locator": "Sheet1!A15:N15"
+        },
+        {
+          "source_name": "41467_2021_22676_MOESM9_ESM.xlsx",
+          "file_sha256": "3a67ab0b240e74d5e9e62114bafb8e0dca6efd18fd1e1a7cd008e366c23ff462",
+          "locator": "Drug responses of LCOs; panel row 48; columns 11:13"
+        },
+        {
+          "source_name": "41467_2021_22676_MOESM5_ESM.xlsx",
+          "file_sha256": "a9ba00bc14e3a4b0ecac6161243aff41ff192e1295622beeccd6003d105b91b7",
+          "locator": "Sheet1!A16:N16"
+        },
+        {
+          "source_name": "41467_2021_22676_MOESM9_ESM.xlsx",
+          "file_sha256": "3a67ab0b240e74d5e9e62114bafb8e0dca6efd18fd1e1a7cd008e366c23ff462",
+          "locator": "Drug responses of LCOs; panel row 119; columns 5:7"
+        },
+        {
+          "source_name": "41467_2021_22676_MOESM5_ESM.xlsx",
+          "file_sha256": "a9ba00bc14e3a4b0ecac6161243aff41ff192e1295622beeccd6003d105b91b7",
+          "locator": "Sheet1!A17:N17"
+        },
+        {
+          "source_name": "41467_2021_22676_MOESM9_ESM.xlsx",
+          "file_sha256": "3a67ab0b240e74d5e9e62114bafb8e0dca6efd18fd1e1a7cd008e366c23ff462",
+          "locator": "Drug responses of LCOs; panel row 1; columns 14:16"
+        },
+        {
+          "source_name": "41467_2021_22676_MOESM5_ESM.xlsx",
+          "file_sha256": "a9ba00bc14e3a4b0ecac6161243aff41ff192e1295622beeccd6003d105b91b7",
+          "locator": "Sheet1!A18:N18"
+        },
+        {
+          "source_name": "41467_2021_22676_MOESM9_ESM.xlsx",
+          "file_sha256": "3a67ab0b240e74d5e9e62114bafb8e0dca6efd18fd1e1a7cd008e366c23ff462",
+          "locator": "Drug responses of LCOs; panel row 48; columns 20:22"
+        }
+      ],
+      "match_kinds": [
+        "complete_exposure",
+        "component_proxy",
+        "drug_analog_conflict"
+      ]
+    },
+    {
+      "study": "10.1002/advs.202101176",
+      "matched_numeric": 14,
+      "sources": [
+        {
+          "source_name": "ADVS-8-2101176-s001.xlsx",
+          "file_sha256": "f34ed91c9e647cd6bd1305a7b4bfd4db3282cbce34917d8bd83026bfa9fae687",
+          "locator": "Sheet1!A41:AC41"
+        },
+        {
+          "source_name": "ADVS-8-2101176-s003.xlsx",
+          "file_sha256": "b66e558a82f11e607d13019bd3ad7701b081d3a371f20a87989f90031d37aa2b",
+          "locator": "Sheet1 column 12; drug rows [24]"
+        },
+        {
+          "source_name": "ADVS-8-2101176-s001.xlsx",
+          "file_sha256": "f34ed91c9e647cd6bd1305a7b4bfd4db3282cbce34917d8bd83026bfa9fae687",
+          "locator": "Sheet1!A58:AC58"
+        },
+        {
+          "source_name": "ADVS-8-2101176-s003.xlsx",
+          "file_sha256": "b66e558a82f11e607d13019bd3ad7701b081d3a371f20a87989f90031d37aa2b",
+          "locator": "Sheet1 column 40; drug rows [26, 21, 25]"
+        },
+        {
+          "source_name": "ADVS-8-2101176-s001.xlsx",
+          "file_sha256": "f34ed91c9e647cd6bd1305a7b4bfd4db3282cbce34917d8bd83026bfa9fae687",
+          "locator": "Sheet1!A63:AC63"
+        },
+        {
+          "source_name": "ADVS-8-2101176-s003.xlsx",
+          "file_sha256": "b66e558a82f11e607d13019bd3ad7701b081d3a371f20a87989f90031d37aa2b",
+          "locator": "Sheet1 column 41; drug rows [32]"
+        },
+        {
+          "source_name": "ADVS-8-2101176-s001.xlsx",
+          "file_sha256": "f34ed91c9e647cd6bd1305a7b4bfd4db3282cbce34917d8bd83026bfa9fae687",
+          "locator": "Sheet1!A78:AC78"
+        },
+        {
+          "source_name": "ADVS-8-2101176-s003.xlsx",
+          "file_sha256": "b66e558a82f11e607d13019bd3ad7701b081d3a371f20a87989f90031d37aa2b",
+          "locator": "Sheet1 column 42; drug rows [24]"
+        },
+        {
+          "source_name": "ADVS-8-2101176-s001.xlsx",
+          "file_sha256": "f34ed91c9e647cd6bd1305a7b4bfd4db3282cbce34917d8bd83026bfa9fae687",
+          "locator": "Sheet1!A80:AC80"
+        },
+        {
+          "source_name": "ADVS-8-2101176-s003.xlsx",
+          "file_sha256": "b66e558a82f11e607d13019bd3ad7701b081d3a371f20a87989f90031d37aa2b",
+          "locator": "Sheet1 column 44; drug rows [52]"
+        },
+        {
+          "source_name": "ADVS-8-2101176-s001.xlsx",
+          "file_sha256": "f34ed91c9e647cd6bd1305a7b4bfd4db3282cbce34917d8bd83026bfa9fae687",
+          "locator": "Sheet1!A87:AC87"
+        },
+        {
+          "source_name": "ADVS-8-2101176-s003.xlsx",
+          "file_sha256": "b66e558a82f11e607d13019bd3ad7701b081d3a371f20a87989f90031d37aa2b",
+          "locator": "Sheet1 column 70; drug rows [55]"
+        },
+        {
+          "source_name": "ADVS-8-2101176-s001.xlsx",
+          "file_sha256": "f34ed91c9e647cd6bd1305a7b4bfd4db3282cbce34917d8bd83026bfa9fae687",
+          "locator": "Sheet1!A93:AC93"
+        },
+        {
+          "source_name": "ADVS-8-2101176-s003.xlsx",
+          "file_sha256": "b66e558a82f11e607d13019bd3ad7701b081d3a371f20a87989f90031d37aa2b",
+          "locator": "Sheet1 column 47; drug rows [55]"
+        },
+        {
+          "source_name": "ADVS-8-2101176-s001.xlsx",
+          "file_sha256": "f34ed91c9e647cd6bd1305a7b4bfd4db3282cbce34917d8bd83026bfa9fae687",
+          "locator": "Sheet1!A111:AC111"
+        },
+        {
+          "source_name": "ADVS-8-2101176-s003.xlsx",
+          "file_sha256": "b66e558a82f11e607d13019bd3ad7701b081d3a371f20a87989f90031d37aa2b",
+          "locator": "Sheet1 column 30; drug rows [51, 24]"
+        },
+        {
+          "source_name": "ADVS-8-2101176-s001.xlsx",
+          "file_sha256": "f34ed91c9e647cd6bd1305a7b4bfd4db3282cbce34917d8bd83026bfa9fae687",
+          "locator": "Sheet1!A117:AC117"
+        },
+        {
+          "source_name": "ADVS-8-2101176-s003.xlsx",
+          "file_sha256": "b66e558a82f11e607d13019bd3ad7701b081d3a371f20a87989f90031d37aa2b",
+          "locator": "Sheet1 column 80; drug rows [52, 33]"
+        },
+        {
+          "source_name": "ADVS-8-2101176-s001.xlsx",
+          "file_sha256": "f34ed91c9e647cd6bd1305a7b4bfd4db3282cbce34917d8bd83026bfa9fae687",
+          "locator": "Sheet1!A131:AC131"
+        },
+        {
+          "source_name": "ADVS-8-2101176-s003.xlsx",
+          "file_sha256": "b66e558a82f11e607d13019bd3ad7701b081d3a371f20a87989f90031d37aa2b",
+          "locator": "Sheet1 column 54; drug rows [21, 7]"
+        },
+        {
+          "source_name": "ADVS-8-2101176-s001.xlsx",
+          "file_sha256": "f34ed91c9e647cd6bd1305a7b4bfd4db3282cbce34917d8bd83026bfa9fae687",
+          "locator": "Sheet1!A152:AC152"
+        },
+        {
+          "source_name": "ADVS-8-2101176-s003.xlsx",
+          "file_sha256": "b66e558a82f11e607d13019bd3ad7701b081d3a371f20a87989f90031d37aa2b",
+          "locator": "Sheet1 column 31; drug rows [51, 24]"
+        },
+        {
+          "source_name": "ADVS-8-2101176-s001.xlsx",
+          "file_sha256": "f34ed91c9e647cd6bd1305a7b4bfd4db3282cbce34917d8bd83026bfa9fae687",
+          "locator": "Sheet1!A181:AC181"
+        },
+        {
+          "source_name": "ADVS-8-2101176-s003.xlsx",
+          "file_sha256": "b66e558a82f11e607d13019bd3ad7701b081d3a371f20a87989f90031d37aa2b",
+          "locator": "Sheet1 column 72; drug rows [25, 8, 26]"
+        },
+        {
+          "source_name": "ADVS-8-2101176-s001.xlsx",
+          "file_sha256": "f34ed91c9e647cd6bd1305a7b4bfd4db3282cbce34917d8bd83026bfa9fae687",
+          "locator": "Sheet1!A185:AC185"
+        },
+        {
+          "source_name": "ADVS-8-2101176-s003.xlsx",
+          "file_sha256": "b66e558a82f11e607d13019bd3ad7701b081d3a371f20a87989f90031d37aa2b",
+          "locator": "Sheet1 column 73; drug rows [21, 8]"
+        },
+        {
+          "source_name": "ADVS-8-2101176-s001.xlsx",
+          "file_sha256": "f34ed91c9e647cd6bd1305a7b4bfd4db3282cbce34917d8bd83026bfa9fae687",
+          "locator": "Sheet1!A196:AC196"
+        },
+        {
+          "source_name": "ADVS-8-2101176-s003.xlsx",
+          "file_sha256": "b66e558a82f11e607d13019bd3ad7701b081d3a371f20a87989f90031d37aa2b",
+          "locator": "Sheet1 column 81; drug rows [26, 33]"
+        }
+      ],
+      "match_kinds": [
+        "complete_exposure",
+        "component_proxy"
+      ]
+    },
+    {
+      "study": "10.1186/s12885-025-15495-x",
+      "matched_numeric": 7,
+      "sources": [
+        {
+          "source_name": "12885_2025_15495_MOESM7_ESM.xlsx",
+          "file_sha256": "a293fd68e4b433a851039848f17a2e35bf6608208d2aa3217525eabf50806161",
+          "locator": "Clinical data after surgery !A3:L4"
+        },
+        {
+          "source_name": "12885_2025_15495_MOESM7_ESM.xlsx",
+          "file_sha256": "a293fd68e4b433a851039848f17a2e35bf6608208d2aa3217525eabf50806161",
+          "locator": "Clinical data after surgery !A5:L5"
+        },
+        {
+          "source_name": "12885_2025_15495_MOESM7_ESM.xlsx",
+          "file_sha256": "a293fd68e4b433a851039848f17a2e35bf6608208d2aa3217525eabf50806161",
+          "locator": "Clinical data after surgery !A6:L7"
+        },
+        {
+          "source_name": "12885_2025_15495_MOESM7_ESM.xlsx",
+          "file_sha256": "a293fd68e4b433a851039848f17a2e35bf6608208d2aa3217525eabf50806161",
+          "locator": "Clinical data after surgery !A8:L8"
+        },
+        {
+          "source_name": "12885_2025_15495_MOESM7_ESM.xlsx",
+          "file_sha256": "a293fd68e4b433a851039848f17a2e35bf6608208d2aa3217525eabf50806161",
+          "locator": "Clinical data after surgery !A9:L10"
+        },
+        {
+          "source_name": "12885_2025_15495_MOESM7_ESM.xlsx",
+          "file_sha256": "a293fd68e4b433a851039848f17a2e35bf6608208d2aa3217525eabf50806161",
+          "locator": "Clinical data after surgery !A11:L11"
+        },
+        {
+          "source_name": "12885_2025_15495_MOESM7_ESM.xlsx",
+          "file_sha256": "a293fd68e4b433a851039848f17a2e35bf6608208d2aa3217525eabf50806161",
+          "locator": "Clinical data after surgery !A12:L13"
+        }
+      ],
+      "match_kinds": [
+        "active_metabolite",
+        "component_proxy"
+      ]
+    },
+    {
+      "study": "10.1002/1878-0261.13296",
+      "matched_numeric": 40,
+      "sources": [
+        {
+          "source_name": "MOL2-16-2396-s002.xlsx",
+          "file_sha256": "7f5c906f779acb2bd873abb131c1af639b3689c91cea6688f46374706c35c581",
+          "locator": "cohort information!A5:Q5"
+        },
+        {
+          "source_name": "MOL2-16-2396-s005.xlsx",
+          "file_sha256": "c4ef454ab8c187a3fab70e847c0a9198dcabefde85811577cda5f624a8ec97c9",
+          "locator": "b.organoid score!A2:G2"
+        },
+        {
+          "source_name": "article.xml",
+          "file_sha256": "ce677094aa7d32f561c95ac339838d4aaeb782ca21f60c16689f5f70b15411c5",
+          "locator": "Results clinical correlation: all except 046 collected before therapy; author exclusions; bevacizumab omitted from score"
+        },
+        {
+          "source_name": "MOL2-16-2396-s002.xlsx",
+          "file_sha256": "7f5c906f779acb2bd873abb131c1af639b3689c91cea6688f46374706c35c581",
+          "locator": "cohort information!A6:Q6"
+        },
+        {
+          "source_name": "MOL2-16-2396-s005.xlsx",
+          "file_sha256": "c4ef454ab8c187a3fab70e847c0a9198dcabefde85811577cda5f624a8ec97c9",
+          "locator": "b.organoid score!A3:G3"
+        },
+        {
+          "source_name": "article.xml",
+          "file_sha256": "ce677094aa7d32f561c95ac339838d4aaeb782ca21f60c16689f5f70b15411c5",
+          "locator": "Results clinical correlation: all except 046 collected before therapy; author exclusions; bevacizumab omitted from score"
+        },
+        {
+          "source_name": "MOL2-16-2396-s002.xlsx",
+          "file_sha256": "7f5c906f779acb2bd873abb131c1af639b3689c91cea6688f46374706c35c581",
+          "locator": "cohort information!A7:Q7"
+        },
+        {
+          "source_name": "MOL2-16-2396-s005.xlsx",
+          "file_sha256": "c4ef454ab8c187a3fab70e847c0a9198dcabefde85811577cda5f624a8ec97c9",
+          "locator": "b.organoid score!A4:G4"
+        },
+        {
+          "source_name": "article.xml",
+          "file_sha256": "ce677094aa7d32f561c95ac339838d4aaeb782ca21f60c16689f5f70b15411c5",
+          "locator": "Results clinical correlation: all except 046 collected before therapy; author exclusions; bevacizumab omitted from score"
+        },
+        {
+          "source_name": "MOL2-16-2396-s002.xlsx",
+          "file_sha256": "7f5c906f779acb2bd873abb131c1af639b3689c91cea6688f46374706c35c581",
+          "locator": "cohort information!A8:Q8"
+        },
+        {
+          "source_name": "MOL2-16-2396-s005.xlsx",
+          "file_sha256": "c4ef454ab8c187a3fab70e847c0a9198dcabefde85811577cda5f624a8ec97c9",
+          "locator": "b.organoid score!A5:G5"
+        },
+        {
+          "source_name": "article.xml",
+          "file_sha256": "ce677094aa7d32f561c95ac339838d4aaeb782ca21f60c16689f5f70b15411c5",
+          "locator": "Results clinical correlation: all except 046 collected before therapy; author exclusions; bevacizumab omitted from score"
+        },
+        {
+          "source_name": "MOL2-16-2396-s002.xlsx",
+          "file_sha256": "7f5c906f779acb2bd873abb131c1af639b3689c91cea6688f46374706c35c581",
+          "locator": "cohort information!A9:Q9"
+        },
+        {
+          "source_name": "MOL2-16-2396-s005.xlsx",
+          "file_sha256": "c4ef454ab8c187a3fab70e847c0a9198dcabefde85811577cda5f624a8ec97c9",
+          "locator": "b.organoid score!A6:G6"
+        },
+        {
+          "source_name": "article.xml",
+          "file_sha256": "ce677094aa7d32f561c95ac339838d4aaeb782ca21f60c16689f5f70b15411c5",
+          "locator": "Results clinical correlation: all except 046 collected before therapy; author exclusions; bevacizumab omitted from score"
+        },
+        {
+          "source_name": "MOL2-16-2396-s002.xlsx",
+          "file_sha256": "7f5c906f779acb2bd873abb131c1af639b3689c91cea6688f46374706c35c581",
+          "locator": "cohort information!A11:Q11"
+        },
+        {
+          "source_name": "MOL2-16-2396-s005.xlsx",
+          "file_sha256": "c4ef454ab8c187a3fab70e847c0a9198dcabefde85811577cda5f624a8ec97c9",
+          "locator": "b.organoid score!A8:G8"
+        },
+        {
+          "source_name": "article.xml",
+          "file_sha256": "ce677094aa7d32f561c95ac339838d4aaeb782ca21f60c16689f5f70b15411c5",
+          "locator": "Results clinical correlation: all except 046 collected before therapy; author exclusions; bevacizumab omitted from score"
+        },
+        {
+          "source_name": "MOL2-16-2396-s002.xlsx",
+          "file_sha256": "7f5c906f779acb2bd873abb131c1af639b3689c91cea6688f46374706c35c581",
+          "locator": "cohort information!A12:Q12"
+        },
+        {
+          "source_name": "MOL2-16-2396-s005.xlsx",
+          "file_sha256": "c4ef454ab8c187a3fab70e847c0a9198dcabefde85811577cda5f624a8ec97c9",
+          "locator": "b.organoid score!A9:G9"
+        },
+        {
+          "source_name": "article.xml",
+          "file_sha256": "ce677094aa7d32f561c95ac339838d4aaeb782ca21f60c16689f5f70b15411c5",
+          "locator": "Results clinical correlation: all except 046 collected before therapy; author exclusions; bevacizumab omitted from score"
+        },
+        {
+          "source_name": "MOL2-16-2396-s002.xlsx",
+          "file_sha256": "7f5c906f779acb2bd873abb131c1af639b3689c91cea6688f46374706c35c581",
+          "locator": "cohort information!A13:Q13"
+        },
+        {
+          "source_name": "MOL2-16-2396-s005.xlsx",
+          "file_sha256": "c4ef454ab8c187a3fab70e847c0a9198dcabefde85811577cda5f624a8ec97c9",
+          "locator": "b.organoid score!A10:G10"
+        },
+        {
+          "source_name": "article.xml",
+          "file_sha256": "ce677094aa7d32f561c95ac339838d4aaeb782ca21f60c16689f5f70b15411c5",
+          "locator": "Results clinical correlation: all except 046 collected before therapy; author exclusions; bevacizumab omitted from score"
+        },
+        {
+          "source_name": "MOL2-16-2396-s002.xlsx",
+          "file_sha256": "7f5c906f779acb2bd873abb131c1af639b3689c91cea6688f46374706c35c581",
+          "locator": "cohort information!A14:Q14"
+        },
+        {
+          "source_name": "MOL2-16-2396-s005.xlsx",
+          "file_sha256": "c4ef454ab8c187a3fab70e847c0a9198dcabefde85811577cda5f624a8ec97c9",
+          "locator": "b.organoid score!A11:G11"
+        },
+        {
+          "source_name": "article.xml",
+          "file_sha256": "ce677094aa7d32f561c95ac339838d4aaeb782ca21f60c16689f5f70b15411c5",
+          "locator": "Results clinical correlation: all except 046 collected before therapy; author exclusions; bevacizumab omitted from score"
+        },
+        {
+          "source_name": "MOL2-16-2396-s002.xlsx",
+          "file_sha256": "7f5c906f779acb2bd873abb131c1af639b3689c91cea6688f46374706c35c581",
+          "locator": "cohort information!A15:Q15"
+        },
+        {
+          "source_name": "MOL2-16-2396-s005.xlsx",
+          "file_sha256": "c4ef454ab8c187a3fab70e847c0a9198dcabefde85811577cda5f624a8ec97c9",
+          "locator": "b.organoid score!A12:G12"
+        },
+        {
+          "source_name": "article.xml",
+          "file_sha256": "ce677094aa7d32f561c95ac339838d4aaeb782ca21f60c16689f5f70b15411c5",
+          "locator": "Results clinical correlation: all except 046 collected before therapy; author exclusions; bevacizumab omitted from score"
+        },
+        {
+          "source_name": "MOL2-16-2396-s002.xlsx",
+          "file_sha256": "7f5c906f779acb2bd873abb131c1af639b3689c91cea6688f46374706c35c581",
+          "locator": "cohort information!A16:Q16"
+        },
+        {
+          "source_name": "MOL2-16-2396-s005.xlsx",
+          "file_sha256": "c4ef454ab8c187a3fab70e847c0a9198dcabefde85811577cda5f624a8ec97c9",
+          "locator": "b.organoid score!A13:G13"
+        },
+        {
+          "source_name": "article.xml",
+          "file_sha256": "ce677094aa7d32f561c95ac339838d4aaeb782ca21f60c16689f5f70b15411c5",
+          "locator": "Results clinical correlation: all except 046 collected before therapy; author exclusions; bevacizumab omitted from score"
+        },
+        {
+          "source_name": "MOL2-16-2396-s002.xlsx",
+          "file_sha256": "7f5c906f779acb2bd873abb131c1af639b3689c91cea6688f46374706c35c581",
+          "locator": "cohort information!A17:Q17"
+        },
+        {
+          "source_name": "MOL2-16-2396-s005.xlsx",
+          "file_sha256": "c4ef454ab8c187a3fab70e847c0a9198dcabefde85811577cda5f624a8ec97c9",
+          "locator": "b.organoid score!A14:G14"
+        },
+        {
+          "source_name": "article.xml",
+          "file_sha256": "ce677094aa7d32f561c95ac339838d4aaeb782ca21f60c16689f5f70b15411c5",
+          "locator": "Results clinical correlation: all except 046 collected before therapy; author exclusions; bevacizumab omitted from score"
+        },
+        {
+          "source_name": "MOL2-16-2396-s002.xlsx",
+          "file_sha256": "7f5c906f779acb2bd873abb131c1af639b3689c91cea6688f46374706c35c581",
+          "locator": "cohort information!A18:Q18"
+        },
+        {
+          "source_name": "MOL2-16-2396-s005.xlsx",
+          "file_sha256": "c4ef454ab8c187a3fab70e847c0a9198dcabefde85811577cda5f624a8ec97c9",
+          "locator": "b.organoid score!A15:G15"
+        },
+        {
+          "source_name": "article.xml",
+          "file_sha256": "ce677094aa7d32f561c95ac339838d4aaeb782ca21f60c16689f5f70b15411c5",
+          "locator": "Results clinical correlation: all except 046 collected before therapy; author exclusions; bevacizumab omitted from score"
+        },
+        {
+          "source_name": "MOL2-16-2396-s002.xlsx",
+          "file_sha256": "7f5c906f779acb2bd873abb131c1af639b3689c91cea6688f46374706c35c581",
+          "locator": "cohort information!A19:Q19"
+        },
+        {
+          "source_name": "MOL2-16-2396-s005.xlsx",
+          "file_sha256": "c4ef454ab8c187a3fab70e847c0a9198dcabefde85811577cda5f624a8ec97c9",
+          "locator": "b.organoid score!A16:G16"
+        },
+        {
+          "source_name": "article.xml",
+          "file_sha256": "ce677094aa7d32f561c95ac339838d4aaeb782ca21f60c16689f5f70b15411c5",
+          "locator": "Results clinical correlation: all except 046 collected before therapy; author exclusions; bevacizumab omitted from score"
+        },
+        {
+          "source_name": "MOL2-16-2396-s002.xlsx",
+          "file_sha256": "7f5c906f779acb2bd873abb131c1af639b3689c91cea6688f46374706c35c581",
+          "locator": "cohort information!A21:Q21"
+        },
+        {
+          "source_name": "MOL2-16-2396-s005.xlsx",
+          "file_sha256": "c4ef454ab8c187a3fab70e847c0a9198dcabefde85811577cda5f624a8ec97c9",
+          "locator": "b.organoid score!A18:G18"
+        },
+        {
+          "source_name": "article.xml",
+          "file_sha256": "ce677094aa7d32f561c95ac339838d4aaeb782ca21f60c16689f5f70b15411c5",
+          "locator": "Results clinical correlation: all except 046 collected before therapy; author exclusions; bevacizumab omitted from score"
+        },
+        {
+          "source_name": "MOL2-16-2396-s002.xlsx",
+          "file_sha256": "7f5c906f779acb2bd873abb131c1af639b3689c91cea6688f46374706c35c581",
+          "locator": "cohort information!A23:Q23"
+        },
+        {
+          "source_name": "MOL2-16-2396-s005.xlsx",
+          "file_sha256": "c4ef454ab8c187a3fab70e847c0a9198dcabefde85811577cda5f624a8ec97c9",
+          "locator": "b.organoid score!A20:G20"
+        },
+        {
+          "source_name": "article.xml",
+          "file_sha256": "ce677094aa7d32f561c95ac339838d4aaeb782ca21f60c16689f5f70b15411c5",
+          "locator": "Results clinical correlation: all except 046 collected before therapy; author exclusions; bevacizumab omitted from score"
+        },
+        {
+          "source_name": "MOL2-16-2396-s002.xlsx",
+          "file_sha256": "7f5c906f779acb2bd873abb131c1af639b3689c91cea6688f46374706c35c581",
+          "locator": "cohort information!A26:Q26"
+        },
+        {
+          "source_name": "MOL2-16-2396-s005.xlsx",
+          "file_sha256": "c4ef454ab8c187a3fab70e847c0a9198dcabefde85811577cda5f624a8ec97c9",
+          "locator": "b.organoid score!A23:G23"
+        },
+        {
+          "source_name": "article.xml",
+          "file_sha256": "ce677094aa7d32f561c95ac339838d4aaeb782ca21f60c16689f5f70b15411c5",
+          "locator": "Results clinical correlation: all except 046 collected before therapy; author exclusions; bevacizumab omitted from score"
+        },
+        {
+          "source_name": "MOL2-16-2396-s002.xlsx",
+          "file_sha256": "7f5c906f779acb2bd873abb131c1af639b3689c91cea6688f46374706c35c581",
+          "locator": "cohort information!A27:Q27"
+        },
+        {
+          "source_name": "MOL2-16-2396-s005.xlsx",
+          "file_sha256": "c4ef454ab8c187a3fab70e847c0a9198dcabefde85811577cda5f624a8ec97c9",
+          "locator": "b.organoid score!A24:G24"
+        },
+        {
+          "source_name": "article.xml",
+          "file_sha256": "ce677094aa7d32f561c95ac339838d4aaeb782ca21f60c16689f5f70b15411c5",
+          "locator": "Results clinical correlation: all except 046 collected before therapy; author exclusions; bevacizumab omitted from score"
+        },
+        {
+          "source_name": "MOL2-16-2396-s002.xlsx",
+          "file_sha256": "7f5c906f779acb2bd873abb131c1af639b3689c91cea6688f46374706c35c581",
+          "locator": "cohort information!A29:Q29"
+        },
+        {
+          "source_name": "MOL2-16-2396-s005.xlsx",
+          "file_sha256": "c4ef454ab8c187a3fab70e847c0a9198dcabefde85811577cda5f624a8ec97c9",
+          "locator": "b.organoid score!A26:G26"
+        },
+        {
+          "source_name": "article.xml",
+          "file_sha256": "ce677094aa7d32f561c95ac339838d4aaeb782ca21f60c16689f5f70b15411c5",
+          "locator": "Results clinical correlation: all except 046 collected before therapy; author exclusions; bevacizumab omitted from score"
+        },
+        {
+          "source_name": "MOL2-16-2396-s002.xlsx",
+          "file_sha256": "7f5c906f779acb2bd873abb131c1af639b3689c91cea6688f46374706c35c581",
+          "locator": "cohort information!A30:Q30"
+        },
+        {
+          "source_name": "MOL2-16-2396-s005.xlsx",
+          "file_sha256": "c4ef454ab8c187a3fab70e847c0a9198dcabefde85811577cda5f624a8ec97c9",
+          "locator": "b.organoid score!A27:G27"
+        },
+        {
+          "source_name": "article.xml",
+          "file_sha256": "ce677094aa7d32f561c95ac339838d4aaeb782ca21f60c16689f5f70b15411c5",
+          "locator": "Results clinical correlation: all except 046 collected before therapy; author exclusions; bevacizumab omitted from score"
+        },
+        {
+          "source_name": "MOL2-16-2396-s002.xlsx",
+          "file_sha256": "7f5c906f779acb2bd873abb131c1af639b3689c91cea6688f46374706c35c581",
+          "locator": "cohort information!A31:Q31"
+        },
+        {
+          "source_name": "MOL2-16-2396-s005.xlsx",
+          "file_sha256": "c4ef454ab8c187a3fab70e847c0a9198dcabefde85811577cda5f624a8ec97c9",
+          "locator": "b.organoid score!A28:G28"
+        },
+        {
+          "source_name": "article.xml",
+          "file_sha256": "ce677094aa7d32f561c95ac339838d4aaeb782ca21f60c16689f5f70b15411c5",
+          "locator": "Results clinical correlation: all except 046 collected before therapy; author exclusions; bevacizumab omitted from score"
+        },
+        {
+          "source_name": "MOL2-16-2396-s002.xlsx",
+          "file_sha256": "7f5c906f779acb2bd873abb131c1af639b3689c91cea6688f46374706c35c581",
+          "locator": "cohort information!A32:Q32"
+        },
+        {
+          "source_name": "MOL2-16-2396-s005.xlsx",
+          "file_sha256": "c4ef454ab8c187a3fab70e847c0a9198dcabefde85811577cda5f624a8ec97c9",
+          "locator": "b.organoid score!A29:G29"
+        },
+        {
+          "source_name": "article.xml",
+          "file_sha256": "ce677094aa7d32f561c95ac339838d4aaeb782ca21f60c16689f5f70b15411c5",
+          "locator": "Results clinical correlation: all except 046 collected before therapy; author exclusions; bevacizumab omitted from score"
+        },
+        {
+          "source_name": "MOL2-16-2396-s002.xlsx",
+          "file_sha256": "7f5c906f779acb2bd873abb131c1af639b3689c91cea6688f46374706c35c581",
+          "locator": "cohort information!A33:Q33"
+        },
+        {
+          "source_name": "MOL2-16-2396-s005.xlsx",
+          "file_sha256": "c4ef454ab8c187a3fab70e847c0a9198dcabefde85811577cda5f624a8ec97c9",
+          "locator": "b.organoid score!A30:G30"
+        },
+        {
+          "source_name": "article.xml",
+          "file_sha256": "ce677094aa7d32f561c95ac339838d4aaeb782ca21f60c16689f5f70b15411c5",
+          "locator": "Results clinical correlation: all except 046 collected before therapy; author exclusions; bevacizumab omitted from score"
+        },
+        {
+          "source_name": "MOL2-16-2396-s002.xlsx",
+          "file_sha256": "7f5c906f779acb2bd873abb131c1af639b3689c91cea6688f46374706c35c581",
+          "locator": "cohort information!A34:Q34"
+        },
+        {
+          "source_name": "MOL2-16-2396-s005.xlsx",
+          "file_sha256": "c4ef454ab8c187a3fab70e847c0a9198dcabefde85811577cda5f624a8ec97c9",
+          "locator": "b.organoid score!A31:G31"
+        },
+        {
+          "source_name": "article.xml",
+          "file_sha256": "ce677094aa7d32f561c95ac339838d4aaeb782ca21f60c16689f5f70b15411c5",
+          "locator": "Results clinical correlation: all except 046 collected before therapy; author exclusions; bevacizumab omitted from score"
+        },
+        {
+          "source_name": "MOL2-16-2396-s002.xlsx",
+          "file_sha256": "7f5c906f779acb2bd873abb131c1af639b3689c91cea6688f46374706c35c581",
+          "locator": "cohort information!A35:Q35"
+        },
+        {
+          "source_name": "MOL2-16-2396-s005.xlsx",
+          "file_sha256": "c4ef454ab8c187a3fab70e847c0a9198dcabefde85811577cda5f624a8ec97c9",
+          "locator": "b.organoid score!A32:G32"
+        },
+        {
+          "source_name": "article.xml",
+          "file_sha256": "ce677094aa7d32f561c95ac339838d4aaeb782ca21f60c16689f5f70b15411c5",
+          "locator": "Results clinical correlation: all except 046 collected before therapy; author exclusions; bevacizumab omitted from score"
+        },
+        {
+          "source_name": "MOL2-16-2396-s002.xlsx",
+          "file_sha256": "7f5c906f779acb2bd873abb131c1af639b3689c91cea6688f46374706c35c581",
+          "locator": "cohort information!A38:Q38"
+        },
+        {
+          "source_name": "MOL2-16-2396-s005.xlsx",
+          "file_sha256": "c4ef454ab8c187a3fab70e847c0a9198dcabefde85811577cda5f624a8ec97c9",
+          "locator": "b.organoid score!A35:G35"
+        },
+        {
+          "source_name": "article.xml",
+          "file_sha256": "ce677094aa7d32f561c95ac339838d4aaeb782ca21f60c16689f5f70b15411c5",
+          "locator": "Results clinical correlation: all except 046 collected before therapy; author exclusions; bevacizumab omitted from score"
+        },
+        {
+          "source_name": "MOL2-16-2396-s002.xlsx",
+          "file_sha256": "7f5c906f779acb2bd873abb131c1af639b3689c91cea6688f46374706c35c581",
+          "locator": "cohort information!A39:Q39"
+        },
+        {
+          "source_name": "MOL2-16-2396-s005.xlsx",
+          "file_sha256": "c4ef454ab8c187a3fab70e847c0a9198dcabefde85811577cda5f624a8ec97c9",
+          "locator": "b.organoid score!A36:G36"
+        },
+        {
+          "source_name": "article.xml",
+          "file_sha256": "ce677094aa7d32f561c95ac339838d4aaeb782ca21f60c16689f5f70b15411c5",
+          "locator": "Results clinical correlation: all except 046 collected before therapy; author exclusions; bevacizumab omitted from score"
+        },
+        {
+          "source_name": "MOL2-16-2396-s002.xlsx",
+          "file_sha256": "7f5c906f779acb2bd873abb131c1af639b3689c91cea6688f46374706c35c581",
+          "locator": "cohort information!A41:Q41"
+        },
+        {
+          "source_name": "MOL2-16-2396-s005.xlsx",
+          "file_sha256": "c4ef454ab8c187a3fab70e847c0a9198dcabefde85811577cda5f624a8ec97c9",
+          "locator": "b.organoid score!A38:G38"
+        },
+        {
+          "source_name": "article.xml",
+          "file_sha256": "ce677094aa7d32f561c95ac339838d4aaeb782ca21f60c16689f5f70b15411c5",
+          "locator": "Results clinical correlation: all except 046 collected before therapy; author exclusions; bevacizumab omitted from score"
+        },
+        {
+          "source_name": "MOL2-16-2396-s002.xlsx",
+          "file_sha256": "7f5c906f779acb2bd873abb131c1af639b3689c91cea6688f46374706c35c581",
+          "locator": "cohort information!A42:Q42"
+        },
+        {
+          "source_name": "MOL2-16-2396-s005.xlsx",
+          "file_sha256": "c4ef454ab8c187a3fab70e847c0a9198dcabefde85811577cda5f624a8ec97c9",
+          "locator": "b.organoid score!A39:G39"
+        },
+        {
+          "source_name": "article.xml",
+          "file_sha256": "ce677094aa7d32f561c95ac339838d4aaeb782ca21f60c16689f5f70b15411c5",
+          "locator": "Results clinical correlation: all except 046 collected before therapy; author exclusions; bevacizumab omitted from score"
+        },
+        {
+          "source_name": "MOL2-16-2396-s002.xlsx",
+          "file_sha256": "7f5c906f779acb2bd873abb131c1af639b3689c91cea6688f46374706c35c581",
+          "locator": "cohort information!A43:Q43"
+        },
+        {
+          "source_name": "MOL2-16-2396-s005.xlsx",
+          "file_sha256": "c4ef454ab8c187a3fab70e847c0a9198dcabefde85811577cda5f624a8ec97c9",
+          "locator": "b.organoid score!A40:G40"
+        },
+        {
+          "source_name": "article.xml",
+          "file_sha256": "ce677094aa7d32f561c95ac339838d4aaeb782ca21f60c16689f5f70b15411c5",
+          "locator": "Results clinical correlation: all except 046 collected before therapy; author exclusions; bevacizumab omitted from score"
+        },
+        {
+          "source_name": "MOL2-16-2396-s002.xlsx",
+          "file_sha256": "7f5c906f779acb2bd873abb131c1af639b3689c91cea6688f46374706c35c581",
+          "locator": "cohort information!A44:Q44"
+        },
+        {
+          "source_name": "MOL2-16-2396-s005.xlsx",
+          "file_sha256": "c4ef454ab8c187a3fab70e847c0a9198dcabefde85811577cda5f624a8ec97c9",
+          "locator": "b.organoid score!A41:G41"
+        },
+        {
+          "source_name": "article.xml",
+          "file_sha256": "ce677094aa7d32f561c95ac339838d4aaeb782ca21f60c16689f5f70b15411c5",
+          "locator": "Results clinical correlation: all except 046 collected before therapy; author exclusions; bevacizumab omitted from score"
+        },
+        {
+          "source_name": "MOL2-16-2396-s002.xlsx",
+          "file_sha256": "7f5c906f779acb2bd873abb131c1af639b3689c91cea6688f46374706c35c581",
+          "locator": "cohort information!A45:Q45"
+        },
+        {
+          "source_name": "MOL2-16-2396-s005.xlsx",
+          "file_sha256": "c4ef454ab8c187a3fab70e847c0a9198dcabefde85811577cda5f624a8ec97c9",
+          "locator": "b.organoid score!A42:G42"
+        },
+        {
+          "source_name": "article.xml",
+          "file_sha256": "ce677094aa7d32f561c95ac339838d4aaeb782ca21f60c16689f5f70b15411c5",
+          "locator": "Results clinical correlation: all except 046 collected before therapy; author exclusions; bevacizumab omitted from score"
+        },
+        {
+          "source_name": "MOL2-16-2396-s002.xlsx",
+          "file_sha256": "7f5c906f779acb2bd873abb131c1af639b3689c91cea6688f46374706c35c581",
+          "locator": "cohort information!A46:Q46"
+        },
+        {
+          "source_name": "MOL2-16-2396-s005.xlsx",
+          "file_sha256": "c4ef454ab8c187a3fab70e847c0a9198dcabefde85811577cda5f624a8ec97c9",
+          "locator": "b.organoid score!A43:G43"
+        },
+        {
+          "source_name": "article.xml",
+          "file_sha256": "ce677094aa7d32f561c95ac339838d4aaeb782ca21f60c16689f5f70b15411c5",
+          "locator": "Results clinical correlation: all except 046 collected before therapy; author exclusions; bevacizumab omitted from score"
+        },
+        {
+          "source_name": "MOL2-16-2396-s002.xlsx",
+          "file_sha256": "7f5c906f779acb2bd873abb131c1af639b3689c91cea6688f46374706c35c581",
+          "locator": "cohort information!A47:Q47"
+        },
+        {
+          "source_name": "MOL2-16-2396-s005.xlsx",
+          "file_sha256": "c4ef454ab8c187a3fab70e847c0a9198dcabefde85811577cda5f624a8ec97c9",
+          "locator": "b.organoid score!A44:G44"
+        },
+        {
+          "source_name": "article.xml",
+          "file_sha256": "ce677094aa7d32f561c95ac339838d4aaeb782ca21f60c16689f5f70b15411c5",
+          "locator": "Results clinical correlation: all except 046 collected before therapy; author exclusions; bevacizumab omitted from score"
+        },
+        {
+          "source_name": "MOL2-16-2396-s002.xlsx",
+          "file_sha256": "7f5c906f779acb2bd873abb131c1af639b3689c91cea6688f46374706c35c581",
+          "locator": "cohort information!A48:Q48"
+        },
+        {
+          "source_name": "MOL2-16-2396-s005.xlsx",
+          "file_sha256": "c4ef454ab8c187a3fab70e847c0a9198dcabefde85811577cda5f624a8ec97c9",
+          "locator": "b.organoid score!A45:G45"
+        },
+        {
+          "source_name": "article.xml",
+          "file_sha256": "ce677094aa7d32f561c95ac339838d4aaeb782ca21f60c16689f5f70b15411c5",
+          "locator": "Results clinical correlation: all except 046 collected before therapy; author exclusions; bevacizumab omitted from score"
+        },
+        {
+          "source_name": "MOL2-16-2396-s002.xlsx",
+          "file_sha256": "7f5c906f779acb2bd873abb131c1af639b3689c91cea6688f46374706c35c581",
+          "locator": "cohort information!A51:Q51"
+        },
+        {
+          "source_name": "MOL2-16-2396-s005.xlsx",
+          "file_sha256": "c4ef454ab8c187a3fab70e847c0a9198dcabefde85811577cda5f624a8ec97c9",
+          "locator": "b.organoid score!A48:G48"
+        },
+        {
+          "source_name": "article.xml",
+          "file_sha256": "ce677094aa7d32f561c95ac339838d4aaeb782ca21f60c16689f5f70b15411c5",
+          "locator": "Results clinical correlation: all except 046 collected before therapy; author exclusions; bevacizumab omitted from score"
+        },
+        {
+          "source_name": "MOL2-16-2396-s002.xlsx",
+          "file_sha256": "7f5c906f779acb2bd873abb131c1af639b3689c91cea6688f46374706c35c581",
+          "locator": "cohort information!A53:Q53"
+        },
+        {
+          "source_name": "MOL2-16-2396-s005.xlsx",
+          "file_sha256": "c4ef454ab8c187a3fab70e847c0a9198dcabefde85811577cda5f624a8ec97c9",
+          "locator": "b.organoid score!A50:G50"
+        },
+        {
+          "source_name": "article.xml",
+          "file_sha256": "ce677094aa7d32f561c95ac339838d4aaeb782ca21f60c16689f5f70b15411c5",
+          "locator": "Results clinical correlation: all except 046 collected before therapy; author exclusions; bevacizumab omitted from score"
+        },
+        {
+          "source_name": "MOL2-16-2396-s002.xlsx",
+          "file_sha256": "7f5c906f779acb2bd873abb131c1af639b3689c91cea6688f46374706c35c581",
+          "locator": "cohort information!A54:Q54"
+        },
+        {
+          "source_name": "MOL2-16-2396-s005.xlsx",
+          "file_sha256": "c4ef454ab8c187a3fab70e847c0a9198dcabefde85811577cda5f624a8ec97c9",
+          "locator": "b.organoid score!A51:G51"
+        },
+        {
+          "source_name": "article.xml",
+          "file_sha256": "ce677094aa7d32f561c95ac339838d4aaeb782ca21f60c16689f5f70b15411c5",
+          "locator": "Results clinical correlation: all except 046 collected before therapy; author exclusions; bevacizumab omitted from score"
+        },
+        {
+          "source_name": "MOL2-16-2396-s002.xlsx",
+          "file_sha256": "7f5c906f779acb2bd873abb131c1af639b3689c91cea6688f46374706c35c581",
+          "locator": "cohort information!A56:Q56"
+        },
+        {
+          "source_name": "MOL2-16-2396-s005.xlsx",
+          "file_sha256": "c4ef454ab8c187a3fab70e847c0a9198dcabefde85811577cda5f624a8ec97c9",
+          "locator": "b.organoid score!A53:G53"
+        },
+        {
+          "source_name": "article.xml",
+          "file_sha256": "ce677094aa7d32f561c95ac339838d4aaeb782ca21f60c16689f5f70b15411c5",
+          "locator": "Results clinical correlation: all except 046 collected before therapy; author exclusions; bevacizumab omitted from score"
+        },
+        {
+          "source_name": "MOL2-16-2396-s002.xlsx",
+          "file_sha256": "7f5c906f779acb2bd873abb131c1af639b3689c91cea6688f46374706c35c581",
+          "locator": "cohort information!A57:Q57"
+        },
+        {
+          "source_name": "MOL2-16-2396-s005.xlsx",
+          "file_sha256": "c4ef454ab8c187a3fab70e847c0a9198dcabefde85811577cda5f624a8ec97c9",
+          "locator": "b.organoid score!A54:G54"
+        },
+        {
+          "source_name": "article.xml",
+          "file_sha256": "ce677094aa7d32f561c95ac339838d4aaeb782ca21f60c16689f5f70b15411c5",
+          "locator": "Results clinical correlation: all except 046 collected before therapy; author exclusions; bevacizumab omitted from score"
+        }
+      ],
+      "match_kinds": [
+        "author_regimen_component_score",
+        "component_proxy"
+      ]
+    },
+    {
+      "study": "10.1016/j.xcrm.2023.101335",
+      "matched_numeric": 5,
+      "sources": [
+        {
+          "source_name": "gr4.jpg",
+          "file_sha256": "97ea44947b2ee5415eb3a834957050e374f12de7fcb06197775dd2e49149d22a",
+          "panel": "4B",
+          "row": 1
+        },
+        {
+          "source_name": "mmc1.pdf",
+          "file_sha256": "b2357dfaf12ea45aafa7b0250751ed510af59793e53258ed4c3ff1852b166a00",
+          "page": 5,
+          "panel": "FigureS4 caption: immediate after collection and subsequent treatments"
+        },
+        {
+          "source_name": "mmc4.xlsx",
+          "file_sha256": "c769732edc1ef21bdf8981bbf6ffa141c390a1a5af839a908a63e86ed1b165a9",
+          "locator": "Sheet1!A2:E2"
+        },
+        {
+          "source_name": "fulltext.xml",
+          "file_sha256": "0154118a55cd7c7971f1e5d5acdde3399e665e54bc9ef16ec10f1a9151df0d1c",
+          "locator": "Chemotherapy combination drug testing; immediate treatment FigureS4"
+        },
+        {
+          "source_name": "gr4.jpg",
+          "file_sha256": "97ea44947b2ee5415eb3a834957050e374f12de7fcb06197775dd2e49149d22a",
+          "panel": "4B",
+          "row": 10
+        },
+        {
+          "source_name": "mmc1.pdf",
+          "file_sha256": "b2357dfaf12ea45aafa7b0250751ed510af59793e53258ed4c3ff1852b166a00",
+          "page": 5,
+          "panel": "FigureS4 caption: immediate after collection and subsequent treatments"
+        },
+        {
+          "source_name": "mmc4.xlsx",
+          "file_sha256": "c769732edc1ef21bdf8981bbf6ffa141c390a1a5af839a908a63e86ed1b165a9",
+          "locator": "Sheet1!A35:E35"
+        },
+        {
+          "source_name": "fulltext.xml",
+          "file_sha256": "0154118a55cd7c7971f1e5d5acdde3399e665e54bc9ef16ec10f1a9151df0d1c",
+          "locator": "Chemotherapy combination drug testing; immediate treatment FigureS4"
+        },
+        {
+          "source_name": "gr4.jpg",
+          "file_sha256": "97ea44947b2ee5415eb3a834957050e374f12de7fcb06197775dd2e49149d22a",
+          "panel": "4B",
+          "row": 21
+        },
+        {
+          "source_name": "mmc1.pdf",
+          "file_sha256": "b2357dfaf12ea45aafa7b0250751ed510af59793e53258ed4c3ff1852b166a00",
+          "page": 5,
+          "panel": "FigureS4 caption: immediate after collection and subsequent treatments"
+        },
+        {
+          "source_name": "mmc4.xlsx",
+          "file_sha256": "c769732edc1ef21bdf8981bbf6ffa141c390a1a5af839a908a63e86ed1b165a9",
+          "locator": "Sheet1!A57:E57"
+        },
+        {
+          "source_name": "fulltext.xml",
+          "file_sha256": "0154118a55cd7c7971f1e5d5acdde3399e665e54bc9ef16ec10f1a9151df0d1c",
+          "locator": "Chemotherapy combination drug testing; immediate treatment FigureS4"
+        },
+        {
+          "source_name": "gr5.jpg",
+          "file_sha256": "b1d51e048ac300ff66c8a4c55068bee179a528568c7f4e9bf0362101840147fb",
+          "panel": "5C",
+          "row": 1
+        },
+        {
+          "source_name": "mmc1.pdf",
+          "file_sha256": "b2357dfaf12ea45aafa7b0250751ed510af59793e53258ed4c3ff1852b166a00",
+          "page": 5,
+          "panel": "FigureS4 caption: immediate after collection and subsequent treatments"
+        },
+        {
+          "source_name": "mmc4.xlsx",
+          "file_sha256": "c769732edc1ef21bdf8981bbf6ffa141c390a1a5af839a908a63e86ed1b165a9",
+          "locator": "Sheet1!A88:E88"
+        },
+        {
+          "source_name": "fulltext.xml",
+          "file_sha256": "0154118a55cd7c7971f1e5d5acdde3399e665e54bc9ef16ec10f1a9151df0d1c",
+          "locator": "Chemotherapy combination drug testing; immediate treatment FigureS4"
+        },
+        {
+          "source_name": "gr5.jpg",
+          "file_sha256": "b1d51e048ac300ff66c8a4c55068bee179a528568c7f4e9bf0362101840147fb",
+          "panel": "5C",
+          "row": 10
+        },
+        {
+          "source_name": "mmc1.pdf",
+          "file_sha256": "b2357dfaf12ea45aafa7b0250751ed510af59793e53258ed4c3ff1852b166a00",
+          "page": 5,
+          "panel": "FigureS4 caption: immediate after collection and subsequent treatments"
+        },
+        {
+          "source_name": "mmc4.xlsx",
+          "file_sha256": "c769732edc1ef21bdf8981bbf6ffa141c390a1a5af839a908a63e86ed1b165a9",
+          "locator": "Sheet1!A104:E104"
+        },
+        {
+          "source_name": "fulltext.xml",
+          "file_sha256": "0154118a55cd7c7971f1e5d5acdde3399e665e54bc9ef16ec10f1a9151df0d1c",
+          "locator": "Chemotherapy combination drug testing; immediate treatment FigureS4"
+        }
+      ],
+      "match_kinds": [
+        "active_moiety_matrix"
+      ]
+    }
+  ],
+  "clinical_validation": "retrospective reanalysis; published outcomes already exposed",
+  "source_sha256": {
+    "protocol": "7cfa9dc52faf0ec6062b53a0b2bbcf2715e19414c88b803d209c03c52ce70b89",
+    "cohort": "6ab6649f6b932d0fcdcbba048bc52b124d2f6b5709b30e8ac1b91a4500255e84",
+    "ledger": "14f32c593fc822a7cf900bb13937bba698f09d8b767c84356e9aa37d6a969998"
+  },
+  "absolute_calibration_status": "No across-study shared assay units. LOSO probability calibration uses training-study percentile ranks; no held-out outcome used to fit predictions.",
+  "rank_reference": "co-tested held-out donor panel; transductive outcome-free percentiles, not deployable single-patient absolute calibration",
+  "expanded_estimand": {
+    "name": "clinical benefit and recurrence association with regimen-aligned PDO summaries",
+    "treatment_scope": "includes explicitly tagged partial components, analogs, separate-drug means and active-moiety matrices",
+    "endpoint_scope": "PR/CR/SD benefit or source recurrence-free followup; duration-only >=6 months tagged separately",
+    "selection": "earliest evaluable post-sampling episode per patient; author exclusions retained; no score-based selection",
+    "response_interpretation": "mixed clinical-benefit endpoint, not uniform RECIST objective response",
+    "analysis_type": "retrospective; outcomes historically visible; S58 estimand expansion is not prospective validation",
+    "cluster_independence": "distinct source study cohorts; same-study episodes deduplicated; global undocumented cross-study identity remains unknown"
+  },
+  "sensitivities": {
+    "complete_exposure_or_active_moiety": {
+      "numeric_patients": 185,
+      "qualifying_clusters": 5,
+      "by_study": {
+        "10.1002/advs.202204097": {
+          "n": 23,
+          "favourable": 13,
+          "unfavourable": 10
+        },
+        "10.1016/j.xcrm.2023.101335": {
+          "n": 13,
+          "favourable": 3,
+          "unfavourable": 10
+        },
+        "10.1016/j.xcrm.2025.102397": {
+          "n": 127,
+          "favourable": 58,
+          "unfavourable": 69
+        },
+        "doi:10.1371/journal.pone.0339416": {
+          "n": 1,
+          "favourable": 1,
+          "unfavourable": 0
+        },
+        "10.1016/j.xcrm.2023.101277": {
+          "n": 9,
+          "favourable": 6,
+          "unfavourable": 3
+        },
+        "10.1038/s41467-021-22676-1": {
+          "n": 7,
+          "favourable": 5,
+          "unfavourable": 2
+        },
+        "10.1002/advs.202101176": {
+          "n": 2,
+          "favourable": 1,
+          "unfavourable": 1
+        },
+        "10.1186/s12885-025-15495-x": {
+          "n": 3,
+          "favourable": 1,
+          "unfavourable": 2
+        }
+      },
+      "auc": {
+        "replicates": 10000,
+        "seed": 20261024,
+        "ci95": [
+          0.7452830188679245,
+          0.9844128743106545
+        ],
+        "method": "resample studies, then independent patients separately by class; within-study pair weighting",
+        "mean_bootstrap_auc": 0.9266577111094663,
+        "auc": 0.96145584725537
+      }
+    },
+    "without_duration_only_endpoints": {
+      "numeric_patients": 241,
+      "qualifying_clusters": 8,
+      "by_study": {
+        "10.1002/advs.202204097": {
+          "n": 23,
+          "favourable": 13,
+          "unfavourable": 10
+        },
+        "10.1016/j.xcrm.2023.101335": {
+          "n": 13,
+          "favourable": 3,
+          "unfavourable": 10
+        },
+        "10.1016/j.xcrm.2025.102397": {
+          "n": 127,
+          "favourable": 58,
+          "unfavourable": 69
+        },
+        "doi:10.1371/journal.pone.0339416": {
+          "n": 1,
+          "favourable": 1,
+          "unfavourable": 0
+        },
+        "10.1016/j.xcrm.2023.101277": {
+          "n": 9,
+          "favourable": 6,
+          "unfavourable": 3
+        },
+        "10.1038/s41467-021-22676-1": {
+          "n": 9,
+          "favourable": 6,
+          "unfavourable": 3
+        },
+        "10.1002/advs.202101176": {
+          "n": 12,
+          "favourable": 6,
+          "unfavourable": 6
+        },
+        "10.1186/s12885-025-15495-x": {
+          "n": 7,
+          "favourable": 3,
+          "unfavourable": 4
+        },
+        "10.1002/1878-0261.13296": {
+          "n": 40,
+          "favourable": 36,
+          "unfavourable": 4
+        }
+      },
+      "auc": {
+        "replicates": 10000,
+        "seed": 20261024,
+        "ci95": [
+          0.6857381608491528,
+          0.9773787868692253
+        ],
+        "method": "resample studies, then independent patients separately by class; within-study pair weighting",
+        "mean_bootstrap_auc": 0.8983647353921081,
+        "auc": 0.9505694760820046
+      }
+    },
+    "new_sources_only": {
+      "numeric_patients": 70,
+      "qualifying_clusters": 4,
+      "by_study": {
+        "10.1038/s41467-021-22676-1": {
+          "n": 9,
+          "favourable": 6,
+          "unfavourable": 3
+        },
+        "10.1002/advs.202101176": {
+          "n": 14,
+          "favourable": 8,
+          "unfavourable": 6
+        },
+        "10.1186/s12885-025-15495-x": {
+          "n": 7,
+          "favourable": 3,
+          "unfavourable": 4
+        },
+        "10.1002/1878-0261.13296": {
+          "n": 40,
+          "favourable": 36,
+          "unfavourable": 4
+        }
+      },
+      "auc": {
+        "replicates": 10000,
+        "seed": 20261024,
+        "ci95": [
+          0.5753205128205128,
+          1.0
+        ],
+        "method": "resample studies, then independent patients separately by class; within-study pair weighting",
+        "mean_bootstrap_auc": 0.7744896485359308,
+        "auc": 0.740990990990991
+      }
+    }
+  },
+  "loso_heldout_prediction_bootstrap": {
+    "replicates": 10000,
+    "seed": 20261024,
+    "ci95": [
+      0.6848788561010275,
+      0.9774581052729114
+    ],
+    "method": "resample studies, then independent patients separately by class; within-study pair weighting",
+    "mean_bootstrap_auc": 0.8983205710263724,
+    "auc": 0.9502498864152658
+  },
+  "bootstrap_fit_scope": "10000 study/patient resamples of fixed heldout predictions; logistic fits performed once per omitted study, not refitted per bootstrap",
+  "official_gain": 0,
+  "source_cohort_sha256": "2a470dd30b433e7be910babdd76afc8885cdf128f4b8936247f38800afbf9d98"
+}

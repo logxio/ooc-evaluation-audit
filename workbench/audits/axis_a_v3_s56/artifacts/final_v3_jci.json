@@ -1,0 +1,189 @@
+{
+ "schema": "s55.donor_risk.final.v3",
+ "lock_sha256": "2016427aa8e71230036fc4e35b13f82f04000e8f9d5a2c57c9e3264c18173a45",
+ "source": "jci",
+ "input_sha256": "c6882b5855ad16aaa1302ddf75e2825c599cb113f55dce324f4429f1d161cb23",
+ "curves": 240,
+ "actives": 237,
+ "FG_wells": 7200,
+ "materials": [
+  "hF24",
+  "hM1F",
+  "hT1"
+ ],
+ "clusters": 8,
+ "arms": {
+  "MODEL": {
+   "wells": 3096,
+   "saving": 0.5700000000000001,
+   "misses": 1,
+   "miss_ucb95": 0.01961259962870235,
+   "stages": {
+    "cert": 236,
+    "stop": 3,
+    "complete": 1
+   },
+   "waves": {
+    "1": 163,
+    "2": 77
+   },
+   "wave1_wells": 2160,
+   "bridge_wells": 231,
+   "wave2_non_bridge_wells": 705,
+   "delay_cycles_mean": 1.3208333333333333,
+   "per_material_saving": {
+    "hF24": 0.5266666666666666,
+    "hM1F": 0.5933333333333333,
+    "hT1": 0.6
+   },
+   "per_drug_saving": {
+    "5-fluorouracil": 0.6799999999999999,
+    "SN-38": 0.52,
+    "gemcitabine": 0.5,
+    "oxaliplatin": 0.56,
+    "paclitaxel": 0.6,
+    "trametinib": 0.56
+   },
+   "ranking": {
+    "topk_overlap": 0.9166666666666666,
+    "topk_hits": 44,
+    "topk_slots": 48,
+    "spearman_mean": 0.8850531582238901,
+    "spearman_ic50_mean": 0.6913679788627741,
+    "drugs": 6,
+    "rank_certified": 215,
+    "rank_certified_correct": 215,
+    "rank_certificate_precision": 1.0
+   }
+  },
+  "MO": {
+   "wells": 3300,
+   "saving": 0.5416666666666667,
+   "misses": 0,
+   "miss_ucb95": 0.012404638050409015,
+   "stages": {
+    "cert": 236,
+    "complete": 3,
+    "stop": 1
+   },
+   "waves": {
+    "1": 148,
+    "2": 92
+   },
+   "wave1_wells": 2160,
+   "bridge_wells": 276,
+   "wave2_non_bridge_wells": 864,
+   "delay_cycles_mean": 1.3833333333333333,
+   "per_material_saving": {
+    "hF24": 0.5222222222222221,
+    "hM1F": 0.5488888888888889,
+    "hT1": 0.56
+   },
+   "per_drug_saving": {
+    "5-fluorouracil": 0.5900000000000001,
+    "SN-38": 0.54,
+    "gemcitabine": 0.49,
+    "oxaliplatin": 0.5,
+    "paclitaxel": 0.6,
+    "trametinib": 0.53
+   },
+   "ranking": {
+    "topk_overlap": 0.9375,
+    "topk_hits": 45,
+    "topk_slots": 48,
+    "spearman_mean": 0.9108192620387744,
+    "spearman_ic50_mean": 0.733672586904483,
+    "drugs": 6,
+    "rank_certified": 185,
+    "rank_certified_correct": 185,
+    "rank_certificate_precision": 1.0
+   }
+  },
+  "TW": {
+   "wells": 1629,
+   "saving": 0.7737499999999999,
+   "misses": 0,
+   "miss_ucb95": 0.012404638050409015
+  },
+  "TW_S": {
+   "wells": 1602,
+   "saving": 0.7775,
+   "misses": 0,
+   "miss_ucb95": 0.012404638050409015
+  },
+  "D1": {
+   "wells": 1524,
+   "saving": 0.7883333333333333,
+   "misses": 0,
+   "miss_ucb95": 0.012404638050409015
+  }
+ },
+ "ci95": {
+  "saving_MODEL": [
+   0.54,
+   0.6
+  ],
+  "saving_MO": [
+   0.5066666666666666,
+   0.575
+  ],
+  "saving_TW": [
+   0.7625,
+   0.7887500000000001
+  ],
+  "saving_TW_S": [
+   0.76625,
+   0.7887500000000001
+  ],
+  "saving_D1": [
+   0.77875,
+   0.79625
+  ],
+  "model_minus_mo": [
+   0.02,
+   0.03666666666666667
+  ],
+  "model_minus_tw": [
+   -0.24125,
+   -0.16625
+  ],
+  "topk_MODEL": [
+   0.7916666666666666,
+   0.9791666666666666
+  ],
+  "topk_MO": [
+   0.8125,
+   0.9791666666666666
+  ],
+  "topk_diff": [
+   -0.0625,
+   0.02083333333333337
+  ],
+  "spearman_MODEL": [
+   0.8259224515322078,
+   0.9255472170106317
+  ],
+  "spearman_MO": [
+   0.8573389618511571,
+   0.9470606629143216
+  ],
+  "spearman_diff": [
+   -0.03924327704815522,
+   -0.015165728580362692
+  ]
+ },
+ "B": 10000,
+ "success": {
+  "model_vs_mo": true,
+  "total": true,
+  "miss": true,
+  "ranking": false,
+  "all": false
+ },
+ "model_minus_mo_wells": 204,
+ "units": "curve-level miss bound treats curves as exchangeable; materials are the independent unit",
+ "prediction_rmse": "NaN（未重算）",
+ "local_lb_residual_rmse": "NaN（未重算）",
+ "official_gain": 0,
+ "seconds": 5.159438133239746
+}

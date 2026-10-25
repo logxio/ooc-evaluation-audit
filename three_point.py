@@ -29,13 +29,17 @@ interpolation and analog chemicals disagree most, then reports (active from its 
 from the four-concentration margin) or completes the series. Responses are put on the baseline scale of EPA's ToxCast
 pipeline (tcpl): each plate is centred on its vehicle wells when it has them, then the median and robust SD (1.4826 x
 MAD) of the responses at the two lowest concentrations of every completed compound set the baseline, computed from
-training and calibration compounds only, and responses are clipped to +-10 baseline SDs. A series is active when its
+training compounds only, and responses are clipped to +-10 baseline SDs. A series is active when its
 largest absolute concentration mean reaches 3 baseline SDs (--threshold).
 
 Run: python three_point.py my_table.csv                       (forecast if any series is unfinished, else replay)
      python three_point.py my_table.csv --library more.csv    (more completed series of the same endpoints)
      python three_point.py my_finished_table.csv --reconcile three_point_my_table
      python three_point.py --example epa_dnt                  (the US EPA human neural screen in this format)
+
+Physical-plate replay: python three_point.py --two-wave --help. This entry uses
+A-only interpolation residual training and biological-group calibration, with
+separate prediction locking, B acquisition and independent reveal phases.
 """
 import argparse
 import csv
@@ -54,6 +58,27 @@ from concurrent.futures import ProcessPoolExecutor
 from datetime import datetime, timezone
 from fractions import Fraction
 from pathlib import Path
+
+if __name__ == '__main__' and '--corpus-intake' in sys.argv[1:]:
+    sys.argv.remove('--corpus-intake')
+    sys.path.insert(0, str(Path(__file__).resolve().parent/'workbench/audits/corpus/integration'))
+    import pdo_intake
+    pdo_intake.main()
+    raise SystemExit(0)
+
+if __name__ == '__main__' and '--two-wave' in sys.argv[1:]:
+    sys.argv.remove('--two-wave')
+    sys.path.insert(0, str(Path(__file__).resolve().parent/'workbench/audits/corpus/integration'))
+    import two_wave_replay
+    two_wave_replay.main()
+    raise SystemExit(0)
+
+if __name__ == '__main__' and '--corpus' in sys.argv[1:]:
+    # Standard-library corpus replay works without the optional training stack.
+    sys.path.insert(0, str(Path(__file__).resolve().parent/'workbench/audits/corpus/integration'))
+    import corpus_cli
+    corpus_cli.main(sys.argv[1:])
+    raise SystemExit(0)
 
 import numpy as np
 import sklearn
@@ -75,7 +100,9 @@ COLUMNS = {'compound': ('compound', 'chemical', 'drug', 'treatment', 'sample'),
            'endpoint': ('endpoint', 'assay', 'readout'),
            'value': ('value', 'reading', 'response', 'raw_value'),
            'plate': ('plate', 'replicate', 'plate_id', 'replicate_or_plate'),
-           'date': ('date', 'culture_date', 'run_date')}
+           'date': ('date', 'culture_date', 'run_date'),
+           'biological_source': ('biological_source', 'donor_id', 'cell_line_id'),
+           'source_bank': ('source_bank',)}
 REQUIRED = ('compound', 'concentration', 'endpoint', 'value')
 MOLAR = {'pm': 1e-6, 'nm': 1e-3, 'um': 1.0, 'mm': 1e3, 'm': 1e6}
 EMPTY = {'', 'na', 'nan', 'none', 'null', '-'}
@@ -105,12 +132,16 @@ nd = rule_module()
 
 
 def sha(path):
-    return hashlib.sha256(Path(path).read_bytes()).hexdigest()
+    digest = hashlib.sha256()
+    with Path(path).open('rb') as source:
+        for chunk in iter(lambda: source.read(1024 * 1024), b''):
+            digest.update(chunk)
+    return digest.hexdigest()
 
 
 def deal(names, key, n):
     """Balanced deterministic partition: names sorted by SHA-256 of (key, name), dealt round-robin into n parts."""
-    order = sorted(names, key=lambda c: nd.digest([key, c]))
+    order = sorted(set(names), key=lambda c: nd.digest([key, c]))
     return {c: i % n for i, c in enumerate(order)}
 
 
@@ -164,7 +195,9 @@ def read_table(path):
             if conc > 0 and u in MOLAR:
                 conc, unit = conc * MOLAR[u], 'uM'
             rows.append(dict(compound=compound, conc=conc, unit=unit or 'as given', endpoint=endpoint, value=value,
-                             plate=(get('plate'), get('date')), line=line))
+                             plate=(get('plate'), get('date')), line=line,
+                             biological_source=get('biological_source') or compound,
+                             source_bank=get('source_bank')))
     if not rows:
         raise ValueError(f'{path}: no rows')
     return rows
@@ -203,6 +236,10 @@ class Curve:
 
     def __init__(self, compound, endpoint, rows, centres, source):
         self.compound, self.endpoint, self.source = compound, endpoint, source
+        groups = {r.get('biological_source', compound) for r in rows}
+        if len(groups) != 1:
+            raise ValueError(f'{compound}: curve merges biological sources')
+        self.group = groups.pop()
         units = sorted({r['unit'] for r in rows})
         if len(units) > 1:
             raise ValueError(f'{source}: {compound} / {endpoint} mixes concentration units {units}')
@@ -223,7 +260,7 @@ class Curve:
         """chip_forecast.Task in baseline SDs, clipped to +-10."""
         z = np.clip((self.centred - scale['b0']) / scale['b1'], -CLIP, CLIP).astype(np.float32)
         t = cf.Task(self.compound, 0, 'unused', self.logc, z.reshape(-1, 1, 1), np.ones((len(z), 1, 1), bool))
-        t.group = self.compound
+        t.group = self.group
         return t
 
     def raw(self, z, scale):
@@ -411,10 +448,12 @@ def well_errors(tasks, points):
     return out
 
 
-def width_models(errors, key, rng):
+def width_models(errors, key, rng, groups=None):
     """chip_forecast_intervals.py widths: one quantile model per calibration part, trained on the other parts; the
     conformal quantile of errors scaled by the model that did not see them."""
-    part = deal(sorted(errors), ['width-v1', key], PARTS)
+    groups = groups or {c: c for c in errors}
+    group_part = deal([groups[c] for c in errors], ['width-v1', key], PARTS)
+    part = {c: group_part[groups[c]] for c in errors}
     parts = {g: [errors[c] for c in errors if part[c] == g] for g in range(PARTS)}
     parts = {g: (np.concatenate([x for x, _ in v]), np.concatenate([e for _, e in v])) for g, v in parts.items() if v}
     if len(parts) < 2:
@@ -441,7 +480,8 @@ def fit(train, cal, key, threshold, alpha):
     measured-active lane) and the interval width models."""
     if len(train) < 2 or len(cal) < 2:
         raise ValueError(f'needs at least 2 training and 2 calibration compounds; has {len(train)} and {len(cal)}')
-    half = deal([t.chem for t in train], ['inner-v1', key], 2)
+    halves = deal([t.group for t in train], ['inner-v1', key], 2)
+    half = {t.chem: halves[t.group] for t in train}
     records, points = [], []
     for h in (0, 1):
         held = [t for t in train if half[t.chem] == h]
@@ -459,7 +499,8 @@ def fit(train, cal, key, threshold, alpha):
         r['truth'] = truth(next(t for t in cal if t.chem == r['compound']), threshold)
     margin, feasible = chain_margin(chain, alpha, threshold)
     two = {m: two_action_margin(cal_rec, m, alpha, threshold) for m in ('anchorboost', 'measured_only')}
-    widths = width_models(well_errors(cal, cal_pts), key, np.random.default_rng(0))
+    widths = width_models(well_errors(cal, cal_pts), key, np.random.default_rng(0),
+                          {t.chem: t.group for t in cal})
     return dict(model=model, rules=rules, chain_margin=margin, chain_feasible=feasible, two_action=two, widths=widths,
                 training=sorted(t.chem for t in train), calibration=sorted(t.chem for t in cal), threshold=threshold,
                 alpha=alpha, training_rows=model.rows)
@@ -509,8 +550,8 @@ def forecast_endpoint(ep, curves, library, threshold, alpha, out):
     if len(usable) < 4:
         raise ValueError(f'endpoint {ep!r}: {len(usable)} completed series with at least four concentrations; '
                          'add completed compounds of this endpoint to the table or with --library')
-    scale = baseline(usable)
     role = deal([c.compound for c in usable], ['library-v1', ep], 2)
+    scale = baseline([c for c in usable if role[c.compound] == 0])
     f = fit([c.task(scale) for c in usable if role[c.compound] == 0],
             [c.task(scale) for c in usable if role[c.compound] == 1], f'A|{ep}', threshold, alpha)
     f['scale'] = scale
@@ -647,10 +688,11 @@ def replay_fold(curves, ep, f, threshold, alpha):
     """One outer fold of one endpoint: fit on training and calibration compounds, decide every test design, then read
     the test compounds' full series to score the decisions, forecasts and intervals."""
     unit = curves[0].unit
-    fold = deal([c.compound for c in curves], ['outer-v1', ep], 5)
+    group_fold = deal([c.group for c in curves], ['outer-v1', ep], 5)
+    fold = {c.compound: group_fold[c.group] for c in curves}
     other = [g for g in range(5) if g != f]
-    # The baseline scale comes from training and calibration compounds; test compounds only receive it.
-    scale = baseline([c for c in curves if fold[c.compound] != f])
+    # Training compounds alone set the baseline; calibration and test compounds receive the fixed scale.
+    scale = baseline([c for c in curves if fold[c.compound] in other[:2]])
     tasks = {c.compound: c.task(scale) for c in curves}
     test = [t for t in tasks.values() if fold[t.chem] == f]
     fitted = fit([t for t in tasks.values() if fold[t.chem] in other[:2]],
@@ -699,7 +741,13 @@ def replay_fold(curves, ep, f, threshold, alpha):
         h = half_width(fitted['widths'], errors[t.chem][0])
         hits.append(errors[t.chem][1] <= h)
         widths.append(h)
+    split_groups = {name: sorted({t.group for t in tasks.values() if fold[t.chem] in folds})
+                    for name, folds in [('train', other[:2]), ('calibration', other[2:]), ('test', [f])]}
+    assert not (set(split_groups['train']) & set(split_groups['calibration']) or
+                set(split_groups['train']) & set(split_groups['test']) or
+                set(split_groups['calibration']) & set(split_groups['test']))
     info = dict(training=len(fitted['training']), calibration=len(fitted['calibration']), test=len(test),
+                biological_source_groups=split_groups,
                 baseline=dict(median=round(scale['b0'], 6), sd=round(scale['b1'], 6)), release_margin=fitted['chain_margin'],
                 calibration_feasible=fitted['chain_feasible'], two_action_margins=fitted['two_action'],
                 interval_quantile=round(fitted['widths']['q'], 4))
@@ -932,7 +980,7 @@ def protocol(args, mode, files):
                 measured_concentrations=K, margin_grid=nd.MARGIN_GRID, concentration_level_tolerance_log10=TOL,
                 response_scale='value minus the median of its plate\'s vehicle wells (when the table has vehicle '
                                'wells for the endpoint), then minus the baseline median and divided by the baseline '
-                               '1.4826 x MAD, both from the two lowest concentrations of every training and calibration '
+                               '1.4826 x MAD, both from the two lowest concentrations of every training '
                                'series (tcpl), clipped to +-10',
                 call='inactive when the largest absolute concentration mean of the full series is below the threshold',
                 model=dict(name='AnchorBoost', params=cf.MODEL, designs='all C(L,3) training designs'),
@@ -950,6 +998,18 @@ def protocol(args, mode, files):
 
 
 def main():
+    if '--corpus-anchorboost' in sys.argv[1:]:
+        sys.path.insert(0, str(ROOT/'workbench/audits/corpus/integration'))
+        import anchorboost_replay
+        anchorboost_replay.main(sys.argv[1:])
+        return
+    if '--corpus' in sys.argv[1:]:
+        # The corpus CLI retains corpus.v1 point provenance and drives source/
+        # biological-source holdouts without converting donors to drug IDs.
+        sys.path.insert(0, str(ROOT/'workbench/audits/corpus/integration'))
+        import corpus_cli
+        corpus_cli.main(sys.argv[1:])
+        return
     p = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     p.add_argument('table', nargs='?', type=Path, help='long CSV: compound, concentration, unit, endpoint, value, plate, date')
     p.add_argument('--library', type=Path, nargs='+', default=[], help='more tables of completed series')

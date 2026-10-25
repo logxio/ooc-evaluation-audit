@@ -7,7 +7,7 @@
   const esc = s => String(s).replace(/[&<>"']/g, c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
   const log = (type, data = {}) => events.push({ type, elapsed_ms: Math.round(performance.now() - start), at: new Date().toISOString(), ...data });
   const pc = x => x === null ? 'NA' : (100 * x).toFixed(2) + '%';
-  const ci = x => x ? `${pc(x.low)}–${pc(x.high)}` : 'NA';
+  const ci = x => x ? `${pc(x.low)} to ${pc(x.high)}` : 'NA';
   const readout = k => k.replace(/^readout(\d)$/, 'Readout $1');
   function save(name, body, type) {
     const u = URL.createObjectURL(new Blob([body], { type })), a = document.createElement('a');
@@ -47,7 +47,7 @@
         + `<circle cx="${x(c)}" cy="${y}" r="6" fill="${m.consensus ? '#1b2430' : '#035a77'}"/>`
         + `<text x="${X1 + 22}" y="${y + 5}" font-size="14" fill="#1b2430"><tspan font-weight="700">${m.correct}/${m.n}</tspan><tspan fill="#647084" dx="8">${(100 * c).toFixed(1)}% · ${ci(m.interval)}</tspan></text>`;
     }).join('');
-    const head = full ? `<text x="0" y="30" font-family="Newsreader, Georgia, serif" font-size="22" fill="#1b2430">Patient-level clinical concordance</text><text x="0" y="52" font-size="13" fill="#647084">${esc(result.approach)} · 95% Clopper–Pearson intervals</text>` : '';
+    const head = full ? `<text x="0" y="30" font-family="Newsreader, Georgia, serif" font-size="22" fill="#1b2430">Patient-level clinical concordance</text><text x="0" y="52" font-size="13" fill="#647084">${esc(result.approach)} · 95% Clopper-Pearson intervals</text>` : '';
     const foot = full ? `<text x="0" y="${H - 10}" font-size="12" fill="#647084">Binomial intervals are descriptive for overlapping leave-one-out fits. ${result.patients} patient rows.</text>` : '';
     return `<svg xmlns="http://www.w3.org/2000/svg" width="${W}" height="${H}" viewBox="0 0 ${W} ${H}"${full ? '' : ' role="img" aria-label="Clinical concordance per readout with 95% intervals"'}>${full ? '<rect width="100%" height="100%" fill="white"/>' : ''}<g font-family="Source Sans 3, Helvetica Neue, Arial, sans-serif">${head}${ticks}${rows}${foot}</g></svg>`;
   }
@@ -60,7 +60,7 @@
       log('analysis_complete', { patients: result.patients, labelled: result.scored, readouts: result.models.length, approach: result.approach, source: source?.id || 'own_data' });
       const review = result.patients - result.releases;
       $('own-result-title').textContent = `${result.releases} release candidates · ${review} to review or retest`;
-      $('own-result-title').setAttribute('aria-description', `${result.approach}. Clopper–Pearson bounds are exact under a fixed-rule binomial model; for overlapping leave-one-out fits they are descriptive intervals. Release candidates identify concordant readouts for research review.`);
+      $('own-result-title').setAttribute('aria-description', `${result.approach}. Clopper-Pearson bounds are exact under a fixed-rule binomial model; for overlapping leave-one-out fits they are descriptive intervals. Release candidates identify concordant readouts for research review.`);
       const main = result.paired ? { n: result.scored_released, correct: result.agreement_correct, interval: result.agreement_interval } : result.models[0];
       $('own-metrics').innerHTML = [
         stat(result.paired ? 'Correct among released' : 'Readout concordance', main.n ? `${main.correct}/${main.n}` : 'Awaiting outcomes', main.n ? `${ci(main.interval)}, 95% binomial interval` : 'Add a response column to score the calls', 'report'),
@@ -90,7 +90,7 @@
       const procedures = result.models.map(m => m.loo
         ? `${m.key}: for every labelled patient, the cutoff was selected on the remaining labelled patients by maximizing balanced accuracy (ties used the lowest cutoff on the direction-adjusted scale); unlabelled patients used a cutoff fitted on all labelled patients`
         : `${m.key}: insufficient labelled outcome classes for leave-one-out threshold fitting, so the cohort median supplied an exploratory cutoff`).join('. ');
-      method = `We analysed ${result.patients} independent patient rows with ${result.scored} recorded binary clinical outcomes (1 = responder, 0 = non-responder). Readout values ${direction} the fitted cutoff were called sensitive. ${procedures}. With two available readouts, concordant calls were marked as release candidates and discordant or incomplete pairs were assigned to review/retest; a single readout remained a review-only prediction. We reported readout-level clinical concordance and, for consensus releases, both wrong releases/all labelled patients and wrong releases/labelled released patients. The current batch had ${result.scored_released} labelled releases and ${result.wrong} wrong releases. Two-sided 95% Clopper–Pearson intervals were computed for the observed binary counts. Because leave-one-out predictions share training data, these binomial intervals describe the counts and do not provide exact cross-validation coverage. Sample-size calculations use a separate fixed-rule, independent-validation model, a one-sided 95% upper bound, and zero additional errors; they are planning minima. Study endpoint definition, assay units, treatment mapping, eligibility and within-patient replicate aggregation should be specified alongside this analysis.`;
+      method = `We analysed ${result.patients} independent patient rows with ${result.scored} recorded binary clinical outcomes (1 = responder, 0 = non-responder). Readout values ${direction} the fitted cutoff were called sensitive. ${procedures}. With two available readouts, concordant calls were marked as release candidates and discordant or incomplete pairs were assigned to review/retest; a single readout remained a review-only prediction. We reported readout-level clinical concordance and, for consensus releases, both wrong releases/all labelled patients and wrong releases/labelled released patients. The current batch had ${result.scored_released} labelled releases and ${result.wrong} wrong releases. Two-sided 95% Clopper-Pearson intervals were computed for the observed binary counts. Because leave-one-out predictions share training data, these binomial intervals describe the counts and do not provide exact cross-validation coverage. Sample-size calculations use a separate fixed-rule, independent-validation model, a one-sided 95% upper bound, and zero additional errors; they are planning minima. Study endpoint definition, assay units, treatment mapping, eligibility and within-patient replicate aggregation should be specified alongside this analysis.`;
       $('own-method-text').textContent = method;
 
       const series = result.models.filter(m => m.n).map(m => ({ name: readout(m.key), n: m.n, correct: m.correct, interval: m.interval }));

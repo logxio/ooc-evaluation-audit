@@ -4,27 +4,52 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Published studies | Chip Forecast</title>
-<meta name="description" content="13 public organ-chip and organoid studies, 12 in Cell or Nature portfolio journals, each with its unit, denominator, source and downloadable records.">
+<meta name="description" content="Frozen four-axis evidence: 40 qualified human 3D studies, 248 matched clinical patients and 399 audited papers, with 13 interactive study examples.">
 <link rel="icon" href="data:,">
 <link rel="preload" href="../vendor/fonts/newsreader-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="../vendor/fonts/source-sans-3-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../style.css?v=1023d1">
 <script defer src="../tip.js?v=1023d1"></script>
+<style>
+  .bar { flex-wrap: wrap; height: auto; min-height: 50px; padding-block: 10px; }
+  .bar .kpis { order: 3; width: 100%; flex-wrap: wrap; gap: 4px 18px; overflow: visible; }
+  .bar .kpi { display: inline; white-space: normal; }
+  .bar nav { margin-left: auto; }
+  .frozen-summary { margin-bottom: 16px; }
+  .frozen-summary .data td { white-space: normal; vertical-align: top; }
+  .frozen-summary tbody th { position: static; width: 70px; white-space: nowrap; }
+  .frozen-summary .data td:last-child { min-width: 130px; }
+</style>
 </head>
 <body>
 <header class="bar">
   <a class="brand" href="../index.html"><span class="mark">Chip Forecast</span><span class="team" title="Team Three-Pointer · Yan Su &amp; Ziyang Liu">Team Three-Pointer</span></a>
   <div class="kpis">
-    <span class="kpi"><b>13</b> <span>published studies</span></span>
-    <span class="kpi" aria-description="Cell Reports Medicine, Nature Communications and Communications Biology; the 13th is Advanced Science"><b>12</b> <span>in Cell or Nature portfolio journals</span></span>
-    <span class="kpi" aria-description="4 clinical cohorts load with leave-one-patient-out concordance and 9 assay studies load for median split and readout agreement"><b>13</b> <span>studies load into the worksheet</span></span>
+    <span class="kpi"><b>40</b> <span>qualified human 3D studies (34 strict PDO, 13,444 curves)</span></span>
+    <span class="kpi"><b>248</b> <span>matched clinical patients across 8 study clusters (AUC 0.9502)</span></span>
+    <span class="kpi"><b>399</b> <span>audited papers from a 17,386-record PubMed frame</span></span>
   </div>
   <nav><a href="../index.html">Workbench</a><a href="../sample.html">Sample size</a><a href="index.html" aria-current="page">Published studies</a><a href="https://github.com/logxio/ooc-evaluation-audit">Source</a><a class="cta" href="../index.html#tab=yours">Paste your table</a></nav>
 </header>
 
 <main class="page">
+  <section class="card frozen-summary" aria-labelledby="frozen-summary-title">
+    <div class="head"><h1 class="t3" id="frozen-summary-title">Four-Axis Frozen Audit Summary</h1><span class="t1 ink3">FROZEN · 25 October 2026</span></div>
+    <div class="data-wrap">
+      <table class="data">
+        <thead><tr><th scope="col">Axis</th><th scope="col">Frozen result</th><th scope="col">Evidence</th></tr></thead>
+        <tbody>
+          <tr><th scope="row">A</th><td>JCI: 240 human 3D PDO curves, 7,200 wells. Two-wave MODEL acquisition uses 3,096 wells: <b>57.00%</b> saving [54.00%, 60.00%], 1/240 missed, mean 1.32 waves. Measured-only uses 3,300 wells (54.17% saving): MODEL saves 204 more wells, +2.83 percentage points [2.00, 3.67]. Saving and missed count stay at 57.00% and 1/240 under 273 ToxCast physical drift pairs: 91 sample plate pairs, 88 compounds, 924 scenarios.</td><td><a href="axis_a_v3_s56/public_readout.md">PDO and drift receipt</a></td></tr>
+          <tr><th scope="row">B</th><td>At least 5 positive concentrations: <b>34 strict direct-patient PDO studies, 13,444 curves</b>, 202,498 measurement points, 181 resolved deduplicated donor groups. All qualified human 3D models: <b>40 studies, 13,585 curves</b>, 206,113 points. At least 6 positive concentrations: 29 strict studies, 12,908 curves, 197,293 points. Full master table: 13,780 curves, 208,824 observations.</td><td><a href="corpus/public_s18/readout_s18.md">Frozen corpus readout</a></td></tr>
+          <tr><th scope="row">C</th><td><b>248 matched clinical patients</b> across 8 eligible study clusters, 243 with numerical sensitivity. Within-study weighted AUC <b>0.9502</b> [0.6849, 0.9775]; complete-exposure sensitivity: 185 patients, 5 clusters, AUC 0.9615 [0.7453, 0.9844]. LOSO calibration slopes span 0.27 to 30.42. Same-budget design leverage (10,000 paired Monte Carlo draws in the nonsaturated study cohort): reallocating from 30 wells per donor to 9 wells per donor across more donors increases clinical responder AUC by <b>+0.0286, +0.0577 and +0.0994</b> at 96, 192 and 384 wells.</td><td><a href="clinical_match_s54/protocol_s55/readout_s56.md">Clinical and budget readout</a></td></tr>
+          <tr><th scope="row">D</th><td><b>17,386 PubMed records</b>, 2019 to 2026, 85 strata; <b>399 randomly sampled papers</b>. Q and R complete <b>12,144 evidence checks</b> of original quotations and image hashes. Evidence aligned coding across 12 fields has Krippendorff alpha <b>0.8054 to 1.0000</b>. Weighted prevalence across channels: 94.84% to 96.29% lack clinical outcome linkage; 53.66% to 65.36% use at most 3 independent human donors; 5.28% to 15.10% publish raw multidose tables.</td><td><a href="survey400_s54/public_s58/readout_s58_full400.md">Survey and coding readout</a></td></tr>
+        </tbody>
+      </table>
+    </div>
+    <p class="foot">Neural screening: 56.8% fewer exposure wells (12,119 / 28,080), 925 calls, 69 wrong. AnchorBoost Stack: 97W 1T 0L across 32 published models at k=1 to 4; k=3 wins 32/32, MAE 1.1170 versus CNP 1.1920. Bircsak perfused human liver: 46/46 hidden responses inside frozen envelopes, all curves settled with 25 points and 0 early errors. Harrill human neural screening: 2,318/2,520 hidden wells (92.0%) inside locked 90% intervals, with 35.6% next-action well saving.</p>
+  </section>
   <section class="card">
-    <div class="head"><h1 class="t3" aria-description="Open each study for its measurement unit, denominator, source and downloadable records.">13 public studies, each result kept with its denominator</h1><div class="tools"><label class="search"><input id="study-search" type="search" aria-label="Filter published studies" placeholder="Filter by author, tissue or journal"></label><span class="t1 ink3" id="study-count" role="status">13 studies</span></div></div>
+    <div class="head"><h2 class="t3" aria-description="Open each study for its measurement unit, denominator, source and downloadable records.">13 interactive study examples, each result kept with its denominator</h2><div class="tools"><label class="search"><input id="study-search" type="search" aria-label="Filter published studies" placeholder="Filter by author, tissue or journal"></label><span class="t1 ink3" id="study-count" role="status">13 studies</span></div></div>
     <div class="data-wrap">
       <table class="data studies">
         <thead><tr><th>Study</th><th>Journal</th><th class="n">Year</th><th>Measured</th><th class="n">Units</th><th>Headline</th><th>Worksheet</th></tr></thead>
