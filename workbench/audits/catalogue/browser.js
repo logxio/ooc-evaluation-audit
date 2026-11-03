@@ -18,16 +18,19 @@
     positive_doses_ge6: 'At least 6 doses', strict_clinical_eligible: 'Strict clinical eligible',
     cutpoint_in_sample: 'Cutpoint fit in sample', n_distinct_positive_doses: 'Distinct positive doses'
   };
+  const phrases = {no_clinical_link: 'No link', fulltext_unavailable: 'No full text', not_applicable: 'N/A'};
   const fmt = value => value === null || value === undefined ? 'Unobserved' :
-    Array.isArray(value) ? value.join(', ') : typeof value === 'object' ? JSON.stringify(value) : String(value);
+    Array.isArray(value) ? value.map(fmt).join(', ') : typeof value === 'object' ? JSON.stringify(value) :
+    typeof value === 'boolean' ? (value ? 'Yes' : 'No') : phrases[value] || String(value).replaceAll('_', ' ');
   const num = value => value.toLocaleString('en-US');
-  const valueHTML = (pair, channel) => `${esc(fmt(pair[channel]))}<small class="code-status">${esc(pair[channel + '_status'])}</small>`;
-  const paired = pair => `Q: ${valueHTML(pair, 'Q')}<br>R: ${valueHTML(pair, 'R')}`;
+  const statusTip = pair => `Q status: ${pair.Q_status} | R status: ${pair.R_status}`;
+  const valueHTML = (pair, channel) => `<span aria-description="${esc(statusTip(pair))}">${esc(fmt(pair[channel]))}</span>`;
+  const paired = pair => ['Q', 'R'].map(c => `<span class="paired-value" aria-description="${esc(statusTip(pair))}">${c}: ${esc(fmt(pair[c]))}</span>`).join('');
   const observed = (paper, field, channel) => paper.coding[field][channel + '_status'] === 'observed' ? paper.coding[field][channel] : null;
   const choices = (id, values) => {
     [...new Set(values.filter(v => v !== null && v !== undefined && v !== ''))]
       .sort((a, b) => String(a).localeCompare(String(b), 'en', {numeric: true}))
-      .forEach(value => $(id).add(new Option(String(value).replaceAll('_', ' '), String(value))));
+      .forEach(value => $(id).add(new Option(String(value).replaceAll('|', ' · ').replaceAll('_', ' '), String(value))));
   };
   choices('paper-year', data.papers.map(p => p.pub_year));
   choices('paper-tier', data.papers.map(p => p.journal_tier));
@@ -38,7 +41,8 @@
   function showAgreement() {
     $('agreement-grid').innerHTML = data.agreement[$('agreement-mode').value].map(a => {
       const ci = a.alpha_95_cluster_bootstrap_ci.map(v => v.toFixed(4)).join(', ');
-      return `<tr><td title="${esc(a.field)}">${esc(labels[a.field])}</td><td><details><summary>${a.alpha.toFixed(4)}</summary><div class="alpha-detail">95% CI: [${ci}]<br>Value agreement: ${(a.raw_agreement_comparable * 100).toFixed(1)}%<br>Status agreement (all 399): ${(a.status_agreement_all_pairs * 100).toFixed(1)}%<br>Status alpha: ${a.status_alpha.toFixed(4)}<br>IPW alpha: ${a.ipw_alpha_sensitivity.toFixed(4)}<br>${num(a.valid_bootstrap_replicates)} bootstrap draws</div></details></td><td>${a.comparable_papers}</td></tr>`;
+      const tip = `95% CI: [${ci}] · Value agreement: ${(a.raw_agreement_comparable * 100).toFixed(1)}% · Status agreement (399): ${(a.status_agreement_all_pairs * 100).toFixed(1)}% · Status alpha: ${a.status_alpha.toFixed(4)} · IPW alpha: ${a.ipw_alpha_sensitivity.toFixed(4)}`;
+      return `<tr aria-description="${esc(tip)}"><td title="${esc(a.field)}">${esc(labels[a.field])}</td><td><details aria-description="${esc(tip)}"><summary aria-description="${esc(tip)}">${a.alpha.toFixed(4)}</summary><div class="alpha-detail">95% CI: [${ci}]<br>Value agreement: ${(a.raw_agreement_comparable * 100).toFixed(1)}%<br>Status agreement (all 399): ${(a.status_agreement_all_pairs * 100).toFixed(1)}%<br>Status alpha: ${a.status_alpha.toFixed(4)}<br>IPW alpha: ${a.ipw_alpha_sensitivity.toFixed(4)}<br>${num(a.valid_bootstrap_replicates)} bootstrap draws</div></details></td><td>${a.comparable_papers}</td></tr>`;
     }).join('');
   }
   $('agreement-mode').addEventListener('change', showAgreement);
@@ -72,22 +76,23 @@
         return true;
       });
     });
-    $('paper-count').textContent = `${papers.length} of 399 papers · ${new Set(papers.map(p => p.stratum)).size} of 85 strata · filtered IPW sum ${num(Number(papers.reduce((s,p) => s + p.weight, 0).toFixed(4)))}`;
+    $('paper-count').textContent = `${papers.length} of 399 papers · ${new Set(papers.map(p => p.stratum)).size} of 85 strata · IPW ${num(Number(papers.reduce((s,p) => s + p.weight, 0).toFixed(4)))}`;
     $('paper-grid').innerHTML = papers.map(p => {
       const source = [];
       if (p.pmid) source.push(`<a href="https://pubmed.ncbi.nlm.nih.gov/${encodeURIComponent(p.pmid)}/" target="_blank" rel="noopener">PubMed</a>`);
       if (p.doi) source.push(`<a href="https://doi.org/${esc(encodeURI(p.doi))}" target="_blank" rel="noopener">DOI</a>`);
       if (p.pmcid) source.push(`<a href="https://pmc.ncbi.nlm.nih.gov/articles/${encodeURIComponent(p.pmcid)}/" target="_blank" rel="noopener">PMC</a>`);
-      return `<tr data-paper-id="${p.paper_id}"><td><span class="paper-id">${p.paper_id}</span><div class="source-links">${source.join('')}</div></td><td><details data-paper="${p.paper_id}"><summary class="paper-title">${esc(p.title || p.paper_id)}</summary><div class="paper-coding"></div></details></td><td>${esc(p.journal)}<small class="code-status">${esc(p.pub_year)}</small></td><td>${esc(p.stratum)}<small class="code-status">IPW ${Number(p.weight.toFixed(6))}</small></td><td>Q: ${esc(p.Q_eligibility)}<br>R: ${esc(p.R_eligibility)}</td><td>${paired(p.coding.independent_human_donor_n)}</td><td>${paired(p.coding.treatment_timing_match)}</td></tr>`;
+      return `<tr data-paper-id="${p.paper_id}"><td><span class="paper-id">${p.paper_id}</span><div class="source-links">${source.join('')}</div></td><td><details data-paper="${p.paper_id}"><summary class="paper-title">${esc(p.title || p.paper_id)}</summary><div class="paper-coding"></div></details></td><td>${esc(p.journal)}<small class="code-status">${esc(p.pub_year)}</small></td><td aria-description="${esc(`Stratum: ${p.stratum} · Inverse probability weight (IPW): ${p.weight.toFixed(6)}`)}">${esc(p.stratum.replaceAll('|', ' · ').replaceAll('_', ' '))}</td><td>${paired({Q: p.Q_eligibility, R: p.R_eligibility, Q_status: p.Q_eligibility, R_status: p.R_eligibility})}</td><td>${paired(p.coding.independent_human_donor_n)}</td><td>${paired(p.coding.treatment_timing_match)}</td></tr>`;
     }).join('') || '<tr><td colspan="7" class="empty-result">No papers match these filters. Reset filters to browse all 399.</td></tr>';
   }
   $('paper-grid').addEventListener('toggle', e => {
     const id = e.target.dataset.paper;
     if (!id || !e.target.open || e.target.dataset.loaded) return;
     const p = data.papers.find(p => p.paper_id === id);
-    e.target.querySelector('.paper-coding').innerHTML = `<table class="data paired-coding"><caption>${id}: evidence-aligned paired coding</caption><thead><tr><th>Field</th><th>Q value / status</th><th>R value / status</th></tr></thead><tbody>${Object.entries(p.coding).map(([f,v]) => `<tr><td>${esc(labels[f])}</td><td>${valueHTML(v, 'Q')}</td><td>${valueHTML(v, 'R')}</td></tr>`).join('')}</tbody></table>`;
+    e.target.querySelector('.paper-coding').innerHTML = `<table class="data paired-coding"><caption>${id}: evidence-aligned paired coding</caption><thead><tr><th>Field</th><th>Q value</th><th>R value</th></tr></thead><tbody>${Object.entries(p.coding).map(([f,v]) => `<tr><td>${esc(labels[f])}</td><td>${valueHTML(v, 'Q')}</td><td>${valueHTML(v, 'R')}</td></tr>`).join('')}</tbody></table>`;
     e.target.dataset.loaded = 'true';
   }, true);
+  $('paper-reset-top').addEventListener('click', () => $('paper-filters').reset());
   $('paper-filters').addEventListener('submit', e => e.preventDefault());
   $('paper-filters').addEventListener('input', filterPapers);
   $('paper-filters').addEventListener('change', e => { if (e.target.matches('select')) filterPapers(); });
