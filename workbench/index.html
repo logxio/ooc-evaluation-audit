@@ -6,10 +6,14 @@
 <title>More screening decisions from fewer measurements</title>
 <meta name="description" content="Measure three concentrations of a neural MEA screen and get the whole concentration-response series with 90% intervals and a hit call; call organoid patients sensitive, resistant or retest. Runs in your browser.">
 <link rel="icon" href="data:,">
-<link rel="preload" href="vendor/fonts/newsreader-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="vendor/fonts/source-sans-3-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <script>
   document.documentElement.dataset.entry = 'loading';
+  document.documentElement.dataset.localFile = String(location.protocol === 'file:');
+  if (location.protocol !== 'file:') ['newsreader-latin-opsz-normal.woff2','source-sans-3-latin-wght-normal.woff2'].forEach(name => {
+    const link = document.createElement('link');
+    link.rel = 'preload'; link.as = 'font'; link.type = 'font/woff2'; link.crossOrigin = 'anonymous';
+    link.href = 'vendor/fonts/' + name; document.head.appendChild(link);
+  });
   window.addEventListener('error', event => {
     if (document.documentElement.dataset.entry !== 'loading') return;
     if (!(event instanceof ErrorEvent) && !(event.target instanceof HTMLScriptElement)) return;
@@ -50,6 +54,7 @@
 </script>
 <link rel="stylesheet" href="assets/system.css?v=1023f1">
 <style>
+  html[data-local-file="true"] { --sans: -apple-system, BlinkMacSystemFont, Arial, sans-serif; --serif: Georgia, serif; --mono: ui-monospace, monospace; }
   /* command bar: brand and links above three frozen readings */
   .bar { display: flex; align-items: center; justify-content: space-between; gap: var(--s2); flex-wrap: wrap; min-height: 50px; padding: 10px 24px; background: #121820; color: #f0f4f8; white-space: nowrap; }
   .bar :focus-visible { outline-color: #38bdf8; }
@@ -220,7 +225,7 @@
     <span class="kpi"><b>97W 1T 0L</b> <span>vs 32 published models</span></span>
     <span class="kpi"><b>248</b> <span>matched clinical patients (AUC 0.9502)</span></span>
   </div>
-  <nav><a href="sample.html">Sample size</a><a href="audits/index.html">Published studies (40)</a><a href="https://github.com/logxio/ooc-evaluation-audit">Source</a><button class="cta" type="button" id="paste-cta">Paste your table</button></nav>
+  <nav><a href="sample.html">Sample size</a><a href="audits/index.html#papers399">Studies (40) &amp; 399-Paper Audit</a><a href="https://github.com/logxio/ooc-evaluation-audit">Source</a><button class="cta" type="button" id="paste-cta">Paste your table</button></nav>
 </header>
 
 <main class="page atlas">
@@ -750,6 +755,11 @@ document.addEventListener('DOMContentLoaded', function () {
   if (view.tab === 'yours') view.page = 'yours';
   list(); pages(); entity();
   fitLines();
+  if (C.hash.get('focus') === 'liver') requestAnimationFrame(() => {
+    const liver = $('chips-claim');
+    liver.style.scrollMarginTop = '24px';
+    liver.scrollIntoView({block: 'start', behavior: 'instant'});
+  });
   if (document.documentElement.dataset.entry !== 'error') {
     document.documentElement.dataset.entry = 'ready';
     performance.mark('workbench-ready');

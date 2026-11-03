@@ -3,13 +3,14 @@
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Published studies | Chip Forecast</title>
+<title>399 Audited Papers &amp; 40 Human 3D Studies | Chip Forecast</title>
 <meta name="description" content="Frozen four-axis evidence: 40 qualified human 3D studies, 248 matched clinical patients and 399 audited papers, with 13 interactive study examples.">
 <link rel="icon" href="data:,">
-<link rel="preload" href="../vendor/fonts/newsreader-latin-opsz-normal.woff2" as="font" type="font/woff2" crossorigin>
-<link rel="preload" href="../vendor/fonts/source-sans-3-latin-wght-normal.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="../style.css?v=1023d1">
 <script defer src="../tip.js?v=1023d1"></script>
+<link rel="stylesheet" href="catalogue/browser.css?v=1103">
+<script defer src="catalogue/evidence.js?v=1103"></script>
+<script defer src="catalogue/browser.js?v=1103"></script>
 <style>
   .bar { flex-wrap: wrap; height: auto; min-height: 50px; padding-block: 10px; }
   .bar .kpis { order: 3; width: 100%; flex-wrap: wrap; gap: 4px 18px; overflow: visible; }
@@ -48,7 +49,55 @@
     </div>
     <p class="foot">Neural screening: 56.8% fewer exposure wells (12,119 / 28,080), 925 calls, 69 wrong. AnchorBoost Stack: 97W 1T 0L across 32 published models at k=1 to 4; k=3 wins 32/32, MAE 1.1170 versus CNP 1.1920. Bircsak perfused human liver: 46/46 hidden responses inside frozen envelopes, all curves settled with 25 points and 0 early errors. Harrill human neural screening: 2,318/2,520 hidden wells (92.0%) inside locked 90% intervals, with 35.6% next-action well saving.</p>
   </section>
-  <section class="card">
+  <section id="evidence-browser" aria-label="Evidence browser">
+    <div class="evidence-tabs" role="tablist" aria-label="Evidence collections">
+      <button id="tab-papers399" type="button" role="tab" aria-selected="true" aria-controls="papers399">399 Audited Papers <small>(17,386 PubMed Frame · 85 Strata · 12,144 Checks)</small></button>
+      <button id="tab-human3d" type="button" role="tab" aria-selected="false" aria-controls="human3d" tabindex="-1">40 Human 3D Studies <small>(13,585 Curves · 34 Strict PDO)</small></button>
+      <button id="tab-worksheets13" type="button" role="tab" aria-selected="false" aria-controls="worksheets13" tabindex="-1">13 Interactive Clinical &amp; Organoid Study Worksheets</button>
+    </div>
+    <section class="card evidence-panel" id="papers399" role="tabpanel" aria-labelledby="tab-papers399">
+      <div class="head"><h2 class="t3">399 Audited Papers</h2><a href="catalogue/evidence.json" download>Download catalogue JSON</a></div>
+      <p class="catalogue-intro">Search the 17,386-record PubMed sampling frame through its 399 paired papers. Each paper keeps both coding channels and all 12 fields. Analysis weights total 17,376 across 85 strata. Evidence checks: Q 6,905 + R 5,239 = 12,144.</p>
+      <div class="catalogue-layout">
+        <aside class="agreement-box" aria-labelledby="agreement-title">
+          <h3 id="agreement-title">12-field Krippendorff alpha</h3>
+          <label>Coding view<select id="agreement-mode"><option value="unharmonized">Evidence-aligned observations</option><option value="closed_vocabulary_normalized">Closed vocabulary normalized</option><option value="common_dimensions_projection_sensitivity">Common dimensions sensitivity</option></select></label>
+          <div class="data-wrap"><table class="data agreement-table"><thead><tr><th scope="col">Field</th><th scope="col">Alpha</th><th scope="col">Paired n</th></tr></thead><tbody id="agreement-grid"></tbody></table></div>
+          <p class="catalogue-note">Alpha uses papers with observed values in both channels. Select an alpha for its 95% stratified bootstrap interval, agreement and status statistics. Filters on the right leave these full-sample estimates unchanged.</p>
+        </aside>
+        <div class="paper-box">
+          <form id="paper-filters" class="catalogue-filters" role="search" aria-label="Filter audited papers">
+            <label class="wide">Search papers<input id="paper-search" type="search" placeholder="Title, PMID, DOI, journal or coding value"></label>
+            <label>Year<select id="paper-year"><option value="">All years</option></select></label>
+            <label>Journal tier<select id="paper-tier"><option value="">All tiers</option></select></label>
+            <label>Journal<select id="paper-journal"><option value="">All journals</option></select></label>
+            <label>Stratum<select id="paper-stratum"><option value="">All 85 strata</option></select></label>
+            <label>Coding channel<select id="paper-channel"><option value="either">Q or R (either)</option><option value="Q">Q</option><option value="R">R</option></select></label>
+            <label>Eligibility<select id="paper-eligibility"><option value="">All categories</option><option>eligible</option><option>ineligible</option><option>uncertain</option><option>fulltext_unavailable</option></select></label>
+            <label>Clinical linkage<select id="paper-clinical"><option value="">All papers</option><option value="linked">Clinical link recorded</option><option value="strict">Strict clinical eligible</option><option value="none">No clinical link recorded</option></select></label>
+            <label>Human donors<select id="paper-donors"><option value="">All counts</option><option value="le3">0 to 3 observed donors</option><option value="gt3">More than 3 observed donors</option><option value="unknown">Unobserved in selected channels</option></select></label>
+            <button type="reset" class="catalogue-reset">Reset filters</button>
+          </form>
+          <p id="paper-count" role="status" aria-live="polite">Loading 399 papers…</p>
+          <div class="data-wrap catalogue-scroll" tabindex="0" aria-label="Audited papers table"><table class="data paper-table"><thead><tr><th scope="col">Paper / source</th><th scope="col">Title / paired coding</th><th scope="col">Journal / year</th><th scope="col">Stratum / IPW</th><th scope="col">Eligibility Q / R</th><th scope="col">Human donors Q / R</th><th scope="col">Clinical timing Q / R</th></tr></thead><tbody id="paper-grid"></tbody></table></div>
+          <p class="catalogue-note">Clinical and donor filters match observed values in the selected channel(s). Unobserved donor counts stay distinct from zero. Open a paper title to inspect all 12 Q/R values and their observation statuses.</p>
+        </div>
+      </div>
+    </section>
+    <section class="card evidence-panel" id="human3d" role="tabpanel" aria-labelledby="tab-human3d" hidden>
+      <div class="head"><h2 class="t3">40 Human 3D Studies</h2><span>13,585 curves · 206,113 measurement points · 34 strict PDO studies</span></div>
+      <form id="corpus-filters" class="catalogue-filters" role="search" aria-label="Filter human 3D studies">
+        <label class="wide">Search studies<input id="corpus-search" type="search" placeholder="Study ID, DOI, organ, disease or model"></label>
+        <label>Scope<select id="corpus-scope"><option value="">All 40 studies</option><option value="strict">34 strict patient PDO studies</option><option value="other">Other qualified human 3D studies</option></select></label>
+        <label>System<select id="corpus-system"><option value="">All systems</option><option value="3D_organoid">3D organoid</option><option value="chip">Chip</option></select></label>
+        <label>Organ / disease<select id="corpus-organ"><option value="">All organs / diseases</option></select></label>
+        <button type="reset" class="catalogue-reset">Reset filters</button>
+      </form>
+      <p id="corpus-count" role="status" aria-live="polite">Loading 40 studies…</p>
+      <div class="data-wrap catalogue-scroll corpus-scroll" tabindex="0" aria-label="Human 3D studies table"><table class="data corpus-table"><thead><tr><th scope="col">Study / DOI</th><th scope="col">Organ / cancer / disease</th><th scope="col">Origin / system</th><th scope="col">Curves ≥5 doses</th><th scope="col">Measurement points</th><th scope="col">Positive doses per curve</th><th scope="col">Strict PDO curves</th></tr></thead><tbody id="corpus-grid"></tbody></table></div>
+      <p class="foot">All qualified curves have at least 5 distinct positive concentrations. Strict patient PDO: 34 studies, 13,444 curves and 202,498 points. Organ and disease labels follow recorded source metadata; blank source labels appear as “Not recorded”.</p>
+    </section>
+  <section class="card evidence-panel" id="worksheets13" role="tabpanel" aria-labelledby="tab-worksheets13" hidden>
     <div class="head"><h2 class="t3" aria-description="Open each study for its measurement unit, denominator, source and downloadable records.">13 interactive study examples, each result kept with its denominator</h2><div class="tools"><label class="search"><input id="study-search" type="search" aria-label="Filter published studies" placeholder="Filter by author, tissue or journal"></label><span class="t1 ink3" id="study-count" role="status">13 studies</span></div></div>
     <div class="data-wrap">
       <table class="data studies">
@@ -71,6 +120,7 @@
       </table>
     </div>
     <p class="foot">Independent reanalysis of public data. The experimental work and clinical observations belong to the original authors.</p>
+  </section>
   </section>
 </main>
 <script>
