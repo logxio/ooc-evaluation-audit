@@ -4,56 +4,43 @@
 
 **56.8% fewer neural screening wells. 57.00% fewer human 3D PDO wells. 97 wins, 1 tie and 0 losses against 32 published predictor configurations.**
 
-[Open the workbench](workbench/index.html) · [Explore the four axes](workbench/audits/index.html) · [Read the technical report](technical_report.md) · [Public code](https://github.com/logxio/ooc-evaluation-audit)
+[Open the live workbench](https://yansu.me/chip-forecast/) · [Explore the four axes](workbench/audits/index.html) · [Read the technical report](technical_report.md) · [Public code](https://github.com/logxio/ooc-evaluation-audit)
 
 **Author:** Yan Su (Tsinghua University · `hi@yansu.me` · [Interactive Workbench](https://yansu.me/chip-forecast/))
 
-## 1. System Architecture: From Three Concentrations to the Next Well
+<p align="center">
+  <img src="figures/fig1_survey_corpus.svg" alt="Figure 1: Probability census of 17,386 PubMed records and 40-study human 3D drug-response corpus" width="100%">
+</p>
 
-AnchorBoost learns the residual around a log concentration interpolation skeleton. Training enumerates every sparse design within complete training curves, including all C(7,3)=35 three concentration layouts. Chemical identities stay together across training, calibration and evaluation. Disagreement selects the next concentration, and conformal risk control chooses the reporting action.
+> **Figure 1 | Probability census of 17,386 PubMed records and 40-study human 3D drug-response corpus.** **(a)** Conventional dense titration (30 wells per drug across $\le 3$ donors in 53.66% to 65.36% of studies) versus conformal two-wave sparse dosing (9 Wave-1 anchor wells, $3\times$ donor coverage per 30 wells), alongside the 399-paper stratified random probability census (12,144 quote and image-hash checks, 0 schema or evidence failures) and the 40-study human 3D corpus (13,585 curves, 206,113 points). **(b, c)** Independent six-axis coding reliability across 192 pre-sharing and 287 completed papers ($\alpha = 0.8054$ to $1.0000$ across all 12 fields after evidence reconciliation). **(d)** Weighted field prevalence showing 94.84% to 96.29% of eligible studies lack clinical outcome linkage. **(e)** Frozen human 3D and patient-derived organoid corpus scale and blinded digitization accuracy (median error 1.15 percentage points).
 
-```text
-+============================================================================+
-| Stage 1: Sparse 3 Concentration Input                                       |
-| three_point.py or Browser CSV Drag and Drop                                 |
-|                                                                            |
-| Log Concentration Interpolation Skeleton                                   |
-|   + AnchorBoost Multi Task Residual Learning                               |
-|   + All C(7,3)=35 Sparse Designs                                            |
-|                                                                            |
-| 13.7% lower reconstruction error than interpolation                         |
-| Stack: 97W 1T 0L against 32 published predictor configurations               |
-+============================================================================+
-                                      |
-                                      v
-+============================================================================+
-| Stage 2: Disagreement Guided Acquisition and Conformal Risk Control          |
-|                                                                            |
-| Report Call Immediately  |  Add 4th Concentration  |  Complete the Series     |
-|                            5.2% lower error                                |
-|                            53/53 accurate added calls                       |
-|                                      |                                     |
-|                     New measurements feed back to Stage 1                   |
-|                                                                            |
-| Two Wave Certificate Stopping                                              |
-| Neural chip: 56.8% well saving                                              |
-| Human 3D PDO: 57.00% well saving on 240 curves                               |
-| MODEL saves 2.83 percentage points more than measured only                   |
-+============================================================================+
-                                      |
-                                      v
-+============================================================================+
-| Stage 3: Clinical Linkage and Fixed Budget Donor Reallocation                |
-|                                                                            |
-| 248 matched cancer patients across 8 clinical study clusters                 |
-| Within study AUC: 0.9502  |  Complete exposure: 185 patients, AUC 0.9615      |
-|                                                                            |
-| 10,000 paired Monte Carlo draws                                            |
-| 30 wells/donor => 9 wells/donor across more donors                           |
-| AUC gains: +0.0286 / +0.0577 / +0.0994 at 96 / 192 / 384 wells               |
-| 3 wells/donor: +0.1605 AUC at 96 wells                                       |
-+============================================================================+
-```
+## 1. System Architecture & Main Vector Plates: From Three Concentrations to Clinical Cohort Allocation
+
+AnchorBoost learns the residual around a log-concentration interpolation skeleton. Training enumerates every sparse design within complete training curves, including all $\binom{7}{3}=35$ three-concentration layouts. Chemical identities stay strictly separated across training, calibration and evaluation. Cross-forecaster disagreement selects the next concentration, and split-conformal risk control governs when to issue an activity call immediately, measure one additional concentration, or complete the series.
+
+<p align="center">
+  <img src="figures/fig2_anchorboost_scoreboard.svg" alt="Figure 2: Exhaustive sparse-design residual learning defeats 32 published predictor configurations across 98 paired evaluations" width="100%">
+</p>
+
+> **Figure 2 | Exhaustive sparse-design residual learning defeats 32 published predictor configurations across 98 paired evaluations.** **(a)** All $\binom{7}{3}=35$ three-concentration sparse designs inside a seven-concentration curve. **(b)** Reconstruction MAE across $k=1$ to $4$ measured concentrations (13.7% lower error than interpolation at $k=3$). **(c, d)** Head-to-head benchmark across 32 published configurations (LimiX-2, TabPFN-3.5, TabICLv2, KANO, MotiL, CNP, TNP, FlowNP, DR-PFN, GP, GenRA): AnchorBoost Stack achieves **97 wins, 1 tie and 0 losses** across 98 paired comparisons (32/32 wins at $k=3$, MAE 1.1170; single CPU model 83W 15T 0L, MAE 1.1540). **(e, f)** Disagreement-guided 4th-concentration acquisition and aggregate paired win tallies.
+
+<p align="center">
+  <img src="figures/fig3_organoid_twowave.svg" alt="Figure 3: Prelocked two-wave conformal stopping saves 57.00% of human organoid wells and generalizes across 25 held-out 3D studies" width="100%">
+</p>
+
+> **Figure 3 | Prelocked two-wave conformal stopping saves 57.00% of human organoid wells and generalizes across 25 held-out 3D studies.** **(a, b)** On 240 ten-concentration human pancreatic PDO curves (7,200 wells), prelocked two-wave stopping settles 163 curves after Wave 1 and consumes 3,096 total wells (**57.00% well saving** [54.00%, 60.00%], 204 fewer wells and +2.83 pp over measured-only stopping, 1/240 missed active). **(c, d)** Savings across organoid lines and drugs with 10,000-draw block-bootstrap intervals and 215/215 valid rank certificates. **(e, f)** Leave-one-study-out generalization across 25 human 3D studies (13,510 curves, 204,371 wells; 52.41% total wells saved).
+
+<p align="center">
+  <img src="figures/fig4_plate_drift_chips.svg" alt="Figure 4: Physical cross-plate drift invariance, perfused human liver chip, and human neural screen" width="100%">
+</p>
+
+> **Figure 4 | Physical cross-plate drift invariance and blinded microfluidic organ-chip validation.** **(a-c)** Across 91 physical plate pairs (273 endpoint pairs, 924 drift scenarios), well savings remain invariant at **57.00%** (miss rate 0.4167%) while two-control affine bridging restores potency ranking. **(d)** Custodian-blinded perfused human liver chip: **46/46** withheld responses fall inside frozen 90% envelopes, settling all 12 curves in 25/46 measurements with **0 early errors** (versus 7/12 errors under a zero-width rule). **(e)** Prelocked human neural screen: **92.0%** (2,318/2,520) hidden wells inside locked 90% intervals with **35.6%** follow-up well savings.
+
+<p align="center">
+  <img src="figures/fig5_clinical_budget_leverage.svg" alt="Figure 5: Clinical responder discrimination across 248 cancer patients and fixed-budget donor reallocation" width="100%">
+</p>
+
+> **Figure 5 | Clinical responder prediction across 248 matched cancer patients and fixed-budget donor reallocation.** **(a-c)** Within-study clinical responder AUC reaches **0.9502** [0.6849, 0.9775] across 248 matched patients in 8 clinical study clusters (**0.9615** across 185 complete-exposure patients), whereas uncalibrated cross-study probability slopes span 0.27 to 30.42. **(d-f)** Reallocating saved wells from 30 to 9 wells per donor across 10,000 Monte Carlo arrival orders raises clinical responder AUC from 0.5033, 0.5111 and 0.5425 (dense) to **0.5155, 0.5870 and 0.8485** at 96, 192 and 384 wells, while preserving drug-response rankings across a 102-patient colorectal biobank.
 
 
 ## 2. Four-Axis Benchmark Scoreboard
