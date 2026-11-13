@@ -1,6 +1,4 @@
-给定器官芯片或患者3D类器官的前3个稀疏浓度实测读数，Chip Forecast (Three-Pointer) 在笔记本CPU上1分钟内重构完整多通道剂量反应曲线与90%预测区间，按保形风险控制给出签发活性结论、加测1个分歧浓度或补全序列的排板指令，让实验室用约一半孔位完成药筛，把节省的孔位分配给更多患者供体。
-
-# Chip Forecast (Three-Pointer)
+# Chip Forecast & AnchorBoost
 
 **Measure three concentrations. Reconstruct the curve. Plan the next well.** Chip Forecast turns sparse organ chip and patient organoid measurements into response curves, uncertainty intervals and an actionable plate plan on a laptop CPU.
 
@@ -8,9 +6,9 @@
 
 [Open the workbench](workbench/index.html) · [Explore the four axes](workbench/audits/index.html) · [Read the technical report](technical_report.md) · [Public code](https://github.com/logxio/ooc-evaluation-audit)
 
-Yan Su (苏颜), Ziyang Liu (刘子扬). Team Three-Pointer.
+**Author:** Yan Su (Tsinghua University · `hi@yansu.me` · [Interactive Workbench](https://yansu.me/chip-forecast/))
 
-## 1. 从三个浓度到下一孔。System architecture
+## 1. System Architecture: From Three Concentrations to the Next Well
 
 AnchorBoost learns the residual around a log concentration interpolation skeleton. Training enumerates every sparse design within complete training curves, including all C(7,3)=35 three concentration layouts. Chemical identities stay together across training, calibration and evaluation. Disagreement selects the next concentration, and conformal risk control chooses the reporting action.
 
@@ -57,9 +55,8 @@ AnchorBoost learns the residual around a log concentration interpolation skeleto
 +============================================================================+
 ```
 
-三浓度输入连接三种实验动作：立即报告、补测最有分歧的一点、完成剩余序列。新增测量回到同一预测流程。实验室随后按固定孔位预算扩大供体覆盖，比较相同实验资源下的筛查能力。
 
-## 2. 四轴基准与封账读数。Four Axis Benchmark Scoreboard
+## 2. Four-Axis Benchmark Scoreboard
 
 Results below use the released evaluation sets and their stated denominators, dated 25 October 2026.
 
@@ -78,9 +75,8 @@ Results below use the released evaluation sets and their stated denominators, da
 | D. Literature survey | 17,386 PubMed records, 2019 to 2026, 85 strata | **399 stratified random sampled papers**, **12,144 quotation and image hash evidence checks**. Evidence aligned coding across 12 fields: Krippendorff alpha **0.8054 to 1.0000**. | [Survey readout](workbench/audits/survey400_s54/public_s58/readout_s58_full400.md) |
 | D. Experimental design landscape | Weighted prevalence across the two coding channels | **94.84% to 96.29%** of eligible studies lack clinical outcome linkage. **53.66% to 65.36%** use at most 3 independent human donors. **5.28% to 15.10%** publish raw multidose tables. | [Survey statistics](workbench/audits/survey400_s54/public_s58/sample400_agreement_v2.json) |
 
-A轴回答少测多少孔、何时加测。B轴提供跨研究的人源3D剂量反应语料。C轴连接患者结局并计算固定预算下的供体配置。D轴量化公开研究的供体规模、数据可用性与临床连接。
 
-## 3. 与32个公开模型同场对决。Head to Head Benchmark against 32 Published Models
+## 3. Head-to-Head Benchmark Against 32 Published Models
 
 MAE uses the released normalized response units at three measured concentrations. Lower values indicate closer reconstruction. The paired evaluation groups chemicals by parent identity. W, T and L count paired 95% interval outcomes across the available k=1 to 4 cells.
 
@@ -126,7 +122,7 @@ MAE uses the released normalized response units at three measured concentrations
 
 The table contains all 32 evaluated opponent configurations. The full [scoreboard](results/final/baselines/scoreboard.csv) includes each paired interval, chemical denominator and available concentration count. Gaussian process, Hill and released CNP checkpoint comparisons use their shared 193 chemical subset. The other rows use the 194 chemical cohort. The [technical report](technical_report.md) describes training, calibration and method sources.
 
-## 4. 仓库模块分工。Repository Module Structure
+## 4. Repository Module Structure
 
 | Module | Responsibility | Entry point |
 | :--- | :--- | :--- |
@@ -140,9 +136,9 @@ The table contains all 32 evaluated opponent configurations. The full [scoreboar
 | [workbench/audits/survey400_s54/public_s58/](workbench/audits/survey400_s54/public_s58/) | Stratified literature frame, evidence aligned coding and prevalence statistics. | `sample400_agreement_v2.json` |
 | [technical_report.md](technical_report.md) | Method, benchmark definitions, source attribution and reproduction details. | Read the report. |
 
-## 5. 一分钟快速上手。Quickstart
+## 5. Quickstart
 
-直接打开[网页工作台](workbench/index.html)，选择化合物、查看68通道曲线与90%预测区间，切换48孔板布局，再导出下一步测量动作。将自己的CSV拖入页面，按列映射接入读数。
+Open the [interactive browser workbench](https://yansu.me/chip-forecast/) (or local `workbench/index.html`) to inspect 68-channel concentration-response curves with 90% prediction intervals, toggle 48-well plate layouts, export next-step measurement actions, or drag and drop custom CSV plate readouts.
 
 ```sh
 open workbench/index.html
@@ -164,7 +160,7 @@ The output directory contains `forecast.csv`, `summary.md`, fitted endpoint mode
 python three_point.py my_finished_plates.csv --reconcile results/my_plates
 ```
 
-## 6. 一键复核与结果复算。Reproducibility
+## 6. Reproducibility & Verification
 
 Run from the repository root with Python 3 and Node.js after installing the released dependencies. The four portable audits read only their distributed inputs and print a JSON receipt with `status` set to `passed`.
 

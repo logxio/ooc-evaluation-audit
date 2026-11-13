@@ -30,10 +30,7 @@ header-includes:
   - \fancyfoot[C]{\thepage}
 ---
 
-**Team: Three-Pointer**
-
-**Yan Su (苏颜)**, Team leader, Kaggle `yansuu`  
-**Ziyang Liu (刘子扬)**, Team member, Kaggle `ZY.Liu777`
+**Author: Yan Su**, Tsinghua University (`hi@yansu.me`)
 
 **Category: Tool & Platform**
 
@@ -701,7 +698,7 @@ The effective free reproduction is `python -m contract_agent.replay_agent`: it e
 
 The pre-existing EPA measurements, NeuroChip Twin code and evaluation protocol, clinical studies, HNOCA atlas and image dataset retain their original attribution. The competition contribution is the sparse-design learner, controlled comparisons, acquisition and reporting experiments, study-specific follow-up analyses, workbench and executable reproduction routes. AI assistance supported programming and prose. Completed biological experiments and clinical cohorts belong to their original investigators.
 
-Yan Su is responsible for methods, code, computational experiments and the report. Ziyang Liu is responsible for biological review, participant recruitment for trial use and presentation collaboration.
+Yan Su designed the methodology, implemented the software and interactive workbench, conducted all computational and clinical evaluations, and wrote the report.
 
 The present research stage comprises retrospective assay analyses, published-cohort replays and one independent participant session. In that self-serve, screen-recorded session, a participant with no laboratory experience and no prior use of the tool worked through the frozen tasks without assistance. Measured from task release to the first correct export, the workbench action lists matched the sealed answers for 3 of 3 chemicals in 23 seconds and 6 of 6 patients in 57 seconds. Having no screening rule of their own, the participant made no call on the matched current-method tasks, so the session has no comparator; the risk-comprehension answers scored 0 of 3. The participant's package omitted the workbench version lock, so the session used the live build `5ea7998` instead of the locked `eaeb887`; both exports still matched the sealed answers. Prospective wet-laboratory validation, measured staff-time savings and real laboratory well-use savings remain to be established.
 
