@@ -128,7 +128,8 @@ The table contains all 32 evaluated opponent configurations. The full [scoreboar
 Open the [interactive browser workbench](https://yansu.me/chip-forecast/) (or local `workbench/index.html`) to inspect 68-channel concentration-response curves with 90% prediction intervals, toggle 48-well plate layouts, export next-step measurement actions, or drag and drop custom CSV plate readouts.
 
 ```sh
-open workbench/index.html
+python3 -m http.server 8000
+# then open http://localhost:8000/workbench/ in any browser on Linux, macOS, or Windows
 ```
 
 For the Python workflow, install the released dependencies and provide a long CSV with columns `compound,concentration,unit,endpoint,value,plate,date`. Complete curves supply training and calibration. Three observed concentrations, including the highest, seed each incomplete test curve. An empty `value` marks a concentration to forecast.
